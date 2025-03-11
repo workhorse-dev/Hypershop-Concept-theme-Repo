@@ -1,0 +1,55 @@
+{%- comment -%}
+  Renders a set of links for paginated results. Must be used within paginate tags.
+
+  Usage:
+  {% paginate results by 2 %}
+    {% render 'pagination', paginate: paginate %}
+  {% endpaginate %}
+
+  Accepts:
+  - paginate: {Object}
+  - mode: {String} (optional) How additional pages of products are navigated
+{%- endcomment -%}
+
+<div class="pagination flex flex-wrap justify-center align-self-center md:gap-2 text-sm md:text-base">
+  {%- if mode == 'infinite' or mode == 'click' -%}
+    {%- if paginate.next -%}
+      <button type="button" class="infinite-scroll button button--primary button--fixed" action="{{ shop.url }}{{ paginate.next.url }}" mode="{{ mode }}" is="infinite-button">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text" data-text>{{ 'general.pagination.show_more' | t }}</span>
+      </button>
+    {%- endif -%}
+  {%- else -%}
+    {%- if paginate.previous -%}
+      <a class="previous flex items-center justify-center gap-2" href="{{ paginate.previous.url }}{{ hash }}" is="magnet-link" aria-current="page" aria-label="{{ 'general.pagination.previous' | t | escape }}">
+        {%- render 'icon', icon: 'arrow-left', size: 'sm', class: 'transform stroke-1 flex-auto' -%}
+        <span class="btn-text" data-text>{{ 'general.pagination.previous' | t }}</span>
+      </a>
+    {%- endif -%}
+
+    {%- for part in paginate.parts -%}
+      {%- if part.is_link -%}
+        <a class="page flex items-center justify-center rounded-full" href="{{ part.url }}{{ hash }}" is="magnet-link" aria-current="page" aria-label="{{ part.title | escape }}">
+          <span class="btn-text" data-text>{{ part.title }}</span>
+        </a>
+      {%- else -%}
+        {%- if part.title == paginate.current_page -%}
+          <span class="page current flex items-center justify-center rounded-full pointer-events-none" aria-current="page" aria-label="{{ part.title | escape }}">
+            {{- part.title -}}
+          </span>
+        {%- else -%}
+          <span class="page flex items-center justify-center rounded-full" aria-current="page" aria-label="{{ part.title | escape }}">
+            {{- part.title -}}
+          </span>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endfor -%}
+
+    {%- if paginate.next -%}
+      <a class="next flex items-center justify-center gap-2" href="{{ paginate.next.url }}{{ hash }}" is="magnet-link" aria-current="page" aria-label="{{ 'general.pagination.next' | t | escape }}">
+        <span class="btn-text" data-text>{{ 'general.pagination.next' | t }}</span>
+        {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform stroke-1 flex-auto' -%}
+      </a>
+    {%- endif -%}
+  {%- endif -%}
+</div>

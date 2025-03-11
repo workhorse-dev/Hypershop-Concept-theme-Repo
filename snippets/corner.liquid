@@ -1,0 +1,37 @@
+{%- comment -%}
+  Renders a corner component
+
+  Accepts:
+  - prefix: {String}
+  - dir: {String}
+  - border: {Boolean}
+
+  Usage:
+  {% render 'corner', prefix: 'header' %}
+{%- endcomment -%}
+
+{%- liquid
+  if prefix != blank
+    assign corner = prefix | append: '__corner corner'
+    assign cutout = prefix | append: '__cutout cutout'
+  else
+    assign corner = 'corner'
+    assign cutout = 'cutout'
+  endif
+-%}
+
+<span class="{{ corner }} left {{ dir }} flex absolute pointer-events-none">
+  <svg class="w-full h-auto" viewBox="0 0 101 101" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M101 0H0V101H1C1 45.7715 45.7715 1 101 1V0Z"></path>
+    <path d="M1 101C1 45.7715 45.7715 1 101 1" fill="none"></path>
+  </svg>
+</span>
+<span class="{{ corner }} right {{ dir }} flex absolute pointer-events-none">
+  <svg class="w-full h-auto" viewBox="0 0 101 101" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M101 0H0V101H1C1 45.7715 45.7715 1 101 1V0Z"></path>
+    <path d="M1 101C1 45.7715 45.7715 1 101 1" fill="none"></path>
+  </svg>
+</span>
+{%- if border == true -%}
+  <span class="{{ cutout }} opacity-0 absolute left-0 top-100 w-full pointer-events-none"></span>
+{%- endif -%}

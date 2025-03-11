@@ -1,0 +1,365 @@
+{%- comment -%}
+  Renders product buy-buttons.
+  Accepts:
+  - product: {Object} product object.
+  - block: {Object} passing the block information.
+  - product_form_id: {String} product form id.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'buy-buttons', block: block, product: product, product_form_id: product_form_id, section_id: section.id %}
+{%- endcomment -%}
+
+<div class="product-form-wrapper" {{ block.shopify_attributes }}>
+  {%- liquid
+    assign gift_card_recipient_feature_active = false
+    if block.settings.show_gift_card_recipient and product.gift_card?
+      assign gift_card_recipient_feature_active = true
+    endif
+
+    assign show_dynamic_checkout = false
+    if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
+      assign show_dynamic_checkout = true
+    endif
+
+    assign quantity_block = section.blocks | where: "type", "quantity_selector" | first
+    assign show_quantity_selector = block.settings.show_quantity_selector
+    if quantity_block
+      assign show_quantity_selector = false
+    endif
+
+    assign back_in_stock_block = section.blocks | where: "type", "back_in_stock" | first
+    assign enable_back_in_stock = block.settings.enable_back_in_stock
+    if back_in_stock_block
+      assign enable_back_in_stock = false
+    endif
+  -%}
+  {%- form 'product',
+    product,
+    id: product_form_id,
+    data-type: 'add-to-cart-form',
+    data-hide-errors: gift_card_recipient_feature_active,
+    class: 'product-form grid gap-8',
+    is: 'product-form'
+  -%}
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
+
+    {%- liquid
+      if gift_card_recipient_feature_active
+        render 'gift-card-recipient-form', product: product, form: form, section_id: section_id, product_id: product_id
+      endif
+
+      assign check_against_inventory = true
+      if product.selected_or_first_available_variant.inventory_management != 'shopify' or  product.selected_or_first_available_variant.inventory_policy == 'continue'
+        assign check_against_inventory = false
+      endif
+      if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+        assign quantity_rule_soldout = true
+      endif
+    -%}
+
+    <div class="product-form__buttons grid gap-4"{% unless product.quantity_price_breaks_configured? and show_quantity_selector %} id="QuantityForm-{{ section_id }}-{{ product_id }}"{% endunless %}>
+      <div class="product-form__error-message alert alert--error text-sm font-medium leading-tight" role="alert" hidden></div>
+
+      {%- if product.quantity_price_breaks_configured? and show_quantity_selector -%}
+        <div id="QuantityForm-{{ section_id }}-{{ product_id }}" class="field">
+          {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+          <label for="Quantity-{{ section_id }}-{{ product_id }}" class="quantity__label label" is="quantity-label">
+            {{ 'products.quantity.label' | t }}
+            <span id="QuantityRulesCart-{{ section_id }}-{{ product_id }}" class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %} relative">
+              <span class="quantity-cart font-medium">({{ 'products.quantity.in_cart_html' | t: quantity: cart_qty }})</span>
+            </span>
+          </label>
+          <div class="flex items-center gap-4">
+            <quantity-input class="quantity inline-flex relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
+              <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+                {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+              </button>
+              <input
+                id="Quantity-{{ section_id }}-{{ product_id }}"
+                class="quantity__input text-sm sm:text-base font-medium text-center"
+                type="number"
+                name="quantity"
+                inputmode="numeric"
+                autocomplete="off"
+                data-quantity-variant-id="{{ product.selected_or_first_available_variant.id }}"
+                data-cart-quantity="{{ cart_qty }}"
+                data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                  data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                  max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                {% endif %}
+                step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+                value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+                form="{{ product_form_id }}"
+              />
+              <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+                {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+              </button>
+            </quantity-input>
+
+            {%- if product.quantity_price_breaks_configured? -%}
+              {%- liquid
+                assign volume_pricing_array = product.selected_or_first_available_variant.quantity_price_breaks | sort: 'quantity' | reverse
+                assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.min
+                if cart_qty > 0
+                  assign current_qty_for_volume_pricing = cart_qty | plus: product.selected_or_first_available_variant.quantity_rule.increment
+                endif
+                assign variant_price_compare = product.selected_or_first_available_variant.compare_at_price
+              -%}
+              <price-per-item
+                id="PricePerItem-{{ section_id }}-{{ product_id }}"
+                class="price flex flex-wrap items-center gap-2 lg:gap-1d5"
+                data-section-id="{{ section_id }}"
+                data-product-id="{{ product_id }}"
+                data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+              >
+                {%- if variant_price_compare -%}
+                  <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+                  <span class="price__sale inline-flex items-center h-auto relative">
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        echo variant_price_compare | money_with_currency
+                      else
+                        echo variant_price_compare | money
+                      endif
+                    -%}
+                  </span>
+                  <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+                {%- endif -%}
+                
+                {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
+                  {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                      else
+                        assign variant_price = product.selected_or_first_available_variant.price | money
+                      endif
+                    -%}
+                    <span class="price-per-item--current price__regular whitespace-nowrap">
+                      {{- 'products.volume_pricing.price_at_each' | t: price: variant_price -}}
+                    </span>
+                  {%- else -%}
+                    {%- for price_break in volume_pricing_array -%}
+                      {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
+                        {%- liquid
+                          if settings.currency_code_enabled
+                            assign price_break_price = price_break.price | money_with_currency
+                          else
+                            assign price_break_price = price_break.price | money
+                          endif
+                        -%}
+                        <span class="price-per-item--current price__regular whitespace-nowrap">
+                          {{- 'products.volume_pricing.price_at_each' | t: price: price_break_price -}}
+                        </span>
+                        {%- break -%}
+                      {%- endif -%}
+                    {%- endfor -%}
+                  {%- endif -%}
+                {%- else -%}
+                  <span class="price-per-item--current price__regular whitespace-nowrap">
+                    {%- liquid
+                      if settings.currency_code_enabled
+                        assign variant_price = product.selected_or_first_available_variant.price | money_with_currency
+                      else
+                        assign variant_price = product.selected_or_first_available_variant.price | money
+                      endif
+                    -%}
+                    {{- 'products.volume_pricing.price_at_each' | t: price: variant_price -}}
+                  </span>
+                {%- endif -%}
+              </price-per-item>
+            {%- endif -%}
+          </div>
+
+          {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
+            <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
+              {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+                <span class="divider">
+                  {{- 'products.quantity.multiples_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment -}}
+                </span>
+              {%- endif -%}
+              {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+                <span class="divider">
+                  {{- 'products.quantity.minimum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.min -}}
+                </span>
+              {%- endif -%}
+              {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+                <span class="divider">
+                  {{- 'products.quantity.maximum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.max -}}
+                </span>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector %} flex{% else %} grid{% endif %} gap-4">
+        {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
+          {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
+          <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
+          <quantity-input class="quantity inline-flex flex-auto relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
+            <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+              {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+            </button>
+            <input
+              id="Quantity-{{ section_id }}-{{ product_id }}"
+              class="quantity__input text-sm sm:text-base font-medium text-center"
+              type="number"
+              name="quantity"
+              inputmode="numeric"
+              autocomplete="off"
+              data-quantity-variant-id="{{ product.selected_or_first_available_variant.id }}"
+              data-cart-quantity="{{ cart_qty }}"
+              data-min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+              min="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+              {% if product.selected_or_first_available_variant.quantity_rule.max != null %}
+                data-max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+                max="{{ product.selected_or_first_available_variant.quantity_rule.max }}"
+              {% endif %}
+              step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
+              value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
+              form="{{ product_form_id }}"
+            />
+            <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+              {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+            </button>
+          </quantity-input>
+        {%- endif -%}
+        
+        <button
+          type="submit"
+          name="add"
+          form="{{ product_form_id }}"
+          class="product-form__submit button button--primary button--fixed w-full"
+          is="hover-button"
+          {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+          {%- if product.template_suffix == 'pre-order' %} data-pre-order{% endif -%}
+          {%- if enable_back_in_stock %} data-back-in-stock{% endif -%}
+        >
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- liquid
+              if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+                echo 'products.product.sold_out' | t
+              elsif product.template_suffix != 'pre-order'
+                echo 'products.product.add_to_cart' | t
+              else
+                echo 'products.product.pre_order' | t
+              endif
+            -%}
+          </span>
+        </button>
+
+        {%- if enable_back_in_stock -%}
+          <button
+            type="button"
+            class="product-form__alert button button--primary button--fixed w-full"
+            is="hover-button"
+            aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+            aria-expanded="false"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">{{ 'products.product.sold_out' | t }} - {{ 'products.back_in_stock.label' | t }}</span>
+          </button>
+        {%- endif -%}
+
+        {%- liquid
+          unless product.quantity_price_breaks_configured? != true and show_quantity_selector
+            if show_dynamic_checkout
+              echo form | payment_button
+            endif
+          endunless
+        -%}
+      </div>
+
+      {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
+        {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
+          <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
+            {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
+              <span class="divider">
+                {{- 'products.quantity.multiples_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment -}}
+              </span>
+            {%- endif -%}
+            {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
+              <span class="divider">
+                {{- 'products.quantity.minimum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.min -}}
+              </span>
+            {%- endif -%}
+            {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
+              <span class="divider">
+                {{- 'products.quantity.maximum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.max -}}
+              </span>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- liquid
+        if product.quantity_price_breaks_configured? != true and show_quantity_selector
+          if show_dynamic_checkout
+            echo form | payment_button
+          endif
+        endif
+      -%}
+    </div>
+  {%- endform -%}
+
+  {%- if enable_back_in_stock -%}
+    <div id="BackInStock-{{ section_id }}-{{ product_id }}">
+      {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
+        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+          role="dialog"
+          aria-modal="true"
+          aria-label="{{ product.title | escape }}"
+          shopify-design-mode
+          hidden
+        >
+          <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+          <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+            <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+              <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight grid gap-4">
+                {{ product.title | escape }}
+                {%- unless product.has_only_default_variant -%}
+                  <dl class="grid gap-1d5">
+                    {%- for option in product.options_with_values -%}
+                      <div class="flex gap-2 text-sm text-opacity leading-tight">
+                        <dt>{{ option.name | escape }}:</dt>
+                        <dd>
+                          {%- for value in option.values -%}
+                            {%- if option.selected_value == value -%}
+                              <span class="font-medium">{{ value | escape }}</span>
+                            {%- endif -%}
+                          {%- endfor -%}
+                        </dd>
+                      </div>
+                    {%- endfor -%}
+                  </dl>
+                {%- endunless -%}
+              </span>
+              <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                <span class="btn-fill" data-fill></span>
+                <span class="btn-text">
+                  {%- render 'icon', icon: 'close', size: 'sm' -%}
+                </span>
+              </button>
+            </gesture-element>
+            <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+              <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                {%- render 'back-in-stock',
+                  product: product,
+                  product_id: product_id,
+                  section_id: section_id,
+                  show_name: block.settings.show_back_in_stock_name,
+                  show_phone: block.settings.show_back_in_stock_phone
+                -%}
+              </div>
+            </div>
+          </div>
+        </back-in-stock-drawer>        
+      {%- endif -%}
+    </div>
+  {%- endif -%}
+</div>

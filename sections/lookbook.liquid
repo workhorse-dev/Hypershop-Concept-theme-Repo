@@ -1,0 +1,1011 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    {%- if section.settings.image != blank %}
+      --ratio-percent: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+    {% endif -%}
+  }
+
+  {%- for block in section.blocks -%}
+    #shopify-block-{{ block.id }} {
+      --hotspot-color: {{ block.settings.color_text.rgb }};
+      --hotspot-x: {{ block.settings.horizontal }}%;
+      --hotspot-y: {{ block.settings.vertical }}%;
+    }
+  {%- endfor -%}
+
+  {%- if section.settings.image_mobile != blank %}
+    @media screen and (max-width: 767px) {
+      #shopify-section-{{ section.id }} {
+        --ratio-percent: {{ 1 | divided_by: section.settings.image_mobile.aspect_ratio | times: 100 }}%;
+      }
+
+      {%- for block in section.blocks -%}
+        #shopify-block-{{ block.id }} {
+          --hotspot-x: {{ block.settings.horizontal_mobile }}%;
+          --hotspot-y: {{ block.settings.vertical_mobile }}%;
+        }
+      {%- endfor -%}
+    }
+  {% endif -%}
+
+  {%- if section.settings.heading_position != 'none' %}
+    {%- assign color_overlay_brightness = section.settings.color_overlay | color_brightness -%}
+    #shopify-section-{{ section.id }} .banner__box {
+      {%- if color_overlay_brightness < 150 %}
+        --color-foreground: 255 255 255;
+        --color-button-gradient: #ffffff;
+        --color-button-background: 255 255 255;
+        --color-button-border: 255 255 255;
+        --color-button-text: 0 0 0;
+      {% else %}
+        --color-foreground: 0 0 0;
+        --color-button-gradient: #000000;
+        --color-button-background: 0 0 0;
+        --color-button-border: 0 0 0;
+        --color-button-text: 255 255 255;
+      {% endif -%}
+    }
+  {% endif -%}
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}" data-section-id="{{ section.id }}">
+  <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
+    {%- if section.settings.heading_position != 'none' -%}
+      <div class="md:hidden">
+    {%- endif -%}
+      {%- render 'section-heading', section: section, section_full_width: section.settings.full_width -%}
+    {%- if section.settings.heading_position != 'none' -%}
+      </div>
+    {%- endif -%}
+
+    <lookbook-element class="banner block media--adapt mobile:media--adapt relative">
+      <div class="banner__media w-full h-full overflow-hidden">
+        <picture class="media media--height w-full h-full block relative">
+          {%- if section.settings.image != blank -%}
+            {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
+            {%- if section.settings.image_mobile -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ section.settings.image_mobile | image_url: width: '400x' }} 400w, {{ section.settings.image_mobile | image_url: width: '600x' }} 600w, {{ section.settings.image_mobile | image_url: width: '800x' }} 800w, {{ section.settings.image_mobile | image_url: width: '1000x' }} 1000w"
+                width="{{ section.settings.image_mobile.width }}"
+                height="{{ section.settings.image_mobile.height }}"
+              >
+            {%- endif -%}
+
+            {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', class: 'banner__image' -}}
+          {%- else -%}
+            {{- 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder' -}}
+          {%- endif -%}
+        </picture>
+      </div>
+
+      {%- if section.blocks.size > 0 or section.settings.heading_position != 'none' -%}
+        <span class="banner__overlay absolute top-0 left-0 w-full h-full pointer-events-none"></span>
+
+        {%- if section.settings.heading_position != 'none' -%}
+          <div class="banner__content overflow-hidden absolute z-1 top-0 left-0 w-full h-full hidden md:block pointer-events-none">
+            <div class="page-width w-full h-full flex {{ section.settings.heading_position }}">
+              <div class="banner__box pointer-events-auto">
+                {%- render 'section-heading', section: section -%}
+              </div>
+            </div>
+          </div>
+        {%- endif -%}
+        
+        {%- for block in section.blocks -%}
+          {%- case block.type -%}
+            {%- when 'product' -%}
+              {%- liquid
+                assign product = block.settings.product
+                if product == null
+                  assign placeholder = true
+                endif
+              -%}
+              {% if product != blank %}
+                {%- if settings.product_quick_view -%}
+                  <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+                    <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
+                      {%- if product.featured_media -%}
+                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                          {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+                        </div>
+                      {%- endif -%}
+                      <div class="rte text-sm leading-none grid gap-2">
+                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+
+                        {%- render 'product-price', product: product, placeholder: placeholder -%}
+                      </div>
+                      {%- render 'icon', icon: 'caret', class: 'absolute' -%}
+                    </div>
+                  </hover-element>
+                  <quick-view id="Quickview-{{ section.id }}-{{ product.id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true">
+                    <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false"></overlay-element>
+                    <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                      <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                        <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                          <span class="btn-fill" data-fill></span>
+                          <span class="btn-text">
+                            {%- render 'icon', icon: 'close', size: 'sm' -%}
+                          </span>
+                        </button>
+                      </gesture-element>
+                      <div class="quick-view__content drawer__content opacity-0 invisible flex flex-col h-full grow shrink"></div>
+                    </div>
+                  </quick-view>
+                {%- else -%}
+                  <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+                    <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
+                      {%- if product.featured_media -%}
+                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                          {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+                        </div>
+                      {%- endif -%}
+                      <div class="rte text-sm leading-none grid gap-2">
+                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+
+                        {%- render 'product-price', product: product, placeholder: placeholder -%}
+                      </div>
+                      {%- render 'icon', icon: 'caret', class: 'absolute' -%}
+                    </div>
+                  </a>
+                {%- endif -%}
+              {%- else -%}
+                <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} aria-disabled="true"{% endif %} id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>&nbsp;</a>
+              {%- endif -%}
+
+            {%- when 'content'-%}
+              <a class="hotspot with-content flex items-center justify-center absolute cursor-pointer"{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% else %} role="link" aria-disabled="true" aria-controls="Hotspot-{{ section.id }}-{{ block.id }}" aria-expanded="false"{% endif %} aria-label="{{ block.settings.heading | escape }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+                {% if block.settings.heading != blank or block.settings.text != blank %}
+                  <div class="hotspot__content hidden md:flex gap-2 items-center absolute z-1 pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
+                    <div class="rte text-sm leading-tight grid gap-2 md:gap-3">
+                      {%- if block.settings.icon_image != blank -%}
+                        <figure class="media media--transparent relative inline-block">
+                          {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
+                          {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                          {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
+                        </figure>
+                      {%- elsif block.settings.icon != 'none' -%}
+                        {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
+                      {%- endif -%}
+                      {%- if block.settings.heading != blank -%}
+                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ block.settings.heading }}</p>
+                      {%- endif -%}
+
+                      {{- block.settings.text -}}
+                    </div>
+                    {%- render 'icon', icon: 'caret', class: 'absolute' -%}
+                  </div>
+                {% endif %}
+              </a>
+              {% if block.settings.link == blank %}
+                <x-modal id="Hotspot-{{ section.id }}-{{ block.id }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="{{ block.settings.heading | escape }}"
+                  hidden
+                >
+                  <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Hotspot-{{ section.id }}-{{ block.id }}" aria-expanded="false"></overlay-element>
+                  <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                    <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                      <span class="drawer__title heading title-md">{{ block.settings.heading | escape }}</span>
+                      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="Hotspot-{{ section.id }}-{{ block.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">
+                          {%- render 'icon', icon: 'close', size: 'sm' -%}
+                        </span>
+                      </button>
+                    </gesture-element>
+                    <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                      <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                        <div class="rte text-base md:text-lg">{{ block.settings.text }}</div>
+                      </div>
+                    </div>
+                  </div>
+                </x-modal>
+              {%- endif -%}
+          {%- endcase -%}
+        {%- endfor -%}
+      {%- endif -%}
+    </lookbook-element>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.lookbook.name",
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.global.settings.image.label"
+    },
+    {
+      "type": "image_picker",
+      "id": "image_mobile",
+      "label": "t:sections.global.settings.image_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-center md:items-center"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "select",
+      "id": "heading_position",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.content_position.options__10.label"
+        },
+        {
+          "value": "items-start justify-start text-left",
+          "label": "t:sections.global.settings.content_position.options__1.label"
+        },
+        {
+          "value": "items-start justify-center text-center",
+          "label": "t:sections.global.settings.content_position.options__2.label"
+        },
+        {
+          "value": "items-start justify-end text-right",
+          "label": "t:sections.global.settings.content_position.options__3.label"
+        },
+        {
+          "value": "items-center justify-start text-left",
+          "label": "t:sections.global.settings.content_position.options__4.label"
+        },
+        {
+          "value": "items-center justify-center text-center",
+          "label": "t:sections.global.settings.content_position.options__5.label"
+        },
+        {
+          "value": "items-center justify-end text-right",
+          "label": "t:sections.global.settings.content_position.options__6.label"
+        },
+        {
+          "value": "items-end justify-start text-left",
+          "label": "t:sections.global.settings.content_position.options__7.label"
+        },
+        {
+          "value": "items-end justify-center text-center",
+          "label": "t:sections.global.settings.content_position.options__8.label"
+        },
+        {
+          "value": "items-end justify-end text-right",
+          "label": "t:sections.global.settings.content_position.options__9.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.heading_position.label",
+      "info": "t:sections.global.settings.heading_position.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_external",
+      "label": "t:sections.global.settings.button_external.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "color",
+      "id": "color_overlay",
+      "label": "t:sections.global.settings.color_overlay.label",
+      "default": "#171717"
+    },
+    {
+      "type": "range",
+      "id": "overlay_opacity",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "label": "t:sections.global.settings.overlay_opacity.label",
+      "default": 30
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "product",
+      "name": "t:sections.global.blocks.product.name",
+      "settings": [
+        {
+          "type": "product",
+          "id": "product",
+          "label": "t:sections.global.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.lookbook.blocks.global.settings.header.content"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "vertical",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "horizontal",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content",
+          "info": "t:sections.lookbook.blocks.global.settings.header__mobile.info"
+        },
+        {
+          "type": "range",
+          "id": "vertical_mobile",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_mobile",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        }
+      ]
+    },
+    {
+      "type": "content",
+      "name": "t:sections.global.blocks.content.name",
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.global.settings.icon.label",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.global.settings.icon.options__1.label"
+            },
+            {
+              "value": "alert",
+              "label": "t:sections.global.settings.icon.options__2.label"
+            },
+            {
+              "value": "award",
+              "label": "t:sections.global.settings.icon.options__3.label"
+            },
+            {
+              "value": "bag",
+              "label": "t:sections.global.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.global.settings.icon.options__5.label"
+            },
+            {
+              "value": "briefcase",
+              "label": "t:sections.global.settings.icon.options__6.label"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.global.settings.icon.options__7.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.global.settings.icon.options__8.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.global.settings.icon.options__9.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.global.settings.icon.options__10.label"
+            },
+            {
+              "value": "cosmetics",
+              "label": "t:sections.global.settings.icon.options__11.label"
+            },
+            {
+              "value": "creadit_card",
+              "label": "t:sections.global.settings.icon.options__12.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.global.settings.icon.options__13.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.global.settings.icon.options__14.label"
+            },
+            {
+              "value": "devices",
+              "label": "t:sections.global.settings.icon.options__15.label"
+            },
+            {
+              "value": "email",
+              "label": "t:sections.global.settings.icon.options__16.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.global.settings.icon.options__17.label"
+            },
+            {
+              "value": "file_text",
+              "label": "t:sections.global.settings.icon.options__18.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.global.settings.icon.options__19.label"
+            },
+            {
+              "value": "gluten",
+              "label": "t:sections.global.settings.icon.options__20.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.global.settings.icon.options__21.label"
+            },
+            {
+              "value": "headphone",
+              "label": "t:sections.global.settings.icon.options__22.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.global.settings.icon.options__23.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.global.settings.icon.options__24.label"
+            },
+            {
+              "value": "lightning",
+              "label": "t:sections.global.settings.icon.options__25.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.global.settings.icon.options__26.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.global.settings.icon.options__27.label"
+            },
+            {
+              "value": "newspaper",
+              "label": "t:sections.global.settings.icon.options__28.label"
+            },
+            {
+              "value": "organic",
+              "label": "t:sections.global.settings.icon.options__29.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.global.settings.icon.options__30.label"
+            },
+            {
+              "value": "phone",
+              "label": "t:sections.global.settings.icon.options__31.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.global.settings.icon.options__32.label"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.global.settings.icon.options__33.label"
+            },
+            {
+              "value": "planet_2",
+              "label": "t:sections.global.settings.icon.options__34.label"
+            },
+            {
+              "value": "recycling",
+              "label": "t:sections.global.settings.icon.options__35.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.global.settings.icon.options__36.label"
+            },
+            {
+              "value": "rocket",
+              "label": "t:sections.global.settings.icon.options__37.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.global.settings.icon.options__38.label"
+            },
+            {
+              "value": "ruler_2",
+              "label": "t:sections.global.settings.icon.options__39.label"
+            },
+            {
+              "value": "ruler_3",
+              "label": "t:sections.global.settings.icon.options__40.label"
+            },
+            {
+              "value": "sale",
+              "label": "t:sections.global.settings.icon.options__41.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.global.settings.icon.options__42.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.global.settings.icon.options__43.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.global.settings.icon.options__44.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.global.settings.icon.options__45.label"
+            },
+            {
+              "value": "support",
+              "label": "t:sections.global.settings.icon.options__46.label"
+            },
+            {
+              "value": "swatchbook",
+              "label": "t:sections.global.settings.icon.options__47.label"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.global.settings.icon.options__48.label"
+            },
+            {
+              "value": "tags",
+              "label": "t:sections.global.settings.icon.options__49.label"
+            },
+            {
+              "value": "time",
+              "label": "t:sections.global.settings.icon.options__50.label"
+            },
+            {
+              "value": "trophy",
+              "label": "t:sections.global.settings.icon.options__51.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.global.settings.icon.options__52.label"
+            },
+            {
+              "value": "users",
+              "label": "t:sections.global.settings.icon.options__53.label"
+            },
+            {
+              "value": "wallet",
+              "label": "t:sections.global.settings.icon.options__54.label"
+            },
+            {
+              "value": "wash",
+              "label": "t:sections.global.settings.icon.options__55.label"
+            },
+            {
+              "value": "watch",
+              "label": "t:sections.global.settings.icon.options__56.label"
+            },
+            {
+              "value": "wrench",
+              "label": "t:sections.global.settings.icon.options__57.label"
+            }
+          ]
+        },
+        {
+          "type": "image_picker",
+          "id": "icon_image",
+          "label": "t:sections.global.settings.icon_image.label"
+        },
+        {
+          "type": "range",
+          "id": "icon_width",
+          "label": "t:sections.global.settings.icon_width.label",
+          "default": 24,
+          "min": 20,
+          "max": 120,
+          "step": 2,
+          "unit": "px"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "label": "t:sections.global.settings.text.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.global.settings.link.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.lookbook.blocks.global.settings.header.content"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "vertical",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "horizontal",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content",
+          "info": "t:sections.lookbook.blocks.global.settings.header__mobile.info"
+        },
+        {
+          "type": "range",
+          "id": "vertical_mobile",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "horizontal_mobile",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.lookbook.name",
+      "blocks": [
+        {
+          "type": "product",
+          "settings": {
+            "vertical": 25,
+            "horizontal": 25,
+            "vertical_mobile": 25,
+            "horizontal_mobile": 25
+          }
+        },
+        {
+          "type": "product",
+          "settings": {
+            "vertical": 75,
+            "horizontal": 65,
+            "vertical_mobile": 75,
+            "horizontal_mobile": 65
+          }
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "templates": [
+      "password"
+    ]
+  }
+}
+{% endschema %}

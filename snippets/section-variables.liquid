@@ -1,0 +1,51 @@
+{%- if section.settings.gradient_background != blank and section.settings.gradient_background != 'rgba(0,0,0,0)' -%}
+  --gradient-background: {{ section.settings.gradient_background }};
+{%- endif -%}
+
+{%- if section.settings.color_background != blank and section.settings.color_background != 'rgba(0,0,0,0)' -%}
+  --color-background: {{ section.settings.color_background.rgb }};
+{%- endif -%}
+
+{%- if section.settings.gradient_background_2 != blank and section.settings.gradient_background_2 != 'rgba(0,0,0,0)' -%}
+  --gradient-background-2: {{ section.settings.gradient_background_2 }};
+{%- endif -%}
+
+{%- if section.settings.color_background_2 != blank and section.settings.color_background_2 != 'rgba(0,0,0,0)' -%}
+  --color-background-2: {{ section.settings.color_background_2.rgb }};
+{%- endif -%}
+
+{%- if section.settings.color_text != blank and section.settings.color_text != 'rgba(0,0,0,0)' -%}
+  --color-foreground: {{ section.settings.color_text.rgb }};
+  --color-border: var(--color-foreground)/ 0.1;
+  --color-border-dark: var(--color-foreground)/ 0.4;
+  --color-border-light: var(--color-foreground)/ 0.06;
+{%- endif -%}
+
+{%- if section.settings.color_highlight != blank and section.settings.color_highlight != 'rgba(0,0,0,0)' -%}
+  --color-highlight: {{ section.settings.color_highlight.rgb }};
+{%- endif -%}
+
+{%- if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)' -%}
+  --gradient-highlight: {{ section.settings.gradient_highlight }};
+{%- endif -%}
+
+{%- if section.settings.color_button_gradient != blank and section.settings.color_button_gradient != 'rgba(0,0,0,0)' -%}
+  --color-button-gradient: {{ section.settings.color_button_gradient }};
+{%- endif -%}
+
+{%- if section.settings.color_button_background != blank and section.settings.color_button_background != 'rgba(0,0,0,0)' -%}
+  --color-button-background: {{ section.settings.color_button_background.rgb }};
+  --color-button-border: {{ section.settings.color_button_background.rgb }};
+{%- endif -%}
+
+{%- if section.settings.color_button_text != blank and section.settings.color_button_text != 'rgba(0,0,0,0)' -%}
+  --color-button-text: {{ section.settings.color_button_text.rgb }};
+{%- endif -%}
+
+{%- if section.settings.color_overlay != blank and section.settings.color_overlay != 'rgba(0,0,0,0)' -%}
+  --color-overlay: {{ section.settings.color_overlay.rgb }};
+{%- endif -%}
+
+{%- if section.settings.overlay_opacity != blank -%}
+  --overlay-opacity: {{ section.settings.overlay_opacity | divided_by: 100.0 }};
+{%- endif -%}

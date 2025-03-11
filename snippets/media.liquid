@@ -1,0 +1,79 @@
+{%- comment -%}
+  Renders product media
+
+  Accepts:
+  - media: {Object} Product Media object
+  - sizes: {String} Used for the image generation
+  - preload: {Boolean} The image is preloaded and its fetch priority is higher
+  - loop: {Boolean} Enable video looping (optional)
+  - autoplay: {Boolean} Enable video autoplay (optional)
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'media',
+    media: media,
+    loop: false,
+    autoplay: false
+  %}
+{%- endcomment -%}
+
+{%- liquid
+  if preload
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+  else
+    assign loading = 'lazy'
+    assign fetchpriority = 'auto'
+  endif
+-%}
+
+{%- case media.media_type -%}
+  {%- when 'image' -%}
+    {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+
+  {%- when 'video', 'external_video' -%}
+    <video-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.aspect_ratio }}" data-aspect-ratio="{{ media.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}"
+      {%- if media.host %} host="{{ media.host }}"{% endif -%}
+      {%- if autoplay %} autoplay{% endif -%}
+    >
+      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+
+      <template>
+        {%- liquid
+          if media.media_type == 'video'
+            echo media | video_tag: controls: true, playsinline: true, muted: autoplay, autoplay: autoplay, loop: loop, preload: 'none'
+          else
+            if media.host == 'youtube'
+              echo media | external_video_url: enablejsapi: true, loop: loop, mute: autoplay, autoplay: autoplay, playlist: media.external_id | external_video_tag: class: video_class, loading: 'lazy'
+            elsif media.host == 'vimeo'
+              echo media | external_video_url: autopause: true, loop: loop, muted: autoplay, autoplay: autoplay | external_video_tag: class: video_class, loading: 'lazy'
+            else
+              echo media | external_video_tag: image_size: '2048x'
+            endif
+          endif
+        -%}
+      </template>
+
+      <button type="button" id="DeferredPoster-{{ media.id }}" class="play-button absolute flex items-center justify-center rounded-full" aria-label="{{ 'products.media.play_video' | t | escape }}">
+        {%- render 'icon', icon: 'play' -%}
+      </button>
+    </video-media>
+
+  {%- when 'model' -%}
+    <model-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.preview_image.aspect_ratio }}" data-aspect-ratio="{{ media.preview_image.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
+      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+      {{- media | model_viewer_tag: image_size: '2048x', reveal: 'interaction', toggleable: true -}}
+
+      <template>
+        {{- media | media_tag: image_size: '2048x', toggleable: true -}}
+      </template>
+      <button type="button" id="DeferredPoster-{{ media.id }}" class="play-button absolute flex items-center justify-center rounded-full" aria-label="{{ 'products.media.play_model' | t | escape }}">
+        {%- render 'icon', icon: '3d-model' -%}
+      </button>
+      <button type="button" id="DeferredPosterClose-{{ media.id }}" class="button button--secondary button--close play-button absolute flex items-center justify-center rounded-full z-10" aria-label="{{ 'general.accessibility.close' | t | escape }}" hidden is="hover-button">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">{% render 'icon', icon: 'close' %}</span>
+      </button>
+    </model-media>
+{%- endcase -%}

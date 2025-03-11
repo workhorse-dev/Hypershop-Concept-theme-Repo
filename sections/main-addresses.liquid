@@ -1,0 +1,455 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'customer.js' | asset_url }}" defer></script>
+
+{%- paginate customer.addresses by 5 -%}
+  <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+    <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+      <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none grid gap-4 md:flex {{ section.settings.heading_alignment }} md:justify-between">
+        <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+          <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.addresses.title' | t }}</split-words>
+        </{{ section.settings.heading_tag }}>
+        <p>
+          <a class="button button--secondary icon-with-text" href="{{ routes.account_url }}" is="hover-link">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- liquid
+                render 'icon', icon: 'account-2', size: 'xs'
+                echo 'customer.account.return' | t
+              -%}
+            </span>
+          </a>
+        </p>
+      </div>
+
+      <div class="addresses grid gap-8 md:gap-12" data-customer-addresses>
+        <div class="button-group" data-address>
+          <button
+            class="button button--primary button--fixed"
+            type="button"
+            is="hover-button"
+            aria-label="{{ 'customer.addresses.add_new' | t | escape }}"
+            aria-controls="Address-{{ customer.new_address.id }}" aria-expanded="false"
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">{{ 'customer.addresses.add_new' | t }}</span>
+          </button>
+
+          <x-modal id="Address-{{ customer.new_address.id }}" class="address-modal x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+            role="dialog"
+            aria-modal="true"
+            aria-label="{{ 'customer.addresses.add_new' | t | escape }}"
+            hidden
+          >
+            <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Address-{{ customer.new_address.id }}" aria-expanded="false"></overlay-element>
+            <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+              <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight">{{ 'customer.addresses.add_new' | t }}</span>
+                <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="Address-{{ customer.new_address.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">
+                    {%- render 'icon', icon: 'close', size: 'sm' -%}
+                  </span>
+                </button>
+              </gesture-element>
+              <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                  {%- form 'customer_address', customer.new_address, aria-labelledBy: 'AddressNewHeading', class: 'address__fields flex flex-wrap gap-4d5 md:gap-6' -%}
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressFirstNameNew" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" placeholder="{{ 'customer.addresses.first_name' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressFirstNameNew">{{ 'customer.addresses.first_name' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressLastNameNew" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" placeholder="{{ 'customer.addresses.last_name' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressLastNameNew">{{ 'customer.addresses.last_name' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressCompanyNew" name="address[company]" value="{{ form.company }}" autocomplete="organization" placeholder="{{ 'customer.addresses.company' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressCompanyNew">{{ 'customer.addresses.company' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="tel" id="AddressPhoneNew" name="address[phone]" value="{{ form.phone }}" autocomplete="tel" placeholder="{{ 'customer.addresses.phone' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressPhoneNew">{{ 'customer.addresses.phone' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressAddress1New" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" placeholder="{{ 'customer.addresses.address1' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressAddress1New">{{ 'customer.addresses.address1' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressAddress2New" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2" placeholder="{{ 'customer.addresses.address2' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressAddress2New">{{ 'customer.addresses.address2' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressCityNew" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" placeholder="{{ 'customer.addresses.city' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressCityNew">{{ 'customer.addresses.city' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <select
+                        class="select is-floating"
+                        id="AddressCountryNew"
+                        name="address[country]"
+                        data-default="{{ form.country }}"
+                        autocomplete="country"
+                        is="custom-select"
+                      >
+                        {{ all_country_option_tags }}
+                      </select>
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      <label class="label is-floating" for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
+                    </div>
+                    <div class="field" id="AddressProvinceContainerNew" style="display: none">
+                      <select
+                        class="select is-floating"
+                        id="AddressProvinceNew"
+                        name="address[province]"
+                        data-default="{{ form.province }}"
+                        autocomplete="address-level1"
+                        is="custom-select"
+                      >
+                      </select>
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      <label class="label is-floating" for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
+                    </div>
+                    <div class="field">
+                      <input class="input is-floating" type="text" id="AddressZipNew" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code" placeholder="{{ 'customer.addresses.zip' | t | escape }}"/>
+                      <label class="label is-floating" for="AddressZipNew">{{ 'customer.addresses.zip' | t }}</label>
+                    </div>
+                    <div class="field field--full">
+                      <label for="address_default_address_new" class="flex items-center gap-3">
+                        {%- liquid
+                          echo form.set_as_default_checkbox
+                          echo 'customer.addresses.set_default' | t
+                        -%}
+                      </label>
+                    </div>
+                    <div class="field field--full">
+                      <button
+                        class="button button--primary button--fixed"
+                        type="submit"
+                        is="hover-button"
+                      >
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">{{ 'customer.addresses.add' | t }}</span>
+                      </button>
+                    </div>
+                  {%- endform -%}
+                </div>
+              </div>
+            </div>
+          </x-modal>
+        </div>
+
+        <div>
+          <ul role="list" class="address-grid grid">
+            {%- for address in customer.addresses -%}
+              <li class="address flex flex-col gap-5 md:gap-7d5" data-address>
+                {%- if address == customer.default_address -%}
+                  <h2 class="text-xl-3xl font-medium">{{ 'customer.addresses.default' | t }}</h2>
+                {%- endif -%}
+                <div class="text-base md:text-lg">{{ address | format_address }}</div>
+                <div class="flex flex-wrap gap-3">
+                  <button
+                    class="button button--secondary button--small icon-with-text"
+                    type="button"
+                    is="hover-button"
+                    aria-label="{{ 'customer.addresses.edit_address' | t | escape }} {{ forloop.index }}"
+                    aria-controls="Address-{{ address.id }}" aria-expanded="false"
+                  >
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'edit', size: 'xs'
+                        echo 'customer.addresses.edit' | t
+                      -%}
+                    </span>
+                  </button>
+                  <button
+                    class="button button--secondary button--small icon-with-text"
+                    type="button"
+                    is="hover-button"
+                    aria-label="{{ 'customer.addresses.delete' | t | escape }} {{ forloop.index }}"
+                    data-target="{{ address.url }}"
+                    data-confirm-message="{{ 'customer.addresses.delete_confirm' | t | escape }}"
+                  >
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'trash', size: 'xs'
+                        echo 'customer.addresses.delete' | t
+                      -%}
+                    </span>
+                  </button>
+                </div>
+                <x-modal id="Address-{{ address.id }}" class="address-modal x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+                  role="dialog"
+                  aria-modal="true"
+                  aria-label="{{ 'customer.addresses.edit_address' | t | escape }} {{ forloop.index }}"
+                  hidden
+                >
+                  <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Address-{{ address.id }}" aria-expanded="false"></overlay-element>
+                  <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                    <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                      <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight">{{ 'customer.addresses.edit_address' | t }}</span>
+                      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="Address-{{ address.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">
+                          {%- render 'icon', icon: 'close', size: 'sm' -%}
+                        </span>
+                      </button>
+                    </gesture-element>
+                    <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                      <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                        {%- form 'customer_address', address, class: 'address__fields flex flex-wrap gap-4d5 md:gap-6' -%}
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressFirstName_{{ form.id }}" name="address[first_name]" value="{{ form.first_name }}" autocomplete="given-name" placeholder="{{ 'customer.addresses.first_name' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressFirstName_{{ form.id }}">{{ 'customer.addresses.first_name' | t }}</label>
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressLastName_{{ form.id }}" name="address[last_name]" value="{{ form.last_name }}" autocomplete="family-name" placeholder="{{ 'customer.addresses.last_name' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressLastName_{{ form.id }}">{{ 'customer.addresses.last_name' | t }}</label>
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressCompany_{{ form.id }}" name="address[company]" value="{{ form.company }}" autocomplete="organization" placeholder="{{ 'customer.addresses.company' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressCompany_{{ form.id }}">{{ 'customer.addresses.company' | t }}</label> 
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="tel" id="AddressPhone_{{ form.id }}"  name="address[phone]" value="{{ form.phone }}" autocomplete="tel" placeholder="{{ 'customer.addresses.phone' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressPhone_{{ form.id }}">{{ 'customer.addresses.phone' | t }}</label>
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressAddress1_{{ form.id }}" name="address[address1]" value="{{ form.address1 }}" autocomplete="address-line1" placeholder="{{ 'customer.addresses.address1' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressAddress1_{{ form.id }}">{{ 'customer.addresses.address1' | t }}</label> 
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressAddress2_{{ form.id }}" name="address[address2]" value="{{ form.address2 }}" autocomplete="address-line2" placeholder="{{ 'customer.addresses.address2' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressAddress2_{{ form.id }}">{{ 'customer.addresses.address2' | t }}</label> 
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressCity_{{ form.id }}" name="address[city]" value="{{ form.city }}" autocomplete="address-level2" placeholder="{{ 'customer.addresses.city' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressCity_{{ form.id }}">{{ 'customer.addresses.city' | t }}</label> 
+                          </div>
+                          <div class="field">
+                            <select
+                              class="select is-floating"
+                              id="AddressCountry_{{ form.id }}"
+                              name="address[country]"
+                              data-address-country-select
+                              data-default="{{ form.country }}"
+                              data-form-id="{{ form.id }}"
+                              autocomplete="country"
+                              is="custom-select"
+                            >
+                              {{ all_country_option_tags }}
+                            </select>
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                            <label class="label is-floating" for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
+                          </div>
+                          <div class="field" id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
+                            <select
+                              class="select is-floating"
+                              id="AddressProvince_{{ form.id }}"
+                              name="address[province]"
+                              data-default="{{ form.province }}"
+                              autocomplete="address-level1"
+                              is="custom-select"
+                            >
+                            </select>
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                            <label class="label is-floating" for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
+                          </div>
+                          <div class="field">
+                            <input class="input is-floating" type="text" id="AddressZip_{{ form.id }}" name="address[zip]" value="{{ form.zip }}" autocapitalize="characters" autocomplete="postal-code" placeholder="{{ 'customer.addresses.zip' | t | escape }}"/>
+                            <label class="label is-floating" for="AddressZip_{{ form.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                          </div>
+                          <div class="field field--full">
+                            <label for="address_default_address_{{ form.id }}" class="flex items-center gap-3">
+                              {%- liquid
+                                echo form.set_as_default_checkbox
+                                echo 'customer.addresses.set_default' | t
+                              -%}
+                            </label>
+                          </div>
+                          <div class="field field--full">
+                            <button
+                              class="button button--primary button--fixed"
+                              type="submit"
+                              is="hover-button"
+                            >
+                              <span class="btn-fill" data-fill></span>
+                              <span class="btn-text">{{ 'customer.addresses.update' | t }}</span>
+                            </button>
+                          </div>
+                        {%- endform -%}
+                      </div>
+                    </div>
+                  </div>
+                </x-modal>
+              </li>
+            {%- endfor -%}
+          </ul>
+
+          {%- liquid
+            if paginate.pages > 1
+              render 'pagination', paginate: paginate
+            endif
+          -%}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endpaginate -%}
+
+<script>
+  window.addEventListener("load", () => {
+    typeof CustomerAddresses !== 'undefined' && new CustomerAddresses();
+  }, false);
+</script>
+
+{% schema %}
+{
+  "name": "t:sections.main-addresses.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "md:items-end",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "md:items-center md:flex-col",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "md:items-end"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ]
+}
+{% endschema %}

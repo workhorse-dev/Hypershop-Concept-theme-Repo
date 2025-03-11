@@ -1,0 +1,262 @@
+{%- comment -%}
+  Renders product bundle variant-picker
+
+  Accepts:
+  - product: {Object} product object.
+  - show_variant_labels: {Boolean} Show the variant label.
+  - picker_type: {String} Variant picker type.
+  - enable_color_swatches: {Boolean} Enable the color swatches.
+  - color_swatch_type: {String} Color swatch type.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'product-bundle-variant-picker', product: product, block: block %}
+{%- endcomment -%}
+
+{%- liquid
+  assign product_form_id = 'ProductForm-' | append: section_id | append: '-' | append: product_id
+  assign featured_image = ''
+  if product.featured_image
+    assign featured_image = product.featured_image | image_url
+  endif
+-%}
+{%- form 'product',
+  product,
+  id: product_form_id,
+  data-type: 'add-to-cart-form',
+  data-product-title: product.title,
+  data-product-image: featured_image,
+  class: 'product-form flex flex-col gap-4 h-full justify-between',
+  is: 'product-bundle-form',
+  aria-controls: controls
+-%}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
+
+  {%- unless product.has_only_default_variant -%}
+    <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden">
+      {%- for option in product.options_with_values -%}
+        {%- if picker_type == 'button' -%}
+          {%- liquid
+            assign is_color = false
+            if enable_color_swatches
+              assign swatch_file_extension = 'png'
+              assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
+              assign downcased_option = option.name | downcase
+              for trigger in swatch_trigger_list
+                assign swatch_trigger = trigger | strip
+                if downcased_option contains swatch_trigger
+                  assign is_color = true
+                elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+                  assign is_color = true
+                endif
+
+                if is_color == true
+                  break
+                endif
+              endfor
+            endif
+
+            assign option_index_0 = forloop.index0
+          -%}
+          <fieldset class="js product-form__input variant-input-wrapper relative"
+            data-option-index="option{{ forloop.index }}"
+            data-option-slug="{{ option.name | handleize }}"
+          >
+            <legend class="sr-only">{{ option.name }}</legend>
+            <div class="form__label flex items-center justify-between gap-2 w-full">
+              {%- if show_variant_labels -%}
+                <div class="flex gap-2">
+                  {{- option.name -}}:
+                  <span class="font-medium" id="{{ section_id }}-{{ product_id }}-option{{ option.position }}">{{ option.selected_value }}</span>
+                </div>
+              {%- endif -%}
+            </div>
+            <scroll-shadow class="product-card__bottom grid w-full">
+              <ul class="scroll-area swatches swatches--{{ settings.rounded_swatch }}{% if color_swatch_type == 'variant' %} swatches--variant{% endif %} grid justify-start gap-4">
+                {%- for value in option.values -%}
+                  <li>
+                    <magnet-element class="block">
+                      <input
+                        type="radio"
+                        class="sr-only{% unless value.available %} disabled{% endunless %}"
+                        id="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                        name="{{ option.name }}-{{ section_id }}-{{ product_id }}"
+                        value="{{ value | escape }}"
+                        {% if option.selected_value == value %}checked{% endif %}
+                        {% if value.product_url != blank and value.product_url != product.url %}data-product-url="{{ value.variant.url | default: value.product_url }}"{% endif %}
+                        data-option-value="{{ value | escape }}"
+                        data-option-value-id="{{ value.id }}"
+                        align-selected=".scroll-area"
+                      />
+                      {%- if is_color or value.swatch != blank -%}
+                        {%- liquid
+                          if value.swatch == blank
+                            assign file_extension = swatch_file_extension | default: 'png'
+                            assign file_name = value | handle | append: '.' | append: file_extension
+                            assign swatch_fallback = value | split: ' ' | last | handle
+                            assign swatch_fallback_override = false
+
+                            if settings.swatch_config != blank
+                              assign value_downcase = value | downcase
+                              assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+                              for swatch in swatch_config
+                                assign swatch_parts = swatch | strip | split: ':'
+                                assign swatch_name = swatch_parts.first | downcase | strip
+
+                                if swatch_name == value_downcase
+                                  assign swatch_value = swatch_parts.last | strip
+                                  if swatch_value contains '#'
+                                    assign swatch_fallback = swatch_value
+                                    assign swatch_fallback_override = true
+                                  else
+                                    assign file_name = swatch_value
+                                  endif
+                                  break
+                                endif
+                              endfor
+                            endif
+
+                            assign swatch_image = blank
+                            if images[file_name] != blank
+                              assign swatch_image = images[file_name] | image_url: width: 72
+                            elsif file_name contains '//cdn.shopify.com/'
+                              assign swatch_image = file_name
+                            endif
+                          else
+                            assign swatch_image = blank
+                            assign swatch_fallback = value | split: ' ' | last | handle
+                            if value.swatch.image
+                              assign swatch_image = value.swatch.image | image_url: width: 72
+                              assign swatch_fallback_override = false
+                            elsif value.swatch.color
+                              assign swatch_fallback = value.swatch.color
+                            endif
+                          endif
+
+                          if color_swatch_type == 'variant'
+                            for variant in product.variants
+                              assign variant_value = variant.options[option_index_0]
+                              if variant_value contains value and variant.image
+                                assign swatch_image = variant.image | image_url: width: 144
+                                assign swatch_fallback_override = false
+                                break
+                              endif
+                            endfor
+                          endif
+                        -%}
+                        <label
+                          for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                          class="color-swatch{% if swatch_image != blank %} with-image{% endif %} relative"
+                          title="{{ value | escape }}"
+                          style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}"
+                        >
+                          <span class="sr-only">{{ value | escape }}</span>
+                        </label>
+                      {%- else -%}
+                        <label
+                          for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
+                          class="label-swatch text-sm font-medium leading-none cursor-pointer relative"
+                          title="{{ value | escape }}"
+                        >
+                          {{- value -}}
+                        </label>
+                      {%- endif -%}
+                    </magnet-element>
+                  </li>
+                {%- endfor -%}
+              </ul>
+              <template>
+                <slot></slot>
+                <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+                  <span class="l"></span>
+                  <span class="r"></span>
+                </s>
+                <style>
+                  :host{display:inline-block;position:relative}:host([hidden]){display:none}
+                  s{position:absolute;inset:0;pointer-events:none;{% if settings.card_style == 'card' %}--color-background:var(--color-placeholder);{% endif %}}
+                  s span{position:absolute;inset-block:0;width:var(--sp-12);opacity:0;transition:opacity var(--animation-short);}
+                  s .l{inset-inline-start:0;opacity:var(--l);background:linear-gradient(90deg,rgb(var(--color-background)) 0%,transparent 100%);}
+                  s .r{inset-inline-end:0;opacity:var(--r);background:linear-gradient(270deg,rgb(var(--color-background)) 0%,transparent 100%);}
+                  s[dir=rtl] :is(.icon-chevron-left,.icon-chevron-right){transform:scaleX(-1);}
+                </style>
+              </template>
+            </scroll-shadow>
+          </fieldset>
+        {%- else -%}
+          <div class="product-form__input product-form__input--dropdown variant-input-wrapper"
+            data-option-index="option{{ forloop.index }}"
+            data-option-slug="{{ option.name | handleize }}"
+          >
+            <div class="form__label flex items-center justify-between gap-2 w-full">
+              {%- if show_variant_labels -%}
+                <label class="flex gap-2" for="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}">
+                  {{- option.name -}}
+                </label>
+              {%- endif -%}
+            </div>
+            <div class="field">
+              <select id="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}"
+                class="select"
+                name="options[{{ option.name | escape }}]"
+                is="custom-select"
+              >
+                {%- for value in option.values -%}
+                  <option value="{{ value | escape }}" data-option-value-id="{{ value.id }}" {% if option.selected_value == value %}selected{% endif %}{% if value.product_url != blank and value.product_url != product.url %} data-product-url="{{ value.variant.url | default: value.product_url }}"{% endif %}>
+                    {{ value }}
+                  </option>
+                {%- endfor -%}
+              </select>
+              {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+            </div>
+          </div>
+        {% endif %}
+      {%- endfor -%}
+
+      <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+    </variant-selects>
+  {%- else -%}
+    <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+  {%- endunless -%}
+
+  <noscript>
+    <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+      <label class="form__label flex gap-2" for="Variants-{{ section_id }}-{{ product_id }}">{{ 'products.product.product_variants' | t }}</label>
+      <div class="field">
+        <select name="id" id="Variants-{{ section_id }}-{{ product_id }}" class="select">
+          {%- for variant in product.variants -%}
+            <option
+              {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+              {% if variant.available == false %}disabled{% endif %}
+              value="{{ variant.id }}"
+            >
+              {{ variant.title }}
+              {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+              - {{ variant.price | money | strip_html }}
+            </option>
+          {%- endfor -%}
+        </select>
+        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+      </div>
+    </div>
+  </noscript>
+
+  <button
+    type="submit"
+    name="add"
+    class="product-form__submit button button--primary w-full"
+    is="hover-button"
+    {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+          echo 'products.product.sold_out' | t
+        else
+          echo 'products.product.add_to_bundle' | t
+        endif
+      -%}
+    </span>
+  </button>
+{%- endform -%}

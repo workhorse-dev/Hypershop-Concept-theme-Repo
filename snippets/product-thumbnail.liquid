@@ -1,0 +1,72 @@
+{%- liquid
+  assign gang_media_active = false
+  assign gang_connect_alt = ''
+  if media.alt contains '#' and hide_variants == false
+    assign gang_connect_alt = media.alt | split: '#' | last
+    assign gang_connect_list = gang_connect_alt | split: ','
+    for gang_connect_value in gang_connect_list
+      assign gang_exist = false
+      assign gang_connect = ''
+      assign gang_option_name = ''
+      assign gang_connect_item = gang_connect_value
+
+      if gang_connect_item contains ':' and localization.language.iso_code != blank
+        assign gang_split_param = localization.language.iso_code | append: ':'
+        assign gang_connect_item = gang_connect_item | split: gang_split_param | last
+      endif
+
+      if gang_connect_item contains '_'
+        assign gang_option_name = gang_connect_item | split: '_' | first | handleize
+
+        for option_name in product.options
+          assign option_name_handlized = option_name | handleize | replace: '_', '-'
+          if option_name_handlized == gang_option_name
+            assign gang_exist = true
+            assign gang_connect = gang_connect_item
+            
+            assign option_key = 'option' | append: forloop.index
+            assign current_option_value = product.selected_or_first_available_variant[option_key] | handleize
+            assign current_connect = option_name_handlized | append: '_' | append: current_option_value
+            if gang_connect == current_connect
+              assign gang_media_active = true
+            endif
+            break
+          endif
+        endfor
+
+        if gang_exist == true
+          break
+        endif
+      endif
+    endfor
+  endif
+
+  if gang_exist == true
+    assign media_alt = media.alt | split: '#' | first
+  else
+    assign media_alt = media.alt
+  endif
+-%}
+
+<button type="button"
+  class="product__thumbnail media media--{{ image_ratio }} mobile:media--{{ image_ratio_mobile }}{% unless image_fill %} media--contain{% endunless %} relative overflow-hidden
+  {%- if hide_variants and variant_images contains media.src %} product__media--variant{% endif -%}"
+  data-media-id="{{ media.id }}"
+  aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}"
+  aria-current="{% if media.id != featured_media.id %}false{% else %}true{% endif %}"
+  {%- if gang_exist == true %} data-gang-option="{{ gang_option_name }}" data-gang-connect="{{ gang_connect }}"{% if gang_media_active == false %} hidden{% endif %}{% else %} data-gang-default{% endif -%}
+>
+  {{- media.preview_image | image_url: width: 416 | image_tag: loading: 'lazy', sizes: '(max-width: 1280px) 90px, 98px', widths: '54,74,104,162,208,324,416', alt: media_alt, is: 'lazy-image' -}}
+
+  {%- unless media.media_type == 'image' -%}
+    <span class="play-button absolute flex items-center justify-center rounded-full">
+      {%- liquid
+        if media.media_type == 'model'
+          render 'icon', icon: '3d-model'
+        else
+          render 'icon', icon: 'play'
+        endif
+      -%}
+    </span>
+  {% endunless %}
+</button>

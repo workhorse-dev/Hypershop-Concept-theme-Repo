@@ -1,0 +1,52 @@
+{%- comment -%}
+  Renders a newsletter form
+
+  Accepts:
+  - context: {String}
+  - section_id: {String} The ID of section to which this snippet belongs.
+  Usage:
+  {% render 'newsletter-form', section_id: section.id, context: 'section' %}
+{%- endcomment -%}
+
+{%- assign form_id = 'newsletter-' | append: section_id -%}
+{%- form 'customer', id: form_id, class: 'newsletter-form grid gap-5' -%}
+  <input type="hidden" name="contact[tags]" value="newsletter" />
+  <input type="hidden" name="contact[context]" value="{{ context }}" />
+  <div class="field relative">
+    <input
+      id="NewsletterForm--{{ section_id }}"
+      class="input is-floating input--fill"
+      type="email"
+      name="contact[email]"
+      value="{{ form.email }}"
+      autocorrect="off"
+      autocapitalize="off"
+      autocomplete="email"
+      placeholder="{{ 'general.newsletter.label' | t | escape }}"
+      required
+      {%- if form.errors %} autofocus{% endif -%}
+    />
+    <label class="label is-floating" for="NewsletterForm--{{ section_id }}">{{ 'general.newsletter.label' | t }}</label>
+    <div class="self-submit-button absolute">
+      <button type="submit" class="button button--primary self-button flex justify-center items-center" is="magnet-button" data-magnet="20" aria-label="{{ 'general.newsletter.submit' | t | escape }}">
+        <span class="btn-text">
+          <svg class="icon icon-arrow-right icon-xs transform" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2 8.00012H14M14 8.00012L9.33333 3.3335M14 8.00012L9.33333 12.6668"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  {%- liquid
+    if form.errors and form.context == context
+      assign form_errors = form.errors | default_errors
+      render 'alert', status: 'error', content: form_errors
+    endif
+
+    if form.posted_successfully?
+      assign success_message = 'general.newsletter.success' | t
+      render 'alert', status: 'success', content: success_message
+    endif
+  -%}
+{%- endform -%}

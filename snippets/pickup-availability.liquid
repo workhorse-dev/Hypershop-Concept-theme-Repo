@@ -1,0 +1,88 @@
+{%- comment -%}
+  Renders the store availability for a given variant, along the associated modal.
+  Accepts:
+  - product: {Object} product object.
+  - product_form_id: {String} product form id.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'pickup-availability', product: product, product_form_id: product_form_id %}
+{%- endcomment -%}
+
+{%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
+
+{%- if pick_up_availabilities.size > 0 -%}
+  {%- if section.index > 2 -%}
+    <link rel="stylesheet" href="{{ 'pickup-availability.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'pickup-availability.css' | asset_url | stylesheet_tag }}</noscript>
+  {%- else -%}
+    {{ 'pickup-availability.css' | asset_url | stylesheet_tag }}
+  {%- endif -%}
+  <script src="{{ 'pickup-availability.js' | asset_url }}" defer="defer"></script>
+
+  <pickup-availability
+    id="PickupAvailability-{{ section_id }}-{{ product_id }}"
+    class="pickup-availability block"
+    form="{{ product_form_id }}"
+    data-root-url="{{ routes.root_url }}"
+    data-variant-id="{{ product.selected_or_first_available_variant.id }}"
+    data-has-only-default-variant="{{ product.has_only_default_variant }}"
+    {%- if product.selected_or_first_available_variant.available and pick_up_availabilities.size > 0 %} available{% endif -%}
+    {{ block.shopify_attributes }}
+  >
+    <template>
+      <div class="pickup-availability-preview grid items-start justify-between gap-5">
+        <div class="pickup-availability-info flex items-start gap-2d5">
+          {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'flex-auto' -%}
+          <div class="grid gap-1">
+            <p class="text-sm font-medium leading-tight">{{ 'products.pickup_availability.unavailable' | t }}</p>
+          </div>
+        </div>
+        <button type="button" class="pickup-availability-button text-left">
+          <span class="link text-xs leading-tight">
+            {{- 'products.pickup_availability.refresh' | t -}}
+          </span>
+        </button>
+      </div>
+    </template>
+    
+    <div class="pickup-availability-preview grid items-start justify-between gap-5">
+      {%- assign closest_location = pick_up_availabilities.first -%}
+      {%- if closest_location.available -%}
+        <div class="pickup-availability-info flex items-start gap-2d5">
+          {%- render 'icon', icon: 'check-circle-filled', size: 'sm', class: 'flex-auto' -%}
+          <div class="grid gap-1">
+            <p class="text-sm font-medium leading-tight">{{ 'products.pickup_availability.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</p>
+            <small class="text-xs leading-tight">{{ closest_location.pick_up_time }}</small>
+          </div>
+        </div>
+        <button type="button" class="pickup-availability-button text-left" aria-controls="PickupAvailability" aria-expanded="false">
+          <span class="link text-xs leading-tight">
+            {%- liquid
+              if pick_up_availabilities.size == 1
+                echo 'products.pickup_availability.view_store_info' | t
+              else
+                echo 'products.pickup_availability.check_other_stores' | t
+              endif
+            -%}
+          </span>
+        </button>
+      {%- else -%}
+        <div class="pickup-availability-info flex items-start gap-2d5">
+          {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'flex-auto' -%}
+          <div class="grid gap-1">
+            <p class="text-sm font-medium leading-tight">{{ 'products.pickup_availability.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</p>
+          </div>
+        </div>
+        {%- if pick_up_availabilities.size > 1 -%}
+          <button type="button" class="pickup-availability-button text-left" aria-controls="PickupAvailability" aria-expanded="false">
+            <span class="link text-xs leading-tight">
+              {{- 'products.pickup_availability.check_other_stores' | t -}}
+            </span>
+          </button>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+  </pickup-availability>
+{%- endif -%}

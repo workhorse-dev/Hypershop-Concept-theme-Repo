@@ -1,0 +1,30 @@
+{
+  "sections": {
+    "main-blog": {
+      "type": "main-blog",
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "text-center justify-center",
+        "heading_tag": "h1",
+        "description": "",
+        "show_tag_filter": true,
+        "per_page": 9,
+        "layout": "collage",
+        "image_ratio": "landscape",
+        "show_tags": true,
+        "show_date": true,
+        "show_comments": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-blog"
+  ]
+}

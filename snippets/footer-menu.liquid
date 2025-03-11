@@ -1,0 +1,42 @@
+{%- comment -%}
+  Renders a menu block on the footer section
+
+  Accepts:
+  - block: {Object}
+
+  Usage:
+  {% render 'footer-menu', block: block %}
+{%- endcomment -%}
+
+{%- if block.settings.menu != blank -%}
+  {%- capture block_content -%}
+    <div class="details__content">
+      <ul class="flex flex-col gap-3">
+        {%- for link in block.settings.menu.links -%}
+          <li class="inline-flex">
+            <a href="{{ link.url }}" class="block reversed-link text-sm-lg leading-tight">{{ link.title }}</a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </div>
+    <style>
+      @media (min-width: 1280px) {
+        .footer__item--{{ block.id }} { width: calc({{ block.settings.container_width }}% - var(--sp-12)); }
+      }
+    </style>
+  {%- endcapture -%}
+  
+  {%- if block.settings.heading == blank -%}
+    <div class="footer__item--{{ block.id }} no-details" {{ block.shopify_attributes }}>
+      {{- block_content -}}
+    </div>
+  {%- else -%}
+    <details class="footer__item--{{ block.id }} details active" is="footer-details"{% if block.settings.opened %} data-opened{% endif %} {{ block.shopify_attributes }}>
+      <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+        <span class="heading text-base-2xl font-medium lg:font-heading">{{ block.settings.heading | escape }}</span>
+        {%- render 'icon', icon: 'chevron-up' -%}
+      </summary>
+      {{- block_content -}}
+    </details>
+  {%- endif -%}
+{%- endif -%}

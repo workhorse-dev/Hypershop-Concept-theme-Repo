@@ -1,0 +1,24 @@
+{%- comment -%}
+  Renders highlighted text
+
+  Accepts:
+  - content: {HTML} The textual content to use
+  - style: {String} The style you would like for your highlights
+  - scribble: {String} The scribble type
+  - gradient: {Boolean} Will be used for the gradient
+
+  Usage:
+  {% render 'highlighted-text', style: 'scribble', scribble: 'circle' %}
+{%- endcomment -%}
+
+{%- if style != 'none' -%}
+  {%- capture begin_tag -%}<em class="highlighted-text inline-block not-italic relative{% if gradient %} with-gradient{% endif %}" is="highlighted-text" data-style="{{ style }}">{%- endcapture -%}
+  {%- assign content = content | replace: '<em>', begin_tag -%}
+
+  {%- if style == 'scribble' -%}
+    {%- capture end_tag -%}{% render 'icon-scribble', icon: scribble %}</em>{%- endcapture -%}
+    {%- assign content = content | replace: '</em>', end_tag -%}
+  {%- endif -%}
+{%- endif -%}
+
+{{- content -}}

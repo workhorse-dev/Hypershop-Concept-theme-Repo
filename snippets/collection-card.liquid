@@ -1,0 +1,99 @@
+{%- comment -%}
+  Renders a collection card
+
+  Accepts:
+  - collection: {Object} Collection Liquid object
+  - image_type: {String} Type of the collection image card
+  - image_ratio: {String} Size of the collection image card
+  - block: {Object} Block object
+
+  Usage:
+  {% render 'collection-card' %}
+{%- endcomment -%}
+
+{%- liquid
+  if image_type == 'collection' and collection.image
+    assign collection_image = collection.image
+  else
+    assign collection_image = collection.products.first.featured_media.preview_image
+  endif
+
+  assign collection_title = collection.title
+
+  if block != blank
+    if block.settings.image != blank
+      assign collection_image = block.settings.image
+    endif
+
+    if block.settings.title != blank
+      assign collection_title = block.settings.title
+    endif
+
+    if block.settings.description != blank
+      assign collection_description = block.settings.description
+    endif
+
+    assign overlay_content = block.settings.overlay_content
+  endif
+
+  if image_ratio == 'adapt' and collection_image == blank
+    assign image_ratio = 'wide'
+  endif
+-%}
+
+<div class="card media-card media-card--{{ settings.card_style }}{% if overlay_content %} media-card--overlap{% endif %} overflow-hidden" id="shopify-block-{{ block.id }}">
+  {%- if overlay_content and block != blank -%}
+    <style>
+      #shopify-block-{{ block.id }} {
+        {%- render 'section-variables', section: block -%}
+      }
+    </style>
+  {%- endif -%}
+  {%- if collection != blank -%}
+    <a href="{{ collection.url }}" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ collection_title | escape }}">
+      <div class="media media--{{ image_ratio }} relative overflow-hidden">
+        {%- if collection_image != blank -%}
+          {{- collection_image | image_url: width: collection_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+        {%- else -%}
+          <span class="block aspect-{{ image_ratio }}"></span>
+        {%- endif -%}
+      </div>
+      <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
+        <div class="media-card__text shrink-1 grid gap-0d5">
+          <p class="flex">
+            <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative">
+              {{- collection_title | escape -}}
+              {%- if show_products_count and collection.all_products_count > 0 -%}
+                <small class="count font-medium absolute text-xs tracking-none whitespace-nowrap">{{ collection.all_products_count }}</small>
+              {%- endif -%}
+            </span>
+          </p>
+          {%- if collection_description != blank -%}
+            <p class="leading-none text-xs xl:text-sm">{{ collection_description }}</p>
+          {%- endif -%}
+        </div>
+        {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0' -%}
+      </div>
+    </a>
+  {%- else -%}
+    <a href="#" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ 'onboarding.collection_title' | t | escape }}">
+      <div class="media media--{{ image_ratio }} relative overflow-hidden">
+        {%- liquid
+          assign modulo = position | modulo: 5 | plus: 1
+          assign placeholder = 'collection-' | append: modulo
+          echo placeholder | placeholder_svg_tag: 'placeholder'
+        -%}
+      </div>
+      <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
+        <div class="media-card__text shrink-1 grid gap-0d5">
+          <p class="flex">
+            <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative">
+              {{- 'onboarding.collection_title' | t | escape -}}
+            </span>
+          </p>
+        </div>
+        {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0' -%}
+      </div>
+    </a>
+  {%- endif -%}
+</div>

@@ -1,0 +1,332 @@
+{%- liquid
+  assign gallery_layout = section.settings.gallery_layout
+  assign thumbnail_position = section.settings.thumbnail_position
+  assign image_zoom = section.settings.image_zoom
+  assign mobile_layout = section.settings.mobile_layout
+  assign product_form_id = 'ProductForm-' | append: section_id
+  
+  assign spinning_block = section.blocks | where: 'type', 'spinning_text' | first
+-%}
+
+<div class="featured-product product product--{{ section.settings.gallery_layout }} flex flex-col items-start lg:grid gap-5 w-full relative">
+  <media-gallery
+    class="product__gallery product__gallery--{{ mobile_layout }} block w-full relative
+    {%- if gallery_layout == 'scroll' %} xl:grid xl:items-start gap-5 h-full{% endif -%}"
+    form="{{ product_form_id }}"
+    data-animate="fade-up"
+    data-immediate
+  >
+    {%- if gallery_layout == 'scroll' -%}
+      <sticky-element class="product__preview relative overflow-hidden w-full h-full hidden xl:block sticky top-0">
+        <div class="product__media media flex w-full relative overflow-hidden" data-media-type="image" data-media-id="1">
+          {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
+  
+          <button type="button" class="absolute top-0 left-0 w-full h-full flex items-center justify-center" is="media-{{ image_zoom }}-button" aria-label="{{ 'products.media.open_media' | t: index: 1 | escape }}" tabindex="-1">
+            {%- render 'icon', icon: 'zoom', size: 'xs', class: 'lg:hidden' -%}
+          </button>
+        </div>
+      </sticky-element>
+    {%- endif -%}
+
+    <div class="product__media-container flex flex-col gap-4 
+      {%- if gallery_layout == 'thumbnail' %} items-start{% if thumbnail_position == 'beside' %} xl:flex-row{% endif %}{% endif -%}"
+    >
+      <slider-element id="SliderGallery-{{ section_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media" tabindex="-1">
+        <div
+          class="product__media-list flex gap-1
+          {%- if gallery_layout == 'columns' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}
+          {%- if gallery_layout == 'scroll' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}"
+        >
+          {%- for i in (1..6) -%}
+            <div class="product__media card media flex w-full flex-auto relative overflow-hidden"
+              data-media-type="image"
+              data-media-id="{{ forloop.index }}"
+            >
+              {%- liquid
+                capture placeholder
+                  cycle 'product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6'
+                endcapture
+                echo placeholder | placeholder_svg_tag: 'placeholder'
+              -%}
+            </div>            
+          {%- endfor -%}
+        </div>
+      </slider-element>
+
+      <scroll-shadow class="product__thumbnails{% unless mobile_thumbnail %} with-dots{% endunless %}{% if gallery_layout == 'scroll' or gallery_layout == 'columns' %} lg:hidden{% endif %} product__thumbnails--{{ thumbnail_position }} grid items-center relative w-full">
+        <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-4 w-full" aria-controls="SliderGallery-{{ section_id }}" tabindex="-1">
+          {%- for i in (1..6) -%}
+            <button type="button"
+              class="product__thumbnail media media--square relative overflow-hidden"
+              data-media-id="{{ media.id }}"
+              aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}"
+              aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
+              tabindex="-1"
+            >
+              {%- liquid
+                capture placeholder
+                  cycle 'product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6'
+                endcapture
+                echo placeholder | placeholder_svg_tag: 'placeholder'
+              -%}
+            </button>
+          {%- endfor -%}
+        </media-dots>
+        <template>
+          <slot></slot>
+          <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+            <span class="t">{%- render 'icon', icon: 'chevron-up' -%}</span>
+            <span class="b">{%- render 'icon', icon: 'chevron-down' -%}</span>
+            <span class="l">{%- render 'icon', icon: 'chevron-left' -%}</span>
+            <span class="r">{%- render 'icon', icon: 'chevron-right' -%}</span>
+          </s>
+          <style>
+            :host{display:inline-block;position:relative}:host([hidden]){display:none}
+            s{position:absolute;inset:0;pointer-events:none;}
+            s svg{width:24px;height:auto;stroke-width:var(--icon-weight);}
+            s span{position:absolute;display:grid;align-items:center;justify-items:center;background-color:rgb(var(--color-background));padding:8px;opacity:0;transition:opacity var(--animation-short);}
+            s .t{inset-block-start:0;inset-inline:-5px;border-block-end:1px solid rgb(var(--color-border));opacity:var(--t);}
+            s .b{inset-block-end:0;inset-inline:-5px;border-block-start:1px solid rgb(var(--color-border));opacity:var(--b);}
+            s .l{inset-inline-start:0;inset-block:-5px;border-inline-end:1px solid rgb(var(--color-border));opacity:var(--l);}
+            s .r{inset-inline-end:0;inset-block:-5px;border-inline-start:1px solid rgb(var(--color-border));opacity:var(--r);}
+            s[dir=rtl] :is(.icon-chevron-left,.icon-chevron-right){transform:scaleX(-1);}
+            @media screen and (max-width: 1023px) {
+              s{display:none}
+            }
+          </style>
+        </template>
+      </scroll-shadow>
+    </div>
+
+    {%- if spinning_block != blank -%}
+      <spinning-text class="product__spinning text-xs md:text-base lg:text-lg uppercase flex items-center justify-center absolute top-0 z-10" data-string="{{ spinning_block.settings.text | escape }}">
+        {%- render 'icon', icon: 'thumbs-up', class: 'absolute' -%}
+      </spinning-text>
+    {%- endif -%}
+  </media-gallery>
+  
+  <animate-element class="product__info block{% if section.settings.enable_sticky_info %} sticky{% endif %} w-full" data-animate="fade-up" data-immediate>
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when '@app' -%}
+          {%- render block -%}
+
+        {%- when 'breadcrumb' -%}
+          <nav class="product__breadcrumb breadcrumb hidden lg:flex" role="navigation" aria-label="breadcrumbs" {{ block.shopify_attributes }}>
+            <ul class="inline-flex gap-4 md:gap-6">
+              <li class="flex items-center gap-4 md:gap-6">
+                <a class="block" href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t | escape }}">
+                  {%- render 'icon', icon: 'home', size: 'sm' -%}
+                </a>
+              </li>
+              <li class="flex items-center gap-4 md:gap-6">{{ 'onboarding.product_title' | t }}</li>
+            </ul>
+          </nav>
+
+        {%- when 'text' -%}
+          {%- if block.settings.text != blank -%}
+            <p class="product__text rte {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+              {%- liquid
+                render 'icon-accordion', icon: block.settings.icon
+                echo block.settings.text
+              -%}
+            </p>
+          {%- endif -%}
+
+        {%- when 'description' -%}
+          <div class="product__text rte" {{ block.shopify_attributes }}>
+            {{- 'onboarding.product_description' | t -}}
+          </div>
+
+        {%- when 'title' -%}
+          {%- assign price_block = section.blocks | where: "type", "price" | first -%}
+          <div class="product__title{% if price_block == blank and block.settings.show_price %} with-price{% endif %}" {{ block.shopify_attributes }}>
+            <h1 class="heading leading-none {{ block.settings.title_size }} mobile:{{ block.settings.title_size_mobile }} col-span-full">
+              <split-words class="split-words block" data-animate="fade-up">{{ 'onboarding.product_title' | t }}</split-words>
+            </h1>
+
+            {%- if price_block == blank and block.settings.show_price -%}
+              <div id="Price-{{ section_id }}" class="product__price">
+                {%- render 'product-price', product: product, placeholder: true, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:flex-col xl:items-end lg:gap-1d5' -%}
+              </div>
+            {%- endif -%}
+          </div>
+
+        {%- when 'price' -%}
+          <div class="product__price grid gap-3" {{ block.shopify_attributes }}>
+            <div class="no-js-hidden" id="Price-{{ section_id }}">
+              {%- render 'product-price', product: product, placeholder: true, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:gap-1d5' -%}
+            </div>
+
+            {%- if block.settings.show_taxes_notice -%}
+              {%- if cart.taxes_included or shop.shipping_policy.body != blank -%}
+                <div class="product__tax rte text-sm">
+                  {%- liquid
+                    if cart.taxes_included
+                      echo 'products.product.include_taxes' | t
+                    endif
+                    if shop.shipping_policy.body != blank
+                      echo 'products.product.shipping_policy_html' | t: link: shop.shipping_policy.url
+                    endif
+                  -%}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
+
+        {%- when 'quantity_selector' -%}
+          <div id="QuantityForm-{{ section_id }}" class="field" {{ block.shopify_attributes }}>
+            <label for="Quantity-{{ section_id }}" class="quantity__label label" is="quantity-label">
+              {{ 'products.quantity.label' | t }}
+            </label>
+            <div class="flex items-center gap-4">
+              <quantity-input class="quantity inline-flex relative" data-section-id="{{ section_id }}" data-product-id="{{ product.id }}">
+                <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+                  {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                </button>
+                <input
+                  id="Quantity-{{ section_id }}"
+                  class="quantity__input text-sm sm:text-base font-medium text-center"
+                  type="number"
+                  name="quantity"
+                  inputmode="numeric"
+                  autocomplete="off"
+                  data-min="1"
+                  min="1"
+                  step="1"
+                  value="1"
+                  form="{{ product_form_id }}"
+                />
+                <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+                  {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                </button>
+              </quantity-input>
+            </div>
+          </div>
+
+        {%- when 'buy_buttons' -%}
+          <div class="product-form-wrapper" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign quantity_block = section.blocks | where: "type", "quantity_selector" | first
+              assign show_quantity_selector = block.settings.show_quantity_selector
+              if quantity_block
+                assign show_quantity_selector = false
+              endif
+            -%}
+            <div class="product-form grid gap-8">
+              <div class="product-form__buttons grid gap-4">
+                <div class="flex gap-4">
+                  {%- if show_quantity_selector -%}
+                    <label for="Quantity-{{ section_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
+                    <quantity-input class="quantity inline-flex flex-auto relative">
+                      <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+                        {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
+                      </button>
+                      <input
+                        id="Quantity-{{ section_id }}"
+                        class="quantity__input text-sm sm:text-base font-medium text-center"
+                        type="number"
+                        name="quantity"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        data-min="1"
+                        min="1"
+                        step="1"
+                        value="1"
+                        form="{{ product_form_id }}"
+                      />
+                      <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+                        {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
+                      </button>
+                    </quantity-input>
+                  {%- endif -%}
+                  
+                  <button
+                    type="button"
+                    name="add"
+                    form="{{ product_form_id }}"
+                    class="product-form__submit button button--primary button--fixed w-full"
+                    is="hover-button"
+                  >
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">{{ 'products.product.add_to_cart' | t }}</span>
+                  </button>
+                </div>
+              </div>
+            </div>
+          </div>          
+
+        {%- when 'share' -%}
+          <div class="flex justify-between items-center" {{ block.shopify_attributes }}>
+            {%- liquid
+              assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+              assign share_image = product.selected_variant.featured_image | default: product.featured_image
+            -%}
+            {%- render 'social-sharing',
+              section_id: section_id,
+              share_id: product.id,
+              share_label: block.settings.share_label,
+              share_title: product.title,
+              share_link: share_url,
+              share_image: share_image
+            -%}
+
+            {%- if block.settings.show_help_desk -%}
+              <div class="flex items-center gap-2">
+                {%- render 'icon', icon: 'question' -%}
+                <a class="link text-sm leading-tight cursor-pointer"
+                  {%- if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% else %} role="link" aria-disabled="true"{% endif -%}
+                  {%- if block.settings.help_type == 'drawer' %} aria-controls="HelpDrawer"{% endif -%}
+                >
+                  {{- block.settings.help_label | escape -}}
+                </a>
+              </div>
+            {%- endif -%}
+          </div>
+
+        {%- when 'help_desk' -%}
+          <div class="flex items-center gap-2" {{ block.shopify_attributes }}>
+            {%- render 'icon', icon: 'question' -%}
+            <a class="link text-sm leading-tight cursor-pointer"
+              {%- if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% else %} role="link" aria-disabled="true"{% endif -%}
+              {%- if block.settings.help_type == 'drawer' %} aria-controls="HelpDrawer"{% endif -%}
+            >
+              {{- block.settings.help_label | escape -}}
+            </a>
+          </div>
+
+        {%- when 'liquid' -%}
+          {%- if block.settings.liquid != blank -%}
+            <div class="rte" {{ block.shopify_attributes }}>
+              {{- block.settings.liquid -}}
+            </div>
+          {%- endif -%}
+
+        {%- when 'collapsible_tab' -%}
+          <details class="product__accordion details" is="accordion-details" {{ block.shopify_attributes }}>
+            <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+              <div class="flex items-center gap-2d5">
+                {%- render 'icon-accordion', icon: block.settings.icon -%}
+                <span class="text-base font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
+              </div>
+              {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+            </summary>
+            <div class="details__content rte text-sm text-opacity">
+              {{ block.settings.content }}
+              {{ block.settings.page.content }}
+              {{ block.settings.liquid }}
+            </div>
+          </details>
+
+        {%- when 'read_more' -%}
+          <button type="button" class="product__more flex items-center justify-between w-full" {{ block.shopify_attributes }}>
+            <span class="text-sm-base font-medium leading-none">
+              {{- 'products.product.read_more' | t -}}
+            </span>
+            {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'flex-auto' -%}
+          </button>
+
+      {%- endcase -%}
+    {%- endfor -%}
+  </animate-element>
+</div>

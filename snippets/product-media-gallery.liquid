@@ -1,0 +1,255 @@
+{%- comment -%}
+  Parameters
+  product
+  product_id
+  section_id
+  product_form_id
+  gallery_layout
+  mobile_layout
+  thumbnail_position
+  image_zoom
+  image_fill
+  image_ratio
+  image_ratio_mobile
+  hide_variants
+  enable_video_autoplay
+  enable_video_looping
+  first_3d_model
+{%- endcomment -%}
+
+{%- liquid
+  assign variant_images = product.images | where: 'attached_to_variant?', true | map: 'src'
+  
+  assign media_count = product.media.size
+  if hide_variants and media_count > 1
+    assign media_count = media_count | minus: variant_images.size | plus: 1
+  endif
+  
+  assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media
+-%}
+{%- capture sizes -%}(max-width: 740px) calc(100vw - 40px), (max-width: 999px) calc(100vw - 64px), min(580px, 30vw){%- endcapture -%}
+
+<media-gallery
+  class="product__gallery product__gallery--{{ mobile_layout }} block w-full relative{% if media_count == 1 %} with-only1{% endif %}
+  {%- if gallery_layout == 'scroll' %} xl:grid xl:items-start gap-5 h-full{% endif -%}"
+  form="{{ product_form_id }}"
+  aria-label="{{ 'products.media.gallery_viewer' | t | escape }}"
+  data-animate="fade-up"
+  data-immediate
+>
+  {%- if gallery_layout == 'scroll' -%}
+    {%- if featured_media != null -%}
+      {%- liquid
+        assign gang_media_active = false
+        assign gang_connect_alt = ''
+        if media.alt contains '#' and hide_variants == false
+          assign gang_connect_alt = media.alt | split: '#' | last
+          assign gang_connect_list = gang_connect_alt | split: ','
+          for gang_connect_value in gang_connect_list
+            assign gang_exist = false
+            assign gang_connect = ''
+            assign gang_option_name = ''
+            assign gang_connect_item = gang_connect_value
+
+            if gang_connect_item contains ':' and localization.language.iso_code != blank
+              assign gang_split_param = localization.language.iso_code | append: ':'
+              assign gang_connect_item = gang_connect_item | split: gang_split_param | last
+            endif
+
+            if gang_connect_item contains '_'
+              assign gang_option_name = gang_connect_item | split: '_' | first | handleize
+
+              for option_name in product.options
+                assign option_name_handlized = option_name | handleize | replace: '_', '-'
+                if option_name_handlized == gang_option_name
+                  assign gang_exist = true
+                  assign gang_connect = gang_connect_item
+                  
+                  assign option_key = 'option' | append: forloop.index
+                  assign current_option_value = product.selected_or_first_available_variant[option_key] | handleize
+                  assign current_connect = option_name_handlized | append: '_' | append: current_option_value
+                  if gang_connect == current_connect
+                    assign gang_media_active = true
+                  endif
+                  break
+                endif
+              endfor
+
+              if gang_exist == true
+                break
+              endif
+            endif
+          endfor
+        endif
+      -%}
+      <sticky-element class="product__preview relative overflow-hidden w-full h-full hidden xl:block sticky top-0">
+        <div class="product__media media flex w-full relative overflow-hidden
+          {%- if hide_variants and variant_images contains featured_media.src %} product__media--variant{% endif -%}"
+          data-media-type="{{ featured_media.media_type }}"
+          data-media-id="{{ featured_media.id }}"
+          {%- if gang_exist == true %} data-gang-option="{{ gang_option_name }}" data-gang-connect="{{ gang_connect }}"{% if gang_media_active == false %} hidden{% endif %}{% else %} data-gang-default{% endif -%}
+        >
+          {%- render 'media', section_id: section_id, product_id: product_id, media: featured_media, sizes: sizes, preload: true, autoplay: enable_video_autoplay, loop: enable_video_looping -%}
+
+          {%- if image_zoom != 'none' and featured_media.media_type == 'image' -%}
+            <button type="button" class="absolute top-0 left-0 w-full h-full flex items-center justify-center" is="media-{{ image_zoom }}-button" aria-label="{{ 'products.media.open_media' | t: index: featured_media.position | escape }}" tabindex="-1">
+              {%- render 'icon', icon: 'zoom', size: 'xs', class: 'lg:hidden' -%}
+            </button>
+          {%- endif -%}
+        </div>
+      </sticky-element>
+    {%- endif -%}
+  {%- endif -%}
+
+  <div class="product__media-container flex flex-col gap-4 
+    {%- if gallery_layout == 'thumbnail' %} items-start{% if thumbnail_position == 'beside' %} xl:flex-row{% endif %}{% endif -%}"
+  >
+    <div class="relative w-full h-full">
+      <slider-element id="SliderGallery-{{ section_id }}-{{ product_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media">
+        <div
+          class="product__media-list flex gap-1
+          {%- if gallery_layout == 'columns' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}
+          {%- if gallery_layout == 'scroll' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}"
+        >
+          {%- if featured_media != null -%}
+            {%- render 'product-media',
+              product: product,
+              product_id: product_id,
+              section_id: section_id,
+              media: featured_media,
+              featured_media: featured_media,
+              variant_images: variant_images,
+              hide_variants: hide_variants,
+              gallery_layout: gallery_layout,
+              image_zoom: image_zoom,
+              image_fill: image_fill,
+              image_ratio: image_ratio,
+              image_ratio_mobile: image_ratio_mobile,
+              preload: true,
+              sizes: sizes,
+              autoplay: enable_video_autoplay,
+              loop: enable_video_looping
+            -%}
+          {%- endif -%}
+
+          {%- for media in product.media -%}
+            {%- if media.id != featured_media.id -%}
+              {%- render 'product-media',
+                product: product,
+                product_id: product_id,
+                section_id: section_id,
+                media: media,
+                featured_media: featured_media,
+                variant_images: variant_images,
+                hide_variants: hide_variants,
+                gallery_layout: gallery_layout,
+                image_zoom: image_zoom,
+                image_fill: image_fill,
+                image_ratio: image_ratio,
+                image_ratio_mobile: image_ratio_mobile,
+                preload: false,
+                sizes: sizes,
+                autoplay: enable_video_autoplay,
+                loop: enable_video_looping
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </div>
+      </slider-element>
+
+      <div class="indicators hidden items-center justify-between opacity-0 z-1 absolute top-0 left-0 w-full h-full pointer-events-none">
+        <button class="button button--secondary pointer-events-auto" type="button" is="previous-button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
+          </span>
+        </button>
+        <button class="button button--secondary pointer-events-auto" type="button" is="next-button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}
+          </span>
+        </button>
+      </div>
+    </div>
+
+    {%- if media_count > 1 -%}
+      {%- if gallery_layout != 'dots' -%}
+        <scroll-shadow id="SliderThumbnails-{{ section_id }}-{{ product_id }}" class="product__thumbnails{% unless mobile_thumbnail %} with-dots{% endunless %}{% if gallery_layout == 'scroll' or gallery_layout == 'columns' %} lg:hidden{% endif %} product__thumbnails--{{ thumbnail_position }} grid items-center relative w-full">
+        {%- endif -%}
+          <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-4 w-full" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
+            {%- if featured_media != null -%}
+              {%- render 'product-thumbnail',
+                product: product,
+                media: featured_media,
+                featured_media: featured_media,
+                variant_images: variant_images,
+                hide_variants: hide_variants,
+                image_fill: image_fill,
+                image_ratio: image_ratio,
+                image_ratio_mobile: image_ratio_mobile
+              -%}
+            {%- endif -%}
+    
+            {%- for media in product.media -%}
+              {%- if media.id != featured_media.id -%}
+                {%- render 'product-thumbnail',
+                  product: product,
+                  media: media,
+                  featured_media: featured_media,
+                  variant_images: variant_images,
+                  hide_variants: hide_variants,
+                  image_fill: image_fill,
+                  image_ratio: image_ratio,
+                  image_ratio_mobile: image_ratio_mobile
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </media-dots>
+        {%- if gallery_layout != 'dots' -%}
+          <template>
+            <slot></slot>
+            <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+              <span class="t">{%- render 'icon', icon: 'chevron-up' -%}</span>
+              <span class="b">{%- render 'icon', icon: 'chevron-down' -%}</span>
+              <span class="l">{%- render 'icon', icon: 'chevron-left' -%}</span>
+              <span class="r">{%- render 'icon', icon: 'chevron-right' -%}</span>
+            </s>
+            <style>
+              :host{display:inline-block;position:relative}:host([hidden]){display:none}
+              s{position:absolute;inset:0;pointer-events:none;}
+              s svg{width:24px;height:auto;stroke-width:var(--icon-weight);}
+              s span{position:absolute;display:grid;align-items:center;justify-items:center;background-color:rgb(var(--color-background));padding:8px;opacity:0;transition:opacity var(--animation-short);}
+              s .t{inset-block-start:0;inset-inline:-5px;border-block-end:1px solid rgb(var(--color-border));opacity:var(--t);}
+              s .b{inset-block-end:0;inset-inline:-5px;border-block-start:1px solid rgb(var(--color-border));opacity:var(--b);}
+              s .l{inset-inline-start:0;inset-block:-5px;border-inline-end:1px solid rgb(var(--color-border));opacity:var(--l);}
+              s .r{inset-inline-end:0;inset-block:-5px;border-inline-start:1px solid rgb(var(--color-border));opacity:var(--r);}
+              s[dir=rtl] :is(.icon-chevron-left,.icon-chevron-right){transform:scaleX(-1);}
+              @media screen and (max-width: 1023px) {
+                s{display:none}
+              }
+            </style>
+          </template>
+        </scroll-shadow>
+      {%- endif -%}
+    {%- endif -%}
+
+    {%- if first_3d_model -%}
+      <button class="button icon-with-text w-full" is="hover-button" aria-label="{{ 'products.product.xr_button_label' | t }}" data-shopify-xr data-shopify-model3d-id="{{ first_3d_model.id }}" data-shopify-model3d-default-id="{{ first_3d_model.id }}" data-shopify-title="{{ product.title | escape }}" data-shopify-xr-hidden>
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">
+          {%- liquid
+            render 'icon', icon: '3d-model'
+            echo 'products.product.xr_button' | t
+          -%}
+        </span>
+      </button>
+    {%- endif -%}
+  </div>
+  
+  {%- if spinning_block != blank and spinning_block.settings.text != blank -%}
+    <spinning-text class="product__spinning text-xs md:text-base lg:text-lg uppercase flex items-center justify-center absolute top-0 z-10" data-string="{{ spinning_block.settings.text | escape }}">
+      {%- render 'icon', icon: 'thumbs-up', class: 'absolute' -%}
+    </spinning-text>
+  {%- endif -%}
+</media-gallery>

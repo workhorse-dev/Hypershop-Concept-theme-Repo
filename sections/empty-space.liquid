@@ -1,0 +1,61 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --spacing-height-desktop: {{ section.settings.desktop_height }}px;
+    --spacing-height-mobile: {{ section.settings.mobile_height }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+</style>
+
+{% schema %}
+{
+  "name": "t:sections.empty-space.name",
+  "class": "section spacing-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "desktop_height",
+      "label": "t:sections.empty-space.settings.height.label",
+      "default": 40,
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "range",
+      "id": "mobile_height",
+      "label": "t:sections.empty-space.settings.height_mobile.label",
+      "default": 28,
+      "min": 0,
+      "max": 200,
+      "step": 4,
+      "unit": "px"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.empty-space.presets.name"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

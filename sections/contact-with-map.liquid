@@ -1,0 +1,1035 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    {%- if section.settings.image != blank and section.settings.image_height == 'adapt' %}
+      --ratio-percent: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+    {% endif -%}
+  }
+</style>
+
+<script>
+  theme.strings.addressError = {{ 'sections.map.address_error' | t | json }};
+  theme.strings.addressNoResults = {{ 'sections.map.address_no_results' | t | json }};
+  theme.strings.addressQueryLimit = {{ 'sections.map.address_query_limit_html' | t | json }};
+  theme.strings.authError = {{ 'sections.map.auth_error_html' | t | json }};
+</script>
+
+{%- liquid
+  assign display_map = false
+  if section.settings.map_address != blank and section.settings.map_api_key != blank
+    assign display_map = true
+  endif
+
+  assign custom_fields = section.blocks | where: "type", "custom_field"
+  assign form_id = 'ContactForm-' | append: section.id
+-%}
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+    <div class="contact with-map grid">
+      <div class="flex flex-col-reverse lg:grid grid-cols-2">
+        {%- form 'contact', id: form_id, class: 'grow grid lg:gap-4' -%}
+          {%- render 'section-heading', section: section -%}
+
+          <div class="contact__fields flex flex-wrap gap-4d5 md:gap-6">
+            {%- if form.errors -%}
+              <div class="field field--full">
+                {%- liquid
+                  assign form_errors = form.errors | default_errors
+                  render 'alert', status: 'error', content: form_errors
+                -%}
+              </div>
+            {%- endif -%}
+
+            {%- if form.posted_successfully? -%}
+              <div class="field field--full">
+                {%- liquid
+                  assign success_message = 'contact.form.post_success' | t
+                  render 'alert', status: 'success', content: success_message
+                -%}
+              </div>
+            {%- endif -%}
+
+            <div class="field">
+              <input
+                class="input is-floating"
+                autocomplete="name"
+                type="text"
+                id="ContactFormName-{{ section.id }}"
+                name="contact[{{ 'contact.form.name' | t }}]"
+                value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                placeholder="{{ 'contact.form.name' | t | escape }}"
+              />
+              <label class="label is-floating" for="ContactFormName-{{ section.id }}">{{ 'contact.form.name' | t }}</label>
+            </div>
+            <div class="field">
+              <input
+                class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+                autocomplete="email"
+                type="email"
+                id="ContactFormEmail-{{ section.id }}"
+                name="contact[email]"
+                spellcheck="false"
+                autocapitalize="off"
+                value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                placeholder="{{ 'contact.form.email' | t | escape }}"
+                required
+              >
+              <label class="label is-floating" for="ContactFormEmail-{{ section.id }}">{{ 'contact.form.email' | t }}</label>
+            </div>
+
+            {%- for block in custom_fields -%}
+              {%- assign custom_name = block.settings.title | escape -%}
+              <div class="field{% if block.settings.full_width %} field--full{% endif %}" {{ block.shopify_attributes }}>
+                {%- if block.settings.type == 'checkbox' -%}
+                  <label for="ContactFormInput-{{ section.id }}-{{ block.id }}" class="flex items-center gap-3">
+                    <input
+                      type="hidden"
+                      name="contact[{{ custom_name }}]"
+                      value="{{ block.settings.unchecked_value | escape }}"
+                    />
+                    <input
+                      type="checkbox"
+                      id="ContactFormInput-{{ section.id }}-{{ block.id }}"
+                      name="contact[{{ custom_name }}]"
+                      value="{{ block.settings.checked_value | escape }}"
+                      {%- if block.settings.required %} required{% endif -%}
+                    />
+                    {{- block.settings.title | escape -}}
+                  </label>
+
+                {%- elsif block.settings.type == 'radio' -%}
+                  <div class="grid gap-4">
+                    <p>{{ block.settings.title | escape }}</p>
+                    {%- assign options = block.settings.radio_options | split: ',' -%}
+                    {%- if options.size > 0 -%}
+                      <ul class="grid gap-2 leading-none" role="list">
+                        {%- for option in options -%}
+                          {%- assign option_2 = option | strip | escape -%}
+                          <li>
+                            <label for="ContactFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}" class="inline-flex items-center gap-3">
+                              <input
+                                type="radio"
+                                id="ContactFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
+                                name="contact[{{ custom_name }}]"
+                                value="{{ option_2 }}"
+                                {%- if block.settings.required %} required{% endif -%}
+                              />
+                              {{- option_2 -}}
+                            </label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    {%- endif -%}
+                  </div>
+
+                {%- else -%}
+                  {%- case block.settings.type -%}
+                    {%- when 'text' -%}
+                      <input
+                        class="input is-floating"
+                        type="text"
+                        id="ContactFormInput-{{ section.id }}-{{ block.id }}"
+                        name="contact[{{ custom_name }}]"
+                        placeholder="{{ block.settings.title | escape }}"
+                        {%- if block.settings.required %} required{% endif -%}
+                      />
+                      <label class="label is-floating" for="ContactFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+
+                    {%- when 'textarea' -%}
+                      <textarea
+                        class="textarea is-floating"
+                        rows="5"
+                        id="ContactFormInput-{{ section.id }}-{{ block.id }}"
+                        name="contact[{{ custom_name }}]"
+                        placeholder=" "
+                        {%- if block.settings.required %} required{% endif -%}
+                      ></textarea>
+                      <label class="label is-floating" for="ContactFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+
+                    {%- when 'select' -%}
+                      {%- assign options = block.settings.select_options | split: ',' -%}
+                      {%- if options.size > 0 -%}
+                        <select
+                          class="select is-floating"
+                          id="ContactFormInput-{{ section.id }}-{{ block.id }}"
+                          name="contact[{{ custom_name }}]"
+                          {%- if block.settings.required %} required{% else %} is="custom-select"{% endif -%}
+                        >
+                          <option value="" disabled selected></option>
+                          {%- for option in options -%}
+                            {%- assign option_2 = option | strip | escape -%}
+                            <option value="{{ option_2 }}">{{ option_2 }}</option>
+                          {%- endfor -%}
+                        </select>
+                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      {%- endif -%}
+                      <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="ContactFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+                  {%- endcase -%}
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+
+            <div class="field field--full">
+              <textarea
+                class="textarea is-floating"
+                rows="5"
+                id="ContactFormMessage-{{ section.id }}"
+                name="contact[{{ 'contact.form.message' | t }}]"
+                placeholder=" "
+              >
+                {{- form.body -}}
+              </textarea>
+              <label class="label is-floating" for="ContactFormMessage-{{ section.id }}">{{ 'contact.form.message' | t }}</label>
+            </div>
+            <div class="field field--full">
+              <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label>
+              <button type="submit" id="ContactSubmit-{{ section.id }}" class="button button--primary button--fixed" is="hover-button">
+                <span class="btn-fill" data-fill></span>
+                <span class="btn-text">{{ 'contact.form.send' | t }}</span>
+              </button>
+            </div>
+
+            {%- comment -%}
+              Remove the following three lines of code to remove the note
+              about being protected by Google's reCAPTCHA service.
+              By removing it, the small reCAPTCHA widget will appear in the
+              bottom right corner of the page.
+            {%- endcomment -%}
+            <div class="field field--full rte text-sm">
+              {% # theme-check-disable TranslationKeyExists %}
+              {{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}
+              {% # theme-check-enable TranslationKeyExists %}
+            </div>
+          </div>
+        {%- endform -%}
+
+        <div class="grow-0">
+          <div class="banner media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} relative overflow-hidden">
+            <media-element class="banner__media block w-full h-full overflow-hidden pointer-events-none{% if display_map %} opacity-0{% endif %}"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
+              <picture class="media media--height block w-full h-full relative overflow-hidden">
+                {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
+                {%- liquid
+                  if section.settings.image != blank
+                    echo section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image', class: 'banner__image'
+                  else
+                    echo 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                  endif
+                -%}
+              </picture>
+            </media-element>
+            
+            {%- if display_map -%}
+              <media-element class="banner__map absolute top-0 left-0 w-full h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
+                <div class="media media--height block w-full h-full relative overflow-hidden">
+                  <g-map
+                    class="block h-full"
+                    data-map-address="{{ section.settings.map_address | escape }}"
+                    data-api-key="{{ section.settings.map_api_key }}"
+                    data-zoom="{{ section.settings.map_zoom }}"
+                    data-marker-color="{% if section.settings.map_style == 'standard' or section.settings.map_style == 'silver' or section.settings.map_style == 'retro' %}#000000{% else %}#ffffff{% endif %}"
+                  ></g-map>
+                  <a class="block absolute top-0 left-0 w-full h-full" href="https://www.google.com/maps/place/{{ section.settings.map_address | escape }}" target="_blank" rel="noopener" aria-label="{{ section.settings.map_address | escape }}">&nbsp;</a>
+                  <script type="application/json" data-gmap-style>
+                    {%- case section.settings.map_style -%}
+                      {%- when 'standard' -%}
+                        []
+                
+                      {%- when 'silver' -%}
+                        [
+                          { "elementType": "geometry", "stylers": [{"color": "#f5f5f5"}] },
+                          { "elementType": "labels.icon", "stylers": [{"visibility": "off"}] },
+                          { "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                          { "elementType": "labels.text.stroke", "stylers": [{"color": "#f5f5f5"}] },
+                          { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#bdbdbd"}] },
+                          { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#eeeeee"}] },
+                          { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                          { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#e5e5e5"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                          { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#ffffff"}] },
+                          { "featureType": "road.arterial", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                          { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#dadada"}] },
+                          { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                          { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                          { "featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#e5e5e5"}] },
+                          { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#eeeeee"}] },
+                          { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#c9c9c9"}] },
+                          { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] }
+                        ]
+                
+                      {%- when 'retro' -%}
+                        [
+                          { "elementType": "geometry", "stylers": [{"color": "#ebe3cd"}] },
+                          { "elementType": "labels.text.fill", "stylers": [{"color": "#523735"}] },
+                          { "elementType": "labels.text.stroke", "stylers": [{"color": "#f5f1e6"}] },
+                          { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{"color": "#c9b2a6"}] },
+                          { "featureType": "administrative.land_parcel", "elementType": "geometry.stroke", "stylers": [{"color": "#dcd2be"}] },
+                          { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#ae9e90"}] },
+                          { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                          { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                          { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#93817c"}] },
+                          { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{"color": "#a5b076"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#447530"}] },
+                          { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#f5f1e6"}] },
+                          { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{"color": "#fdfcf8"}] },
+                          { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#f8c967"}] },
+                          { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#e9bc62"}] },
+                          { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{"color": "#e98d58"}] },
+                          { "featureType": "road.highway.controlled_access", "elementType": "geometry.stroke", "stylers": [{"color": "#db8555"}] },
+                          { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#806b63"}] },
+                          { "featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                          { "featureType": "transit.line", "elementType": "labels.text.fill", "stylers": [{"color": "#8f7d77"}] },
+                          { "featureType": "transit.line", "elementType": "labels.text.stroke", "stylers": [{"color": "#ebe3cd"}] },
+                          { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                          { "featureType": "water", "elementType": "geometry.fill", "stylers": [{"color": "#b9d3c2"}] },
+                          { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#92998d"}] }
+                        ]
+                
+                      {%- when 'dark' -%}
+                        [
+                          { "elementType": "geometry", "stylers": [{"color": "#212121"}] },
+                          { "elementType": "labels.icon", "stylers": [{"visibility": "off"}] },
+                          { "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                          { "elementType": "labels.text.stroke", "stylers": [{"color": "#212121"}] },
+                          { "featureType": "administrative", "elementType": "geometry", "stylers": [{"color": "#757575"}] },
+                          { "featureType": "administrative.country", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                          { "featureType": "administrative.land_parcel", "stylers": [{"visibility": "off"}] },
+                          { "featureType": "administrative.locality", "elementType": "labels.text.fill", "stylers": [{"color": "#bdbdbd"}] },
+                          { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                          { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#181818"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.stroke", "stylers": [{"color": "#1b1b1b"}] },
+                          { "featureType": "road", "elementType": "geometry.fill", "stylers": [{"color": "#2c2c2c"}] },
+                          { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#8a8a8a"}] },
+                          { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{"color": "#373737"}] },
+                          { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#3c3c3c"}] },
+                          { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{"color": "#4e4e4e"}] },
+                          { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                          { "featureType": "transit", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                          { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#000000"}] },
+                          { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#3d3d3d"}] }
+                        ]
+                
+                      {%- when 'night' -%}
+                        [
+                          { "elementType": "geometry", "stylers": [{"color": "#242f3e"}] },
+                          { "elementType": "labels.text.fill", "stylers": [{"color": "#746855"}] },
+                          { "elementType": "labels.text.stroke", "stylers": [{"color": "#242f3e"}] },
+                          { "featureType": "administrative.locality", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                          { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                          { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#263c3f"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#6b9a76"}] },
+                          { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#38414e"}] },
+                          { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{"color": "#212a37"}] },
+                          { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#9ca5b3"}] },
+                          { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#746855"}] },
+                          { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#1f2835"}] },
+                          { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#f3d19c"}] },
+                          { "featureType": "transit", "elementType": "geometry", "stylers": [{"color": "#2f3948"}] },
+                          { "featureType": "transit.station", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                          { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#17263c"}] },
+                          { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#515c6d"}] },
+                          { "featureType": "water", "elementType": "labels.text.stroke", "stylers": [{"color": "#17263c"}] }
+                        ]
+                
+                      {%- when 'aubergine' -%}
+                        [
+                          { "elementType": "geometry", "stylers": [{"color": "#1d2c4d"}] },
+                          { "elementType": "labels.text.fill", "stylers": [{"color": "#8ec3b9"}] },
+                          { "elementType": "labels.text.stroke", "stylers": [{"color": "#1a3646"}] },
+                          { "featureType": "administrative.country", "elementType": "geometry.stroke", "stylers": [{"color": "#4b6878"}] },
+                          { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#64779e"}] },
+                          { "featureType": "administrative.province", "elementType": "geometry.stroke", "stylers": [{"color": "#4b6878"}] },
+                          { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [{"color": "#334e87"}] },
+                          { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{"color": "#023e58"}] },
+                          { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#283d6a"}] },
+                          { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#6f9ba5"}] },
+                          { "featureType": "poi", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                          { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{"color": "#023e58"}] },
+                          { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#3C7680"}] },
+                          { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#304a7d"}] },
+                          { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#98a5be"}] },
+                          { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                          { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#2c6675"}] },
+                          { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#255763"}] },
+                          { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#b0d5ce"}] },
+                          { "featureType": "road.highway", "elementType": "labels.text.stroke", "stylers": [{"color": "#023e58"}] },
+                          { "featureType": "transit", "elementType": "labels.text.fill", "stylers": [{"color": "#98a5be"}] },
+                          { "featureType": "transit", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                          { "featureType": "transit.line", "elementType": "geometry.fill", "stylers": [{"color": "#283d6a"}] },
+                          { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#3a4762"}] },
+                          { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#0e1626"}] },
+                          { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#4e6d70"}] }
+                        ]
+                    {%- endcase -%}
+                  </script>
+                </div>
+              </media-element>
+            {%- endif -%}
+          </div>
+        </div>
+      </div>
+
+      {%- if section.blocks.size > custom_fields.size -%}
+        <ul class="contact__sidebar grid gap-5 xl:gap-10">
+          {%- for block in section.blocks -%}
+            {%- if block.type != 'custom_field' -%}
+              <li class="flex flex-col{% if block.type == 'contact' %} gap-3{% else %} gap-5{% endif %}" {{ block.shopify_attributes }}>
+                <p class="subtitle block text-xs uppercase leading-tight tracking-widest">{{ block.settings.heading | escape }}</p>
+
+                {%- if block.type == 'contact' -%}
+                  <div class="rte leading-normal">{{ block.settings.text }}</div>
+                {%- else -%}
+                  <div class="social-icons flex items-center">
+                    {%- render 'social-icons', size: 'lg', gap: '7' -%}
+                  </div>
+                {%- endif -%}
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-with-map.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.contact-form.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Contact Us"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-start",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-start"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_external",
+      "label": "t:sections.global.settings.button_external.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.contact-with-map.settings.header__map.content"
+    },
+    {
+      "id": "map_address",
+      "type": "text",
+      "label": "t:sections.map.settings.map_address.label",
+      "info": "t:sections.map.settings.map_address.info",
+      "default": "620 King St W, Toronto, ON M5V 1M7, Canada"
+    },
+    {
+      "id": "map_api_key",
+      "type": "text",
+      "label": "t:sections.map.settings.map_api_key.label",
+      "info": "t:sections.map.settings.map_api_key.info"
+    },
+    {
+      "type": "range",
+      "id": "map_zoom",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "label": "t:sections.map.settings.map_zoom.label",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "map_style",
+      "label": "t:sections.map.settings.map_style.label",
+      "options": [
+        {
+          "value": "standard",
+          "label": "t:sections.map.settings.map_style.options__1.label"
+        },
+        {
+          "value": "silver",
+          "label": "t:sections.map.settings.map_style.options__2.label"
+        },
+        {
+          "value": "retro",
+          "label": "t:sections.map.settings.map_style.options__3.label"
+        },
+        {
+          "value": "dark",
+          "label": "t:sections.map.settings.map_style.options__4.label"
+        },
+        {
+          "value": "night",
+          "label": "t:sections.map.settings.map_style.options__5.label"
+        },
+        {
+          "value": "aubergine",
+          "label": "t:sections.map.settings.map_style.options__6.label"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.global.settings.image.label",
+      "info": "t:sections.map.settings.image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "label": "t:sections.global.settings.image_height.options__1.label",
+          "value": "adapt"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__2.label",
+          "value": "400px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__3.label",
+          "value": "450px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__4.label",
+          "value": "500px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__5.label",
+          "value": "550px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__6.label",
+          "value": "600px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__7.label",
+          "value": "650px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__8.label",
+          "value": "700px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__9.label",
+          "value": "750px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__10.label",
+          "value": "850px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__11.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "100vh"
+        }
+      ],
+      "default": "550px",
+      "label": "t:sections.global.settings.image_height.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "image_height_mobile",
+      "options": [
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__1.label",
+          "value": "auto"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__2.label",
+          "value": "200px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__3.label",
+          "value": "250px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__4.label",
+          "value": "300px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__5.label",
+          "value": "400px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__6.label",
+          "value": "500px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__7.label",
+          "value": "600px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__8.label",
+          "value": "100vh"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__9.label",
+          "value": "adapt"
+        }
+      ],
+      "default": "400px",
+      "label": "t:sections.global.settings.image_height_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "narrow",
+      "label": "t:sections.global.settings.narrow.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "t:sections.global.settings.parallax_direction.label",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:sections.global.settings.parallax_direction.options__1.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.global.settings.parallax_direction.options__2.label"
+        },
+        {
+          "value": "zoom",
+          "label": "t:sections.global.settings.parallax_direction.options__3.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "contact",
+      "name": "t:sections.contact-form.blocks.contact.name",
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Customer service",
+          "label": "t:sections.global.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>shop@yourstore.com</p>",
+          "label": "t:sections.global.settings.text.label"
+        }
+      ]
+    },
+    {
+      "type": "media",
+      "name": "t:sections.contact-form.blocks.media.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.contact-form.blocks.media.settings.paragraph.content"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "default": "Follow us",
+          "label": "t:sections.global.settings.heading.label"
+        }
+      ]
+    },
+    {
+      "type": "custom_field",
+      "name": "t:sections.contact-form.blocks.custom_field.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.contact-form.blocks.custom_field.settings.paragraph.content"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:sections.contact-form.blocks.custom_field.settings.type.options__1.label"
+            },
+            {
+              "value": "textarea",
+              "label": "t:sections.contact-form.blocks.custom_field.settings.type.options__2.label"
+            },
+            {
+              "value": "checkbox",
+              "label": "t:sections.contact-form.blocks.custom_field.settings.type.options__3.label"
+            },
+            {
+              "value": "radio",
+              "label": "t:sections.contact-form.blocks.custom_field.settings.type.options__4.label"
+            },
+            {
+              "value": "select",
+              "label": "t:sections.contact-form.blocks.custom_field.settings.type.options__5.label"
+            }
+          ],
+          "default": "text",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.type.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.label.label",
+          "default": "Your label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.required.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "full_width",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.full_width.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.content",
+          "info": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.info"
+        },
+        {
+          "type": "text",
+          "id": "checked_value",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.checked_value.label",
+          "default": "Yes"
+        },
+        {
+          "type": "text",
+          "id": "unchecked_value",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.unchecked_value.label",
+          "default": "No"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.contact-form.blocks.custom_field.settings.header__radio.content",
+          "info": "t:sections.contact-form.blocks.custom_field.settings.header__radio.info"
+        },
+        {
+          "type": "text",
+          "id": "radio_options",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
+          "info": "t:sections.contact-form.blocks.custom_field.settings.options.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.content",
+          "info": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.info"
+        },
+        {
+          "type": "text",
+          "id": "select_options",
+          "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
+          "info": "t:sections.contact-form.blocks.custom_field.settings.options.info"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-with-map.presets.name"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,78 @@
+<div class="card article-card relative flex flex-col gap-5 md:gap-8 leading-none{% if article.image == blank %} without-image{% endif %}">
+  {%- if article.image != blank -%}
+    <div class="article-card__media relative overflow-hidden">
+      {%- if show_tags and article.tags.size > 0 -%}
+        <div class="badges z-2 absolute grid gap-3">
+          {%- if article.metafields.theme.tag_color.value != blank and article.metafields.theme.tag_background.value != blank -%}
+            {%- capture badge_style -%}
+            --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }}); --badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
+            {%- endcapture -%}
+          {%- endif -%}
+          
+          {%- for tag in article.tags -%}
+            <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="badge{% if badge_style %} badge--custom{% endif %} font-medium leading-none rounded-full"{% if badge_style %} style="{{ badge_style }}"{% endif %}>{{ tag }}</a>
+          {%- endfor -%}
+        </div>
+      {%- endif -%}
+
+      <a href="{{ article.url }}" class="article-card__link block relative media media--{{ image_ratio }}" aria-label="{{ article.title | escape }}" tabindex="-1">
+        {{- article.image | image_url: width: article.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', is: 'lazy-image', class: 'article-card__image' -}}
+      </a>
+    </div>
+  {%- endif -%}
+
+  <div class="article-card__content flex flex-col gap-5 md:gap-8">
+    <div class="grid gap-4 md:gap-5">
+      {%- if show_date or show_comments or show_author -%}
+        <ul class="article-card__top flex flex-wrap gap-4">
+          {%- if show_date -%}
+            <li class="inline-flex gap-2 text-xs relative">
+              {%- render 'icon', icon: 'calendar', size: 'xs', class: 'stroke-1' -%}
+              {{- article.published_at | time_tag: format: 'month_day_year' -}}
+            </li>
+          {%- endif -%}
+
+          {%- if show_comments -%}
+            <li class="inline-flex gap-2 text-xs relative">
+              {%- render 'icon', icon: 'comment', size: 'xs', class: 'stroke-1' -%}
+              <a class="reversed-link" href="{{ article.url }}#comments">
+                {{- 'blogs.comments.with_count' | t: count: article.comments_count -}}
+              </a>
+            </li>
+          {%- endif -%}
+
+          {%- if show_author -%}
+            <li class="italic text-xs relative">
+              {%- capture author -%}<span class="font-medium not-italic">{{ article.author }}</span>{%- endcapture -%}
+              {{- 'blogs.article.written_by_html' | t: author: author -}}
+            </li>
+          {%- endif -%}
+        </ul>
+      {%- endif -%}
+
+      <p>
+        <a class="article-card__title heading reversed-link text-lg-2xl leading-tight tracking-tight" href="{{ article.url }}">
+          {{- article.title -}}
+        </a>
+      </p>
+
+      {%- if show_excerpt -%}
+        <div class="article-card__bottom rte leading-normal">
+          {%- liquid
+            if article.excerpt.size > 0
+              echo article.excerpt
+            else
+              echo article.content | strip_html | truncatewords: 40
+            endif
+          -%}
+        </div>
+      {%- endif -%}
+    </div>
+
+    <p>
+      <a class="link text-sm font-medium leading-tight" href="{{ article.url }}">
+        {{- 'blogs.article.read_more' | t -}}
+      </a>
+    </p>
+  </div>
+</div>

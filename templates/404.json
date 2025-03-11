@@ -1,0 +1,24 @@
+{
+  "sections": {
+    "main-404": {
+      "type": "main-404",
+      "settings": {
+        "rounded": false,
+        "heading_size": "title-xl tracking-heading",
+        "padding_top": 120,
+        "padding_bottom": 120
+      }
+    },
+    "empty-space": {
+      "type": "empty-space",
+      "settings": {
+        "desktop_height": 120,
+        "mobile_height": 20
+      }
+    }
+  },
+  "order": [
+    "main-404",
+    "empty-space"
+  ]
+}

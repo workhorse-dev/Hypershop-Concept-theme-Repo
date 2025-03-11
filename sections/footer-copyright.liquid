@@ -1,0 +1,238 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --gradient-background: {% if section.settings.gradient_background != blank %}{{ section.settings.gradient_background }}{% else %}{{ section.settings.color_background }}{% endif %};
+    --color-background: {{ section.settings.color_background.rgb }};
+    --color-foreground: {{ section.settings.color_text.rgb }};
+  }
+</style>
+
+<div class="section{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}"{% if section.settings.enable_parallax %} is="footer-parallax"{% endif %}>
+  <div class="footer-copyright page-width{% if section.settings.full_width %} page-width--full{% endif %} w-full flex flex-col items-center justify-between gap-4 lg:gap-0 lg:flex-row relative">
+    <div class="rte credits text-center">
+      {%- liquid
+        if section.settings.show_copyright
+          echo '&copy;&nbsp;'
+          echo 'now' | date: '%Y'
+          echo '&nbsp;'
+          echo shop.name
+          if section.settings.copyright_text != blank
+            echo '&nbsp;'
+            echo section.settings.copyright_text
+          endif
+          echo '.&nbsp;'
+        endif
+        echo powered_by_link
+      -%}
+      {%- if section.settings.show_policy -%}
+        <ul class="flex flex-wrap gap-3 justify-center lg:justify-start">
+          {%- for policy in shop.policies -%}
+            {%- if policy != blank -%}
+              <li>
+                <small>
+                  <a href="{{ policy.url }}" class="block reversed-link">{{ policy.title }}</a>
+                </small>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        </ul>
+      {%- endif -%}
+    </div>
+
+    {%- liquid
+      if section.settings.enable_language_selector and localization.available_languages.size > 1
+        assign enable_language_selector = true
+      endif
+      if section.settings.enable_country_selector and localization.available_countries.size > 1
+        assign enable_country_selector = true
+      endif
+    -%}
+    {%- if enable_language_selector or enable_country_selector -%}
+      <div class="localization flex items-center justify-center flex-col md:flex-row">
+        {%- if enable_language_selector -%}
+          <div class="grid gap-2">
+            {%- form 'localization', id: 'localization_language_form_footer', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
+              <label class="sr-only" for="LocalizationLanguageFormFooter">
+                {{- 'localization.language_label' | t -}}
+              </label>
+              {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
+              <select class="localization__item cursor-pointer leading-tight w-full" name="locale_code" id="LocalizationLanguageFormFooter">
+                {%- for language in localization.available_languages -%}
+                  <option value="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                    {{- language.endonym_name | capitalize -}}
+                  </option>
+                {%- endfor -%}
+              </select>
+              {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'absolute pointer-events-none' -%}
+            {%- endform -%}
+            <noscript>
+              <button class="button button--primary button--small w-full" type="submit" form="localization_language_form_footer">
+                {{- 'localization.update_language' | t -}}
+              </button>
+            </noscript>
+          </div>
+        {%- endif -%}
+        {%- if enable_country_selector -%}
+          <div class="grid gap-2">
+            {%- form 'localization', id: 'localization_country_form_footer', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
+              <label class="sr-only" for="LocalizationCountryFormFooter">
+                {{- 'localization.country_label' | t -}}
+              </label>
+              {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
+              <select class="localization__item cursor-pointer leading-tight w-full" name="country_code" id="LocalizationCountryFormFooter">
+                {%- for country in localization.available_countries -%}
+                  <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                    {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                  </option>
+                {%- endfor -%}
+              </select>
+              {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'absolute pointer-events-none' -%}
+            {%- endform -%}
+            <noscript>
+              <button class="button button--primary button--small w-full" type="submit" form="localization_country_form_footer">
+                {{- 'localization.update_country' | t -}}
+              </button>
+            </noscript>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if section.settings.show_payment_icons -%}
+      {%- unless shop.enabled_payment_types == empty -%}
+        <ul class="payment-icons{% if section.settings.monochrome_payment_icons %} payment-icons--gray{% endif %} flex flex-wrap justify-center gap-2 xl:gap-3">
+          {%- for type in shop.enabled_payment_types -%}
+            <li>
+              {{- type | payment_type_svg_tag -}}
+            </li>
+          {%- endfor -%}
+        </ul>
+      {%- endunless -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.footer-copyright.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.footer-copyright.settings.header__language_selector.content",
+      "info": "t:sections.footer-copyright.settings.header__language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "label": "t:sections.footer-copyright.settings.enable_language_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer-copyright.settings.header__country_selector.content",
+      "info": "t:sections.footer-copyright.settings.header__country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "label": "t:sections.footer-copyright.settings.enable_country_selector.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer-copyright.settings.header__policy.content",
+      "info": "t:sections.footer-copyright.settings.header__policy.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_policy",
+      "label": "t:sections.footer-copyright.settings.show_policy.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer-copyright.settings.header__payment_methods.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:sections.footer-copyright.settings.show_payment_icons.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "monochrome_payment_icons",
+      "label": "t:sections.footer-copyright.settings.monochrome_payment_icons.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.footer-copyright.settings.header__additional_content.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_copyright",
+      "label": "t:sections.footer-copyright.settings.show_copyright.label"
+    },
+    {
+      "type": "text",
+      "id": "copyright_text",
+      "label": "t:sections.footer-copyright.settings.copyright_text.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label",
+      "default": "#ffffff"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label",
+      "default": "#171717"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": true
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "footer"
+    ]
+  }
+}
+{% endschema %}

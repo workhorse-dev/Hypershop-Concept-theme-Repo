@@ -1,0 +1,197 @@
+{%- comment -%}
+  Renders a product card
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
+  - image_ratio: {String} Size of the product image card. Values are "square", "landscape" and "portrait". Default is "square" (optional)
+  - image_fill: {Boolean} Zoom image to fill space. Default: false (optional)
+  - show_vendor: {Boolean} Show the product vendor. Default: false
+  - show_rating: {Boolean} Show the product rating. Default: false
+  - show_countdown: {Boolean} Show the countdown timer.
+  - show_quick_add: {Boolean} Show the quick add button.
+  - show_quick_view: {Boolean} Show the quick view button.
+  - show_color_swatches: {Boolean} Show the color swatches.
+  - show_save_amount: {Boolean} Show save amount.
+  - amount_type: {String} Save amount type.
+  - show_variant_labels: {Boolean} Show the variant label.
+  - picker_type: {String} Variant picker type.
+  - enable_color_swatches: {Boolean} Enable the color swatches.
+  - color_swatch_type: {String} Color swatch type.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of the section that contains this card.
+
+  Usage:
+  {% render 'product-card-bundle', show_vendor: section.settings.show_vendor %}
+{%- endcomment -%}
+
+{%- if product != blank -%}
+  {%- liquid
+    assign featured_media = product.selected_variant.featured_image | default: product.featured_image
+
+    assign product_url = product.url | within: collection
+    if settings.product_disable_collection_portion
+      assign product_url = product.url
+    endif
+  -%}
+  <div class="card product-card product-card--{{ settings.card_style }}{% if settings.card_border_thickness > 0 %} product-card--thickness{% endif %}{% unless featured_media %} no-media{% endunless %} flex flex-col leading-none relative">
+    {%- if featured_media -%}
+      <div class="product-card__media relative h-auto overflow-hidden">
+        {%- if show_quick_view -%}
+          <button type="button" class="quick-view__button button button--secondary z-2 absolute top-0 right-0 opacity-0" is="hover-button" aria-controls="Quickview-{{ section_id }}-{{ product_id }}" aria-expanded="false">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'eye', size: 'sm' -%}
+              <span class="sr-only">{{ 'products.product.quick_view' | t }}</span>
+            </span>
+          </button>
+          <quick-view id="Quickview-{{ section_id }}-{{ product_id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product_url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true">
+            <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Quickview-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+            <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+              <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="Quickview-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                  <span class="btn-fill" data-fill></span>
+                  <span class="btn-text">
+                    {%- render 'icon', icon: 'close', size: 'sm' -%}
+                  </span>
+                </button>
+              </gesture-element>
+              <div class="quick-view__content drawer__content opacity-0 invisible flex flex-col h-full grow shrink"></div>
+            </div>
+          </quick-view>
+        {%- endif -%}
+
+        {%- if show_rating -%}
+          {%- liquid
+            assign rating_max = 5
+          
+            if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count.value > 0
+              assign rating_value = product.metafields.reviews.rating.value.rating | round: 1
+              assign rating_count = product.metafields.reviews.rating_count.value
+              assign rating_max = product.metafields.reviews.rating.value.scale_max
+            elsif show_empty
+              assign rating_value = 0.0
+              assign rating_count = 0
+            elsif show_placeholder
+              assign rating_value = 4.5
+              assign rating_count = 2
+            else
+              assign hide_rating = true
+            endif
+          -%}
+          
+          {%- unless hide_rating -%}
+            <div class="rating product-card__rating z-2 absolute rounded-full flex items-center gap-2 md:gap-1d5 pointer-events-none" title="{{ 'general.accessibility.star_reviews_count' | t: count: rating_count | escape }}">
+              <span role="img" aria-label="{{ 'general.accessibility.star_reviews_info' | t: rating_value: rating_value, rating_max: rating_max }}">
+                {%- render 'icon', icon: 'star', size: 'xs' -%}
+              </span>
+              {%- liquid
+                if display_mode == 'count'
+                  echo 'general.accessibility.star_reviews_count' | t: count: rating_count
+                else
+                  echo rating_value
+                endif
+              -%}
+            </div>
+          {%- endunless -%}
+        {%- endif -%}
+
+        {%- render 'product-badges', product: product, show_save_amount: show_save_amount, save_type: save_type, class: 'z-2 absolute grid gap-3' -%}
+
+        <a id="Media-{{ section_id }}-{{ product_id }}" class="block relative media media--{{ image_ratio }}{% unless image_fill %} media--contain{% endunless %} overflow-hidden}" href="{{ product_url }}" aria-label="{{ product.title | escape }}" tabindex="-1">
+          {%- unless featured_media.media_type == 'video' or featured_media.media_type == 'external_video' -%}
+            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+          {%- else -%}
+            {%- render 'product-video',
+              video: featured_media,
+              muted: false,
+              autoplay: false,
+              loop: false,
+              cover_image: featured_media,
+              show_play_button: true,
+              class: 'relative w-full overflow-hidden'
+            -%}
+          {%- endunless -%}
+        </a>
+
+        {%- if show_countdown and product.metafields.theme.countdown.value != blank -%}
+          {%- liquid
+            assign now_time = 'now' | date: '%s' | times: 1
+            assign countdown_time = product.metafields.theme.countdown.value | date: '%s' | times: 1
+          -%}
+          {%- if countdown_time > now_time -%}
+            <div class="product-card__countdown hidden sm:flex justify-center absolute w-full z-0 pointer-events-none no-js-hidden">
+              <div class="button icon-with-text">
+                <div class="btn-text">
+                  {%- render 'icon', icon: 'countdown-compact', size: 'sm', class: 'flex-auto hidden md:block' -%}
+                  <countdown-timer
+                    class="flex gap-3"
+                    data-expires="{{ product.metafields.theme.countdown.value | date: '%FT%T%:z' | escape }}"
+                    data-compact="true"
+                  >
+                    <div class="countdown__item">
+                      <p>--{{ 'general.date.d' | t }}</p>
+                    </div>
+                    <div class="countdown__item">
+                      <p>--{{ 'general.date.h' | t }}</p>
+                    </div>
+                    <div class="countdown__item">
+                      <p>--{{ 'general.date.m' | t }}</p>
+                    </div>
+                    <div class="countdown__item">
+                      <p>--{{ 'general.date.s' | t }}</p>
+                    </div>
+                  </countdown-timer>
+                </div>
+              </div>
+            </div>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- else -%}
+      <div class="product-card__media h-auto overflow-hidden">
+        <span class="block aspect-{{ image_ratio }}"></span>
+      </div>
+    {%- endif -%}
+    <product-bundle-info
+      class="product-card__content grow flex flex-col{% if featured_media %} justify-start text-{{ settings.card_text_alignment }}{% else %} justify-center items-center absolute top-0 left-0 w-full h-full{% endif %}"
+      data-section-id="{{ section_id }}"
+      data-product-id="{{ product_id }}"
+      data-product-url="{{ product.url }}"
+      data-update-url="false"
+    >
+      {%- if show_vendor -%}
+        <div class="product-card__top w-full">
+          <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
+          {{- product.vendor | link_to_vendor : class: "caption reversed-link uppercase leading-none tracking-widest" -}}
+        </div>
+      {%- endif -%}
+
+      <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+        <p class="grow">
+          <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ product_url }}" data-product-bundle-title>
+            {{- product.title | escape -}}
+          </a>
+        </p>
+        <div id="Price-{{ section_id }}-{{ product_id }}">
+          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+        </div>
+      </div>
+
+      <div class="product-card__variants grow">
+        {%- render 'product-bundle-variant-picker',
+          product: product,
+          product_id: product_id,
+          section_id: section_id,
+          show_variant_labels: show_variant_labels,
+          picker_type: picker_type,
+          enable_color_swatches: enable_color_swatches,
+          color_swatch_type: color_swatch_type,
+          controls: controls
+        -%}
+      </div>
+    </product-bundle-info>
+  </div>
+{%- else -%}
+  {%- render 'product-card-placeholder', placeholder: 'image', image_ratio: image_ratio, text_alignment: text_alignment, show_vendor: show_vendor, show_rating: show_rating -%}
+{%- endif -%}

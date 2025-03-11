@@ -1,0 +1,308 @@
+{% comment %}
+  Variant List Row
+
+  Accepts:
+  - item: {Object} Variant or Product object
+  - sku: {String} Sku of Product or Variant (optional)
+  - image: {Object} Product or Variant image (optional)
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+  Usage:
+  {% render 'quick-order-list-row' variant: variant %}
+{% endcomment %}
+
+{%- assign cart_qty = cart | item_count_for_variant: variant.id -%}
+{%- capture variant_price -%}
+  {%- liquid
+    assign volume_pricing_array = variant.quantity_price_breaks | sort: 'quantity' | reverse
+    assign current_qty_for_volume_pricing = cart_qty | plus: variant.quantity_rule.min
+    if cart_qty > 0
+      assign current_qty_for_volume_pricing = cart_qty | plus: variant.quantity_rule.increment
+    endif
+    assign variant_price_compare = variant.compare_at_price
+  -%}
+  <price-per-item
+    id="PricePerItem-{{ section_id }}-{{ product_id }}"
+    class="price{% if variant_price_compare %} price--on-sale{% endif %} inline-flex flex-wrap items-center gap-2 lg:gap-1d5"
+    data-section-id="{{ section_id }}"
+    data-product-id="{{ product_id }}"
+    data-variant-id="{{ variant.id }}"
+  >
+    {%- if variant_price_compare -%}
+      <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+      <span class="price__sale inline-flex items-center h-auto relative">
+        {%- liquid
+          if settings.currency_code_enabled
+            echo variant_price_compare | money_with_currency
+          else
+            echo variant_price_compare | money
+          endif
+        -%}
+      </span>
+      <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+    {%- endif -%}
+    
+    {%- if variant.quantity_price_breaks.size > 0 -%}
+      {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
+        {%- liquid
+          if settings.currency_code_enabled
+            assign variant_price = variant.price | money_with_currency
+          else
+            assign variant_price = variant.price | money
+          endif
+        -%}
+        <span class="price-per-item--current price__regular whitespace-nowrap">
+          {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
+        </span>
+      {%- else -%}
+        {%- for price_break in volume_pricing_array -%}
+          {%- if current_qty_for_volume_pricing >= price_break.minimum_quantity -%}
+            {%- liquid
+              if settings.currency_code_enabled
+                assign price_break_price = price_break.price | money_with_currency
+              else
+                assign price_break_price = price_break.price | money
+              endif
+            -%}
+            <span class="price-per-item--current price__regular whitespace-nowrap">
+              {{- 'sections.quick_order_list.each' | t: money: price_break_price -}}
+            </span>
+            {%- break -%}
+          {%- endif -%}
+        {%- endfor -%}
+      {%- endif -%}
+    {%- else -%}
+      <span class="price-per-item--current price__regular whitespace-nowrap">
+        {%- liquid
+          if settings.currency_code_enabled
+            assign variant_price = variant.price | money_with_currency
+          else
+            assign variant_price = variant.price | money
+          endif
+        -%}
+        {{- 'sections.quick_order_list.each' | t: money: variant_price -}}
+      </span>
+    {%- endif -%}
+
+    {%- if item.available and item.unit_price_measurement -%}
+      <span class="sr-only">{{ 'products.price.unit_price' | t }}</span>
+      <span class="unit-price flex items-center">
+        {%- liquid
+          capture unit_price_base_unit
+            if item.unit_price_measurement
+              if item.unit_price_measurement.reference_value != 1
+                echo item.unit_price_measurement.reference_value
+              endif
+              echo item.unit_price_measurement.reference_unit
+            endif
+          endcapture
+        -%}
+        ({{ item.variant.unit_price | money }}
+        <span aria-hidden="true">/</span>
+        <span class="sr-only">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {{ unit_price_base_unit }})
+        </span>
+    {%- endif -%}
+  </price-per-item>
+{%- endcapture -%}
+{%- capture variant_quantity -%}
+  {%- liquid
+    assign check_against_inventory = true
+    if variant.inventory_management != 'shopify' or variant.inventory_policy == 'continue'
+      assign check_against_inventory = false
+    endif
+    if variant.quantity_rule.min > variant.inventory_quantity and check_against_inventory
+      assign quantity_rule_soldout = true
+    endif
+
+    assign has_qty_rules = false
+    if variant.quantity_rule.increment > 1 or variant.quantity_rule.min > 1 or variant.quantity_rule.max != null
+      assign has_qty_rules = true
+    endif
+
+    assign has_vol_pricing = false
+    if variant.quantity_price_breaks.size > 0
+      assign has_vol_pricing = true
+    endif
+
+    assign is_available = false
+    unless variant.available == false or quantity_rule_soldout
+      assign is_available = true
+    endunless
+  -%}
+  {%- if has_qty_rules or has_vol_pricing -%}
+    {%- capture qty_rules_vol_pricing -%}
+      {%- if has_qty_rules -%}
+        <div class="quantity__rules text-sm font-medium leading-tight">
+          {%- if variant.quantity_rule.increment > 1 -%}
+            <span class="divider">
+              {{- 'products.quantity.multiples_of' | t: quantity: variant.quantity_rule.increment -}}
+            </span>
+          {%- endif -%}
+          {%- if variant.quantity_rule.min > 1 -%}
+            <span class="divider">
+              {{- 'products.quantity.min_of' | t: quantity: variant.quantity_rule.min -}}
+            </span>
+          {%- endif -%}
+          {%- if variant.quantity_rule.max != null -%}
+            <span class="divider">
+              {{- 'products.quantity.max_of' | t: quantity: variant.quantity_rule.max -}}
+            </span>
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+      {%- if has_vol_pricing -%}
+        {{ 'volume-pricing.css' | asset_url | stylesheet_tag }}
+        <volume-pricing class="volume-pricing grid gap-6">
+          <span class="caption-large font-medium">{{ 'products.volume_pricing.title' | t }}</span>
+          <ul class="list-unstyled">
+            <li class="text-sm flex gap-2d5 justify-between">
+              <span class="font-medium">{{ variant.quantity_rule.min }}+</span>
+              {%- assign price = variant.price | money_with_currency -%}
+              <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
+            </li>
+            {%- for price_break in variant.quantity_price_breaks -%}
+              <li class="text-sm flex gap-2d5 justify-between">
+                <span class="font-medium">
+                  {{- price_break.minimum_quantity -}}
+                  <span aria-hidden="true">+</span>
+                </span>
+                {%- assign price = price_break.price | money_with_currency -%}
+                <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
+              </li>
+            {%- endfor -%}
+          </ul>
+        </volume-pricing>
+      {%- endif -%}
+    {%- endcapture -%}
+  {%- endif -%}
+  <div class="cart-quantity__info flex items-center justify-start gap-3 md:gap-4">
+    {%- if has_qty_rules or has_vol_pricing -%}
+      <button type="button" class="hotspot hidden md:flex items-center justify-center relative cursor-pointer">
+        {%- render 'icon', icon: 'info', size: 'lg' -%}
+        <div class="hotspot__content grid gap-6 items-center absolute z-1 pointer-events-none overflow-hidden text-left">
+          {{- qty_rules_vol_pricing -}}
+        </div>
+      </button>
+    {%- endif -%}
+    <div class="flex gap-3">
+      {%- if has_qty_rules or has_vol_pricing -%}
+        <button type="button" class="md:hidden flex items-center justify-center" aria-controls="VolumePricing-{{ section_id }}-{{ variant.id }}" aria-expanded="false">
+          {%- render 'icon', icon: 'info', size: 'sm' -%}
+        </button>
+        <x-modal id="VolumePricing-{{ section_id }}-{{ variant.id }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+          role="dialog"
+          aria-modal="true"
+          aria-label="{{ item.title | escape }}"
+          hidden
+        >
+          <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="VolumePricing-{{ section_id }}-{{ variant.id }}" aria-expanded="false"></overlay-element>
+          <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+            <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+              <span class="drawer__title heading title-md grid gap-4">
+                {{ item.title | escape }}
+              </span>
+              <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="VolumePricing-{{ section_id }}-{{ variant.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                <span class="btn-fill" data-fill></span>
+                <span class="btn-text">
+                  {%- render 'icon', icon: 'close', size: 'sm' -%}
+                </span>
+              </button>
+            </gesture-element>
+            <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+              <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                <div class="text-base md:text-lg grid gap-6">
+                  {{- qty_rules_vol_pricing -}}
+                </div>
+              </div>
+            </div>
+          </div>
+        </x-modal>
+      {%- endif -%}
+
+      {%- if is_available -%}
+        <quantity-input class="cart-quantity flex items-center relative">
+          <label class="sr-only" for="Quantity-{{ section_id }}-{{ variant.id }}">
+            {{- 'products.quantity.label' | t -}}
+          </label>
+          <input class="quantity__input input text-center w-full h-full"
+            type="number"
+            name="updates[]"
+            aria-label="{{ 'products.quantity.input_label' | t: product: item.title | escape }}"
+            id="Quantity-{{ section_id }}-{{ variant.id }}"
+            data-index="{{ variant.id }}"
+            inputmode="numeric"
+            autocomplete="off"
+            data-quantity-variant-id="{{ variant.id }}"
+            data-cart-quantity="{{ cart | item_count_for_variant: variant.id }}"
+            min="0"
+            data-min="{{ variant.quantity_rule.min }}"
+            {% if variant.quantity_rule.max != null %}
+              max="{{ variant.quantity_rule.max }}"
+            {% endif %}
+            step="{{ variant.quantity_rule.increment }}"
+            value="{{ cart | item_count_for_variant: variant.id }}"
+          />
+          <div class="quantity__buttons absolute right-0 hidden lg:flex flex-col items-center justify-center h-full">
+            <button type="button" name="plus" class="quantity__button flex justify-center w-full items-end" aria-label="{{ 'products.quantity.increase' | t: product: item.title | escape }}">
+              {%- render 'icon', icon: 'increase', size: 'sm', class: 'stroke-1' -%}
+            </button>
+            <button type="button" name="minus" class="quantity__button flex justify-center w-full items-start" aria-label="{{ 'products.quantity.decrease' | t: product: item.title | escape }}">
+              {%- render 'icon', icon: 'decrease', size: 'sm', class: 'stroke-1' -%}
+            </button>
+          </div>
+        </quantity-input>
+      {%- else -%}
+        <span class="variant-item__sold-out">{{ 'products.product.sold_out' | t }}</span>
+      {%- endif -%}
+    </div>
+    <div class="text-xs relative">
+      <div id="Loader-{{ section_id }}-{{ variant.id }}" class="loader absolute left-0" hidden>
+        {%- render 'icon', icon: 'rotator', size: 'xs', class: 'animate-rotator' -%}
+      </div>
+      <a class="link{% if cart_qty == 0 %} invisible pointer-events-none{% endif %}" href="{{ item.url_to_remove }}" is="quick-order-list-remove-button" data-index="{{ variant.id }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+    </div>
+  </div>
+{%- endcapture -%}
+<tr class="variant-item" id="VariantItem-{{ section_id }}-{{ variant.id }}">
+  <td>
+    <div class="variant-item__inner flex items-start md:items-center gap-4d5 md:gap-10">
+      {%- if show_image and image != blank -%}
+        <picture class="variant-item__media media relative overflow-hidden flex-auto">
+          {{- image | image_url: width: image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+        </picture>
+      {%- endif -%}
+
+      <div class="variant-item__details grid justify-start gap-3">
+        <div class="grid gap-1">
+          <div class="block leading-tight">
+            <span class="variant-item__title font-medium text-base leading-tight">{{ item.title | escape }}</span>
+          </div>
+          {%- if show_sku and sku != blank -%}
+          <p class="text-xs text-opacity">{{ sku | escape }}</p>
+          {%- endif -%}
+          <div class="variant-item__price lg:hidden">
+            {{- variant_price -}}
+          </div>
+        </div>
+        <div class="variant-item__quantity md:hidden text-sm">
+          {{- variant_quantity -}}
+        </div>
+      </div>
+    </div>
+  </td>
+
+  <td class="variant-item__quantity hidden md:table-cell text-sm text-right md:text-left">
+    {{- variant_quantity -}}
+  </td>
+
+  <td class="variant-item__price hidden lg:table-cell text-right">
+    {{- variant_price -}}
+  </td>
+
+  <td class="variant-item__totals text-right">
+    <span class="price text-base-xl">
+      {{- cart | line_items_for: item | sum: 'original_line_price' | money -}}
+    </span>
+  </td>
+</tr>

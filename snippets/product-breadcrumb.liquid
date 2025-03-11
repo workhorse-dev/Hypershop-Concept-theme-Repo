@@ -1,0 +1,23 @@
+<nav class="product__breadcrumb breadcrumb hidden lg:flex" role="navigation" aria-label="breadcrumbs" {{ block.shopify_attributes }}>
+  <ul class="inline-flex gap-4 md:gap-6">
+    <li class="flex items-center gap-4 md:gap-6">
+      <a class="block" href="{{ routes.root_url }}" title="{{ 'general.breadcrumbs.home_link_title' | t | escape }}">
+        {%- render 'icon', icon: 'home', size: 'sm' -%}
+      </a>
+    </li>
+    {%- if block.settings.show_collections_link -%}
+      <li class="flex items-center gap-4 md:gap-6">
+        <a class="reversed-link" href="{{ routes.collections_url }}">{{ 'general.breadcrumbs.collections' | t }}</a>
+      </li>
+    {%- endif -%}
+    <li class="flex items-center gap-4 md:gap-6">
+      {%- liquid
+        if collection == blank
+          assign collection = product.collections | first
+        endif
+      -%}
+      <a class="reversed-link" href="{{ collection.url }}">{{ collection.title }}</a>
+    </li>
+    <li class="flex items-center gap-4 md:gap-6">{{ product.title }}</li>
+  </ul>
+</nav>

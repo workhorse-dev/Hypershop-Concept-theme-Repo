@@ -1,0 +1,189 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width relative">
+    <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} text-center leading-none grid gap-4">
+      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+        <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.activate_account.title' | t }}</split-words>
+      </{{ section.settings.heading_tag }}>
+      <p class="text-lg md:text-2xl">{{ 'customer.activate_account.subtext' | t }}</p>
+    </div>
+
+    <div class="customer">
+      {%- form 'activate_customer_password', class: 'grid gap-12' -%}
+        {%- liquid
+          if form.errors
+            assign form_errors = form.errors | default_errors
+            render 'alert', status: 'error', content: form_errors
+          endif
+        -%}
+
+        <div class="grid gap-5">
+          <div class="field">
+            <input
+              required
+              class="input is-floating{% if form.errors contains 'password' %} invalid{% endif %}"
+              type="password"
+              name="customer[password]"
+              id="Password"
+              autocomplete="new-password"
+              placeholder="{{ 'customer.activate_account.password' | t | escape }}"
+            />
+            <label class="label is-floating" for="Password">{{ 'customer.activate_account.password' | t }}</label>
+          </div>
+      
+          <div class="field">
+            <input
+              required
+              class="input is-floating{% if form.errors contains 'password_confirmation' %} invalid{% endif %}"
+              type="password"
+              name="customer[password_confirmation]"
+              id="PasswordConfirmation"
+              autocomplete="new-password"
+              placeholder="{{ 'customer.activate_account.password_confirm' | t | escape }}"
+            />
+            <label class="label is-floating" for="PasswordConfirmation">{{ 'customer.activate_account.password_confirm' | t }}</label>
+          </div>
+        </div>
+
+        <div class="grid gap-8">
+          <button class="button button--primary button--fixed" type="submit" is="hover-button">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">{{ 'customer.activate_account.submit' | t }}</span>
+          </button>
+          
+          <p class="text-center">
+            <button class="inline-flex items-center gap-2" type="submit">
+              {%- render 'icon', icon: 'return', size: 'sm' -%}
+              <span class="link text-lg leading-none">{{ 'customer.activate_account.cancel' | t }}</span>
+            </button>
+          </p>
+        </div>
+      {%- endform -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-activate-account.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ]
+}
+{% endschema %}

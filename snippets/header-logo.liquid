@@ -1,0 +1,71 @@
+{%- comment -%}
+  Renders a header logo component
+
+  Usage:
+  {% render 'header-logo' %}
+{%- endcomment -%}
+
+{%- liquid
+  assign logo = settings.logo
+  assign logo_mobile = settings.logo_mobile | default: logo
+
+  assign white_logo = settings.white_logo
+  assign white_logo_mobile = settings.white_logo_mobile | default: white_logo
+-%}
+
+{%- if request.page_type == 'index' -%}
+  <h1 class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
+    <span class="sr-only">{{ shop.name }}</span>
+{%- else -%}
+  <div class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
+{%- endif -%}
+
+  {%- if logo != blank -%}
+    <a
+      href="{{ routes.root_url }}"
+      itemprop="url"
+      class="header__logo-link{% if white_logo %} has-white-logo{% endif %} flex items-center relative"
+    >
+      <span class="sr-only">{{ shop.name }}</span>
+      
+      {%- comment -%} Desktop logo {%- endcomment -%}
+      {%- capture sizes -%}{{ settings.logo_width }}px{%- endcapture -%}
+      {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 2 | at_most: logo.width }}{%- endcapture -%}
+      {%- capture style -%}max-height: {{ settings.logo_width | divided_by: logo.aspect_ratio }}px;max-width: {{ settings.logo_width }}px;{%- endcapture -%}
+
+      {%- comment -%} Mobile logo {%- endcomment -%}
+      {%- capture mobile_sizes -%}{{ settings.logo_width_mobile }}px{%- endcapture -%}
+      {%- capture mobile_widths -%}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 2 | at_most: logo_mobile.width }}{%- endcapture -%}
+      {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: logo_mobile.aspect_ratio }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
+
+      {%- liquid
+        echo logo | image_url: width: logo.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo hidden md:block'
+        echo logo_mobile | image_url: width: logo_mobile.width | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'logo md:hidden'
+      -%}
+
+      {%- if white_logo -%}
+        {%- comment -%} Desktop logo {%- endcomment -%}
+        {%- capture sizes -%}{{ settings.logo_width }}px{%- endcapture -%}
+        {%- capture widths -%}{{ settings.logo_width }}, {{ settings.logo_width | times: 2 | at_most: white_logo.width }}{%- endcapture -%}
+        {%- capture style -%}max-height: {{ settings.logo_width | divided_by: white_logo.aspect_ratio }}px;max-width: {{ settings.logo_width }}px;{%- endcapture -%}
+
+        {%- comment -%} Mobile logo {%- endcomment -%}
+        {%- capture mobile_sizes -%}{{ settings.logo_width_mobile }}px{%- endcapture -%}
+        {%- capture mobile_widths -%}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 2 | at_most: white_logo_mobile.width }}{%- endcapture -%}
+        {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: white_logo_mobile.aspect_ratio }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
+
+        {%- liquid
+          echo white_logo | image_url: width: white_logo.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo hidden md:block absolute'
+          echo white_logo_mobile | image_url: width: white_logo_mobile.width | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo md:hidden absolute'
+        -%}
+      {%- endif -%}
+    </a>
+  {%- else -%}
+    <a href="{{ routes.root_url }}" itemprop="url" class="h3">{{ shop.name }}</a>
+  {%- endif -%}
+
+{%- if request.page_type == 'index' -%}
+  </h1>
+{%- else -%}
+  </div>
+{%- endif -%}

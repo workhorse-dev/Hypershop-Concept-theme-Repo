@@ -1,0 +1,273 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl",
+        "heading_tag": "h1",
+        "text_size": "text-lg md:text-2xl",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Contact Us",
+            "heading_size": "title-xl tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We'd love to hear from you. Our team is here to help.</p>",
+            "text_size": "subtext-lg",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "empty-space": {
+      "type": "empty-space",
+      "settings": {
+        "desktop_height": 120,
+        "mobile_height": 44,
+        "color_background": "",
+        "gradient_background": ""
+      }
+    },
+    "maps": {
+      "type": "maps",
+      "blocks": {
+        "map-1": {
+          "type": "map",
+          "settings": {
+            "map_address": "620 King St W, Toronto, ON M5V 1M7, Canada",
+            "heading": "620 King St",
+            "text": "",
+            "liquid": "<p class=\"banner__subheading heading uppercase leading-none tracking-widest text-xs banner__text--colored\">Opening hours</p>\n<table>\n  <tr>\n    <td>Mon - Fri</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Saturday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Sunday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n</table>",
+            "button_label": "Get directions",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": true,
+            "button_icon": true
+          }
+        },
+        "map-2": {
+          "type": "map",
+          "settings": {
+            "map_address": "151 O'Connor Street, Ottawa ON K2P 2L8, Canada",
+            "heading": "151 O'Connor St",
+            "text": "",
+            "liquid": "<p class=\"banner__subheading heading uppercase leading-none tracking-widest text-xs banner__text--colored\">Opening hours</p>\n<table>\n  <tr>\n    <td>Mon - Fri</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Saturday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Sunday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n</table>",
+            "button_label": "Get directions",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": true,
+            "button_icon": true
+          }
+        },
+        "map-3": {
+          "type": "map",
+          "settings": {
+            "map_address": "131 Greene Street, New York, NY 10012, USA",
+            "heading": "131 Greene St",
+            "text": "",
+            "liquid": "<p class=\"banner__subheading heading uppercase leading-none tracking-widest text-xs banner__text--colored\">Opening hours</p>\n<table>\n  <tr>\n    <td>Mon - Fri</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Saturday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n  <tr>\n    <td>Sunday</td>\n    <td>8:30am - 10:30pm</td>\n  </tr>\n</table>",
+            "button_label": "Get directions",
+            "button_link": "",
+            "button_style": "primary",
+            "button_size": "sm",
+            "button_external": true,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "map-1",
+        "map-2",
+        "map-3"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "map_api_key": "",
+        "map_zoom": 16,
+        "map_style": "dark",
+        "image": "",
+        "image_height": "650px",
+        "content_position": "md:items-center md:justify-end",
+        "text_alignment": "left",
+        "content_position_mobile": "image_first",
+        "image_height_mobile": "400px",
+        "text_alignment_mobile": "left",
+        "heading": "Find Our Stores",
+        "heading_size": "text-2xl lg:text-3xl",
+        "heading_tag": "h2",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "#a3a3a3",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "contact-form": {
+      "type": "contact-form",
+      "blocks": {
+        "contact-1": {
+          "type": "contact",
+          "settings": {
+            "heading": "Address",
+            "text": "<p><a href=\"#\" title=\"mailto:shop@yourstore.com\">shop@yourstore.com</a></p>"
+          }
+        },
+        "contact-2": {
+          "type": "contact",
+          "settings": {
+            "heading": "Email",
+            "text": "<p><a href=\"#\" title=\"mailto:contact@yourstore.com\">contact@yourstore.com</a><br\/><a href=\"#\" title=\"mailto:sales@yourstore.com\">sales@yourstore.com</a></p>"
+          }
+        },
+        "contact-3": {
+          "type": "contact",
+          "settings": {
+            "heading": "Phone",
+            "text": "<p><a href=\"#\" title=\"tel:+33 (0) 31-305-210\">+33 (0) 31-305-210<br\/></a>mo – fri: 09:00 – 17:00</p>"
+          }
+        },
+        "media": {
+          "type": "media",
+          "settings": {
+            "heading": "Follow us"
+          }
+        },
+        "custom_field-1": {
+          "type": "custom_field",
+          "settings": {
+            "type": "text",
+            "title": "Phone number",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": ""
+          }
+        },
+        "custom_field-2": {
+          "type": "custom_field",
+          "settings": {
+            "type": "select",
+            "title": "Subject",
+            "required": false,
+            "full_width": false,
+            "checked_value": "Yes",
+            "unchecked_value": "No",
+            "radio_options": "",
+            "select_options": "Product, Order, Press, Other"
+          }
+        }
+      },
+      "block_order": [
+        "contact-1",
+        "contact-2",
+        "contact-3",
+        "media",
+        "custom_field-1",
+        "custom_field-2"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "title-lg tracking-heading",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Let your customers get in touch with you by filling out the email form below.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 84,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "main",
+    "rich-text",
+    "empty-space",
+    "maps",
+    "contact-form"
+  ]
+}

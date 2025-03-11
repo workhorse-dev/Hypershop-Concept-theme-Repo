@@ -1,0 +1,359 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'blog.js' | asset_url }}" defer></script>
+
+{%- paginate blog.articles by section.settings.per_page -%}
+  <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+    <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+      <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} {{ section.settings.heading_alignment }} grid gap-4">
+        {%- if section.settings.subheading != blank -%}
+          {%- liquid
+            if section.settings.heading_size == 'title-sm'
+              assign subtext_size = 'subtext-md'
+            else
+              assign subtext_size = 'subtext-lg'
+            endif
+          -%}
+          <p class="heading normal-case font-medium {{ subtext_size }} leading-none tracking-none">
+            {{- section.settings.subheading | escape -}}
+          </p>
+        {%- endif -%}
+
+        <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+          <split-words class="split-words block" data-animate="fade-up-large">{{ blog.title }}</split-words>
+        </{{ section.settings.heading_tag }}>
+
+        {%- if section.settings.description != blank -%}
+          {%- liquid
+            if section.settings.heading_size == 'title-sm' or section.settings.heading_size == 'title-md'
+              assign subtext_size = 'subtext-md'
+            else
+              assign subtext_size = 'subtext-lg'
+            endif
+          -%}
+          <div class="inline-flex justify-center rte">
+            <div class="page-width--narrow rte leading-normal {{ subtext_size }}">{{ section.settings.description }}</div>
+          </div>
+        {%- endif -%}
+
+        {%- if section.settings.show_tag_filter and blog.tags.size > 0 -%}
+          <div class="hidden md:block">
+            <ul class="subcollections inline-flex flex-wrap justify-center max-w-full">
+              <li class="flex items-center justify-center relative{% if current_tags == blank %} active{% endif %}">
+                <a href="{{ blog.url }}" class="subcollection flex items-center relative leading-tight text-lg-2xl">
+                  <span class="btn-text">{{ 'blogs.article.all_tags' | t }}</span>
+                </a>
+              </li>
+              {%- for tag in blog.all_tags -%}
+                <li class="flex items-center justify-center relative{% if current_tags contains tag %} active{% endif %}">
+                  <a href="{{ blog.url }}/tagged/{{ tag | handleize }}" class="subcollection flex items-center relative leading-tight text-lg-2xl">
+                    <span class="btn-text">{{ tag }}</span>
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+
+          <div class="blog-filter field md:hidden">
+            <div class="inline-block relative">
+              <label for="TagFilter" class="sr-only">{{ 'blogs.article.filter' | t }}</label>
+              <select id="TagFilter" class="select" is="tag-filter">
+                <option value="{{ blog.url }}">{{ 'blogs.article.all_tags' | t }}</option>
+                {%- for tag in blog.all_tags -%}
+                  <option value="{{ blog.url }}/tagged/{{ tag | handleize }}" {% if current_tags contains tag %}selected{% endif %}>{{ tag }}</option>
+                {%- endfor -%}
+              </select>
+              {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+            </div>
+          </div>
+        {%- endif -%}
+      </div>
+
+      <div class="blog flex flex-col gap-12">
+        <motion-list class="blog-grid{% if section.settings.layout == 'collage' %} blog-collage{% if blog.articles_count == 1 %} with-only1{% endif %}{% endif %} card-grid card-grid--3 mobile:card-grid--1 grid">
+          {%- for article in blog.articles -%}
+            {%- if section.settings.layout == 'collage' and forloop.first -%}
+              {%- capture sizes -%}(max-width: 1023px) 100vw, calc(min(100vw, {{ settings.page_width }}px) * 0.65){%- endcapture -%}
+            {%- else -%}
+              {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
+            {%- endif -%}
+
+            {%- render 'article-card',
+              article: article,
+              sizes: sizes,
+              image_ratio: section.settings.image_ratio,
+              show_tags: section.settings.show_tags,
+              show_date: section.settings.show_date,
+              show_author: section.settings.show_author,
+              show_comments: section.settings.show_comments,
+              show_excerpt: section.settings.show_excerpt,
+            -%}
+          {%- endfor -%}
+        </motion-list>
+
+        {%- liquid
+          if paginate.pages > 1
+            render 'pagination', paginate: paginate
+          endif
+        -%}
+      </div>
+    </div>
+  </div>
+{%- endpaginate -%}
+
+{% schema %}
+{
+  "name": "t:sections.main-blog.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left justify-start",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center justify-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right justify-end",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-center justify-center"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tag_filter",
+      "label": "t:sections.main-blog.settings.show_tag_filter.label",
+      "default": true
+    },
+    {
+      "type": "range",
+      "id": "per_page",
+      "min": 6,
+      "max": 48,
+      "step": 3,
+      "label": "t:sections.main-blog.settings.per_page.label",
+      "default": 9
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__post.content"
+    },
+    {
+      "type": "select",
+      "id": "layout",
+      "options": [
+        {
+          "value": "grid",
+          "label": "t:sections.main-blog.settings.layout.options__1.label"
+        },
+        {
+          "value": "collage",
+          "label": "t:sections.main-blog.settings.layout.options__2.label"
+        }
+      ],
+      "default": "collage",
+      "label": "t:sections.main-blog.settings.layout.label",
+      "info": "t:sections.main-blog.settings.layout.info"
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.global.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.global.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.global.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.global.settings.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.global.settings.image_ratio.options__5.label"
+        }
+      ],
+      "default": "landscape",
+      "label": "t:sections.global.settings.image_ratio.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_tags",
+      "label": "t:sections.main-blog.settings.show_tags.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_date",
+      "label": "t:sections.main-blog.settings.show_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_comments",
+      "label": "t:sections.main-blog.settings.show_comments.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_author",
+      "label": "t:sections.main-blog.settings.show_author.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_excerpt",
+      "label": "t:sections.main-blog.settings.show_excerpt.label",
+      "default": true
+    },
+    {
+      "type": "paragraph",
+      "content": "t:sections.main-blog.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 120
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ]
+}
+{% endschema %}

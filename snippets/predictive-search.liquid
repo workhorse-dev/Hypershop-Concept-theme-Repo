@@ -1,0 +1,196 @@
+<form class="search__form flex flex-col gap-8 h-full relative" action="{{ routes.search_url }}" method="GET" role="search"
+  {%- if settings.predictive_search_enabled %}
+    is="predictive-search"
+    data-section-id="{{ section_id }}"
+    data-limit="{{ settings.predictive_search_limit }}"
+  {% endif -%}
+>
+  <input type="hidden" name="options[prefix]" value="last" />
+  <label class="sr-only" for="SearchFormInput-{{ section_id }}">{{ 'general.search.title' | t }}</label>
+  <div class="search__field field flex items-center gap-4 relative">
+    {%- if settings.predictive_search_enabled and settings.typewriter_effect_enabled -%}
+      {%- unless search.terms -%}
+        <div class="typed absolute top-0 left-0 w-full h-full flex items-center justify-start gap-2 font-medium text-base md:text-lg leading-none pointer-events-none">
+          <search-typed class="flex items-center h-full overflow-hidden whitespace-nowrap" data-delay="0.5" data-first-text="{{ settings.typewriter_starter_text | escape }}" data-last-text="{{ 'general.search.placeholder' | t | escape }}"></search-typed>
+        </div>
+      {%- endunless -%}
+    {%- endif -%}
+    <input
+      class="input{% if settings.predictive_search_enabled or settings.predictive_search_recommendation != blank %} search__input{% endif %}"
+      type="search"
+      name="q"
+      id="SearchFormInput-{{ section_id }}"
+      placeholder="{{ 'general.search.placeholder' | t | escape }}"
+      autocomplete="off"
+      autocorrect="off"
+      autocapitalize="off"
+      spellcheck="off"
+      {%- if context == 'page' %}
+        value="{{ search.terms | escape }}"
+      {% endif -%}
+    />
+    {%- if settings.predictive_search_enabled %}
+      <button class="clear absolute flex items-center justify-center text-xs opacity-0" type="reset">
+        <span>{{ 'general.search.clear' | t }}</span>
+        {%- render 'icon', icon: 'loader', size: 'sm absolute opacity-0 invisible animate-spin' -%}
+      </button>
+    {%- endif -%}
+  </div>
+
+  {%- if settings.predictive_search_recommendation != blank -%}
+    <ul class="search__box search__recommendation text-left grid gap-6 md:gap-9">
+      {%- for link in settings.predictive_search_recommendation.links -%}
+        {%- if link.links != blank -%}
+          <li class="grid gap-3 md:gap-4">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- link.title -}}
+            </p>
+            <ul class="grid gap-2">
+              {%- for childlink in link.links -%}
+                <li>
+                  <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ childlink.url }}">
+                    {{- childlink.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </li>
+        {%- else -%}
+          <li>
+            <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ link.url }}">
+              {{- link.title -}}
+            </a>
+          </li>
+        {%- endif -%}
+      {%- endfor -%}
+    </ul>
+  {%- endif -%}
+
+  {%- if settings.predictive_search_enabled %}
+    <div id="PredictiveSearchResults-{{ section_id }}" class="search__box search__results text-left flex flex-col items-start grow gap-10" role="listbox">
+      {%- if predictive_search.performed -%}
+        {%- if predictive_search.resources.queries.size > 0 -%}
+          <div class="grid gap-3 md:gap-4 w-full">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- 'general.search.suggestions' | t -}}
+            </p>
+            <ul class="grid gap-2">
+              {%- for query in predictive_search.resources.queries -%}
+                <li>
+                  <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ query.url }}" aria-label="{{ query.text }}">
+                    {{- query.styled_text -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if predictive_search.resources.products.size > 0 -%}
+          <div class="grid gap-3 md:gap-4 w-full">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- 'general.search.products' | t -}}
+            </p>
+            <div class="horizontal-products grid">
+              {%- for product in predictive_search.resources.products -%}
+                {%- render 'product-card-horizontal',
+                  product: product,
+                  image_ratio: settings.product_image_ratio,
+                  image_fill: settings.product_image_fill,
+                  show_vendor: settings.predictive_search_show_vendor,
+                  show_price: settings.predictive_search_show_price,
+                  show_quick_add: false,
+                  show_quick_view: false
+                -%}
+              {%- endfor -%}
+            </div>
+          </div>
+        {%- endif -%}
+
+        {%- if predictive_search.resources.articles.size > 0 -%}
+          <div class="grid gap-3 md:gap-4 w-full">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- 'general.search.articles' | t -}}
+            </p>
+            <ul class="grid gap-2">
+              {%- for article in predictive_search.resources.articles -%}
+                <li>
+                  <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ article.url }}">
+                    {{- article.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if predictive_search.resources.collections.size > 0 -%}
+          <div class="grid gap-3 md:gap-4 w-full">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- 'general.search.collections' | t -}}
+            </p>
+            <ul class="grid gap-2">
+              {%- for collection in predictive_search.resources.collections -%}
+                <li>
+                  <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ collection.url }}">
+                    {{- collection.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- if predictive_search.resources.pages.size > 0 -%}
+          <div class="grid gap-3 md:gap-4 w-full">
+            <p class="search__heading block text-xs uppercase leading-tight tracking-widest">
+              {{- 'general.search.pages' | t -}}
+            </p>
+            <ul class="grid gap-2">
+              {%- for page in predictive_search.resources.pages -%}
+                <li>
+                  <a class="reversed-link text-base md:text-lg leading-tight font-medium" href="{{ page.url }}">
+                    {{- page.title -}}
+                  </a>
+                </li>
+              {%- endfor -%}
+            </ul>
+          </div>
+        {%- endif -%}
+
+        {%- assign total_results = predictive_search.resources.queries.size
+          | plus: predictive_search.resources.products.size
+          | plus: predictive_search.resources.collections.size
+          | plus: predictive_search.resources.articles.size
+          | plus: predictive_search.resources.pages.size
+        -%}
+        {%- if total_results == 0 -%}
+          <div class="search__empty flex justify-center items-star text-center w-full h-full">
+            <div class="drawer__empty flex flex-col gap-5 md:gap-8">
+              <p>
+                {%- render 'icon', icon: 'empty', size: 'xxxl', class: 'inline-block' -%}
+              </p>
+              <h2 class="drawer__empty-text heading leading-none tracking-tight">{{ 'general.search.no_results' | t: terms: predictive_search.terms }}.</h2>
+              <p class="drawer__empty-message text-sm md:text-base leading-tight">{{ 'general.search.user_different_terms' | t }}</p>
+            </div>
+          </div>
+        {%- else -%}
+          <div class="drawer__sticky z-1 sticky left-0 bottom-0 w-full">
+            <button class="button button--primary icon-with-text w-full" type="submit" is="hover-button">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">
+                {%- liquid
+                  echo 'general.search.view_more' | t
+                  render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+                -%}
+              </span>
+            </button>
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+    </div>
+    {%- if context == 'page' -%}
+      <predictive-search-overlay class="search__overlay block opacity-0 z-30 fixed top-0 left-0 w-full h-full pointer-events-none"></predictive-search-overlay>
+    {%- endif -%}
+  {%- endif -%}
+</form>

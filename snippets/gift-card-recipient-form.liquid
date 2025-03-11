@@ -1,0 +1,120 @@
+{%- comment -%}
+  Renders gift card recipient form.
+  Accepts:
+  - product: {Object} product object.
+  - form: {Object} the product form object.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'gift-card-recipient-form', product: product, form: form, section_id: section.id, product_id: product.id %}
+{%- endcomment -%}
+
+<div class="customer">
+  {%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}
+  <script src="{{ 'recipient-form.js' | asset_url }}" defer="defer"></script>
+  <recipient-form
+    class="recipient-form grid gap-6"
+    data-section-id="{{ section_id }}"
+    data-product-id="{{ product_id }}"
+    data-product-variant-id="{{ product.selected_or_first_available_variant.id }}"
+  >
+    <label for="Recipient-checkbox-{{ section_id }}-{{ product_id }}" class="flex items-center gap-3">
+      <input
+        type="checkbox"
+        id="Recipient-checkbox-{{ section_id }}-{{ product_id }}"
+        name="{{ gift_card_recipient_control_flag }}"
+        disabled
+      />
+      {{- 'recipient.form.checkbox' | t -}}
+    </label>
+
+    <div
+      class="product-form__recipient-error-message"
+      role="alert"
+      {% unless form.errors %}
+        hidden
+      {% endunless %}
+    >
+      {%- liquid
+        assign form_errors = form.errors | default: '<ul></ul>'
+        render 'alert', status: 'error', content: form_errors
+      -%}
+    </div>
+
+    <p id="Recipient-fields-live-region-{{ section_id }}-{{ product_id }}" class="sr-only" role="status"></p>
+
+    <div class="recipient-fields grid gap-4 hidden" id="Recipient-fields-{{ section_id }}-{{ product_id }}">
+      <div class="field">
+        <input
+          class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+          id="Recipient-email-{{ section_id }}-{{ product_id }}"
+          type="email"
+          placeholder="{{ 'recipient.form.email' | t }}"
+          name="properties[Recipient email]"
+          value="{{ form.email }}"
+        />
+        <label class="label is-floating" for="Recipient-email-{{ section_id }}-{{ product_id }}">{{ 'recipient.form.email_label' | t }}</label>
+      </div>
+
+      <div class="field">
+        <input
+          class="input is-floating{% if form.errors contains 'name' %} invalid{% endif %}"
+          autocomplete="name"
+          type="text"
+          id="Recipient-name-{{ section_id }}-{{ product_id }}"
+          name="properties[Recipient name]"
+          placeholder="{{ 'recipient.form.name' | t }}"
+        />
+        <label class="label is-floating" for="Recipient-name-{{ section_id }}-{{ product_id }}">{{ 'recipient.form.name_label' | t }}</label>
+      </div>
+
+      <div class="field grid gap-2d5">
+        {%- liquid
+          assign max_chars_message = 200
+          assign max_chars_message_rendered = 'recipient.form.max_characters' | t: max_chars: max_chars_message
+          assign message_label_rendered = 'recipient.form.message_label' | t
+        -%}
+        <textarea
+          class="textarea is-floating{% if form.errors contains 'message' %} invalid{% endif %}"
+          rows="3"
+          id="Recipient-message-{{ section_id }}-{{ product_id }}"
+          name="properties[Message]"
+          maxlength="{{ max_chars_message }}"
+          placeholder=" "
+          aria-label="{{ message_label_rendered }} {{ max_chars_message_rendered }}"
+        >{{ form.message }}</textarea>
+        <label class="label is-floating" for="Recipient-message-{{ section_id }}-{{ product_id }}">{{ message_label_rendered }}</label>
+        <span class="text-sm">{{ max_chars_message_rendered }}</span>
+      </div>
+
+      <div class="field">
+        <input
+          class="input is-floating{% if form.errors contains 'send_on' %} invalid{% endif %}"
+          autocomplete="send_on"
+            type="date"
+            id="Recipient-send-on-{{ section_id }}-{{ product_id }}"
+            name="properties[Send on]"
+            placeholder="{{ 'recipient.form.send_on' | t }}"
+            pattern="\d{4}-\d{2}-\d{2}"
+            value="{{ form.send_on }}"
+        />
+        <label class="label is-floating" for="Recipient-send-on-{{ section_id }}-{{ product_id }}">{{ 'recipient.form.send_on_label' | t }}</label>
+        {%- render 'icon', icon: 'calendar', size: 'sm', class: 'stroke-1 absolute pointer-events-none' -%}
+      </div>
+    </div>
+    <input
+      type="hidden"
+      name="{{ gift_card_recipient_control_flag }}"
+      value="if_present"
+      id="Recipient-control-{{ section_id }}-{{ product_id }}"
+    />
+    <input
+      type="hidden"
+      name="properties[__shopify_offset]"
+      value=""
+      id="Recipient-timezone-offset-{{ section_id }}-{{ product_id }}"
+      disabled
+    />
+  </recipient-form>
+</div>

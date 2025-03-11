@@ -1,0 +1,112 @@
+{%- liquid
+  assign with_gradient = false
+  if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+    assign with_gradient = true
+  endif
+-%}
+
+{%- for block in section.blocks -%}
+  {%- capture block_content -%}
+    {%- if block.settings.subheading != blank or block.settings.heading != blank -%}
+      <span class="banner__overlay absolute top-0 left-0 w-full h-full pointer-events-none flex {{ block.settings.content_position }} {{ block.settings.content_position_mobile }}"></span>
+      <a class="media-card__link absolute z-1 top-0 left-0 w-full h-full flex {{ block.settings.content_position }} {{ block.settings.content_position_mobile }}"{% if block.settings.link != blank %} href="{{ block.settings.link }}"{% else %} role="link" aria-disabled="true"{% endif %}>
+        <div class="media-card__content flex justify-between items-center gap-4 w-full md:text-{{ block.settings.text_alignment }} text-{{ block.settings.text_alignment_mobile }}">
+          <div class="media-card__text shrink-1 grid gap-0d5">
+            {%- if block.settings.subheading != blank and block.settings.invert_subheading_heading == false -%}
+              <p class="leading-none text-xs xl:text-sm">
+                {%- render 'highlighted-text', content: block.settings.subheading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+              </p>
+            {%- endif -%}
+
+            {%- if block.settings.heading != blank -%}
+              <p class="flex">
+                <span class="heading reversed-link lg:text-4xl text-2xl tracking-tighter leading-tight">
+                  {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                </span>
+              </p>
+            {%- endif -%}
+
+            {%- if block.settings.subheading != blank and block.settings.invert_subheading_heading == true -%}
+              <p class="leading-none text-xs xl:text-sm">
+                {%- render 'highlighted-text', content: block.settings.subheading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+              </p>
+            {%- endif -%}
+          </div>
+          {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0' -%}
+        </div>
+      </a>
+    {%- endif -%}
+    {%- if block.settings.heading == blank and block.settings.link != blank -%}
+      <a href="{{ block.settings.link }}" class="block absolute z-1 top-0 left-0 w-full h-full" aria-hidden="true">&nbsp;</a>
+    {%- endif -%}
+  {%- endcapture -%}
+  
+  {%- case block.type -%}
+    {%- when 'image' -%}
+      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size }}; --collage-row: {{ block.settings.row_size }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+        {%- if block.settings.image != blank -%}
+          {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
+          <picture class="media media--height block w-full h-full relative overflow-hidden">
+            {%- if block.settings.image_mobile -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ block.settings.image_mobile | image_url: width: '400x' }} 400w, {{ block.settings.image_mobile | image_url: width: '600x' }} 600w, {{ block.settings.image_mobile | image_url: width: '800x' }} 800w, {{ block.settings.image_mobile | image_url: width: '1000x' }} 1000w"
+                width="{{ block.settings.image_mobile.width }}"
+                height="{{ block.settings.image_mobile.height }}"
+              >
+            {%- endif -%}
+
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
+          </picture>
+
+          {%- if block.settings.image_hover != blank -%}
+            <picture class="media media--height block w-full h-full absolute top-0 left-0 opacity-0 pointer-events-none overflow-hidden">
+              {{- block.settings.image_hover | image_url: width: block.settings.image_hover.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
+            </picture>
+          {%- endif -%}
+        {%- else -%}
+          <div class="media media--height w-full h-full relative overflow-hidden">
+            {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
+            {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+          </div>
+        {%- endif -%}
+
+        {{- block_content -}}
+      </div>
+
+    {%- when 'video' -%}
+      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size | default: 10 }}; --collage-row: {{ block.settings.row_size | default: 4 }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+        <div class="w-full h-full relative">
+          {%- if block.settings.video_mobile or block.settings.video_url_mobile -%}
+            {%- render 'video',
+              video: block.settings.video_mobile,
+              video_url: block.settings.video_url_mobile,
+              muted: block.settings.enable_video_autoplay,
+              autoplay: block.settings.enable_video_autoplay,
+              loop: block.settings.enable_video_looping,
+              description: block.settings.description,
+              cover_image: block.settings.cover_image_mobile,
+              show_play_button: true,
+              is_mobile: true,
+              class: 'media media--height w-full h-full'
+            -%}
+          {%- endif -%}
+    
+          {%- render 'video',
+            video: block.settings.video,
+            video_url: block.settings.video_url,
+            muted: block.settings.enable_video_autoplay,
+            autoplay: block.settings.enable_video_autoplay,
+            loop: block.settings.enable_video_looping,
+            description: block.settings.description,
+            cover_image: block.settings.cover_image,
+            show_play_button: true,
+            class: 'media media--height w-full h-full'
+          -%}
+          
+          {{- block_content -}}
+        </div>
+      </div>
+
+  {%- endcase -%}
+{%- endfor -%}

@@ -1,0 +1,58 @@
+{%- comment -%}
+  Render complementary products
+
+  Accepts:
+  - limit: {Number} Number of items to show.
+  - image_ratio: {String} Size of the product image card. Values are "square", "landscape" and "portrait". Default is "square" (optional)
+  - image_fill: {Boolean} Zoom image to fill space. Default: false (optional)
+  - show_vendor: {Boolean} Show the product vendor. Default: false
+  - show_price: {Boolean} Show the product price. Default: false
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'product-complementary', limit: 5 %}
+{%- endcomment -%}
+
+{%- liquid
+  if recommendations.performed
+    if recommendations_products != blank
+      assign products_count = recommendations_products.count
+    elsif recommendations.products_count > 0
+      assign recommendations_products = recommendations.products
+      assign products_count = recommendations.products_count
+    endif
+  endif
+-%}
+<product-recommendations class="complementary-products flex flex-col gap-5" data-url="{{ routes.product_recommendations_url }}?section_id={{ section_id }}&product_id={{ product_id }}&limit={{ limit }}&intent=complementary">
+  <div class="flex justify-between gap-4 items-center">
+    <p class="recommend__title font-medium text-lg grow">{{ heading | escape }}</p>
+    {%- if products_count > 1 -%}
+      <div class="indicators indicators--small flex gap-2">
+        <button class="button button--secondary" type="button" is="hover-button" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled data-prev-button>
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'transform' -%}
+          </span>
+        </button>
+        <button class="button button--secondary" type="button" is="hover-button" aria-label="{{ 'general.pagination.next' | t | escape }}" data-next-button>
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'transform' -%}
+          </span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+  {%- if recommendations.performed -%}
+    <product-complementary class="horizontal-products block{% if products_count > 1 %} flickity{% endif %}">
+      {%- liquid
+        for recommendation in recommendations_products
+          render 'product-card-horizontal', product: recommendation, image_ratio: image_ratio, image_fill: image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: true, show_quick_view: settings.product_quick_view
+        endfor
+      -%}
+    </product-complementary>
+  {%- else -%}
+    <div class="horizontal-products relative"></div>
+  {%- endif -%}
+</product-recommendations>

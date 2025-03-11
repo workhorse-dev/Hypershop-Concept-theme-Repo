@@ -1,0 +1,84 @@
+{%- comment -%}
+  Renders the store availability for a given variant, along the associated modal.
+  Accepts:
+  - block: {Object} block object.
+  - product: {Object} product object.
+  - product_form_id: {String} product form id.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'product-inventory', product: product, product_form_id: product_form_id %}
+{%- endcomment -%}
+
+{%- assign product_variant = product.selected_or_first_available_variant -%}
+<div
+  class="product__inventory no-js-hidden{% if product_variant.inventory_management != 'shopify' %} sr-only{% endif %}"
+  id="Inventory-{{ section_id }}-{{ product_id }}"
+  role="status"
+  {{ block.shopify_attributes }}
+>
+  {%- if product_variant.inventory_management == 'shopify' -%}
+    {%- if product_variant.inventory_quantity > 0 -%}
+      {%- if product_variant.inventory_quantity <= block.settings.inventory_threshold -%}
+        <div class="grid gap-3 w-full">
+          <span class="text-sm leading-tight">
+            {%- liquid
+              unless block.settings.show_inventory_quantity == 'none'
+                echo 'products.inventory.low_stock_with_count' | t: count: product_variant.inventory_quantity
+              else
+                echo 'products.inventory.low_stock' | t
+              endunless
+            -%}
+          </span>
+          <progress-bar class="overflow-hidden rounded-full {{ block.settings.color_scheme }}" data-value="{{ product_variant.inventory_quantity }}" data-max="{{ block.settings.inventory_threshold }}"></progress-bar>
+        </div>
+      {%- else -%}
+        <div class="alert alert--success inline-flex items-center gap-3">
+          {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+          <span class="text-sm font-medium leading-tight">
+            {%- liquid
+              if block.settings.show_inventory_quantity == 'always'
+                echo 'products.inventory.in_stock_with_count' | t: count: product_variant.inventory_quantity
+              else
+                echo 'products.inventory.in_stock' | t
+              endif
+            -%}
+          </span>
+        </div>
+      {%- endif -%}
+    {%- elsif product_variant.incoming and block.settings.show_inventory_transfer -%}
+      <div class="alert alert--info inline-flex items-center gap-3">
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        <span class="text-sm font-medium leading-tight">
+          {%- liquid
+            if product_variant.next_incoming_date
+              assign date = product_variant.next_incoming_date | date: format: 'date'
+              if product_variant.available
+                echo 'products.inventory.will_not_ship_until' | t: date: date
+              else
+                echo 'products.inventory.will_be_in_stock_after' | t: date: date
+              endif
+            else
+              echo 'products.inventory.waiting_for_stock' | t
+            endif
+          -%}
+        </span>
+      </div>
+    {%- elsif product_variant.inventory_policy == 'continue'-%}
+      <div class="alert alert--success inline-flex items-center gap-3">
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        <span class="text-sm font-medium leading-tight">
+          {{- 'products.inventory.out_of_stock_continue_selling' | t -}}
+        </span>
+      </div>
+    {%- else -%}
+      <div class="alert alert--error inline-flex items-center gap-3">
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        <span class="text-sm font-medium leading-tight">
+          {{- 'products.inventory.out_of_stock' | t -}}
+        </span>
+      </div>
+    {%- endif -%}
+  {%- endif -%}
+</div>

@@ -1,0 +1,101 @@
+{%- comment -%}
+  Renders active facets
+
+  Accepts:
+  - results: {Object} Liquid 'collection' or 'search' object
+  - enable_color_swatches: {Boolean}
+  - filter_count: {Number}
+
+  Usage:
+  {% render 'facets-active', results: collection, enable_color_swatches: true, filter_count: count %}
+{%- endcomment -%}
+
+{%- capture active_facets -%}
+  {%- for filter in results.filters -%}
+    {%- if filter.type == 'price_range' -%}
+      {%- if filter.max_value.value != blank or filter.min_value.value != blank -%}
+        <div class="removable-facet flex items-center justify-between gap-3 lg:gap-4 text-xs lg:text-sm leading-none rounded-full">
+          <div class="facet-title flex items-center gap-2">
+            {{- filter.min_value.value | default: 0 | money_without_trailing_zeros }} - {{ filter.max_value.value | default: filter.range_max | money_without_trailing_zeros -}}
+          </div>
+          <a class="block relative" href="{{ filter.url_to_remove }}" aria-label="{{ 'collections.filtering.clear' | t: name: active_value.label | escape }}" is="facet-remove" data-magnet="3" data-no-instant>
+            <span class="btn-text" data-text>
+              {%- render 'icon', icon: 'remove', size: 'xs' -%}
+            </span>
+          </a>
+        </div>
+      {%- endif -%}
+    {%- else -%}
+      {%- for active_value in filter.active_values -%}
+        <div class="removable-facet flex items-center justify-between gap-3 lg:gap-4 text-xs lg:text-sm leading-none rounded-full">
+          <div class="facet-title flex items-center gap-2">
+            {%- if filter.type == 'list' -%}
+              {%- liquid
+                assign is_color = false
+                if enable_color_swatches
+                  assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
+                  assign downcased_label = filter.label | downcase
+                  for trigger in swatch_trigger_list
+                    assign swatch_trigger = trigger | strip
+                    if downcased_label contains swatch_trigger
+                      assign is_color = true
+                    elsif swatch_trigger == 'color' and downcased_label contains 'colour'
+                      assign is_color = true
+                    endif
+
+                    if is_color == true
+                      break
+                    endif
+                  endfor
+                endif
+
+                if is_color or filter.presentation == 'swatch'
+                  if filter.presentation == 'swatch'
+                    render 'swatch', value: active_value.value, href: active_value.url_to_remove, title: active_value.label, class: 'pointer-events-none', no_instant: true, swatch: active_value.swatch
+                  else
+                    render 'swatch', value: active_value.label, href: active_value.url_to_remove, title: active_value.label, class: 'pointer-events-none', no_instant: true
+                  endif
+                endif
+              -%}
+            {%- endif -%}
+            {%- liquid
+              if filter.type == 'boolean'
+                echo filter.label | append: ': ' | append: active_value.label
+              else
+                echo active_value.label
+              endif
+            -%}
+          </div>
+
+          <a class="block relative" href="{{ active_value.url_to_remove }}" aria-label="{{ 'collections.filtering.clear' | t: name: active_value.label | escape }}" is="facet-remove" data-magnet="3" data-no-instant>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'remove', size: 'xs' -%}
+            </span>
+          </a>
+        </div>
+      {%- endfor -%}
+    {%- endif -%}
+  {%- endfor -%}
+
+  {%- if filter_count > 1 -%}
+    {%- liquid
+      if results.url
+        assign results_url = results.url
+      else
+        assign terms = results.terms | escape
+        assign results_url = routes.search_url | append: '?q=' | append: terms | append: '&options%5Bprefix%5D=last&type=product'
+        if results.sort_by != blank
+          assign results_url = results_url | append: '&sort_by=' | append: results.sort_by
+        endif
+      endif
+    -%}
+
+    <a href="{{ results_url }}" class="facet-clear-all link text-xs lg:text-sm" is="facet-remove" data-magnet="0">
+      {{- 'collections.filtering.clear_all' | t -}}
+    </a>
+  {%- endif -%}
+{%- endcapture -%}
+
+<div class="active-facets flex flex-wrap items-center gap-2 z-1 relative" id="FacetFiltersActive">
+  {{- active_facets -}}
+</div>

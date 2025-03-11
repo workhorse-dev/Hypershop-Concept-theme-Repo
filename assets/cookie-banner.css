@@ -1,0 +1,49 @@
+html.touch .has-cookie-banner {
+  touch-action: none
+}
+
+html.js .cookie-modal .overlay,
+html.js .cookie-modal[active] .overlay {
+  background-color: transparent;
+  pointer-events: none;
+}
+
+.cookie-modal .drawer__header {
+  border-block-end: 0;
+  padding: 0;
+}
+
+.cookie-modal .drawer__inner {
+  backdrop-filter: blur(6px);
+  background-color: rgb(var(--color-background)/ 0.9);
+  border: 1px solid rgb(var(--color-border));
+}
+
+.cookie-banner>*+*:not(.spacing-section) {
+  margin-block-start: var(--sp-4);
+}
+
+.cookie-modal .text-center :is(.heading) {
+  justify-content: center;
+}
+
+.cookie-modal .text-right :is(.heading) {
+  justify-content: flex-end;
+}
+
+@media screen and (max-width: 639px) {
+  html.js .cookie-modal .drawer__inner {
+    height: auto;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  .cookie-modal .drawer__inner {
+    max-width: 30rem;
+    margin: var(--sp-8d5);
+  }
+
+  .cookie-modal .drawer__inner {
+    position: absolute;
+  }
+}

@@ -1,0 +1,83 @@
+{%- comment -%}
+  Renders a color swatch
+
+  Accepts:
+  - allow_multiple: {Boolean} If set to true, it allows several values to be selected (by using a checkbox instead of radio)
+  - id: {String}
+  - value: {String} The color value
+  - name: the name attribute when field is submitted
+  - title: {String} The color title
+  - disabled: {Boolean} If set to true, this swatch is disabled
+  - selected: {Boolean} If set to true, this swatch is preselected
+  - size: {String} Can be 'sm' to make it smaller
+  - tooltip: {String} Display a tooltip on hover
+  - file_extension: {String}
+  - swatch: {Object}
+
+  Usage:
+  {% render 'swatch' %}
+{%- endcomment -%}
+
+{%- liquid
+  if swatch == blank
+    assign file_extension = file_extension | default: 'png'
+    assign file_name = value | handle | append: '.' | append: file_extension
+    assign swatch_fallback = value | split: ' ' | last | handle
+    assign swatch_fallback_override = false
+
+    if settings.swatch_config != blank
+      assign value_downcase = value | downcase
+      assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+      for swatch in swatch_config
+        assign swatch_parts = swatch | strip | split: ':'
+        assign swatch_name = swatch_parts.first | downcase | strip
+
+        if swatch_name == value_downcase
+          assign swatch_value = swatch_parts.last | strip
+          if swatch_value contains '#'
+            assign swatch_fallback = swatch_value
+            assign swatch_fallback_override = true
+          else
+            assign file_name = swatch_value
+          endif
+          break
+        endif
+      endfor
+    endif
+
+    assign swatch_image = blank
+    if images[file_name] != blank
+      assign swatch_image = images[file_name] | image_url: width: 72
+    elsif file_name contains '//cdn.shopify.com/'
+      assign swatch_image = file_name
+    endif
+  else
+    assign swatch_image = blank
+    assign swatch_fallback = value | split: ' ' | last | handle
+    if swatch.image
+      assign swatch_image = swatch.image | image_url: width: 72
+      assign swatch_fallback_override = false
+    elsif swatch.color
+      assign swatch_fallback = swatch.color
+    endif
+  endif
+-%}
+
+{%- if href -%}
+  <a href="{{ href }}" class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative{% if class != blank %} {{ class }}{% endif %}" title="{{ title | escape }}" aria-label="{{ title | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}"{% if no_instant %} data-no-instant{% endif %}>
+    {%- if tooltip != blank -%}
+      <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ tooltip | escape }}</span>
+    {%- else -%}
+      <span class="sr-only">{{ value | escape }}</span>
+    {%- endif -%}
+  </a>
+{%- else -%}
+  <input class="sr-only" name="{{ name }}" value="{{ value | escape }}" type="{% if allow_multiple %}checkbox{% else %}radio{% endif %}"{% if form %} form="{{ form | escape }}"{% endif %} id="{{ id | escape }}"{% if disabled %} disabled{% endif %}{% if selected %} checked{% endif %} />
+  <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative{% if class != blank %} {{ class }}{% endif %}" for="{{ id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}">
+    {%- if tooltip != blank -%}
+      <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ tooltip | escape }}</span>
+    {%- else -%}
+      <span class="sr-only">{{ value | escape }}</span>
+    {%- endif -%}
+  </label>
+{%- endif -%}

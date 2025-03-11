@@ -1,0 +1,29 @@
+{%- comment -%}
+  Renders a alter component
+
+  Accepts:
+  - status: {String} Can be "success", "error" or "info" (if none is set the colors must be set on the parent)
+  - content: {HTML} The textual content to use
+
+  Usage:
+  {% render 'alert', status: 'success' %}
+{%- endcomment -%}
+
+<div class="alert alert--{{ status }} flex items-start gap-3 text-sm md:text-base leading-tight">
+  {%- liquid
+    unless hide_icon
+      case status
+        when 'success'
+          assign icon = 'check-circle'
+        when 'info'
+          assign icon = 'alert-circle'
+        when 'error'
+          assign icon = 'alert-triangle'
+      endcase
+
+      render 'icon', icon: icon, size: 'sm', class: 'flex-auto'
+    endunless
+
+    echo content
+  -%}
+</div>

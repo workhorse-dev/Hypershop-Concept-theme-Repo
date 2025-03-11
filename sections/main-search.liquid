@@ -1,0 +1,1058 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'blog.css' | asset_url | stylesheet_tag }}
+{{ 'search.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'collection.js' | asset_url }}" defer></script>
+<script src="{{ 'search.js' | asset_url }}" defer></script>
+
+{%- liquid
+  assign filter_count = 0
+  for filter in search.filters
+    if filter.type == 'price_range'
+      if filter.max_value.value != blank or filter.min_value.value != blank
+        assign filter_count = filter_count | plus: 1
+      endif
+    else
+      assign filter_count = filter_count | plus: filter.active_values.size
+    endif
+  endfor
+
+  assign enable_sorting = section.settings.enable_sorting
+  assign enable_filtering = section.settings.enable_filtering
+  assign filter_type = section.settings.filter_type
+-%}
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="collection page-width{% if section.settings.full_width %} page-width--full{% endif %} relative{% if enable_filtering %} with-{{ filter_type }}{% endif %}">
+    <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} text-center leading-none grid gap-8">
+      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}" tabindex="-1">
+        <split-words class="split-words block" data-animate="fade-up-large">
+          {%- liquid
+            if search.performed
+              echo 'general.search.title_results' | t
+            else
+              echo 'general.search.title' | t
+            endif
+          -%}
+        </split-words>
+      </{{ section.settings.heading_tag }}>
+
+      {%- render 'predictive-search', section_id: section.id, context: 'page' -%}
+    </div>
+
+    {%- paginate search.results by section.settings.products_per_page -%}
+      {%- if search.results_count > 0 -%}
+        {%- render 'facets-sticky',
+          results: search,
+          collapsed: section.settings.filter_collapsed,
+          enable_color_swatches: section.settings.filter_color_swatches,
+          enable_filtering: enable_filtering,
+          enable_sorting: enable_sorting,
+          filter_count: filter_count,
+          section_id: section.id
+        -%}
+      {%- endif -%}
+
+      {%- unless enable_filtering or enable_sorting -%}
+        {%- if search.results_count > 0 -%}
+          <div class="collection__topbar hidden xl:flex items-center gap-4">
+            <p class="text-base lg:text-lg" role="status">{{ 'general.search.results_with_count_and_term' | t: terms: search.terms, count: search.results_count }}</p>
+          </div>
+        {%- endif -%}
+      {%- endunless -%}
+
+      {%- if search.results_count > 0 -%}
+        {%- if enable_filtering or enable_sorting -%}
+          <div class="collection__topbar hidden xl:flex items-center gap-4">
+            {%- if enable_filtering -%}
+              {%- if filter_type == 'drawer' -%}
+                {%- render 'facets-drawer',
+                  results: search,
+                  collapsed: section.settings.filter_collapsed,
+                  enable_filtering: enable_filtering,
+                  enable_sorting: enable_sorting,
+                  enable_color_swatches: section.settings.filter_color_swatches,
+                  filter_count: filter_count
+                  section_id: section.id
+                -%}
+              {%- elsif filter_type == 'sidebar' -%}
+                <div class="facet-wrapper">
+                  <button class="button button--secondary icon-with-text" type="button" is="filters-toogle" aria-controls="FacetFiltersContainer" aria-expanded="true">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'filter'
+                        echo 'collections.filtering.filter_hide_button' | t
+                      -%}
+                    </span>
+                    <span class="btn-text btn-duplicate">
+                      {%- liquid
+                        render 'icon', icon: 'filter'
+                        echo 'collections.filtering.filter_show_button' | t
+                      -%}
+                      <facet-count class="count flex items-center justify-center text-xs font-medium rounded-full"{% if filter_count == 0 %} hidden{% endif %}>{{ filter_count }}</facet-count>
+                    </span>
+                  </button>
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+
+            <p id="ProductCount" class="text-base lg:text-lg" role="status">
+              {%- liquid
+                if search.results_count
+                  echo 'general.search.results_with_count' | t: terms: search.terms, count: search.results_count
+                elsif search.products_count == search.all_products_count
+                  echo 'collections.general.product_count_simple' | t: count: search.products_count
+                else
+                  echo 'collections.general.product_count' | t: product_count: search.products_count, count: search.all_products_count
+                endif
+              -%}
+            </p>
+
+            {%- if enable_sorting -%}
+              {%- liquid
+                assign sort_by = search.sort_by | default: search.default_sort_by
+                for option in search.sort_options
+                  if option.value == sort_by
+                    assign sort_by_name = option.name
+                    break
+                  endif
+                endfor
+              -%}
+              <div class="facet-sorting inline-flex items-center gap-6" id="SortByContainer">
+                <span>{{ 'collections.sorting.sort_by_label' | t }}</span>
+                <facet-sort class="sort-wrapper relative">
+                  <hover-element class="button button--secondary sort-by whitespace-nowrap overflow-hidden z-3">
+                    <span class="btn-fill" data-fill></span>
+                    <div class="btn-text">
+                      <span class="sort-header flex items-center justify-center gap-5 relative w-full">
+                        <span class="sort-selection">{{ sort_by_name | escape }}</span>
+                        <span class="sort-title text-sm uppercase absolute left-0 opacity-0 tracking-widest">{{ 'collections.sorting.sort_button' | t }}</span>
+                        <span class="sort-close flex items-center justify-center rounded-full">
+                          {%- render 'icon', icon: 'close', size: 'sm' -%}
+                        </span>
+                      </span>
+                      <ul class="sort-listbox text-left grid gap-2 absolute left-0 opacity-0 invisible w-full h-auto">
+                        {%- for option in search.sort_options -%}
+                          <li class="opacity-0 relative">
+                            <input id="SortBy-{{ option.value }}" class="sr-only" name="sort_by" type="radio" value="{{ option.value }}"{% if option.value == sort_by %} checked{% endif %} />
+                            <label for="SortBy-{{ option.value }}" class="reversed-link text-xl">{{ option.name | escape }}</label>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                    </div>
+                  </hover-element>
+                </facet-sort>
+              </div>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+      {%- endif -%}
+
+      {%- liquid
+        if enable_filtering
+          render 'facets-active', results: search, enable_color_swatches: section.settings.filter_color_swatches, filter_count: filter_count
+        endif
+      -%}
+
+      <div class="collection__content flex">
+        {%- if enable_filtering and filter_type == 'sidebar' and search.results_count > 0 -%}
+          <div class="hidden xl:block" id="FacetFiltersContainer">
+            <sticky-element class="facets__scroll block sticky top-0">
+              {%- render 'facets',
+                context: 'sidebar',
+                results: search,
+                collapsed: section.settings.filter_collapsed,
+                enable_filtering: enable_filtering,
+                enable_sorting: false,
+                enable_color_swatches: section.settings.filter_color_swatches,
+                section_id: section.id
+              -%}
+            </sticky-element>
+          </div>
+        {%- endif -%}
+
+        <div class="flex flex-col gap-12 grow" id="ProductGridContainer">
+          {%- if search.performed and search.results.size == 0 -%}
+            <div class="empty-state flex flex-col items-center justify-center text-center gap-6">
+              {%- render 'icon', icon: 'empty', size: 'xxxl' -%}
+              <div class="flex flex-col items-center gap-4">
+                <p class="heading leading-none tracking-tight">
+                  {{- 'general.search.no_results' | t: terms: search.terms | replace: '*', '' -}}
+                </p>
+                <p>{{ 'general.search.user_different_terms' | t }}</p>
+              </div>
+            </div>
+          {%- endif -%}
+
+          {%- if search.results_count > 0 -%}
+            <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative">
+              {%- for item in search.results -%}
+                {%- liquid
+                  for block in section.blocks
+                    if block.type == 'promotion' or block.type == 'promotion_video'
+                      if forloop.parentloop.index != block.settings.position
+                        continue
+                      endif
+
+                      render 'promotion-card', block: block
+                    endif
+                  endfor
+
+                  assign lazy_load = false
+                  if forloop.index > 2
+                    assign lazy_load = true
+                  endif
+                -%}
+
+                {%- case item.object_type -%}
+                  {%- when 'product' -%}
+                    {%- render 'product-card',
+                      product: item,
+                      product_id: item.id,
+                      section_id: section.id,
+                      lazy_load: lazy_load,
+                      image_ratio: settings.product_image_ratio,
+                      image_fill: settings.product_image_fill,
+                      show_secondary_image: settings.product_secondary_image,
+                      show_vendor: settings.product_vendor,
+                      show_rating: settings.product_rating,
+                      show_color_swatches: settings.product_color_swatches,
+                      show_countdown: settings.product_countdown,
+                      show_quick_add: settings.product_quick_add,
+                      show_quick_view: settings.product_quick_view,
+                      show_save_amount: settings.product_save_amount,
+                      save_type: settings.product_save_type
+                    -%}
+
+                  {%- when 'article' -%}
+                    {%- liquid
+                      assign article = item
+                      assign featured_media = article.image
+                      assign image_ratio = settings.product_image_ratio
+                      assign image_fill = settings.product_image_fill
+
+                      assign split_1 = article.url | split: '/blogs/'
+                      assign split_2 = split_1[1] | split: '/'
+                      assign blog_handle = split_2[0] | strip
+                      assign blog = blogs[blog_handle]
+                    -%}
+                    <div class="card article-card product-card product-card--{{ settings.card_style }}{% if settings.card_border_thickness > 0 %} product-card--thickness{% endif %}{% unless featured_media %} no-media{% endunless %} flex flex-col leading-none relative overflow-hidden">
+                      <div class="product-card__media relative h-auto">
+                        {%- if section.settings.show_post_tags and article.tags.size > 0 -%}
+                          <div class="badges z-2 absolute grid gap-3">
+                            {%- if article.metafields.theme.tag_color.value != blank and article.metafields.theme.tag_background.value != blank -%}
+                              {%- capture badge_style -%}
+                              --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }}); --badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
+                              {%- endcapture -%}
+                            {%- endif -%}
+                            
+                            {%- for tag in article.tags -%}
+                              <a href="{{ blog.url }}/tagged/{{ tag | handle }}" class="badge{% if badge_style %} badge--custom{% endif %} font-medium leading-none rounded-full"{% if badge_style %} style="{{ badge_style }}"{% endif %}>{{ tag }}</a>
+                            {%- endfor -%}
+                          </div>
+                        {%- endif -%}
+
+                        {%- if featured_media -%}
+                          <a class="block relative media media--{{ image_ratio }}{% unless image_fill %} media--contain{% endunless %} overflow-hidden" href="{{ article.url }}">
+                            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                          </a>
+                        {%- else -%}
+                          <span class="block aspect-{{ image_ratio }}"></span>
+                        {%- endif -%}
+                      </div>
+                      <div class="product-card__content grow flex flex-col{% if featured_media %} justify-start text-{{ settings.card_text_alignment }}{% else %} justify-center items-center absolute top-0 left-0 w-full h-full{% endif %}">
+                        {%- if section.settings.show_post_category -%}
+                          <div class="product-card__top w-full">
+                            <a class="caption reversed-link uppercase leading-none tracking-widest" href="{{ blog.url }}">
+                              {{- blog.title -}}
+                            </a>
+                          </div>
+                        {%- endif -%}
+
+                        <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+                          <p class="grow">
+                            <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ article.url }}">
+                              {{- article.title | escape -}}
+                            </a>
+                          </p>
+                        </div>
+
+                        {%- if section.settings.show_post_date or section.settings.show_post_comments or section.settings.show_post_author -%}
+                          <div class="product-card__bottom">
+                            <ul class="article-card__top flex flex-wrap gap-4">
+                              {%- if section.settings.show_post_date -%}
+                                <li class="inline-flex gap-2 text-xs relative">
+                                  {%- render 'icon', icon: 'calendar', size: 'xs', class: 'stroke-1' -%}
+                                  {{- article.published_at | time_tag: format: 'month_day_year' -}}
+                                </li>
+                              {%- endif -%}
+                    
+                              {%- if section.settings.show_post_comments -%}
+                                <li class="inline-flex gap-2 text-xs relative">
+                                  {%- render 'icon', icon: 'comment', size: 'xs', class: 'stroke-1' -%}
+                                  <a class="reversed-link" href="{{ article.url }}#comments">
+                                    {{- 'blogs.comments.with_count' | t: count: article.comments_count -}}
+                                  </a>
+                                </li>
+                              {%- endif -%}
+                    
+                              {%- if section.settings.show_post_author -%}
+                                <li class="italic text-xs relative">
+                                  {%- capture author -%}<span class="font-medium not-italic">{{ article.author }}</span>{%- endcapture -%}
+                                  {{- 'blogs.article.written_by_html' | t: author: author -}}
+                                </li>
+                              {%- endif -%}
+                            </ul>
+                          </div>
+                        {%- endif -%}
+                      </div>
+                    </div>
+
+                  {%- when 'page' -%}
+                    <div class="card article-card product-card product-card--{{ settings.card_style }}{% if settings.card_border_thickness > 0 %} product-card--thickness{% endif %} no-media flex flex-col leading-none relative overflow-hidden">
+                      <div class="product-card__media relative h-auto">
+                        <span class="block aspect-{{ settings.product_image_ratio }}"></span>
+                      </div>
+                      <div class="product-card__content grow flex flex-col justify-center items-center absolute top-0 left-0 w-full h-full">
+                        <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+                          <p class="grow">
+                            <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ item.url }}">
+                              {{- item.title | escape -}}
+                            </a>
+                          </p>
+                        </div>
+                      </div>
+                    </div>
+
+                {%- endcase -%}
+              {%- endfor -%}
+            </motion-list>
+
+            {%- liquid
+              if paginate.pages > 1
+                render 'pagination', paginate: paginate, mode: section.settings.pagination
+              endif
+            -%}
+          {%- endif -%}
+        </div>
+      </div>
+    {%- endpaginate -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-search.name",
+  "class": "collection-section search-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "products_per_page",
+      "min": 6,
+      "max": 50,
+      "step": 1,
+      "default": 16,
+      "label": "t:sections.main-collection.settings.products_per_page.label"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "default": "2",
+      "label": "t:sections.global.settings.columns_mobile.label",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "select",
+      "id": "pagination",
+      "options": [
+        {
+          "value": "infinite",
+          "label": "t:sections.main-collection.settings.pagination.options__1.label"
+        },
+        {
+          "value": "click",
+          "label": "t:sections.main-collection.settings.pagination.options__2.label"
+        },
+        {
+          "value": "paginated",
+          "label": "t:sections.main-collection.settings.pagination.options__3.label"
+        }
+      ],
+      "default": "paginated",
+      "label": "t:sections.main-collection.settings.pagination.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.main-collection.settings.header__filtering_sorting.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_filtering",
+      "default": true,
+      "label": "t:sections.main-collection.settings.enable_filtering.label",
+      "info": "t:sections.main-collection.settings.enable_filtering.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_collapsed",
+      "label": "t:sections.main-collection.settings.filter_collapsed.label",
+      "default": false
+    },
+    {
+      "type": "select",
+      "id": "filter_type",
+      "label": "t:sections.main-collection.settings.filter_type.label",
+      "default": "sidebar",
+      "options": [
+        {
+          "value": "sidebar",
+          "label": "t:sections.main-collection.settings.filter_type.options__1.label"
+        },
+        {
+          "value": "drawer",
+          "label": "t:sections.main-collection.settings.filter_type.options__2.label"
+        }
+      ]
+    },
+    {
+      "type": "checkbox",
+      "id": "filter_color_swatches",
+      "label": "t:sections.main-collection.settings.filter_color_swatches.label",
+      "info": "t:sections.main-collection.settings.filter_color_swatches.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_sorting",
+      "label": "t:sections.main-collection.settings.enable_sorting.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__post.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_tags",
+      "label": "t:sections.main-search.settings.show_post_tags.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_category",
+      "label": "t:sections.main-search.settings.show_post_category.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_date",
+      "label": "t:sections.main-search.settings.show_post_date.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_comments",
+      "label": "t:sections.main-search.settings.show_post_comments.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_post_author",
+      "label": "t:sections.main-search.settings.show_post_author.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "promotion",
+      "name": "t:sections.main-collection.blocks.promotion.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-collection.blocks.promotion.settings.paragraph.content"
+        },
+        {
+          "type": "range",
+          "id": "position",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.main-collection.blocks.promotion.settings.position.label"
+        },
+        {
+          "type": "select",
+          "id": "column_size",
+          "options": [
+            {
+              "value": "1",
+              "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__1.label"
+            },
+            {
+              "value": "2",
+              "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__2.label"
+            }
+          ],
+          "default": "1",
+          "label": "t:sections.main-collection.blocks.promotion.settings.column_size.label",
+          "info": "t:sections.main-collection.blocks.promotion.settings.column_size.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.global.settings.image.label"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:sections.global.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "default": "Example title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.global.settings.description.label",
+          "default": "<p>Share information about your brand with your customers.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.global.settings.button_label.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.global.settings.button_style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.global.settings.button_style.options__2.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.global.settings.button_style.options__3.label"
+            }
+          ],
+          "default": "secondary",
+          "label": "t:sections.global.settings.button_style.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "button_icon",
+          "label": "t:sections.global.settings.button_icon.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "options": [
+            {
+              "value": "md:items-start",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label"
+            },
+            {
+              "value": "md:items-center",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label"
+            },
+            {
+              "value": "md:items-end",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label"
+            }
+          ],
+          "default": "md:items-center",
+          "label": "t:sections.global.settings.content_position.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment",
+          "default": "center",
+          "label": "t:sections.global.settings.text_alignment.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "image_mobile",
+          "label": "t:sections.global.settings.image_mobile.label"
+        },
+        {
+          "type": "select",
+          "id": "content_position_mobile",
+          "options": [
+            {
+              "value": "items-start",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label"
+            },
+            {
+              "value": "items-center",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label"
+            },
+            {
+              "value": "items-end",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label"
+            }
+          ],
+          "default": "items-center",
+          "label": "t:sections.global.settings.content_position_mobile.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment_mobile",
+          "default": "center",
+          "label": "t:sections.global.settings.text_alignment_mobile.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__colors.content",
+          "info": "t:sections.global.settings.header__colors.info"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_button_text",
+          "label": "t:sections.global.settings.color_button_text.label",
+          "default": "#171717"
+        },
+        {
+          "type": "color",
+          "id": "color_button_background",
+          "label": "t:sections.global.settings.color_button_background.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color_background",
+          "id": "color_button_gradient",
+          "label": "t:sections.global.settings.color_button_gradient.label"
+        },
+        {
+          "type": "color",
+          "id": "color_overlay",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#171717"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        }
+      ]
+    },
+    {
+      "type": "promotion_video",
+      "name": "t:sections.main-collection.blocks.promotion-video.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-collection.blocks.promotion.settings.paragraph.content"
+        },
+        {
+          "type": "range",
+          "id": "position",
+          "min": 1,
+          "max": 50,
+          "step": 1,
+          "default": 4,
+          "label": "t:sections.main-collection.blocks.promotion.settings.position.label"
+        },
+        {
+          "type": "select",
+          "id": "column_size",
+          "options": [
+            {
+              "value": "1",
+              "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__1.label"
+            },
+            {
+              "value": "2",
+              "label": "t:sections.main-collection.blocks.promotion.settings.column_size.options__2.label"
+            }
+          ],
+          "default": "1",
+          "label": "t:sections.main-collection.blocks.promotion.settings.column_size.label",
+          "info": "t:sections.main-collection.blocks.promotion.settings.column_size.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.video.settings.header__video.content"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:sections.video.settings.video.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.video.settings.header__video_url.content",
+          "info": "t:sections.video.settings.header__video_url.info"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url",
+          "accept": ["youtube", "vimeo"],
+          "default": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+          "label": "t:sections.video.settings.video_url.label",
+          "info": "t:sections.video.settings.video_url.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover_image",
+          "label": "t:sections.video.settings.cover_image.label"
+        },
+        {
+          "type": "text",
+          "id": "description",
+          "label": "t:sections.video.settings.description.label",
+          "info": "t:sections.video.settings.description.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "icon",
+          "label": "t:sections.global.settings.icon.label"
+        },
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "default": "Example title"
+        },
+        {
+          "type": "richtext",
+          "id": "content",
+          "label": "t:sections.global.settings.description.label",
+          "default": "<p>Share information about your brand with your customers.</p>"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.global.settings.button_label.label"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.global.settings.button_style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.global.settings.button_style.options__2.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.global.settings.button_style.options__3.label"
+            }
+          ],
+          "default": "secondary",
+          "label": "t:sections.global.settings.button_style.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "type": "checkbox",
+          "id": "button_icon",
+          "label": "t:sections.global.settings.button_icon.label",
+          "default": true
+        },
+        {
+          "type": "select",
+          "id": "content_position",
+          "options": [
+            {
+              "value": "md:items-start",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label"
+            },
+            {
+              "value": "md:items-center",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label"
+            },
+            {
+              "value": "md:items-end",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label"
+            }
+          ],
+          "default": "md:items-center",
+          "label": "t:sections.global.settings.content_position.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment",
+          "default": "center",
+          "label": "t:sections.global.settings.text_alignment.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "video",
+          "id": "video_mobile",
+          "label": "t:sections.video.settings.video_mobile.label"
+        },
+        {
+          "type": "video_url",
+          "id": "video_url_mobile",
+          "accept": ["youtube", "vimeo"],
+          "label": "t:sections.video.settings.video_url_mobile.label",
+          "info": "t:sections.video.settings.video_url.info"
+        },
+        {
+          "type": "image_picker",
+          "id": "cover_image_mobile",
+          "label": "t:sections.video.settings.cover_image_mobile.label"
+        },
+        {
+          "type": "select",
+          "id": "content_position_mobile",
+          "options": [
+            {
+              "value": "items-start",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__1.label"
+            },
+            {
+              "value": "items-center",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__2.label"
+            },
+            {
+              "value": "items-end",
+              "label": "t:sections.main-collection.blocks.promotion.settings.content_position.options__3.label"
+            }
+          ],
+          "default": "items-center",
+          "label": "t:sections.global.settings.content_position_mobile.label"
+        },
+        {
+          "type": "text_alignment",
+          "id": "text_alignment_mobile",
+          "default": "center",
+          "label": "t:sections.global.settings.text_alignment_mobile.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__colors.content",
+          "info": "t:sections.global.settings.header__colors.info"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_button_text",
+          "label": "t:sections.global.settings.color_button_text.label",
+          "default": "#171717"
+        },
+        {
+          "type": "color",
+          "id": "color_button_background",
+          "label": "t:sections.global.settings.color_button_background.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color_background",
+          "id": "color_button_gradient",
+          "label": "t:sections.global.settings.color_button_gradient.label"
+        },
+        {
+          "type": "color",
+          "id": "color_overlay",
+          "label": "t:sections.global.settings.color_overlay.label",
+          "default": "#171717"
+        },
+        {
+          "type": "range",
+          "id": "overlay_opacity",
+          "min": 0,
+          "max": 100,
+          "step": 1,
+          "unit": "%",
+          "label": "t:sections.global.settings.overlay_opacity.label",
+          "default": 40
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

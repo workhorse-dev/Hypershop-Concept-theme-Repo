@@ -1,0 +1,422 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'customer.css' | asset_url | stylesheet_tag }}
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width relative">
+    <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} text-center leading-none">
+      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+        <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.register.title' | t }}</split-words>
+      </{{ section.settings.heading_tag }}>
+    </div>
+    
+    <div class="customer">
+      {%- form 'create_customer', class: 'grid gap-12' -%}
+        {%- liquid
+          if form.errors
+            assign form_errors = form.errors | default_errors
+            render 'alert', status: 'error', content: form_errors
+          endif
+        -%}
+
+        <div class="grid gap-5">
+          <div class="field">
+            <input
+              type="text"
+              class="input is-floating"
+              name="customer[first_name]"
+              id="RegisterFormFirstName"
+              {% if form.first_name %}value="{{ form.first_name }}"{% endif %}
+              autocomplete="given-name"
+              placeholder="{{ 'customer.register.first_name' | t | escape }}"
+            />
+            <label class="label is-floating" for="RegisterFormFirstName">{{ 'customer.register.first_name' | t }}</label>
+          </div>
+          <div class="field">
+            <input
+              type="text"
+              class="input is-floating"
+              name="customer[last_name]"
+              id="RegisterFormLastName"
+              {% if form.last_name %}value="{{ form.last_name }}"{% endif %}
+              autocomplete="family-name"
+              placeholder="{{ 'customer.register.last_name' | t | escape }}"
+            />
+            <label class="label is-floating" for="RegisterFormLastName">{{ 'customer.register.last_name' | t }}</label>
+          </div>
+          <div class="field">
+            <input
+              required
+              class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+              type="email"
+              name="customer[email]"
+              id="RegisterFormEmail"
+              spellcheck="false"
+              autocapitalize="off"
+              autocomplete="email"
+              placeholder="{{ 'customer.register.email' | t | escape }}"
+              {%- if form.email %} value="{{ form.email }}"{% endif -%}
+            />
+            <label class="label is-floating" for="RegisterFormEmail">{{ 'customer.register.email' | t }}</label>
+          </div>
+          <div class="field">
+            <input
+              required
+              class="input is-floating{% if form.errors contains 'password' %} invalid{% endif %}"
+              type="password"
+              name="customer[password]"
+              id="RegisterFormPassword"
+              placeholder="{{ 'customer.register.password' | t | escape }}"
+            />
+            <label class="label is-floating" for="RegisterFormPassword">{{ 'customer.register.password' | t }}</label>
+          </div>
+
+          {%- for block in section.blocks -%}
+            {%- assign custom_name = block.settings.title | escape -%}
+            <div class="field" {{ block.shopify_attributes }}>
+              {%- if block.settings.type == 'checkbox' -%}
+                <label for="RegisterFormInput-{{ section.id }}-{{ block.id }}" class="flex items-center gap-3">
+                  <input
+                    type="hidden"
+                    name="customer[note][{{ custom_name }}]"
+                    value="{{ block.settings.unchecked_value | escape }}"
+                  />
+                  <input
+                    type="checkbox"
+                    id="RegisterFormInput-{{ section.id }}-{{ block.id }}"
+                    name="customer[note][{{ custom_name }}]"
+                    value="{{ block.settings.checked_value | escape }}"
+                    {%- if block.settings.required %} required{% endif -%}
+                  />
+                  {{- block.settings.title | escape -}}
+                </label>
+
+              {%- elsif block.settings.type == 'radio' -%}
+                <div class="grid gap-4">
+                  <p>{{ block.settings.title | escape }}</p>
+                  {%- assign options = block.settings.radio_options | split: ',' -%}
+                  {%- if options.size > 0 -%}
+                    <ul class="grid gap-2 leading-none" role="list">
+                      {%- for option in options -%}
+                        {%- assign option_2 = option | strip | escape -%}
+                        <li>
+                          <label for="RegisterFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}" class="inline-flex items-center gap-3">
+                            <input
+                              type="radio"
+                              id="RegisterFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
+                              name="customer[note][{{ custom_name }}]"
+                              value="{{ option_2 }}"
+                              {%- if block.settings.required %} required{% endif -%}
+                            />
+                            {{- option_2 -}}
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+
+              {%- else -%}
+                {%- case block.settings.type -%}
+                  {%- when 'text' -%}
+                    <input
+                      class="input is-floating"
+                      type="text"
+                      id="RegisterFormInput-{{ section.id }}-{{ block.id }}"
+                      name="customer[note][{{ custom_name }}]"
+                      placeholder="{{ block.settings.title | escape }}"
+                      {%- if block.settings.required %} required{% endif -%}
+                    />
+                    <label class="label is-floating" for="RegisterFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+
+                  {%- when 'textarea' -%}
+                    <textarea
+                      class="textarea is-floating"
+                      rows="4"
+                      id="RegisterFormInput-{{ section.id }}-{{ block.id }}"
+                      name="customer[note][{{ custom_name }}]"
+                      placeholder=" "
+                      {%- if block.settings.required %} required{% endif -%}
+                    ></textarea>
+                    <label class="label is-floating" for="RegisterFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+
+                  {%- when 'select' -%}
+                    {%- assign options = block.settings.select_options | split: ',' -%}
+                    {%- if options.size > 0 -%}
+                      <select
+                        class="select is-floating"
+                        id="RegisterFormInput-{{ section.id }}-{{ block.id }}"
+                        name="customer[note][{{ custom_name }}]"
+                        {%- if block.settings.required %} required{% else %} is="custom-select"{% endif -%}
+                      >
+                        <option value="" disabled selected></option>
+                        {%- for option in options -%}
+                          {%- assign option_2 = option | strip | escape -%}
+                          <option value="{{ option_2 }}">{{ option_2 }}</option>
+                        {%- endfor -%}
+                      </select>
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                    {%- endif -%}
+                    <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="RegisterFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+                {%- endcase -%}
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+
+          {%- if section.settings.show_email_consent -%}
+            <div class="field">
+              <label for="RegisterFormEmailConsent" class="flex items-center gap-3">
+                <input
+                  type="checkbox"
+                  id="RegisterFormEmailConsent"
+                  name="customer[accepts_marketing]"
+                  value="1"
+                />
+                {{- 'customer.register.accepts_marketing' | t -}}
+              </label>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="grid gap-8">
+          <div class="button-group grid gap-4 md:grid-cols-2">
+            <button class="button button--primary button--fixed" type="submit" is="hover-button">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">{{ 'customer.register.submit' | t }}</span>
+            </button>
+            <a class="button button--secondary button--fixed" href="{{ routes.account_login_url }}" is="hover-link" rel="nofollow">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">{{ 'customer.register.sign_in' | t }}</span>
+            </a>
+          </div>
+          
+          <p class="text-center">
+            <a class="inline-flex gap-2" href="{{ routes.root_url }}">
+              {%- render 'icon', icon: 'return', size: 'sm' -%}
+              <span class="link text-lg leading-none">{{ 'customer.register.return' | t }}</span>
+            </a>
+          </p>
+        </div>
+      {%- endform -%}  
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-register.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_email_consent",
+      "label": "t:sections.main-register.settings.show_email_consent.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "custom_field",
+      "name": "t:sections.main-register.blocks.custom_field.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-register.blocks.custom_field.settings.paragraph.content"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:sections.main-register.blocks.custom_field.settings.type.options__1.label"
+            },
+            {
+              "value": "textarea",
+              "label": "t:sections.main-register.blocks.custom_field.settings.type.options__2.label"
+            },
+            {
+              "value": "checkbox",
+              "label": "t:sections.main-register.blocks.custom_field.settings.type.options__3.label"
+            },
+            {
+              "value": "radio",
+              "label": "t:sections.main-register.blocks.custom_field.settings.type.options__4.label"
+            },
+            {
+              "value": "select",
+              "label": "t:sections.main-register.blocks.custom_field.settings.type.options__5.label"
+            }
+          ],
+          "default": "text",
+          "label": "t:sections.main-register.blocks.custom_field.settings.type.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.main-register.blocks.custom_field.settings.label.label",
+          "default": "Your label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "t:sections.main-register.blocks.custom_field.settings.required.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-register.blocks.custom_field.settings.header__checkbox.content",
+          "info": "t:sections.main-register.blocks.custom_field.settings.header__checkbox.info"
+        },
+        {
+          "type": "text",
+          "id": "checked_value",
+          "label": "t:sections.main-register.blocks.custom_field.settings.checked_value.label",
+          "default": "Yes"
+        },
+        {
+          "type": "text",
+          "id": "unchecked_value",
+          "label": "t:sections.main-register.blocks.custom_field.settings.unchecked_value.label",
+          "default": "No"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-register.blocks.custom_field.settings.header__radio.content",
+          "info": "t:sections.main-register.blocks.custom_field.settings.header__radio.info"
+        },
+        {
+          "type": "text",
+          "id": "radio_options",
+          "label": "t:sections.main-register.blocks.custom_field.settings.options.label",
+          "info": "t:sections.main-register.blocks.custom_field.settings.options.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-register.blocks.custom_field.settings.header__dropdown.content",
+          "info": "t:sections.main-register.blocks.custom_field.settings.header__dropdown.info"
+        },
+        {
+          "type": "text",
+          "id": "select_options",
+          "label": "t:sections.main-register.blocks.custom_field.settings.options.label",
+          "info": "t:sections.main-register.blocks.custom_field.settings.options.info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

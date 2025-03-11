@@ -1,0 +1,179 @@
+{%- comment -%}
+  Renders a header menu drawer component
+
+  Accepts:
+  - section: {Object}
+
+  Usage:
+  {% render 'header-drawer', section: section %}
+{%- endcomment -%}
+
+<menu-drawer id="MenuDrawer" class="menu-drawer drawer drawer--start z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+  data-section-id="{{ section.id }}"
+  hidden
+>
+  <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="MenuDrawer" aria-expanded="false"></overlay-element>
+  <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+    <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+      <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight"></span>
+      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'close', size: 'sm' -%}
+        </span>
+      </button>
+    </gesture-element>
+    <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+      <nav class="relative grow overflow-hidden" role="navigation">
+        <ul class="drawer__scrollable drawer__menu relative w-full h-full" role="list" data-parent>
+          {%- assign main_menu = section.settings.menu_mobile | default: section.settings.menu -%}
+          {%- for link in main_menu.links -%}
+            <li>
+              {%- liquid
+                assign enable_mega_menu = false
+                assign link_title_handle = link.title | downcase | handle
+          
+                for block in section.blocks
+                  assign menu_title_handle = block.settings.menu_title | downcase | handle
+                  if menu_title_handle == link_title_handle
+                    assign enable_mega_menu = true
+                    assign mega_menu_block = block
+                    break
+                  endif
+                endfor
+              -%}
+
+              {%- if link.links != blank or enable_mega_menu -%}
+                {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block -%}
+              {%- else -%}
+                <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight" href="{{ link.url }}">{{ link.title | escape }}</a>
+              {%- endif -%}
+            </li>
+          {%- endfor -%}
+        </ul>
+      </nav>
+      <div class="drawer__footer grid w-full">
+        {%- liquid
+          if section.settings.enable_language_selector and localization.available_languages.size > 1
+            assign enable_language_selector = true
+          endif
+          if section.settings.enable_country_selector and localization.available_countries.size > 1
+            assign enable_country_selector = true
+          endif
+        -%}
+        {%- if enable_language_selector or enable_country_selector -%}
+          <div class="drawer__footer-top flex">
+            {%- if enable_language_selector -%}
+              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false">
+                <span class="text-sm leading-none flex items-center gap-2 w-auto">
+                  {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
+                  {{- localization.language.endonym_name | capitalize -}}
+                </span>
+                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'flex-auto' -%}
+              </button>
+            {%- endif -%}
+            {%- if enable_country_selector -%}
+              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"> 
+                <span class="text-sm leading-none flex items-center gap-2 w-auto">
+                  {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
+                  {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                </span>
+                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'flex-auto' -%}
+              </button>
+            {%- endif -%}
+
+            {%- if enable_language_selector -%}
+              <modal-element id="LocalizationLanguage-{{ section.id }}" class="modal invisible absolute bottom-0 left-0 w-full h-full" role="dialog" hidden>
+                <overlay-element class="fixed-modal opacity-0 z-1 absolute top-0 left-0 w-full h-full" aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false"></overlay-element>
+                <div class="modal__container flex flex-col z-3 absolute left-0 bottom-0 w-full">
+                  <button class="close items-center justify-center absolute top-0 right-0" type="button" is="magnet-button" aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <span class="inline-block" data-text>
+                      {%- render 'icon', icon: 'close' -%}
+                    </span>
+                  </button>
+                  {%- form 'localization', id: 'localization_language_form_header_drawer', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
+                    <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
+                      {%- for language in localization.available_languages -%}
+                        <li class="opacity-0">
+                          <a class="text-sm reversed-link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
+                            href="#"
+                            hreflang="{{ language.iso_code }}"
+                            lang="{{ language.iso_code }}"
+                            {% if language.iso_code == localization.language.iso_code %}
+                              aria-current="true"
+                            {% endif %}
+                            data-value="{{ language.iso_code }}"
+                            title="{{ language.endonym_name | capitalize | escape }}"
+                            data-no-instant
+                          >
+                            {{- language.endonym_name | capitalize -}}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
+                  {%- endform -%}
+                </div>
+              </modal-element>
+            {%- endif -%}
+            {%- if enable_country_selector -%}
+              <modal-element id="LocalizationCountry-{{ section.id }}" class="modal invisible absolute bottom-0 left-0 w-full h-full" role="dialog" hidden>
+                <overlay-element class="fixed-modal opacity-0 z-1 absolute top-0 left-0 w-full h-full" aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"></overlay-element>
+                <div class="modal__container flex flex-col z-3 absolute left-0 bottom-0 w-full">
+                  <button class="close items-center justify-center absolute top-0 right-0" type="button" aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false" is="magnet-button" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <span class="inline-block" data-text>
+                      {%- render 'icon', icon: 'close' -%}
+                    </span>
+                  </button>
+                  {%- form 'localization', id: 'localization_country_form_header_drawer', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
+                    {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                    <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
+                      {%- for country in localization.available_countries -%}
+                        <li class="opacity-0">
+                          <a class="text-sm reversed-link{% if country.iso_code == localization.country.iso_code %} active{% endif %}"
+                            href="#"
+                            {% if country.iso_code == localization.country.iso_code %}
+                              aria-current="true"
+                            {% endif %}
+                            data-value="{{ country.iso_code }}"
+                            title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
+                            data-no-instant
+                          >
+                            {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
+                  {%- endform -%}
+                </div>
+              </modal-element>
+            {%- endif -%}
+          </div>
+        {%- endif -%}
+        <div class="drawer__footer-bottom flex items-center justify-between gap-6">
+          {%- if shop.customer_accounts_enabled -%}
+            <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="button button--primary icon-with-text" is="hover-link" rel="nofollow">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">
+                {%- liquid
+                  render 'icon', icon: 'account-2', size: 'xs'
+                  if customer
+                    echo 'customer.account.title' | t
+                  else
+                    echo 'customer.login.title' | t
+                  endif
+                -%}
+              </span>
+            </a>
+          {%- endif -%}
+          {%- liquid
+            if section.settings.show_social
+              render 'social-icons', size: 'sm', gap: '6'
+            endif
+          -%}
+        </div>
+      </div>
+    </div>
+  </div>
+</menu-drawer>

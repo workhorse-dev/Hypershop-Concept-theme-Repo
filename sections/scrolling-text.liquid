@@ -1,0 +1,353 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    --section-grid-gap: {{ section.settings.grid_horizontal }}px;
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.enable_twin %} section--plain{% endif %}">
+  <div class="relative z-1">
+    {%- if section.blocks.size > 0 -%}
+      {%- capture marquee -%}
+        {%- liquid
+          assign first_block = section.blocks | first
+          assign last_block = section.blocks | last
+          if first_block.type == 'text' and last_block.type == 'text'
+            assign with_dot = true
+          endif
+
+          assign with_gradient = false
+          if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+            assign with_gradient = true
+          endif
+        -%}
+        <div class="marquee{% if with_dot %} with-dot{% endif %} flex items-center flex-auto whitespace-nowrap">
+          {%- for block in section.blocks -%}
+            {%- case block.type -%}
+              {%- when 'text' -%}
+                <div class="scrolling-text__item with-text flex items-center flex-auto {{ block.settings.text_font }} tracking-heading" style="--font-size: {{ block.settings.text_size }}px;{% if block.settings.text_size >= 100 %}--stencil-stroke-width: 0.01em;{% endif %}" {{ block.shopify_attributes }}>
+                  {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                </div>
+              {%- when 'image' -%}
+                {%- liquid
+                  assign image_height = block.settings.height
+                  assign image_height_2x = block.settings.height | times: 2
+                -%}
+                <div class="scrolling-text__item with-media flex items-center flex-auto media media--transparent relative" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
+                  {%- if block.settings.image != blank -%}
+                    <img
+                      srcset="{{ block.settings.image | image_url: height: image_height }} 1x, {{ block.settings.image | image_url: height: image_height_2x }} 2x"
+                      src="{{ block.settings.image | image_url: height: image_height }}"
+                      alt="{{ block.settings.image.alt | escape }}"
+                      loading="lazy"
+                      width="{{ image_height | times: block.settings.image.aspect_ratio }}"
+                      height="{{ image_height }}"
+                      is="lazy-image"
+                    />
+                  {%- else -%}
+                    {{- 'logo' | placeholder_svg_tag: 'placeholder' -}}
+                  {%- endif -%}
+                </div>
+            {%- endcase -%}
+          {%- endfor -%}
+        </div>
+      {%- endcapture -%}
+
+      {%- if section.settings.enable_twin -%}
+        {%- liquid
+          assign direction = section.settings.direction
+          if direction == 'left'
+            assign reversed = 'right'
+          else
+            assign reversed = 'left'
+          endif
+        -%}
+        <div class="scrolling-wrapper with-{{ direction }} relative z-1">
+          <marquee-element class="scrolling-text scrolling-text--{{ direction }} flex items-center" data-speed="{{ section.settings.speed }}" data-direction="{{ direction }}"{% if section.settings.enable_parallax %} data-parallax="1.5"{% endif %}>
+            {{- marquee -}}
+          </marquee-element>
+        </div>
+        <div class="scrolling-wrapper with-{{ direction }} relative">
+          <marquee-element class="scrolling-text scrolling-text--{{ reversed }} flex items-center" data-speed="{{ section.settings.speed }}" data-direction="{{ reversed }}"{% if section.settings.enable_parallax %} data-parallax="1.5"{% endif %}>
+            {{- marquee -}}
+          </marquee-element>
+        </div>
+      {%- else -%}
+        <marquee-element class="scrolling-text scrolling-text--{{ section.settings.direction }} flex items-center" data-speed="{{ section.settings.speed }}" data-direction="{{ section.settings.direction }}"{% if section.settings.enable_parallax %} data-parallax="1.5"{% endif %}>
+          {{- marquee -}}
+        </marquee-element>
+      {%- endif -%}
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.scrolling-text.name",
+  "class": "scrolling-text-section",
+  "settings": [
+    {
+      "type": "select",
+      "id": "direction",
+      "options": [
+        {
+          "value": "left",
+          "label": "t:sections.scrolling-text.settings.direction.options__1.label"
+        },
+        {
+          "value": "right",
+          "label": "t:sections.scrolling-text.settings.direction.options__2.label"
+        }
+      ],
+      "default": "left",
+      "label": "t:sections.scrolling-text.settings.direction.label"
+    },
+    {
+      "type": "range",
+      "id": "speed",
+      "min": 1,
+      "max": 30,
+      "step": 1,
+      "label": "t:sections.scrolling-text.settings.speed.label",
+      "unit": "x",
+      "default": 20
+    },
+    {
+      "type": "range",
+      "id": "grid_horizontal",
+      "min": 50,
+      "max": 200,
+      "step": 5,
+      "default": 70,
+      "unit": "px",
+      "label": "t:sections.scrolling-text.settings.grid_horizontal.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_twin",
+      "label": "t:sections.scrolling-text.settings.enable_twin.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 36
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "text",
+      "name": "t:sections.global.blocks.text.name",
+      "settings": [
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "default": "Welcome to our store",
+          "label": "t:sections.global.settings.text.label"
+        },
+        {
+          "type": "range",
+          "id": "text_size",
+          "default": 160,
+          "min": 12,
+          "max": 180,
+          "step": 2,
+          "unit": "px",
+          "label": "t:sections.global.settings.text_size.label"
+        },
+        {
+          "type": "select",
+          "id": "text_font",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.global.settings.text_font.options__1.label"
+            },
+            {
+              "value": "heading",
+              "label": "t:sections.global.settings.text_font.options__2.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.global.settings.text_font.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__highlight.content",
+          "info": "t:sections.global.settings.header__highlight.info"
+        },
+        {
+          "type": "select",
+          "id": "highlighted_text",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.global.settings.highlighted_text.options__1.label"
+            },
+            {
+              "value": "text",
+              "label": "t:sections.global.settings.highlighted_text.options__2.label"
+            },
+            {
+              "value": "full_text",
+              "label": "t:sections.global.settings.highlighted_text.options__3.label"
+            },
+            {
+              "value": "half_text",
+              "label": "t:sections.global.settings.highlighted_text.options__4.label"
+            },
+            {
+              "value": "underline",
+              "label": "t:sections.global.settings.highlighted_text.options__5.label"
+            },
+            {
+              "value": "stencil",
+              "label": "t:sections.global.settings.highlighted_text.options__6.label"
+            },
+            {
+              "value": "scribble",
+              "label": "t:sections.global.settings.highlighted_text.options__7.label"
+            }
+          ],
+          "default": "none",
+          "label": "t:sections.global.settings.highlighted_text.label"
+        },
+        {
+          "type": "select",
+          "id": "highlighted_scribble",
+          "options": [
+            {
+              "value": "circle",
+              "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+            },
+            {
+              "value": "basic-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+            },
+            {
+              "value": "sketch-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+            },
+            {
+              "value": "squiggle-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+            },
+            {
+              "value": "squiggle-underline-2",
+              "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+            }
+          ],
+          "default": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.label",
+          "info": "t:sections.global.settings.highlighted_scribble.info"
+        }
+      ]
+    },
+    {
+      "type": "image",
+      "name": "t:sections.global.blocks.image.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.global.settings.image.label"
+        },
+        {
+          "type": "range",
+          "id": "height",
+          "min": 0,
+          "max": 200,
+          "step": 4,
+          "default": 80,
+          "unit": "px",
+          "label": "t:sections.scrolling-text.blocks.image.settings.image_height.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.scrolling-text.presets.name",
+      "blocks": [
+        {
+          "type": "text"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

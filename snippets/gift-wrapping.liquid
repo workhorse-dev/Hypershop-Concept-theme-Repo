@@ -1,0 +1,57 @@
+{%- comment -%}
+  Renders the cart gift wrapping
+
+  Accepts:
+  - gift_wrapping: {Object} The product object
+  - gift_wrap_id: {Number} The product variant ID.
+  - gift_wraps_in_cart: {Number} Number of gift wraps in cart.
+  - items_in_cart: {Number} Number of items in cart.
+  - section_id: {String} The ID of section to which this snippet belongs.
+
+  Usage:
+  {% render 'gift-wrapping' %}
+{%- endcomment -%}
+
+{%- if gift_wrapping != nil -%}
+  <gift-wrapping class="gift-wrapping grid gap-4"
+    data-gift-wrap-id="{{ gift_wrap_id }}"
+    data-gift-wrapping="{{ cart.attributes.gift-wrapping | escape }}"
+    cart-items-size="{{ cart.items.size }}"
+    gift-wraps-in-cart="{{ gift_wraps_in_cart }}"
+    items-in-cart="{{ items_in_cart }}"
+    data-section-id="{{ section_id }}"
+  >
+    <div class="flex gap-2 md:gap-3">
+      <div class="relative">
+        <div class="loader absolute right-0" hidden>
+          {%- render 'icon', icon: 'rotator', size: 'sm', class: 'animate-rotator' -%}
+        </div>
+        <input
+          type="checkbox"
+          id="GiftWrap-{{ section_id }}"
+          name="attributes[gift-wrapping]"
+          value="yes"
+          {%- if cart.attributes.gift-wrapping %} checked{% endif -%}
+        />
+      </div>
+      <label for="GiftWrap-{{ section_id }}" class="text-sm md:text-base leading-tight">
+        {%- liquid
+          assign gift_price = gift_wrapping.object.price | money
+          echo 'cart.gift_wrapping.message_html' | t : price: gift_price
+        -%}
+      </label>
+    </div>
+    {%- if cart.attributes.gift-wrapping -%}
+      <gift-note class="field">
+        <textarea
+          class="textarea is-floating"
+          rows="4"
+          id="GiftNote-{{ section_id }}"
+          name="attributes[gift-note]"
+          placeholder=" "
+        >{{ cart.attributes.gift-note }}</textarea>
+        <label class="label is-floating" for="GiftNote-{{ section_id }}">{{ 'cart.gift_wrapping.note_placeholder' | t }}</label>
+      </gift-note>
+    {%- endif -%}
+  </gift-wrapping>
+{%- endif -%}

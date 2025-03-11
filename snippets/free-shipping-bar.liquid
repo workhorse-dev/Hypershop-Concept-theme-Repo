@@ -1,0 +1,38 @@
+{%- comment -%}
+  Renders free shipping message
+
+  Accepts:
+  - minimum_amount: {Number} Free shipping minimum amount
+
+  Usage:
+  {% render 'free-shipping-bar', minimum_amount: minimum_amount %}
+{%- endcomment -%}
+
+{%- liquid
+  assign minimum_amount_in_cents = minimum_amount | times: 100
+  assign total_price = cart.total_price
+
+  if linklists.gift-wrapping.links != blank and linklists.gift-wrapping.links.first.type == 'product_link'
+    assign gift_wrapping = linklists.gift-wrapping.links.first
+    
+    assign gift_wrap_id = gift_wrapping.object.variants.first.id
+    assign gift_wraps_in_cart = 0
+    for item in cart.items
+      if item.id == gift_wrap_id
+        assign gift_wraps_in_cart = item.price
+        break
+      endif
+    endfor
+    assign total_price = total_price | minus: gift_wraps_in_cart
+  endif
+-%}
+<div class="free-shipping-bar grid gap-3 w-full">
+  {%- if total_price >= minimum_amount_in_cents -%}
+    <span class="text-sm leading-tight">{{ 'general.cart.free_shipping.congratulations_html' | t }}</span>
+    <progress-bar class="overflow-hidden rounded-full" style="--progress: 100%;"></progress-bar>
+  {%- else -%}
+    {%- capture remaining_amount -%}<span class="font-bold">{{ total_price | minus: minimum_amount_in_cents | abs | money }}</span>{%- endcapture -%}
+    <span class="text-sm leading-tight">{{ 'general.cart.free_shipping.remaining_html' | t: remaining_amount: remaining_amount }}</span>
+    <progress-bar class="overflow-hidden rounded-full" style="--progress: {{ total_price | times: 1.0 | divided_by: minimum_amount_in_cents | at_most: 1 | times: 100 | round }}%;"></progress-bar>
+  {%- endif -%}
+</div>

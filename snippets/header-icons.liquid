@@ -1,0 +1,195 @@
+{%- comment -%}
+  Renders a header menu icons component
+
+  Accepts:
+  - section: {Object}
+  - show_account: {Boolean}
+  - show_cart: {Boolean}
+  - show_hamburger: {Boolean}
+  - show_search: {Boolean}
+  - dir: {String}
+
+  Usage:
+  {% render 'header-icons', section: section %}
+{%- endcomment -%}
+
+{%- liquid
+  if section.settings.enable_language_selector_desktop and localization.available_languages.size > 1
+    assign enable_language_selector = true
+  endif
+  if section.settings.enable_country_selector_desktop and localization.available_countries.size > 1
+    assign enable_country_selector = true
+    assign show_country_name = section.settings.show_country_name_dekstop
+    assign show_country_flag = section.settings.show_country_flag_desktop
+  endif
+-%}
+
+<div class="header__icons header__icons--{{ dir }} flex justify-{{ dir }} z-2">
+  <div class="header__buttons flex items-center gap-1d5">
+    {%- if show_toggle -%}
+      <button class="menu-toggle-button hidden lg:flex items-center justify-center" type="button" is="menu-toogle" aria-controls="MenuToggle" aria-expanded="false">
+        <span class="sr-only">{{ 'general.drawers.navigation' | t }}</span>
+        {%- render 'icon', icon: 'hamburger', size: 'lg' -%}
+      </button>
+    {%- endif -%}
+
+    {%- if enable_language_selector or enable_country_selector -%}
+      <div class="header__menu hidden lg:flex">
+        <ul class="flex flex-nowrap list-menu with-{{ section.settings.menu_active }}">
+          {%- if enable_language_selector -%}
+            <li class="localization">
+              <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
+                <summary data-link="{{ link.url }}">
+                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+                    <span class="btn-text" data-text>
+                      {%- liquid
+                        echo localization.language.endonym_name | capitalize
+                        unless section.settings.hover_menu
+                          render 'icon', icon: 'chevron-menu', class: 'shrink-0'
+                        endunless
+                      -%}
+                    </span>
+                    {%- if section.settings.menu_active == 'block' -%}
+                      <span class="btn-text btn-duplicate">
+                        {%- liquid
+                          echo localization.language.endonym_name | capitalize
+                          unless section.settings.hover_menu
+                            render 'icon', icon: 'chevron-menu', class: 'shrink-0'
+                          endunless
+                        -%}
+                      </span>
+                    {%- endif -%}
+                  </magnet-element>
+                </summary>
+                <div class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
+                  {%- form 'localization', id: 'localization_language_form_header_desktop', class: 'dropdown__container relative', is: 'localization-listbox' -%}
+                    {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                    <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                      {%- for language in localization.available_languages -%}
+                        <li class="opacity-0">
+                          <p>
+                            <a class="reversed-link{% if language.iso_code == localization.language.iso_code %} active pointer-events-none{% endif %}"
+                              href="#"
+                              hreflang="{{ language.iso_code }}"
+                              lang="{{ language.iso_code }}"
+                              {% if language.iso_code == localization.language.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              data-value="{{ language.iso_code }}"
+                              title="{{ language.endonym_name | capitalize | escape }}"
+                              data-no-instant
+                            >
+                              {{- language.endonym_name | capitalize -}}
+                            </a>
+                          </p>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
+                  {%- endform -%}
+                </div>
+              </details>
+            </li>
+          {% endif %}
+
+          {%- if enable_country_selector -%}
+            <li class="localization">
+              <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
+                <summary data-link="{{ link.url }}">
+                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+                    {%- capture localization_country -%}
+                      {%- if show_country_flag -%}
+                        <span class="country-flag shrink-0 media media--rounded relative overflow-hidden">
+                          {{- localization.country | image_url: width: 60, format: 'jpg' | image_tag: loading: 'lazy', class: 'rounded-full', is: 'lazy-image' -}}
+                        </span>
+                      {%- endif -%}
+                      {%- if show_country_name -%}
+                        {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+                      {%- else -%}
+                        <span class="whitespace-nowrap">
+                          {{- localization.country.currency.iso_code }} {{ localization.country.currency.symbol -}}
+                        </span>
+                      {%- endif -%}
+                      {%- liquid
+                        unless section.settings.hover_menu
+                          render 'icon', icon: 'chevron-menu', class: 'shrink-0'
+                        endunless
+                      -%}
+                    {%- endcapture -%}
+
+                    <span class="btn-text" data-text>{{ localization_country }}</span>
+                    {%- if section.settings.menu_active == 'block' -%}
+                      <span class="btn-text btn-duplicate">{{ localization_country }}</span>
+                    {%- endif -%}
+                  </magnet-element>
+                </summary>
+                <div class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
+                  {%- form 'localization', id: 'localization_country_form_header_desktop', class: 'dropdown__container relative', is: 'localization-listbox' -%}
+                    {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                    <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                      {%- for country in localization.available_countries -%}
+                        <li class="opacity-0">
+                          <p>
+                            <a class="reversed-link{% if country.iso_code == localization.country.iso_code %} active pointer-events-none{% endif %}"
+                              href="#"
+                              {% if country.iso_code == localization.country.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              data-value="{{ country.iso_code }}"
+                              title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
+                              data-no-instant
+                            >
+                              {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                            </a>
+                          </p>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                    <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
+                  {%- endform -%}
+                </div>
+              </details>
+            </li>
+          {% endif %}
+        </ul>
+      </div>
+    {%- endif -%}
+
+    {%- if show_search and settings.enable_search -%}
+      <a href="{{ routes.search_url }}" class="search-drawer-button flex items-center justify-center" is="magnet-link" aria-controls="SearchDrawer" aria-expanded="false" >
+        <span class="sr-only">{{ 'general.search.title' | t }}</span>
+        {%- render 'icon', icon: 'search', size: 'lg' -%}
+      </a>
+    {%- endif -%}
+
+    {%- if show_account and shop.customer_accounts_enabled -%}
+      <a href="{%- if customer -%}{{ routes.account_url }}{%- else -%}{{ routes.account_login_url }}{%- endif -%}" class="hidden lg:flex items-center justify-center" is="magnet-link" rel="nofollow">
+        <span class="sr-only">
+          {%- liquid
+            if customer
+              echo 'customer.account.title' | t
+            else
+              echo 'customer.login.title' | t
+            endif
+          -%}
+        </span>
+        {%- render 'icon', icon: 'account', size: 'lg' -%}
+      </a>
+    {%- endif -%}
+
+    {%- if show_cart -%}
+      <a href="{{ routes.cart_url }}" class="cart-drawer-button flex items-center justify-center relative" is="magnet-link" aria-controls="CartDrawer" aria-expanded="false" data-no-instant>
+        <span class="sr-only">{{ 'general.cart.title' | t }}</span>
+        {%- render 'icon', icon: 'cart', size: 'lg' -%}
+        <cart-count class="count absolute top-0 right-0 text-xs" aria-label="{{ 'general.cart.cart_count' | t: count: cart.item_count | escape }}"{% if cart == empty %} hidden{% endif %}>{{ cart.item_count }}</cart-count>
+      </a>
+    {%- endif -%}
+
+    {%- if show_hamburger -%}
+      <button class="menu-drawer-button flex items-center justify-center" type="button" is="magnet-button" aria-controls="MenuDrawer" aria-expanded="false">
+        <span class="sr-only">{{ 'general.drawers.navigation' | t }}</span>
+        {%- render 'icon', icon: 'hamburger', size: 'lg' -%}
+      </button>
+    {%- endif -%}
+  </div>
+</div>

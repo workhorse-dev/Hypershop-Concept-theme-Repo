@@ -1,0 +1,53 @@
+{%- liquid
+  assign loading = loading | default: 'lazy'
+  assign fetchpriority = fetchpriority | default: 'auto'
+  assign sizes = sizes | default: 'min(100vw, var(--page-width))'
+
+  assign video_id = video.id
+  assign video_alt = video.alt | default: description
+  assign alt = 'general.accessibility.load_video' | t: description: video_alt | escape
+  assign preview_image = video.preview_image | default: cover_image
+
+  capture poster
+    if preview_image != blank
+      echo preview_image | image_url: width: preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', alt: alt
+    else
+      echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder'
+    endif
+  endcapture
+-%}
+
+{%- if video != blank -%}
+  <video-media class="media deferred-media{% if is_mobile %} mobile:deferred-media{% endif %} block {{ class }}"
+    style="--aspect-ratio: {{ video.aspect_ratio }}"
+    {%- if video.host %} host="{{ video.host }}"{% endif -%}
+    {%- if autoplay %} autoplay{% endif -%}
+  >
+    {{- poster -}}
+
+    <template>
+      {%- if video != blank -%}
+        {{- video | video_tag: playsinline: true, muted: muted, autoplay: true, loop: loop, controls: false, preload: 'none', image_size: '800x' -}}
+      {%- else -%}
+        {%- if video.type == 'youtube' -%}
+          <iframe src="https://www.youtube.com/embed/{{ video.id }}?playsinline=1&controls=0{% if autoplay %}&autoplay=1{% endif %}{% if muted %}&mute=1{% endif %}{% if loop %}&loop=1{% endif %}&playlist={{ video.id }}&enablejsapi=1&rel=0&modestbranding=1&origin={{ 'https://' | append: request.host | url_encode }}" allow="autoplay; encrypted-media" allowfullscreen="allowfullscreen"></iframe>
+        {%- elsif video.type == 'vimeo' -%}
+          <iframe src="https://player.vimeo.com/video/{{ video.id }}?autopause=1{% if autoplay %}&autoplay=1{% endif %}{% if muted %}&background=1&muted=1{% endif %}{% if loop %}&loop=1{% endif %}&transparent=0&responsive=1&portrait=0&title=0&byline=0&color={{ settings.color_text | remove_first: '#' }}" allow="autoplay; encrypted-media;" allowfullscreen="allowfullscreen"></iframe>
+        {%- endif -%}
+      {%- endif -%}
+    </template>
+
+    {%- if show_play_button -%}
+      <button type="button" id="DeferredPoster-{{ video_id }}" class="deferred-poster absolute top-0 left-0 w-full h-full" aria-label="{{ 'general.accessibility.play_video' | t | escape }}">
+        <span class="play-button absolute flex items-center justify-center rounded-full pointer-events-auto z-10">
+          {%- render 'icon', icon: 'play' -%}
+          {%- render 'icon', icon: 'pause' -%}
+        </span>
+      </button>
+    {%- endif -%}
+  </video-media>
+{%- else -%}
+  <div class="deferred-media{% if is_mobile %} mobile:deferred-media{% endif %} h-full {{ class }}">
+    {{- poster -}}
+  </div>
+{%- endif -%}

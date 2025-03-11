@@ -1,0 +1,100 @@
+{%- liquid
+  assign promotion_has_content = false
+  if block.settings.icon != blank or block.settings.heading != blank or block.settings.content != blank or block.settings.button_label != blank
+    assign promotion_has_content = true
+  endif
+-%}
+
+<div class="card product-card product-card--promo block leading-none relative overflow-hidden" id="shopify-block-{{ block.id }}">
+  <style>
+    #shopify-block-{{ block.id }} {
+      {%- render 'section-variables', section: block -%}
+      --card-column-size: {{ block.settings.column_size }};
+    }
+  </style>
+  <div class="product-card__media{% unless promotion_has_content %} without-content{% endunless %} relative top-0 left-0 w-full h-full">
+    <media-element class="flex relative top-0 left-0 w-full h-full"{% if block.type == 'promotion' %} data-parallax="0.3"{% endif %}>
+      {%- if block.type == 'promotion' -%}
+        <picture class="media block w-full h-full relative overflow-hidden">
+          {%- if block.settings.image != blank -%}
+            {%- if block.settings.image_mobile -%}
+              <source
+                media="(max-width: 767px)"
+                srcset="{{ block.settings.image_mobile | image_url: width: '400x' }} 400w, {{ block.settings.image_mobile | image_url: width: '600x' }} 600w, {{ block.settings.image_mobile | image_url: width: '800x' }} 800w, {{ block.settings.image_mobile | image_url: width: '1000x' }} 1000w"
+                width="{{ block.settings.image_mobile.width }}"
+                height="{{ block.settings.image_mobile.height }}"
+              >
+            {%- endif -%}
+
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+          {%- else -%}
+            {{- 'collection-1' | placeholder_svg_tag: 'placeholder' -}}
+          {%- endif -%}
+        </picture>
+      {%- else -%}
+        {%- if block.settings.video_mobile or block.settings.video_url_mobile -%}
+          {%- render 'video',
+            video: block.settings.video_mobile,
+            video_url: block.settings.video_url_mobile,
+            muted: true,
+            autoplay: true,
+            loop: true,
+            description: block.settings.description,
+            cover_image: block.settings.cover_image_mobile,
+            show_play_button: false,
+            is_mobile: true,
+            class: 'media w-full h-full'
+          -%}
+        {%- endif -%}
+
+        {%- render 'video',
+          video: block.settings.video,
+          video_url: block.settings.video_url,
+          muted: true,
+          autoplay: true,
+          loop: true,
+          description: block.settings.description,
+          cover_image: block.settings.cover_image,
+          show_play_button: false,
+          class: 'media w-full h-full'
+        -%}
+      {%- endif -%}
+    </media-element>
+  </div>
+
+  {%- if promotion_has_content -%}
+    <div class="product-card__content z-1 absolute top-0 left-0 w-full h-full flex justify-center {{ block.settings.content_position_mobile }} {{ block.settings.content_position }}">
+      <div class="md:text-{{ block.settings.text_alignment }} text-{{ block.settings.text_alignment_mobile }} w-full">
+        <div class="promo-box inline-block">
+          {%- liquid
+            if block.settings.icon != blank
+              echo block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy', widths: '80,96,160,192', is: 'lazy-image', class: 'promo-img inline-block'
+            endif
+          -%}
+  
+          {%- if block.settings.heading != blank or block.settings.content != blank -%}
+            <div class="grid gap-3">
+              {%- if block.settings.heading != blank -%}
+                <p class="promo-title heading text-3xl leading-none tracking-tight">{{ block.settings.heading }}</p>
+              {%- endif -%}
+  
+              {%- if block.settings.content != blank -%}
+                <div class="promo-subtitle rte leading-tight">{{ block.settings.content }}</div>
+              {%- endif -%}
+            </div>
+          {%- endif -%}
+  
+          {%- if block.settings.button_label != blank -%}
+            {%- render 'button',
+              label: block.settings.button_label,
+              link: block.settings.button_link,
+              style: block.settings.button_style,
+              external: block.settings.button_external,
+              show_icon: block.settings.button_icon
+            -%}
+          {%- endif -%}
+        </div>
+      </div>
+    </div>
+  {%- endif -%}
+</div>

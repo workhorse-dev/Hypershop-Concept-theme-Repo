@@ -1,0 +1,169 @@
+{%- comment -%}
+  Accepts:
+  - share_label: {String}
+  - share_title: {String}
+  - share_link: {String}
+  - share_image: {String}
+  - share_id: {String}
+  - section_id: {String}
+
+  Usage:
+  {% render 'social-sharing', section_id: section.id, share_id: product.id %}
+{%- endcomment -%}
+
+{%- if settings.share_facebook or settings.share_twitter or settings.share_pinterest or settings.share_telegram or settings.share_whatsapp or settings.share_email -%}
+  <div class="hidden sm:flex items-center gap-3">
+    <p class="leading-none">{{ share_label | escape }}:</p>
+    <ul class="social-sharing flex flex-wrap items-center">
+      {%- if settings.share_facebook -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//www.facebook.com/sharer.php?u={{ share_link }}" title="{{ 'general.social.alt_text.share_on_facebook' | t | escape }}">
+            {%- render 'icon-brand', icon: 'facebook', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    
+      {%- if settings.share_twitter -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//twitter.com/intent/tweet?text={{ share_title | url_param_escape }}&amp;url={{ share_link }}" title="{{ 'general.social.alt_text.share_on_twitter' | t | escape }}">
+            {%- render 'icon-brand', icon: 'twitter', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    
+      {%- if settings.share_pinterest -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//pinterest.com/pin/create/button/?url={{ share_link }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}&amp;description={{ share_title | url_param_escape }}" title="{{ 'general.social.alt_text.share_on_pinterest' | t | escape }}">
+            {%- render 'icon-brand', icon: 'pinterest', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_telegram -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//telegram.me/share/url?url={{ share_link }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}" title="{{ 'general.social.alt_text.share_on_telegram' | t | escape }}">
+            {%- render 'icon-brand', icon: 'telegram', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_on_telegram' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_whatsapp -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//web.whatsapp.com/send?text={{ share_link }}" title="{{ 'general.social.alt_text.share_on_whatsapp' | t | escape }}">
+            {%- render 'icon-brand', icon: 'whatsapp', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_on_whatsapp' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+
+      {%- if settings.share_email -%}
+        <li>
+          <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="mailto:?&subject={{ share_title | url_param_escape }}&body={{ share_link }}" title="{{ 'general.social.alt_text.share_by_email' | t | escape }}">
+            {%- render 'icon-brand', icon: 'email', size: 'sm' -%}
+            <span class="sr-only">{{ 'general.social.alt_text.share_by_email' | t }}</span>
+          </a>
+        </li>
+      {%- endif -%}
+    </ul>
+  </div>
+
+  <div class="sm:hidden flex items-center gap-2">
+    {%- render 'icon', icon: 'share', size: 'sm' -%}
+    <a class="link text-sm" href="{{ share_link }}" aria-controls="ShareDrawer-{{ section_id }}-{{ share_id }}" aria-expanded="false">{{ share_label | escape }}</a>
+  </div>
+  <share-drawer id="ShareDrawer-{{ section_id }}-{{ share_id }}" class="sm:hidden share-drawer drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ share_label | escape }}"
+    data-section-id="{{ section_id }}"
+    hidden
+  >
+    <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="ShareDrawer-{{ section_id }}-{{ share_id }}" aria-expanded="false"></overlay-element>
+    <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+      <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+        <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight">
+          {{- share_label | escape -}}
+        </span>
+        <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="ShareDrawer-{{ section_id }}-{{ share_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- liquid
+              render 'icon', icon: 'close', size: 'sm'
+              render 'icon', icon: 'loader', size: 'sm absolute opacity-0 invisible animate-spin'
+            -%}
+          </span>
+        </button>
+      </gesture-element>
+      <div class="drawer__content opacity-0 invisible">
+        <div class="drawer__scrollable relative w-full">
+          <input type="hidden" value="{{ share_link }}" />
+          <ul class="share-buttons grid">
+            {%- if settings.share_facebook -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="//www.facebook.com/sharer.php?u={{ share_link }}" title="{{ 'general.social.alt_text.share_on_facebook' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'facebook', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_on_facebook' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_on_facebook' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+          
+            {%- if settings.share_twitter -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="//twitter.com/intent/tweet?text={{ share_title | url_param_escape }}&amp;url={{ share_link }}" title="{{ 'general.social.alt_text.share_on_twitter' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'twitter', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_on_twitter' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_on_twitter' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+          
+            {%- if settings.share_pinterest -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="//pinterest.com/pin/create/button/?url={{ share_link }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}&amp;description={{ share_title | url_param_escape }}" title="{{ 'general.social.alt_text.share_on_pinterest' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'pinterest', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_on_pinterest' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_on_pinterest' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+        
+            {%- if settings.share_telegram -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="//telegram.me/share/url?url={{ share_link }}&amp;media={{ share_image | image_url: width: 1024, height: 1024 }}" title="{{ 'general.social.alt_text.share_on_telegram' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'telegram', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_on_telegram' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_on_telegram' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+
+            {%- if settings.share_whatsapp -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="//web.whatsapp.com/send?text={{ share_link }}" title="{{ 'general.social.alt_text.share_on_whatsapp' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'whatsapp', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_on_whatsapp' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_on_whatsapp' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+        
+            {%- if settings.share_email -%}
+              <li>
+                <a target="_blank" rel="noopener" class="social-sharing__link flex items-center gap-4 text-sm" href="mailto:?&subject={{ share_title | url_param_escape }}&body={{ share_link }}" title="{{ 'general.social.alt_text.share_by_email' | t | escape }}">
+                  {%- render 'icon-brand', icon: 'email', size: 'lg' -%}
+                  <span aria-hidden="true">{{ 'general.social.share_by_email' | t }}</span>
+                  <span class="sr-only">{{ 'general.social.alt_text.share_by_email' | t }}</span>
+                </a>
+              </li>
+            {%- endif -%}
+          </ul>
+        </div>
+      </div>
+    </div>
+  </share-drawer>
+{%- endif -%}

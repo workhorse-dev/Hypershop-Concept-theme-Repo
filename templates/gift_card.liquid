@@ -1,0 +1,179 @@
+{%- layout none -%}
+
+{%- capture direction -%}{% render 'direction' %}{%- endcapture -%}
+<!doctype html>
+  <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
+  <head>
+    <meta charset="utf-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
+    <meta name="viewport" content="width=device-width,initial-scale=1">
+    <meta name="theme-color" content="{{ settings.color_button_background }}">
+    <link rel="canonical" href="{{ canonical_url }}">
+  
+    {%- if settings.favicon != blank -%}
+      <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
+    {%- endif -%}
+  
+    {%- assign formatted_initial_value = gift_card.initial_value | money_without_trailing_zeros: gift_card.currency -%}
+    {%- assign formatted_initial_value_stripped = formatted_initial_value | strip_html -%}
+    <title>{{ 'gift_cards.issued.title_html' | t: value: formatted_initial_value_stripped, shop: shop.name }}</title>
+  
+    <meta name="description" content="{{ 'gift_cards.issued.subtext' | t | escape }}">
+  
+    {%- liquid
+      render 'social-meta-tags'
+      render 'css-variables'
+  
+      echo 'theme.css' | asset_url | stylesheet_tag: preload: true
+      echo 'giftcard.css' | asset_url | stylesheet_tag
+  
+      if direction == 'rtl'
+        echo 'rtl.css' | asset_url | stylesheet_tag
+      endif
+  
+      render 'js-variables'
+    -%}
+  
+    {{ content_for_header }}
+  
+    <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'giftcard.js' | asset_url }}" defer="defer"></script>
+    <script src="{{ 'vendor/qrcode.js' | shopify_asset_url }}" defer="defer"></script>
+
+    {%- if settings.enable_tab_attention -%}
+      <script src="{{ 'tab-attention.js' | asset_url }}" defer="defer"></script>
+    {%- endif -%}
+  </head>
+  
+  <body class="template-giftcard"{% if request.design_mode %} shopify-design-mode{% endif %} data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}"{% if settings.enable_lazy_image %} data-lazy-image{% endif %} data-title-animation data-page-rendering>
+    <a class="sr-only skip-link" href="#MainContent">{{ 'general.accessibility.skip_to_content' | t }}</a>
+  
+    <div class="page-container" id="PageContainer">
+      {%- section 'main-giftcard-header' -%}
+  
+      <main class="main-content relative" id="MainContent" role="main">
+        <div class="section section--padding">
+          <div class="page-width page-width--narrow relative">
+            <div class="text-center">
+              <div class="giftcard__top grid gap-4 justify-center">
+                <h2 class="giftcard__title heading leading-none title-md">{{ 'gift_cards.issued.subtext' | t }}</h2>
+                {%- if gift_card.enabled == false or gift_card.expired -%}
+                  <div class="badges grid justify-center">
+                    <p class="badge badge--onsale badge--expired flex items-center gap-1d5 font-medium leading-none rounded-full">{{ 'gift_cards.issued.expired' | t }}</p>
+                  </div>
+                {%- endif -%}
+              </div>
+            
+              <div class="giftcard__middle relative">
+                <div class="media media--transparent relative">
+                  <img
+                    src="{{ 'gift-card/card.svg' | shopify_asset_url }}"
+                    alt="Gift card illustration"
+                    height="{{ 720 | divided_by: 1.5 }}"
+                    width="720"
+                    loading="lazy"
+                  />
+                </div>
+                <div class="giftcard__amount absolute bottom-0 font-bold title-sm">
+                  {%- liquid
+                    if settings.currency_code_enabled
+                      echo gift_card.balance | money_with_currency
+                    else
+                      echo gift_card.balance | money
+                    endif
+                  -%}
+                </div>
+              </div>
+            
+              <div class="giftcard__bottom grid gap-7d5">
+                <div class="grid gap-4">
+                  <div class="grid gap-2">
+                    <div class="giftcard__code" onclick="theme.selectText('gift-card-code');">
+                      <strong id="gift-card-code" class="text-base-2xl font-bold leading-none">{{ gift_card.code | format_code }}</strong>
+                    </div>
+            
+                    <p class="text-sm">{{ 'gift_cards.issued.redeem' | t }}</p>
+                  </div>
+          
+                  <div class="grid gap-4 grid-cols-12 no-print">
+                    <button type="button" class="button button--secondary icon-with-text col-span-6" is="copy-button" data-text="{{ gift_card.code | escape }}" aria-controls="gift-card-success">
+                      <span class="btn-fill" data-fill></span>
+                      <span class="btn-text">
+                        {%- liquid
+                          render 'icon', icon: 'copy', size: 'sm', class: 'stroke-1 hidden md:block'
+                          echo 'gift_cards.issued.copy' | t
+                        -%}
+                      </span>
+                    </button>
+                    <button type="button" class="button button--secondary icon-with-text col-span-6" is="hover-button" onclick="window.print();">
+                      <span class="btn-fill" data-fill></span>
+                      <span class="btn-text">
+                        {%- liquid
+                          render 'icon', icon: 'printer', size: 'sm', class: 'stroke-1 hidden md:block'
+                          echo 'gift_cards.issued.print' | t
+                        -%}
+                      </span>
+                    </button>
+                  </div>
+                  
+                  <div id="gift-card-success" class="alert alert--success flex items-start gap-3 text-sm md:text-base leading-tight" hidden>
+                    {%- liquid
+                      render 'icon', icon: 'check-circle', size: 'sm', class: 'flex-auto'
+                      echo 'gift_cards.issued.copy_code_success' | t
+                    -%}
+                  </div>          
+                </div>
+        
+                <div class="grid justify-center">
+                  <div class="gift-card__qr-code grid justify-center gap-6">
+                    <p class="heading text-base-xl leading-none">{{ 'gift_cards.issued.scan' | t }}</p>
+                    <qr-code identifier="{{ gift_card.qr_identifier }}" class="flex justify-center"></qr-code>
+        
+                    {%- if gift_card.pass_url -%}
+                      <div class="grid justify-center no-print">
+                        <a href="{{ gift_card.pass_url }}" class="gift_card__apple-wallet">
+                          <img
+                            src="{{ 'gift-card/add-to-apple-wallet.svg' | shopify_asset_url }}"
+                            width="120"
+                            height="40"
+                            alt="{{ 'gift_cards.issued.add_to_apple_wallet' | t }}"
+                            loading="lazy"
+                          />
+                        </a>
+                      </div>
+                    {%- endif -%}
+                  </div>
+                </div>
+        
+                <p class="no-print">
+                  <a
+                    href="{{ shop.url }}"
+                    class="button button--primary button--fixed icon-with-text"
+                    is="hover-link"
+                    target="_blank"
+                    rel="noopener"
+                    aria-describedby="a11y-new-window-message"
+                  >
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'arrow-left', class: 'transform'
+                        echo 'gift_cards.issued.shop_link' | t
+                      -%}
+                    </span>
+                  </a>
+                </p>
+              </div>
+            </div>
+          </div>
+        </div>        
+      </main>
+    </div>
+  
+    <ul hidden>
+      <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
+      <li id="a11y-new-window-message">{{ 'general.accessibility.link_messages.new_window' | t }}</li>
+    </ul>
+  </body>
+</html>

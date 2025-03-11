@@ -1,0 +1,36 @@
+{%- comment -%}
+  Renders a text block on the footer section
+
+  Accepts:
+  - block: {Object}
+
+  Usage:
+  {% render 'footer-text', block: block %}
+{%- endcomment -%}
+
+{%- if block.settings.heading != blank or block.settings.text != blank -%}
+  {%- capture block_content -%}
+    <div class="details__content">
+      {{ block.settings.text }}
+    </div>
+    <style>
+      @media (min-width: 1280px) {
+        .footer__item--{{ block.id }} { width: calc({{ block.settings.container_width }}% - var(--sp-12)); }
+      }
+    </style>
+  {%- endcapture -%}
+
+  {%- if block.settings.heading == blank -%}
+    <div class="footer__item--{{ block.id }} no-details rte" {{ block.shopify_attributes }}>
+      {{- block_content -}}
+    </div>
+  {%- else -%}
+    <details class="footer__item--{{ block.id }} details active" is="footer-details"{% if block.settings.opened %} data-opened{% endif %} {{ block.shopify_attributes }}>
+      <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+        <span class="heading text-base-2xl font-medium lg:font-heading">{{ block.settings.heading | escape }}</span>
+        {%- render 'icon', icon: 'chevron-up' -%}
+      </summary>
+      {{- block_content -}}
+    </details>
+  {%- endif -%}
+{%- endif -%}

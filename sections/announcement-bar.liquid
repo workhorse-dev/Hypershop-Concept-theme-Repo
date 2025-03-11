@@ -1,0 +1,677 @@
+{%- liquid
+  assign show_section = true
+
+  if section.settings.hide_homepage and request.page_type == 'index'
+    assign show_section = false
+  endif
+-%}
+
+{%- if show_section -%}
+  <style>
+    :root {--topbar-height: var(--sp-12);}
+    
+    @media screen and (min-width: 1536px) {
+      :root {--topbar-height: var(--sp-14);}
+    }
+
+    #shopify-section-{{ section.id }} {
+      --gradient-background: {% if section.settings.gradient_background != blank %}{{ section.settings.gradient_background }}{% else %}{{ section.settings.color_background }}{% endif %};
+      --color-background: {{ section.settings.color_background.rgb }};
+      --color-foreground: {{ section.settings.color_text.rgb }};
+      --color-highlight: {{ section.settings.color_highlight.rgb }};
+    }
+  </style>
+
+  {%- liquid
+    assign announcement_block_count = section.blocks.size
+    if section.settings.enable_language_selector and localization.available_languages.size > 1
+      assign enable_language_selector = true
+    endif
+    if section.settings.enable_country_selector and localization.available_countries.size > 1
+      assign enable_country_selector = true
+    endif
+  -%}
+
+  <div class="topbar topbar--{{ section.settings.announcement_position }}{% if section.settings.invert_icons_selectors %} topbar--inverted{% endif %}{% unless section.settings.show_social or enable_language_selector or enable_country_selector %} topbar--only{% endunless %} page-width{% if section.settings.full_width %} page-width--full{% endif %} section{% if section.settings.rounded %} section--rounded{% endif %} relative grid py-0 h-full w-full items-center">
+    {%- if section.settings.show_social -%}
+      <div class="social-icons hidden lg:flex items-center">
+        {%- render 'social-icons', size: 'sm', gap: '6' -%}
+      </div>
+    {%- endif -%}
+
+    {%- if announcement_block_count > 0 -%}
+      <div class="announcement-bar h-full flex justify-center lg:justify-{{ section.settings.announcement_position }}{% unless section.settings.show_navigation %} without-nav{% endunless %} relative">
+        <announcement-bar id="Slider-{{ section.id }}" class="announcement__slides{% if announcement_block_count > 1 %} flex justify-center w-full h-full flickity{% endif %}"{% if section.settings.autoplay %} autoplay autoplay-speed="{{ section.settings.autoplay_speed }}"{% endif %}>
+          {%- liquid
+            assign with_gradient = false
+            if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+              assign with_gradient = true
+            endif
+          -%}
+          {%- for block in section.blocks -%}
+            <div class="announcement__slide flex h-full"{% unless forloop.first %} aria-hidden="true"{% endunless %} {{ block.shopify_attributes }}>
+              {%- if block.settings.link != blank -%}
+                <a class="announcement__content flex items-center gap-2" href="{{ block.settings.link }}">
+              {%- else -%}
+                <div class="announcement__content flex items-center gap-2">
+              {%- endif -%}
+                {%- if block.settings.icon != 'none' -%}
+                  <span class="announcement-icon{% if block.settings.hide_icon_mobile %} hidden md:block{% endif %}">
+                    {%- render 'icon-announcement', icon: block.settings.icon, size: 'xs', class: 'stroke-1' -%}
+                  </span>
+                {%- endif -%}
+
+                {%- if block.settings.text_mobile != blank -%}
+                  <p class="announcement-text leading-tight md:hidden">
+                    {%- render 'highlighted-text', content: block.settings.text_mobile, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                  </p>
+                  <p class="announcement-text leading-tight hidden md:block">
+                    {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                  </p>
+                {%- else -%}
+                  <p class="announcement-text leading-tight">
+                    {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                  </p>
+                {%- endif -%}
+
+              {%- if block.settings.link != blank -%}
+                </a>
+              {%- else -%}
+                </div>
+              {%- endif -%}
+            </div>
+          {%- endfor -%}
+        </announcement-bar>
+        {%- if section.settings.show_navigation and announcement_block_count > 1 -%}
+          <button type="button" is="previous-button" class="fader left relative flex items-center justify-start h-full" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}">
+            <svg class="icon icon-arrow-left icon-xs transform" viewBox="0 0 15 14" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M6.33333 2.91675L2.25 7.00004M2.25 7.00004L6.33333 11.0834M2.25 7.00004H12.75"></path>
+            </svg>
+          </button>
+          <button type="button" is="next-button" class="fader right relative flex items-center justify-end h-full" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+            <svg class="icon icon-arrow-right icon-xs transform" viewBox="0 0 15 14" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.00004H12.75M12.75 7.00004L8.66667 2.91675M12.75 7.00004L8.66667 11.0834"></path>
+            </svg>
+          </button>
+          {%- if section.settings.autoplay -%}
+            <button
+              type="button"
+              class="slideshow-control flex items-center justify-center rounded-full sr-only"
+              is="control-button"
+              aria-controls="Slider-{{ section.id }}"
+              aria-live="polite"
+            >
+              <span class="slideshow-control__pause">
+                {%- render 'icon', icon: 'pause' -%}
+                <span class="sr-only">{{ 'sections.slideshow.pause_slideshow' | t }}</span>
+              </span>
+              <span class="slideshow-control__play">
+                {%- render 'icon', icon: 'play' -%}
+                <span class="sr-only">{{ 'sections.slideshow.play_slideshow' | t }}</span>
+              </span>
+            </button>
+          {%- endif -%}
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+
+    {%- if enable_language_selector or enable_country_selector -%}
+      <div class="localization hidden lg:flex items-center h-full">
+        {%- if enable_language_selector -%}
+          <div class="localization__item h-full relative" role="combobox" aria-controls="LanguageLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.language_label' | t | escape }}">
+            <button type="button" class="flex items-center gap-3 h-full z-2 relative">
+              {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 hidden xl:block' -%}
+              <span class="leading-tight">{{ localization.language.endonym_name | capitalize }}</span>
+              {%- render 'icon', icon: 'chevron-down', size: 'xs' -%}
+            </button>
+            <dropdown-localization class="dropdown opacity-0 invisible z-30 absolute top-100{% if enable_country_selector %} left-0{% else %} right-0{% endif %} pointer-events-none" id="LanguageLocalization-{{ section.id }}">
+              {%- form 'localization', id: 'localization_language_form_header', class: 'dropdown__container', is: 'localization-listbox' -%}
+                {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                  {%- for language in localization.available_languages -%}
+                    <li class="opacity-0">
+                      <p>
+                        <a class="reversed-link{% if language.iso_code == localization.language.iso_code %} active pointer-events-none{% endif %}"
+                          href="#"
+                          hreflang="{{ language.iso_code }}"
+                          lang="{{ language.iso_code }}"
+                          {% if language.iso_code == localization.language.iso_code %}
+                            aria-current="true"
+                          {% endif %}
+                          data-value="{{ language.iso_code }}"
+                          title="{{ language.endonym_name | capitalize | escape }}"
+                          data-no-instant
+                        >
+                          {{- language.endonym_name | capitalize -}}
+                        </a>
+                      </p>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
+              {%- endform -%}
+            </dropdown-localization>
+          </div>
+        {%- endif -%}
+        {%- if enable_country_selector -%}
+          <div class="localization__item h-full relative" role="combobox" aria-controls="CountryLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.country_label' | t | escape }}">
+            <button type="button" class="flex items-center gap-3 h-full z-2 relative">
+              {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden xl:block' -%}
+              <span class="leading-tight">{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
+              {%- render 'icon', icon: 'chevron-down', size: 'xs' -%}
+            </button>
+            <dropdown-localization class="dropdown opacity-0 invisible z-30 absolute top-100 right-0 pointer-events-none" id="CountryLocalization-{{ section.id }}">
+              {%- form 'localization', id: 'localization_country_form_header', class: 'dropdown__container', is: 'localization-listbox' -%}
+                {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                  {%- for country in localization.available_countries -%}
+                    <li class="opacity-0">
+                      <p>
+                        <a class="reversed-link{% if country.iso_code == localization.country.iso_code %} active pointer-events-none{% endif %}"
+                          href="#"
+                          {% if country.iso_code == localization.country.iso_code %}
+                            aria-current="true"
+                          {% endif %}
+                          data-value="{{ country.iso_code }}"
+                          title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
+                          data-no-instant
+                        >
+                          {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                        </a>
+                      </p>
+                    </li>
+                  {%- endfor -%}
+                </ul>
+                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
+              {%- endform -%}
+            </dropdown-localization>
+          </div>
+        {%- endif -%}
+      </div>
+    {%- endif -%}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.announcement-bar.name",
+  "class": "topbar-section",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "show_social",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.show_social.label",
+      "info": "t:sections.announcement-bar.settings.show_social.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_language_selector",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.enable_language_selector.label",
+      "info": "t:sections.announcement-bar.settings.enable_language_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_country_selector",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.enable_country_selector.label",
+      "info": "t:sections.announcement-bar.settings.enable_country_selector.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "invert_icons_selectors",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.invert_icons_selectors.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.announcement-bar.settings.header__announcement.content"
+    },
+    {
+      "type": "select",
+      "id": "announcement_position",
+      "options": [
+        {
+          "value": "start",
+          "label": "t:sections.announcement-bar.settings.announcement_position.options__1.label"
+        },
+        {
+          "value": "center",
+          "label": "t:sections.announcement-bar.settings.announcement_position.options__2.label"
+        },
+        {
+          "value": "end",
+          "label": "t:sections.announcement-bar.settings.announcement_position.options__3.label"
+        }
+      ],
+      "default": "center",
+      "label": "t:sections.announcement-bar.settings.announcement_position.label",
+      "info": "t:sections.announcement-bar.settings.announcement_position.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "autoplay",
+      "default": true,
+      "label": "t:sections.announcement-bar.settings.autoplay.label"
+    },
+    {
+      "type": "range",
+      "id": "autoplay_speed",
+      "label": "t:sections.announcement-bar.settings.autoplay_speed.label",
+      "max": 10,
+      "min": 3,
+      "step": 1,
+      "unit": "s",
+      "default": 5
+    },
+    {
+      "type": "checkbox",
+      "id": "show_navigation",
+      "default": false,
+      "label": "t:sections.announcement-bar.settings.show_navigation.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label",
+      "default": "#fafafa"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label",
+      "default": "#1f1f1f"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label",
+      "default": "#ffddbf"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "hide_homepage",
+      "label": "t:sections.announcement-bar.settings.hide_homepage.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "announcement",
+      "name": "t:sections.announcement-bar.blocks.announcement.name",
+      "limit": 3,
+      "settings": [
+        {
+          "type": "select",
+          "id": "icon",
+          "label": "t:sections.global.settings.icon.label",
+          "default": "none",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.global.settings.icon.options__1.label"
+            },
+            {
+              "value": "alert",
+              "label": "t:sections.global.settings.icon.options__2.label"
+            },
+            {
+              "value": "award",
+              "label": "t:sections.global.settings.icon.options__3.label"
+            },
+            {
+              "value": "bag",
+              "label": "t:sections.global.settings.icon.options__4.label"
+            },
+            {
+              "value": "box",
+              "label": "t:sections.global.settings.icon.options__5.label"
+            },
+            {
+              "value": "briefcase",
+              "label": "t:sections.global.settings.icon.options__6.label"
+            },
+            {
+              "value": "calendar",
+              "label": "t:sections.global.settings.icon.options__7.label"
+            },
+            {
+              "value": "chat_bubble",
+              "label": "t:sections.global.settings.icon.options__8.label"
+            },
+            {
+              "value": "check_mark",
+              "label": "t:sections.global.settings.icon.options__9.label"
+            },
+            {
+              "value": "clipboard",
+              "label": "t:sections.global.settings.icon.options__10.label"
+            },
+            {
+              "value": "cosmetics",
+              "label": "t:sections.global.settings.icon.options__11.label"
+            },
+            {
+              "value": "creadit_card",
+              "label": "t:sections.global.settings.icon.options__12.label"
+            },
+            {
+              "value": "dairy",
+              "label": "t:sections.global.settings.icon.options__13.label"
+            },
+            {
+              "value": "dairy_free",
+              "label": "t:sections.global.settings.icon.options__14.label"
+            },
+            {
+              "value": "devices",
+              "label": "t:sections.global.settings.icon.options__15.label"
+            },
+            {
+              "value": "email",
+              "label": "t:sections.global.settings.icon.options__16.label"
+            },
+            {
+              "value": "eye",
+              "label": "t:sections.global.settings.icon.options__17.label"
+            },
+            {
+              "value": "file_text",
+              "label": "t:sections.global.settings.icon.options__18.label"
+            },
+            {
+              "value": "gift",
+              "label": "t:sections.global.settings.icon.options__19.label"
+            },
+            {
+              "value": "gluten",
+              "label": "t:sections.global.settings.icon.options__20.label"
+            },
+            {
+              "value": "gluten_free",
+              "label": "t:sections.global.settings.icon.options__21.label"
+            },
+            {
+              "value": "headphone",
+              "label": "t:sections.global.settings.icon.options__22.label"
+            },
+            {
+              "value": "heart",
+              "label": "t:sections.global.settings.icon.options__23.label"
+            },
+            {
+              "value": "iron",
+              "label": "t:sections.global.settings.icon.options__24.label"
+            },
+            {
+              "value": "lightning",
+              "label": "t:sections.global.settings.icon.options__25.label"
+            },
+            {
+              "value": "lock",
+              "label": "t:sections.global.settings.icon.options__26.label"
+            },
+            {
+              "value": "map_pin",
+              "label": "t:sections.global.settings.icon.options__27.label"
+            },
+            {
+              "value": "newspaper",
+              "label": "t:sections.global.settings.icon.options__28.label"
+            },
+            {
+              "value": "organic",
+              "label": "t:sections.global.settings.icon.options__29.label"
+            },
+            {
+              "value": "perfume",
+              "label": "t:sections.global.settings.icon.options__30.label"
+            },
+            {
+              "value": "phone",
+              "label": "t:sections.global.settings.icon.options__31.label"
+            },
+            {
+              "value": "plane",
+              "label": "t:sections.global.settings.icon.options__32.label"
+            },
+            {
+              "value": "planet",
+              "label": "t:sections.global.settings.icon.options__33.label"
+            },
+            {
+              "value": "planet_2",
+              "label": "t:sections.global.settings.icon.options__34.label"
+            },
+            {
+              "value": "recycling",
+              "label": "t:sections.global.settings.icon.options__35.label"
+            },
+            {
+              "value": "return",
+              "label": "t:sections.global.settings.icon.options__36.label"
+            },
+            {
+              "value": "rocket",
+              "label": "t:sections.global.settings.icon.options__37.label"
+            },
+            {
+              "value": "ruler",
+              "label": "t:sections.global.settings.icon.options__38.label"
+            },
+            {
+              "value": "ruler_2",
+              "label": "t:sections.global.settings.icon.options__39.label"
+            },
+            {
+              "value": "ruler_3",
+              "label": "t:sections.global.settings.icon.options__40.label"
+            },
+            {
+              "value": "sale",
+              "label": "t:sections.global.settings.icon.options__41.label"
+            },
+            {
+              "value": "shield",
+              "label": "t:sections.global.settings.icon.options__42.label"
+            },
+            {
+              "value": "shirt",
+              "label": "t:sections.global.settings.icon.options__43.label"
+            },
+            {
+              "value": "shoe",
+              "label": "t:sections.global.settings.icon.options__44.label"
+            },
+            {
+              "value": "star",
+              "label": "t:sections.global.settings.icon.options__45.label"
+            },
+            {
+              "value": "support",
+              "label": "t:sections.global.settings.icon.options__46.label"
+            },
+            {
+              "value": "swatchbook",
+              "label": "t:sections.global.settings.icon.options__47.label"
+            },
+            {
+              "value": "tag",
+              "label": "t:sections.global.settings.icon.options__48.label"
+            },
+            {
+              "value": "tags",
+              "label": "t:sections.global.settings.icon.options__49.label"
+            },
+            {
+              "value": "time",
+              "label": "t:sections.global.settings.icon.options__50.label"
+            },
+            {
+              "value": "trophy",
+              "label": "t:sections.global.settings.icon.options__51.label"
+            },
+            {
+              "value": "truck",
+              "label": "t:sections.global.settings.icon.options__52.label"
+            },
+            {
+              "value": "users",
+              "label": "t:sections.global.settings.icon.options__53.label"
+            },
+            {
+              "value": "wallet",
+              "label": "t:sections.global.settings.icon.options__54.label"
+            },
+            {
+              "value": "wash",
+              "label": "t:sections.global.settings.icon.options__55.label"
+            },
+            {
+              "value": "watch",
+              "label": "t:sections.global.settings.icon.options__56.label"
+            },
+            {
+              "value": "wrench",
+              "label": "t:sections.global.settings.icon.options__57.label"
+            }
+          ]
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text",
+          "label": "t:sections.global.settings.text.label",
+          "default": "Welcome to our store"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.global.settings.link.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__mobile.content"
+        },
+        {
+          "type": "checkbox",
+          "id": "hide_icon_mobile",
+          "default": true,
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.hide_icon_mobile.label"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "text_mobile",
+          "label": "t:sections.announcement-bar.blocks.announcement.settings.text_mobile.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__highlight.content",
+          "info": "t:sections.global.settings.header__highlight.info"
+        },
+        {
+          "type": "select",
+          "id": "highlighted_text",
+          "options": [
+            {
+              "value": "none",
+              "label": "t:sections.global.settings.highlighted_text.options__1.label"
+            },
+            {
+              "value": "text",
+              "label": "t:sections.global.settings.highlighted_text.options__2.label"
+            },
+            {
+              "value": "full_text",
+              "label": "t:sections.global.settings.highlighted_text.options__3.label"
+            },
+            {
+              "value": "half_text",
+              "label": "t:sections.global.settings.highlighted_text.options__4.label"
+            },
+            {
+              "value": "underline",
+              "label": "t:sections.global.settings.highlighted_text.options__5.label"
+            },
+            {
+              "value": "stencil",
+              "label": "t:sections.global.settings.highlighted_text.options__6.label"
+            },
+            {
+              "value": "scribble",
+              "label": "t:sections.global.settings.highlighted_text.options__7.label"
+            }
+          ],
+          "default": "none",
+          "label": "t:sections.global.settings.highlighted_text.label"
+        },
+        {
+          "type": "select",
+          "id": "highlighted_scribble",
+          "options": [
+            {
+              "value": "circle",
+              "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+            },
+            {
+              "value": "basic-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+            },
+            {
+              "value": "sketch-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+            },
+            {
+              "value": "squiggle-underline",
+              "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+            },
+            {
+              "value": "squiggle-underline-2",
+              "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+            }
+          ],
+          "default": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.label",
+          "info": "t:sections.global.settings.highlighted_scribble.info"
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "header"
+    ]
+  }
+}
+{% endschema %}

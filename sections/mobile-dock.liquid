@@ -1,0 +1,292 @@
+{%- if section.blocks.size > 0 -%}
+  <style>
+    #shopify-section-{{ section.id }} {
+      --section-padding-top: {{ section.settings.padding_top }}px;
+      --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+      {%- render 'section-variables', section: section -%}
+    }
+  </style>
+
+  <link rel="stylesheet" href="{{ 'mobile-dock.css' | asset_url }}" media="print" onload="this.media='all'">
+  <noscript>{{ 'mobile-dock.css' | asset_url | stylesheet_tag }}</noscript>
+  <script src="{{ 'mobile-dock.js' | asset_url }}" defer="defer"></script>
+
+  <mobile-dock class="mobile-dock mobile-dock--{{ section.blocks.size }}-col fixed z-25 left-0 bottom-0 w-full flex invisible{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}">
+    {%- for block in section.blocks -%}
+      {%- case block.type -%}
+        {%- when 'account' -%}
+          <a class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" href="{% if customer %}{{ routes.account_url }}{% else %}{{ routes.account_login_url }}{% endif %}" rel="nofollow" {{ block.shopify_attributes }}>
+            {%- liquid
+              if block.settings.custom_icon != blank
+                echo block.settings.custom_icon
+              else
+                render 'icon-dock', icon: 'account', size: 'sm'
+              endif
+            -%}
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+          </a>
+
+        {%- when 'cart' -%}
+          <a class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" href="{{ routes.cart_url }}" aria-controls="CartDrawer" aria-expanded="false" {{ block.shopify_attributes }}>
+            <span class="relative">
+              {%- liquid
+                if block.settings.custom_icon != blank
+                  echo block.settings.custom_icon
+                else
+                  render 'icon-dock', icon: 'cart', size: 'sm'
+                endif
+              -%}
+              <cart-count class="count absolute text-3xs leading-none" aria-label="{{ 'general.cart.cart_count' | t: count: cart.item_count | escape }}"{% if cart == empty %} hidden{% endif %}>{{ cart.item_count }}</cart-count>
+            </span>
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+          </a>
+
+        {%- when 'home' -%}
+          <a class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" href="{{ routes.root_url }}" {{ block.shopify_attributes }}>
+            {%- liquid
+              if block.settings.custom_icon != blank
+                echo block.settings.custom_icon
+              else
+                render 'icon-dock', icon: 'home', size: 'sm'
+              endif
+            -%}
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+          </a>
+
+        {%- when 'menu' -%}
+          <button type="button" class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" aria-controls="MenuDrawer" aria-expanded="false" {{ block.shopify_attributes }}>
+            {%- liquid
+              if block.settings.custom_icon != blank
+                echo block.settings.custom_icon
+              else
+                render 'icon-dock', icon: 'hamburger', size: 'sm'
+              endif
+            -%}
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+            </button>
+
+        {%- when 'search' -%}
+          <a class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" href="{{ routes.search_url }}" aria-controls="SearchDrawer" aria-expanded="false" {{ block.shopify_attributes }}>
+            {%- liquid
+              if block.settings.custom_icon != blank
+                echo block.settings.custom_icon
+              else
+                render 'icon-dock', icon: 'search', size: 'sm'
+              endif
+            -%}
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+            </a>
+
+        {%- when 'link' -%}
+          <a class="dock__item flex flex-col items-center justify-center gap-1d5 grow shrink-0 cursor-pointer" href="{{ block.settings.link }}"{% if block.settings.external %} target="_blank" rel="noopener"{% endif %} {{ block.shopify_attributes }}>
+            {%- liquid
+              if block.settings.custom_icon != blank
+                echo block.settings.custom_icon
+              else
+                render 'icon-dock', icon: 'grid', size: 'sm'
+              endif
+            -%}
+            <span class="text-3xs leading-none">{{ block.settings.title | escape }}</span>
+          </a>
+      {%- endcase %}
+    {%- endfor %}
+  </mobile-dock>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:sections.mobile-dock.name",
+  "class": "mobile-dock-section",
+  "limit": 1,
+  "max_blocks": 6,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 12
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 60,
+      "step": 2,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 6
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "account",
+      "name": "t:sections.mobile-dock.blocks.account.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Account",
+          "label": "t:sections.global.settings.title.label"
+        }
+      ]
+    },
+    {
+      "type": "cart",
+      "name": "t:sections.mobile-dock.blocks.cart.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Cart",
+          "label": "t:sections.global.settings.title.label"
+        }
+      ]
+    },
+    {
+      "type": "home",
+      "name": "t:sections.mobile-dock.blocks.home.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Home",
+          "label": "t:sections.global.settings.title.label"
+        }
+      ]
+    },
+    {
+      "type": "menu",
+      "name": "t:sections.mobile-dock.blocks.menu.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Menu",
+          "label": "t:sections.global.settings.title.label"
+        }
+      ]
+    },
+    {
+      "type": "search",
+      "name": "t:sections.mobile-dock.blocks.search.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Search",
+          "label": "t:sections.global.settings.title.label"
+        }
+      ]
+    },
+    {
+      "type": "link",
+      "name": "t:sections.mobile-dock.blocks.link.name",
+      "settings": [
+        {
+          "type": "html",
+          "id": "custom_icon",
+          "label": "t:sections.mobile-dock.blocks.link.settings.custom_icon.label",
+          "info": "t:sections.mobile-dock.blocks.link.settings.custom_icon.info"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "default": "Link",
+          "label": "t:sections.global.settings.title.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.mobile-dock.blocks.link.settings.link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        }
+      ]
+    }
+  ],
+  "enabled_on": {
+    "groups": [
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

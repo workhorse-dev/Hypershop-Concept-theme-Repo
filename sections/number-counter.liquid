@@ -1,0 +1,258 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    --section-blocks-count: {{ section.blocks.size }};
+  }
+
+  @media screen and (min-width: 1024px) {
+    #shopify-section-{{ section.id }} .multicolumn {
+      --card-grid-gap: {% if section.settings.gap == 'small' %}var(--sp-4){% elsif section.settings.gap == 'medium' %}var(--sp-6){% else %}clamp(40px, 3.5vw, 60px){% endif %};
+    }
+  }
+  
+  #shopify-section-{{ section.id }} .counter-heading {
+    {%- if section.settings.color_highlight != blank and section.settings.color_highlight != 'rgba(0,0,0,0)' -%}
+      --color-highlight: {{ section.settings.color_highlight.rgb }};
+      color: rgb(var(--color-highlight));
+    {%- endif -%}
+    {%- if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)' -%}
+      --gradient-highlight: {{ section.settings.gradient_highlight }};
+      background-image: var(--gradient-highlight);
+      -webkit-background-clip: text;
+      -webkit-text-fill-color: transparent;
+    {%- endif -%}
+  }
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <slider-element class="grid slider{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+      <div class="multicolumn with-{{ section.blocks.size }} card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative z-1">
+        {%- for block in section.blocks -%}
+          <div class="counter-card card flex gap-5 w-full flex-col items-start xl:flex-row md:text-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment_mobile }}" {{ block.shopify_attributes }}>
+            <div class="grid gap-4 lg:gap-6 w-full">
+              {%- if block.settings.number != blank -%}
+                <p class="counter-heading heading title-lg font-bold leading-none tracking-tight whitespace-nowrap">
+                  <number-counter data-duration="{{ block.settings.duration }}">{{ block.settings.number | escape }}</number-counter>
+                  {{- block.settings.unit | escape -}}
+                </p>
+              {%- endif -%}
+              {%- if block.settings.title != blank -%}
+                <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ block.settings.title }}</p>
+              {%- endif -%}
+            </div>
+          </div>
+        {%- endfor -%}
+      </div>
+    </slider-element>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.number-counter.name",
+  "settings": [
+    {
+      "type": "select",
+      "id": "gap",
+      "options": [
+        {
+          "value": "small",
+          "label": "t:sections.multicolumn.settings.gap.options__1.label"
+        },
+        {
+          "value": "medium",
+          "label": "t:sections.multicolumn.settings.gap.options__2.label"
+        },
+        {
+          "value": "large",
+          "label": "t:sections.multicolumn.settings.gap.options__3.label"
+        }
+      ],
+      "default": "large",
+      "label": "t:sections.multicolumn.settings.gap.label"
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "default": "center",
+      "label": "t:sections.global.settings.text_alignment.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.global.settings.columns_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "t:sections.global.settings.swipe_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment_mobile",
+      "default": "center",
+      "label": "t:sections.global.settings.text_alignment_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "counter",
+      "name": "t:sections.number-counter.blocks.counter.name",
+      "settings": [
+        {
+          "type": "textarea",
+          "id": "title",
+          "label": "t:sections.global.settings.title.label"
+        },
+        {
+          "type": "text",
+          "id": "number",
+          "label": "t:sections.number-counter.blocks.counter.settings.number.label",
+          "default": "100"
+        },
+        {
+          "type": "text",
+          "id": "unit",
+          "label": "t:sections.number-counter.blocks.counter.settings.unit.label"
+        },
+        {
+          "type": "range",
+          "id": "duration",
+          "label": "t:sections.number-counter.blocks.counter.settings.duration.label",
+          "min": 0.5,
+          "max": 5,
+          "step": 0.1,
+          "unit": "s",
+          "default": 2
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.number-counter.presets.name",
+      "blocks": [
+        {
+          "type": "counter"
+        },
+        {
+          "type": "counter"
+        },
+        {
+          "type": "counter"
+        },
+        {
+          "type": "counter"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

@@ -1,0 +1,24 @@
+.volume-pricing {
+  padding: var(--sp-5) var(--sp-6);
+  background-color: rgb(var(--color-foreground) / .045);
+}
+
+.volume-pricing:empty {
+  display: none;
+}
+
+[data-rounded-block=round] .volume-pricing {
+  border-radius: var(--sp-2d5);
+}
+
+.volume-pricing li {
+  padding: var(--sp-2d5) var(--sp-4d5);
+}
+
+.volume-pricing li:nth-child(odd) {
+  background-color: rgb(var(--color-background));
+}
+
+[data-rounded-block=round] .volume-pricing li {
+  border-radius: var(--sp-1d5);
+}

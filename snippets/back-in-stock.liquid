@@ -1,0 +1,168 @@
+{%- comment -%}
+  Renders back-in-stock alert.
+  Accepts:
+  - product: {Object} product object.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+  - show_name: {Boolean} Show form name.
+  - show_phone: {Boolean} Show form phone number.
+  - heading: {String} The heading of the block.
+  - description: {String} The description of the block.
+  - compact: {Boolean} Use compact style.
+
+  Usage:
+  {% render 'back-in-stock', block: block, product: product, section_id: section.id %}
+{%- endcomment -%}
+
+{%- liquid
+  assign form_id = 'ContactForm-' | append: section.id | append: '-' | append: product_id
+  assign return_to = product.selected_variant.url | default: product.url
+-%}
+{%- form 'contact', id: form_id, class: 'grid gap-4d5 md:gap-6' -%}
+  <input type="hidden" name="return_to" value="{{ return_to }}{% if return_to contains '?' %}&{% else %}?{% endif %}contact_posted=true">
+
+  {%- if form.errors -%}
+    <div class="field">
+      {%- liquid
+        assign form_errors = form.errors | default_errors
+        render 'alert', status: 'error', content: form_errors
+      -%}
+    </div>
+  {%- endif -%}
+
+  {%- if form.posted_successfully? -%}
+    <div class="field">
+      {%- liquid
+        assign success_message = 'products.back_in_stock.form.post_success' | t
+        render 'alert', status: 'success', content: success_message
+      -%}
+    </div>
+  {%- endif -%}
+
+  {%- if heading != blank -%}
+    <p class="field heading text-base lg:text-lg xl:text-xl leading-tight">{{ heading | escape }}</p>
+  {%- elsif description != blank -%}
+    <div class="field rte text-base">{{ description }}</div>
+  {%- endif -%}
+
+  {%- if show_name -%}
+    <div class="field">
+      <input
+        class="input is-floating"
+        autocomplete="name"
+        type="text"
+        id="ContactFormName-{{ section.id }}"
+        name="contact[name]"
+        value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+        placeholder="{{ 'products.back_in_stock.form.name' | t | escape }}"
+      />
+      <label class="label is-floating" for="ContactFormName-{{ section.id }}">{{ 'products.back_in_stock.form.name' | t }}</label>
+    </div>
+  {%- endif -%}
+
+  {%- if show_phone -%}
+    <div class="field">
+      <input
+        class="input is-floating"
+        autocomplete="phone"
+        type="text"
+        id="ContactFormPhone-{{ section.id }}"
+        name="contact[phone]"
+        value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+        placeholder="{{ 'products.back_in_stock.form.phone' | t | escape }}"
+      />
+      <label class="label is-floating" for="ContactFormPhone-{{ section.id }}">{{ 'products.back_in_stock.form.phone' | t }}</label>
+    </div>
+  {%- endif -%}
+
+  <div class="field">
+    <input
+      class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+      autocomplete="email"
+      type="email"
+      id="ContactFormEmail-{{ section.id }}"
+      name="contact[email]"
+      spellcheck="false"
+      autocapitalize="off"
+      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+      placeholder="{{ 'products.back_in_stock.form.email' | t | escape }}"
+      required
+    >
+    <label class="label is-floating" for="ContactFormEmail-{{ section.id }}">{{- 'products.back_in_stock.form.email' | t }}</label>
+    {%- if compact -%}
+      <div class="self-submit-button absolute">
+        <button type="submit" class="button button--primary self-button flex justify-center items-center" is="magnet-button" data-magnet="20" aria-label="{{ 'general.newsletter.submit' | t | escape }}">
+          <span class="btn-text">
+            <svg class="icon icon-arrow-right icon-xs transform" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+              <path stroke-linecap="round" stroke-linejoin="round" d="M2 8.00012H14M14 8.00012L9.33333 3.3335M14 8.00012L9.33333 12.6668"></path>
+            </svg>
+          </span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+
+  {%- if heading != blank and description != blank -%}
+    <div class="field rte text-sm">{{ description }}</div>
+  {%- endif -%}
+
+  <div class="field" hidden>
+    <textarea
+      class="textarea is-floating"
+      rows="5"
+      id="ContactFormMessage-{{ section.id }}"
+      name="contact[{{ 'products.back_in_stock.form.message' | t }}]"
+      placeholder=" "
+    >
+      {%- liquid
+        echo product.title | escape
+        echo '&#13;&#10;'
+
+        unless product.has_only_default_variant
+          for option in product.options_with_values
+            echo option.name | escape
+            echo ':&nbsp;'
+
+            for value in option.values
+              if option.selected_value == value
+                echo value | escape
+              endif
+            endfor
+
+            unless forloop.last
+              echo ',&nbsp;'
+            endunless
+          endfor
+
+          echo '&#13;&#10;'
+        endunless
+
+        echo '&#13;&#10;'
+        echo return_to | prepend: shop.url
+      -%}
+    </textarea>
+    <label class="label is-floating" for="ContactFormMessage-{{ section.id }}">{{ 'products.back_in_stock.form.message' | t }}</label>
+  </div>
+
+  {%- unless compact -%}
+    <div class="field">
+      <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'products.back_in_stock.form.send' | t }}</label>
+      <button type="submit" id="ContactSubmit-{{ section.id }}" class="button button--primary button--fixed" is="hover-button">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">{{ 'products.back_in_stock.form.send' | t }}</span>
+      </button>
+    </div>
+  {%- endunless -%}
+
+  {%- comment -%}
+    Remove the following three lines of code to remove the note
+    about being protected by Google's reCAPTCHA service.
+    By removing it, the small reCAPTCHA widget will appear in the
+    bottom right corner of the page.
+  {%- endcomment -%}
+  <div class="field rte text-sm">
+    {% # theme-check-disable TranslationKeyExists %}
+    {{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}
+    {% # theme-check-enable TranslationKeyExists %}
+  </div>
+{%- endform -%}

@@ -1,0 +1,187 @@
+{%- comment -%}
+  IMPLEMENTATION NOTE: this feature allows to connect different products on the same page. It is therefore
+  visually similar to a variant picker, although it does not share the functionality
+{%- endcomment -%}
+
+{%- liquid
+  assign contains_product = false
+
+  for product_variation in block.settings.products
+    if product_variation == product
+      assign contains_product = true
+      break
+    endif
+  endfor
+-%}
+
+{%- if contains_product -%}
+  {%- liquid
+    assign is_color = false
+    if block.settings.enable_color_swatches
+      assign swatch_file_extension = 'png'
+      assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
+      assign downcased_option = block.settings.option_name | downcase
+      for trigger in swatch_trigger_list
+        assign swatch_trigger = trigger | strip
+        if downcased_option contains swatch_trigger
+          assign is_color = true
+        elsif swatch_trigger == 'color' and downcased_option contains 'colour'
+          assign is_color = true
+        endif
+
+        if is_color == true
+          break
+        endif
+      endfor
+    endif
+
+    assign is_size = false
+    if block.settings.size_chart != blank
+      assign size_trigger = 'products.general.size_trigger' | t | downcase
+      assign downcased_option = block.settings.option_name | downcase
+      if downcased_option contains size_trigger
+        assign is_size = true
+      endif
+    endif
+
+  -%}
+  <div class="variant-picker grid gap-5">
+    <fieldset class="product-form__input variant-input-wrapper">
+      <legend class="sr-only">{{ block.settings.option_name | escape }}</legend>
+      {%- liquid
+        assign metafield_parts = block.settings.option_value_metafield | split: '.'
+        assign metafield_namespace = metafield_parts | first
+        assign metafield_key = metafield_parts | last
+      -%}
+      <div class="form__label flex items-center justify-between gap-2 w-full">
+        <div class="flex gap-2">{{ block.settings.option_name | escape }}:
+          <span class="font-medium">{{ product.metafields[metafield_namespace][metafield_key].value | escape }}</span>
+        </div>
+        {%- if is_size -%}
+          <div class="flex items-center gap-2">
+            {%- render 'icon', icon: 'ruler', size: 'xs', class: 'stroke-1' -%}
+            <button type="button" class="link text-sm leading-tight cursor-pointer" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false">
+              {{- 'products.general.size_chart' | t -}}
+            </button>
+            <x-modal id="SizeChart-{{ section_id }}-{{ product_id }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+              role="dialog"
+              aria-modal="true"
+              aria-label="{{ block.settings.size_chart.title | escape }}"
+              hidden
+            >
+              <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+              <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                  <span class="drawer__title heading title-md">{{ block.settings.size_chart.title | escape }}</span>
+                  <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- render 'icon', icon: 'close', size: 'sm' -%}
+                    </span>
+                  </button>
+                </gesture-element>
+                <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                  <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                    <div class="rte text-base md:text-lg">{{ block.settings.size_chart.content }}</div>
+                  </div>
+                </div>
+              </div>
+            </x-modal>
+          </div>
+        {%- endif -%}
+      </div>
+      <ul class="swatches swatches--{{ settings.rounded_swatch }}{% if block.settings.color_swatch_type == 'variant' %} swatches--variant{% endif %} flex items-start flex-wrap gap-4">
+        {%- for product_variation in block.settings.products -%}
+          {%- liquid
+            assign value = product_variation.metafields[metafield_namespace][metafield_key].value
+            if product_variation == product
+              assign selected = true
+            else
+              assign selected = false
+            endif
+          -%}
+          <li>
+            <a href="{{ product_variation.url }}" class="block" is="magnet-link">
+              <input
+                type="radio"
+                class="sr-only"
+                id="{{ section_id }}-{{ product_id }}-{{ block.settings.option_name | handle }}-{{ forloop.index0 }}"
+                {% if selected %}checked{% endif %}
+                tabindex="-1"
+              />
+              {%- if is_color or value.swatch != blank -%}
+                {%- liquid
+                  if value.swatch == blank
+                    assign file_extension = swatch_file_extension | default: 'png'
+                    assign file_name = value | handle | append: '.' | append: file_extension
+                    assign swatch_fallback = value | split: ' ' | last | handle
+                    assign swatch_fallback_override = false
+    
+                    if settings.swatch_config != blank
+                      assign value_downcase = value | downcase
+                      assign swatch_config = settings.swatch_config | newline_to_br | split: '<br />'
+                      for swatch in swatch_config
+                        assign swatch_parts = swatch | strip | split: ':'
+                        assign swatch_name = swatch_parts.first | downcase | strip
+      
+                        if swatch_name == value_downcase
+                          assign swatch_value = swatch_parts.last | strip
+                          if swatch_value contains '#'
+                            assign swatch_fallback = swatch_value
+                            assign swatch_fallback_override = true
+                          else
+                            assign file_name = swatch_value
+                          endif
+                          break
+                        endif
+                      endfor
+                    endif
+    
+                    assign swatch_image = blank
+                    if images[file_name] != blank
+                      assign swatch_image = images[file_name] | image_url: width: 72
+                    elsif file_name contains '//cdn.shopify.com/'
+                      assign swatch_image = file_name
+                    endif
+                  else
+                    assign swatch_image = blank
+                    assign swatch_fallback = value | split: ' ' | last | handle
+                    if value.swatch.image
+                      assign swatch_image = value.swatch.image | image_url: width: 72
+                      assign swatch_fallback_override = false
+                    elsif value.swatch.color
+                      assign swatch_fallback = value.swatch.color
+                    endif
+                  endif
+  
+                  if block.settings.color_swatch_type == 'variant'
+                    if product_variation.featured_media
+                      assign swatch_image = product_variation.featured_media | image_url: width: 144
+                      assign swatch_fallback_override = false
+                    endif
+                  endif
+                -%}
+                <label
+                  for="{{ section_id }}-{{ product_id }}-{{ block.settings.option_name | handle }}-{{ forloop.index0 }}"
+                  class="color-swatch{% if swatch_image != blank %} with-image{% endif %} relative pointer-events-none{% if block.settings.color_swatch_type == 'variant' and swatch_image != blank %} aspect-{{ image_ratio }} mobile:aspect-{{ image_ratio_mobile }}{% unless image_fill %} aspect-contain{% endunless %}{% endif %}"
+                  title="{{ value | escape }}"
+                  style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}"
+                >
+                  <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ value | escape }}</span>
+                </label>
+              {%- else -%}
+                <label
+                  for="{{ section_id }}-{{ product_id }}-{{ block.settings.option_name | handle }}-{{ forloop.index0 }}"
+                  class="label-swatch text-sm font-medium leading-none cursor-pointer relative pointer-events-none"
+                  title="{{ value | escape }}"
+                >
+                  {{- value -}}
+                </label>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endfor -%}
+      </ul>
+    </fieldset>
+  </div>
+{%- endif -%}

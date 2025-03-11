@@ -1,0 +1,22 @@
+<div class="card product-card product-card--{{ settings.card_style }} flex flex-col leading-none relative overflow-hidden">
+  <div class="product-card__media relative h-auto overflow-hidden">
+    <a class="block relative media media--{{ image_ratio }}" href="#" aria-label="{{ 'onboarding.product_title' | t | escape }}" tabindex="-1">
+      {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+    </a>
+  </div>
+  <div class="product-card__content grow flex flex-col justify-start text-{{ text_alignment }}">
+    {%- if show_vendor -%}
+      <div class="product-card__top w-full">
+        <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
+        <span class="caption reversed-link uppercase leading-none tracking-widest">{{ 'products.product.vendor' | t }}</span>
+      </div>
+    {%- endif -%}
+
+    <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+      <p class="grow">
+        <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="#">{{ 'onboarding.product_title' | t }}</a>
+      </p>
+      {%- render 'product-price', placeholder: true, class: 'flex flex-wrap flex-row-reverse gap-2 md:gap-1d5' -%}
+    </div>
+  </div>
+</div>

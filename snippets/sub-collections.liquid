@@ -1,0 +1,37 @@
+<div class="grow">
+  <ul class="subcollections inline-flex flex-wrap max-w-full">
+    {%- if parent_link != blank -%}
+      <li class="flex items-center justify-center relative active">
+        <a class="subcollection block flex items-center relative leading-tight text-lg-2xl" href="{{ parent_link.url }}">
+          <span class="btn-text">
+            {{- 'collections.subcollections.all_products' | t: collection: parent_link.title -}}
+            {%- if show_count and parent_link.type == 'collection_link' -%}
+              <span class="count absolute text-xs">{{ parent_link.object.all_products_count }}</span>
+            {%- endif -%}
+          </span>
+        </a>
+      </li>
+    {%- endif -%}
+    {%- for sub_collection_link in sub_collection_links -%}
+      {%- if sub_collection_link.type == 'collection_link' -%}
+        {%- unless parent_link.url == sub_collection_link.url -%}
+          <li class="flex items-center justify-center relative">
+            <a class="subcollection{% if sub_collection_link.object.metafields.theme.thumbnail.value != blank %} with-thumbnail{% endif %} block flex items-center relative leading-tight text-lg-2xl" href="{{ sub_collection_link.url }}" is="reveal-link"{% if sub_collection_link.object.metafields.theme.thumbnail.value != blank %} data-magnet="80"{% endif %}>
+              <span class="btn-text">
+                {{- sub_collection_link.title | escape -}}
+                {%- if show_count -%}
+                  <span class="count absolute text-xs">{{ sub_collection_link.object.all_products_count }}</span>
+                {%- endif -%}
+              </span>
+              {%- if sub_collection_link.object.metafields.theme.thumbnail.value != blank -%}
+                <span class="btn-reveal opacity-0 absolute pointer-events-none" data-reveal
+                  style="background-image: url({{ sub_collection_link.object.metafields.theme.thumbnail.value | image_url: width: 400 }});"
+                ></span>
+              {%- endif -%}
+            </a>
+          </li>
+        {%- endunless -%}
+      {%- endif -%}
+    {%- endfor -%}
+  </ul>
+</div>

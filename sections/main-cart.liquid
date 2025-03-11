@@ -1,0 +1,1036 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'cart.css' | asset_url | stylesheet_tag }}
+<script src="{{ 'cart.js' | asset_url }}" defer></script>
+{%- if linklists.gift-wrapping.links != blank and linklists.gift-wrapping.links.first.type == 'product_link' -%}
+  <script src="{{ 'gift-wrapping.js' | asset_url }}" defer="defer"></script>
+{%- endif -%}
+
+<div class="cart{% if cart == empty %} is-empty{% endif %} section{% if cart != empty %} section--padding{% endif %}{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none grid gap-4 md:flex {{ section.settings.heading_alignment }} md:justify-between">
+      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+        <split-words class="split-words block" data-animate="fade-up-large">{{ 'cart.general.title' | t }}</split-words>
+      </{{ section.settings.heading_tag }}>
+      <p>
+        <a class="button button--secondary icon-with-text" href="{{ routes.all_products_collection_url }}" is="hover-link">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- liquid
+              render 'icon', icon: 'return', size: 'sm'
+              echo 'cart.general.continue_shopping' | t
+            -%}
+          </span>
+        </a>
+      </p>
+    </div>
+
+    <div class="empty-state grid items-center justify-center text-center gap-7d5 md:gap-14">
+      <div class="flex flex-col items-center gap-5 md:gap-10">
+        {%- render 'icon', icon: 'empty', size: 'xxxl' -%}
+        <div class="grid gap-5">
+          <p class="heading leading-none tracking-tight">{{ 'cart.general.empty' | t }}</p>
+        </div>
+      </div>
+      <a class="empty-state__link button button--primary button--fixed" href="{{ routes.all_products_collection_url }}" is="hover-link">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">{{ 'cart.general.continue_shopping' | t }}</span>
+      </a>
+    </div>
+    
+    {%- if cart.item_count > 0 -%}
+      {%- liquid
+        if linklists.gift-wrapping.links != blank and linklists.gift-wrapping.links.first.type == 'product_link'
+          assign gift_wrapping = linklists.gift-wrapping.links.first
+      
+          assign gift_wrap_id = gift_wrapping.object.variants.first.id
+          assign gift_wraps_in_cart = 0
+          for item in cart.items
+            if item.id == gift_wrap_id
+              assign gift_wraps_in_cart = item.quantity
+              break
+            endif
+          endfor
+          assign items_in_cart = cart.item_count | minus: gift_wraps_in_cart
+        endif
+      -%}
+      <main-cart id="MainCart-{{ section.id }}" class="cart__content flex flex-col lg:flex-row" data-section-id="{{ section.id }}">
+        <div class="grow flex flex-col gap-8 md:gap-12">
+          <form class="cart__form" action="{{ routes.cart_url }}" method="POST" id="cart">
+            <cart-items class="cart__items block" data-section-id="{{ section.id }}">
+              <table role="table" class="no-headings w-full overflow-visible">
+                <caption class="sr-only">{{ 'cart.general.title' | t }}</caption>
+                <thead>
+                  <tr>
+                    <th colspan="1" scope="col">
+                      {{- 'cart.headings.product' | t -}}
+                    </th>
+                    <th class="hidden md:table-cell" colspan="1" scope="col">
+                      {{- 'cart.headings.quantity' | t -}}
+                    </th>
+                    <th class="text-right hidden md:table-cell" colspan="1" scope="col">
+                      {{- 'cart.headings.total' | t -}}
+                    </th>
+                  </tr>
+                </thead>
+                <tbody>
+                  {%- for item in cart.items -%}
+                    {%- liquid
+                      assign is_gift_wrap_item = false
+
+                      if gift_wrap_id != nil and item.id == gift_wrap_id
+                        assign is_gift_wrap_item = true
+                      endif
+                    -%}
+
+                    {%- capture cart_item -%}
+                      <tr class="cart-item" id="CartItem-{{ item.key }}">
+                        <td>
+                          <div class="flex items-start md:items-center gap-4d5 md:gap-10">
+                            {%- if item.image -%}
+                              <a class="cart-item__media media relative overflow-hidden flex-auto" href="{{ item.url }}" tabindex="-1">
+                                {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+                              </a>
+                            {%- endif -%}
+                            
+                            <div class="cart-item__details grid justify-start gap-1d5">
+                              <div class="grid gap-1">
+                                <div class="block leading-tight">
+                                  {%- if section.settings.show_vendor -%}
+                                    <p class="text-xs text-opacity">{{ item.product.vendor }}</p>
+                                  {%- endif -%}
+                                  <a href="{{ item.url }}" class="cart__item-title reversed-link font-medium text-base leading-tight">{{ item.product.title | escape }}</a>
+                                </div>
+                      
+                                {%- if item.product.has_only_default_variant == false or item.properties.size != 0 or item.selling_plan_allocation != null -%}
+                                  <dl class="grid gap-1d5">
+                                    {%- unless item.product.has_only_default_variant -%}
+                                      {%- for option in item.options_with_values -%}
+                                        <div class="flex gap-1 text-xs text-opacity leading-tight">
+                                          <dt class="sr-only">{{ option.name }}:</dt>
+                                          <dd>{{ option.value }}</dd>
+                                        </div>
+                                      {%- endfor -%}
+                                    {%- endunless -%}
+                      
+                                    {%- for property in item.properties -%}
+                                      {%- assign property_first_char = property.first | slice: 0 -%}
+                                      {%- if property.last != blank and property_first_char != '_' -%}
+                                        <div class="flex gap-1 text-xs text-opacity leading-tight">
+                                          <dt>{{ property.first }}:&nbsp;</dt>
+                                          <dd>
+                                            {%- if property.last contains '/uploads/' -%}
+                                              <a href="{{ property.last }}" class="link" target="_blank" aria-describedby="a11y-new-window-message">
+                                                {{- property.last | split: '/' | last -}}
+                                              </a>
+                                            {%- else -%}
+                                              {{- property.last -}}
+                                            {%- endif -%}
+                                          </dd>
+                                        </div>
+                                      {%- endif -%}
+                                    {%- endfor -%}
+                                  </dl>
+                      
+                                  {%- if item.selling_plan_allocation != null -%}
+                                    <p class="text-xs text-opacity">{{ item.selling_plan_allocation.selling_plan.name }}</p>
+                                  {%- endif -%}
+                                {%- endif -%}
+                              </div>
+                      
+                              <div class="grid gap-1">
+                                <div class="price{% if item.original_price != item.final_price %} price--on-sale{% endif %} text-sm flex flex-wrap gap-1d5">
+                                  {%- liquid
+                                    assign money_price = item.original_price | money
+                                    if settings.currency_code_enabled
+                                      assign money_price = item.original_price | money_with_currency
+                                    endif
+                                  -%}
+                                  {%- if item.original_price != item.final_price -%}
+                                    <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+                                    <span class="price__sale inline-flex items-center relative">{{ money_price }}</span>
+                                    <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+                                    <span class="price__regular whitespace-nowrap">
+                                      {%- liquid
+                                        if settings.currency_code_enabled
+                                          echo item.final_price | money_with_currency
+                                        else
+                                          echo item.final_price | money
+                                        endif
+                                      -%}
+                                    </span>
+                                  {%- else -%}
+                                    <span class="price__regular whitespace-nowrap">{{ money_price }}</span>
+                                  {%- endif -%}
+                      
+                                  {%- if item.variant.available and item.unit_price_measurement -%}
+                                    <span class="sr-only">{{ 'products.price.unit_price' | t }}</span>
+                                    <span class="unit-price flex items-center">
+                                      {%- liquid
+                                        capture unit_price_base_unit
+                                          if item.variant.unit_price_measurement
+                                            if item.variant.unit_price_measurement.reference_value != 1
+                                              echo item.variant.unit_price_measurement.reference_value
+                                            endif
+                                            echo item.variant.unit_price_measurement.reference_unit
+                                          endif
+                                        endcapture
+                                      -%}
+                                      ({{ item.variant.unit_price | money }}
+                                      <span aria-hidden="true">/</span>
+                                      <span class="sr-only">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+                                      {{ unit_price_base_unit }})
+                                      </span>
+                                  {%- endif -%}
+                                </div>
+                      
+                                {%- if item.line_level_discount_allocations != blank -%}
+                                  <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t | escape }}">
+                                    {%- for discount_allocation in item.line_level_discount_allocations -%}
+                                      <li class="discounts__discount text-xs flex flex-wrap items-center gap-1">
+                                        <span class="badge badge--highlight flex items-center gap-1d5 font-medium leading-none rounded-full">{{ discount_allocation.discount_application.title }}</span>
+                                        <span class="badge badge--onsale flex items-center gap-1d5 font-medium leading-none rounded-full">-{{ discount_allocation.amount | money }}</span>
+                                      </li>
+                                    {%- endfor -%}
+                                  </ul>
+                                {%- endif -%}
+                              </div>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td class="cart-item__quantity text-sm text-right md:text-left">
+                          {%- liquid
+                            assign has_qty_rules = false
+                            if item.variant.quantity_rule.increment > 1 or item.variant.quantity_rule.min > 1 or item.variant.quantity_rule.max != null
+                              assign has_qty_rules = true
+                            endif
+      
+                            assign has_vol_pricing = false
+                            if item.variant.quantity_price_breaks.size > 0
+                              assign has_vol_pricing = true
+                            endif
+                          -%}
+                          {%- if has_qty_rules or has_vol_pricing -%}
+                            {%- capture qty_rules_vol_pricing -%}
+                              {%- if has_qty_rules -%}
+                                <div class="quantity__rules text-sm font-medium leading-tight">
+                                  {%- if item.variant.quantity_rule.increment > 1 -%}
+                                    <span class="divider">
+                                      {{- 'products.quantity.multiples_of' | t: quantity: item.variant.quantity_rule.increment -}}
+                                    </span>
+                                  {%- endif -%}
+                                  {%- if item.variant.quantity_rule.min > 1 -%}
+                                    <span class="divider">
+                                      {{- 'products.quantity.min_of' | t: quantity: item.variant.quantity_rule.min -}}
+                                    </span>
+                                  {%- endif -%}
+                                  {%- if item.variant.quantity_rule.max != null -%}
+                                    <span class="divider">
+                                      {{- 'products.quantity.max_of' | t: quantity: item.variant.quantity_rule.max -}}
+                                    </span>
+                                  {%- endif -%}
+                                </div>
+                              {%- endif -%}
+                              {%- if has_vol_pricing -%}
+                                {{ 'volume-pricing.css' | asset_url | stylesheet_tag }}
+                                <volume-pricing class="volume-pricing grid gap-6">
+                                  <span class="caption-large font-medium">{{ 'products.volume_pricing.title' | t }}</span>
+                                  <ul class="list-unstyled">
+                                    <li class="text-sm flex gap-2d5 justify-between">
+                                      <span class="font-medium">{{ item.variant.quantity_rule.min }}+</span>
+                                      {%- assign price = item.variant.price | money_with_currency -%}
+                                      <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
+                                    </li>
+                                    {%- for price_break in item.variant.quantity_price_breaks -%}
+                                      <li class="text-sm flex gap-2d5 justify-between">
+                                        <span class="font-medium">
+                                          {{- price_break.minimum_quantity -}}
+                                          <span aria-hidden="true">+</span>
+                                        </span>
+                                        {%- assign price = price_break.price | money_with_currency -%}
+                                        <span> {{ 'sections.quick_order_list.each' | t: money: price }}</span>
+                                      </li>
+                                    {%- endfor -%}
+                                  </ul>
+                                </volume-pricing>
+                              {%- endif -%}
+                            {%- endcapture -%}
+                          {%- endif -%}
+                          <div class="cart-quantity__info grid md:flex items-center justify-end md:justify-start gap-3 md:gap-4">
+                            {%- if has_qty_rules or has_vol_pricing -%}
+                              <button type="button" class="hotspot hidden md:flex items-center justify-center relative cursor-pointer">
+                                {%- render 'icon', icon: 'info', size: 'lg' -%}
+                                <div class="hotspot__content grid gap-6 items-center absolute z-1 pointer-events-none overflow-hidden text-left">
+                                  {{- qty_rules_vol_pricing -}}
+                                </div>
+                              </button>
+                            {%- endif -%}
+                            {%- unless is_gift_wrap_item -%}
+                              <div class="flex gap-3">
+                                {%- if has_qty_rules or has_vol_pricing -%}
+                                  <button type="button" class="md:hidden flex items-center justify-center" aria-controls="VolumePricing-{{ section.id }}-{{ item.key }}" aria-expanded="false">
+                                    {%- render 'icon', icon: 'info', size: 'sm' -%}
+                                  </button>
+                                  <x-modal id="VolumePricing-{{ section.id }}-{{ item.key }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+                                    role="dialog"
+                                    aria-modal="true"
+                                    aria-label="{{ item.product.title | escape }}"
+                                    hidden
+                                  >
+                                    <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="VolumePricing-{{ section.id }}-{{ item.key }}" aria-expanded="false"></overlay-element>
+                                    <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                                      <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                                        <span class="drawer__title heading title-md grid gap-4">
+                                          {{ item.product.title | escape }}
+                                          {%- unless item.product.has_only_default_variant -%}
+                                            <dl class="grid gap-1d5">
+                                              {%- for option in item.options_with_values -%}
+                                                <div class="flex gap-1 text-xs text-opacity leading-tight">
+                                                  <dt class="sr-only">{{ option.name }}:</dt>
+                                                  <dd>{{ option.value }}</dd>
+                                                </div>
+                                              {%- endfor -%}
+                                            </dl>
+                                          {%- endunless -%}
+                                        </span>
+                                        <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="VolumePricing-{{ section.id }}-{{ item.key }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                                          <span class="btn-fill" data-fill></span>
+                                          <span class="btn-text">
+                                            {%- render 'icon', icon: 'close', size: 'sm' -%}
+                                          </span>
+                                        </button>
+                                      </gesture-element>
+                                      <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                                        <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                                          <div class="text-base md:text-lg grid gap-6">
+                                            {{- qty_rules_vol_pricing -}}
+                                          </div>
+                                        </div>
+                                      </div>
+                                    </div>
+                                  </x-modal>
+                                {%- endif -%}
+                                <quantity-input class="cart-quantity flex items-center relative">
+                                  <label class="sr-only" for="Quantity-{{ section.id }}-{{ item.key }}">
+                                    {{- 'products.quantity.label' | t -}}
+                                  </label>
+                                  <input class="quantity__input input text-center w-full h-full"
+                                    type="number"
+                                    name="updates[]"
+                                    aria-label="{{ 'products.quantity.input_label' | t: product: item.product.title | escape }}"
+                                    id="Quantity-{{ section.id }}-{{ item.key }}"
+                                    data-index="{{ item.key }}"
+                                    inputmode="numeric"
+                                    autocomplete="off"
+                                    data-quantity-variant-id="{{ item.variant.id }}"
+                                    data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                                    min="0"
+                                    data-min="{{ item.variant.quantity_rule.min }}"
+                                    {% if item.variant.quantity_rule.max != null %}
+                                      max="{{ item.variant.quantity_rule.max }}"
+                                    {% endif %}
+                                    step="{{ item.variant.quantity_rule.increment }}"
+                                    value="{{ item.quantity }}"
+                                  />
+                                  <div class="quantity__buttons absolute right-0 hidden lg:flex flex-col items-center justify-center h-full">
+                                    <button type="button" name="plus" class="quantity__button flex justify-center w-full items-end" aria-label="{{ 'products.quantity.increase' | t: product: item.product.title | escape }}">
+                                      {%- render 'icon', icon: 'increase', size: 'sm', class: 'stroke-1' -%}
+                                    </button>
+                                    <button type="button" name="minus" class="quantity__button flex justify-center w-full items-start" aria-label="{{ 'products.quantity.decrease' | t: product: item.product.title | escape }}">
+                                      {%- render 'icon', icon: 'decrease', size: 'sm', class: 'stroke-1' -%}
+                                    </button>
+                                  </div>
+                                </quantity-input>
+                              </div>
+                            {%- else -%}
+                              <div class="cart-quantity flex items-center relative">
+                                <label class="sr-only" for="Quantity-{{ section.id }}-{{ item.key }}">
+                                  {{- 'products.quantity.label' | t -}}
+                                </label>
+                                <input class="quantity__input input text-center w-full h-full"
+                                  type="number"
+                                  name="updates[]"
+                                  aria-label="{{ 'products.quantity.input_label' | t: product: item.product.title | escape }}"
+                                  id="Quantity-{{ section.id }}-{{ item.key }}"
+                                  data-index="{{ item.key }}"
+                                  inputmode="numeric"
+                                  autocomplete="off"
+                                  data-quantity-variant-id="{{ item.variant.id }}"
+                                  data-cart-quantity="{{ cart | item_count_for_variant: item.variant.id }}"
+                                  min="0"
+                                  data-min="{{ item.variant.quantity_rule.min }}"
+                                  {% if item.variant.quantity_rule.max != null %}
+                                    max="{{ item.variant.quantity_rule.max }}"
+                                  {% endif %}
+                                  step="{{ item.variant.quantity_rule.increment }}"
+                                  value="{{ item.quantity }}"
+                                  disabled
+                                />
+                                <div class="quantity__buttons absolute right-0 hidden lg:flex flex-col items-center justify-center h-full sr-only">
+                                  <button type="button" name="plus" class="quantity__button flex justify-center w-full items-end" aria-label="{{ 'products.quantity.increase' | t: product: item.product.title | escape }}" disabled>
+                                    {%- render 'icon', icon: 'increase', size: 'sm', class: 'stroke-1' -%}
+                                  </button>
+                                  <button type="button" name="minus" class="quantity__button flex justify-center w-full items-start" aria-label="{{ 'products.quantity.decrease' | t: product: item.product.title | escape }}" disabled>
+                                    {%- render 'icon', icon: 'decrease', size: 'sm', class: 'stroke-1' -%}
+                                  </button>
+                                </div>
+                              </div>
+                            {%- endunless -%}
+                            <div class="text-xs relative">
+                              <div id="Loader-{{ section.id }}-{{ item.key }}" class="loader absolute right-0 md:left-0" hidden>
+                                {%- render 'icon', icon: 'rotator', size: 'xs', class: 'animate-rotator' -%}
+                              </div>
+                              <a class="link" href="{{ item.url_to_remove }}"{% unless is_gift_wrap_item %} is="cart-remove-button"{% else %} is="remove-gift-wrap"{% endunless %} data-index="{{ item.key }}" data-no-instant>{{ 'cart.general.remove' | t }}</a>
+                            </div>
+                          </div>
+                        </td>
+
+                        <td class="text-right hidden md:table-cell">
+                          <span class="price text-base-xl">
+                            {%- liquid
+                              if settings.currency_code_enabled
+                                echo item.final_line_price | money_with_currency
+                              else
+                                echo item.final_line_price | money
+                              endif
+                            -%}
+                          </span>
+                        </td>
+                      </tr>
+                    {%- endcapture -%}
+
+                    {%- liquid
+                      unless is_gift_wrap_item
+                        echo cart_item
+                      else
+                        assign cart_gift_wrap_item = cart_item
+                      endunless
+                    -%}
+                  {%- endfor -%}
+
+                  {%- liquid
+                    if cart_gift_wrap_item
+                      echo cart_gift_wrap_item
+                    endif
+                  -%}
+                </tbody>
+              </table>
+            </cart-items>
+          </form>
+
+          {%- render 'gift-wrapping',
+            section_id: section.id,
+            gift_wrapping: gift_wrapping,
+            gift_wrap_id: gift_wrap_id,
+            gift_wraps_in_cart: gift_wraps_in_cart,
+            items_in_cart: items_in_cart,
+          -%}
+
+          {%- if section.settings.show_shipping_calculator -%}
+            <div class="cart-details">
+              <details class="details" is="accordion-details">
+                <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                  <span class="text-sm md:text-2xl font-medium leading-none">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
+                  <svg class="icon icon-chevron-down" viewBox="0 0 18 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                    <path stroke-linecap="round" stroke-linejoin="round" d="M1 1L9 9L17 1"></path>
+                  </svg>
+                </summary>
+                <form class="details__content grid gap-4 md:gap-6" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
+                  <div class="grid xl:flex gap-4">
+                    <country-province class="grid xl:flex gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
+                      <div class="field">
+                        <select
+                          name="address[country]"
+                          class="select is-floating"
+                          autocomplete="country"
+                          is="custom-select"
+                          id="ShippingCalculatorCountry-{{ section.id }}"
+                        >
+                          {{- all_country_option_tags -}}
+                        </select>
+                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                        <label class="label is-floating" for="ShippingCalculatorCountry-{{ section.id }}">{{ 'customer.addresses.country' | t }}</label>
+                      </div>
+                      <div class="field" hidden>
+                        <select
+                          name="address[province]"
+                          class="select is-floating"
+                          autocomplete="address-level1"
+                          is="custom-select"
+                          id="ShippingCalculatorProvince-{{ section.id }}"
+                        >
+                        </select>
+                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                        <label class="label is-floating" for="ShippingCalculatorProvince-{{ section.id }}">{{ 'customer.addresses.province' | t }}</label>
+                      </div>
+                    </country-province>
+                    <div class="field">
+                      <input
+                        name="address[zip]"
+                        class="input is-floating"
+                        type="text"
+                        autocapitalize="characters"
+                        autocomplete="postal-code"
+                        placeholder=" "
+                        id="ShippingCalculatorZip-{{ section.id }}"
+                        {% if shop.customer_accounts_enabled and customer %}value="{{ customer.default_address.zip }}"{% endif %}
+                      />
+                      <label class="label is-floating" for="ShippingCalculatorZip-{{ section.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                    </div>
+                    <div class="justify-self-start">
+                      <button class="button button--secondary button--fixed" type="submit" is="hover-button">
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">{{ 'general.cart.shipping_calculator.button' | t }}</span>
+                      </button>
+                    </div>
+                  </div>
+                  <div class="grid gap-3 text-sm"></div>
+                </form>
+              </details>
+            </div>
+          {%- endif -%}
+        </div>
+
+        <div class="grow-0">
+          <sticky-element class="flex flex-col gap-7d5 sticky top-0">
+            <div class="cart__sidebar flex flex-col gap-7d5 md:gap-10">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when '@app' -%}
+                    {%- render block -%}
+                  
+                  {%- when 'subtotal' -%}
+                    <div class="grid gap-3" {{ block.shopify_attributes }}>
+                      {%- if cart.cart_level_discount_applications.size > 0 -%}
+                        <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t | escape }}">
+                          {%- for discount in cart.cart_level_discount_applications -%}
+                            <li class="discounts__discount text-sm sm:text-base flex flex-wrap items-center justify-between gap-1d5">
+                              {{- discount.title -}}
+                              <span class="badge badge--onsale flex items-center gap-1d5 font-medium leading-none rounded-full">-{{ discount.total_allocated_amount | money }}</span>
+                            </li>
+                          {%- endfor -%}
+                        </ul>
+                      {%- endif -%}
+
+                      <div class="totals flex flex-wrap items-end justify-between gap-2">
+                        <h2 class="totals__subtotal font-medium text-base-xl md:text-2xl leading-none">{{ 'cart.general.subtotal' | t }}</h2>
+                        <p class="totals__subtotal-value font-bold text-2xl md:text-3xl leading-none">{{ cart.total_price | money_with_currency }}</p>
+                      </div>
+
+                      <div class="tax-note text-opacity text-2sm rte">
+                        {%- liquid
+                          if cart.taxes_included and shop.shipping_policy.body != blank
+                            echo 'cart.general.taxes_included_and_shipping_policy_html' | t: link: shop.shipping_policy.url
+                          elsif cart.taxes_included
+                            echo 'cart.general.taxes_included_but_shipping_at_checkout' | t
+                          elsif shop.shipping_policy.body != blank
+                            echo 'cart.general.taxes_and_shipping_policy_at_checkout_html' | t: link: shop.shipping_policy.url
+                          else
+                            echo 'cart.general.taxes_and_shipping_at_checkout' | t
+                          endif
+                        -%}
+                      </div>
+                    </div>
+
+                  {%- when 'cart_note' -%}
+                    <cart-note class="grid gap-3 cart-note" {{ block.shopify_attributes }}>
+                      <p class="font-medium leading-tight">{{ block.settings.heading | escape }}</p>
+                      <div class="field">
+                        <textarea
+                          class="textarea is-floating"
+                          rows="4"
+                          id="CartNotForm-{{ block.id }}"
+                          name="note"
+                          form="cart"
+                          placeholder=" "
+                        >{{ cart.note }}</textarea>
+                        <label class="label is-floating" for="CartNotForm-{{ block.id }}">{{ 'cart.general.note' | t }}</label>
+                      </div>
+                    </cart-note>
+
+                  {%- when 'buttons' -%}
+                    <div class="grid gap-3" {{ block.shopify_attributes }}>
+                      <noscript>
+                        <button class="button button--secondary w-full" type="submit" name="update" form="cart">
+                          {{- 'cart.general.update' | t -}}
+                        </button>
+                      </noscript>
+
+                      <button class="button button--primary icon-with-text w-full" type="submit" name="checkout" form="cart" is="hover-button">
+                        <span class="btn-fill" data-fill></span>
+                        <span class="btn-text">
+                          {%- liquid
+                            render 'icon', icon: 'lock', size: 'sm'
+                            echo 'cart.general.checkout' | t
+                          -%}
+                        </span>
+                      </button>
+          
+                      {%- if block.settings.show_accelerated_buttons and additional_checkout_buttons -%}
+                        <div class="additional-checkout-buttons additional-checkout-buttons--vertical">{{ content_for_additional_checkout_buttons }}</div>
+                      {%- endif -%}
+                    </div>
+
+                  {%- when 'free_shipping' -%}
+                    {%- liquid
+                      if block.settings.minimum_amount != blank
+                        assign minimum_amounts = block.settings.minimum_amount | remove: ' '
+                        assign show_free_shipping_bar = false
+              
+                        if minimum_amounts contains ':'
+                          assign minimum_amounts = minimum_amounts | split: ','
+                          for amount in minimum_amounts
+                            assign amount_parts = amount | split: ':'
+                            assign currency_code = amount_parts | first | upcase
+                            if currency_code == cart.currency.iso_code
+                              assign minimum_amount = amount_parts | last
+                              assign show_free_shipping_bar = true
+                              break
+                            endif
+                          endfor
+                        else
+                          assign minimum_amount = minimum_amounts
+                          assign show_free_shipping_bar = true
+                        endif
+                        
+                        if show_free_shipping_bar
+                          render 'free-shipping-bar', minimum_amount: minimum_amount
+                        endif
+                      endif
+                    -%}
+
+                  {%- when 'custom_field' -%}
+                    {%- assign custom_name = block.settings.title | escape -%}
+                    {%- assign custom_value = cart.attributes[custom_name] -%}
+                    <div class="field" {{ block.shopify_attributes }}>
+                      {%- if block.settings.type == 'checkbox' -%}
+                        <label for="CartFormInput-{{ section.id }}-{{ block.id }}" class="flex items-center gap-3">
+                          <input
+                            type="hidden"
+                            name="attributes[{{ custom_name }}]"
+                            form="cart"
+                            value="{{ block.settings.unchecked_value | escape }}"
+                          />
+                          <input
+                            type="checkbox"
+                            id="CartFormInput-{{ section.id }}-{{ block.id }}"
+                            name="attributes[{{ custom_name }}]"
+                            form="cart"
+                            value="{{ block.settings.checked_value | escape }}"
+                            {%- if block.settings.required %} required{% endif -%}
+                          />
+                          {{- block.settings.title | escape -}}
+                        </label>
+                        
+                      {%- elsif block.settings.type == 'radio' -%}
+                        <div class="grid gap-4">
+                          <p>{{ block.settings.title | escape }}</p>
+                          {%- assign options = block.settings.radio_options | split: ',' -%}
+                          {%- if options.size > 0 -%}
+                            <ul class="grid gap-2 leading-none" role="list">
+                              {%- for option in options -%}
+                                {%- assign option_2 = option | strip | escape -%}
+                                <li>
+                                  <label for="CartFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}" class="inline-flex items-center gap-3">
+                                    <input
+                                      type="radio"
+                                      id="CartFormInput-{{ section.id }}-{{ block.id }}-{{ forloop.index0 }}"
+                                      name="attributes[{{ custom_name }}]"
+                                      form="cart"
+                                      value="{{ option_2 }}"
+                                      {%- if block.settings.required %} required{% endif -%}
+                                      {%- if option_2 == custom_value %} checked{% endif -%}
+                                    />
+                                    {{- option_2 -}}
+                                  </label>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          {%- endif -%}
+                        </div>
+
+                      {%- else -%}
+                        {%- case block.settings.type -%}
+                          {%- when 'text' -%}
+                            <input
+                              class="input is-floating"
+                              type="text"
+                              id="CartFormInput-{{ section.id }}-{{ block.id }}"
+                              name="attributes[{{ custom_name }}]"
+                              form="cart"
+                              value="{{ custom_value | escape }}"
+                              placeholder="{{ block.settings.title | escape }}"
+                              {%- if block.settings.required %} required{% endif -%}
+                            />
+                            <label class="label is-floating" for="CartFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+        
+                          {%- when 'textarea' -%}
+                            <textarea
+                              class="textarea is-floating"
+                              rows="4"
+                              id="CartFormInput-{{ section.id }}-{{ block.id }}"
+                              name="attributes[{{ custom_name }}]"
+                              form="cart"
+                              placeholder=" "
+                              {%- if block.settings.required %} required{% endif -%}
+                            >{{ custom_value }}</textarea>
+                            <label class="label is-floating" for="CartFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+        
+                          {%- when 'select' -%}
+                            {%- assign options = block.settings.select_options | split: ',' -%}
+                            {%- if options.size > 0 -%}
+                              <select
+                                class="select is-floating"
+                                id="CartFormInput-{{ section.id }}-{{ block.id }}"
+                                name="attributes[{{ custom_name }}]"
+                                form="cart"
+                                {%- if block.settings.required %} required{% else %} is="custom-select"{% endif -%}
+                              >
+                                <option value="" disabled selected></option>
+                                {%- for option in options -%}
+                                  {%- assign option_2 = option | strip | escape -%}
+                                  <option value="{{ option_2 }}"{% if option_2 == custom_value %} selected{% endif %}>{{ option_2 }}</option>
+                                {%- endfor -%}
+                              </select>
+                              {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                            {%- endif -%}
+                            <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="CartFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
+                        {%- endcase -%}
+                      {%- endif -%}
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
+            {%- if section.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+              <div class="flex flex-col gap-3">
+                <span class="text-xs text-opacity text-center">{{ 'cart.general.we_accept' | t }}</span>
+                <div class="flex flex-wrap justify-center gap-2">
+                  {%- liquid
+                    for type in shop.enabled_payment_types
+                      echo type | payment_type_svg_tag
+                    endfor
+                  -%}
+                </div>
+              </div>
+            {%- endif -%}
+          </sticky-element>
+        </div>
+      </main-cart>
+    {%- endif -%}
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.main-cart.name",
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-xl tracking-heading",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "md:items-end",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "md:items-center md:flex-col",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "md:items-end"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h1",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "t:sections.main-cart.settings.show_vendor.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_payment_icons",
+      "label": "t:sections.main-cart.settings.show_payment_icons.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "show_shipping_calculator",
+      "label": "t:sections.main-cart.settings.show_shipping_calculator.label",
+      "info": "t:sections.main-cart.settings.show_shipping_calculator.info",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 120
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "@app"
+    },
+    {
+      "type": "subtotal",
+      "name": "t:sections.main-cart.blocks.subtotal.name",
+      "limit": 1,
+      "settings": [
+        
+      ]
+    },
+    {
+      "type": "cart_note",
+      "name": "t:sections.main-cart.blocks.cart_note.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "text",
+          "id": "heading",
+          "label": "t:sections.global.settings.heading.label",
+          "default": "Add a note to your order"
+        }
+      ]
+    },
+    {
+      "type": "buttons",
+      "name": "t:sections.main-cart.blocks.buttons.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "checkbox",
+          "id": "show_accelerated_buttons",
+          "label": "t:sections.main-cart.blocks.buttons.settings.show_accelerated_buttons.label",
+          "info": "t:sections.main-cart.blocks.buttons.settings.show_accelerated_buttons.info",
+          "default": true
+        }
+      ]
+    },
+    {
+      "type": "free_shipping",
+      "name": "t:sections.main-cart.blocks.free_shipping.name",
+      "limit": 1,
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-cart.blocks.free_shipping.settings.paragraph.content"
+        },
+        {
+          "type": "text",
+          "id": "minimum_amount",
+          "default": "100",
+          "label": "t:sections.main-cart.blocks.free_shipping.settings.minimum_amount.label",
+          "info": "t:sections.main-cart.blocks.free_shipping.settings.minimum_amount.info"
+        }
+      ]
+    },
+    {
+      "type": "custom_field",
+      "name": "t:sections.main-cart.blocks.custom_field.name",
+      "settings": [
+        {
+          "type": "paragraph",
+          "content": "t:sections.main-cart.blocks.custom_field.settings.paragraph.content"
+        },
+        {
+          "type": "select",
+          "id": "type",
+          "options": [
+            {
+              "value": "text",
+              "label": "t:sections.main-cart.blocks.custom_field.settings.type.options__1.label"
+            },
+            {
+              "value": "textarea",
+              "label": "t:sections.main-cart.blocks.custom_field.settings.type.options__2.label"
+            },
+            {
+              "value": "checkbox",
+              "label": "t:sections.main-cart.blocks.custom_field.settings.type.options__3.label"
+            },
+            {
+              "value": "radio",
+              "label": "t:sections.main-cart.blocks.custom_field.settings.type.options__4.label"
+            },
+            {
+              "value": "select",
+              "label": "t:sections.main-cart.blocks.custom_field.settings.type.options__5.label"
+            }
+          ],
+          "default": "text",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.type.label"
+        },
+        {
+          "type": "text",
+          "id": "title",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.label.label",
+          "default": "Your label"
+        },
+        {
+          "type": "checkbox",
+          "id": "required",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.required.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-cart.blocks.custom_field.settings.header__checkbox.content",
+          "info": "t:sections.main-cart.blocks.custom_field.settings.header__checkbox.info"
+        },
+        {
+          "type": "text",
+          "id": "checked_value",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.checked_value.label",
+          "default": "Yes"
+        },
+        {
+          "type": "text",
+          "id": "unchecked_value",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.unchecked_value.label",
+          "default": "No"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-cart.blocks.custom_field.settings.header__radio.content",
+          "info": "t:sections.main-cart.blocks.custom_field.settings.header__radio.info"
+        },
+        {
+          "type": "text",
+          "id": "radio_options",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.options.label",
+          "info": "t:sections.main-cart.blocks.custom_field.settings.options.info"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.main-cart.blocks.custom_field.settings.header__dropdown.content",
+          "info": "t:sections.main-cart.blocks.custom_field.settings.header__dropdown.info"
+        },
+        {
+          "type": "text",
+          "id": "select_options",
+          "label": "t:sections.main-cart.blocks.custom_field.settings.options.label",
+          "info": "t:sections.main-cart.blocks.custom_field.settings.options.info"
+        }
+      ]
+    }
+  ]
+}
+{% endschema %}

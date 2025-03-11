@@ -1,0 +1,266 @@
+{%- comment -%}
+  Renders facets
+
+  Accepts:
+  - context: {String}
+  - results: {Object} Liquid 'collection' or 'search' object
+  - collapsed: {Boolean}
+  - enable_filtering: {Boolean}
+  - enable_sorting: {Boolean}
+  - enable_color_swatches: {Boolean}
+  - subcollections: {Boolean}
+  - section_id: {String}
+
+  Usage:
+  {% render 'facets', results: collection, collapsed: true, enable_color_swatches: true %}
+{%- endcomment -%}
+
+{%- if results.filters != empty -%}
+  <form class="facet-form" method="GET" action="{{ request.path }}" is="facet-form" data-section-id="{{ section_id }}" data-history update-on-change>
+    <div class="details" data-filter data-index="{{ context }}-page" hidden>
+      <input type="hidden" name="page" value="" />
+
+      {%- if results.current_type != blank or results.current_vendor != blank -%}
+        <input type="hidden" name="q" value="{{ results.current_vendor | default: results.current_type | escape }}" />
+      {%- endif -%}
+
+      {%- if request.page_type == 'search' -%}
+        <input type="hidden" name="q" value="{{ results.terms | escape }}" />
+      {%- endif -%}
+
+      {%- if enable_sorting == false and results.sort_by != blank -%}
+        <input type="hidden" name="sort_by" value="{{ results.sort_by }}" />
+      {%- endif -%}
+    </div>
+
+    {%- if enable_sorting -%}
+      <div class="details select-sort-by" data-filter data-index="{{ context }}-sort-by">
+        <div class="field">
+          <select name="sort_by" class="select is-floating" is="custom-select" id="FacetFormSortBy-{{ context }}">
+            {%- assign sort_by = results.sort_by | default: results.default_sort_by -%}
+            {%- for option in results.sort_options -%}
+              <option value="{{ option.value }}" {% if option.value == sort_by %} selected{% endif %}>{{ option.name | escape }}</option>
+            {%- endfor -%}
+          </select>
+          {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+          <label class="label is-floating" for="FacetFormSortBy-{{ context }}">{{ 'collections.sorting.sort_button' | t }}</label>
+        </div>
+      </div>
+    {%- endif -%}
+
+    {%- if enable_filtering -%}
+      {%- for filter in results.filters -%}
+        {%- assign filter_id = context | append: '-' | append: filter.param_name -%}
+        {%- if filter.type == 'boolean' or filter.param_name == 'filter.v.availability' -%}
+          <div class="details" data-filter data-index="{{ filter_id }}">
+            <div class="details__summary flex items-center justify-between gap-2">
+              <label for="{{ filter_id }}" class="text-base-xl font-medium cursor-pointer">
+                {%- liquid
+                  if filter.param_name == 'filter.v.availability'
+                    echo 'collections.filtering.in_stock_only' | t
+                  else
+                    echo filter.label | escape
+                  endif
+                -%}
+              </label>
+              <input name="{{ filter.param_name }}" class="switch" id="{{ filter_id }}" type="checkbox" value="1"{% if filter.active_values.size > 0 %} checked{% endif %} />
+            </div>
+          </div>
+        {%- else -%}
+          {%- case filter.type -%}
+            {%- when 'list' -%}
+              {%- liquid
+                assign is_color = false
+                if enable_color_swatches
+                  assign swatch_trigger_list = 'products.general.color_swatch_trigger' | t | downcase | split: ','
+                  assign downcased_label = filter.label | downcase
+                  for trigger in swatch_trigger_list
+                    assign swatch_trigger = trigger | strip
+                    if downcased_label contains swatch_trigger
+                      assign is_color = true
+                    elsif swatch_trigger == 'color' and downcased_label contains 'colour'
+                      assign is_color = true
+                    endif
+
+                    if is_color == true
+                      break
+                    endif
+                  endfor
+                endif
+
+                assign sorted_values = filter.values
+                # Keep the selected values grouped together when operator is AND
+                if filter.operator == 'AND'
+                  assign active_filter_values = filter.values | where: 'active', true
+                  assign inactive_filter_values = filter.values | where: 'active', false
+                  assign sorted_values = active_filter_values | concat: inactive_filter_values
+                endif
+              -%}
+
+              <details class="details{% unless collapsed %} active{% endunless %}" is="accordion-details"{% unless collapsed %} open{% endunless %} data-filter data-index="{{ filter_id }}">
+                <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                  <span class="text-base-xl font-medium">
+                    {{- filter.label | escape -}}
+                    {%- if filter.operator == 'AND' -%}
+                      <small class="details__helptext block text-opacity text-sm font-normal overflow-hidden">
+                        {{- 'collections.filtering.filter_and_operator_subtitle' | t -}}
+                      </small>
+                    {%- endif -%}
+                  </span>
+                  {%- render 'icon', icon: 'chevron-up' -%}
+                </summary>
+                <div class="details__content">
+                  {%- if is_color or filter.presentation == 'swatch' -%}
+                    <ul class="swatches swatches--{{ settings.rounded_swatch }} flex items-center flex-wrap gap-4">
+                      {%- for filter_value in sorted_values -%}
+                        {%- liquid
+                          assign filter_value_id = filter_id | append: '-' | append: forloop.index
+                          assign is_disabled = false
+                          if filter_value.count == 0 and filter_value.active == false
+                            assign is_disabled = true
+                          endif
+                        -%}
+                        <li>
+                          <magnet-element class="block">
+                            {%- capture filter_label -%}{{ filter_value.label }} ({{ filter_value.count }}){%- endcapture -%}
+                            {%- liquid
+                              if filter.presentation == 'swatch'
+                                render 'swatch', allow_multiple: true, value: filter_value.value, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, swatch: filter_value.swatch
+                              else
+                                render 'swatch', allow_multiple: true, value: filter_value.label, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, file_extension: 'png'
+                              endif
+                            -%}
+                          </magnet-element>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- elsif filter.presentation == 'image' -%}
+                    <ul class="swatches swatches--{{ settings.rounded_swatch }} swatches--variant flex items-start flex-wrap gap-4">
+                      {%- for filter_value in sorted_values -%}
+                        {%- liquid
+                          assign filter_value_id = filter_id | append: '-' | append: forloop.index
+                          assign is_disabled = false
+                          if filter_value.count == 0 and filter_value.active == false
+                            assign is_disabled = true
+                          endif
+
+                          assign swatch_image = blank
+                          assign swatch_fallback = filter_value.value | split: ' ' | last | handle
+                          if filter_value.image
+                            assign swatch_image = filter_value.image | image_url: width: 144
+                          endif
+                        -%}
+                        <li>
+                          <magnet-element class="flex flex-col gap-1 pointer-events-none">
+                            <input class="sr-only" name="{{ filter_value.param_name }}" value="{{ filter_value.value | escape }}" class="checkbox" id="{{ filter_value_id }}" type="checkbox"{% if filter_value.active %} checked{% endif %}{% if is_disabled %} disabled{% endif %} />
+                            <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative pointer-events-auto" for="{{ filter_value_id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}">
+                              {%- if settings.swatch_image_tooltip -%}
+                                <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ filter_value.label | escape }} ({{ filter_value.count }})</span>
+                              {%- else -%}
+                                <span class="sr-only">{{ filter_value.label | escape }}</span>
+                                <span class="count absolute top-0 right-0 text-xs flex items-center justify-center z-1 rounded-full">{{ filter_value.count }}</span>
+                              {%- endif -%}
+                            </label>
+                            {%- unless settings.swatch_image_tooltip -%}
+                              <span class="text-xs text-center pointer-events-none">{{ filter_value.label | escape }}</span>
+                            {%- endunless -%}
+                          </magnet-element>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- else -%}
+                    <ul class="list grid gap-3" role="list">
+                      {%- for filter_value in sorted_values -%}
+                        {%- liquid
+                          assign filter_value_id = filter_id | append: '-' | append: forloop.index
+                          assign is_disabled = false
+                          if filter_value.count == 0 and filter_value.active == false
+                            assign is_disabled = true
+                          endif
+                        -%}
+                        <li class="flex items-center gap-3">
+                          <input name="{{ filter_value.param_name }}" value="{{ filter_value.value | escape }}" class="checkbox" id="{{ filter_value_id | escape }}" type="checkbox"{% if filter_value.active %} checked{% endif %}{% if is_disabled %} disabled{% endif %} />
+                          <label for="{{ filter_value_id }}" class="flex items-baseline gap-1">
+                            {{- filter_value.label | escape -}}
+                            <span class="text-sm{% unless filter_value.active %} text-opacity{% endunless %}">({{ filter_value.count }})</span>
+                          </label>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </div>
+              </details>
+            {%- when 'price_range'-%}
+              {%- liquid
+                assign min_value = filter.min_value.value | default: 0.0 | divided_by: 100.0
+                assign max_value = filter.max_value.value | default: filter.range_max | divided_by: 100.0
+                assign range_max = filter.range_max | divided_by: 100.0 | ceil
+                assign step_value = max_value | minus: min_value | divided_by: 100.0 | ceil | at_least: 1
+                assign lower_bound_progress = min_value | divided_by: range_max | times: 100.0
+                assign higher_bound_progress = max_value | divided_by: range_max | times: 100.0
+              -%}
+              <details class="details{% unless collapsed %} active{% endunless %}" is="accordion-details"{% unless collapsed %} open{% endunless %} data-filter data-index="{{ filter_id }}">
+                <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                  <span class="text-base-xl font-medium">{{ filter.label | escape }}</span>
+                  {%- render 'icon', icon: 'chevron-up' -%}
+                </summary>
+                <div class="details__content">
+                  <price-range class="price-range grid gap-8">
+                    <label class="sr-only" for="FacetFormRangeFromPrice-{{ context }}">{{ 'collections.filtering.from_price' | t }}</label>
+                    <label class="sr-only" for="FacetFormRangeToPrice-{{ context }}">{{ 'collections.filtering.to_price' | t }}</label>
+                    <div class="range-wrapper relative" style="--range-min: {{ lower_bound_progress }}%; --range-max: {{ higher_bound_progress }}%">
+                      <input class="range w-full pointer-events-none" type="range"
+                        min="0"
+                        max="{{ range_max | ceil }}"
+                        step="{{ step_value }}"
+                        value="{{ min_value | ceil }}"
+                        id="FacetFormRangeFromPrice-{{ context }}"
+                      />
+                      <input class="range w-full pointer-events-none absolute top-0 left-0" type="range"
+                        min="0"
+                        max="{{ range_max | ceil }}"
+                        step="{{ step_value }}"
+                        value="{{ max_value | ceil }}"
+                        id="FacetFormRangeToPrice-{{ context }}"
+                      />
+                    </div>
+                    <div class="input-wrapper flex items-center gap-6">
+                      <div class="field flex items-center grow relative">
+                        <label class="sr-only" for="FacetFormInputFromPrice-{{ context }}">{{ 'collections.filtering.from_price' | t }}</label>
+                        <span class="prefix absolute left-0">{{ cart.currency.symbol }}</span>
+                        <input class="input" type="number" inputmode="numeric"
+                          name="{{ filter.min_value.param_name }}"
+                          id="FacetFormInputFromPrice-{{ context }}"
+                          autocomplete="off"
+                          placeholder="0"
+                          min="0"
+                          max="{{ max_value | ceil }}"
+                          step="{{ step_value }}"
+                          {% if filter.min_value.value %}value="{{ min_value | ceil }}"{% endif %}
+                        />
+                      </div>
+                      <span>{{ 'collections.filtering.to' | t }}</span>
+                      <div class="field flex items-center grow relative">
+                        <label class="sr-only" for="FacetFormInputToPrice-{{ context }}">{{ 'collections.filtering.to_price' | t }}</label>
+                        <span class="prefix absolute left-0">{{ cart.currency.symbol }}</span>
+                        <input class="input" type="number" inputmode="numeric"
+                          name="{{ filter.max_value.param_name }}"
+                          id="FacetFormInputToPrice-{{ context }}"
+                          autocomplete="off"
+                          placeholder="{{ range_max | ceil }}"
+                          min="{{ min_value | ceil }}"
+                          max="{{ range_max | ceil }}"
+                          step="{{ step_value }}"
+                          {% if filter.max_value.value %}value="{{ max_value | ceil }}"{% endif %}
+                        />
+                      </div>
+                    </div>
+                  </price-range>
+                </div>
+              </details>
+          {%- endcase -%}
+        {%- endif -%}
+      {%- endfor -%}
+    {%- endif -%}
+  </form>
+{%- endif -%}

@@ -1,0 +1,130 @@
+{%- liquid
+  unless limit
+    assign limit = main_menu.links.size
+  endunless
+  unless offset
+    assign offset = 0
+  endunless
+-%}
+
+<ul class="flex flex-wrap{% unless section.settings.hover_menu %} gap-1{% endunless %} list-menu with-{{ section.settings.menu_active }}">
+  {%- for link in main_menu.links limit: limit offset: offset -%}
+    {%- liquid
+      assign enable_mega_menu = false
+      assign link_title_handle = link.title | downcase | handle
+
+      for block in section.blocks
+        assign menu_title_handle = block.settings.menu_title | downcase | handle
+        if menu_title_handle == link_title_handle
+          assign enable_mega_menu = true
+          assign mega_menu_block = block
+          break
+        endif
+      endfor
+    -%}
+    {%- if enable_mega_menu -%}
+      <li>
+        <details is="details-mega" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top" {{ mega_menu_block.shopify_attributes }}>
+          <summary data-link="{{ link.url }}">
+            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+              <span class="btn-text" data-text>
+                {%- liquid
+                  echo link.title
+                  unless section.settings.hover_menu
+                    render 'icon', icon: 'chevron-menu'
+                  endunless
+                -%}
+              </span>
+              {%- if section.settings.menu_active == 'block' -%}
+                <span class="btn-text btn-duplicate">
+                  {%- liquid
+                    echo link.title
+                    unless section.settings.hover_menu
+                      render 'icon', icon: 'chevron-menu'
+                    endunless
+                  -%}
+                </span>
+              {%- endif -%}
+            </magnet-element>
+          </summary>
+          <div class="mega-menu absolute top-0 left-0 w-full max-w-full overflow-hidden pointer-events-none">
+            {%- render 'header-nav-mega', link: link, block: mega_menu_block, full_width: section.settings.full_width -%}
+          </div>
+        </details>
+      </li>
+    {%- elsif link.links != blank -%}
+      <li>
+        <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
+          <summary data-link="{{ link.url }}">
+            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+              <span class="btn-text" data-text>
+                {%- liquid
+                  echo link.title
+                  unless section.settings.hover_menu
+                    render 'icon', icon: 'chevron-menu'
+                  endunless
+                -%}
+              </span>
+              {%- if section.settings.menu_active == 'block' -%}
+                <span class="btn-text btn-duplicate">
+                  {%- liquid
+                    echo link.title
+                    unless section.settings.hover_menu
+                      render 'icon', icon: 'chevron-menu'
+                    endunless
+                  -%}
+                </span>
+              {%- endif -%}
+            </magnet-element>
+          </summary>
+          <div class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
+            <div class="dropdown__container relative">
+              {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+              <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                {%- for childlink in link.links -%}
+                  {%- if childlink.links != blank -%}
+                    <li class="opacity-0 relative">
+                      <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="child">
+                        <summary data-link="{{ childlink.url }}">
+                          <a href="{{ childlink.url }}" class="reversed-link text-sm-base" tabindex="-1">{{ childlink.title }}</a>
+                        </summary>
+                        <div class="dropdown opacity-0 invisible absolute top-0 left-100 max-w-full pointer-events-none">
+                          <div class="dropdown__container">
+                            <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                              {%- for grandchildlink in childlink.links -%}
+                                <li class="opacity-0">
+                                  <p>
+                                    <a href="{{ grandchildlink.url }}" class="reversed-link text-sm-base">{{ grandchildlink.title }}</a>
+                                  </p>
+                                </li>
+                              {%- endfor -%}
+                            </ul>
+                          </div>
+                        </div>
+                      </details>
+                    </li>
+                  {%- else -%}
+                    <li class="opacity-0">
+                      <p>
+                        <a href="{{ childlink.url }}" class="reversed-link text-sm-base">{{ childlink.title }}</a>
+                      </p>
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        </details>
+      </li>
+    {%- else -%}
+      <li>
+        <a href="{{ link.url }}" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" is="magnet-link"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+          <span class="btn-text" data-text>{{ link.title }}</span>
+          {%- if section.settings.menu_active == 'block' -%}
+            <span class="btn-text btn-duplicate">{{ link.title }}</span>
+          {%- endif -%}
+        </a>
+      </li>
+    {%- endif -%}
+  {%- endfor -%}
+</ul>

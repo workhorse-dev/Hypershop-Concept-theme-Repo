@@ -1,0 +1,19 @@
+<article class="grid md:flex items-start gap-4 md:gap-7d5">
+  {%- if show_gravatar -%}
+    {% # theme-check-disable RemoteAsset %}
+    <img class="gravatar rounded-full" src="//www.gravatar.com/avatar/{{ comment.email | md5 }}?s=100" alt="{{ comment.author | escape }}" loading="lazy" width="100" height="100" />
+    {% # theme-check-enable RemoteAsset %}
+  {%- endif -%}
+  <div class="grid gap-4">
+    <ul class="article-card__top grid md:flex flex-wrap gap-4">
+      <li class="heading text-base-xl leading-none relative">{{ comment.author }}</li>
+      <li class="inline-flex gap-2 text-xs relative">
+        {%- render 'icon', icon: 'calendar', size: 'xs', class: 'stroke-1' -%}
+        {{- comment.created_at | date: format: 'date_at_time' -}}
+      </li>
+    </ul>
+    <div class="rte text-sm md:text-base">
+      {{- comment.content -}}
+    </div>
+  </div>
+</article>

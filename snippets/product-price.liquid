@@ -1,0 +1,105 @@
+{%- comment -%}
+  Renders a list of product's price (regular, sale)
+
+  Accepts:
+  - product: {Object} Product Liquid object (optional)
+  - placeholder: {Boolean} Renders a placeholder price (optional)
+  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
+  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
+  - hide_unit_price: if set to true, unit pricing are hidden (optional)
+  - skip_to_price: if set to true, quantity price breaks configured are hidden (optional)
+  - class: {String} Adds a price class to the price element (optional)
+
+  Usage:
+  {% render 'product-price', product: product %}
+{%- endcomment -%}
+{%- liquid
+  if use_variant
+    assign target = product.selected_or_first_available_variant
+  elsif placeholder
+    assign target = null
+  else
+    assign target = product
+  endif
+
+  assign compare_at_price = target.compare_at_price
+  assign price = target.price | default: 1999
+
+  assign on_sale = false
+  if compare_at_price > price
+    assign on_sale = true
+  endif
+-%}
+
+<div class="price
+  {%- if on_sale %} price--on-sale{% endif -%}
+  {%- if class != blank %} {{ class }}{% endif -%}"
+>
+  {%- if on_sale -%}
+    <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
+  {%- endif -%}
+
+  <span class="price__regular whitespace-nowrap">
+    {%- liquid
+      if product.quantity_price_breaks_configured? != true or skip_to_price
+        if target == product and product.price_varies
+          if settings.currency_code_enabled
+            assign price_min = product.price_min | money_with_currency
+          else
+            assign price_min = product.price_min | money
+          endif
+          echo 'products.price.from_price_html' | t: price: price_min
+        else
+          if settings.currency_code_enabled
+            echo price | money_with_currency
+          else
+            echo price | money
+          endif
+        endif
+      else
+        if settings.currency_code_enabled
+          assign price_min = product.price_min | money_with_currency
+        else
+          assign price_min = product.price_min | money
+        endif
+        echo 'products.price.from_price_html' | t: price: price_min
+      endif
+    -%}
+  </span>
+
+  {%- if on_sale -%}
+    <span class="sr-only">{{ 'products.price.regular_price' | t }}</span>
+    <span class="price__sale inline-flex items-center h-auto relative">
+      {%- liquid
+        if settings.currency_code_enabled
+          echo compare_at_price | money_with_currency
+        else
+          echo compare_at_price | money
+        endif
+      -%}
+    </span>
+  {%- endif -%}
+
+  {%- unless hide_unit_price -%}
+    {%- assign product_variant = product.selected_or_first_available_variant -%}
+    {%- if product_variant.unit_price_measurement -%}
+      <span class="sr-only">{{ 'products.price.unit_price' | t }}</span>
+      <span class="unit-price flex items-center">
+        {%- liquid
+          capture unit_price_base_unit
+            if product_variant.unit_price_measurement
+              if product_variant.unit_price_measurement.reference_value != 1
+                echo product_variant.unit_price_measurement.reference_value
+              endif
+              echo product_variant.unit_price_measurement.reference_unit
+            endif
+          endcapture
+        -%}
+        ({{ product_variant.unit_price | money }}
+        <span aria-hidden="true">/</span>
+        <span class="sr-only">&nbsp;{{ 'general.accessibility.unit_price_separator' | t }}&nbsp;</span>
+        {{ unit_price_base_unit }})
+        </span>
+    {%- endif -%}
+  {%- endunless -%}
+</div>
