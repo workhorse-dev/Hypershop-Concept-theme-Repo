@@ -1,0 +1,92 @@
+<script>
+    function lcw(){
+      return{
+        styleProps:{
+          generalStyles:{
+             width: "360px",
+             height: "560px",
+             bottom: "50%",
+             right: "20px",
+             top: "unset",
+             left: "unset"
+          }  
+        },
+        chatButtonProps:{
+          controlProps:{
+            hideChatTextContainer: true
+          },
+          styleProps: {
+              generalStyleProps: {
+                  minWidth: "60px",
+                  width: "60px",
+                  height: "60px"
+              },
+              iconStyleProps: {
+                backgroundColor: "#334fb4"
+              }
+          }
+        },
+        headerProps: {
+            styleProps: {
+                generalStyleProps: {
+                    backgroundColor: "#334fb4",
+                },
+                iconStyleProps: {
+                    width: "50px",
+                    height: "50px",
+                    color: "white",
+                   
+                },
+                titleStyleProps: {
+                    color: "white",
+                    fontWeight: 600
+                },
+                closeButtonStyleProps: {
+                    margin: "10px 5px 5px 5px",
+                    color: "white"
+                },
+                closeButtonHoverStyleProps: {
+                    backgroundColor: "rgb(200, 200, 200, 0.2)",
+                    margin: "10px 5px 5px 5px",
+                    color: "white"
+                },
+                minimizeButtonStyleProps: {
+                    margin: "10px 5px 5px 5px",
+                    color: "white"
+                },
+                minimizeButtonHoverStyleProps: {
+                    backgroundColor: "rgb(200, 200, 200, 0.2)",
+                    margin: "10px 5px 5px 5px",
+                    color: "white"
+                }
+            }
+        },
+        preChatSurveyPaneProps:{
+          styleProps: {
+              customButtonStyleProps:{
+              backgroundColor: "#334fb4"
+            }
+          }
+        }
+      }
+    }
+  </script>
+  
+  <script 
+    v2
+    id="Microsoft_Omnichannel_LCWidget" 
+    src="https://oc-cdn-ocprod.azureedge.net/livechatwidget/scripts/LiveChatBootstrapper.js" 
+    data-app-id="65e7e3fd-a294-4360-ba33-7398672f2ca9" 
+    data-lcw-version="prod" 
+    data-org-id="f2015019-2dea-4f2f-9c31-487a8cc6d38f" 
+    data-org-url="https://m-f2015019-2dea-4f2f-9c31-487a8cc6d38f.us.omnichannelengagementhub.com" 
+    data-customization-callback="lcw"
+    >
+  </script>
+  <script>
+    const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
+    const width = screen.width;
+    if (chatWidget &&  width > 470) {
+        chatWidget.style.transform = 'translateY(50%)'; 
+      }
+  </script>

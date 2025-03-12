@@ -1,0 +1,10 @@
+<script>
+    (function() {
+        const currentUrl = window.location.href;
+        const urlPath = window.location.pathname;
+        const lowercaseUrl = currentUrl.toLowerCase();
+        if (urlPath !== urlPath.toLowerCase()) {
+            window.location.replace(lowercaseUrl);
+        }
+    })();
+</script>

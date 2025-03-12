@@ -1,0 +1,26 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      function getUTMParameters() {
+        let params = {};
+        window.location.search.substring(1).split('&').forEach(param => {
+          let [key, value] = param.split('=');
+          if (key.includes('utm_')) {
+            params[key] = decodeURIComponent(value || '');
+          }
+        });
+        return params;
+      }
+  
+      function setLocalStorage(key, value) {
+        localStorage.setItem(key, value);
+      }
+  
+      const utmParams = getUTMParameters();
+      if (Object.keys(utmParams).length > 0) {
+        Object.keys(utmParams).forEach(param => {
+          setLocalStorage(param, utmParams[param]); // Store UTM params in localStorage
+        });
+      }
+    });
+</script>
+  
