@@ -1,1 +1,950 @@
-{"sections":{"slideshow":{"type":"slideshow","blocks":{"slide-1":{"type":"image","settings":{"image":"","image_mobile":"","heading":"IMAGE SLIDE 1","heading_size":"title-md","heading_tag":"h2","button_label":"Shop Now","button_link":"","button_style":"primary","button_icon":false}},"slide-2":{"type":"image","settings":{"image":"","image_mobile":"","heading":"IMAGE SLIDE 2","heading_size":"title-md","heading_tag":"h2","button_label":"Shop Now","button_link":"","button_style":"primary","button_icon":false}},"slide-3":{"type":"video","settings":{"video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","description":"","video_url_mobile":"","heading":"VIDEO SLIDE","heading_size":"title-md","heading_tag":"h2","button_label":"Shop Now","button_link":"","button_style":"primary","button_icon":false}}},"block_order":["slide-1","slide-2","slide-3"],"settings":{"autoplay":false,"autoplay_speed":7,"show_navigation":true,"image_height":"750px","content_width":"small","image_height_mobile":"500px","color_text":"#ffffff","color_background":"#ffffff","gradient_background":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#000000","padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":false,"enable_parallax":false,"parallax_direction":"vertical"}},"rich-text-1":{"type":"rich-text","blocks":{"text":{"type":"text","settings":{"text":"<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<br\/><br\/>Share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store. Share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.<\/p>","text_size":"subtext-md","text_max_size":32,"text_font":"body","secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["text"],"settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"Talk about your <em>brand<\/em>","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","button_label":"Our Story","button_link":"","button_icon":true,"highlighted_text":"scribble","highlighted_scribble":"basic-underline","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":72,"padding_bottom":0,"divider":false,"narrow":false,"rounded":false}},"collection-list":{"type":"collection-list","blocks":{"collection-1":{"type":"collection","settings":{"collection":"","image":"","title":"All products","description":"Check out all our products","overlay_content":true,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":30}},"collection-2":{"type":"collection","settings":{"collection":"","image":"","title":"Collection 1","description":"Collection description","overlay_content":false,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":40}},"collection-3":{"type":"collection","settings":{"collection":"","image":"","title":"Collection 2","description":"Collection description","overlay_content":false,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":40}},"collection-4":{"type":"collection","settings":{"collection":"","image":"","title":"Collection 3","description":"Collection description","overlay_content":false,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":40}},"collection-5":{"type":"collection","settings":{"collection":"","image":"","title":"Collection 4","description":"Collection description","overlay_content":false,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":40}},"collection-6":{"type":"collection","settings":{"collection":"","image":"","title":"Collection 5","description":"Collection description","overlay_content":false,"color_text":"#ffffff","color_overlay":"#000000","overlay_opacity":40}}},"block_order":["collection-1","collection-2","collection-3","collection-4","collection-5","collection-6"],"settings":{"columns":4,"carousel_on_desktop":true,"image_type":"collection","image_ratio":"square","show_products_count":true,"show_view_all":false,"columns_mobile":"1","swipe_on_mobile":true,"heading":"","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":100,"padding_bottom":100,"divider":false,"full_width":false,"rounded":false}},"video-with-text-overlay":{"type":"video-with-text-overlay","blocks":{"heading":{"type":"heading","settings":{"heading":"Video with text overlay","heading_size":"title-md","heading_tag":"h2","highlighted_text":"none","highlighted_scribble":"circle"}},"text":{"type":"text","settings":{"text":"<p>Give customers details about the banner image(s) or content on the template.<\/p>","text_size":"subtext-md","text_max_size":32,"text_font":"body","secondary_color":true,"highlighted_text":"none","highlighted_scribble":"circle"}},"button":{"type":"button","settings":{"button_label":"Shop Now","button_link":"","button_style":"primary","button_size":"md","button_icon":true}}},"block_order":["heading","text","button"],"settings":{"transparent_header":false,"video_url":"https:\/\/www.youtube.com\/watch?v=_9VUPq3SxOc","description":"","enable_video_autoplay":true,"enable_video_looping":true,"image_height":"750px","content_width":"medium","content_position":"md:items-center md:justify-center","text_alignment":"center","video_url_mobile":"","image_height_mobile":"auto","content_position_mobile":"items-center justify-center","text_alignment_mobile":"center","color_text":"#ffffff","color_highlight":"#e0a580","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#000000","overlay_opacity":50,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":true}},"featured-product":{"type":"featured-product","blocks":{"text":{"type":"text","settings":{"text":"{{ section.settings.product.vendor }}","text_size":"text-base"}},"title":{"type":"title","settings":{"title_size":"product-title-md","show_price":true,"show_rating":true}},"description":{"type":"description","settings":{"text_size":"text-base"}},"countdown":{"type":"countdown","settings":{"heading":"Hurry up!","subheading":"Sale end in:","color_text":"#e11d48","color_background":"#fff1f2","gradient_background":""}},"variant_picker":{"type":"variant_picker","settings":{"show_variant_labels":true,"picker_type":"button","enable_color_swatches":true,"color_swatch_type":"color","size_chart":""}},"inventory":{"type":"inventory","settings":{"inventory_threshold":15,"show_inventory_transfer":true,"color_scheme":"accent-1"}},"buy_buttons":{"type":"buy_buttons","settings":{"show_quantity_selector":false,"show_dynamic_checkout":false,"show_gift_card_recipient":false}},"pickup_availability":{"type":"pickup_availability","settings":{}},"share":{"type":"share","settings":{"share_label":"Share","show_help_desk":true,"help_label":"Need help?","help_page":""}},"read_more":{"type":"read_more","settings":{}},"spinning_text":{"type":"spinning_text","settings":{"text":"Featured product"}}},"block_order":["text","title","description","countdown","variant_picker","inventory","buy_buttons","pickup_availability","share","read_more","spinning_text"],"settings":{"product":"","enable_sticky_info":true,"media_size":64,"gallery_layout":"thumbnail","thumbnail_position":"beside","image_zoom":"lightbox","hide_variants":false,"enable_video_autoplay":true,"enable_video_looping":true,"mobile_layout":"full_width","mobile_thumbnail":false,"padding_top":120,"padding_bottom":0,"divider":false,"full_width":false,"rounded":true}},"image-comparison":{"type":"image-comparison","blocks":{"image-1":{"type":"image","settings":{"image":"","subheading":"","heading":"Before image","content_position":"end","color_text":"#ffffff"}},"image-2":{"type":"image","settings":{"image":"","subheading":"","heading":"After image","content_position":"end","color_text":"#ffffff"}}},"block_order":["image-1","image-2"],"settings":{"layout":"horizontal","image_height":"750px","image_height_mobile":"300px","heading":"<em>Image comparison<\/em>","heading_size":"title-md","heading_alignment":"text-center md:items-center","heading_tag":"h2","subheading":"Add a tagline","description":"","button_label":"","button_link":"","button_icon":true,"highlighted_text":"text","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"linear-gradient(90deg, rgba(249, 197, 141, 1), rgba(43, 43, 43, 1) 100%)","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":100,"padding_bottom":0,"divider":false,"full_width":false,"rounded":false}},"rich-text-2":{"type":"rich-text","custom_css":["@media screen and (min-width: 1536px) and (max-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: 0; }}","@media screen and (min-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: var(--grid-gap); }}"],"settings":{"text_alignment":"left","text_alignment_mobile":"left","heading":"Build your <em>Bundle<\/em>","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_width":"large","heading_tag":"h2","subheading":"","description":"<p>The choice is yours. With our bundle builder, you can select any combination from our range of products. The easiest way to keep everyone happy.<\/p>","button_label":"","button_link":"","button_external":false,"button_icon":true,"highlighted_text":"scribble","highlighted_scribble":"squiggle-underline","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":120,"padding_bottom":52,"divider":false,"narrow":false,"rounded":false}},"product-bundle":{"type":"product-bundle","custom_css":["@media screen and (min-width: 1536px) {.product-bundle {flex: 0 0 25%; } .product-bundle__sidebar {width: 100%; }}","@media screen and (min-width: 1920px) {.product-bundle-wrapper {padding-inline: calc(var(--grid-gap) * 2); }}"],"settings":{"collection":"","products":[],"product_limit":6,"columns":3,"columns_mobile":"1","minimum_quantity":3,"maximum_quantity":3,"prevent_duplicate_products":true,"allow_quantity_change":true,"quantity_increment":"1","quantity_minimum":"1","quantity_maximum":"","show_variant_labels":true,"picker_type":"button","enable_color_swatches":true,"color_swatch_type":"color","heading":"Your bundle","heading_size":"lg:text-5xl text-2xl","heading_alignment":"text-left","heading_tag":"h2","subheading":"","description":"<p>Add at least 3 products to proceed and Save 30%<\/p>","highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":0,"padding_bottom":0,"divider":false,"full_width":false,"rounded":false}},"scrolling-text-1":{"type":"scrolling-text","blocks":{"text":{"type":"text","settings":{"text":"<em><strong>Free shipping and returns<\/strong><\/em>","text_size":160,"text_font":"body","highlighted_text":"stencil","highlighted_scribble":"circle"}}},"block_order":["text"],"settings":{"direction":"left","speed":20,"grid_horizontal":70,"enable_twin":false,"enable_parallax":true,"color_text":"","color_background":"","gradient_background":"","padding_top":120,"padding_bottom":120,"divider":false,"rounded":false}},"countdown-timer":{"type":"countdown-timer","blocks":{"text":{"type":"text","settings":{"text":"<p>Countdown timer<\/p>","text_size":"subtext-custom","text_max_size":32,"text_font":"body","secondary_color":false,"highlighted_text":"none","highlighted_scribble":"circle"}},"spacing":{"type":"spacing","settings":{"height":24,"height_mobile":16}},"timer":{"type":"timer","settings":{"year":"2026","month":"01","day":"1","hour":"03","minute":"00","text_font":"heading","text_size":"title-lg tracking-heading","message":""}},"button":{"type":"button","settings":{"button_label":"Shop Now","button_link":"","button_style":"secondary","button_size":"md","button_icon":true}}},"block_order":["text","spacing","timer","button"],"settings":{"transparent_header":false,"image":"","image_height":"750px","content_width":"medium","content_position":"md:items-center md:justify-center","text_alignment":"center","image_mobile":"","image_height_mobile":"500px","content_position_mobile":"items-center justify-center","text_alignment_mobile":"center","color_text":"#ffffff","color_highlight":"#fcd34d","gradient_highlight":"","color_button_text":"#171717","color_button_background":"#ffffff","color_button_gradient":"","color_overlay":"#000000","overlay_opacity":30,"padding_top":0,"padding_bottom":0,"divider":false,"full_width":true,"rounded":true,"enable_parallax":true,"parallax_direction":"vertical"}},"shop-the-look":{"type":"shop-the-look","blocks":{"product-1":{"type":"product","settings":{"product":"","color_text":"#ffffff","vertical":35,"horizontal":15,"vertical_mobile":25,"horizontal_mobile":25}},"product-2":{"type":"product","settings":{"product":"","color_text":"#ffffff","vertical":65,"horizontal":38,"vertical_mobile":75,"horizontal_mobile":65}},"product-3":{"type":"product","settings":{"product":"","color_text":"#ffffff","vertical":50,"horizontal":62,"vertical_mobile":50,"horizontal_mobile":50}}},"block_order":["product-1","product-2","product-3"],"settings":{"image":"","heading":"Shop the <em>look<\/em>","heading_size":"title-sm","heading_alignment":"text-center md:items-center","heading_tag":"h2","subheading":"Add a tagline","description":"","button_label":"","button_link":"","button_icon":true,"highlighted_text":"scribble","highlighted_scribble":"squiggle-underline","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","color_overlay":"#171717","overlay_opacity":40,"padding_top":100,"padding_bottom":100,"divider":false,"full_width":false,"rounded":true}},"testimonials-banner":{"type":"testimonials-banner","blocks":{"testimonial-1":{"type":"testimonial","settings":{"icon":"quote","text":"<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>","author":"Author's name","image":"","image_ratio":"rounded","highlighted_text":"none","highlighted_scribble":"circle"}},"testimonial-2":{"type":"testimonial","settings":{"icon":"quote","text":"<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>","author":"Author's name","image":"","image_ratio":"rounded","highlighted_text":"none","highlighted_scribble":"circle"}},"testimonial-3":{"type":"testimonial","settings":{"icon":"quote","text":"<p>Add customer reviews and testimonials to showcase your store’s happy customers.<\/p>","author":"Author's name","image":"","image_ratio":"rounded","highlighted_text":"none","highlighted_scribble":"circle"}}},"block_order":["testimonial-1","testimonial-2","testimonial-3"],"settings":{"transparent_header":false,"image":"","image_height":"750px","content_position":"md:items-center md:justify-center","image_height_mobile":"500px","content_position_mobile":"items-center justify-center","color_text":"#ffffff","color_highlight":"","gradient_highlight":"","color_overlay":"#171717","overlay_opacity":40,"padding_top":0,"padding_bottom":0,"divider":false,"rounded":true,"enable_parallax":true,"parallax_direction":"vertical"}},"featured-collections":{"type":"featured-collections","blocks":{"collection-1":{"type":"collection","settings":{"collection":"","products":[],"title":"Collection 1"}},"collection-2":{"type":"collection","settings":{"collection":"","products":[],"title":"Collection 2"}},"collection-3":{"type":"collection","settings":{"collection":"","products":[],"title":"Collection 3"}}},"block_order":["collection-1","collection-2","collection-3"],"settings":{"product_limit":6,"columns":4,"carousel_on_desktop":true,"show_view_all":false,"columns_mobile":"1","swipe_on_mobile":true,"heading":"Best Sellers","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":100,"padding_bottom":100,"divider":false,"full_width":false,"rounded":true}},"scrolling-text-2":{"type":"scrolling-text","blocks":{"image-1":{"type":"image","settings":{"image":"","height":60}},"image-2":{"type":"image","settings":{"image":"","height":60}},"image-3":{"type":"image","settings":{"image":"","height":60}},"image-4":{"type":"image","settings":{"image":"","height":60}},"image-5":{"type":"image","settings":{"image":"","height":60}},"image-6":{"type":"image","settings":{"image":"","height":60}},"image-7":{"type":"image","settings":{"image":"","height":60}}},"block_order":["image-1","image-2","image-3","image-4","image-5","image-6","image-7"],"settings":{"direction":"right","speed":5,"grid_horizontal":140,"enable_twin":true,"enable_parallax":true,"color_text":"","color_background":"#fde68a","gradient_background":"","padding_top":36,"padding_bottom":36,"divider":false,"rounded":false}},"blog-posts-collage":{"type":"blog-posts-collage","settings":{"blog":"","post_limit":3,"show_view_all":true,"image_ratio":"landscape","show_tags":true,"show_date":true,"show_comments":true,"show_author":false,"show_excerpt":true,"heading":"Latest Stories","heading_size":"title-md","heading_alignment":"text-left md:items-end md:flex-row","heading_tag":"h2","subheading":"","description":"","highlighted_text":"none","highlighted_scribble":"circle","color_text":"","color_background":"","gradient_background":"","color_highlight":"","gradient_highlight":"","color_button_text":"","color_button_background":"","color_button_gradient":"","padding_top":100,"padding_bottom":100,"divider":false,"full_width":false,"rounded":false}}},"order":["slideshow","rich-text-1","collection-list","video-with-text-overlay","featured-product","image-comparison","rich-text-2","product-bundle","scrolling-text-1","countdown-timer","shop-the-look","testimonials-banner","featured-collections","scrolling-text-2","blog-posts-collage"]}
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+ {
+    "sections": {
+      "slideshow": {
+        "type": "slideshow",
+        "blocks": {
+          "slide-1": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/hyper-email-1-spring-break-sale-hp-banner-v01-r01-3840x800.webp",
+              "image_mobile": "shopify://shop_images/hyper-email-1-spring-break-sale-homepage-spring-break-sale-banner-mobile-v01-r01-430x520.webp",
+              "heading": "Adventure Awaits! Spring Break Sale - Save 20% OFF",
+              "heading_size": "title-md",
+              "heading_tag": "h2",
+              "button_label": "Shop Now",
+              "button_link": "shopify://collections/refresh-your-tech",
+              "button_style": "primary",
+              "button_external": false,
+              "button_icon": false
+            }
+          },
+          "slide-2": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/Email-Qi2_Launch-hp-banner-v01-r01-3840x800_1_copy.webp",
+              "image_mobile": "shopify://shop_images/Email-Qi2_Launch-hp-mobile-banner-v01-r01-430x520_copy.webp",
+              "heading": "Charge 2X Faster with Qi2",
+              "heading_size": "title-md",
+              "heading_tag": "h2",
+              "button_label": "Shop Now",
+              "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
+              "button_style": "primary",
+              "button_external": false,
+              "button_icon": false
+            }
+          },
+          "image_mi8Bqq": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/hyper-HDM1H-dual-4k-hdmi-10-port-usb-c-for-macbook-banner-v01-r01-3840x800-2x_9ff8c39b-7c58-4d9a-bcfd-d97d37510b59.webp",
+              "image_mobile": "shopify://shop_images/hyper-HDM1H-dual-4k-hdmi-10-port-usb-c-for-macbook-banner-mobile-v01-r01-430x502-2x_864cb439-70ed-4556-bb42-fabee0905bda.webp",
+              "heading": "Driverless Dual Display Support for M1, M2, & M3 MacBooks",
+              "heading_size": "title-lg tracking-heading",
+              "heading_tag": "h2",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperdrive-dual-4k-hdmi-10-in-1-usb-c-hub",
+              "button_style": "primary",
+              "button_external": false,
+              "button_icon": false
+            }
+          },
+          "image_LQHDYp": {
+            "type": "image",
+            "settings": {
+              "image": "shopify://shop_images/hyper-HD5001-homepage-banner-v01-r02-3840x800_copy.webp",
+              "image_mobile": "shopify://shop_images/hyper-HD5001-homepage-banner-mobile-v01-r01-740x1216.webp",
+              "heading": "Available Now!",
+              "heading_size": "title-lg tracking-heading",
+              "heading_tag": "h2",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+              "button_style": "primary",
+              "button_external": false,
+              "button_icon": false
+            }
+          }
+        },
+        "block_order": [
+          "slide-1",
+          "slide-2",
+          "image_mi8Bqq",
+          "image_LQHDYp",
+          "image_9gtyAn"
+        ],
+        "settings": {
+          "autoplay": false,
+          "autoplay_speed": 7,
+          "show_navigation": true,
+          "image_height": "750px",
+          "content_width": "small",
+          "image_height_mobile": "500px",
+          "color_text": "#ffffff",
+          "color_background": "#ffffff",
+          "gradient_background": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "color_overlay": "#000000",
+          "overlay_opacity": 0,
+          "padding_top": 0,
+          "padding_bottom": 0,
+          "divider": false,
+          "full_width": true,
+          "rounded": false,
+          "enable_parallax": false,
+          "parallax_direction": "vertical"
+        }
+      },
+      "multicolumn_UqDXFR": {
+        "type": "multicolumn",
+        "blocks": {
+          "column_tkD8xL": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/Hyper_Homepage_Icons-01_free_shipping_no_border_66x_31cd0035-4c62-48db-9626-c8ad2c8855b2.svg",
+              "image_ratio": "portrait",
+              "heading": "Free Shipping on all orders over $40",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_GwNkNy": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/Hyper_Homepage_Icons-02_2yr_warranty_no_border_66x_965229ac-09e7-4336-94da-85bbe79f80bb.svg",
+              "image_ratio": "portrait",
+              "heading": "Up to a 2-year Warranty",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_HxCQXb": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/Hyper_Homepage_Icons-03_free_returns_no_border_66x_95ab750c-8b9e-4e16-96a2-9671252f92ac.svg",
+              "image_ratio": "portrait",
+              "heading": "Free Returns within 30 days",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          }
+        },
+        "block_order": [
+          "column_tkD8xL",
+          "column_GwNkNy",
+          "column_HxCQXb"
+        ],
+        "settings": {
+          "gap": "large",
+          "columns": 3,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "",
+          "heading_size": "title-md",
+          "heading_alignment": "text-center md:items-center",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "button_label": "",
+          "button_link": "",
+          "button_external": false,
+          "button_icon": true,
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "",
+          "color_button_background": "",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "featured_collection_pkhP8d": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "",
+          "products": [
+            "hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "hyperjuice-100w-usb-c-gan-travel-charger-with-4-ports",
+            "hyperjuice-next-qi2-2-in-1-magnetic-charging-stand",
+            "hyperdrive-dual-4k-hdmi-adaptor-for-m1-macbook",
+            "hyperjuice-245w-usb-c-battery-pack"
+          ],
+          "product_limit": 6,
+          "columns": 4,
+          "carousel_on_desktop": true,
+          "show_view_all": false,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Check Out These Top Sellers!",
+          "heading_size": "title-md",
+          "heading_alignment": "text-left md:items-end md:flex-row",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "multicolumn_aLFyYA": {
+        "type": "multicolumn",
+        "blocks": {
+          "column_p7Bk9W": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/hyper-hj245b-b-spot-v01-r01-660x520.webp",
+              "image_ratio": "adapt",
+              "heading": "Charge Everything, Anytime, and Anywhere",
+              "heading_size": "text-lg-2xl",
+              "text": "<p>Hyper’s compact, airline-safe, super portable battery pack. Provides 100W Power Delivery quickly recharge four devices at once.</p>",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_Rk4PVz": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/Hyper-Email-HJ3004-Available_Now-b-spot-01-v01-r01-660x520_5acfb728-ccc0-46fc-b8d8-fe8c8de3a019.jpg",
+              "image_ratio": "adapt",
+              "heading": "Qi2 3-in-1 Magnetic Charging Stand",
+              "heading_size": "text-lg-2xl",
+              "text": "<p>Charge up to 3 devices in this compact and innovative design, perfect for easy packing, desktop, or bedside charging.</p>",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_LwaKmy": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/Hyper-Email-HJ3004-Available_Now-b-spot-02-v01-r01-660x520_471793f2-abd6-4b5d-9f82-3fe78ba50346.jpg",
+              "image_ratio": "adapt",
+              "heading": "Qi2 2-in-1 Magnetic Charging Stand",
+              "heading_size": "text-lg-2xl",
+              "text": "<p>Featuring the latest Qi2 technology, this sleek and portable charging with a kickstand for easy viewing angles, anywhere.</p>",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperjuice-next-qi2-2-in-1-magnetic-charging-stand",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_4HqRpE": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/hyper-hd7002-bspot-9-v01-r01-1080x1080_1.webp",
+              "image_ratio": "adapt",
+              "heading": "Get Dual Extended Monitors for M1 & M2 MacBooks",
+              "heading_size": "text-lg-2xl",
+              "text": "<p>Empower your M1 & M2 MacBooks by extending dual monitors for a productivity boost.</p>",
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperdrivenext-dual-4k-hdmi-7-port-usb-c-dock",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          }
+        },
+        "block_order": [
+          "column_p7Bk9W",
+          "column_Rk4PVz",
+          "column_LwaKmy",
+          "column_4HqRpE"
+        ],
+        "settings": {
+          "gap": "large",
+          "columns": 2,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Productivity, Your Way",
+          "heading_size": "title-md",
+          "heading_alignment": "text-center md:items-center",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "<p>Explore our most outstanding connectivity and power solutions.</p>",
+          "button_label": "",
+          "button_link": "",
+          "button_external": false,
+          "button_icon": true,
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "#f8f8f8",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "image_with_text_overlay_gEanti": {
+        "type": "image-with-text-overlay",
+        "blocks": {
+          "heading_QCRpKj": {
+            "type": "heading",
+            "settings": {
+              "heading": "Never Lose Track of Your Gear",
+              "heading_size": "title-lg tracking-heading",
+              "heading_tag": "h2",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "text_MWMGg4": {
+            "type": "text",
+            "settings": {
+              "text": "<p>The HyperPack Pro with an Apple® Find My™ compatible location module keeps your gear safe, dry, and always by your side.</p>",
+              "text_size": "subtext-md",
+              "text_max_size": 32,
+              "text_font": "body",
+              "secondary_color": false,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "button_4E4iMg": {
+            "type": "button",
+            "settings": {
+              "button_label": "Shop Now",
+              "button_link": "shopify://products/hyperpack-pro-with-apple-find-my",
+              "button_style": "primary",
+              "button_size": "md",
+              "button_external": false,
+              "button_icon": false
+            }
+          }
+        },
+        "block_order": [
+          "heading_QCRpKj",
+          "text_MWMGg4",
+          "button_4E4iMg"
+        ],
+        "settings": {
+          "transparent_header": false,
+          "image": "shopify://shop_images/hyper-hyperpack-fullwidth-module-4-v01-r01-1080x1080_copy.webp",
+          "image_height": "900px",
+          "content_width": "small",
+          "content_position": "md:items-center md:justify-start",
+          "text_alignment": "left",
+          "image_height_mobile": "auto",
+          "content_position_mobile": "items-end justify-start",
+          "text_alignment_mobile": "left",
+          "color_text": "#ffffff",
+          "color_highlight": "#e0a580",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "color_overlay": "#171717",
+          "overlay_opacity": 0,
+          "padding_top": 0,
+          "padding_bottom": 0,
+          "divider": false,
+          "full_width": true,
+          "rounded": false,
+          "enable_parallax": false,
+          "parallax_direction": "vertical"
+        }
+      },
+      "featured_collection_Mdw6E9": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "",
+          "products": [
+            "hyperpack-pro-with-apple-find-my",
+            "hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+            "hyperjuice-245w-usb-c-battery-pack",
+            "hyperdrive-thunderbolt-4-power-hub",
+            "hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports",
+            "hypershield-stash-go-sleeve-for-15-16-macbooks"
+          ],
+          "product_limit": 6,
+          "columns": 4,
+          "carousel_on_desktop": true,
+          "show_view_all": false,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Trending Products Right Now!",
+          "heading_size": "title-md",
+          "heading_alignment": "text-left md:items-end md:flex-row",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "collection_list_FHMCa7": {
+        "type": "collection-list",
+        "blocks": {
+          "collection_TgmLNK": {
+            "type": "collection",
+            "settings": {
+              "collection": "hyperdrive",
+              "image": "shopify://shop_images/HDTB4D_Main_1920x1920_2x_65d5c2fc-6897-451b-8e1d-022750883e1e.webp",
+              "title": "",
+              "description": "",
+              "overlay_content": false,
+              "color_text": "#ffffff",
+              "color_overlay": "#000000",
+              "overlay_opacity": 30
+            }
+          },
+          "collection_Ypdnx3": {
+            "type": "collection",
+            "settings": {
+              "collection": "hyperjuice",
+              "image": "shopify://shop_images/charger-battery_300x300_e342e4fd-30a4-4818-9841-9d50832e9562.webp",
+              "title": "",
+              "description": "",
+              "overlay_content": false,
+              "color_text": "#ffffff",
+              "color_overlay": "#000000",
+              "overlay_opacity": 30
+            }
+          },
+          "collection_n3yKQx": {
+            "type": "collection",
+            "settings": {
+              "collection": "bags-and-sleeves",
+              "image": "shopify://shop_images/hyper-HP20P2BKGL-hyperpack-pro-find-my-module-hero-v01-r02-2000x2000.webp",
+              "title": "Backpacks & Sleeves",
+              "description": "",
+              "overlay_content": false,
+              "color_text": "#ffffff",
+              "color_overlay": "#000000",
+              "overlay_opacity": 30
+            }
+          },
+          "collection_rGaYPH": {
+            "type": "collection",
+            "settings": {
+              "collection": "hyperthin",
+              "image": "shopify://shop_images/cables_300x300_a3341814-b94b-436f-91c5-3b5c0234a591.webp",
+              "title": "",
+              "description": "",
+              "overlay_content": false,
+              "color_text": "#ffffff",
+              "color_overlay": "#000000",
+              "overlay_opacity": 30
+            }
+          }
+        },
+        "block_order": [
+          "collection_TgmLNK",
+          "collection_Ypdnx3",
+          "collection_n3yKQx",
+          "collection_rGaYPH"
+        ],
+        "settings": {
+          "columns": 4,
+          "carousel_on_desktop": true,
+          "image_type": "collection",
+          "image_ratio": "adapt",
+          "show_products_count": true,
+          "show_view_all": false,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Product Categories",
+          "heading_size": "title-md",
+          "heading_alignment": "text-left md:items-end md:flex-row",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "testimonials_zBjQXY": {
+        "type": "testimonials",
+        "blocks": {
+          "testimonial_XVnKtE": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>Hyper Thunderbolt 4 Power Hub review: Fast connectivity for demanding users ​</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/HP-Logos-_0003_Layer-4_180x_93c8923a-12f2-4fd6-be80-64cacbb9c472.webp",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_fQNpMw": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>The HyperDrive 10-in-1 USB-C Hub is the best dual 4K hub for M1/M2 Macs​</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-3_180x_0ea536cb-730c-41a7-8fcd-c582ee30118e.webp",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_TAnnFM": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>The HyperDrive Thunderbolt Power Hub makes for one of the best Thunderbolt hubs we have come across thus far​</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-1_180x_ece88601-962c-4c8c-80b8-270f5c41cd32.webp",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_fU8KGB": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>The HyperDrive 10-in-1 USB-C Hub is a great way to expand your Mac's I/O but is particularly useful for M1-based Macs if you want to use two external displays</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_LynYNV": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>The HyperDrive Hub should be considered an essential addition to any home office or graphic/video design environment​</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-4_180x_3b7a8be8-2744-4860-9615-7c8f5fb7799d.webp",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_efRM6p": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>Best MagSafe stands for Standby​ in iOS 17​</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "testimonial_idWzjQ": {
+            "type": "testimonial",
+            "settings": {
+              "icon": "quote",
+              "text": "<p>The new Hyper 245W GaN Desktop Charger is compact, sleek, and the most powerful multi charger you can have at the ready</p>",
+              "author": "",
+              "author_info": "",
+              "author_url": "",
+              "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+              "image_ratio": "adapt",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          }
+        },
+        "block_order": [
+          "testimonial_XVnKtE",
+          "testimonial_fQNpMw",
+          "testimonial_TAnnFM",
+          "testimonial_fU8KGB",
+          "testimonial_LynYNV",
+          "testimonial_efRM6p",
+          "testimonial_idWzjQ"
+        ],
+        "settings": {
+          "heading": "",
+          "heading_size": "title-md",
+          "heading_alignment": "text-center md:items-center",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "button_label": "",
+          "button_link": "",
+          "button_external": false,
+          "button_icon": true,
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "#f8f8f8",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "",
+          "color_button_background": "",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "rounded": false
+        }
+      },
+      "logo_list_Fj7XTp": {
+        "type": "logo-list",
+        "blocks": {
+          "logo_yrMbVb": {
+            "type": "logo",
+            "settings": {
+              "image": "shopify://shop_images/brand2.webp",
+              "height": 40,
+              "link": ""
+            }
+          },
+          "logo_pV6DjL": {
+            "type": "logo",
+            "settings": {
+              "image": "shopify://shop_images/brand3.webp",
+              "height": 28,
+              "link": ""
+            }
+          },
+          "logo_nfNcYK": {
+            "type": "logo",
+            "settings": {
+              "image": "shopify://shop_images/brand5.webp",
+              "height": 80,
+              "link": ""
+            }
+          },
+          "logo_RAddPa": {
+            "type": "logo",
+            "settings": {
+              "image": "shopify://shop_images/brand6.webp",
+              "height": 40,
+              "link": ""
+            }
+          },
+          "logo_WpwR9h": {
+            "type": "logo",
+            "settings": {
+              "image": "shopify://shop_images/apple-insider.webp",
+              "height": 40,
+              "link": ""
+            }
+          }
+        },
+        "block_order": [
+          "logo_yrMbVb",
+          "logo_pV6DjL",
+          "logo_nfNcYK",
+          "logo_RAddPa",
+          "logo_WpwR9h"
+        ],
+        "settings": {
+          "layout": "default",
+          "grid_horizontal": 70,
+          "direction": "left",
+          "speed": 5,
+          "heading": "Featured in",
+          "heading_size": "title-md",
+          "heading_alignment": "text-center md:items-center",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "button_label": "",
+          "button_link": "",
+          "button_external": false,
+          "button_icon": true,
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "#f8f8f8",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "",
+          "color_button_background": "",
+          "color_button_gradient": "",
+          "padding_top": 28,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "multicolumn_TfDxBQ": {
+        "type": "multicolumn",
+        "blocks": {
+          "column_tpCL8N": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/hyper-sm-image-2.webp",
+              "image_ratio": "adapt",
+              "heading": "<a href=\"https://www.instagram.com/reel/DCmruQVC9Zl/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\" title=\"https://www.instagram.com/reel/DCmruQVC9Zl/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\">Instagram @sleepingiant_808</a>",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_P36U3f": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/hyper-sm-image-3.webp",
+              "image_ratio": "adapt",
+              "heading": "<a href=\"https://www.instagram.com/reel/CpvJsMvDaq5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\" title=\"https://www.instagram.com/reel/CpvJsMvDaq5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\">Instagram @appledsign</a>",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "column_YKQfrd": {
+            "type": "column",
+            "settings": {
+              "show_border": false,
+              "text_alignment": "center",
+              "text_alignment_mobile": "center",
+              "image": "shopify://shop_images/hyper-sm-image-1.webp",
+              "image_ratio": "adapt",
+              "heading": "<a href=\"https://www.instagram.com/reel/C_jR2cnIT04/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\" title=\"https://www.instagram.com/reel/C_jR2cnIT04/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==\">Instagram @kevtech.fr</a>",
+              "heading_size": "text-lg-2xl",
+              "text": "",
+              "button_label": "",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          }
+        },
+        "block_order": [
+          "column_tpCL8N",
+          "column_P36U3f",
+          "column_YKQfrd"
+        ],
+        "settings": {
+          "gap": "large",
+          "columns": 3,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Show Us How You Go Beyond",
+          "heading_size": "title-md",
+          "heading_alignment": "text-center md:items-center",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "<p>Share and Follow</p>",
+          "button_label": "",
+          "button_link": "",
+          "button_external": false,
+          "button_icon": true,
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "",
+          "color_button_background": "",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      },
+      "featured_collection_qDCqHi": {
+        "type": "featured-collection",
+        "settings": {
+          "collection": "",
+          "products": [
+            "desktop-anywhere-hyperdrive-dual-monitor-usb4-dock-and-cable-bundle",
+            "hyperdrive-6-in-1-hub-for-ipad",
+            "hyperdrive-2m-thunderbolt-4-cable",
+            "hyperdrive-6-in-1-hub-for-imac-24"
+          ],
+          "product_limit": 6,
+          "columns": 4,
+          "carousel_on_desktop": true,
+          "show_view_all": false,
+          "columns_mobile": "1",
+          "swipe_on_mobile": true,
+          "heading": "Recently Viewed",
+          "heading_size": "title-md",
+          "heading_alignment": "text-left md:items-end md:flex-row",
+          "heading_tag": "h2",
+          "subheading": "",
+          "description": "",
+          "highlighted_text": "none",
+          "highlighted_scribble": "circle",
+          "color_text": "",
+          "color_background": "",
+          "gradient_background": "",
+          "color_highlight": "",
+          "gradient_highlight": "",
+          "color_button_text": "#ffffff",
+          "color_button_background": "#3c3fbc",
+          "color_button_gradient": "",
+          "padding_top": 72,
+          "padding_bottom": 72,
+          "divider": false,
+          "full_width": false,
+          "rounded": false
+        }
+      }
+    },
+    "order": [
+      "slideshow",
+      "multicolumn_UqDXFR",
+      "featured_collection_pkhP8d",
+      "multicolumn_aLFyYA",
+      "image_with_text_overlay_gEanti",
+      "featured_collection_Mdw6E9",
+      "collection_list_FHMCa7",
+      "testimonials_zBjQXY",
+      "logo_list_Fj7XTp",
+      "multicolumn_TfDxBQ",
+      "featured_collection_qDCqHi"
+    ]
+  }
+  
