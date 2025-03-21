@@ -996,6 +996,100 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "featured_product_gNYaLT": {
+      "type": "featured-product",
+      "blocks": {
+        "title_AQbmLF": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-md",
+            "title_size_mobile": "product-title-md",
+            "show_price": true,
+            "show_rating": true
+          }
+        },
+        "description_Tx3wDj": {
+          "type": "description",
+          "settings": {
+            "text_size": "text-base"
+          }
+        },
+        "variant_picker_eH8J3b": {
+          "type": "variant_picker",
+          "settings": {
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": ""
+          }
+        },
+        "buy_buttons_fypbxm": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "pickup_availability_fwCrPf": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "share_qgWekh": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "show_help_desk": true,
+            "help_label": "Need help?",
+            "help_page": ""
+          }
+        },
+        "read_more_7mMJzi": {
+          "type": "read_more",
+          "settings": {}
+        },
+        "spinning_text_aAzNLK": {
+          "type": "spinning_text",
+          "settings": {
+            "text": "Featured product"
+          }
+        }
+      },
+      "block_order": [
+        "title_AQbmLF",
+        "description_Tx3wDj",
+        "variant_picker_eH8J3b",
+        "buy_buttons_fypbxm",
+        "pickup_availability_fwCrPf",
+        "share_qgWekh",
+        "read_more_7mMJzi",
+        "spinning_text_aAzNLK"
+      ],
+      "settings": {
+        "product": "hyperjuice-245w-usb-c-battery-pack",
+        "enable_sticky_info": true,
+        "media_size": 66,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "adapt_first",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "mobile_layout": "partial",
+        "image_ratio_mobile": "adapt_first",
+        "mobile_thumbnail": false,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
@@ -1010,6 +1104,7 @@
     "testimonials_zBjQXY",
     "logo_list_Fj7XTp",
     "blog_posts_collage_dkeLCT",
-    "multicolumn_TfDxBQ"
+    "multicolumn_TfDxBQ",
+    "featured_product_gNYaLT"
   ]
 }
