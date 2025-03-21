@@ -94,7 +94,7 @@
         "color_button_gradient": "",
         "color_overlay": "#000000",
         "overlay_opacity": 0,
-        "padding_top": 0,
+        "padding_top": 12,
         "padding_bottom": 0,
         "divider": false,
         "full_width": true,
@@ -368,100 +368,6 @@
         "rounded": false
       }
     },
-    "featured_product_gNYaLT": {
-      "type": "featured-product",
-      "blocks": {
-        "title_AQbmLF": {
-          "type": "title",
-          "settings": {
-            "title_size": "product-title-md",
-            "title_size_mobile": "product-title-md",
-            "show_price": true,
-            "show_rating": true
-          }
-        },
-        "description_Tx3wDj": {
-          "type": "description",
-          "settings": {
-            "text_size": "text-sm"
-          }
-        },
-        "variant_picker_eH8J3b": {
-          "type": "variant_picker",
-          "settings": {
-            "show_variant_labels": true,
-            "picker_type": "button",
-            "enable_color_swatches": true,
-            "color_swatch_type": "color",
-            "size_chart": ""
-          }
-        },
-        "buy_buttons_fypbxm": {
-          "type": "buy_buttons",
-          "settings": {
-            "show_quantity_selector": true,
-            "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true,
-            "enable_back_in_stock": false,
-            "show_back_in_stock_name": false,
-            "show_back_in_stock_phone": false
-          }
-        },
-        "pickup_availability_fwCrPf": {
-          "type": "pickup_availability",
-          "settings": {}
-        },
-        "share_qgWekh": {
-          "type": "share",
-          "settings": {
-            "share_label": "Share",
-            "show_help_desk": true,
-            "help_label": "Need help?",
-            "help_page": ""
-          }
-        },
-        "read_more_7mMJzi": {
-          "type": "read_more",
-          "settings": {}
-        },
-        "spinning_text_aAzNLK": {
-          "type": "spinning_text",
-          "settings": {
-            "text": "Special Discount"
-          }
-        }
-      },
-      "block_order": [
-        "title_AQbmLF",
-        "description_Tx3wDj",
-        "variant_picker_eH8J3b",
-        "buy_buttons_fypbxm",
-        "pickup_availability_fwCrPf",
-        "share_qgWekh",
-        "read_more_7mMJzi",
-        "spinning_text_aAzNLK"
-      ],
-      "settings": {
-        "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
-        "enable_sticky_info": true,
-        "media_size": 66,
-        "gallery_layout": "thumbnail",
-        "thumbnail_position": "beside",
-        "image_ratio": "adapt_first",
-        "image_zoom": "lightbox",
-        "hide_variants": false,
-        "enable_video_autoplay": false,
-        "enable_video_looping": false,
-        "mobile_layout": "partial",
-        "image_ratio_mobile": "adapt_first",
-        "mobile_thumbnail": false,
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
     "multicolumn_aLFyYA": {
       "type": "multicolumn",
       "blocks": {
@@ -577,6 +483,100 @@
         "color_button_text": "#ffffff",
         "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "featured_product_gNYaLT": {
+      "type": "featured-product",
+      "blocks": {
+        "title_AQbmLF": {
+          "type": "title",
+          "settings": {
+            "title_size": "product-title-md",
+            "title_size_mobile": "product-title-md",
+            "show_price": true,
+            "show_rating": true
+          }
+        },
+        "description_Tx3wDj": {
+          "type": "description",
+          "settings": {
+            "text_size": "text-sm"
+          }
+        },
+        "variant_picker_eH8J3b": {
+          "type": "variant_picker",
+          "settings": {
+            "show_variant_labels": true,
+            "picker_type": "button",
+            "enable_color_swatches": true,
+            "color_swatch_type": "color",
+            "size_chart": ""
+          }
+        },
+        "buy_buttons_fypbxm": {
+          "type": "buy_buttons",
+          "settings": {
+            "show_quantity_selector": true,
+            "show_dynamic_checkout": true,
+            "show_gift_card_recipient": true,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
+          }
+        },
+        "pickup_availability_fwCrPf": {
+          "type": "pickup_availability",
+          "settings": {}
+        },
+        "share_qgWekh": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "show_help_desk": true,
+            "help_label": "Need help?",
+            "help_page": ""
+          }
+        },
+        "read_more_7mMJzi": {
+          "type": "read_more",
+          "settings": {}
+        },
+        "spinning_text_aAzNLK": {
+          "type": "spinning_text",
+          "settings": {
+            "text": "Special Discount"
+          }
+        }
+      },
+      "block_order": [
+        "title_AQbmLF",
+        "description_Tx3wDj",
+        "variant_picker_eH8J3b",
+        "buy_buttons_fypbxm",
+        "pickup_availability_fwCrPf",
+        "share_qgWekh",
+        "read_more_7mMJzi",
+        "spinning_text_aAzNLK"
+      ],
+      "settings": {
+        "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
+        "enable_sticky_info": true,
+        "media_size": 66,
+        "gallery_layout": "thumbnail",
+        "thumbnail_position": "beside",
+        "image_ratio": "adapt_first",
+        "image_zoom": "lightbox",
+        "hide_variants": false,
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "mobile_layout": "partial",
+        "image_ratio_mobile": "adapt_first",
+        "mobile_thumbnail": false,
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
