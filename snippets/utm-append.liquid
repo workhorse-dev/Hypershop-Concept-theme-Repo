@@ -1,0 +1,84 @@
+<script>
+    document.addEventListener('DOMContentLoaded', function () {
+      // Functions to manage UTM parameters in localStorage
+      function deleteUTMFromLocalStorage(param) {
+        localStorage.removeItem(param);
+      }
+  
+      function setUTMInLocalStorage(param, value) {
+        localStorage.setItem(param, value);
+        sessionStorage.setItem(param, value);
+      }
+  
+      const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
+  
+      // Check for UTM parameters in the URL
+      const urlParams = new URLSearchParams(window.location.search);
+      const hasUtmParams = utmParams.some(param => urlParams.has(param));
+  
+      if (hasUtmParams) {
+        // Clear previous UTM parameters from localStorage
+        utmParams.forEach(param => deleteUTMFromLocalStorage(param));
+  
+        // Store new UTM parameters in localStorage
+        utmParams.forEach(param => {
+          if (urlParams.has(param)) {
+            setUTMInLocalStorage(param, urlParams.get(param));
+          }
+        });
+      } else {
+        // If no UTM parameters are found, remove them from localStorage
+        utmParams.forEach(param => deleteUTMFromLocalStorage(param));
+      }
+  
+      // Retrieve stored UTM parameters from localStorage
+      const storedUtmParams = utmParams.reduce((acc, param) => {
+        const value = localStorage.getItem(param);
+        if (value) {
+          acc[param] = value;
+        }
+        return acc;
+      }, {});
+  
+      if (Object.keys(storedUtmParams).length > 0) {
+        // Update href attributes of anchor links
+        const links = document.querySelectorAll('a');
+        links.forEach(link => {
+          if (link.getAttribute('href') !== '#menu') {
+            try {
+              let url = new URL(link.href);
+              Object.keys(storedUtmParams).forEach(key => {
+                url.searchParams.set(key, storedUtmParams[key]);
+              });
+              link.href = url.toString();
+            } catch (error) {
+              // console.error('Error updating link:', link.href, error);
+            }
+          }
+        });
+  
+        // Update data-link attributes
+        const dataLinks = document.querySelectorAll('[data-link]');
+        dataLinks.forEach(element => {
+          try {
+            let url = new URL(element.getAttribute('data-link'), window.location.origin);
+            Object.keys(storedUtmParams).forEach(key => {
+              url.searchParams.set(key, storedUtmParams[key]);
+            });
+            element.setAttribute('data-link', url.pathname + url.search); // Update the attribute
+          } catch (error) {
+            console.error('Error updating data-link attribute:', element.getAttribute('data-link'), error);
+          }
+        });
+  
+        // Reinitialize click event listeners for .image-link-wrapper elements
+        const imageLinkWrappers = document.querySelectorAll('.image-link-wrapper');
+        imageLinkWrappers.forEach(function (wrapper) {
+          const link = wrapper.getAttribute('data-link'); // Get the updated data-link
+          wrapper.addEventListener('click', function () {
+            window.location.href = link; // Redirect to the updated data-link
+          });
+        });
+      }
+    });
+</script>  
