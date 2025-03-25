@@ -73,12 +73,12 @@
                 <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
                   <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
                     {%- if product.featured_media -%}
-                      <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                      <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
                         {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                       </div>
                     {%- endif -%}
                     <div class="rte text-sm leading-none grid gap-2">
-                      <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                      <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
 
                       {%- render 'product-price', product: product, placeholder: placeholder -%}
                     </div>
@@ -89,12 +89,12 @@
                 <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} aria-current="{% if forloop.first %}true{% else %}false{% endif %}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
                   <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
                     {%- if product.featured_media -%}
-                      <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                      <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
                         {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                       </div>
                     {%- endif -%}
                     <div class="rte text-sm leading-none grid gap-2">
-                      <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                      <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
 
                       {%- render 'product-price', product: product, placeholder: placeholder -%}
                     </div>
@@ -103,7 +103,7 @@
                 </a>
               {%- endif -%}
             {%- else -%}
-              <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} aria-disabled="true"{% endif %} aria-current="{% if forloop.first %}true{% else %}false{% endif %}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>&nbsp;</a>
+              <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
             {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
@@ -115,6 +115,7 @@
             product: block.settings.product,
             product_id: block.settings.product.id,
             section_id: section.id,
+            block_id: block.id,
             lazy_load: false,
             image_ratio: settings.product_image_ratio,
             image_fill: settings.product_image_fill,
@@ -127,6 +128,7 @@
             show_quick_view: settings.product_quick_view,
             show_save_amount: settings.product_save_amount,
             save_type: settings.product_save_type,
+            show_icon_list: false,
             mobile_quick_add: true
           -%}
         {%- endfor -%}
@@ -472,7 +474,7 @@
         {
           "type": "color",
           "id": "color_text",
-          "label": "t:sections.global.settings.color_text.label",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
           "default": "#ffffff"
         },
         {

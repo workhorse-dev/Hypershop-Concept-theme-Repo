@@ -35,7 +35,7 @@
         </div>
       {%- else -%}
         <div class="alert alert--success inline-flex items-center gap-3">
-          {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+          {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0' -%}
           <span class="text-sm font-medium leading-tight">
             {%- liquid
               if block.settings.show_inventory_quantity == 'always'
@@ -49,7 +49,7 @@
       {%- endif -%}
     {%- elsif product_variant.incoming and block.settings.show_inventory_transfer -%}
       <div class="alert alert--info inline-flex items-center gap-3">
-        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0' -%}
         <span class="text-sm font-medium leading-tight">
           {%- liquid
             if product_variant.next_incoming_date
@@ -67,14 +67,14 @@
       </div>
     {%- elsif product_variant.inventory_policy == 'continue'-%}
       <div class="alert alert--success inline-flex items-center gap-3">
-        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0' -%}
         <span class="text-sm font-medium leading-tight">
           {{- 'products.inventory.out_of_stock_continue_selling' | t -}}
         </span>
       </div>
     {%- else -%}
       <div class="alert alert--error inline-flex items-center gap-3">
-        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'flex-auto' -%}
+        {%- render 'icon', icon: 'ellipse', size: 'xs', class: 'shrink-0' -%}
         <span class="text-sm font-medium leading-tight">
           {{- 'products.inventory.out_of_stock' | t -}}
         </span>

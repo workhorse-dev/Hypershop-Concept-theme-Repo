@@ -9,18 +9,21 @@
   - show_price: {Boolean} Show the product pricing. Default: false
   - show_quick_add: {Boolean} Show the quick add button.
   - show_quick_view: {Boolean} Show the quick view button.
+  - product_id: {String} The ID of the current product.
+  - section_id: {String} The ID of section to which this snippet belongs.
+  - block_id: {String} The ID of block to which this snippet belongs.
 
   Usage:
   {% render 'product-card-horizontal', product: item %}
 {%- endcomment -%}
 
 <div class="horizontal-product flex items-center gap-4 md:gap-6 w-full">
-  <a class="horizontal-product__media media media--{{ image_ratio }}{% unless image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto" href="{{ product.url }}" tabindex="-1">
+  <a class="horizontal-product__media media media--{{ image_ratio }}{% unless image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ product.url }}" tabindex="-1">
     {%- liquid
       if product.featured_media
         echo product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image'
       else
-        echo 'image' | placeholder_svg_tag
+        echo 'product-1' | placeholder_svg_tag
       endif
     -%}
   </a>
@@ -61,7 +64,8 @@
             {%- endform -%}
           {%- else -%}
             {%- if show_quick_view -%}
-              <button type="button" class="button button--primary button--small icon-with-text" is="hover-button" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" aria-label="{{ 'products.product.quick_view' | t | escape }}">
+              {%- capture quick_view_id -%}Quickview-{{ section_id }}{% if block_id != blank %}-{{ block_id }}{% endif %}-{{ product_id }}{%- endcapture -%}
+              <button type="button" class="button button--primary button--small icon-with-text" is="hover-button" aria-controls="{{ quick_view_id }}" aria-expanded="false" aria-label="{{ 'products.product.quick_view' | t | escape }}">
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
                   {%- render 'icon', icon: 'plus', size: '2xs' -%}
@@ -70,11 +74,11 @@
                   </span>
                 </span>
               </button>
-              <quick-view id="Quickview-{{ section.id }}-{{ product.id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true">
-                <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false"></overlay-element>
+              <quick-view id="{{ quick_view_id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true" hidden>
+                <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="{{ quick_view_id }}" aria-expanded="false"></overlay-element>
                 <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
                   <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
-                    <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="{{ quick_view_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
                       <span class="btn-fill" data-fill></span>
                       <span class="btn-text">
                         {%- render 'icon', icon: 'close', size: 'sm' -%}

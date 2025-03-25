@@ -34,6 +34,8 @@
     if back_in_stock_block
       assign enable_back_in_stock = false
     endif
+
+    assign show_price = block.settings.show_price
   -%}
   {%- form 'product',
     product,
@@ -196,11 +198,11 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector %} flex{% else %} grid{% endif %} gap-4">
+      <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price %} flex flex-wrap{% else %} grid{% endif %} gap-4">
         {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
           {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
           <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
-          <quantity-input class="quantity inline-flex flex-auto relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
+          <quantity-input class="quantity inline-flex shrink-0 relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
             <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
               {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
             </button>
@@ -233,7 +235,7 @@
           type="submit"
           name="add"
           form="{{ product_form_id }}"
-          class="product-form__submit button button--primary button--fixed w-full"
+          class="product-form__submit button button--primary button--fixed grow{% if show_price %} with-price{% endif %}"
           is="hover-button"
           {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
           {%- if product.template_suffix == 'pre-order' %} data-pre-order{% endif -%}
@@ -241,15 +243,28 @@
         >
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
-            {%- liquid
-              if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
-                echo 'products.product.sold_out' | t
-              elsif product.template_suffix != 'pre-order'
-                echo 'products.product.add_to_cart' | t
-              else
-                echo 'products.product.pre_order' | t
-              endif
-            -%}
+            <span>
+              {%- liquid
+                if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+                  echo 'products.product.sold_out' | t
+                elsif product.template_suffix != 'pre-order'
+                  echo 'products.product.add_to_cart' | t
+                else
+                  echo 'products.product.pre_order' | t
+                endif
+              -%}
+            </span>
+            {%- if show_price -%}
+              <div id="BuyButtonPrice-{{ section.id }}-{{ product.id }}" class="flex">
+                <span class="relative">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+                {%- liquid
+                  if product == null
+                    assign placeholder = true
+                  endif
+                  render 'product-price', product: product, placeholder: placeholder, use_variant: true
+                -%}
+              </div>
+            {%- endif -%}
           </span>
         </button>
 
@@ -267,7 +282,7 @@
         {%- endif -%}
 
         {%- liquid
-          unless product.quantity_price_breaks_configured? != true and show_quantity_selector
+          unless product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price
             if show_dynamic_checkout
               echo form | payment_button
             endif
@@ -298,7 +313,7 @@
       {%- endif -%}
 
       {%- liquid
-        if product.quantity_price_breaks_configured? != true and show_quantity_selector
+        if product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price
           if show_dynamic_checkout
             echo form | payment_button
           endif
@@ -310,7 +325,7 @@
   {%- if enable_back_in_stock -%}
     <div id="BackInStock-{{ section_id }}-{{ product_id }}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none"
           role="dialog"
           aria-modal="true"
           aria-label="{{ product.title | escape }}"
@@ -326,7 +341,7 @@
                   <dl class="grid gap-1d5">
                     {%- for option in product.options_with_values -%}
                       <div class="flex gap-2 text-sm text-opacity leading-tight">
-                        <dt>{{ option.name | escape }}:</dt>
+                        <dt class="font-normal">{{ option.name | escape }}:</dt>
                         <dd>
                           {%- for value in option.values -%}
                             {%- if option.selected_value == value -%}
@@ -358,7 +373,7 @@
               </div>
             </div>
           </div>
-        </back-in-stock-drawer>        
+        </back-in-stock-drawer>
       {%- endif -%}
     </div>
   {%- endif -%}

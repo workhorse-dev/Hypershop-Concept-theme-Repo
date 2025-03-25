@@ -67,7 +67,7 @@
                             {%- endif -%}
                             {{- block.settings.heading | escape -}}
                           </span>
-                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                         </summary>
                         <div class="details__content text-base rte">
                           <div class="specification">
@@ -171,7 +171,7 @@
                             {%- endif -%}
                             {{- block.settings.heading | escape -}}
                           </span>
-                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                         </summary>
                         <div class="details__content text-base rte">
                           <div class="specification grid grid-cols-12 gap-6 md:gap-10">
@@ -205,7 +205,7 @@
             <ul class="flex flex-wrap items-start justify-center gap-6 md:gap-10">
               {%- for block in specifications -%}
                 {%- if block.settings.icon != blank or block.settings.heading != blank -%}
-                  <li class="flex-auto grid gap-2d5">
+                  <li class="shrink-0 grid gap-2d5">
                     {%- if block.settings.icon != blank -%}
                       <div class="media relative flex items-center justify-center rounded-full">
                         {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy', widths: '80,96,160,192', is: 'lazy-image' -}}
@@ -800,7 +800,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 24,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"
@@ -1070,7 +1070,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 24,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"

@@ -1,8 +1,12 @@
 {%- liquid
   assign show_section = true
-
   if section.settings.hide_homepage and request.page_type == 'index'
     assign show_section = false
+  endif
+
+  assign section_rendering_api = false
+  if section.index == nil
+    assign section_rendering_api = true
   endif
 -%}
 
@@ -119,71 +123,79 @@
       <div class="localization hidden lg:flex items-center h-full">
         {%- if enable_language_selector -%}
           <div class="localization__item h-full relative" role="combobox" aria-controls="LanguageLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.language_label' | t | escape }}">
-            <button type="button" class="flex items-center gap-3 h-full z-2 relative">
+            <button type="button" class="flex items-center gap-3 h-full z-2 relative"{% unless section_rendering_api %} is="api-button" data-id="announcement_localization_language_form" data-section-id="{{ section.id }}"{% endunless %}>
               {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 hidden xl:block' -%}
               <span class="leading-tight">{{ localization.language.endonym_name | capitalize }}</span>
               {%- render 'icon', icon: 'chevron-down', size: 'xs' -%}
             </button>
             <dropdown-localization class="dropdown opacity-0 invisible z-30 absolute top-100{% if enable_country_selector %} left-0{% else %} right-0{% endif %} pointer-events-none" id="LanguageLocalization-{{ section.id }}">
-              {%- form 'localization', id: 'localization_language_form_header', class: 'dropdown__container', is: 'localization-listbox' -%}
-                {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-                <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
-                  {%- for language in localization.available_languages -%}
-                    <li class="opacity-0">
-                      <p>
-                        <a class="reversed-link{% if language.iso_code == localization.language.iso_code %} active pointer-events-none{% endif %}"
-                          href="#"
-                          hreflang="{{ language.iso_code }}"
-                          lang="{{ language.iso_code }}"
-                          {% if language.iso_code == localization.language.iso_code %}
-                            aria-current="true"
-                          {% endif %}
-                          data-value="{{ language.iso_code }}"
-                          title="{{ language.endonym_name | capitalize | escape }}"
-                          data-no-instant
-                        >
-                          {{- language.endonym_name | capitalize -}}
-                        </a>
-                      </p>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
-              {%- endform -%}
+              {%- unless section_rendering_api -%}
+                <div class="dropdown__container" id="announcement_localization_language_form"></div>
+              {%- else -%}
+                {%- form 'localization', id: 'announcement_localization_language_form', class: 'dropdown__container', is: 'localization-listbox' -%}
+                  {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                  <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                    {%- for language in localization.available_languages -%}
+                      <li class="opacity-0">
+                        <p>
+                          <a class="reversed-link{% if language.iso_code == localization.language.iso_code %} active pointer-events-none{% endif %}"
+                            href="#"
+                            hreflang="{{ language.iso_code }}"
+                            lang="{{ language.iso_code }}"
+                            {% if language.iso_code == localization.language.iso_code %}
+                              aria-current="true"
+                            {% endif %}
+                            data-value="{{ language.iso_code }}"
+                            title="{{ language.endonym_name | capitalize | escape }}"
+                            data-no-instant
+                          >
+                            {{- language.endonym_name | capitalize -}}
+                          </a>
+                        </p>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
+                {%- endform -%}
+              {%- endunless -%}
             </dropdown-localization>
           </div>
         {%- endif -%}
         {%- if enable_country_selector -%}
           <div class="localization__item h-full relative" role="combobox" aria-controls="CountryLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.country_label' | t | escape }}">
-            <button type="button" class="flex items-center gap-3 h-full z-2 relative">
+            <button type="button" class="flex items-center gap-3 h-full z-2 relative"{% unless section_rendering_api %} is="api-button" data-id="announcement_localization_country_form" data-section-id="{{ section.id }}"{% endunless %}>
               {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden xl:block' -%}
               <span class="leading-tight">{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
               {%- render 'icon', icon: 'chevron-down', size: 'xs' -%}
             </button>
             <dropdown-localization class="dropdown opacity-0 invisible z-30 absolute top-100 right-0 pointer-events-none" id="CountryLocalization-{{ section.id }}">
-              {%- form 'localization', id: 'localization_country_form_header', class: 'dropdown__container', is: 'localization-listbox' -%}
-                {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-                <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
-                  {%- for country in localization.available_countries -%}
-                    <li class="opacity-0">
-                      <p>
-                        <a class="reversed-link{% if country.iso_code == localization.country.iso_code %} active pointer-events-none{% endif %}"
-                          href="#"
-                          {% if country.iso_code == localization.country.iso_code %}
-                            aria-current="true"
-                          {% endif %}
-                          data-value="{{ country.iso_code }}"
-                          title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
-                          data-no-instant
-                        >
-                          {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                        </a>
-                      </p>
-                    </li>
-                  {%- endfor -%}
-                </ul>
-                <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
-              {%- endform -%}
+              {%- unless section_rendering_api -%}
+                <div class="dropdown__container" id="announcement_localization_country_form"></div>
+              {%- else -%}
+                {%- form 'localization', id: 'announcement_localization_country_form', class: 'dropdown__container', is: 'localization-listbox' -%}
+                  {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                  <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
+                    {%- for country in localization.available_countries -%}
+                      <li class="opacity-0">
+                        <p>
+                          <a class="reversed-link{% if country.iso_code == localization.country.iso_code %} active pointer-events-none{% endif %}"
+                            href="#"
+                            {% if country.iso_code == localization.country.iso_code %}
+                              aria-current="true"
+                            {% endif %}
+                            data-value="{{ country.iso_code }}"
+                            title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
+                            data-no-instant
+                          >
+                            {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                          </a>
+                        </p>
+                      </li>
+                    {%- endfor -%}
+                  </ul>
+                  <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
+                {%- endform -%}
+              {%- endunless -%}
             </dropdown-localization>
           </div>
         {%- endif -%}

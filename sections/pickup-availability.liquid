@@ -5,7 +5,7 @@
     {%- assign closest_location = pick_up_availabilities.first -%}
     {%- if closest_location.available -%}
       <div class="pickup-availability-info flex items-start gap-2d5">
-        {%- render 'icon', icon: 'check-circle-filled', size: 'sm', class: 'flex-auto' -%}
+        {%- render 'icon', icon: 'check-circle-filled', size: 'sm', class: 'shrink-0' -%}
         <div class="grid gap-1">
           <p class="text-sm font-medium leading-tight">{{ 'products.pickup_availability.pick_up_available_at_html' | t: location_name: closest_location.location.name }}</p>
           <small class="text-xs leading-tight">{{ closest_location.pick_up_time }}</small>
@@ -24,7 +24,7 @@
       </button>
     {%- else -%}
       <div class="pickup-availability-info flex items-start gap-2d5">
-        {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'flex-auto' -%}
+        {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'shrink-0' -%}
         <div class="grid gap-1">
           <p class="text-sm font-medium leading-tight">{{ 'products.pickup_availability.pick_up_unavailable_at_html' | t: location_name: closest_location.location.name }}</p>
         </div>
@@ -88,7 +88,7 @@
                 <h4 class="font-medium leading-tight md:text-lg">{{ availability.location.name | escape }}</h4>
                 {%- if availability.available -%}
                   <div class="pickup-availability-info flex gap-2 items-center">
-                    {%- render 'icon', icon: 'check-circle-filled', size: 'sm', class: 'flex-auto' -%}
+                    {%- render 'icon', icon: 'check-circle-filled', size: 'sm', class: 'shrink-0' -%}
                     <p class="text-sm leading-tight">
                       {{- 'products.pickup_availability.pick_up_available' | t }},
                       {{ availability.pick_up_time | downcase -}}
@@ -96,7 +96,7 @@
                   </div>
                 {%- else -%}
                   <div class="pickup-availability-info flex gap-2 items-center">
-                    {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'flex-auto' -%}
+                    {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'shrink-0' -%}
                     <p class="text-sm leading-tight">
                       {{- 'products.pickup_availability.pick_up_unavailable' | t -}}
                     </p>

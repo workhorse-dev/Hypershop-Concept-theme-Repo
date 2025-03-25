@@ -3,7 +3,7 @@
     "name": "theme_info",
     "theme_name": "Concept",
     "theme_author": "RoarTheme",
-    "theme_version": "3.1.0",
+    "theme_version": "4.0.0",
     "theme_documentation_url": "https://roartheme.co/blogs/concept",
     "theme_support_url": "https://haloroar.ticksy.com"
   },
@@ -996,6 +996,38 @@
       },
       {
         "type": "header",
+        "content": "t:settings_schema.products.settings.header__icon_list.content",
+        "info": "t:settings_schema.products.settings.header__icon_list.info"
+      },
+      {
+        "type": "text",
+        "id": "product_icon_list_metafield",
+        "label": "t:settings_schema.products.settings.product_icon_list_metafield.label",
+        "info": "t:settings_schema.products.settings.product_icon_list_metafield.info"
+      },
+      {
+        "type": "checkbox",
+        "id": "product_icon_list",
+        "default": false,
+        "label": "t:settings_schema.products.settings.product_icon_list.label"
+      },
+      {
+        "type": "range",
+        "id": "product_icon_list_max",
+        "min": 2,
+        "max": 6,
+        "step": 1,
+        "label": "t:settings_schema.products.settings.product_icon_list_max.label",
+        "default": 4
+      },
+      {
+        "type": "checkbox",
+        "id": "product_icon_list_carousel",
+        "default": false,
+        "label": "t:settings_schema.products.settings.product_icon_list_carousel.label"
+      },
+      {
+        "type": "header",
         "content": "t:settings_schema.products.settings.header__miscellaneous.content"
       },
       {
@@ -1087,14 +1119,14 @@
       {
         "type": "checkbox",
         "id": "predictive_search_show_vendor",
-        "default": true,
-        "label": "t:settings_schema.search.settings.predictive_search_show_vendor.label"
+        "default": false,
+        "label": "t:settings_schema.global.settings.show_product_vendor.label"
       },
       {
         "type": "checkbox",
         "id": "predictive_search_show_price",
         "default": true,
-        "label": "t:settings_schema.search.settings.predictive_search_show_price.label"
+        "label": "t:settings_schema.global.settings.show_product_price.label"
       },
       {
         "type": "header",

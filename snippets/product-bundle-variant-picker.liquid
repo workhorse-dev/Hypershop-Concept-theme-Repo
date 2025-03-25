@@ -27,7 +27,7 @@
   data-type: 'add-to-cart-form',
   data-product-title: product.title,
   data-product-image: featured_image,
-  class: 'product-form flex flex-col gap-4 h-full justify-between',
+  class: 'product-form flex flex-col gap-2 lg:gap-4 h-full justify-between',
   is: 'product-bundle-form',
   aria-controls: controls
 -%}
@@ -83,6 +83,7 @@
                         id="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
                         name="{{ option.name }}-{{ section_id }}-{{ product_id }}"
                         value="{{ value | escape }}"
+                        {% unless value.available %}disabled{% endunless %}
                         {% if option.selected_value == value %}checked{% endif %}
                         {% if value.product_url != blank and value.product_url != product.url %}data-product-url="{{ value.variant.url | default: value.product_url }}"{% endif %}
                         data-option-value="{{ value | escape }}"
@@ -138,7 +139,7 @@
                             for variant in product.variants
                               assign variant_value = variant.options[option_index_0]
                               if variant_value contains value and variant.image
-                                assign swatch_image = variant.image | image_url: width: 144
+                                assign swatch_image = variant.image | image_url: width: 72
                                 assign swatch_fallback_override = false
                                 break
                               endif
@@ -149,7 +150,7 @@
                           for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
                           class="color-swatch{% if swatch_image != blank %} with-image{% endif %} relative"
                           title="{{ value | escape }}"
-                          style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}"
+                          style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} --swatch-background-image: url({{ swatch_image }});{% endif %}"
                         >
                           <span class="sr-only">{{ value | escape }}</span>
                         </label>
@@ -174,7 +175,7 @@
                 </s>
                 <style>
                   :host{display:inline-block;position:relative}:host([hidden]){display:none}
-                  s{position:absolute;inset:0;pointer-events:none;{% if settings.card_style == 'card' %}--color-background:var(--color-placeholder);{% endif %}}
+                  s{position:absolute;inset:0;pointer-events:none;}
                   s span{position:absolute;inset-block:0;width:var(--sp-12);opacity:0;transition:opacity var(--animation-short);}
                   s .l{inset-inline-start:0;opacity:var(--l);background:linear-gradient(90deg,rgb(var(--color-background)) 0%,transparent 100%);}
                   s .r{inset-inline-end:0;opacity:var(--r);background:linear-gradient(270deg,rgb(var(--color-background)) 0%,transparent 100%);}

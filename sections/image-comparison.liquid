@@ -62,7 +62,7 @@
             <div class="comparison__box comparison__box--{{ before_image.settings.content_position }} grid items-start absolute top-0 left-0 w-full h-full" style="--color-foreground: {{ before_image.settings.color_text.rgb }};">
               <div class="grid gap-1 md:gap-2">
                 {%- if before_image.settings.subheading != blank -%}
-                  <p class="text-xs md:text-base lg:text-lg text-medium leading-none">{{ before_image.settings.subheading | escape }}</p>
+                  <p class="text-xs md:text-base lg:text-lg leading-none font-medium">{{ before_image.settings.subheading | escape }}</p>
                 {%- endif -%}
                 {%- if before_image.settings.heading != blank -%}
                   <p class="heading text-base md:text-2xl lg:text-3xl leading-none tracking-tight">{{ before_image.settings.heading | escape }}</p>
@@ -95,7 +95,7 @@
             <div class="comparison__box comparison__box--{{ after_image.settings.content_position }} grid items-start absolute top-0 left-0 w-full h-full text-right" style="--color-foreground: {{ after_image.settings.color_text.rgb }};">
               <div class="grid gap-1 md:gap-2">
                 {%- if after_image.settings.subheading != blank -%}
-                  <p class="text-xs md:text-base lg:text-lg text-medium leading-none">{{ after_image.settings.subheading | escape }}</p>
+                  <p class="text-xs md:text-base lg:text-lg leading-none font-medium">{{ after_image.settings.subheading | escape }}</p>
                 {%- endif -%}
                 {%- if after_image.settings.heading != blank -%}
                   <p class="heading text-base md:text-2xl lg:text-3xl leading-none tracking-tight">{{ after_image.settings.heading | escape }}</p>

@@ -8,6 +8,13 @@
   {% render 'header-drawer', section: section %}
 {%- endcomment -%}
 
+{%- liquid
+assign section_rendering_api = false
+if section.index == nil
+  assign section_rendering_api = true
+endif
+-%}
+
 <menu-drawer id="MenuDrawer" class="menu-drawer drawer drawer--start z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
   data-section-id="{{ section.id }}"
   hidden
@@ -28,9 +35,10 @@
         <ul class="drawer__scrollable drawer__menu relative w-full h-full" role="list" data-parent>
           {%- assign main_menu = section.settings.menu_mobile | default: section.settings.menu -%}
           {%- for link in main_menu.links -%}
-            <li>
+            <li class="drawer__menu-group">
               {%- liquid
                 assign enable_mega_menu = false
+                assign mega_menu_block = nil
                 assign link_title_handle = link.title | downcase | handle
           
                 for block in section.blocks
@@ -44,7 +52,7 @@
               -%}
 
               {%- if link.links != blank or enable_mega_menu -%}
-                {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block -%}
+                {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block, position: forloop.index -%}
               {%- else -%}
                 <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight" href="{{ link.url }}">{{ link.title | escape }}</a>
               {%- endif -%}
@@ -64,21 +72,21 @@
         {%- if enable_language_selector or enable_country_selector -%}
           <div class="drawer__footer-top flex">
             {%- if enable_language_selector -%}
-              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false">
+              <button type="button" class="flex gap-3 grow items-center justify-between"{% unless section_rendering_api %} is="api-button" data-id="header_drawer_localization_language_form" data-section-id="{{ section.id }}"{% endunless %} aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false">
                 <span class="text-sm leading-none flex items-center gap-2 w-auto">
                   {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
                   {{- localization.language.endonym_name | capitalize -}}
                 </span>
-                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'flex-auto' -%}
+                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'shrink-0' -%}
               </button>
             {%- endif -%}
             {%- if enable_country_selector -%}
-              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"> 
+              <button type="button" class="flex gap-3 grow items-center justify-between"{% unless section_rendering_api %} is="api-button" data-id="header_drawer_localization_country_form" data-section-id="{{ section.id }}"{% endunless %} aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"> 
                 <span class="text-sm leading-none flex items-center gap-2 w-auto">
                   {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
                   {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                 </span>
-                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'flex-auto' -%}
+                {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'shrink-0' -%}
               </button>
             {%- endif -%}
 
@@ -91,28 +99,32 @@
                       {%- render 'icon', icon: 'close' -%}
                     </span>
                   </button>
-                  {%- form 'localization', id: 'localization_language_form_header_drawer', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
-                    <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
-                      {%- for language in localization.available_languages -%}
-                        <li class="opacity-0">
-                          <a class="text-sm reversed-link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
-                            href="#"
-                            hreflang="{{ language.iso_code }}"
-                            lang="{{ language.iso_code }}"
-                            {% if language.iso_code == localization.language.iso_code %}
-                              aria-current="true"
-                            {% endif %}
-                            data-value="{{ language.iso_code }}"
-                            title="{{ language.endonym_name | capitalize | escape }}"
-                            data-no-instant
-                          >
-                            {{- language.endonym_name | capitalize -}}
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                    <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
-                  {%- endform -%}
+                  {%- unless section_rendering_api -%}
+                    <div class="modal__content flex flex-col overflow-hidden" id="header_drawer_localization_language_form"></div>
+                  {%- else -%}
+                    {%- form 'localization', id: 'header_drawer_localization_language_form', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
+                      <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
+                        {%- for language in localization.available_languages -%}
+                          <li class="opacity-0">
+                            <a class="text-sm reversed-link{% if language.iso_code == localization.language.iso_code %} active{% endif %}"
+                              href="#"
+                              hreflang="{{ language.iso_code }}"
+                              lang="{{ language.iso_code }}"
+                              {% if language.iso_code == localization.language.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              data-value="{{ language.iso_code }}"
+                              title="{{ language.endonym_name | capitalize | escape }}"
+                              data-no-instant
+                            >
+                              {{- language.endonym_name | capitalize -}}
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <input type="hidden" name="locale_code" value="{{ localization.language.iso_code }}" />
+                    {%- endform -%}
+                  {%- endunless -%}
                 </div>
               </modal-element>
             {%- endif -%}
@@ -125,27 +137,31 @@
                       {%- render 'icon', icon: 'close' -%}
                     </span>
                   </button>
-                  {%- form 'localization', id: 'localization_country_form_header_drawer', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
-                    {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-                    <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
-                      {%- for country in localization.available_countries -%}
-                        <li class="opacity-0">
-                          <a class="text-sm reversed-link{% if country.iso_code == localization.country.iso_code %} active{% endif %}"
-                            href="#"
-                            {% if country.iso_code == localization.country.iso_code %}
-                              aria-current="true"
-                            {% endif %}
-                            data-value="{{ country.iso_code }}"
-                            title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
-                            data-no-instant
-                          >
-                            {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
-                          </a>
-                        </li>
-                      {%- endfor -%}
-                    </ul>
-                    <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
-                  {%- endform -%}
+                  {%- unless section_rendering_api -%}
+                    <div class="modal__content flex flex-col overflow-hidden" id="header_drawer_localization_country_form"></div>
+                  {%- else -%}
+                    {%- form 'localization', id: 'header_drawer_localization_country_form', class: 'modal__content flex flex-col overflow-hidden', is: 'localization-listbox' -%}
+                      {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                      <ul class="modal__scrollable listbox grid gap-1d5 xl:gap-2" role="list" tabindex="-1">
+                        {%- for country in localization.available_countries -%}
+                          <li class="opacity-0">
+                            <a class="text-sm reversed-link{% if country.iso_code == localization.country.iso_code %} active{% endif %}"
+                              href="#"
+                              {% if country.iso_code == localization.country.iso_code %}
+                                aria-current="true"
+                              {% endif %}
+                              data-value="{{ country.iso_code }}"
+                              title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
+                              data-no-instant
+                            >
+                              {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                            </a>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
+                      <input type="hidden" name="country_code" value="{{ localization.country.iso_code }}" />
+                    {%- endform -%}
+                  {%- endunless -%}
                 </div>
               </modal-element>
             {%- endif -%}

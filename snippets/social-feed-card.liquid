@@ -1,0 +1,323 @@
+{%- liquid
+  assign modulo = position | modulo: 5 | plus: 1
+  assign product_1 = block.settings.hotspot_product_1
+  assign product_2 = block.settings.hotspot_product_2
+  assign product_3 = block.settings.hotspot_product_3
+  assign product_4 = block.settings.hotspot_product_4
+
+  assign section_rendering_api = false
+  if section.index == nil
+    assign section_rendering_api = true
+  endif
+-%}
+<div class="card media-card media-card--{{ settings.card_style }} media-card--overlap" id="shopify-block-{{ block.id }}">
+  <div class="product-card__media flex flex-col w-full h-full relative"{% if block.settings.video_on_hover and block.settings.video != blank %} is="secondary-video"{% endif %}>
+    <div class="media media--{{ image_ratio }} relative overflow-hidden">
+      {%- if block.settings.video_on_hover or block.settings.video == blank -%}
+        {%- liquid
+          if block.settings.image != blank
+            echo block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image'
+          else
+            assign placeholder = 'collection-' | append: modulo
+            echo placeholder | placeholder_svg_tag: 'placeholder'
+          endif
+        -%}
+        {%- if block.settings.video != blank -%}
+          <video-media class="absolute top-0 left-0 w-full h-full hidden md:block opacity-0 pointer-events-none">
+            {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: false, loop: true, controls: false, preload: 'none', image_size: '1x' -}}
+          </video-media>
+        {%- endif -%}
+      {%- else -%}
+        {%- liquid
+          assign video_alt = block.settings.video.alt | default: block.settings.image.alt
+          assign alt = 'general.accessibility.load_video' | t: description: video_alt | escape
+          assign preview_image = block.settings.video.preview_image | default: block.settings.image
+
+          capture poster
+            if preview_image != blank
+              echo preview_image | image_url: width: preview_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', sizes: sizes, is: 'lazy-image', class: 'inline-block', alt: alt
+            else
+              echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder'
+            endif
+          endcapture
+        -%}
+        <video-media class="block" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }}" autoplay>
+          {{- poster -}}
+          <template>
+            {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '1x' -}}
+          </template>
+        </video-media>
+      {%- endif -%}
+      <div class="badges z-2 absolute grid gap-3 pointer-events-none">
+        {%- render 'icon-brand', icon: 'instagram', size: 'lg' -%}
+      </div>
+    </div>
+    <div class="media-card__content grid gap-3 w-full">
+      <div class="horizontal-product shrink-1 flex items-end gap-2d5">
+        {%- if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank -%}
+          {%- for i in (1..4) -%}
+            {%- liquid
+              assign product_setting_name = 'hotspot_product_' | append: i
+              assign product = block.settings[product_setting_name]
+            -%}
+            {%- if product != blank -%}
+              <button type="button" class="horizontal-product__media color-swatch relative" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}" tabindex="-1">
+                <picture class="media media--adapt block relative overflow-hidden">
+                  {%- liquid
+                    if product.featured_media != blank
+                      echo product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image'
+                    else
+                      assign placeholder = 'product-' | append: modulo
+                      echo placeholder | placeholder_svg_tag: 'product'
+                    endif
+                  -%}
+                </picture>
+                <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ product.title | escape }}</span>
+              </button>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- else -%}
+          {%- for i in (1..2) -%}
+            <button type="button" class="horizontal-product__media color-swatch relative" aria-label="{{ 'products.product.choose_product_options' | t: product_name: i | escape }}" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}" tabindex="-1">
+              {%- liquid
+                assign placeholder = 'product-' | append: i
+                echo placeholder | placeholder_svg_tag: 'media'
+              -%}
+            </button>
+          {%- endfor -%}
+        {%- endif -%}
+      </div>
+      <button type="button" class="media-card__button"{% unless section_rendering_api %} is="api-button" data-id="SocialFeed-{{ section.id }}-{{ block.id }}" data-section-id="{{ section.id }}"{% endunless %}>
+        <hover-element class="button button--primary button--blur w-full" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">{{ 'products.product.shop_the_look' | t }}</span>
+        </hover-element>
+      </button>
+    </div>
+
+    {%- unless section_rendering_api -%}
+      <div id="SocialFeed-{{ section.id }}-{{ block.id }}" class="social-feed quick-view x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"></div>
+    {%- else -%}
+      <social-feed id="SocialFeed-{{ section.id }}-{{ block.id }}" class="social-feed quick-view x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none" role="dialog" aria-modal="true" hidden loaded>
+        <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}" aria-expanded="false"></overlay-element>
+        <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+          <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+            <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">
+                {%- render 'icon', icon: 'close', size: 'sm' -%}
+              </span>
+            </button>
+          </gesture-element>
+          <div class="drawer__content flex flex-col h-full grow shrink overflow-hidden">
+            <div class="product flex flex-col lg:grid w-full relative">
+              <lookbook-element class="product__gallery product__gallery--full_width block w-full relative">
+                <div class="product__media-container flex flex-col gap-4">
+                  <picture class="media media--adapt block relative overflow-hidden">
+                    {%- if block.settings.image != blank -%}
+                      {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
+                      {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', class: 'banner__image' -}}
+                    {%- else -%}
+                      {%- liquid
+                        assign placeholder = 'collection-' | append: modulo
+                        echo placeholder | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                      -%}
+                    {%- endif -%}
+                  </picture>
+                </div>
+
+                {%- if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank -%}
+                  {%- for i in (1..4) -%}
+                    {%- liquid
+                      assign product_setting_name = 'hotspot_product_' | append: i
+                      assign product = block.settings[product_setting_name]
+                    -%}
+                    {%- if product != blank -%}
+                      {%- liquid
+                        assign color_text_setting_name = 'hotspot_color_text_' | append: i
+                        assign color_text = block.settings[color_text_setting_name]
+                        
+                        assign horizontal_setting_name = 'hotspot_horizontal_' | append: i
+                        assign horizontal = block.settings[horizontal_setting_name]
+    
+                        assign vertical_setting_name = 'hotspot_vertical_' | append: i
+                        assign vertical = block.settings[vertical_setting_name]
+                      -%}
+                      {%- if settings.product_quick_view -%}
+                        {%- capture quick_view_id -%}Quickview-{{ section.id }}-{{ block.id }}-{{ product.id }}-{{ i }}{%- endcapture -%}
+                        <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="{{ quick_view_id }}" aria-expanded="false" style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;">
+                          <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if horizontal < 15 %} with-left{% elsif horizontal > 85 %} with-right{% endif %}{% if vertical > 70 %} with-bottom{% endif %}">
+                            {%- if product.featured_media -%}
+                              <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
+                                {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+                              </div>
+                            {%- endif -%}
+                            <div class="rte text-sm leading-none grid gap-2">
+                              <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                      
+                              {%- render 'product-price', product: product -%}
+                            </div>
+                            {%- render 'icon', icon: 'caret', class: 'absolute' -%}
+                          </div>
+                        </hover-element>
+                        <quick-view id="{{ quick_view_id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true" hidden>
+                          <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="{{ quick_view_id }}" aria-expanded="false"></overlay-element>
+                          <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                            <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                              <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="{{ quick_view_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                                <span class="btn-fill" data-fill></span>
+                                <span class="btn-text">
+                                  {%- render 'icon', icon: 'close', size: 'sm' -%}
+                                </span>
+                              </button>
+                            </gesture-element>
+                            <div class="quick-view__content drawer__content opacity-0 invisible flex flex-col h-full grow shrink"></div>
+                          </div>
+                        </quick-view>
+                      {%- else -%}
+                        <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;">
+                          <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if horizontal < 15 %} with-left{% elsif horizontal > 85 %} with-right{% endif %}{% if vertical > 70 %} with-bottom{% endif %}">
+                            {%- if product.featured_media -%}
+                              <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
+                                {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
+                              </div>
+                            {%- endif -%}
+                            <div class="rte text-sm leading-none grid gap-2">
+                              <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                      
+                              {%- render 'product-price', product: product -%}
+                            </div>
+                            {%- render 'icon', icon: 'caret', class: 'absolute' -%}
+                          </div>
+                        </a>
+                      {%- endif -%}
+                    {%- endif -%}
+                  {%- endfor -%}
+                {%- else -%}
+                  {%- for i in (1..2) -%}
+                    {%- liquid
+                      assign color_text_setting_name = 'hotspot_color_text_' | append: i
+                      assign color_text = block.settings[color_text_setting_name]
+                      
+                      assign horizontal_setting_name = 'hotspot_horizontal_' | append: i
+                      assign horizontal = block.settings[horizontal_setting_name]
+
+                      assign vertical_setting_name = 'hotspot_vertical_' | append: i
+                      assign vertical = block.settings[vertical_setting_name]
+                    -%}
+                    <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;"></button>
+                  {%- endfor -%}
+                {%- endif -%}
+              </lookbook-element>
+              <div class="product__content w-full relative overflow-hidden">
+                <div class="product__feed flex flex-col w-full h-full left-0 top-0">
+                  {%- if section.settings.heading != blank -%}
+                    <p class="drawer__header heading lg:text-3xl text-2xl leading-none tracking-tight">
+                      {%- liquid
+                        if section.settings.highlighted_text == 'none'
+                          echo section.settings.heading
+                        else
+                          assign with_gradient = false
+                          if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+                            assign with_gradient = true
+                          endif
+                          render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient
+                        endif
+                      -%}
+                    </p>
+                  {%- endif -%}
+
+                  <div class="drawer__scrollable relative flex flex-col grow shrink">
+                    <div class="horizontal-products grid">
+                      {%- liquid
+                        if product_1 != blank or product_2 != blank or product_3 != blank or product_4 != blank
+                          for i in (1..4)
+                            assign product_setting_name = 'hotspot_product_' | append: i
+                            assign product = block.settings[product_setting_name]
+                            if product != blank
+                              render 'product-card-horizontal', product: product, product_id: product.id, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view
+                            endif
+                          endfor
+                        else
+                          for i in (1..2)
+                            render 'product-card-horizontal', product: null, product_id: i, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view
+                          endfor
+                        endif
+                      -%}
+                    </div>
+                  </div>
+
+                  {%- if block.settings.account_button != blank or block.settings.account_name != blank or block.settings.account_avatar != blank or section.blocks.size > 1 -%}
+                    <div class="drawer__footer grid w-full">
+                      {%- if block.settings.account_button != blank or block.settings.account_name != blank or block.settings.account_avatar != blank -%}
+                        <div class="social-account flex items-center gap-6">
+                          {%- if block.settings.account_avatar != blank -%}
+                            <div class="social-account__media media media--rounded media--transparent relative overflow-hidden">
+                              {{- block.settings.account_avatar | image_url: width: block.settings.account_avatar.width | image_tag: loading: 'lazy', sizes: '72px', widths: '72px, 144px', class: 'image-fit' -}}
+                            </div>
+                          {%- endif -%}
+              
+                          {%- if block.settings.account_button != blank or block.settings.account_name != blank -%}
+                            <div class="grow flex items-center justify-between gap-2d5">
+                              {%- if block.settings.account_name != blank -%}
+                                {%- liquid
+                                  if section.settings.heading_size == 'title-sm'
+                                    assign subtext_size = 'subtext-md'
+                                  else
+                                    assign subtext_size = 'subtext-lg'
+                                  endif
+                                -%}
+                                <div class="grid">
+                                  <p class="heading {{ subtext_size }} leading-normal">{{ block.settings.account_name }}</p>
+                                  {%- if block.settings.account_description != blank -%}
+                                    <div class="text-xs text-opacity">{{ block.settings.account_description }}</div>
+                                  {%- endif -%}
+                                </div>
+                              {%- endif -%}
+              
+                              {%- if block.settings.account_button != blank -%}
+                                <p>
+                                  <a class="button button--secondary button--sm"{% if block.settings.account_link != blank %} href="{{ block.settings.account_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link">
+                                    <span class="btn-fill" data-fill></span>
+                                    <span class="btn-text">{{ block.settings.account_button }}</span>
+                                  </a>
+                                </p>
+                              {%- endif -%}
+                            </div>
+                          {%- endif -%}
+                        </div>
+                      {%- endif -%}
+
+                      {%- if section.blocks.size > 1 -%}
+                        {%- liquid
+                          if position > 1
+                            assign previous_index = position | minus: 2
+                            assign previous_block = section.blocks[previous_index]
+                          endif
+                          
+                          if position < section.blocks.size
+                            assign next_block = section.blocks[position]
+                          endif
+                        -%}
+                        <div class="product__more flex items-center justify-between">
+                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless previous_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.previous' | t | escape }}"{% if previous_block %} aria-controls="SocialFeed-{{ section.id }}-{{ previous_block.id }}"{% if section_rendering_api %} is="social-feed-button" data-id="SocialFeed-{{ section.id }}-{{ previous_block.id }}" data-section-id="{{ section.id }}"{% endif %}{% else %} disabled{% endif %}>
+                            {%- render 'icon', icon: 'arrow-left', size: 'sm', class: 'transform stroke-1 shrink-0' -%}
+                            <span class="btn-text" data-text>{{ 'general.pagination.previous' | t }}</span>
+                          </button>
+                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless next_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.next' | t | escape }}"{% if next_block %} aria-controls="SocialFeed-{{ section.id }}-{{ next_block.id }}"{% if section_rendering_api %} is="social-feed-button" data-id="SocialFeed-{{ section.id }}-{{ next_block.id }}" data-section-id="{{ section.id }}"{% endif %}{% else %} disabled{% endif %}>
+                            <span class="btn-text" data-text>{{ 'general.pagination.next' | t }}</span>
+                            {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform stroke-1 shrink-0' -%}
+                          </button>
+                        </div>
+                      {%- endif -%}
+                    </div>
+                  {%- endif -%}
+                </div>
+              </div>
+            </div>
+          </div>
+        </div>
+      </social-feed>
+    {%- endunless -%}
+  </div>
+</div>

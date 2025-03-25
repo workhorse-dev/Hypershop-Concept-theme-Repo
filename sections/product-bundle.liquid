@@ -24,6 +24,7 @@
               lazy_load: false,
               image_ratio: settings.product_image_ratio,
               image_fill: settings.product_image_fill,
+              show_secondary_image: settings.product_secondary_image,
               show_vendor: settings.product_vendor,
               show_rating: settings.product_rating,
               show_color_swatches: settings.product_color_swatches,
@@ -65,7 +66,7 @@
         </motion-list>
       </div>
       <product-bundle class="product-bundle lg:grow-0 block pointer-events-none" id="{{ controls }}" data-minimum="{{ section.settings.minimum_quantity }}" data-maximum="{{ section.settings.maximum_quantity }}"{% if section.settings.prevent_duplicate_products %} data-prevent-duplicate{% endif %}>
-        <sticky-element class="product-bundle__sidebar flex flex-col gap-7d5 md:gap-10 sticky top-0 pointer-events-auto">
+        <sticky-element class="product-bundle__sidebar flex flex-col gap-7d5 md:gap-10 sticky top-0 pointer-events-auto overflow-hidden">
           {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
             <div class="title-wrapper leading-none grid gap-2 {{ section.settings.heading_alignment }} relative z-1">
               {%- if section.settings.subheading != blank -%}
@@ -108,7 +109,7 @@
             {%- for i in (1..section.settings.minimum_quantity) -%}
               {%- assign product = products[forloop.index0] -%}
               <div class="horizontal-product flex items-center gap-3" data-product-bundle-variant available>
-                <figure class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} aspect-{{ settings.product_image_ratio }} relative overflow-hidden flex-auto" data-product-bundle-variant-media></figure>
+                <figure class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} aspect-{{ settings.product_image_ratio }} relative overflow-hidden shrink-0" data-product-bundle-variant-media></figure>
                 <div class="horizontal-product__details grow flex flex-col justify-start gap-2d5" data-product-bundle-variant-content>
                   <span class="horizontal-product__skeleton"></span>
                   <span class="horizontal-product__skeleton"></span>
@@ -152,7 +153,7 @@
           </div>
           <div class="product-bundle__footer grid gap-2d5">
             <div class="hidden lg:flex gap-4">
-              <div class="heading text-xl flex-auto">{{ 'sections.product_bundle.total' | t }}</div>
+              <div class="heading text-xl shrink-0">{{ 'sections.product_bundle.total' | t }}</div>
               <div class="heading text-xl grow font-bold text-right" data-product-bundle-total-with-currency>{{ 0 | money_with_currency }}</div>
             </div>
             <button type="button" class="button button--primary w-full" is="hover-button" data-product-bundle-submit disabled>
