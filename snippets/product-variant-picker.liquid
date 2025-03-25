@@ -169,9 +169,9 @@
 										-%}
 										<label
 											for="{{ section_id }}-{{ product_id }}-{{ option.name | handle }}-{{ forloop.index0 }}"
-											class="color-swatch{% if swatch_image != blank %} with-image{% endif %} inline-block cursor-pointer relative{% if block.settings.color_swatch_type == 'variant' and swatch_image != blank %} aspect-{{ image_ratio }} mobile:aspect-{{ image_ratio_mobile }}{% unless image_fill %} aspect-contain{% endunless %}{% endif %}"
+											class="color-swatch{% if swatch_fallback_override == false and swatch_image != blank %} with-image{% endif %} inline-block cursor-pointer relative{% if block.settings.color_swatch_type == 'variant' and swatch_fallback_override == false and swatch_image != blank %} aspect-{{ image_ratio }} mobile:aspect-{{ image_ratio_mobile }}{% unless image_fill %} aspect-contain{% endunless %}{% endif %}"
 											title="{{ value | escape }}"
-											style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}"
+											style="--swatch-background: {{ swatch_fallback }};{% if swatch_fallback_override == false and swatch_image != blank %} --swatch-background-image: url({{ swatch_image }});{% endif %}"
 										>
 											<span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ value | escape }}</span>
 										</label>

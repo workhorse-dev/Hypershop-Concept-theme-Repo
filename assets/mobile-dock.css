@@ -1,7 +1,6 @@
 .mobile-dock {
   visibility: visible;
   transform: translateY(100%);
-  transition: transform var(--animation-primary);
   color: rgb(var(--color-foreground));
   background: var(--gradient-background);
   background-color: rgb(var(--color-background));
@@ -93,6 +92,7 @@
 
   .header-sticky.header-hidden~.mobile-dock-section .mobile-dock,
   .mobile-dock-section.active .mobile-dock,
+  .mobile-dock-section.shopify-active .mobile-dock,
   .mobile-dock-section .mobile-dock.active {
     transform: translateY(0)
   }
@@ -113,5 +113,9 @@
   .header-sticky.header-hidden~.mobile-dock-section~.page-container .product-sticky-form,
   .mobile-dock-section.active~.page-container .product-sticky-form {
     transform: translateY(calc(var(--mobile-dock-height) * -1));
+  }
+
+  .mobile-dock[loaded] {
+    transition: transform var(--animation-primary);
   }
 }

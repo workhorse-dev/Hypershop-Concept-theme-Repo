@@ -38,7 +38,7 @@
           {%- if gallery_layout == 'scroll' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}"
         >
           {%- for i in (1..6) -%}
-            <div class="product__media card media flex w-full flex-auto relative overflow-hidden"
+            <div class="product__media card media flex w-full shrink-0 relative overflow-hidden"
               data-media-type="image"
               data-media-id="{{ forloop.index }}"
             >
@@ -131,6 +131,10 @@
                 echo block.settings.text
               -%}
             </p>
+          {%- else -%}
+            <p class="product__vendor {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+              {{- 'products.product.vendor' | t -}}
+            </p>
           {%- endif -%}
 
         {%- when 'description' -%}
@@ -140,7 +144,7 @@
 
         {%- when 'title' -%}
           {%- assign price_block = section.blocks | where: "type", "price" | first -%}
-          <div class="product__title{% if price_block == blank and block.settings.show_price %} with-price{% endif %}" {{ block.shopify_attributes }}>
+          <div class="product__title grid gap-3{% if price_block == blank and block.settings.show_price %} with-price{% endif %}" {{ block.shopify_attributes }}>
             <h1 class="heading leading-none {{ block.settings.title_size }} mobile:{{ block.settings.title_size_mobile }} col-span-full">
               <split-words class="split-words block" data-animate="fade-up">{{ 'onboarding.product_title' | t }}</split-words>
             </h1>
@@ -205,20 +209,31 @@
           </div>
 
         {%- when 'buy_buttons' -%}
+          {%- liquid
+            assign price_block = section.blocks | where: "type", "price" | first
+            assign show_price = block.settings.show_price
+            if price_block
+              assign show_price = false
+            endif
+
+            assign title_block = section.blocks | where: "type", "title" | first
+            if title_block.settings.show_price
+              assign show_price = false
+            endif
+
+            assign quantity_block = section.blocks | where: "type", "quantity_selector" | first
+            assign show_quantity_selector = block.settings.show_quantity_selector
+            if quantity_block
+              assign show_quantity_selector = false
+            endif
+          -%}
           <div class="product-form-wrapper" {{ block.shopify_attributes }}>
-            {%- liquid
-              assign quantity_block = section.blocks | where: "type", "quantity_selector" | first
-              assign show_quantity_selector = block.settings.show_quantity_selector
-              if quantity_block
-                assign show_quantity_selector = false
-              endif
-            -%}
             <div class="product-form grid gap-8">
               <div class="product-form__buttons grid gap-4">
-                <div class="flex gap-4">
+                <div class="buy-buttons{% if show_quantity_selector or show_price %} flex flex-wrap{% else %} grid{% endif %} gap-4">
                   {%- if show_quantity_selector -%}
                     <label for="Quantity-{{ section_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
-                    <quantity-input class="quantity inline-flex flex-auto relative">
+                    <quantity-input class="quantity inline-flex shrink-0 relative">
                       <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
                         {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
                       </button>
@@ -245,11 +260,24 @@
                     type="button"
                     name="add"
                     form="{{ product_form_id }}"
-                    class="product-form__submit button button--primary button--fixed w-full"
+                    class="product-form__submit button button--primary button--fixed grow{% if show_price %} with-price{% endif %}"
                     is="hover-button"
                   >
                     <span class="btn-fill" data-fill></span>
-                    <span class="btn-text">{{ 'products.product.add_to_cart' | t }}</span>
+                    <span class="btn-text">
+                      <span>{{ 'products.product.add_to_cart' | t }}</span>
+                      {%- if show_price -%}
+                        <div id="Price-{{ section_id }}" class="flex">
+                          <span class="relative">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
+                          {%- liquid
+                            if product == null
+                              assign placeholder = true
+                            endif
+                            render 'product-price', product: product, placeholder: placeholder, use_variant: true
+                          -%}
+                        </div>
+                      {%- endif -%}
+                    </span>
                   </button>
                 </div>
               </div>
@@ -309,7 +337,7 @@
                 {%- render 'icon-accordion', icon: block.settings.icon -%}
                 <span class="text-base font-medium leading-none">{{ block.settings.heading | default: block.settings.page.title | escape }}</span>
               </div>
-              {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+              {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
             </summary>
             <div class="details__content rte text-sm text-opacity">
               {{ block.settings.content }}
@@ -323,7 +351,7 @@
             <span class="text-sm-base font-medium leading-none">
               {{- 'products.product.read_more' | t -}}
             </span>
-            {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'flex-auto' -%}
+            {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'shrink-0' -%}
           </button>
 
       {%- endcase -%}

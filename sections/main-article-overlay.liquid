@@ -55,7 +55,7 @@
               <ul class="grid md:grid-cols-2 gap-5" {{ block.shopify_attributes }}>
                 {%- if blog.previous_article -%}
                   <li class="article-card flex gap-5">
-                    {%- render 'icon', icon: 'arrow-left', class: 'transform flex-auto' -%}
+                    {%- render 'icon', icon: 'arrow-left', class: 'transform shrink-0' -%}
                     <div class="flex flex-col gap-3 grow">
                       {%- if block.settings.show_date or block.settings.show_comments or block.settings.show_author -%}
                         <ul class="article-card__top flex flex-wrap gap-4">
@@ -127,7 +127,7 @@
                         </a>
                       </p>
                     </div>
-                    {%- render 'icon', icon: 'arrow-right', class: 'transform flex-auto' -%}
+                    {%- render 'icon', icon: 'arrow-right', class: 'transform shrink-0' -%}
                   </li>
                 {%- endif -%}
               </ul>

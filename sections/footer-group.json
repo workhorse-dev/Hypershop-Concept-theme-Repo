@@ -1,24 +1,94 @@
-/*
- * ------------------------------------------------------------
- * IMPORTANT: The contents of this file are auto-generated.
- *
- * This file may be updated by the Shopify admin theme editor
- * or related systems. Please exercise caution as any changes
- * made to this file may be overwritten.
- * ------------------------------------------------------------
- */
- {
+{
   "type": "footer",
   "name": "t:sections.footer-group.name",
   "sections": {
+    "multicolumn-with-icons": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "column-1": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "heading": "Customer service",
+            "text": "<p>It’s not actually free we just price it into the products.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column-2": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "heading": "Fast Free Shipping",
+            "text": "<p>Get free shipping on orders of $150 or more</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column-3": {
+          "type": "column",
+          "settings": {
+            "icon": "users",
+            "heading": "Refer a friend",
+            "text": "<p>Refer a friend and get 15% off each other.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column-4": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "heading": "Secure payment",
+            "text": "<p>Your payment information is processed securely</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column-1",
+        "column-2",
+        "column-3",
+        "column-4"
+      ],
+      "settings": {
+        "style": "with-border",
+        "columns": 4,
+        "text_alignment": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 60,
+        "divider": true,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
         "logo_social": {
           "type": "logo_social",
           "settings": {
-            "logo": "shopify://shop_images/hyper-footer-logo.png",
-            "logo_height": 25,
+            "logo": "",
+            "logo_height": 50,
             "show_social": false,
             "enable_follow_on_shop": false
           }
@@ -26,29 +96,32 @@
         "link_list-1": {
           "type": "link_list",
           "settings": {
-            "heading": "Company",
-            "menu": "footer-company",
-            "container_width": 50,
-            "opened": false
+            "heading": "Quick links",
+            "menu": "footer",
+            "container_width": 50
           }
         },
         "link_list-2": {
           "type": "link_list",
           "settings": {
-            "heading": "Support",
-            "menu": "footer-support",
-            "container_width": 50,
-            "opened": false
+            "heading": "Information",
+            "menu": "footer",
+            "container_width": 50
           }
         },
-        "text_69hUem": {
-          "type": "text",
-          "disabled": true,
+        "brand_information": {
+          "type": "brand_information",
           "settings": {
-            "heading": "About HyperShop",
-            "text": "<p>Celebrating its 20th year of enabling creators and innovators to Go Beyond, HYPER specializes in delivering cutting-edge tech and mobile accessories to creative professionals with its award-winning lineup of power, connectivity, mobility, and desktop solutions. </p><p>Headquartered in Silicon Valley, California, HYPER’s tech solutions are groundbreaking “world’s firsts” that inspire the trailblazer in all of us. Enabling you to disrupt the status quo, break down walls, and do whatever it takes to Go Beyond your wildest dreams.</p>",
-            "container_width": 95,
-            "opened": false
+            "heading": "",
+            "button_label_1": "+21 (0) 987654321",
+            "button_link_1": "tel:+21(0)987654321",
+            "button_label_2": "hello@domain.com",
+            "button_link_2": "mailto:hello@domain.com",
+            "button_label_3": "",
+            "button_link_3": "",
+            "button_label_4": "",
+            "button_link_4": "",
+            "container_width": 95
           }
         }
       },
@@ -56,14 +129,15 @@
         "logo_social",
         "link_list-1",
         "link_list-2",
-        "text_69hUem"
+        "brand_information"
       ],
       "settings": {
         "invert_newsletter_others": false,
         "enable_newsletter": true,
-        "newsletter_heading": "Connect",
+        "newsletter_heading": "Stay in the loop with our weekly newsletter",
         "newsletter_heading_size": "md:title-lg",
-        "newsletter_text": "<p><strong>Sign Up for Exclusive Discounts and New Product Updates</strong></p>",
+        "newsletter_text": "",
+        "newsletter_logo": "",
         "newsletter_logo_height": 50,
         "show_social": true,
         "enable_follow_on_shop": false,
@@ -84,13 +158,13 @@
     "footer-copyright": {
       "type": "footer-copyright",
       "settings": {
-        "enable_language_selector": false,
-        "enable_country_selector": false,
-        "show_policy": false,
-        "show_payment_icons": false,
+        "enable_language_selector": true,
+        "enable_country_selector": true,
+        "show_policy": true,
+        "show_payment_icons": true,
         "monochrome_payment_icons": false,
         "show_copyright": true,
-        "copyright_text": "All Rights Reserved",
+        "copyright_text": "",
         "color_text": "#ffffff",
         "color_background": "#171717",
         "gradient_background": "",
@@ -102,6 +176,7 @@
     }
   },
   "order": [
+    "multicolumn-with-icons",
     "footer",
     "footer-copyright"
   ]

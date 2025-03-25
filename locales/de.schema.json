@@ -47,6 +47,18 @@
         "product_limit": {
           "label": "Maximal anzuzeigende Produkte"
         },
+        "show_vendor": {
+          "label": "Anbieter anzeigen"
+        },
+        "show_price": {
+          "label": "Preis anzeigen"
+        },
+        "show_product_vendor": {
+          "label": "Produktanbieter anzeigen"
+        },
+        "show_product_price": {
+          "label": "Produktpreis anzeigen"
+        },
         "button": {
           "label": "Schaltfläche"
         },
@@ -968,9 +980,6 @@
         "paragraph": {
           "content": "Der Warenkorb wird Ihren Kunden nicht angezeigt, wenn Sie den Warenkorbtyp in Ihren [theme settings](/editor?context=theme&category=cart) auf „Seite“ eingestellt haben."
         },
-        "show_vendor": {
-          "label": "Anbieter anzeigen"
-        },
         "show_cart_note": {
           "label": "Warenkorbanmerkung anzeigen"
         },
@@ -1002,18 +1011,6 @@
         "cart_recommendations_enabled": {
           "label": "Aktivieren Sie Einkaufswagenempfehlungen"
         },
-        "cart_recommendations_heading": {
-          "label": "Überschrift"
-        },
-        "cart_recommendations_limit": {
-          "label": "Maximal anzuzeigende Produkte"
-        },
-        "show_cart_recommendations_vendor": {
-          "label": "Anbieter anzeigen"
-        },
-        "show_cart_recommendations_price": {
-          "label": "Preis anzeigen"
-        },
         "cart_recommendations_products": {
           "label": "Produktempfehlungen",
           "info": "Schlagen Sie Ihren Kunden weitere Produkte vor."
@@ -1032,18 +1029,6 @@
         },
         "recent_products_enabled": {
           "label": "Zuletzt angesehene Produkte aktivieren"
-        },
-        "recent_products_heading": {
-          "label": "Überschrift"
-        },
-        "recent_products_limit": {
-          "label": "Maximal anzuzeigende Produkte"
-        },
-        "show_recent_products_vendor": {
-          "label": "Anbieter anzeigen"
-        },
-        "show_recent_products_price": {
-          "label": "Preis anzeigen"
         }
       }
     },
@@ -1665,28 +1650,28 @@
           "name": "Markeninformationen",
           "settings": {
             "button_label_1": {
-              "label": "Slogan Nr. 1"
+              "label": "Slogan 1"
             },
             "button_link_1": {
-              "label": "Slogan Nr. 1 Link"
+              "label": "Slogan 1 Link"
             },
             "button_label_2": {
-              "label": "Slogan Nr. 2"
+              "label": "Slogan 2"
             },
             "button_link_2": {
-              "label": "Slogan Nr. 2 Link"
+              "label": "Slogan 2 Link"
             },
             "button_label_3": {
-              "label": "Slogan Nr. 3"
+              "label": "Slogan 3"
             },
             "button_link_3": {
-              "label": "Slogan Nr. 3 Link"
+              "label": "Slogan 3 Link"
             },
             "button_label_4": {
-              "label": "Slogan Nr. 4"
+              "label": "Slogan 4"
             },
             "button_link_4": {
-              "label": "Slogan Nr. 4 Link"
+              "label": "Slogan 4 Link"
             }
           }
         }
@@ -1818,19 +1803,19 @@
               "label": "Mega-Menübilder anzeigen"
             },
             "header__promo_1": {
-              "content": "Beförderung Nr. 1"
+              "content": "Beförderung 1"
             },
             "header__promo_2": {
-              "content": "Beförderung Nr. 2"
+              "content": "Beförderung 2"
             },
             "header__promo_3": {
-              "content": "Beförderung Nr. 3"
+              "content": "Beförderung 3"
             },
             "header__promo_4": {
-              "content": "Beförderung Nr. 4"
+              "content": "Beförderung 4"
             },
             "header__promo_5": {
-              "content": "Beförderung Nr. 5"
+              "content": "Beförderung 5"
             },
             "promo_image": {
               "label": "Bild"
@@ -1849,6 +1834,38 @@
             },
             "promo_tag": {
               "label": "Etikett"
+            }
+          }
+        },
+        "mega_menu_tab": {
+          "name": "Tabbed mega menu",
+          "settings": {
+            "heading_1": {
+              "label": "Überschrift 1"
+            },
+            "heading_2": {
+              "label": "Überschrift 2"
+            },
+            "target": {
+              "label": "Ziel"
+            },
+            "target_link": {
+              "label": "Ziellink"
+            },
+            "header__tab_1": {
+              "content": "Tab 1"
+            },
+            "header__tab_2": {
+              "content": "Tab 2"
+            },
+            "header__tab_3": {
+              "content": "Tab 3"
+            },
+            "header__tab_4": {
+              "content": "Tab 4"
+            },
+            "header__tab_5": {
+              "content": "Tab 5"
             }
           }
         }
@@ -1985,19 +2002,19 @@
       "name": "Bildern mit Textüberlagerung",
       "settings": {
         "image_1": {
-          "label": "Bild Nr. 1"
+          "label": "Bild 1"
         },
         "image_2": {
-          "label": "Bild Nr. 2"
+          "label": "Bild 2"
         },
         "image_3": {
-          "label": "Bild Nr. 3"
+          "label": "Bild 3"
         },
         "image_4": {
-          "label": "Bild Nr. 4"
+          "label": "Bild 4"
         },
         "image_5": {
-          "label": "Bild Nr. 5"
+          "label": "Bild 5"
         }
       },
       "presets": {
@@ -2057,6 +2074,9 @@
           "settings": {
             "header": {
               "content": "Hotspot"
+            },
+            "color": {
+              "label": "Hotspot-Farbe"
             },
             "vertical": {
               "label": "Vertikale Position"
@@ -2273,9 +2293,6 @@
     "main-cart": {
       "name": "Warenkorbseite",
       "settings": {
-        "show_vendor": {
-          "label": "Anbieter anzeigen"
-        },
         "show_payment_icons": {
           "label": "Zahlungssymbole anzeigen"
         },
@@ -2703,12 +2720,9 @@
         "title": {
           "name": "Titel",
           "settings": {
-            "show_price": {
-              "label": "Produktpreis anzeigen"
-            },
             "show_rating": {
               "label": "Produktbewertung anzeigen",
-              "info": "Para mostrar una calificación, agrega una aplicación de calificación de productos [Más información](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-rating-block)"
+              "info": "Para mostrar una calificación, agrega una aplicación de calificación de productos."
             }
           }
         },
@@ -2916,7 +2930,7 @@
           "name": "Produktbewertung",
           "settings": {
             "paragraph": {
-              "content": "Um eine Bewertung anzuzeigen, musst du eine Produktbewertungs-App hinzufügen. [Mehr Informationen](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-rating-block)"
+              "content": "Para mostrar una calificación, agrega una aplicación de calificación de productos."
             }
           }
         },
@@ -2925,15 +2939,6 @@
           "settings": {
             "paragraph": {
               "content": "Um ergänzende Produkte auszuwählen, füge die Search & Discovery-App hinzu. [Mehr Informationen](https://help.shopify.com/manual/online-store/search-and-discovery/product-recommendations)"
-            },
-            "product_limit": {
-              "label": "Maximal anzuzeigende Produkte"
-            },
-            "show_vendor": {
-              "label": "Anbieter anzeigen"
-            },
-            "show_price": {
-              "label": "Preis anzeigen"
             }
           }
         },
@@ -2948,6 +2953,9 @@
             },
             "page": {
               "label": "Reiheninhalt der Seite"
+            },
+            "opened": {
+              "label": "Wird zunächst im geöffneten Zustand angezeigt"
             }
           }
         },
@@ -3032,6 +3040,32 @@
             "options": {
               "label": "Optionen",
               "info": "Trennen Sie Ihre Optionen mit einem Komma (z. B.: Option 1, Option 2, Option 3)"
+            }
+          }
+        },
+        "product_bundle": {
+          "name": "Produktpaket",
+          "settings": {
+            "paragraph": {
+              "content": "Ermöglicht Kunden, mehrere verwandte Produkte als kuratiertes Set zu kaufen. [Mehr erfahren](https://roartheme.co/blogs/concept/how-to-setup-popular-upgrades-in-product-pages)"
+            },
+            "metafield": {
+              "label": "Metafeld",
+              "info": "Geben Sie den Namensraum und den Schlüssel des Metafeldes ein, welches den Wert enthält. Beispiel: custom.bundle"
+            }
+          }
+        },
+        "icon_list": {
+          "name": "Symbolliste",
+          "settings": {
+            "paragraph": {
+              "content": "Verwenden Sie dynamische Quellen, um einzigartige Attribute hervorzuheben, indem Sie ein Produkt-Metafeld für die Symbolliste erstellen. [Mehr erfahren](https://roartheme.co/blogs/concept/how-to-setup-product-icons)"
+            },
+            "enable_carousel": {
+              "label": "Karussell auf Desktop aktivieren"
+            },
+            "show_below_media": {
+              "label": "Unten Medien anzeigen"
             }
           }
         },
@@ -3549,10 +3583,6 @@
     },
     "scrolling-banner": {
       "name": "Scrollendes Banner und Text",
-      "settings": {
-      },
-      "blocks": {
-      },
       "presets": {
         "name": "Scrollendes Banner und Text"
       }
@@ -3600,10 +3630,58 @@
         "name": "Lauftext"
       }
     },
-    "shop-the-look": {
-      "name": "Hol dir den Look",
+    "shop-the-feed": {
+      "name": "Aus dem Feed shoppen",
+      "settings": {
+        "header__account": {
+          "content": "Soziales Konto"
+        },
+        "account_avatar": {
+          "label": "Avatar eines sozialen Kontos"
+        },
+        "account_name": {
+          "label": "Name des sozialen Kontos"
+        },
+        "account_description": {
+          "label": "Beschreibung des sozialen Kontos"
+        },
+        "account_button": {
+          "label": "Schaltfläche für soziales Konto"
+        },
+        "account_link": {
+          "label": "Link zum sozialen Konto"
+        }
+      },
+      "blocks": {
+        "feed": {
+          "name": "Feed",
+          "settings": {
+            "video_on_hover": {
+              "label": "Video beim Schweben anzeigen"
+            },
+            "header__hotspot_1": {
+              "content": "Hotspot 1"
+            },
+            "header__hotspot_2": {
+              "content": "Hotspot 2"
+            },
+            "header__hotspot_3": {
+              "content": "Hotspot 3"
+            },
+            "header__hotspot_4": {
+              "content": "Hotspot 4"
+            }
+          }
+        }
+      },
       "presets": {
-        "name": "Hol dir den Look"
+        "name": "Aus dem Feed shoppen"
+      }
+    },
+    "shop-the-look": {
+      "name": "Den Look kaufen",
+      "presets": {
+        "name": "Den Look kaufen"
       }
     },
     "slideshow": {
@@ -4235,7 +4313,7 @@
         },
         "show_rating": {
           "label": "Produktbewertung anzeigen",
-          "info": "Para mostrar una calificación, agrega una aplicación de calificación de productos [Más información](https://help.shopify.com/manual/online-store/themes/theme-structure/page-types#product-rating-block)"
+          "info": "Para mostrar una calificación, agrega una aplicación de calificación de productos."
         },
         "show_countdown": {
           "label": "Countdown-Timer anzeigen",
@@ -4284,6 +4362,23 @@
             "label": "Label"
           },
           "label": "Anzeigeart der Ersparnisse"
+        },
+        "header__icon_list": {
+          "content": "Symbolliste",
+          "info": "Verwenden Sie dynamische Quellen, um einzigartige Attribute hervorzuheben, indem Sie ein Produkt-Metafeld für die Symbolliste erstellen. [Mehr erfahren](https://roartheme.co/blogs/concept/how-to-setup-product-icons)"
+        },
+        "product_icon_list": {
+          "label": "Symbolliste anzeigen"
+        },
+        "product_icon_list_metafield": {
+          "label": "Metafeld",
+          "info": "Geben Sie den Namensraum und den Schlüssel des Metafeldes ein, welches den Wert enthält. Beispiel: custom.icons"
+        },
+        "product_icon_list_max": {
+          "label": "Maximale Anzahl anzuzeigender Symbole"
+        },
+        "product_icon_list_carousel": {
+          "label": "Karussell auf Desktop aktivieren"
         },
         "header__miscellaneous": {
           "content": "Verschiedenes"

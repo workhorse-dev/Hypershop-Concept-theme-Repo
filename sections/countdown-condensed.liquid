@@ -29,9 +29,9 @@
             <div class="{% if section.blocks.size > 1 %}col-span-6{% if forloop.first %} text-left{% else %} text-right{% endif %}{% else %}col-span-full text-center{% endif %} md:text-{{ block.settings.text_alignment }}" {{ block.shopify_attributes }}>
               <div class="inline-flex gap-3">
                 {%- liquid
-                  assign icon_class = 'flex-auto'
+                  assign icon_class = 'shrink-0'
                   unless block.settings.compact
-                    assign icon_class = 'flex-auto md:hidden'
+                    assign icon_class = 'shrink-0 md:hidden'
                   endunless
                   render 'icon', icon: 'countdown-compact', size: 'sm', class: icon_class
                 -%}

@@ -105,6 +105,10 @@
   background-color: color-mix(in oklab, rgb(var(--color-foreground)) 50%, #000000);
 }
 
+.blog-collage .article-card:nth-child(1) .article-card__image {
+  width: 100%;
+}
+
 .blog-collage .article-card:nth-child(1):not(.without-image) .article-card__content {
   position: absolute;
   inset: var(--card-grid-gap);

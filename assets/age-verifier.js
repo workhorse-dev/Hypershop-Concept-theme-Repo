@@ -32,7 +32,7 @@ class AgeVerifier extends ModalElement {
   }
 
   load(delay) {
-    if (Shopify && Shopify.designMode) return;
+    if (Shopify.designMode) return;
 
     setTimeout(() => this.show(), delay * 1000);
   }

@@ -51,9 +51,9 @@
 
                 if is_color or filter.presentation == 'swatch'
                   if filter.presentation == 'swatch'
-                    render 'swatch', value: active_value.value, href: active_value.url_to_remove, title: active_value.label, class: 'pointer-events-none', no_instant: true, swatch: active_value.swatch
+                    render 'swatch', value: active_value.value, href: active_value.url_to_remove, title: active_value.label, value_label: active_value.label, class: 'pointer-events-none', no_instant: true, swatch: active_value.swatch
                   else
-                    render 'swatch', value: active_value.label, href: active_value.url_to_remove, title: active_value.label, class: 'pointer-events-none', no_instant: true
+                    render 'swatch', value: active_value.label, href: active_value.url_to_remove, title: active_value.label, value_label: active_value.label, class: 'pointer-events-none', no_instant: true
                   endif
                 endif
               -%}
