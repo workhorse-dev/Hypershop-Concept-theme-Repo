@@ -212,7 +212,7 @@
               <ul class="help-list grid gap-4 md:gap-5" is="g-map-locations" aria-controls="GMap-{{ section.id }}" data-parent>
                 {%- for block in section.blocks -%}
                   {%- if block.settings.map_address != blank -%}
-                    <li class="help-list__item grid gap-2 md:gap-3 cursor-pointer{% if forloop.first %} active{% endif %}" data-map-address="{{ block.settings.map_address | escape }}" {{ block.shopify_attributes }}>
+                    <li class="help-list__item grid gap-2 md:gap-3 cursor-pointer{% if forloop.first %} active{% endif %}" data-map-address="{{ block.settings.map_address | escape }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
                       {%- if block.settings.heading != blank -%}
                         <p class="h4 font-medium leading-tight md:text-lg">{{ block.settings.heading | escape }}</p>
                       {%- endif -%}

@@ -1,28 +1,7 @@
-
 {%- capture direction -%}{% render 'direction' %}{%- endcapture -%}
 <!doctype html>
-<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">  
+<html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
 <head>
-  <script src="https://cdn.userway.org/widget.js" data-account="2xDigTdBpS" defer></script>
-  {% render 'lowercase-redirection' %}
-
-  <!-- Intelligems script code-->
-  <script async type="module" blocking="render" fetchpriority="high" src="https://cdn.intelligems.io/esm/96695abc99c8/bundle.js"></script>
-
-  <!-- Google tag (gtag.js) -->
-  <script async src="https://www.googletagmanager.com/gtag/js?id=G-SPX9NQ9GKW"></script>
-  <script>window.dataLayer = window.dataLayer || [];function gtag(){dataLayer.push(arguments);}gtag('js', new Date());gtag('config', 'G-SPX9NQ9GKW');</script>
-
-  <!-- Reddit Pixel -->
-  <script>
-    !function(w,d){if(!w.rdt){var p=w.rdt=function(){p.sendEvent?p.sendEvent.apply(p,arguments):p.callQueue.push(arguments)};p.callQueue=[];var t=d.createElement("script");t.src="https://www.redditstatic.com/ads/pixel.js",t.async=!0;var s=d.getElementsByTagName("script")[0];s.parentNode.insertBefore(t,s)}}(window,document);rdt('init','a2_f68bksrjbaud');rdt('track', 'PageVisit');
-  </script>
-  <!-- DO NOT MODIFY UNLESS TO REPLACE A USER IDENTIFIER -->
-  <!-- End Reddit Pixel -->
-
-  {% render 'limespot' %}
-
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
@@ -57,13 +36,9 @@
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
 
-  {{ 'https://cdnjs.cloudflare.com/ajax/libs/font-awesome/5.15.3/css/all.min.css' | stylesheet_tag: preload: true }}
-
   {%- liquid
     render 'social-meta-tags'
-    render 'meta-tags'
-    render 'css-fonts'
-
+    
     render 'css-variables'
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
     
@@ -88,12 +63,6 @@
   {%- endif -%}
 
   {%- render 'js-variables' -%}
-  {% comment %} Google ads code{% endcomment %}
-  {%- render 'theme-tracking' -%} 
-  {% comment %} UTM Updation code {% endcomment %}
-  {%- render 'utm-store' -%}
-  {%- render 'utm-append' -%}
-
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}"{% if settings.enable_lazy_image %} data-lazy-image{% endif %} data-title-animation data-page-rendering>
@@ -128,7 +97,5 @@
   {%- if request.design_mode == false and settings.preload_links -%}
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
-  {%- render 'prime-cart' -%}
-  {%- render 'omnichannel-chat-widget' -%}
 </body>
 </html>

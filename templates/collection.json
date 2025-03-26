@@ -12,6 +12,13 @@
       "main-collection-banner": {
         "type": "main-collection-banner",
         "blocks": {
+          "spacing": {
+            "type": "spacing",
+            "settings": {
+              "height": 48,
+              "height_mobile": 0
+            }
+          },
           "breadcrumb": {
             "type": "breadcrumb",
             "settings": {
@@ -23,21 +30,12 @@
             "settings": {
               "title_size": "title-xl"
             }
-          },
-          "description_GQYFQe": {
-            "type": "description",
-            "settings": {
-              "text_size": "subtext-md",
-              "text_max_size": 32,
-              "text_font": "body",
-              "secondary_color": false
-            }
           }
         },
         "block_order": [
+          "spacing",
           "breadcrumb",
-          "title",
-          "description_GQYFQe"
+          "title"
         ],
         "settings": {
           "transparent_header": true,
@@ -63,25 +61,50 @@
       "main-collection": {
         "type": "main-collection",
         "blocks": {
-          "subcollections": {
+          "subcollections_C7FxDf": {
             "type": "subcollections",
             "settings": {
-              "menu": "",
+              "menu": "main-menu",
               "per_row": 5,
               "show_count": true
+            }
+          },
+          "promotion": {
+            "type": "promotion",
+            "settings": {
+              "position": 8,
+              "column_size": "1",
+              "heading": "Example heading",
+              "content": "<p>Share information about your brand with your customers.</p>",
+              "button_label": "Shop now",
+              "button_link": "",
+              "button_style": "secondary",
+              "button_external": false,
+              "button_icon": true,
+              "content_position": "md:items-center",
+              "text_alignment": "center",
+              "content_position_mobile": "items-center",
+              "text_alignment_mobile": "center",
+              "color_text": "#ffffff",
+              "color_button_text": "#4d5940",
+              "color_button_background": "#ffffff",
+              "color_button_gradient": "",
+              "color_overlay": "#000000",
+              "overlay_opacity": 30
             }
           }
         },
         "block_order": [
-          "subcollections"
+          "subcollections_C7FxDf",
+          "promotion"
         ],
         "settings": {
-          "products_per_page": 16,
+          "products_per_page": 11,
           "columns": 4,
           "columns_mobile": "2",
           "pagination": "paginated",
           "enable_filtering": true,
-          "filter_collapsed": false,
+          "filter_collapsed": true,
           "filter_type": "drawer",
           "filter_color_swatches": true,
           "enable_sorting": true,
@@ -90,6 +113,83 @@
           "divider": false,
           "full_width": false,
           "rounded": true
+        }
+      },
+      "images-with-text-overlay": {
+        "type": "images-with-text-overlay",
+        "blocks": {
+          "spacing": {
+            "type": "spacing",
+            "settings": {
+              "height": 80,
+              "height_mobile": 20
+            }
+          },
+          "subheading": {
+            "type": "subheading",
+            "settings": {
+              "subheading": "Earphones",
+              "subheading_size": "subtitle-md",
+              "secondary_color": true
+            }
+          },
+          "heading": {
+            "type": "heading",
+            "settings": {
+              "heading": "In-Ear Clarity & ConvenienceSlide",
+              "heading_size": "title-sm",
+              "heading_tag": "h2",
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          },
+          "text": {
+            "type": "text",
+            "settings": {
+              "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
+              "text_size": "subtext-md",
+              "text_max_size": 32,
+              "text_font": "body",
+              "secondary_color": false,
+              "highlighted_text": "none",
+              "highlighted_scribble": "circle"
+            }
+          }
+        },
+        "block_order": [
+          "spacing",
+          "subheading",
+          "heading",
+          "text"
+        ],
+        "settings": {
+          "transparent_header": false,
+          "image_height": "650px",
+          "content_width": "medium",
+          "content_position": "md:items-center md:justify-start",
+          "text_alignment": "left",
+          "image_1": "shopify://shop_images/hyper-HS2310-premium-graphic-4-v01-r02-808x700.webp",
+          "image_2": "shopify://shop_images/hyper-HJ1002-BK-Hero-v01-r01-2000x20005.02.08_C_PM_1024x1024_4ab47987-6c4f-4a89-a120-9b66e16f4ece.png",
+          "image_3": "shopify://shop_images/hyper-thunderbolt-blog-hdtb3td.webp",
+          "image_4": "shopify://shop_images/hyper-HS2100-ecosmart-07-v01-r01-2000x2000.webp",
+          "image_5": "shopify://shop_images/hyper-email-6-upgrade-season-homepage-banner-mobile-v01-r01-430x520.webp",
+          "image_height_mobile": "500px",
+          "content_position_mobile": "items-center justify-start",
+          "text_alignment_mobile": "left",
+          "color_text": "#ffffff",
+          "color_highlight": "#e0a580",
+          "gradient_highlight": "",
+          "color_button_text": "#171717",
+          "color_button_background": "#ffffff",
+          "color_button_gradient": "",
+          "color_overlay": "#171717",
+          "overlay_opacity": 100,
+          "padding_top": 0,
+          "padding_bottom": 0,
+          "divider": false,
+          "full_width": true,
+          "rounded": true,
+          "enable_parallax": true
         }
       },
       "recently-viewed": {
@@ -122,200 +222,13 @@
           "full_width": false,
           "rounded": true
         }
-      },
-      "rich_text_chgmCr": {
-        "type": "rich-text",
-        "blocks": {
-          "heading_MB68e9": {
-            "type": "heading",
-            "settings": {
-              "heading": "{{ collection.metafields.custom.collection_additional_title.value }}",
-              "heading_size": "title-lg tracking-heading",
-              "heading_tag": "h2",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "text_hfRE9B": {
-            "type": "text",
-            "settings": {
-              "text": "<p>{{ collection.metafields.custom.collections_additional | metafield_tag }}</p>",
-              "text_size": "subtext-md",
-              "text_max_size": 32,
-              "text_font": "body",
-              "secondary_color": false,
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          }
-        },
-        "block_order": [
-          "heading_MB68e9",
-          "text_hfRE9B"
-        ],
-        "settings": {
-          "text_alignment": "center",
-          "text_alignment_mobile": "center",
-          "heading": "",
-          "heading_size": "title-md",
-          "heading_alignment": "text-left md:items-end md:flex-row",
-          "heading_width": "small",
-          "heading_tag": "h2",
-          "subheading": "",
-          "description": "",
-          "button_label": "",
-          "button_link": "",
-          "button_external": false,
-          "button_icon": true,
-          "highlighted_text": "none",
-          "highlighted_scribble": "circle",
-          "color_text": "",
-          "color_background": "",
-          "gradient_background": "",
-          "color_highlight": "",
-          "gradient_highlight": "",
-          "color_button_text": "",
-          "color_button_background": "",
-          "color_button_gradient": "",
-          "padding_top": 0,
-          "padding_bottom": 20,
-          "divider": false,
-          "narrow": true,
-          "rounded": false
-        }
-      },
-      "faq_gt7Ryk": {
-        "type": "faq",
-        "blocks": {
-          "question_gtdFeh": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question1.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer1 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "question_3rwTX7": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question2.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer1 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "question_npUzhM": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question3.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer3 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "question_dK6pye": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question4.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer4 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "question_rQ6qYe": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question5.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer5 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "question_mRAzbY": {
-            "type": "question",
-            "settings": {
-              "title": "<strong>{{ collection.metafields.custom.faq_question6.value }}</strong>",
-              "text": "<p>{{ collection.metafields.custom.faq_answer6 | metafield_tag }}</p>",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          }
-        },
-        "block_order": [
-          "question_gtdFeh",
-          "question_3rwTX7",
-          "question_npUzhM",
-          "question_dK6pye",
-          "question_rQ6qYe",
-          "question_mRAzbY"
-        ],
-        "settings": {
-          "style": "with-border",
-          "heading": "FAQs",
-          "heading_size": "title-md",
-          "heading_alignment": "text-left md:items-end md:flex-row",
-          "heading_tag": "h2",
-          "subheading": "",
-          "description": "",
-          "button_label": "",
-          "button_link": "",
-          "button_external": false,
-          "button_icon": true,
-          "highlighted_text": "none",
-          "highlighted_scribble": "circle",
-          "color_text": "",
-          "color_background": "#f3f3f3",
-          "gradient_background": "",
-          "color_highlight": "",
-          "gradient_highlight": "",
-          "color_button_text": "",
-          "color_button_background": "",
-          "color_button_gradient": "",
-          "color_overlay": "#ffffff",
-          "overlay_opacity": 0,
-          "padding_top": 72,
-          "padding_bottom": 72,
-          "divider": false,
-          "narrow": true,
-          "rounded": false
-        }
-      },
-      "174230062475112af0": {
-        "type": "apps",
-        "blocks": {
-          "product_genius_ai_product_genius_liquid_AaVYF8": {
-            "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
-            "settings": {}
-          }
-        },
-        "block_order": [
-          "product_genius_ai_product_genius_liquid_AaVYF8"
-        ],
-        "settings": {
-          "color_text": "",
-          "color_background": "",
-          "gradient_background": "",
-          "color_highlight": "",
-          "gradient_highlight": "",
-          "color_button_text": "",
-          "color_button_background": "",
-          "color_button_gradient": "",
-          "padding_top": 72,
-          "padding_bottom": 72,
-          "divider": false,
-          "full_width": false,
-          "rounded": false
-        }
       }
     },
     "order": [
       "main-collection-banner",
       "main-collection",
-      "recently-viewed",
-      "rich_text_chgmCr",
-      "faq_gt7Ryk",
-      "174230062475112af0"
+      "images-with-text-overlay",
+      "recently-viewed"
     ]
   }
   

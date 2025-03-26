@@ -93,7 +93,7 @@
                         <td>
                           <div class="flex items-start md:items-center gap-4d5 md:gap-10">
                             {%- if item.image -%}
-                              <a class="cart-item__media media relative overflow-hidden flex-auto" href="{{ item.url }}" tabindex="-1">
+                              <a class="cart-item__media media relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
                                 {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                               </a>
                             {%- endif -%}
@@ -122,7 +122,7 @@
                                       {%- assign property_first_char = property.first | slice: 0 -%}
                                       {%- if property.last != blank and property_first_char != '_' -%}
                                         <div class="flex gap-1 text-xs text-opacity leading-tight">
-                                          <dt>{{ property.first }}:&nbsp;</dt>
+                                          <dt class="font-medium">{{ property.first }}:&nbsp;</dt>
                                           <dd>
                                             {%- if property.last contains '/uploads/' -%}
                                               <a href="{{ property.last }}" class="link" target="_blank" aria-describedby="a11y-new-window-message">
@@ -826,7 +826,7 @@
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "label": "t:sections.main-cart.settings.show_vendor.label",
+      "label": "t:sections.global.settings.show_vendor.label",
       "default": true
     },
     {

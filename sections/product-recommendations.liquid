@@ -46,7 +46,8 @@
                 show_quick_add: settings.product_quick_add,
                 show_quick_view: settings.product_quick_view,
                 show_save_amount: settings.product_save_amount,
-                save_type: settings.product_save_type
+                save_type: settings.product_save_type,
+                show_icon_list: settings.product_icon_list
               -%}
             {%- endfor -%}
           </motion-list>
@@ -78,6 +79,7 @@
 {% schema %}
 {
   "name": "t:sections.product-recommendations.name",
+  "class": "recommendations-section",
   "settings": [
     {
       "type": "paragraph",

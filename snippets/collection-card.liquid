@@ -41,7 +41,7 @@
   endif
 -%}
 
-<div class="card media-card media-card--{{ settings.card_style }}{% if overlay_content %} media-card--overlap{% endif %} overflow-hidden" id="shopify-block-{{ block.id }}">
+<div class="card media-card media-card--{{ settings.card_style }}{% if overlay_content %} media-card--overlap{% endif %}" id="shopify-block-{{ block.id }}">
   {%- if overlay_content and block != blank -%}
     <style>
       #shopify-block-{{ block.id }} {
@@ -60,7 +60,7 @@
       </div>
       <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
         <div class="media-card__text shrink-1 grid gap-0d5">
-          <p class="flex">
+          <p>
             <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative">
               {{- collection_title | escape -}}
               {%- if show_products_count and collection.all_products_count > 0 -%}
@@ -86,7 +86,7 @@
       </div>
       <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
         <div class="media-card__text shrink-1 grid gap-0d5">
-          <p class="flex">
+          <p>
             <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative">
               {{- 'onboarding.collection_title' | t | escape -}}
             </span>

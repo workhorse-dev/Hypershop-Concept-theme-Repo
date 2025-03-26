@@ -46,7 +46,7 @@
                   <video-media class="block" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }}" autoplay>
                     {{- poster -}}
                     <template>
-                      {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '800x' -}}
+                      {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '400x' -}}
                     </template>
                   </video-media>
                 </a>

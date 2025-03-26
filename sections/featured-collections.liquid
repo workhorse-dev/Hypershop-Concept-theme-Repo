@@ -6,6 +6,13 @@
   }
 </style>
 
+{%- liquid
+  assign section_rendering_api = false
+  if section.index == nil
+    assign section_rendering_api = true
+  endif
+-%}
+
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- render 'section-heading', section: section -%}
@@ -16,7 +23,7 @@
           <div class="flex gap-4" role="tablist">
             {%- for block in section.blocks -%}
               {%- assign collection = block.settings.collection -%}
-              <button class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %} whitespace-nowrap"{% if forloop.first %} disabled{% endif %} type="button" is="hover-button" role="tab" aria-controls="TabPanel-{{ block.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+              <button class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %} whitespace-nowrap"{% if forloop.first %} disabled{% endif %} type="button"{% if section_rendering_api or forloop.first %} is="hover-button"{% else %} is="api-hover-button" data-id="TabPanelContent-{{ block.id }}" data-section-id="{{ section.id }}"{% endif %} role="tab" aria-controls="TabPanel-{{ block.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
                   {%- liquid
@@ -58,62 +65,68 @@
           assign products = block.settings.products | default: collection.products
         -%}
         <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}>
-          <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
-            <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
-              {%- for product in products limit: section.settings.product_limit -%}
-                {%- render 'product-card',
-                  product: product,
-                  product_id: product.id,
-                  section_id: section.id,
-                  lazy_load: false,
-                  image_ratio: settings.product_image_ratio,
-                  image_fill: settings.product_image_fill,
-                  show_secondary_image: settings.product_secondary_image,
-                  show_vendor: settings.product_vendor,
-                  show_rating: settings.product_rating,
-                  show_color_swatches: settings.product_color_swatches,
-                  show_countdown: settings.product_countdown,
-                  show_quick_add: settings.product_quick_add,
-                  show_quick_view: settings.product_quick_view,
-                  show_save_amount: settings.product_save_amount,
-                  save_type: settings.product_save_type
-                -%}
-              {%- else -%}
-                {%- for i in (1..section.settings.product_limit) -%}
-                  {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
-                  {%- render 'product-card-placeholder',
-                    lazy_load: false,
-                    image_ratio: settings.product_image_ratio,
-                    image_fill: settings.product_image_fill,
-                    show_secondary_image: settings.product_secondary_image,
-                    show_vendor: settings.product_vendor,
-                    show_rating: settings.product_rating,
-                    show_color_swatches: settings.product_color_swatches,
-                    show_countdown: settings.product_countdown,
-                    show_quick_add: settings.product_quick_add,
-                    show_quick_view: settings.product_quick_view,
-                    show_save_amount: settings.product_save_amount,
-                    save_type: settings.product_save_type,
-                    placeholder: placeholder
-                  -%}
-                {%- endfor -%}
-              {%- endfor -%}
-            </motion-list>
-          </slider-element>
-      
-          {%- if section.settings.show_view_all and collection != blank and section.settings.product_limit < collection.all_products_count -%}
-            <p class="text-center">
-              <a class="button button--secondary icon-with-text" href="{{ collection.url }}" is="hover-link" aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: collection.title }}">
-                <span class="btn-fill" data-fill></span>
-                <span class="btn-text">
-                  {%- liquid
-                    render 'icon', icon: 'newspaper'
-                    echo 'sections.featured_collection.view_all' | t
-                  -%}
-                </span>
-              </a>
-            </p>
-          {%- endif -%}
+          <div id="TabPanelContent-{{ block.id }}">
+            {%- if section_rendering_api or forloop.first -%}
+              <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+                <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+                  {%- for product in products limit: section.settings.product_limit -%}
+                    {%- render 'product-card',
+                      product: product,
+                      product_id: product.id,
+                      section_id: section.id,
+                      block_id: block.id,
+                      lazy_load: false,
+                      image_ratio: settings.product_image_ratio,
+                      image_fill: settings.product_image_fill,
+                      show_secondary_image: settings.product_secondary_image,
+                      show_vendor: settings.product_vendor,
+                      show_rating: settings.product_rating,
+                      show_color_swatches: settings.product_color_swatches,
+                      show_countdown: settings.product_countdown,
+                      show_quick_add: settings.product_quick_add,
+                      show_quick_view: settings.product_quick_view,
+                      show_save_amount: settings.product_save_amount,
+                      save_type: settings.product_save_type,
+                      show_icon_list: settings.product_icon_list
+                    -%}
+                  {%- else -%}
+                    {%- for i in (1..section.settings.product_limit) -%}
+                      {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
+                      {%- render 'product-card-placeholder',
+                        lazy_load: false,
+                        image_ratio: settings.product_image_ratio,
+                        image_fill: settings.product_image_fill,
+                        show_secondary_image: settings.product_secondary_image,
+                        show_vendor: settings.product_vendor,
+                        show_rating: settings.product_rating,
+                        show_color_swatches: settings.product_color_swatches,
+                        show_countdown: settings.product_countdown,
+                        show_quick_add: settings.product_quick_add,
+                        show_quick_view: settings.product_quick_view,
+                        show_save_amount: settings.product_save_amount,
+                        save_type: settings.product_save_type,
+                        placeholder: placeholder
+                      -%}
+                    {%- endfor -%}
+                  {%- endfor -%}
+                </motion-list>
+              </slider-element>
+        
+              {%- if section.settings.show_view_all and collection != blank and section.settings.product_limit < collection.all_products_count -%}
+                <p class="text-center">
+                  <a class="button button--secondary icon-with-text" href="{{ collection.url }}" is="hover-link" aria-label="{{ 'sections.featured_collection.view_all_label' | t: collection_name: collection.title }}">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'newspaper'
+                        echo 'sections.featured_collection.view_all' | t
+                      -%}
+                    </span>
+                  </a>
+                </p>
+              {%- endif -%}
+            {%- endif -%}
+          </div>
         </div>
       {%- endfor -%}
     {%- endif -%}

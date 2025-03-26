@@ -88,7 +88,7 @@
                         <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
                           {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                         </span>
-                        {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+                        {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                       </summary>
                       <div class="details__content text-base rte">
                         {{- block.settings.text -}}

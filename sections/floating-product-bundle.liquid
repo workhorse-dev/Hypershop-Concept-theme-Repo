@@ -179,7 +179,7 @@
           <compact-product-bundle class="compact-product-bundle flex flex-col gap-6 lg:gap-10">
             <motion-list class="product-grid{% if section.settings.swipe_on_mobile %} swipe-on-mobile{% endif %} card-grid card-grid--{{ product_limit }} mobile:card-grid--1 grid">
               {%- for product in products limit: product_limit -%}
-                <div class="flex relative">
+                <div class="grid relative">
                   {%- liquid
                     unless forloop.first
                       render 'icon', icon: 'plus-3', size: 'xl', class: 'icon-bundle-plus absolute pointer-events-none'
@@ -192,6 +192,7 @@
                     lazy_load: false,
                     image_ratio: settings.product_image_ratio,
                     image_fill: settings.product_image_fill,
+                    show_secondary_image: settings.product_secondary_image,
                     show_vendor: settings.product_vendor,
                     show_rating: settings.product_rating,
                     show_color_swatches: settings.product_color_swatches,
@@ -210,7 +211,7 @@
               {%- else -%}
                 {%- for i in (1..section.settings.product_limit) -%}
                   {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
-                  <div class="flex relative">
+                  <div class="grid relative">
                     {%- liquid
                       unless forloop.first
                         render 'icon', icon: 'plus-3', size: 'xl', class: 'icon-bundle-plus absolute pointer-events-none'
@@ -1315,7 +1316,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 48,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"

@@ -1,0 +1,713 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+
+  {%- for block in section.blocks -%}
+    #shopify-block-{{ block.id }} {
+      {%- render 'section-variables', section: block -%}
+      {%- if block.settings.image != blank %}
+        --ratio-percent: {{ 1 | divided_by: block.settings.image.aspect_ratio | times: 100 }}%;
+      {%- endif -%}
+    }
+    
+  {%- endfor -%}
+</style>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}" data-section-id="{{ section.id }}">
+  {%- render 'social-feed-heading', section: section -%}
+  
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <slider-element id="Slider-{{ section.id }}" class="shop-the-feed grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+      <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+        {%- for block in section.blocks -%}
+          {%- render 'social-feed-card',
+            section: section,
+            block: block,
+            collection: collection,
+            show_vendor: section.settings.show_vendor,
+            show_price: section.settings.show_price,
+            image_ratio: section.settings.image_ratio,
+            position: forloop.index
+          -%}
+        {%- endfor -%}
+      </motion-list>
+
+      {%- if section.settings.carousel_on_desktop -%}
+        <div class="indicators hidden lg:flex gap-2d5 items-center absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 page-width">
+          <button class="button button--primary pointer-events-auto" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled tabindex="-1">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-left', class: 'stroke-2 transform' -%}
+            </span>
+          </button>
+          <button class="button button--primary pointer-events-auto" type="button" is="next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}" tabindex="-1">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- render 'icon', icon: 'chevron-right', class: 'stroke-2 transform' -%}
+            </span>
+          </button>
+        </div>
+      {%- endif -%}
+    </slider-element>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.shop-the-feed.name",
+  "class": "shop-the-feed-section",
+  "settings": [
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 5,
+      "step": 1,
+      "default": 4,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "carousel_on_desktop",
+      "label": "t:sections.global.settings.carousel_on_desktop.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "image_ratio",
+      "options": [
+        {
+          "value": "adapt",
+          "label": "t:sections.global.settings.image_ratio.options__1.label"
+        },
+        {
+          "value": "square",
+          "label": "t:sections.global.settings.image_ratio.options__2.label"
+        },
+        {
+          "value": "portrait",
+          "label": "t:sections.global.settings.image_ratio.options__3.label"
+        },
+        {
+          "value": "landscape",
+          "label": "t:sections.global.settings.image_ratio.options__4.label"
+        },
+        {
+          "value": "wide",
+          "label": "t:sections.global.settings.image_ratio.options__5.label"
+        }
+      ],
+      "default": "portrait",
+      "label": "t:sections.global.settings.image_ratio.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.global.settings.columns_mobile.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "swipe_on_mobile",
+      "label": "t:sections.global.settings.swipe_on_mobile.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.shop-the-feed.settings.header__account.content"
+    },
+    {
+      "type": "image_picker",
+      "id": "account_avatar",
+      "label": "t:sections.shop-the-feed.settings.account_avatar.label"
+    },
+    {
+      "type": "text",
+      "id": "account_name",
+      "label": "t:sections.shop-the-feed.settings.account_name.label",
+      "default": "@Concept"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__product.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_vendor",
+      "label": "t:sections.global.settings.show_vendor.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "show_price",
+      "label": "t:sections.global.settings.show_price.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Shop the Feed"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left md:items-end md:flex-row",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center md:items-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right md:items-end md:flex-row-reverse",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left md:items-end md:flex-row"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label",
+      "default": "<p>Discover premium audio from our Instagram and shop now.</p>"
+    },
+    {
+      "type": "text",
+      "id": "button_label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info",
+      "default": "Follow"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_external",
+      "label": "t:sections.global.settings.button_external.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 80
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 100
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "blocks": [
+    {
+      "type": "feed",
+      "name": "t:sections.shop-the-feed.blocks.feed.name",
+      "settings": [
+        {
+          "type": "image_picker",
+          "id": "image",
+          "label": "t:sections.global.settings.image.label"
+        },
+        {
+          "type": "video",
+          "id": "video",
+          "label": "t:sections.video.settings.video.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "video_on_hover",
+          "label": "t:sections.shop-the-feed.blocks.feed.settings.video_on_hover.label",
+          "default": true
+        },
+        {
+          "type": "header",
+          "content": "t:sections.shop-the-feed.settings.header__account.content"
+        },
+        {
+          "type": "image_picker",
+          "id": "account_avatar",
+          "label": "t:sections.shop-the-feed.settings.account_avatar.label"
+        },
+        {
+          "type": "text",
+          "id": "account_name",
+          "label": "t:sections.shop-the-feed.settings.account_name.label",
+          "default": "@Concept"
+        },
+        {
+          "type": "text",
+          "id": "account_description",
+          "label": "t:sections.shop-the-feed.settings.account_description.label",
+          "default": "We cultivate sonic excellence"
+        },
+        {
+          "type": "text",
+          "id": "account_button",
+          "label": "t:sections.shop-the-feed.settings.account_button.label",
+          "default": "Follow"
+        },
+        {
+          "type": "url",
+          "id": "account_link",
+          "label": "t:sections.shop-the-feed.settings.account_link.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "type": "header",
+          "content": "t:sections.global.settings.header__colors.content",
+          "info": "t:sections.global.settings.header__colors.info"
+        },
+        {
+          "type": "color",
+          "id": "color_text",
+          "label": "t:sections.global.settings.color_text.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color",
+          "id": "color_button_text",
+          "label": "t:sections.global.settings.color_button_text.label",
+          "default": "#000000"
+        },
+        {
+          "type": "color",
+          "id": "color_button_background",
+          "label": "t:sections.global.settings.color_button_background.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "color_background",
+          "id": "color_button_gradient",
+          "label": "t:sections.global.settings.color_button_gradient.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.shop-the-feed.blocks.feed.settings.header__hotspot_1.content"
+        },
+        {
+          "type": "color",
+          "id": "hotspot_color_text_1",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_vertical_1",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 45,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_horizontal_1",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 25,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "product",
+          "id": "hotspot_product_1",
+          "label": "t:sections.global.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.shop-the-feed.blocks.feed.settings.header__hotspot_2.content"
+        },
+        {
+          "type": "color",
+          "id": "hotspot_color_text_2",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_vertical_2",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 30,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_horizontal_2",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 65,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "product",
+          "id": "hotspot_product_2",
+          "label": "t:sections.global.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.shop-the-feed.blocks.feed.settings.header__hotspot_3.content"
+        },
+        {
+          "type": "color",
+          "id": "hotspot_color_text_3",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_vertical_3",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 60,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_horizontal_3",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 75,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "product",
+          "id": "hotspot_product_3",
+          "label": "t:sections.global.settings.product.label"
+        },
+        {
+          "type": "header",
+          "content": "t:sections.shop-the-feed.blocks.feed.settings.header__hotspot_4.content"
+        },
+        {
+          "type": "color",
+          "id": "hotspot_color_text_4",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
+          "default": "#ffffff"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_vertical_4",
+          "label": "t:sections.lookbook.blocks.global.settings.vertical.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "range",
+          "id": "hotspot_horizontal_4",
+          "label": "t:sections.lookbook.blocks.global.settings.horizontal.label",
+          "default": 50,
+          "min": 5,
+          "max": 95,
+          "step": 1,
+          "unit": "%"
+        },
+        {
+          "type": "product",
+          "id": "hotspot_product_4",
+          "label": "t:sections.global.settings.product.label"
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.shop-the-feed.name",
+      "blocks": [
+        {
+          "type": "feed"
+        },
+        {
+          "type": "feed"
+        },
+        {
+          "type": "feed"
+        },
+        {
+          "type": "feed"
+        },
+        {
+          "type": "feed"
+        }
+      ]
+    }
+  ],
+  "disabled_on": {
+    "templates": [
+      "password"
+    ]
+  }
+}
+{% endschema %}

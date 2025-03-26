@@ -45,53 +45,70 @@
       if section.settings.enable_country_selector and localization.available_countries.size > 1
         assign enable_country_selector = true
       endif
+
+      assign section_rendering_api = false
+      if section.index == nil
+        assign section_rendering_api = true
+      endif
     -%}
     {%- if enable_language_selector or enable_country_selector -%}
       <div class="localization flex items-center justify-center flex-col md:flex-row">
         {%- if enable_language_selector -%}
           <div class="grid gap-2">
-            {%- form 'localization', id: 'localization_language_form_footer', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
-              <label class="sr-only" for="LocalizationLanguageFormFooter">
+            {%- form 'localization', id: 'footer_localization_language_form', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
+              <label class="sr-only" for="FooterLocalizationLanguageList">
                 {{- 'localization.language_label' | t -}}
               </label>
               {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
-              <select class="localization__item cursor-pointer leading-tight w-full" name="locale_code" id="LocalizationLanguageFormFooter">
-                {%- for language in localization.available_languages -%}
-                  <option value="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>
-                    {{- language.endonym_name | capitalize -}}
+              <button type="button" class="localization__item cursor-pointer leading-tight w-full"{% unless section_rendering_api %} is="api-button" data-id="FooterLocalizationLanguageList" data-section-id="{{ section.id }}"{% endunless %}>
+                {{- localization.language.endonym_name | capitalize -}}
+              </button>
+              {%- unless section_rendering_api -%}
+                <select class="localization__item cursor-pointer absolute top-0 left-0 w-full h-full opacity-0" name="locale_code" id="FooterLocalizationLanguageList">
+                  <option value="{{ localization.language.iso_code }}" selected>
+                    {{- localization.language.endonym_name | capitalize -}}
                   </option>
-                {%- endfor -%}
-              </select>
+                </select>
+              {%- else -%}
+                <select class="localization__item cursor-pointer absolute top-0 left-0 w-full h-full opacity-0" name="locale_code" id="FooterLocalizationLanguageList">
+                  {%- for language in localization.available_languages -%}
+                    <option value="{{ language.iso_code }}"{% if language.iso_code == localization.language.iso_code %} selected{% endif %}>
+                      {{- language.endonym_name | capitalize -}}
+                    </option>
+                  {%- endfor -%}
+                </select>
+              {%- endunless -%}
               {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'absolute pointer-events-none' -%}
             {%- endform -%}
-            <noscript>
-              <button class="button button--primary button--small w-full" type="submit" form="localization_language_form_footer">
-                {{- 'localization.update_language' | t -}}
-              </button>
-            </noscript>
           </div>
         {%- endif -%}
         {%- if enable_country_selector -%}
           <div class="grid gap-2">
-            {%- form 'localization', id: 'localization_country_form_footer', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
-              <label class="sr-only" for="LocalizationCountryFormFooter">
+            {%- form 'localization', id: 'footer_localization_country_form', class: 'localization__form flex items-center relative', is: 'localization-form' -%}
+              <label class="sr-only" for="FooterLocalizationCountryList">
                 {{- 'localization.country_label' | t -}}
               </label>
               {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
-              <select class="localization__item cursor-pointer leading-tight w-full" name="country_code" id="LocalizationCountryFormFooter">
-                {%- for country in localization.available_countries -%}
-                  <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
-                    {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+              <button type="button" class="localization__item cursor-pointer leading-tight w-full"{% unless section_rendering_api %} is="api-button" data-id="FooterLocalizationCountryList" data-section-id="{{ section.id }}"{% endunless %}>
+                {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
+              </button>
+              {%- unless section_rendering_api -%}
+                <select class="localization__item cursor-pointer absolute top-0 left-0 w-full h-full opacity-0" name="locale_code" id="FooterLocalizationCountryList">
+                  <option value="{{ localization.country.iso_code }}" selected>
+                    {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
                   </option>
-                {%- endfor -%}
-              </select>
+                </select>
+              {%- else -%}
+                <select class="localization__item cursor-pointer absolute top-0 left-0 w-full h-full opacity-0" name="country_code" id="FooterLocalizationCountryList">
+                  {%- for country in localization.available_countries -%}
+                    <option value="{{ country.iso_code }}"{% if country.iso_code == localization.country.iso_code %} selected{% endif %}>
+                      {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                    </option>
+                  {%- endfor -%}
+                </select>
+              {%- endunless -%}
               {%- render 'icon', icon: 'chevron-down', size: 'xs', class: 'absolute pointer-events-none' -%}
             {%- endform -%}
-            <noscript>
-              <button class="button button--primary button--small w-full" type="submit" form="localization_country_form_footer">
-                {{- 'localization.update_country' | t -}}
-              </button>
-            </noscript>
           </div>
         {%- endif -%}
       </div>
