@@ -259,6 +259,7 @@
     },
     "video-hero": {
       "type": "video-hero",
+      "disabled": true,
       "settings": {
         "transparent_header": false,
         "video": "shopify://files/videos/HyperJuice_4-in-1_-_Folding_Bag.mp4",
@@ -346,6 +347,7 @@
         "column_QJ3RgJ",
         "column_HfeWQm"
       ],
+      "disabled": true,
       "settings": {
         "gap": "large",
         "columns": 3,
@@ -414,6 +416,7 @@
         "counter_w63qcL",
         "counter_e6Mmtc"
       ],
+      "disabled": true,
       "settings": {
         "gap": "large",
         "columns": 3,
@@ -691,6 +694,68 @@
         "enable_parallax": true
       }
     },
+    "lookbook_PefhYF": {
+      "type": "lookbook",
+      "blocks": {
+        "product_bnGjW3": {
+          "type": "product",
+          "settings": {
+            "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "color_text": "#ffffff",
+            "vertical": 57,
+            "horizontal": 35,
+            "vertical_mobile": 29,
+            "horizontal_mobile": 25
+          }
+        },
+        "product_FpGj3T": {
+          "type": "product",
+          "settings": {
+            "product": "hyperjuice-245w-gan-desktop-charger",
+            "color_text": "#ffffff",
+            "vertical": 75,
+            "horizontal": 65,
+            "vertical_mobile": 75,
+            "horizontal_mobile": 65
+          }
+        }
+      },
+      "block_order": [
+        "product_bnGjW3",
+        "product_FpGj3T"
+      ],
+      "disabled": true,
+      "settings": {
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "heading_position": "none",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 30,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "product-details": {
       "type": "product-details",
       "blocks": {
@@ -770,6 +835,71 @@
         "divider": false,
         "full_width": false,
         "rounded": false
+      }
+    },
+    "compact_product_bundle_h8tfiJ": {
+      "type": "compact-product-bundle",
+      "blocks": {
+        "heading_YnfTgp": {
+          "type": "heading",
+          "settings": {
+            "heading": "Product bundle",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_LCwLwC": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_YnfTgp",
+        "text_LCwLwC"
+      ],
+      "disabled": true,
+      "settings": {
+        "collection": "",
+        "products": [],
+        "product_limit": 3,
+        "layout": "image_first",
+        "content_position": "md:items-center",
+        "text_alignment": "center",
+        "image_height_mobile": "adapt",
+        "content_position_mobile": "items-center",
+        "text_alignment_mobile": "center",
+        "swipe_on_mobile": true,
+        "show_variant_labels": true,
+        "picker_type": "button",
+        "enable_color_swatches": true,
+        "color_swatch_type": "color",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 40,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "faq": {
@@ -863,6 +993,7 @@
     },
     "product-recommendations": {
       "type": "product-recommendations",
+      "disabled": true,
       "settings": {
         "product_limit": 6,
         "columns": 4,
@@ -894,7 +1025,6 @@
     },
     "recently-viewed": {
       "type": "recently-viewed",
-      "disabled": true,
       "settings": {
         "product_limit": 6,
         "columns": 4,
@@ -902,195 +1032,6 @@
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "heading": "Recently Viewed",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
-    "quick_order_list_JQfNEz": {
-      "type": "quick-order-list",
-      "settings": {
-        "layout": "sidebar",
-        "show_image": true,
-        "show_sku": true,
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
-    "compact_product_bundle_h8tfiJ": {
-      "type": "compact-product-bundle",
-      "blocks": {
-        "heading_YnfTgp": {
-          "type": "heading",
-          "settings": {
-            "heading": "Product bundle",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text_LCwLwC": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "heading_YnfTgp",
-        "text_LCwLwC"
-      ],
-      "settings": {
-        "collection": "",
-        "products": [],
-        "product_limit": 3,
-        "layout": "image_first",
-        "content_position": "md:items-center",
-        "text_alignment": "center",
-        "image_height_mobile": "adapt",
-        "content_position_mobile": "items-center",
-        "text_alignment_mobile": "center",
-        "swipe_on_mobile": true,
-        "show_variant_labels": true,
-        "picker_type": "button",
-        "enable_color_swatches": true,
-        "color_swatch_type": "color",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 40,
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false,
-        "enable_parallax": true,
-        "parallax_direction": "vertical"
-      }
-    },
-    "lookbook_PefhYF": {
-      "type": "lookbook",
-      "blocks": {
-        "product_bnGjW3": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "color_text": "#ffffff",
-            "vertical": 57,
-            "horizontal": 35,
-            "vertical_mobile": 29,
-            "horizontal_mobile": 25
-          }
-        },
-        "product_FpGj3T": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "color_text": "#ffffff",
-            "vertical": 75,
-            "horizontal": 65,
-            "vertical_mobile": 75,
-            "horizontal_mobile": 65
-          }
-        }
-      },
-      "block_order": [
-        "product_bnGjW3",
-        "product_FpGj3T"
-      ],
-      "settings": {
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-center md:items-center",
-        "heading_tag": "h2",
-        "heading_position": "none",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 30,
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
-    "recently_viewed_wTrQi8": {
-      "type": "recently-viewed",
-      "settings": {
-        "product_limit": 6,
-        "columns": 4,
-        "carousel_on_desktop": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "Recently viewed",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -1125,11 +1066,9 @@
     "collage",
     "lookbook_PefhYF",
     "product-details",
+    "compact_product_bundle_h8tfiJ",
     "faq",
     "product-recommendations",
-    "recently-viewed",
-    "quick_order_list_JQfNEz",
-    "compact_product_bundle_h8tfiJ",
-    "recently_viewed_wTrQi8"
+    "recently-viewed"
   ]
 }
