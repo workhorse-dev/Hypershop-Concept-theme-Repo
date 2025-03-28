@@ -72,17 +72,17 @@
             "show_menu_image": true,
             "button_label": "All Products",
             "button_link": "shopify://collections/all",
-            "heading_1": "Collections",
+            "heading_1": "Shop For",
             "heading_2": "Most popular",
             "show_vendor": false,
             "show_price": true,
-            "tab_target_1": "Hyperdrive",
-            "tab_target_link_1": "shopify://collections/chromebook",
+            "tab_target_1": "Docks & Hubs",
+            "tab_target_link_1": "shopify://collections/hyperdrive",
             "tab_products_1": [
-              "180w-power-adapter-for-hyperdrive-gen2-18-port",
-              "charge-on-the-go-bundle-hyperjuice-35w-charger-and-2m-usb-c-cable",
-              "cross-campus-special-hyperpack-pro-stash-go-sleeve-and-magnetic-battery-pack",
-              "desktop-anywhere-hyperdrive-dual-monitor-usb4-dock-and-cable-bundle"
+              "hyperdrive-thunderbolt-4-docking-station",
+              "hyperdrive-thunderbolt-4-power-hub",
+              "hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
+              "hyperdrive-gen2-thunderbolt-docking-station"
             ],
             "tab_icon_width_1": 42,
             "promo_image_1": "shopify://shop_images/hyper-email-6-mouse-keyboard-banner-mobile-v01-r01-430x520.webp",
@@ -161,6 +161,7 @@
         },
         "mega_menu_PitMbE": {
           "type": "mega_menu",
+          "disabled": true,
           "settings": {
             "menu_title": "Collection",
             "menu_width": "large",
