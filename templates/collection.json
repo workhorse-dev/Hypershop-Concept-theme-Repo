@@ -19,23 +19,33 @@
             "height_mobile": 0
           }
         },
-        "breadcrumb": {
-          "type": "breadcrumb",
-          "settings": {
-            "show_collections_link": true
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
             "title_size": "title-xl"
           }
+        },
+        "description_FG7iHi": {
+          "type": "description",
+          "settings": {
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false
+          }
+        },
+        "breadcrumb": {
+          "type": "breadcrumb",
+          "settings": {
+            "show_collections_link": true
+          }
         }
       },
       "block_order": [
         "spacing",
-        "breadcrumb",
-        "title"
+        "title",
+        "description_FG7iHi",
+        "breadcrumb"
       ],
       "settings": {
         "transparent_header": true,
@@ -71,6 +81,7 @@
         },
         "promotion": {
           "type": "promotion",
+          "disabled": true,
           "settings": {
             "position": 8,
             "column_size": "1",
@@ -102,7 +113,7 @@
         "products_per_page": 23,
         "columns": 4,
         "columns_mobile": "2",
-        "pagination": "infinite",
+        "pagination": "click",
         "enable_filtering": true,
         "filter_collapsed": true,
         "filter_type": "drawer",
@@ -222,11 +233,79 @@
         "full_width": false,
         "rounded": true
       }
+    },
+    "faq_8mQyFn": {
+      "type": "faq",
+      "blocks": {
+        "question_7JbGmA": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_TrmMrt": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_C7fmkb": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_7JbGmA",
+        "question_TrmMrt",
+        "question_C7fmkb"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 4,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
     }
   },
   "order": [
     "main-collection-banner",
     "main-collection",
+    "faq_8mQyFn",
     "images-with-text-overlay",
     "recently-viewed"
   ]

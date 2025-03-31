@@ -256,18 +256,6 @@
             "highlighted_scribble": "circle"
           }
         },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Since 1980</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
         "button": {
           "type": "button",
           "settings": {
@@ -282,7 +270,6 @@
       },
       "block_order": [
         "heading",
-        "text",
         "button"
       ],
       "settings": {
