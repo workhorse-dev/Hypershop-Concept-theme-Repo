@@ -262,11 +262,21 @@
             "color_text": "#ffffff",
             "color_background": "#171717"
           }
+        },
+        "profile_gXwCWy": {
+          "type": "profile",
+          "settings": {
+            "heading": "Heading",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
         }
       },
       "block_order": [
         "profile_yB4kBY",
-        "profile_deGLGD"
+        "profile_deGLGD",
+        "profile_gXwCWy"
       ],
       "disabled": true,
       "settings": {
@@ -396,7 +406,7 @@
         "content_LADXVi"
       ],
       "settings": {
-        "image_ratio": "portrait",
+        "image_ratio": "square",
         "image_ratio_mobile": "wide",
         "heading": "Timeline",
         "heading_size": "title-md",
