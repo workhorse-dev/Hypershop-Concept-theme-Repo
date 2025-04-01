@@ -7,228 +7,306 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
-    "sections": {
-      "main-collection-banner": {
-        "type": "main-collection-banner",
-        "blocks": {
-          "spacing": {
-            "type": "spacing",
-            "settings": {
-              "height": 48,
-              "height_mobile": 0
-            }
-          },
-          "breadcrumb": {
-            "type": "breadcrumb",
-            "settings": {
-              "show_collections_link": true
-            }
-          },
-          "title": {
-            "type": "title",
-            "settings": {
-              "title_size": "title-xl"
-            }
+{
+  "sections": {
+    "main-collection-banner": {
+      "type": "main-collection-banner",
+      "blocks": {
+        "spacing": {
+          "type": "spacing",
+          "settings": {
+            "height": 48,
+            "height_mobile": 0
           }
         },
-        "block_order": [
-          "spacing",
-          "breadcrumb",
-          "title"
-        ],
-        "settings": {
-          "transparent_header": true,
-          "show_image": true,
-          "image_height": "750px",
-          "content_position": "md:items-end md:justify-start",
-          "text_alignment": "left",
-          "image_height_mobile": "auto",
-          "content_position_mobile": "items-end justify-start",
-          "text_alignment_mobile": "left",
-          "color_text": "#ffffff",
-          "color_overlay": "#000000",
-          "overlay_opacity": 40,
-          "padding_top": 0,
-          "padding_bottom": 0,
-          "divider": false,
-          "full_width": true,
-          "rounded": true,
-          "enable_parallax": true,
-          "parallax_direction": "vertical"
-        }
-      },
-      "main-collection": {
-        "type": "main-collection",
-        "blocks": {
-          "subcollections_C7FxDf": {
-            "type": "subcollections",
-            "settings": {
-              "menu": "main-menu",
-              "per_row": 5,
-              "show_count": true
-            }
-          },
-          "promotion": {
-            "type": "promotion",
-            "settings": {
-              "position": 8,
-              "column_size": "1",
-              "heading": "Example heading",
-              "content": "<p>Share information about your brand with your customers.</p>",
-              "button_label": "Shop now",
-              "button_link": "",
-              "button_style": "secondary",
-              "button_external": false,
-              "button_icon": true,
-              "content_position": "md:items-center",
-              "text_alignment": "center",
-              "content_position_mobile": "items-center",
-              "text_alignment_mobile": "center",
-              "color_text": "#ffffff",
-              "color_button_text": "#4d5940",
-              "color_button_background": "#ffffff",
-              "color_button_gradient": "",
-              "color_overlay": "#000000",
-              "overlay_opacity": 30
-            }
+        "title": {
+          "type": "title",
+          "settings": {
+            "title_size": "title-xl"
           }
         },
-        "block_order": [
-          "subcollections_C7FxDf",
-          "promotion"
-        ],
-        "settings": {
-          "products_per_page": 11,
-          "columns": 4,
-          "columns_mobile": "2",
-          "pagination": "paginated",
-          "enable_filtering": true,
-          "filter_collapsed": true,
-          "filter_type": "drawer",
-          "filter_color_swatches": true,
-          "enable_sorting": true,
-          "padding_top": 40,
-          "padding_bottom": 100,
-          "divider": false,
-          "full_width": false,
-          "rounded": true
-        }
-      },
-      "images-with-text-overlay": {
-        "type": "images-with-text-overlay",
-        "blocks": {
-          "spacing": {
-            "type": "spacing",
-            "settings": {
-              "height": 80,
-              "height_mobile": 20
-            }
-          },
-          "subheading": {
-            "type": "subheading",
-            "settings": {
-              "subheading": "Earphones",
-              "subheading_size": "subtitle-md",
-              "secondary_color": true
-            }
-          },
-          "heading": {
-            "type": "heading",
-            "settings": {
-              "heading": "In-Ear Clarity & ConvenienceSlide",
-              "heading_size": "title-sm",
-              "heading_tag": "h2",
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
-          },
-          "text": {
-            "type": "text",
-            "settings": {
-              "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
-              "text_size": "subtext-md",
-              "text_max_size": 32,
-              "text_font": "body",
-              "secondary_color": false,
-              "highlighted_text": "none",
-              "highlighted_scribble": "circle"
-            }
+        "description_FG7iHi": {
+          "type": "description",
+          "settings": {
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false
           }
         },
-        "block_order": [
-          "spacing",
-          "subheading",
-          "heading",
-          "text"
-        ],
-        "settings": {
-          "transparent_header": false,
-          "image_height": "650px",
-          "content_width": "medium",
-          "content_position": "md:items-center md:justify-start",
-          "text_alignment": "left",
-          "image_1": "shopify://shop_images/hyper-HS2310-premium-graphic-4-v01-r02-808x700.webp",
-          "image_2": "shopify://shop_images/hyper-HJ1002-BK-Hero-v01-r01-2000x20005.02.08_C_PM_1024x1024_4ab47987-6c4f-4a89-a120-9b66e16f4ece.png",
-          "image_3": "shopify://shop_images/hyper-thunderbolt-blog-hdtb3td.webp",
-          "image_4": "shopify://shop_images/hyper-HS2100-ecosmart-07-v01-r01-2000x2000.webp",
-          "image_5": "shopify://shop_images/hyper-email-6-upgrade-season-homepage-banner-mobile-v01-r01-430x520.webp",
-          "image_height_mobile": "500px",
-          "content_position_mobile": "items-center justify-start",
-          "text_alignment_mobile": "left",
-          "color_text": "#ffffff",
-          "color_highlight": "#e0a580",
-          "gradient_highlight": "",
-          "color_button_text": "#171717",
-          "color_button_background": "#ffffff",
-          "color_button_gradient": "",
-          "color_overlay": "#171717",
-          "overlay_opacity": 100,
-          "padding_top": 0,
-          "padding_bottom": 0,
-          "divider": false,
-          "full_width": true,
-          "rounded": true,
-          "enable_parallax": true
+        "breadcrumb": {
+          "type": "breadcrumb",
+          "settings": {
+            "show_collections_link": true
+          }
         }
       },
-      "recently-viewed": {
-        "type": "recently-viewed",
-        "settings": {
-          "product_limit": 6,
-          "columns": 4,
-          "carousel_on_desktop": true,
-          "columns_mobile": "1",
-          "swipe_on_mobile": true,
-          "heading": "Recently Viewed",
-          "heading_size": "title-md",
-          "heading_alignment": "text-left md:items-end md:flex-row",
-          "heading_tag": "h2",
-          "subheading": "",
-          "description": "",
-          "highlighted_text": "none",
-          "highlighted_scribble": "circle",
-          "color_text": "",
-          "color_background": "",
-          "gradient_background": "",
-          "color_highlight": "",
-          "gradient_highlight": "",
-          "color_button_text": "",
-          "color_button_background": "",
-          "color_button_gradient": "",
-          "padding_top": 72,
-          "padding_bottom": 80,
-          "divider": false,
-          "full_width": false,
-          "rounded": true
-        }
+      "block_order": [
+        "spacing",
+        "title",
+        "description_FG7iHi",
+        "breadcrumb"
+      ],
+      "settings": {
+        "transparent_header": true,
+        "show_image": true,
+        "image_height": "750px",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_overlay": "#000000",
+        "overlay_opacity": 40,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
-    "order": [
-      "main-collection-banner",
-      "main-collection",
-      "images-with-text-overlay",
-      "recently-viewed"
-    ]
-  }
-  
+    "main-collection": {
+      "type": "main-collection",
+      "blocks": {
+        "subcollections_C7FxDf": {
+          "type": "subcollections",
+          "settings": {
+            "menu": "main-menu",
+            "per_row": 5,
+            "show_count": true
+          }
+        },
+        "promotion": {
+          "type": "promotion",
+          "disabled": true,
+          "settings": {
+            "position": 8,
+            "column_size": "1",
+            "heading": "Example heading",
+            "content": "<p>Share information about your brand with your customers.</p>",
+            "button_label": "Shop now",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "content_position": "md:items-center",
+            "text_alignment": "center",
+            "content_position_mobile": "items-center",
+            "text_alignment_mobile": "center",
+            "color_text": "#ffffff",
+            "color_button_text": "#4d5940",
+            "color_button_background": "#ffffff",
+            "color_button_gradient": "",
+            "color_overlay": "#000000",
+            "overlay_opacity": 30
+          }
+        }
+      },
+      "block_order": [
+        "subcollections_C7FxDf",
+        "promotion"
+      ],
+      "settings": {
+        "products_per_page": 23,
+        "columns": 4,
+        "columns_mobile": "2",
+        "pagination": "click",
+        "enable_filtering": true,
+        "filter_collapsed": true,
+        "filter_type": "drawer",
+        "filter_color_swatches": true,
+        "enable_sorting": true,
+        "padding_top": 40,
+        "padding_bottom": 100,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "images-with-text-overlay": {
+      "type": "images-with-text-overlay",
+      "blocks": {
+        "spacing": {
+          "type": "spacing",
+          "settings": {
+            "height": 80,
+            "height_mobile": 20
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Earphones",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "In-Ear Clarity & ConvenienceSlide",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "spacing",
+        "subheading",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "650px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_1": "shopify://shop_images/hyper-HS2310-premium-graphic-4-v01-r02-808x700.webp",
+        "image_2": "shopify://shop_images/hyper-HJ1002-BK-Hero-v01-r01-2000x20005.02.08_C_PM_1024x1024_4ab47987-6c4f-4a89-a120-9b66e16f4ece.png",
+        "image_3": "shopify://shop_images/hyper-thunderbolt-blog-hdtb3td.webp",
+        "image_4": "shopify://shop_images/hyper-HS2100-ecosmart-07-v01-r01-2000x2000.webp",
+        "image_5": "shopify://shop_images/hyper-email-6-upgrade-season-homepage-banner-mobile-v01-r01-430x520.webp",
+        "image_height_mobile": "500px",
+        "content_position_mobile": "items-center justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 100,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": true
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Recently Viewed",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    },
+    "faq_8mQyFn": {
+      "type": "faq",
+      "blocks": {
+        "question_7JbGmA": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_TrmMrt": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_C7fmkb": {
+          "type": "question",
+          "settings": {
+            "title": "Frequently asked question",
+            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "question_7JbGmA",
+        "question_TrmMrt",
+        "question_C7fmkb"
+      ],
+      "settings": {
+        "style": "with-border",
+        "heading": "FAQs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 4,
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-collection-banner",
+    "main-collection",
+    "faq_8mQyFn",
+    "images-with-text-overlay",
+    "recently-viewed"
+  ]
+}

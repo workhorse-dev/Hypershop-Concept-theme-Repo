@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "type": "footer",
   "name": "t:sections.footer-group.name",
   "sections": {
@@ -31,18 +31,7 @@
             "icon": "box",
             "custom_icon": "",
             "heading": "Fast Free Shipping",
-            "text": "<p>Get free shipping on orders of $150 or more</p>",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "column-3": {
-          "type": "column",
-          "settings": {
-            "icon": "users",
-            "custom_icon": "",
-            "heading": "Refer a friend",
-            "text": "<p>Refer a friend and get 15% off each other.</p>",
+            "text": "<p>Get free shipping on orders of $40 or more</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -62,7 +51,6 @@
       "block_order": [
         "column-1",
         "column-2",
-        "column-3",
         "column-4"
       ],
       "settings": {
@@ -117,11 +105,38 @@
             "opened": false
           }
         },
-        "link_list-2": {
+        "link_list_wd9wjA": {
           "type": "link_list",
           "settings": {
-            "heading": "Information",
-            "menu": "footer",
+            "heading": "Connect",
+            "menu": "footer-connect",
+            "container_width": 50,
+            "opened": false
+          }
+        },
+        "link_list_NYXwgh": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Shop",
+            "menu": "2025-03_product-footer",
+            "container_width": 50,
+            "opened": false
+          }
+        },
+        "link_list_DrH7VM": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Company",
+            "menu": "footer-company",
+            "container_width": 50,
+            "opened": false
+          }
+        },
+        "link_list_Vzw9Tq": {
+          "type": "link_list",
+          "settings": {
+            "heading": "Support",
+            "menu": "footer-support",
             "container_width": 50,
             "opened": false
           }
@@ -130,10 +145,10 @@
           "type": "brand_information",
           "settings": {
             "heading": "",
-            "button_label_1": "+21 (0) 987654321",
-            "button_link_1": "tel:+21(0)987654321",
-            "button_label_2": "hello@domain.com",
-            "button_link_2": "mailto:hello@domain.com",
+            "button_label_1": "Call us @ 1 (844) 674-6789",
+            "button_link_1": "tel:1 (844) 674-6789",
+            "button_label_2": "Or send us an email support@hypershop.com",
+            "button_link_2": "mailto:Support@hypershop.com",
             "button_label_3": "",
             "button_link_3": "",
             "button_label_4": "",
@@ -146,7 +161,10 @@
       "block_order": [
         "logo_social",
         "link_list-1",
-        "link_list-2",
+        "link_list_wd9wjA",
+        "link_list_NYXwgh",
+        "link_list_DrH7VM",
+        "link_list_Vzw9Tq",
         "brand_information"
       ],
       "settings": {
@@ -159,7 +177,7 @@
         "show_social": true,
         "enable_follow_on_shop": false,
         "color_text": "#ffffff",
-        "color_background": "#1f1f1f",
+        "color_background": "#171717",
         "gradient_background": "",
         "color_button_text": "#000000",
         "color_button_background": "#ffffff",

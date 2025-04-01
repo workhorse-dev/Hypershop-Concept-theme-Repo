@@ -48,11 +48,11 @@
             "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": "",
             "video_url_mobile": "",
-            "heading": "VIDEO SLIDE",
+            "heading": "Lightning Fast USB4 Speeds",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "",
+            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -65,8 +65,8 @@
         "slide-3"
       ],
       "settings": {
-        "autoplay": false,
-        "autoplay_speed": 7,
+        "autoplay": true,
+        "autoplay_speed": 6,
         "show_navigation": true,
         "image_height": "750px",
         "content_width": "small",
@@ -94,7 +94,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Hyper’s compact, airline-safe, super portable battery pack. Provides 100W Power Delivery quickly recharge four devices at once.<br/><br/>Charge up to 3 devices in this compact and innovative design, perfect for easy packing, desktop, or bedside charging.</p>",
+            "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -110,7 +110,7 @@
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
-        "heading": "Charge Everything, Anytime, and <em>Anywhere</em>",
+        "heading": "Hypers' Mission",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "small",
@@ -118,11 +118,11 @@
         "subheading": "",
         "description": "",
         "button_label": "Our Story",
-        "button_link": "",
+        "button_link": "shopify://pages/about-us",
         "button_external": false,
         "button_icon": true,
         "highlighted_text": "scribble",
-        "highlighted_scribble": "basic-underline",
+        "highlighted_scribble": "sketch-underline",
         "color_text": "",
         "color_background": "",
         "gradient_background": "",
@@ -256,18 +256,6 @@
             "highlighted_scribble": "circle"
           }
         },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Since 1980</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
         "button": {
           "type": "button",
           "settings": {
@@ -282,7 +270,6 @@
       },
       "block_order": [
         "heading",
-        "text",
         "button"
       ],
       "settings": {
@@ -447,7 +434,7 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/hyper-HJ1002-WH-Hero-v01-r01-2000x2000_1024x1024_773232dd-d284-4269-8916-7d19ac78529d.png",
+            "image": "shopify://shop_images/hyper-HJ1001-WH-Hero-v01-r01-2000x2000.webp",
             "subheading": "",
             "heading": "Before image",
             "content_position": "end",
@@ -457,7 +444,7 @@
         "image-2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/hyper-HJ1002-BK-Hero-v01-r01-2000x20005.02.08_C_PM_1024x1024_4ab47987-6c4f-4a89-a120-9b66e16f4ece.png",
+            "image": "shopify://shop_images/hyper-HJ1003-WH-Hero-v01-r01-2000x2000.webp",
             "subheading": "",
             "heading": "After image",
             "content_position": "end",
@@ -473,14 +460,14 @@
         "layout": "horizontal",
         "image_height": "adapt",
         "image_height_mobile": "300px",
-        "heading": "<em>Vibrant color chooses</em>",
+        "heading": "<em>Power To The People</em>",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
         "heading_tag": "h2",
-        "subheading": "Color in spectrum",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
+        "subheading": "",
+        "description": "<p>Get GaN charging from 65W to 145W.</p>",
+        "button_label": "Shop Now",
+        "button_link": "shopify://products/hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports",
         "button_external": false,
         "button_icon": true,
         "highlighted_text": "text",
@@ -549,7 +536,7 @@
         "product_limit": 6,
         "columns": 3,
         "columns_mobile": "1",
-        "minimum_quantity": 3,
+        "minimum_quantity": 2,
         "maximum_quantity": 3,
         "prevent_duplicate_products": true,
         "allow_quantity_change": true,
@@ -565,7 +552,7 @@
         "heading_alignment": "text-left",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "<p>Add at least 3 products to proceed and Save 30%</p>",
+        "description": "<p>Add at least 3 products to proceed and Save 20%</p>",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "color_text": "",
@@ -891,10 +878,10 @@
         "product-2": {
           "type": "product",
           "settings": {
-            "product": "hypercam-hd",
+            "product": "hyperdrive-thunderbolt-4-docking-station",
             "color_text": "#ffffff",
-            "vertical": 28,
-            "horizontal": 34,
+            "vertical": 90,
+            "horizontal": 45,
             "vertical_mobile": 75,
             "horizontal_mobile": 65
           }
@@ -902,12 +889,12 @@
         "product_LKtbyf": {
           "type": "product",
           "settings": {
-            "product": "cross-campus-special-hyperpack-pro-stash-go-sleeve-and-magnetic-battery-pack",
+            "product": "hyperspace-bluetooth-wireless-keyboard",
             "color_text": "#ffffff",
-            "vertical": 68,
-            "horizontal": 82,
-            "vertical_mobile": 50,
-            "horizontal_mobile": 50
+            "vertical": 76,
+            "horizontal": 35,
+            "vertical_mobile": 59,
+            "horizontal_mobile": 68
           }
         }
       },

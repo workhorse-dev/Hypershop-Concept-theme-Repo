@@ -72,17 +72,17 @@
             "show_menu_image": true,
             "button_label": "All Products",
             "button_link": "shopify://collections/all",
-            "heading_1": "Collections",
+            "heading_1": "Shop For",
             "heading_2": "Most popular",
             "show_vendor": false,
             "show_price": true,
-            "tab_target_1": "Hyperdrive",
-            "tab_target_link_1": "shopify://collections/chromebook",
+            "tab_target_1": "Docks & Hubs",
+            "tab_target_link_1": "shopify://collections/hyperdrive",
             "tab_products_1": [
-              "180w-power-adapter-for-hyperdrive-gen2-18-port",
-              "charge-on-the-go-bundle-hyperjuice-35w-charger-and-2m-usb-c-cable",
-              "cross-campus-special-hyperpack-pro-stash-go-sleeve-and-magnetic-battery-pack",
-              "desktop-anywhere-hyperdrive-dual-monitor-usb4-dock-and-cable-bundle"
+              "hyperdrive-thunderbolt-4-docking-station",
+              "hyperdrive-thunderbolt-4-power-hub",
+              "hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
+              "hyperdrive-gen2-thunderbolt-docking-station"
             ],
             "tab_icon_width_1": 42,
             "promo_image_1": "shopify://shop_images/hyper-email-6-mouse-keyboard-banner-mobile-v01-r01-430x520.webp",
@@ -95,10 +95,14 @@
             "promo_color_text_1": "#ffffff",
             "promo_color_overlay_1": "#000000",
             "promo_overlay_opacity_1": 40,
-            "tab_target_2": "Hyperjuice",
+            "tab_target_2": "Power",
             "tab_target_link_2": "shopify://collections/hyperjuice",
             "tab_products_2": [
-              "hyperjuice-100w-gan-charger"
+              "hyperjuice-245w-usb-c-battery-pack",
+              "hyperjuice-245w-gan-desktop-charger",
+              "hyperjuice-qi2-4-in-1-magnetic-charging-stand",
+              "hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+              "hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports"
             ],
             "tab_icon_width_2": 42,
             "promo_image_ratio_2": "square",
@@ -110,10 +114,9 @@
             "promo_color_text_2": "#ffffff",
             "promo_color_overlay_2": "#000000",
             "promo_overlay_opacity_2": 40,
-            "tab_target_3": "Backpack & Sleeves",
-            "tab_target_link_3": "shopify://collections/bags-and-sleeves",
+            "tab_target_3": "Backpack",
+            "tab_target_link_3": "shopify://products/hyperpack-pro-with-apple-find-my",
             "tab_products_3": [
-              "hyperpack-and-hyperpack-go",
               "hyperpack-pro-with-apple-find-my"
             ],
             "tab_icon_width_3": 42,
@@ -127,12 +130,14 @@
             "promo_color_text_3": "#ffffff",
             "promo_color_overlay_3": "#000000",
             "promo_overlay_opacity_3": 40,
-            "tab_target_4": "Hyperthin",
+            "tab_target_4": "Cables",
             "tab_target_link_4": "shopify://collections/hyperthin-cables",
             "tab_products_4": [
-              "charge-on-the-go-bundle-hyperjuice-35w-charger-and-2m-usb-c-cable",
-              "cross-campus-special-hyperpack-pro-stash-go-sleeve-and-magnetic-battery-pack",
-              "hyperdrive-4-in-1-usb-c-hub"
+              "hyperdrive-next-usb4-type-c-performance-cable-1-2m-4ft",
+              "hyperjuice-240w-silicone-usb-c-to-usb-c-cable-3ft-1m",
+              "hyperjuice-240w-silicone-usb-c-to-usb-c-cable-6ft-2m",
+              "hyperdrive-usb-c-to-lightning-tough-cable",
+              "hyperdrive-hdmi-to-dp-adapter"
             ],
             "tab_icon_width_4": 42,
             "promo_image_ratio_4": "square",
@@ -144,9 +149,11 @@
             "promo_color_text_4": "#ffffff",
             "promo_color_overlay_4": "#000000",
             "promo_overlay_opacity_4": 40,
-            "tab_target_5": "Tab heading",
-            "tab_target_link_5": "",
-            "tab_products_5": [],
+            "tab_target_5": "Data Storage",
+            "tab_target_link_5": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "tab_products_5": [
+              "hyperdrive-next-usb4-nvme-ssd-enclosure"
+            ],
             "tab_icon_width_5": 42,
             "promo_image_ratio_5": "square",
             "promo_heading_5": "",
@@ -221,7 +228,6 @@
         },
         "mega_menu_tab_XFqX7n": {
           "type": "mega_menu_tab",
-          "disabled": true,
           "settings": {
             "menu_title": "Collection",
             "show_menu_image": true,
@@ -306,7 +312,7 @@
       ],
       "settings": {
         "menu": "new-primary-menu",
-        "menu_mobile": "",
+        "menu_mobile": "new-primary-menu",
         "menu_active": "block",
         "hover_menu": true,
         "header_layout": "left-center",
