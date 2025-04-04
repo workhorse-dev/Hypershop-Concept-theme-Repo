@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "type": "header",
   "name": "t:sections.header-group.name",
   "sections": {
@@ -70,7 +70,7 @@
           "settings": {
             "menu_title": "Products",
             "show_menu_image": true,
-            "button_label": "All Products",
+            "button_label": "View all",
             "button_link": "shopify://collections/all",
             "heading_1": "Shop For",
             "heading_2": "Most popular",
@@ -172,11 +172,11 @@
             "menu_title": "Collection",
             "menu_width": "large",
             "show_menu_image": false,
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "View all",
+            "button_link": "shopify://collections/all",
             "promo_image_1": "shopify://shop_images/hyper-email-6-mouse-keyboard-banner-mobile-v01-r01-430x520.webp",
             "promo_image_ratio_1": "square",
-            "promo_heading_1": "Hyperdrive",
+            "promo_heading_1": "HyperDrive",
             "promo_subtext_1": "",
             "promo_overlay_content_1": true,
             "promo_link_1": "shopify://collections/hyperdrive",
@@ -206,10 +206,10 @@
             "promo_overlay_opacity_3": 0,
             "promo_image_4": "shopify://shop_images/hyper-email-6-upgrade-season-banner-blog-v01-r01-1920x1080.webp",
             "promo_image_ratio_4": "square",
-            "promo_heading_4": "All Collection",
+            "promo_heading_4": "HyperThin",
             "promo_subtext_4": "Save 30%",
             "promo_overlay_content_4": true,
-            "promo_link_4": "shopify://collections",
+            "promo_link_4": "shopify://collections/hyperthin-cables",
             "promo_tag_4": "",
             "promo_color_text_4": "#ffffff",
             "promo_color_overlay_4": "#000000",
@@ -312,7 +312,7 @@
       ],
       "settings": {
         "menu": "new-primary-menu",
-        "menu_mobile": "new-primary-menu",
+        "menu_mobile": "2025-04-03_new-primary-mobile-menu",
         "menu_active": "block",
         "hover_menu": true,
         "header_layout": "left-center",
