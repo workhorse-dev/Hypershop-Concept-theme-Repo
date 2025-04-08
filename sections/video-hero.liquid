@@ -17,7 +17,7 @@
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
   <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
-    <div class="video-hero banner sticky left-0 top-0 w-full h-screen">
+    <div class="video-hero banner sticky left-0 top-0 w-full  {% if section.settings.video_height %} h-screen  {% else %} h-screen-66 {% endif %}">
       {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
       {%- if section.settings.video_mobile or section.settings.video_url_mobile -%}
         {%- render 'video',
@@ -241,6 +241,12 @@
       "id": "divider",
       "label": "t:sections.global.settings.divider.label",
       "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "video_height",
+      "label": "Make the video height full screen",
+      "default": true
     },
     {
       "type": "checkbox",

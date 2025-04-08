@@ -126,114 +126,6 @@
         "rounded": true
       }
     },
-    "images-with-text-overlay": {
-      "type": "images-with-text-overlay",
-      "blocks": {
-        "spacing": {
-          "type": "spacing",
-          "settings": {
-            "height": 80,
-            "height_mobile": 20
-          }
-        },
-        "subheading": {
-          "type": "subheading",
-          "settings": {
-            "subheading": "Earphones",
-            "subheading_size": "subtitle-md",
-            "secondary_color": true
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "In-Ear Clarity & ConvenienceSlide",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "spacing",
-        "subheading",
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "transparent_header": false,
-        "image_height": "650px",
-        "content_width": "medium",
-        "content_position": "md:items-center md:justify-start",
-        "text_alignment": "left",
-        "image_1": "shopify://shop_images/hyper-HS2310-premium-graphic-4-v01-r02-808x700.webp",
-        "image_2": "shopify://shop_images/hyper-HJ1002-BK-Hero-v01-r01-2000x20005.02.08_C_PM_1024x1024_4ab47987-6c4f-4a89-a120-9b66e16f4ece.png",
-        "image_3": "shopify://shop_images/hyper-thunderbolt-blog-hdtb3td.webp",
-        "image_4": "shopify://shop_images/hyper-HS2100-ecosmart-07-v01-r01-2000x2000.webp",
-        "image_5": "shopify://shop_images/hyper-email-6-upgrade-season-homepage-banner-mobile-v01-r01-430x520.webp",
-        "image_height_mobile": "500px",
-        "content_position_mobile": "items-center justify-start",
-        "text_alignment_mobile": "left",
-        "color_text": "#ffffff",
-        "color_highlight": "#e0a580",
-        "gradient_highlight": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
-        "color_button_gradient": "",
-        "color_overlay": "#171717",
-        "overlay_opacity": 100,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": true,
-        "enable_parallax": true
-      }
-    },
-    "recently-viewed": {
-      "type": "recently-viewed",
-      "settings": {
-        "product_limit": 6,
-        "columns": 4,
-        "carousel_on_desktop": true,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "Recently Viewed",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 80,
-        "divider": false,
-        "full_width": false,
-        "rounded": true
-      }
-    },
     "faq_8mQyFn": {
       "type": "faq",
       "blocks": {
@@ -299,6 +191,112 @@
         "divider": false,
         "narrow": true,
         "rounded": false
+      }
+    },
+    "images-with-text-overlay": {
+      "type": "images-with-text-overlay",
+      "blocks": {
+        "spacing": {
+          "type": "spacing",
+          "settings": {
+            "height": 80,
+            "height_mobile": 20
+          }
+        },
+        "subheading": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Earphones",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "In-Ear Clarity & ConvenienceSlide",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "spacing",
+        "subheading",
+        "heading",
+        "text"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image_height": "650px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_1": "shopify://shop_images/group_15_2x_73d0869b-18b5-42d9-8d09-ba13a63f8d35.webp",
+        "image_2": "shopify://shop_images/group_14_2x_041d998c-46d2-4cfc-a102-c48ee9d5d069.webp",
+        "image_3": "shopify://shop_images/group_13_2x_775ad2e5-3503-4ce8-9e28-8530ac8e361a.webp",
+        "image_height_mobile": "500px",
+        "content_position_mobile": "items-center justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 100,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": true
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Recently Viewed",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 80,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
       }
     }
   },
