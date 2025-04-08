@@ -88,56 +88,6 @@
         "parallax_direction": "vertical"
       }
     },
-    "rich-text-1": {
-      "type": "rich-text",
-      "blocks": {
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "text"
-      ],
-      "settings": {
-        "text_alignment": "left",
-        "text_alignment_mobile": "left",
-        "heading": "Hypers' Mission",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "Our Story",
-        "button_link": "shopify://pages/about-us",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "scribble",
-        "highlighted_scribble": "sketch-underline",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 0,
-        "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
     "collection-list": {
       "type": "collection-list",
       "blocks": {
@@ -243,6 +193,62 @@
         "rounded": false
       }
     },
+    "scrolling-text-1": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text_cj4CV6": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Up to 2-Year Warranty</strong>",
+            "text_size": 76,
+            "text_font": "body",
+            "highlighted_text": "text",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_Epx8Q9": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Free Returns</strong>",
+            "text_size": 76,
+            "text_font": "body",
+            "highlighted_text": "underline",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Free Shipping On Orders Over $40.</strong>",
+            "text_size": 76,
+            "text_font": "body",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "text_cj4CV6",
+        "text_Epx8Q9",
+        "text"
+      ],
+      "settings": {
+        "direction": "left",
+        "speed": 20,
+        "grid_horizontal": 70,
+        "enable_twin": false,
+        "enable_parallax": true,
+        "color_text": "#171717",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 0,
+        "padding_bottom": 60,
+        "divider": false,
+        "rounded": false
+      }
+    },
     "video-with-text-overlay": {
       "type": "video-with-text-overlay",
       "blocks": {
@@ -255,22 +261,10 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
-        },
-        "button": {
-          "type": "button",
-          "settings": {
-            "button_label": "Shop Now",
-            "button_link": "shopify://collections",
-            "button_style": "primary",
-            "button_size": "md",
-            "button_external": false,
-            "button_icon": true
-          }
         }
       },
       "block_order": [
-        "heading",
-        "button"
+        "heading"
       ],
       "settings": {
         "transparent_header": false,
@@ -456,6 +450,7 @@
         "image-1",
         "image-2"
       ],
+      "disabled": true,
       "settings": {
         "layout": "horizontal",
         "image_height": "adapt",
@@ -567,40 +562,6 @@
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
-        "rounded": false
-      }
-    },
-    "scrolling-text-1": {
-      "type": "scrolling-text",
-      "blocks": {
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<em><strong>Free Shipping On Orders Over $40.</strong></em>",
-            "text_size": 160,
-            "text_font": "body",
-            "highlighted_text": "stencil",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "text"
-      ],
-      "settings": {
-        "direction": "left",
-        "speed": 20,
-        "grid_horizontal": 70,
-        "enable_twin": false,
-        "enable_parallax": true,
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "divider": false,
         "rounded": false
       }
     },
@@ -1236,14 +1197,13 @@
   },
   "order": [
     "slideshow",
-    "rich-text-1",
     "collection-list",
+    "scrolling-text-1",
     "video-with-text-overlay",
     "featured-product",
     "image-comparison",
     "rich-text-2",
     "product-bundle",
-    "scrolling-text-1",
     "shop_the_feed_WMBVKd",
     "countdown-timer",
     "shop-the-look",
