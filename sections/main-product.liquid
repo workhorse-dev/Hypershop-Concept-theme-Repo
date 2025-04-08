@@ -62,7 +62,7 @@
         assign metafield_parts = settings.product_icon_list_metafield | split: '.'
         assign metafield_namespace = metafield_parts | first
         assign metafield_key = metafield_parts | last
-        assign metafield = product.metafields[metafield_namespace][metafield_key]
+        assign metafield = product.metafields[metafield_namespace][metafield_key] 
       -%}
       {%- if metafield.value != blank and metafield.list? -%}
         <div class="product__highlights{% if icon_list_block.settings.heading != blank %} with-heading flex flex-col gap-5 relative{% endif %}{% if icon_list_block.settings.show_below_media %} below-media{% endif %}" {{ icon_list_block.shopify_attributes }}>
@@ -507,6 +507,18 @@
                 section_id: section.id,
                 product_form_id: product_form_id
               -%}
+               {%- if block.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
+                <div class="flex flex-col gap-3">
+                  <span class="text-xs text-opacity text-center">{{ 'cart.general.we_accept' | t }}</span>
+                  <div class="flex flex-wrap justify-center gap-2">
+                    {%- liquid
+                      for type in shop.enabled_payment_types
+                        echo type | payment_type_svg_tag
+                      endfor
+                    -%}
+                  </div>
+                </div>
+              {%- endif -%}
 
             {%- when 'pickup_availability' -%}
               {%- render 'pickup-availability',
@@ -847,13 +859,13 @@
         {%- endfor -%}
       </product-info>
     </div>
-
     {%- assign sticky_buy_button = section.blocks | where: "type", "sticky_buy_button" | first -%}
     {%- if product.available and sticky_buy_button -%}
       <product-sticky-form
         class="product-sticky-form w-full fixed z-20 bottom-0 right-0 pointer-events-none"
         id="ProductStickyForm-{{ section.id }}-{{ product.id }}"
         form="{{ product_form_id }}"
+        style = "width:{{ sticky_buy_button.settings.sticky-atc-width }}px"
       >
         <div class="product-sticky-form__card grid gap-4 opacity-0 invisible pointer-events-auto">
           {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
@@ -1873,6 +1885,13 @@
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.label",
           "info": "t:sections.main-product.blocks.buy_buttons.settings.show_dynamic_checkout.info"
         },
+         {
+          "type": "checkbox",
+          "id": "show_payment_icons",
+          "default": true,
+          "label": "Show the payment icons",
+          "info": "Should be also enabled in the shop settings"
+        },
         {
           "type": "checkbox",
           "id": "show_gift_card_recipient",
@@ -2858,6 +2877,16 @@
         {
           "type": "paragraph",
           "content": "t:sections.main-product.blocks.sticky_buy_button.settings.paragraph.content"
+        },
+        {
+          "type": "range",
+          "id": "sticky-atc-width",
+          "min": 550,
+          "max": 800,
+          "unit": "px",
+          "step": 50,
+          "default": 550,
+          "label": "Sticky ATC width"
         }
       ]
     }

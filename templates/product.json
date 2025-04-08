@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "main-product": {
       "type": "main-product",
@@ -77,7 +77,8 @@
           "settings": {
             "show_quantity_selector": true,
             "show_price": false,
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
+            "show_payment_icons": true,
             "show_gift_card_recipient": true,
             "enable_back_in_stock": false,
             "show_back_in_stock_name": false,
@@ -100,6 +101,7 @@
         },
         "complementary": {
           "type": "complementary",
+          "disabled": true,
           "settings": {
             "heading": "Pairs well with",
             "product_limit": 4,
@@ -109,10 +111,13 @@
         },
         "sticky_buy_button": {
           "type": "sticky_buy_button",
-          "settings": {}
+          "settings": {
+            "sticky-atc-width": 750
+          }
         },
         "collapsible_tab_J7X8LN": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "truck",
             "heading": "Free US Shipping Over $40",
@@ -124,6 +129,7 @@
         },
         "collapsible_tab_hHFPKK": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "check_mark",
             "heading": "Protected by Warranty",
@@ -135,6 +141,7 @@
         },
         "collapsible_tab_BddAAj": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "return",
             "heading": "30 Day Money Back Guarantee",
@@ -142,6 +149,14 @@
             "page": "",
             "liquid": "",
             "opened": false
+          }
+        },
+        "icon_list_qVynwF": {
+          "type": "icon_list",
+          "settings": {
+            "heading": "Product highlights",
+            "enable_carousel": false,
+            "show_below_media": true
           }
         }
       },
@@ -160,11 +175,12 @@
         "sticky_buy_button",
         "collapsible_tab_J7X8LN",
         "collapsible_tab_hHFPKK",
-        "collapsible_tab_BddAAj"
+        "collapsible_tab_BddAAj",
+        "icon_list_qVynwF"
       ],
       "settings": {
         "enable_sticky_info": true,
-        "media_size": 35,
+        "media_size": 55,
         "gallery_layout": "thumbnail",
         "thumbnail_position": "beside",
         "image_ratio": "square",
@@ -174,11 +190,11 @@
         "enable_video_looping": true,
         "mobile_layout": "full_width",
         "image_ratio_mobile": "adapt_first",
-        "mobile_thumbnail": false,
+        "mobile_thumbnail": true,
         "padding_top": 0,
         "padding_bottom": 84,
         "divider": false,
-        "full_width": true,
+        "full_width": false,
         "rounded": false
       }
     },
@@ -266,7 +282,7 @@
         "description": "",
         "enable_video_autoplay": true,
         "enable_video_looping": true,
-        "content_width": "medium",
+        "content_width": "small",
         "video_url_mobile": "",
         "color_text": "#ffffff",
         "color_highlight": "",
@@ -276,6 +292,7 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
+        "video_height": false,
         "full_width": true,
         "rounded": false
       }
@@ -384,7 +401,7 @@
         "counter_xJxwr6": {
           "type": "counter",
           "settings": {
-            "title": "Blazing Fast",
+            "title": "{{ product.metafields.custom.number_counter_title_1.value }}",
             "number": "100",
             "unit": "",
             "duration": 2
@@ -393,7 +410,7 @@
         "counter_w63qcL": {
           "type": "counter",
           "settings": {
-            "title": "",
+            "title": "{{ product.metafields.custom.number_counter_title_2.value }}",
             "number": "100",
             "unit": "",
             "duration": 2
@@ -402,7 +419,7 @@
         "counter_e6Mmtc": {
           "type": "counter",
           "settings": {
-            "title": "Gbps",
+            "title": "{{ product.metafields.custom.number_counter_title_3.value }}",
             "number": "40",
             "unit": "",
             "duration": 3.3
@@ -436,19 +453,10 @@
     "image-with-text-2": {
       "type": "image-with-text",
       "blocks": {
-        "image": {
-          "type": "image",
-          "settings": {
-            "image": "{{ product.metafields.custom.image_1_center_with_text_.value }}",
-            "image_width": "custom",
-            "image_max_width": 50,
-            "image_max_width_mobile": 50
-          }
-        },
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Easy Snap-in Installation",
+            "heading": "{{ product.metafields.custom.image_with_text_right_1_title.value }}",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -458,7 +466,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>No tools required for easy SSD installation with plug-and-play operation.</p>",
+            "text": "<p>{{ product.metafields.custom.image_with_text_right_1_text | metafield_tag }}</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -469,12 +477,11 @@
         }
       },
       "block_order": [
-        "image",
         "heading",
         "text"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-6-upgrade-season-banner-blog2-v01-r01-1920x1080.webp",
+        "image": "{{ product.metafields.custom.left_image1_with_right_content.value }}",
         "image_height": "600px",
         "image_width": "medium",
         "layout": "text_first",
@@ -507,7 +514,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Fits All M.2 NVMe SSDs 2230/2240/2260/2280 up to 4TB",
+            "heading": "{{ product.metafields.custom.image_with_text_left_title.value }}",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -517,7 +524,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>Compatible with the highest-performing PCIe Gen4/3 SSD for a noticeable boost in speed and performance.</p>",
+            "text": "<p>{{ product.metafields.custom.image_with_text_left_text | metafield_tag }}</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -532,7 +539,7 @@
         "text"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-6-mouse-keyboard-banner-mobile-v01-r01-430x520.webp",
+        "image": "{{ product.metafields.custom.image_with_text_left2_image.value }}",
         "image_height": "600px",
         "image_width": "medium",
         "layout": "image_first",
@@ -570,7 +577,7 @@
             "heading": "Fast charging",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "shopify://shop_images/HS1150-premium-1-v2.gif",
+            "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
             "image_ratio": "square",
             "content_position": "md:items-end md:justify-center",
             "text_alignment": "center",
@@ -593,7 +600,7 @@
             "heading": "Latest Technology",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "shopify://shop_images/home-testimonials.jpg",
+            "image": "{{ product.metafields.custom.collage_on_scroll_image_2.value }}",
             "image_ratio": "portrait",
             "content_position": "md:items-end md:justify-start",
             "text_alignment": "left",
@@ -616,7 +623,7 @@
             "heading": "Most Reliable",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "shopify://shop_images/home-slider-02.jpg",
+            "image": "{{ product.metafields.custom.collage_on_scroll_image_3.value }}",
             "image_ratio": "portrait",
             "content_position": "md:items-start md:justify-end",
             "text_alignment": "right",
@@ -639,7 +646,7 @@
             "heading": "",
             "link": "",
             "invert_subheading_heading": true,
-            "image": "shopify://shop_images/hyper-HS2310-ecosmart-09-v01-r01-2000x2000.webp",
+            "image": "{{ product.metafields.custom.collage_on_scroll_image_4.value }}",
             "image_ratio": "square",
             "content_position": "md:items-end md:justify-end",
             "text_alignment": "right",
@@ -663,12 +670,12 @@
         "image-4"
       ],
       "settings": {
-        "heading": "Hyperdrive",
+        "heading": "{{ product.metafields.custom.collage_on_scroll_title.value }}",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "{{ product.description }}",
+        "description": "<p>{{ product.metafields.custom.collage_on_scroll_text | metafield_tag }}</p>",
         "button_label": "",
         "button_link": "shopify://pages/about-us",
         "button_external": false,
@@ -697,7 +704,7 @@
         "product_bnGjW3": {
           "type": "product",
           "settings": {
-            "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "product": "{{ product.metafields.custom.look_book_product_1.value }}",
             "color_text": "#ffffff",
             "vertical": 57,
             "horizontal": 35,
@@ -708,7 +715,7 @@
         "product_FpGj3T": {
           "type": "product",
           "settings": {
-            "product": "hyperjuice-245w-gan-desktop-charger",
+            "product": "{{ product.metafields.custom.look_book_product_2.value }}",
             "color_text": "#ffffff",
             "vertical": 75,
             "horizontal": 65,
@@ -723,6 +730,7 @@
       ],
       "disabled": true,
       "settings": {
+        "image": "{{ product.metafields.custom.look_book_image.value }}",
         "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
@@ -762,7 +770,7 @@
             "icon": "file_text",
             "icon_width": 24,
             "heading": "Features",
-            "content": "<h4>World’s Fastest 40Gbps USB4 SSD Enclosure</h4><p>Work directly from your SSD with the fastest M.2 NVMe enclosure available today. Fast transfer speeds up to 3,800 Mbps enabling maximum productivity.</p><h4>Fits All M.2 NVMe SSDs 2230/2240/2260/2280</h4><p>Compatible with the highest-performing PCIe Gen4/3 SSD for a noticeable boost in speed and performance.</p><h4>Easy Snap-in Installation</h4><p>No tools required for easy SSD installation with plug-and-play operation.</p><h4>IP55 Water & Dust Resistant*</h4><p>With the silicon protective sleeve use your SSD in a wide range of environmental conditions.<br/>*While using silicon protective sleeve. Tested by Hyper’s design team.</p><h4>Recycled Materials</h4><p>Faster speeds and better for the planet with 100% recycled aluminum.</p>",
+            "content": "{{ product.metafields.custom.product_feature | metafield_tag }}",
             "metafields": ""
           }
         },
@@ -772,17 +780,18 @@
             "icon": "devices",
             "icon_width": 24,
             "heading": "Specifications",
-            "content": "<h4>Specs</h4><ul><li>USB4 40Gbps Host Connection</li><li>M.2 NVMe PCIe Gen 4/3 SSD</li><li>Supports up to 4TB M.2 NVMe SSD</li><li>Includes: USB4 USB-C to USB-C Cable (1.6 ft / 0.5m)</li></ul><h4>Model</h4><ul><li>HD5001GL</li><li>Dimensions</li><li>140mm x 60mm x 21mm<br/>5.51\" x 2.36\" x 0.83\"</li></ul><h4>Weight</h4><ul><li>260g / 9.17 oz / 0.57 lb</li></ul><h4>Compatibility</h4><ul><li>Windows® 10 (and newer) macOS® 12.4 (and newer)</li><li>iPad OS® 13.4 (and newer)</li><li>Chrome OS™</li><li>Androidv 9.0 (and newer)</li></ul>",
+            "content": "{{ product.metafields.custom.product_specifications | metafield_tag }}",
             "metafields": ""
           }
         },
         "collapsible_tab-3": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "box",
             "icon_width": 24,
             "heading": "What's in the Box?",
-            "content": "<h4>What’s in the Box:</h4><ul><li>USB4 NVMe SSD Enclosure</li><li>USB4 USB-C to USB-C Cable (1.6 ft / 0.5m)</li><li>Silicon Protective Sleeve</li><li>2 x Thermal Pads for SSD</li><li>2 x Secure Grips for SSD</li><li>User Guide</li></ul>",
+            "content": "{{ product.metafields.custom.product_what_s_in_the_box | metafield_tag }}",
             "metafields": ""
           }
         },
@@ -792,8 +801,50 @@
             "icon": "chat_bubble",
             "icon_width": 24,
             "heading": "Support",
-            "content": "<h4>For Additional Support Contact Us</h4><p>Email: <a href=\"mailto:support@hypershop.com\">support@hypershop.com</a></p><p>Warranty Details: <a href=\"https://www.hypershop.com/pages/contact-us#warranty\">Click Here</a></p><p>User Manual: <a href=\"https://cdn.shopify.com/s/files/1/0872/6416/files/HYPER_HD5001_USER_GUIDE.pdf?v=1698203563\">Click Here</a></p><p>Phone: <a href=\"tel: 1 (844) 674-6789\">1 (844) 674-6789</a></p>",
+            "content": "{{ product.metafields.custom.product_support | metafield_tag }}",
             "metafields": ""
+          }
+        },
+        "specification_PqmHwt": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/usb_7459efbc-bff9-43fa-9548-28fdcff07c2e.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_1.value }}"
+          }
+        },
+        "specification_JiyDm3": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/cable.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_2.value }}"
+          }
+        },
+        "specification_MJykRh": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/shield.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_3.value }}"
+          }
+        },
+        "specification_gKn9CF": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/cool.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_4.value }}"
+          }
+        },
+        "specification_3Jwphm": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/cellphone-in-a-hand.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_5.value }}"
+          }
+        },
+        "specification_pVRTiF": {
+          "type": "specification",
+          "settings": {
+            "icon": "shopify://shop_images/manual.png",
+            "heading": "{{ product.metafields.custom.what_s_in_the_box_6.value }}"
           }
         }
       },
@@ -801,12 +852,18 @@
         "collapsible_tab-1",
         "collapsible_tab-2",
         "collapsible_tab-3",
-        "collapsible_tab-4"
+        "collapsible_tab-4",
+        "specification_PqmHwt",
+        "specification_JiyDm3",
+        "specification_MJykRh",
+        "specification_gKn9CF",
+        "specification_3Jwphm",
+        "specification_pVRTiF"
       ],
       "settings": {
         "style": "with-border",
-        "open_first_row": true,
-        "specifications_heading": "",
+        "open_first_row": false,
+        "specifications_heading": "What's in the Box?",
         "heading": "Product details",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
@@ -815,7 +872,7 @@
         "description": "",
         "button_label": "",
         "button_link": "",
-        "button_external": false,
+        "button_external": true,
         "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
@@ -866,7 +923,7 @@
       ],
       "settings": {
         "collection": "",
-        "products": [],
+        "products": "{{ product.metafields.custom.product_bundle.value }}",
         "product_limit": 3,
         "layout": "image_first",
         "content_position": "md:items-center",
@@ -904,8 +961,8 @@
         "question-1": {
           "type": "question",
           "settings": {
-            "title": "Where do I place the included thermal pads?",
-            "text": "<p>Only 1 thermal pad will be needed to be placed on the enclosure. It should be placed inside the NVMe SSD designated area on the enclosure piece with the HYPER logo. The other thermal pad may be kept for future use.</p>",
+            "title": "{{ product.metafields.custom.faq_question1.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer1 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -913,8 +970,8 @@
         "question-2": {
           "type": "question",
           "settings": {
-            "title": "Is the enclosure compatible on Windows Bootcamp?",
-            "text": "<p>The enclosure was tested to be compatible on Windows Bootcamp.</p>",
+            "title": "{{ product.metafields.custom.faq_question2.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer2 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -922,8 +979,8 @@
         "question-3": {
           "type": "question",
           "settings": {
-            "title": "Will a NVMe SSD with a heatsink fit inside the enclosure?",
-            "text": "<p>A NVMe SSD with a heatsink will not fit inside the enclosure.</p>",
+            "title": "{{ product.metafields.custom.faq_question3.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer3 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -931,8 +988,8 @@
         "question-4": {
           "type": "question",
           "settings": {
-            "title": "What is the storage support?",
-            "text": "<p>The enclosure will support up to 4TB.</p>",
+            "title": "{{ product.metafields.custom.faq_question4.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer4 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
