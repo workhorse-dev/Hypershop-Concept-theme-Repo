@@ -77,7 +77,8 @@
           "settings": {
             "show_quantity_selector": true,
             "show_price": false,
-            "show_dynamic_checkout": true,
+            "show_dynamic_checkout": false,
+            "show_payment_icons": true,
             "show_gift_card_recipient": true,
             "enable_back_in_stock": false,
             "show_back_in_stock_name": false,
@@ -100,6 +101,7 @@
         },
         "complementary": {
           "type": "complementary",
+          "disabled": true,
           "settings": {
             "heading": "Pairs well with",
             "product_limit": 4,
@@ -109,10 +111,13 @@
         },
         "sticky_buy_button": {
           "type": "sticky_buy_button",
-          "settings": {}
+          "settings": {
+            "sticky-atc-width": 750
+          }
         },
         "collapsible_tab_J7X8LN": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "truck",
             "heading": "Free US Shipping Over $40",
@@ -124,6 +129,7 @@
         },
         "collapsible_tab_hHFPKK": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "check_mark",
             "heading": "Protected by Warranty",
@@ -135,6 +141,7 @@
         },
         "collapsible_tab_BddAAj": {
           "type": "collapsible_tab",
+          "disabled": true,
           "settings": {
             "icon": "return",
             "heading": "30 Day Money Back Guarantee",
@@ -142,6 +149,14 @@
             "page": "",
             "liquid": "",
             "opened": false
+          }
+        },
+        "icon_list_qVynwF": {
+          "type": "icon_list",
+          "settings": {
+            "heading": "Product highlights",
+            "enable_carousel": false,
+            "show_below_media": true
           }
         }
       },
@@ -160,11 +175,12 @@
         "sticky_buy_button",
         "collapsible_tab_J7X8LN",
         "collapsible_tab_hHFPKK",
-        "collapsible_tab_BddAAj"
+        "collapsible_tab_BddAAj",
+        "icon_list_qVynwF"
       ],
       "settings": {
         "enable_sticky_info": true,
-        "media_size": 35,
+        "media_size": 55,
         "gallery_layout": "thumbnail",
         "thumbnail_position": "beside",
         "image_ratio": "square",
@@ -174,11 +190,11 @@
         "enable_video_looping": true,
         "mobile_layout": "full_width",
         "image_ratio_mobile": "adapt_first",
-        "mobile_thumbnail": false,
+        "mobile_thumbnail": true,
         "padding_top": 0,
         "padding_bottom": 84,
         "divider": false,
-        "full_width": true,
+        "full_width": false,
         "rounded": false
       }
     },
@@ -266,7 +282,7 @@
         "description": "",
         "enable_video_autoplay": true,
         "enable_video_looping": true,
-        "content_width": "medium",
+        "content_width": "small",
         "video_url_mobile": "",
         "color_text": "#ffffff",
         "color_highlight": "",
@@ -276,6 +292,7 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
+        "video_height": false,
         "full_width": true,
         "rounded": false
       }
@@ -384,7 +401,7 @@
         "counter_xJxwr6": {
           "type": "counter",
           "settings": {
-            "title": "Blazing Fast",
+            "title": "{{ product.metafields.custom.number_counter_title_1.value }}",
             "number": "100",
             "unit": "",
             "duration": 2
@@ -393,7 +410,7 @@
         "counter_w63qcL": {
           "type": "counter",
           "settings": {
-            "title": "",
+            "title": "{{ product.metafields.custom.number_counter_title_2.value }}",
             "number": "100",
             "unit": "",
             "duration": 2
@@ -402,7 +419,7 @@
         "counter_e6Mmtc": {
           "type": "counter",
           "settings": {
-            "title": "Gbps",
+            "title": "{{ product.metafields.custom.number_counter_title_3.value }}",
             "number": "40",
             "unit": "",
             "duration": 3.3
@@ -687,7 +704,7 @@
         "product_bnGjW3": {
           "type": "product",
           "settings": {
-            "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "product": "{{ product.metafields.custom.look_book_product_1.value }}",
             "color_text": "#ffffff",
             "vertical": 57,
             "horizontal": 35,
@@ -698,7 +715,7 @@
         "product_FpGj3T": {
           "type": "product",
           "settings": {
-            "product": "hyperjuice-245w-gan-desktop-charger",
+            "product": "{{ product.metafields.custom.look_book_product_2.value }}",
             "color_text": "#ffffff",
             "vertical": 75,
             "horizontal": 65,
@@ -713,6 +730,7 @@
       ],
       "disabled": true,
       "settings": {
+        "image": "{{ product.metafields.custom.look_book_image.value }}",
         "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
@@ -905,7 +923,7 @@
       ],
       "settings": {
         "collection": "",
-        "products": [],
+        "products": "{{ product.metafields.custom.product_bundle.value }}",
         "product_limit": 3,
         "layout": "image_first",
         "content_position": "md:items-center",
