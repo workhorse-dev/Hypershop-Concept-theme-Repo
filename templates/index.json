@@ -66,7 +66,7 @@
       ],
       "settings": {
         "autoplay": true,
-        "autoplay_speed": 6,
+        "autoplay_speed": 4,
         "show_navigation": true,
         "image_height": "750px",
         "content_width": "small",
@@ -186,11 +186,58 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 100,
-        "padding_bottom": 100,
+        "padding_top": 40,
+        "padding_bottom": 0,
         "divider": false,
         "full_width": false,
         "rounded": false
+      }
+    },
+    "video-with-text-overlay": {
+      "type": "video-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Go beyond with Hypershop",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "video": "shopify://files/videos/2023_07_19_A_HyperCessFull_SUBT.mp4",
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "enable_video_autoplay": true,
+        "enable_video_looping": true,
+        "image_height": "750px",
+        "content_width": "medium",
+        "content_position": "md:items-center md:justify-center",
+        "text_alignment": "center",
+        "video_url_mobile": "",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "center",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#000000",
+        "overlay_opacity": 50,
+        "padding_top": 76,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true
       }
     },
     "scrolling-text-1": {
@@ -243,56 +290,72 @@
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
-        "padding_top": 0,
-        "padding_bottom": 60,
+        "padding_top": 44,
+        "padding_bottom": 16,
         "divider": false,
         "rounded": false
       }
     },
-    "video-with-text-overlay": {
-      "type": "video-with-text-overlay",
+    "featured-collections": {
+      "type": "featured-collections",
       "blocks": {
-        "heading": {
-          "type": "heading",
+        "collection-1": {
+          "type": "collection",
           "settings": {
-            "heading": "Go beyond with Hypershop",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
+            "collection": "wireless-chargers",
+            "products": [],
+            "title": "HyperJuice"
+          }
+        },
+        "collection-2": {
+          "type": "collection",
+          "settings": {
+            "collection": "thunderbolt-compatible",
+            "products": [],
+            "title": "HyperDrive Thunderbolt"
+          }
+        },
+        "collection-3": {
+          "type": "collection",
+          "settings": {
+            "collection": "hyperspace",
+            "products": [],
+            "title": "HyperSpace"
           }
         }
       },
       "block_order": [
-        "heading"
+        "collection-1",
+        "collection-2",
+        "collection-3"
       ],
       "settings": {
-        "transparent_header": false,
-        "video": "shopify://files/videos/2023_07_19_A_HyperCessFull_SUBT.mp4",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Best Sellers",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
         "description": "",
-        "enable_video_autoplay": true,
-        "enable_video_looping": true,
-        "image_height": "750px",
-        "content_width": "medium",
-        "content_position": "md:items-center md:justify-center",
-        "text_alignment": "center",
-        "video_url_mobile": "",
-        "image_height_mobile": "auto",
-        "content_position_mobile": "items-center justify-center",
-        "text_alignment_mobile": "center",
-        "color_text": "#ffffff",
-        "color_highlight": "#e0a580",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
         "gradient_highlight": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
+        "color_button_text": "",
+        "color_button_background": "",
         "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 50,
-        "padding_top": 0,
-        "padding_bottom": 0,
+        "padding_top": 100,
+        "padding_bottom": 100,
         "divider": false,
-        "full_width": true,
+        "full_width": false,
         "rounded": true
       }
     },
@@ -402,7 +465,7 @@
         "spinning_text"
       ],
       "settings": {
-        "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
+        "product": "hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
         "enable_sticky_info": true,
         "media_size": 64,
         "gallery_layout": "thumbnail",
@@ -482,12 +545,8 @@
         "rounded": false
       }
     },
-    "rich-text-2": {
+    "rich_text_NtjJec": {
       "type": "rich-text",
-      "custom_css": [
-        "@media screen and (min-width: 1536px) and (max-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: 0; }}",
-        "@media screen and (min-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: var(--grid-gap); }}"
-      ],
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
@@ -1096,69 +1155,6 @@
         "rounded": false
       }
     },
-    "featured-collections": {
-      "type": "featured-collections",
-      "blocks": {
-        "collection-1": {
-          "type": "collection",
-          "settings": {
-            "collection": "wireless-chargers",
-            "products": [],
-            "title": "HyperJuice"
-          }
-        },
-        "collection-2": {
-          "type": "collection",
-          "settings": {
-            "collection": "thunderbolt-compatible",
-            "products": [],
-            "title": "HyperDrive Thunderbolt"
-          }
-        },
-        "collection-3": {
-          "type": "collection",
-          "settings": {
-            "collection": "hyperspace",
-            "products": [],
-            "title": "HyperSpace"
-          }
-        }
-      },
-      "block_order": [
-        "collection-1",
-        "collection-2",
-        "collection-3"
-      ],
-      "settings": {
-        "product_limit": 6,
-        "columns": 4,
-        "carousel_on_desktop": true,
-        "show_view_all": false,
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "heading": "Best Sellers",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 100,
-        "padding_bottom": 100,
-        "divider": false,
-        "full_width": false,
-        "rounded": true
-      }
-    },
     "blog-posts-collage": {
       "type": "blog-posts-collage",
       "settings": {
@@ -1198,18 +1194,18 @@
   "order": [
     "slideshow",
     "collection-list",
-    "scrolling-text-1",
     "video-with-text-overlay",
+    "scrolling-text-1",
+    "featured-collections",
     "featured-product",
     "image-comparison",
-    "rich-text-2",
+    "rich_text_NtjJec",
     "product-bundle",
     "shop_the_feed_WMBVKd",
     "countdown-timer",
     "shop-the-look",
     "testimonials-banner",
     "scrolling-text-2",
-    "featured-collections",
     "blog-posts-collage"
   ]
 }
