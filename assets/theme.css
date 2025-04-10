@@ -821,7 +821,7 @@ h6,
   line-height: var(--font-heading-line-height);
   text-transform: var(--font-heading-text-transform);
   color: rgb(var(--color-foreground));
-  word-break: break-word;
+  /* word-break: break-word; */
 }
 
 .h0 {
@@ -8848,7 +8848,7 @@ html.touch .logo-list--right .logo-bar.animate {
 }
 
 .banner__box {
-  word-wrap: break-word;
+  /* word-wrap: break-word; */
   height: fit-content;
   padding-block: clamp(var(--sp-10), 3.368vw, var(--sp-16));
 }
@@ -13735,7 +13735,7 @@ video-media:not([playing]) .deferred-poster .play-button .icon:last-child:not(:o
 
 .collage.on-scroll .banner__box p {
   display: inline-block;
-  max-width: max(62%, var(--sp-32));
+  max-width: max(75%, var(--sp-32));
 }
 
 .collage .deferred-media~* {

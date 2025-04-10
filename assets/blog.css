@@ -195,12 +195,12 @@
   .blog-collage .article-card:is(:nth-child(2), :nth-child(3)),
   .blog-collage.with-only4 .article-card:nth-child(4) {
     grid-column: span 10;
-    flex-direction: row;
+    /* flex-direction: row; */
   }
 
   .blog-collage .article-card:is(:nth-child(2), :nth-child(3)) .article-card__media,
   .blog-collage.with-only4 .article-card:nth-child(4) .article-card__media {
-    flex: 0 0 40%;
+    flex: 1 0 40%;
   }
 
   .blog-collage .article-card:is(:nth-child(1), :nth-child(2), :nth-child(3)) :is(.article-card__media, .article-card__link, .article-card__image),
@@ -232,7 +232,7 @@
 
   .blog-collage .article-card:is(:nth-child(2), :nth-child(3)) .article-card__media,
   .blog-collage.with-only4 .article-card:nth-child(4) .article-card__media {
-    flex: 0 0 45%;
+    flex: 1 0 45%;
   }
 }
 
