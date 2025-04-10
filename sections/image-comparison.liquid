@@ -25,6 +25,10 @@
     {%- render 'section-variables', section: section -%}
     --ratio-percent: {{ ratio_percent }}%;
   }
+  #shopify-section-{{ section.id }} .image-comparison img.loaded {
+    object-fit: contain !important;
+    background-color: {{ section.settings.color_image_background }};
+  }
 
   @media screen and (max-width: 767px) {
     #shopify-section-{{ section.id }} {
@@ -193,6 +197,11 @@
       ],
       "default": "adapt",
       "label": "t:sections.global.settings.image_height.label"
+    },
+    {
+      "type": "color",
+      "id": "color_image_background",
+      "label": "t:sections.global.settings.color_button_background.label"
     },
     {
       "type": "header",

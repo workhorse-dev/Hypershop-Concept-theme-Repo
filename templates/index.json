@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
-{
+ {
   "sections": {
     "slideshow": {
       "type": "slideshow",
@@ -436,7 +436,7 @@
           "settings": {
             "image": "shopify://shop_images/hyper-HJ1001-WH-Hero-v01-r01-2000x2000.webp",
             "subheading": "",
-            "heading": "Before image",
+            "heading": "",
             "content_position": "end",
             "color_text": "#ffffff"
           }
@@ -446,7 +446,7 @@
           "settings": {
             "image": "shopify://shop_images/hyper-HJ1003-WH-Hero-v01-r01-2000x2000.webp",
             "subheading": "",
-            "heading": "After image",
+            "heading": "",
             "content_position": "end",
             "color_text": "#ffffff"
           }
@@ -456,9 +456,11 @@
         "image-1",
         "image-2"
       ],
+      "custom_css": [],
       "settings": {
         "layout": "horizontal",
-        "image_height": "adapt",
+        "image_height": "700px",
+        "color_image_background": "#ffffff",
         "image_height_mobile": "300px",
         "heading": "<em>Power To The People</em>",
         "heading_size": "title-md",
@@ -468,21 +470,21 @@
         "description": "<p>Get GaN charging from 65W to 145W.</p>",
         "button_label": "Shop Now",
         "button_link": "shopify://products/hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports",
-        "button_external": false,
+        "button_external": true,
         "button_icon": true,
         "highlighted_text": "text",
         "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
+        "color_text": "#171717",
+        "color_background": "#ffffff",
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "linear-gradient(90deg, rgba(249, 197, 141, 1), rgba(43, 43, 43, 1) 100%)",
-        "color_button_text": "",
+        "color_button_text": "#ffffff",
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 100,
         "padding_bottom": 0,
-        "divider": false,
+        "divider": true,
         "full_width": false,
         "rounded": false
       }
