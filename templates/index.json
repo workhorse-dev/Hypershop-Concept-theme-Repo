@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "slideshow": {
       "type": "slideshow",
@@ -93,6 +93,7 @@
       "blocks": {
         "text": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
             "text_size": "subtext-md",
@@ -107,6 +108,7 @@
       "block_order": [
         "text"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
