@@ -308,18 +308,6 @@
             "color_overlay": "#000000",
             "overlay_opacity": 40
           }
-        },
-        "collection_e9Ap7w": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "title": "",
-            "description": "",
-            "overlay_content": false,
-            "color_text": "#ffffff",
-            "color_overlay": "#000000",
-            "overlay_opacity": 30
-          }
         }
       },
       "block_order": [
@@ -328,8 +316,7 @@
         "collection-3",
         "collection-4",
         "collection_zEcQeq",
-        "collection-5",
-        "collection_e9Ap7w"
+        "collection-5"
       ],
       "settings": {
         "columns": 4,
@@ -1455,8 +1442,15 @@
           "type": "collection",
           "settings": {
             "collection": "wireless-chargers",
-            "products": [],
-            "title": "HyperJuice"
+            "products": [
+              "hyperjuice-245w-gan-desktop-charger",
+              "hyperjuice-245w-usb-c-battery-pack",
+              "hyperjuice-qi2-4-in-1-magnetic-charging-stand",
+              "hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+              "hyperjuice-next-qi2-2-in-1-magnetic-charging-stand",
+              "hyperjuice-magnetic-wireless-battery-pack"
+            ],
+            "title": "Power"
           }
         },
         "collection-2": {
@@ -1464,7 +1458,7 @@
           "settings": {
             "collection": "thunderbolt-compatible",
             "products": [],
-            "title": "HyperDrive Thunderbolt"
+            "title": "Docks & Hubs"
           }
         },
         "collection-3": {
@@ -1472,14 +1466,23 @@
           "settings": {
             "collection": "hyperspace",
             "products": [],
-            "title": "HyperSpace"
+            "title": "Workstations"
+          }
+        },
+        "collection_nQFGtp": {
+          "type": "collection",
+          "settings": {
+            "collection": "sale-and-deals",
+            "products": [],
+            "title": ""
           }
         }
       },
       "block_order": [
         "collection-1",
         "collection-2",
-        "collection-3"
+        "collection-3",
+        "collection_nQFGtp"
       ],
       "settings": {
         "product_limit": 6,

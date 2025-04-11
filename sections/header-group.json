@@ -7,7 +7,7 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "type": "header",
   "name": "t:sections.header-group.name",
   "sections": {
@@ -18,7 +18,7 @@
           "type": "announcement",
           "settings": {
             "icon": "truck",
-            "text": "Free shipping and returns",
+            "text": "Free shipping on orders over $40",
             "link": "",
             "hide_icon_mobile": true,
             "text_mobile": "",
@@ -31,7 +31,7 @@
           "settings": {
             "icon": "email",
             "text": "A question? Visit our contact page",
-            "link": "",
+            "link": "shopify://pages/contact-us",
             "hide_icon_mobile": true,
             "text_mobile": "",
             "highlighted_text": "none",
@@ -87,8 +87,8 @@
             "tab_icon_width_1": 42,
             "promo_image_1": "shopify://shop_images/hyper-email-6-mouse-keyboard-banner-mobile-v01-r01-430x520.webp",
             "promo_image_ratio_1": "square",
-            "promo_heading_1": "Build your bundle",
-            "promo_subtext_1": "Save 30%",
+            "promo_heading_1": "Find Your Ultimate Desktop Setup",
+            "promo_subtext_1": "",
             "promo_overlay_content_1": true,
             "promo_link_1": "",
             "promo_tag_1": "",
@@ -120,7 +120,6 @@
               "hyperpack-pro-with-apple-find-my"
             ],
             "tab_icon_width_3": 42,
-            "promo_image_3": "shopify://shop_images/home-slider-02.jpg",
             "promo_image_ratio_3": "square",
             "promo_heading_3": "Build your bundle",
             "promo_subtext_3": "",
@@ -163,7 +162,33 @@
             "promo_tag_5": "",
             "promo_color_text_5": "#ffffff",
             "promo_color_overlay_5": "#000000",
-            "promo_overlay_opacity_5": 40
+            "promo_overlay_opacity_5": 40,
+            "tab_target_6": "Tab heading",
+            "tab_target_link_6": "",
+            "tab_products_6": [],
+            "tab_icon_width_6": 42,
+            "promo_image_ratio_6": "square",
+            "promo_heading_6": "",
+            "promo_subtext_6": "",
+            "promo_overlay_content_6": true,
+            "promo_link_6": "",
+            "promo_tag_6": "",
+            "promo_color_text_6": "#ffffff",
+            "promo_color_overlay_6": "#000000",
+            "promo_overlay_opacity_6": 40,
+            "tab_target_7": "Tab heading",
+            "tab_target_link_7": "",
+            "tab_products_7": [],
+            "tab_icon_width_7": 42,
+            "promo_image_ratio_7": "square",
+            "promo_heading_7": "",
+            "promo_subtext_7": "",
+            "promo_overlay_content_7": true,
+            "promo_link_7": "",
+            "promo_tag_7": "",
+            "promo_color_text_7": "#ffffff",
+            "promo_color_overlay_7": "#000000",
+            "promo_overlay_opacity_7": 40
           }
         },
         "mega_menu_PitMbE": {
@@ -301,7 +326,33 @@
             "promo_tag_5": "",
             "promo_color_text_5": "#ffffff",
             "promo_color_overlay_5": "#000000",
-            "promo_overlay_opacity_5": 40
+            "promo_overlay_opacity_5": 40,
+            "tab_target_6": "Tab heading",
+            "tab_target_link_6": "",
+            "tab_products_6": [],
+            "tab_icon_width_6": 42,
+            "promo_image_ratio_6": "square",
+            "promo_heading_6": "",
+            "promo_subtext_6": "",
+            "promo_overlay_content_6": true,
+            "promo_link_6": "",
+            "promo_tag_6": "",
+            "promo_color_text_6": "#ffffff",
+            "promo_color_overlay_6": "#000000",
+            "promo_overlay_opacity_6": 40,
+            "tab_target_7": "Tab heading",
+            "tab_target_link_7": "",
+            "tab_products_7": [],
+            "tab_icon_width_7": 42,
+            "promo_image_ratio_7": "square",
+            "promo_heading_7": "",
+            "promo_subtext_7": "",
+            "promo_overlay_content_7": true,
+            "promo_link_7": "",
+            "promo_tag_7": "",
+            "promo_color_text_7": "#ffffff",
+            "promo_color_overlay_7": "#000000",
+            "promo_overlay_opacity_7": 40
           }
         }
       },
