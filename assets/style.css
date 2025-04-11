@@ -1,6 +1,37 @@
 /* Blogpost CSS */
 
 .article img {
-    border-radius: 2rem;
+  border-radius: 2rem;
+}
+
+/* General CSS */
+@media screen and (min-width: 1280px) {
+  .grid-col-span-2 {
+    grid-column: span 2;
   }
-  
+  .grid-col-span-5{
+    grid-column: span 5;
+  }
+}
+
+/* Footer CSS */
+@media screen and (min-width: 1280px) {
+  .footer__right {
+    padding-inline: clamp(var(--sp-10), 4.421vw, var(--sp-40)) !important;
+  }
+  .footer {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .footer__left {
+    gap: 2rem !important;
+  }
+}
+
+/* shop the feed */
+
+.shop-the-feed .media img.loaded {
+    width: 100%;
+}
+

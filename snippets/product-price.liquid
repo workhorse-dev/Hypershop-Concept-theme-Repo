@@ -45,23 +45,23 @@
       if product.quantity_price_breaks_configured? != true or skip_to_price
         if target == product and product.price_varies
           if settings.currency_code_enabled
-            assign price_min = product.price_min | money_with_currency
+            assign price_min = product.price_min | money_with_currency 
           else
             assign price_min = product.price_min | money
           endif
           echo 'products.price.from_price_html' | t: price: price_min
         else
           if settings.currency_code_enabled
-            echo price | money_with_currency
+            echo price | money_with_currency | replace: ' ', '' 
           else
-            echo price | money
+            echo price | money | replace: ' ', '' 
           endif
         endif
       else
         if settings.currency_code_enabled
-          assign price_min = product.price_min | money_with_currency
+          assign price_min = product.price_min | money_with_currency| replace: ' ', '' 
         else
-          assign price_min = product.price_min | money
+          assign price_min = product.price_min | money | replace: ' ', '' 
         endif
         echo 'products.price.from_price_html' | t: price: price_min
       endif
@@ -73,9 +73,9 @@
     <span class="price__sale inline-flex items-center h-auto relative">
       {%- liquid
         if settings.currency_code_enabled
-          echo compare_at_price | money_with_currency
+          echo compare_at_price | money_with_currency | replace: ' ', '' 
         else
-          echo compare_at_price | money
+          echo compare_at_price | money | replace: ' ', '' 
         endif
       -%}
     </span>
