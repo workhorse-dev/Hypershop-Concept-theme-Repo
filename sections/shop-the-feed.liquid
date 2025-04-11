@@ -19,7 +19,7 @@
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}" data-section-id="{{ section.id }}">
   {%- render 'social-feed-heading', section: section -%}
   
-  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative shop-the-feed">
     <slider-element id="Slider-{{ section.id }}" class="shop-the-feed grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
       <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
         {%- for block in section.blocks -%}

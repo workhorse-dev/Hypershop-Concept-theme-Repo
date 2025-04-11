@@ -16,7 +16,7 @@
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}"{% if section.settings.enable_parallax %} is="footer-parallax"{% endif %}>
   <footer class="footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid">
     {%- if section.blocks.size > 0 -%}
-      <div class="footer__left flex flex-col md:flex-row gap-10">
+      <div class="footer__left flex flex-col md:flex-row gap-10 grid-col-span-5">
         {%- liquid
           assign block = section.blocks | where: "type", "logo_social" | first
           if block
@@ -24,7 +24,7 @@
           endif
         -%}
 
-        <div class="footer__accordions flex flex-wrap flex-col md:flex-row md:grow md:gap-12">
+        <div class="footer__accordions flex flex-wrap flex-col md:flex-row md:grow md:gap-6">
           {%- liquid
             for block in section.blocks
               case block.type
@@ -44,7 +44,7 @@
     {%- endif -%}
 
     {%- if section.settings.enable_newsletter or section.settings.show_social or shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
-      <div class="footer__right grid gap-10">
+      <div class="footer__right grid gap-10 grid-col-span-2">
         {%- if section.settings.enable_newsletter -%}
           <div class="footer__newsletter grid gap-6">
             {%- if section.settings.newsletter_logo -%}
