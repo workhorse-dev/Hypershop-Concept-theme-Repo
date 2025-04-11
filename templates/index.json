@@ -75,7 +75,7 @@
         "slide-3": {
           "type": "video",
           "settings": {
-            "video": "shopify://files/videos/Hyper_HD5001GL_lifestyle_video_squared_7e976af7-66f6-4173-9874-94b05582b93d.mp4",
+            "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
             "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
             "description": "",
             "video_url_mobile": "",
@@ -119,6 +119,51 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "scrolling-text-1": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<strong>Free Shipping On Orders Over $40</strong>",
+            "text_size": 76,
+            "text_font": "body",
+            "highlighted_text": "underline",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_6myjAH": {
+          "type": "text",
+          "settings": {
+            "text": "Up to",
+            "text_size": 160,
+            "text_font": "body",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "text",
+        "text_6myjAH"
+      ],
+      "settings": {
+        "direction": "left",
+        "speed": 20,
+        "grid_horizontal": 70,
+        "enable_twin": false,
+        "enable_parallax": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 52,
+        "padding_bottom": 0,
+        "divider": false,
+        "rounded": false
       }
     },
     "rich-text-1": {
@@ -271,7 +316,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 100,
+        "padding_top": 88,
         "padding_bottom": 100,
         "divider": false,
         "full_width": false,
@@ -594,7 +639,7 @@
       ],
       "settings": {
         "transparent_header": false,
-        "video": "shopify://files/videos/2023_07_19_A_HyperCessFull_SUBT.mp4",
+        "video": "shopify://files/videos/Go Beyond Updated Version.mp4",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "enable_video_autoplay": true,
@@ -1039,40 +1084,6 @@
       ],
       "settings": {}
     },
-    "scrolling-text-1": {
-      "type": "scrolling-text",
-      "blocks": {
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<em><strong>Free Shipping On Orders Over $40.</strong></em>",
-            "text_size": 160,
-            "text_font": "body",
-            "highlighted_text": "stencil",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "text"
-      ],
-      "settings": {
-        "direction": "left",
-        "speed": 20,
-        "grid_horizontal": 70,
-        "enable_twin": false,
-        "enable_parallax": true,
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "padding_top": 120,
-        "padding_bottom": 120,
-        "divider": false,
-        "rounded": false
-      }
-    },
     "shop_the_feed_WMBVKd": {
       "type": "shop-the-feed",
       "blocks": {
@@ -1371,6 +1382,7 @@
         "product-2",
         "product_LKtbyf"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/hyper-email-6-upgrade-season-banner-blog4-v01-r01-1920x1080.webp",
         "heading": "",
@@ -1705,6 +1717,7 @@
   },
   "order": [
     "slideshow",
+    "scrolling-text-1",
     "rich-text-1",
     "collection-list",
     "collage_grid_JPH37M",
@@ -1716,7 +1729,6 @@
     "lookbook_xC8fKB",
     "rich-text-2",
     "product-bundle",
-    "scrolling-text-1",
     "shop_the_feed_WMBVKd",
     "countdown-timer",
     "shop-the-look",
