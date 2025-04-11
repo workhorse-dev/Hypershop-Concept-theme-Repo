@@ -15283,7 +15283,7 @@ video-media:not([playing]) .deferred-poster .play-button .icon:last-child:not(:o
 
 .product-bundle-wrapper[locked] .product-form__submit,
 .product-card[locked] .product-form__submit {
-  opacity: 0.6;
+  opacity: 0.3; /* changed for the disabled button*/
   cursor: not-allowed;
   pointer-events: none;
 }

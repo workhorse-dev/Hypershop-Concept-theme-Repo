@@ -40,8 +40,9 @@
     render 'social-meta-tags'
     
     render 'css-variables'
-    echo 'style.css' | asset_url | stylesheet_tag: preload: true
+    
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
+    echo 'style.css' | asset_url | stylesheet_tag: preload: true
     
     if direction == 'rtl'
       echo 'rtl.css' | asset_url | stylesheet_tag: preload: true
