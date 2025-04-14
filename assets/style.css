@@ -44,6 +44,15 @@ h5
 h6, .h6 {
   font-family: myFontMedium, sans-serif;
 }
+.button,
+.shopify-challenge__button,
+button.shopify-payment-button__button--unbranded,
+#shopify-product-reviews .spr-summary-actions-newreview,
+#shopify-pc__banner__btn-accept,
+#shopify-pc__banner__btn-decline {
+  
+  font-family: myFontMedium, sans-serif;
+}
 /* Blogpost CSS */
 
 .article img {
