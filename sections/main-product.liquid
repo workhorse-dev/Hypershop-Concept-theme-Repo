@@ -861,11 +861,15 @@
     </div>
     {%- assign sticky_buy_button = section.blocks | where: "type", "sticky_buy_button" | first -%}
     {%- if product.available and sticky_buy_button -%}
+      <style>
+        .product-sticky-form{
+          width:{{ sticky_buy_button.settings.sticky-atc-width }}px;
+        }
+      </style>
       <product-sticky-form
         class="product-sticky-form w-full fixed z-20 bottom-0 right-0 pointer-events-none"
         id="ProductStickyForm-{{ section.id }}-{{ product.id }}"
         form="{{ product_form_id }}"
-        style = "width:{{ sticky_buy_button.settings.sticky-atc-width }}px"
       >
         <div class="product-sticky-form__card grid gap-4 opacity-0 invisible pointer-events-auto">
           {%- assign featured_media = product.selected_or_first_available_variant.featured_media | default: product.featured_media -%}
