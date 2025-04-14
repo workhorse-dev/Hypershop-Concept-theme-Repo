@@ -23,6 +23,9 @@
             url("{{'NiveauGroteskBold.woff' | file_url}}") format('woff'),
             url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
     }
+html , body {
+    font-family: myFontRegular, sans-serif;
+}
 blockquote,
 .heading,
 h1,
