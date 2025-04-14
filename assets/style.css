@@ -23,6 +23,23 @@
             url("{{'NiveauGroteskBold.woff' | file_url}}") format('woff'),
             url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
     }
+blockquote,
+.heading,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+.h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5,
+.h6 {
+  font-family: myFontBold, sans-serif;
+}
 /* Blogpost CSS */
 
 .article img {
