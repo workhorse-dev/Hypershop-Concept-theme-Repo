@@ -238,32 +238,32 @@
                     {{- tab_heading -}}
                   </button>
                   <ul class="menu">
-                          {% for link in section.settings.menu.links %}
-                             {% if link.title == block.settings.menu_title  %}
-                                <li class="menu-link">
-                              {% if link.links.size > 0 %}
-                                <ul class="menu dropdown-child">
-                                  {% for child_link in link.links %}
-                                    {% if child_link.title == tab_target_heading  %}
-                                     <li class="menu-link">
-                                      {% if child_link.links.size > 0 %}
-                                        <ul class="menu dropdown-grandchild">
-                                          {% for grandchild_link in child_link.links %}
-                                            <li class="menu-link">
-                                              <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                                            </li>
-                                          {% endfor %}
-                                        </ul>
-                                      {% endif %}
-                                    </li>
-                                    {% endif %}
-                                  {% endfor %}
-                                </ul>
+                    {% for link in section.settings.menu.links %}
+                       {% if link.title == block.settings.menu_title  %}
+                        <li class="menu-link">
+                         {% if link.links.size > 0 %}
+                          <ul class="menu dropdown-child">
+                            {% for child_link in link.links %}
+                              {% if child_link.title == tab_target_heading  %}
+                               <li class="menu-link">
+                                {% if child_link.links.size > 0 %}
+                                  <ul class="menu dropdown-grandchild">
+                                    {% for grandchild_link in child_link.links %}
+                                      <li class="menu-link">
+                                        <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                                      </li>
+                                    {% endfor %}
+                                  </ul>
+                                {% endif %}
+                              </li>
                               {% endif %}
-                            </li>
-                             {% endif %} 
-                          {% endfor %}
-                        </ul>
+                            {% endfor %}
+                          </ul>
+                        {% endif %}
+                      </li>
+                     {% endif %} 
+                    {% endfor %}
+                  </ul>
                   {%- liquid
                     assign forloop_first = false
                     assign forloop_index = forloop_index | plus: 1
