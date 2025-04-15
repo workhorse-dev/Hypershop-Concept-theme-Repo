@@ -70,13 +70,14 @@
           "type": "share",
           "settings": {
             "share_label": "Share",
-            "show_comments": true
+            "show_comments": false
           }
         },
         "comments": {
           "type": "comments",
+          "disabled": true,
           "settings": {
-            "show_gravatar": true
+            "show_gravatar": false
           }
         }
       },
@@ -106,7 +107,7 @@
         "image_ratio": "landscape",
         "show_tags": true,
         "show_date": true,
-        "show_comments": true,
+        "show_comments": false,
         "show_author": false,
         "show_excerpt": true,
         "heading": "Latest Stories",
