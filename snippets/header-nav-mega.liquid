@@ -225,45 +225,72 @@
                 {%- if block.settings[tab_target_link].type == 'collection_link'
                   or block.settings[tab_target_link].type == 'product_link'
                 -%}
-                  <button
-                    type="button"
-                    class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text"
-                    role="tab"
-                    aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
-                    data-index="{{ forloop_index }}"
-                    {% if forloop_first %}
-                      disabled
+                  <div class="mega-menu__nav-item-wrapper group relative">
+ 
+                    
+                    
+                    <button
+    type="button"
+    class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text"
+    role="tab"
+    aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
+    data-index="{{ forloop_index }}"
+    {% if forloop_first %}
+      disabled
+    {% endif %}
+  >
+    {{- tab_heading -}}
+  </button>
+
+  <!-- Dropdown menu -->
+  <ul class="menu absolute left-0 top-full hidden group-hover:block">
+    {% for link in section.settings.menu.links %}
+      {% if link.title == block.settings.menu_title %}
+        <li class="menu-link">
+          {% if link.links.size > 0 %}
+            <ul class="menu dropdown-child">
+              {% for child_link in link.links %}
+                {% if child_link.title == tab_target_heading %}
+                  <li class="menu-link">
+                    {% if child_link.links.size > 0 %}
+                      <ul class="menu dropdown-grandchild">
+                        {% for grandchild_link in child_link.links %}
+                          <li class="menu-link">
+                            <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                          </li>
+                        {% endfor %}
+                      </ul>
                     {% endif %}
-                  >
-                    {{- tab_heading -}}
-                  </button>
-                  <ul class="menu">
-                    {% for link in section.settings.menu.links %}
-                       {% if link.title == block.settings.menu_title  %}
-                        <li class="menu-link">
-                         {% if link.links.size > 0 %}
-                          <ul class="menu dropdown-child">
-                            {% for child_link in link.links %}
-                              {% if child_link.title == tab_target_heading  %}
-                               <li class="menu-link">
-                                {% if child_link.links.size > 0 %}
-                                  <ul class="menu dropdown-grandchild">
-                                    {% for grandchild_link in child_link.links %}
-                                      <li class="menu-link">
-                                        <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                                      </li>
-                                    {% endfor %}
-                                  </ul>
-                                {% endif %}
-                              </li>
-                              {% endif %}
-                            {% endfor %}
-                          </ul>
-                        {% endif %}
-                      </li>
-                     {% endif %} 
-                    {% endfor %}
-                  </ul>
+                  </li>
+                {% endif %}
+              {% endfor %}
+            </ul>
+          {% endif %}
+        </li>
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
+                  <style>
+                    .mega-menu__nav-item-wrapper {
+                        position: relative;
+                      }
+                      
+                      .menu {
+                        display: none;
+                        position: absolute;
+                        top: 100%;
+                        left: 0;
+                        z-index: 50;
+                        background: white;
+                      }
+                      
+                      .mega-menu__nav-item-wrapper:hover .menu {
+                        display: block;
+                      }
+
+                  </style>
+
                   {%- liquid
                     assign forloop_first = false
                     assign forloop_index = forloop_index | plus: 1
