@@ -244,11 +244,8 @@
   </button>
 
   <!-- Dropdown menu -->
-   <div id="DropdownMenu-{{ section.id }}-{{ forloop.index }}-{{ dir }}" class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
-            <div class="dropdown__container relative">
-              {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-              {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-              <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2">
+  {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+  <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2">
                           {% for link in section.settings.menu.links %}
                             {% if link.title == block.settings.menu_title %}
                               {% for child_link in link.links %}
@@ -263,8 +260,6 @@
                             {% endif %}
                           {% endfor %}
                         </ul>
-            </div>
-           </div>
 </div>
 
                     <style>
