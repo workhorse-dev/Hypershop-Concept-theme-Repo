@@ -316,9 +316,8 @@
                               {% if link.links.size > 0 %}
                                 <ul class="menu dropdown-child">
                                   {% for child_link in link.links %}
-                                    {{ tab_target_heading }}-----
-                                    {% if link.title == block.settings.menu_title  %}{% endif %}
-                                    <li class="menu-link">
+                                    {% if link.title == tab_target_heading  %}
+                                     <li class="menu-link">
                                       <a href="{{ child_link.url }}">{{ child_link.title }}</a>
                         
                                       {% if child_link.links.size > 0 %}
@@ -331,6 +330,7 @@
                                         </ul>
                                       {% endif %}
                                     </li>
+                                    {% endif %}
                                   {% endfor %}
                                 </ul>
                               {% endif %}
