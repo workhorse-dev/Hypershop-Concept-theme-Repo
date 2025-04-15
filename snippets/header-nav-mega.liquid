@@ -307,8 +307,8 @@
                           
                         <ul class="menu">
                           {% for link in section.settings.menu.links %}
-                              {{ block.settings.menu_title }}
-                            <li class="menu-link">
+                             {% if link.title == block.settings.menu_title  %}
+                                <li class="menu-link">
                               <a href="{{ link.url }}">{{ link.title }}</a>
 
                               
@@ -333,6 +333,7 @@
                                 </ul>
                               {% endif %}
                             </li>
+                             {% endif %} 
                           {% endfor %}
                         </ul>
                     
