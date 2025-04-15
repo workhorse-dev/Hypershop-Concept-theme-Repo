@@ -962,7 +962,7 @@
         "question-1": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question1.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question1.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer1 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -971,7 +971,7 @@
         "question-2": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question2.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question2.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer2 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -980,7 +980,7 @@
         "question-3": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question3.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question3.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer3 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -989,7 +989,7 @@
         "question-4": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question4.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question4.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer4 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
