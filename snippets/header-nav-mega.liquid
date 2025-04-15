@@ -246,32 +246,20 @@
   <!-- Dropdown menu -->
   {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
   <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2">
-    {% for link in section.settings.menu.links %}
-      {% if link.title == block.settings.menu_title %}
-        <li class="menu-link">
-          {% if link.links.size > 0 %}
-            <ul class="menu dropdown-child">
-              {% for child_link in link.links %}
-                {% if child_link.title == tab_target_heading %}
-                  <li class="menu-link">
-                    {% if child_link.links.size > 0 %}
-                      <ul class="menu dropdown-grandchild">
-                        {% for grandchild_link in child_link.links %}
-                          <li class="menu-link px-4 py-2 hover:bg-gray-100">
-                            <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                          </li>
-                        {% endfor %}
-                      </ul>
-                    {% endif %}
-                  </li>
-                {% endif %}
-              {% endfor %}
-            </ul>
-          {% endif %}
-        </li>
-      {% endif %}
-    {% endfor %}
-  </ul>
+                          {% for link in section.settings.menu.links %}
+                            {% if link.title == block.settings.menu_title %}
+                              {% for child_link in link.links %}
+                                {% if child_link.title == tab_target_heading %}
+                                  {% for grandchild_link in child_link.links %}
+                                    <li class="menu-link px-4 py-2 hover:bg-gray-100">
+                                      <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                                    </li>
+                                  {% endfor %}
+                                {% endif %}
+                              {% endfor %}
+                            {% endif %}
+                          {% endfor %}
+                        </ul>
 </div>
 
                     <style>
@@ -363,21 +351,7 @@
 
                     
                           
-                        <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2">
-                          {% for link in section.settings.menu.links %}
-                            {% if link.title == block.settings.menu_title %}
-                              {% for child_link in link.links %}
-                                {% if child_link.title == tab_target_heading %}
-                                  {% for grandchild_link in child_link.links %}
-                                    <li class="menu-link px-4 py-2 hover:bg-gray-100">
-                                      <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
-                                    </li>
-                                  {% endfor %}
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
+                        
                     
                     {% if block.settings[tab_target_link].type == 'collection_link' %}
                       <a
