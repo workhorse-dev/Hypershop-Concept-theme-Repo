@@ -251,7 +251,7 @@
           {% if child_link.title == tab_target_heading %}
             {% for grandchild_link in child_link.links %}
               <li class="menu-link">
-                <a href="{{ grandchild_link.url }}">{{ grandchild_link.title }}</a>
+                <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">{{ grandchild_link.title }}</a>
               </li>
             {% endfor %}
           {% endif %}
