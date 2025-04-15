@@ -303,8 +303,7 @@
                       <p class="text-sm text-opacity leading-none uppercase">{{ block.settings.heading_2 | escape }}</p>
                     {%- endif -%}
 
-                    <div class="dropdown__container relative">
-                          {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
+                    
                           <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
                             {%- for childlink in link.links -%}
                               {%- if childlink.links != blank -%}
@@ -347,7 +346,7 @@
                               {%- endif -%}
                             {%- endfor -%}
                           </ul>
-                        </div>
+                        
                     
                     {% if block.settings[tab_target_link].type == 'collection_link' %}
                       <a
