@@ -755,6 +755,7 @@
       "blocks": {
         "text": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "icon_width": 20,
@@ -834,12 +835,6 @@
         "read_more": {
           "type": "read_more",
           "settings": {}
-        },
-        "spinning_text": {
-          "type": "spinning_text",
-          "settings": {
-            "text": "Featured product"
-          }
         }
       },
       "block_order": [
@@ -852,8 +847,7 @@
         "buy_buttons",
         "pickup_availability",
         "share",
-        "read_more",
-        "spinning_text"
+        "read_more"
       ],
       "settings": {
         "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
