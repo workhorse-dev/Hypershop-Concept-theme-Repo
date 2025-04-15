@@ -307,8 +307,11 @@
                           
                         <ul class="menu">
                           {% for link in section.settings.menu.links %}
+                              {{ block.settings.menu_title }}
                             <li class="menu-link">
                               <a href="{{ link.url }}">{{ link.title }}</a>
+
+                              
                         
                               {% if link.links.size > 0 %}
                                 <ul class="menu dropdown-child">
