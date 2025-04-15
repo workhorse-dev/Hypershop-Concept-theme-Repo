@@ -260,7 +260,50 @@
     {% endfor %}
   </ul>
 </div>
+<style>
+  .dropdown-container {
+  position: relative;
+  display: inline-block;
+}
 
+.dropdown-trigger {
+  cursor: pointer;
+}
+
+.dropdown__nav {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 6px;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  z-index: 999;
+}
+
+.dropdown-container:hover .dropdown__nav {
+  opacity: 1;
+  visibility: visible;
+  transform: translateY(0);
+}
+
+.menu-link {
+  padding: 10px 16px;
+  white-space: nowrap;
+}
+
+.menu-link:hover {
+  background-color: #f3f3f3;
+}
+
+</style>
 
 
                   {%- liquid
