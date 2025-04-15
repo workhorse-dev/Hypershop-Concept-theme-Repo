@@ -84,9 +84,13 @@ button.shopify-payment-button__button--unbranded,
   }
 }
 
-/* shop the feed */
-
+/* Shop the feed */
 .shop-the-feed .media img.loaded {
     width: 100%;
+}
+
+/* Header CSS */
+.mega-menu__list--tabs {
+  --nav-tabs-width: min(300px, 25vw);
 }
 
