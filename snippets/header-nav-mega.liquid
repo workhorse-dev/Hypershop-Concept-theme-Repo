@@ -244,7 +244,7 @@
   </button>
 
   <!-- Dropdown menu -->
- <ul class="dropdown__nav">
+ <ul class="dropdown__navigation">
     {% for link in section.settings.menu.links %}
       {% if link.title == block.settings.menu_title %}
         {% for child_link in link.links %}
@@ -270,7 +270,7 @@
   cursor: pointer;
 }
 
-.dropdown__nav {
+.dropdown__navigation {
   position: absolute;
   top: 100%;
   left: 0;
