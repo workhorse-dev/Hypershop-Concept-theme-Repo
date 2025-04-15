@@ -354,7 +354,7 @@
                           {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
                           <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
                             {%- for childlink in link.links -%}
-                              {{ childlink }}+++++===+++
+                              {{ childlink.title }}+++++===+++
                               {%- if childlink.links != blank -%}
                                 <li class="opacity-0 relative">
                                   <details
