@@ -27,10 +27,14 @@
     "slideshow_whBdME": {
       "type": "slideshow",
       "blocks": {
-        "image_PRJFyK": {
-          "type": "image",
+        "video_wfdFHE": {
+          "type": "video",
           "settings": {
-            "heading": "Image slide",
+            "video": "shopify://files/videos/20240517_HYPERCHARGE_COMMERCIAL_OFFLINE_COPYS.mp4",
+            "video_url": "",
+            "description": "",
+            "video_url_mobile": "",
+            "heading": "",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
             "button_label": "",
@@ -42,7 +46,7 @@
         }
       },
       "block_order": [
-        "image_PRJFyK"
+        "video_wfdFHE"
       ],
       "settings": {
         "autoplay": false,
@@ -80,43 +84,6 @@
     },
     "video_hero_8DUt4z": {
       "type": "video-hero",
-      "blocks": {
-        "slide_aLzqtR": {
-          "type": "slide",
-          "settings": {
-            "heading": "HyperJuice",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "slide_JeGGBH": {
-          "type": "slide",
-          "settings": {
-            "heading": "GaN Travel Chargers",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "slide_i6KRpe": {
-          "type": "slide",
-          "settings": {
-            "heading": "Heading",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "slide_aLzqtR",
-        "slide_JeGGBH",
-        "slide_i6KRpe"
-      ],
       "disabled": true,
       "settings": {
         "transparent_header": false,
@@ -146,8 +113,8 @@
         "heading_h8Ypam": {
           "type": "heading",
           "settings": {
-            "heading": "Intro Product Line",
-            "heading_size": "title-lg tracking-heading",
+            "heading": "Rapid & Reliable Travel Charging",
+            "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -156,9 +123,9 @@
         "text_mTfkaU": {
           "type": "text",
           "settings": {
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "text": "<p>Introducing our newest HyperJuice GaN Chargers, capable of powering up to 4 devices simultaneously, including laptops, tablets, and phones. Compact and perfect for global travel, they come with travel adapters and a C8 adapter for flexible desktop charging. Designed for creators, entrepreneurs, and students, this all-in-one solution meets even the most demanding needs.<br/><br/></p>",
             "text_size": "subtext-md",
-            "text_max_size": 32,
+            "text_max_size": 12,
             "text_font": "body",
             "secondary_color": false,
             "highlighted_text": "none",
@@ -168,8 +135,8 @@
         "button_m4nMhh": {
           "type": "button",
           "settings": {
-            "button_label": "Button label",
-            "button_link": "",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/wall-chargers",
             "button_style": "primary",
             "button_size": "md",
             "button_external": false,
@@ -185,7 +152,7 @@
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
-        "heading": "",
+        "heading": "HyperJuice GaN Travel Chargers",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "small",
@@ -207,9 +174,9 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 72,
-        "padding_bottom": 100,
+        "padding_bottom": 44,
         "divider": false,
-        "narrow": true,
+        "narrow": false,
         "rounded": false
       }
     },
@@ -270,123 +237,6 @@
         "button_link": "",
         "button_external": false,
         "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
-    "timeline_yQcBQX": {
-      "type": "timeline",
-      "blocks": {
-        "content_hDKGWQ": {
-          "type": "content",
-          "settings": {
-            "subheading": "Benefit 1",
-            "heading": "Benefit 1 A",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_AQtNWb": {
-          "type": "content",
-          "settings": {
-            "subheading": "Benefit 2",
-            "heading": "Benefit 2 A",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_j9HWFD": {
-          "type": "content",
-          "settings": {
-            "subheading": "Text",
-            "heading": "Heading",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_PppeaU": {
-          "type": "content",
-          "settings": {
-            "subheading": "Text",
-            "heading": "Heading",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_LADXVi": {
-          "type": "content",
-          "settings": {
-            "subheading": "Text",
-            "heading": "Heading",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "content_hDKGWQ",
-        "content_AQtNWb",
-        "content_j9HWFD",
-        "content_PppeaU",
-        "content_LADXVi"
-      ],
-      "settings": {
-        "image_ratio": "square",
-        "image_ratio_mobile": "wide",
-        "heading": "Timeline",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "color_text": "",
@@ -499,6 +349,174 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "featured_collections_cLDP3b": {
+      "type": "featured-collections",
+      "blocks": {
+        "collection_mNiGcg": {
+          "type": "collection",
+          "settings": {
+            "collection": "wall-chargers",
+            "products": [
+              "hyperjuice-100w-usb-c-gan-travel-charger-with-4-ports",
+              "hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports",
+              "hyperjuice-70w-usb-c-gan-travel-charger-with-3-ports",
+              "hyperjuice-iec-c7-extension-power-cord"
+            ],
+            "title": ""
+          }
+        }
+      },
+      "block_order": [
+        "collection_mNiGcg"
+      ],
+      "settings": {
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Featured collection",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "timeline_yQcBQX": {
+      "type": "timeline",
+      "blocks": {
+        "content_hDKGWQ": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-GaN-LP-22_-Cooler-v01-r01-660x600.webp",
+            "subheading": "22% Cooler",
+            "heading": "22% Cooler Than a Leading Charger Brand*",
+            "heading_tag": "h2",
+            "text": "<p>The HyperJuice GaN Charger is 22% cooler than leading charger brand. With its efficient thermal management and safe operation, Hyper's advanced GaN (Gallium Nitride) technology allows for more efficient power conversion, leading to a cooler charging experience. This innovation ensures devices are charged quickly and safely.</p><p>*HyperJuice 70W charger vs. a leading brand’s 65W charger</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_AQtNWb": {
+          "type": "content",
+          "settings": {
+            "subheading": "Intelligent Fast Charging",
+            "heading": "Experience Intelligent Fast Charging",
+            "heading_tag": "h2",
+            "text": "<p>Intelligent charging with a Programmable Power Supply (PPS) adapts in real time to deliver the perfect wattage your devices demand. PPS provides a variable amount of power depending on what your device requires.</p><p>*Based on charging speeds provided by Apple</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_j9HWFD": {
+          "type": "content",
+          "settings": {
+            "subheading": "Text",
+            "heading": "Heading",
+            "heading_tag": "h2",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_PppeaU": {
+          "type": "content",
+          "settings": {
+            "subheading": "Text",
+            "heading": "Heading",
+            "heading_tag": "h2",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_LADXVi": {
+          "type": "content",
+          "settings": {
+            "subheading": "Text",
+            "heading": "Heading",
+            "heading_tag": "h2",
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "content_hDKGWQ",
+        "content_AQtNWb",
+        "content_j9HWFD",
+        "content_PppeaU",
+        "content_LADXVi"
+      ],
+      "settings": {
+        "image_ratio": "square",
+        "image_ratio_mobile": "wide",
+        "heading": "Timeline",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
@@ -1379,6 +1397,73 @@
         "rounded": false
       }
     },
+    "image_with_text_overlay_fcQJkM": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_J9HaCz": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "Add a tagline",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_BY6y4n": {
+          "type": "heading",
+          "settings": {
+            "heading": "Image with text overlay",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_VyDe4r": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_J9HaCz",
+        "heading_BY6y4n",
+        "text_VyDe4r"
+      ],
+      "name": "t:sections.image-with-text-overlay.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Hyper-GaN-LP-Full-Width-3_Devices-Simultaneously-v01-r01-1360x600.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 70,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
     "shop_the_look_DLcj8Q": {
       "type": "shop-the-look",
       "blocks": {
@@ -1422,6 +1507,7 @@
         "product_yhytcd"
       ],
       "settings": {
+        "image": "shopify://shop_images/Hyper-GaN-LP-Full-Width-3_Devices-Simultaneously-v01-r01-1360x600.webp",
         "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
@@ -1494,6 +1580,7 @@
         "timer_pPywCb",
         "button_7xFzr8"
       ],
+      "disabled": true,
       "settings": {
         "transparent_header": false,
         "image_height": "650px",
@@ -1646,8 +1733,9 @@
     "video_hero_8DUt4z",
     "rich_text_HgDAEi",
     "portfolio_6TJRPx",
-    "timeline_yQcBQX",
     "multicolumn_zem9t8",
+    "featured_collections_cLDP3b",
+    "timeline_yQcBQX",
     "scrolling_banner_akhCdT",
     "multicolumn_A6aVTL",
     "image_with_text_wTGB7g",
@@ -1659,6 +1747,7 @@
     "collage_iKMVaU",
     "collage_grid_jWKAmW",
     "rich_text_ngzfhF",
+    "image_with_text_overlay_fcQJkM",
     "shop_the_look_DLcj8Q",
     "countdown_timer_AjdPeH",
     "featured_collections_H9RkYK",
