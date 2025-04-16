@@ -7,13 +7,14 @@
  * made to this file may be overwritten.
  * ------------------------------------------------------------
  */
- {
+{
   "sections": {
     "main-product": {
       "type": "main-product",
       "blocks": {
         "vendor": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "icon_width": 20,
@@ -545,7 +546,7 @@
         "layout": "image_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
-        "image_mobile": "{{ product.metafields.custom.left_image1_with_right_content.value }}",
+        "image_mobile": "{{ product.metafields.custom.image_with_text_left2_image.value }}",
         "image_height_mobile": "400px",
         "text_alignment_mobile": "left",
         "color_text": "#171717",
@@ -558,7 +559,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
+        "padding_top": 0,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
@@ -610,7 +611,7 @@
             "highlighted_text": "text",
             "highlighted_scribble": "circle",
             "color_text": "#ffffff",
-            "color_highlight": "#fde047",
+            "color_highlight": "#3c3fbc",
             "gradient_highlight": "",
             "color_overlay": "#000000",
             "overlay_opacity": 40
@@ -690,7 +691,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
+        "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
@@ -884,7 +885,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 28,
+        "padding_top": 76,
         "padding_bottom": 28,
         "divider": false,
         "full_width": false,
@@ -961,7 +962,7 @@
         "question-1": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question1.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question1.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer1 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -970,7 +971,7 @@
         "question-2": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question2.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question2.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer2 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -979,7 +980,7 @@
         "question-3": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question3.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question3.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer3 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -988,7 +989,7 @@
         "question-4": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question4.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question4.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer4 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"

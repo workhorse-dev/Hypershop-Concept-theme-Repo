@@ -65,8 +65,8 @@
             "heading": "Charge 2X Faster with Qi2",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "button_label": "",
-            "button_link": "",
+            "button_label": "Shop Now",
+            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -755,6 +755,7 @@
       "blocks": {
         "text": {
           "type": "text",
+          "disabled": true,
           "settings": {
             "icon": "none",
             "icon_width": 20,
@@ -834,12 +835,6 @@
         "read_more": {
           "type": "read_more",
           "settings": {}
-        },
-        "spinning_text": {
-          "type": "spinning_text",
-          "settings": {
-            "text": "Featured product"
-          }
         }
       },
       "block_order": [
@@ -852,8 +847,7 @@
         "buy_buttons",
         "pickup_availability",
         "share",
-        "read_more",
-        "spinning_text"
+        "read_more"
       ],
       "settings": {
         "product": "hyperdrive-next-usb4-nvme-ssd-enclosure",
@@ -1024,7 +1018,7 @@
         "account_name": "@Hypershop",
         "show_vendor": false,
         "show_price": true,
-        "heading": "Shop the <em>Feed</em>",
+        "heading": "Shop the <em>Look</em>",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -1561,7 +1555,7 @@
         "image_ratio": "landscape",
         "show_tags": true,
         "show_date": true,
-        "show_comments": true,
+        "show_comments": false,
         "show_author": false,
         "show_excerpt": true,
         "heading": "Latest Stories",
