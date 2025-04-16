@@ -244,7 +244,7 @@
   </button>
 
   <!-- Dropdown menu -->
- <ul class="dropdown__navigation">
+ <ul class="dropdown__navigation dropdown__nav flex flex-col gap-1d5 xl:gap-2">
     {% for link in section.settings.menu.links %}
       {% if link.title == block.settings.menu_title %}
         {% for child_link in link.links %}
