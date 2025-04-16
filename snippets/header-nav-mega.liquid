@@ -228,7 +228,7 @@
                   <div class="mega-menu__nav-item-wrapper group relative">
 
                     
-<div class="dropdown-container dropdown__container relative">
+<div class="dropdown-container">
   <button
     type="button"
     class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
@@ -243,13 +243,13 @@
   </button>
 
   <!-- Dropdown menu -->
- <ul class="dropdown__navigation dropdown__nav flex flex-col gap-1d5 xl:gap-2">
+ <ul class="dropdown__navigation ">
     {% for link in section.settings.menu.links %}
       {% if link.title == block.settings.menu_title %}
         {% for child_link in link.links %}
           {% if child_link.title == tab_target_heading %}
             {% for grandchild_link in child_link.links %}
-              <li class="menu-link opacity-0">
+              <li class="menu-link ">
                 <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">{{ grandchild_link.title }}</a>
               </li>
             {% endfor %}
