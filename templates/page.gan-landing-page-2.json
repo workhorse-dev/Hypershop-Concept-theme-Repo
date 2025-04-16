@@ -1526,23 +1526,19 @@
         "collection_YXh8Cr": {
           "type": "collection",
           "settings": {
-            "collection": "",
-            "products": [],
-            "title": ""
-          }
-        },
-        "collection_Rxit4d": {
-          "type": "collection",
-          "settings": {
-            "collection": "",
-            "products": [],
+            "collection": "wall-chargers",
+            "products": [
+              "hyperjuice-100w-usb-c-gan-travel-charger-with-4-ports",
+              "hyperjuice-145w-usb-c-gan-travel-charger-with-4-ports",
+              "hyperjuice-70w-usb-c-gan-travel-charger-with-3-ports",
+              "hyperjuice-iec-c7-extension-power-cord"
+            ],
             "title": ""
           }
         }
       },
       "block_order": [
-        "collection_YXh8Cr",
-        "collection_Rxit4d"
+        "collection_YXh8Cr"
       ],
       "settings": {
         "product_limit": 6,
@@ -1610,6 +1606,7 @@
         "question_cLAWfw",
         "question_zUMqyH"
       ],
+      "disabled": true,
       "settings": {
         "style": "with-border",
         "heading": "FAQs",
