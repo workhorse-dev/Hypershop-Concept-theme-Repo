@@ -72,6 +72,65 @@
         "parallax_direction": "vertical"
       }
     },
+    "highlight_text_R9EV8m": {
+      "type": "highlight-text",
+      "blocks": {
+        "heading_4QUctM": {
+          "type": "heading",
+          "settings": {
+            "heading": "HyperJuice",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "text",
+            "highlighted_scribble": "basic-underline"
+          }
+        },
+        "heading_H7KVpR": {
+          "type": "heading",
+          "settings": {
+            "heading": "Gan Travel Chargers",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_4QUctM",
+        "heading_H7KVpR"
+      ],
+      "name": "t:sections.highlight-text.presets.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
     "rich_text_HgDAEi": {
       "type": "rich-text",
       "blocks": {
@@ -675,6 +734,7 @@
         "text_nTtyyV",
         "button_UfQL6f"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Hyper-GaN-LP-Go-Beyond-Safety-v01-r01-660x600.webp",
         "image_height": "adapt",
@@ -745,6 +805,7 @@
         "text_kw8qdy",
         "button_A89mq6"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Hyper-GaN-LP-Charge-4-Devices-Simultaneously-v01-r01-660x600.webp",
         "image_height": "650px",
@@ -1685,6 +1746,7 @@
   "order": [
     "main-page",
     "slideshow_whBdME",
+    "highlight_text_R9EV8m",
     "rich_text_HgDAEi",
     "portfolio_6TJRPx",
     "multicolumn_zem9t8",
