@@ -227,41 +227,38 @@
                 -%}
                   <div class="mega-menu__nav-item-wrapper group relative">
  
-                    <div id="DropdownMenu-sections--16458396729406__header-3-start" class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
-                   <div class="dropdown-container dropdown__container relative">
-                        <button
-                          type="button"
-                          class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
-                          role="tab"
-                          aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
-                          data-index="{{ forloop_index }}"
-                          {% if forloop_first %}
-                            disabled
-                          {% endif %}
-                        >
-                          {{- tab_heading -}}
-                        </button>
-                      
-                        <!-- Dropdown menu -->
-                       <ul class="dropdown__navigation dropdown__nav flex flex-col gap-1d5 xl:gap-2">
-                          {% for link in section.settings.menu.links %}
-                            {% if link.title == block.settings.menu_title %}
-                              {% for child_link in link.links %}
-                                {% if child_link.title == tab_target_heading %}
-                                  {% for grandchild_link in child_link.links %}
-                                    <li class="menu-link opacity-0">
-                                      <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">{{ grandchild_link.title }}</a>
-                                    </li>
-                                  {% endfor %}
-                                {% endif %}
-                              {% endfor %}
-                            {% endif %}
-                          {% endfor %}
-                        </ul>
-                      </div>
-                    </div>
                     
+<div class="dropdown-container dropdown__container relative">
+  <button
+    type="button"
+    class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
+    role="tab"
+    aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
+    data-index="{{ forloop_index }}"
+    {% if forloop_first %}
+      disabled
+    {% endif %}
+  >
+    {{- tab_heading -}}
+  </button>
 
+  <!-- Dropdown menu -->
+ <ul class="dropdown__navigation dropdown__nav flex flex-col gap-1d5 xl:gap-2">
+    {% for link in section.settings.menu.links %}
+      {% if link.title == block.settings.menu_title %}
+        {% for child_link in link.links %}
+          {% if child_link.title == tab_target_heading %}
+            {% for grandchild_link in child_link.links %}
+              <li class="menu-link opacity-0">
+                <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">{{ grandchild_link.title }}</a>
+              </li>
+            {% endfor %}
+          {% endif %}
+        {% endfor %}
+      {% endif %}
+    {% endfor %}
+  </ul>
+</div>
 <style>
   .dropdown-container {
   position: relative;
