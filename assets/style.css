@@ -1,30 +1,31 @@
 /* Font CSS for the site */
 @font-face {
-  font-family: 'myFontRegular';
+  font-family: "myFontRegular";
   font-style: normal;
   font-weight: normal;
-  src: url("{{'NiveauGroteskRegular.woff2' | file_url}}") format('woff2'),
-       url("{{'NiveauGroteskRegular.woff' | file_url}}") format('woff'),
-       url("{{ 'NiveauGroteskRegular.otf' | file_url }}") format("truetype");
+  src: url("{{'NiveauGroteskRegular.woff2' | file_url}}") format("woff2"),
+    url("{{'NiveauGroteskRegular.woff' | file_url}}") format("woff"),
+    url("{{ 'NiveauGroteskRegular.otf' | file_url }}") format("truetype");
 }
 @font-face {
-    font-family: 'myFontMedium';
-    font-style: normal;
-    font-weight: normal;
-    src: url("{{'NiveauGroteskMedium.woff2' | file_url}}") format('woff2'),
-        url("{{'NiveauGroteskMedium.woff' | file_url}}") format('woff'),
-        url("{{ 'NiveauGroteskMedium.otf' | file_url }}") format("truetype");
+  font-family: "myFontMedium";
+  font-style: normal;
+  font-weight: normal;
+  src: url("{{'NiveauGroteskMedium.woff2' | file_url}}") format("woff2"),
+    url("{{'NiveauGroteskMedium.woff' | file_url}}") format("woff"),
+    url("{{ 'NiveauGroteskMedium.otf' | file_url }}") format("truetype");
 }
 @font-face {
-    font-family: 'myFontBold';
-    font-style: normal;
-    font-weight: normal;
-    src: url("{{'NiveauGroteskBold.woff2' | file_url}}") format('woff2'),
-        url("{{'NiveauGroteskBold.woff' | file_url}}") format('woff'),
-        url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
+  font-family: "myFontBold";
+  font-style: normal;
+  font-weight: normal;
+  src: url("{{'NiveauGroteskBold.woff2' | file_url}}") format("woff2"),
+    url("{{'NiveauGroteskBold.woff' | file_url}}") format("woff"),
+    url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
 }
-html , body {
-    font-family: myFontRegular, sans-serif;
+html,
+body {
+  font-family: myFontRegular, sans-serif;
 }
 blockquote,
 .heading,
@@ -32,8 +33,7 @@ h1,
 h2,
 h3,
 h4,
-h5
-.h0,
+h5 .h0,
 .h1,
 .h2,
 .h3,
@@ -41,7 +41,8 @@ h5
 .h5 {
   font-family: myFontBold, sans-serif;
 }
-h6, .h6 {
+h6,
+.h6 {
   font-family: myFontMedium, sans-serif;
 }
 .button,
@@ -50,7 +51,6 @@ button.shopify-payment-button__button--unbranded,
 #shopify-product-reviews .spr-summary-actions-newreview,
 #shopify-pc__banner__btn-accept,
 #shopify-pc__banner__btn-decline {
-  
   font-family: myFontMedium, sans-serif;
 }
 /* Blogpost CSS */
@@ -64,7 +64,7 @@ button.shopify-payment-button__button--unbranded,
   .grid-col-span-2 {
     grid-column: span 2;
   }
-  .grid-col-span-5{
+  .grid-col-span-5 {
     grid-column: span 5;
   }
 }
@@ -86,11 +86,21 @@ button.shopify-payment-button__button--unbranded,
 
 /* Shop the feed */
 .shop-the-feed .media img.loaded {
-    width: 100%;
+  width: 100%;
 }
 
 /* Header CSS */
 .mega-menu__list--tabs {
-  /* --nav-tabs-width: min(350px, 25vw); */
+  --nav-tabs-width: min(300px, 25vw);
+}
+@media screen and (min-width: 1536px) {
+  .mega-menu__list--tabs {
+    --nav-tabs-width: min(320px, 25vw);
+  }
 }
 
+@media screen and (min-width: 1920px) {
+  .mega-menu__list--tabs {
+    --nav-tabs-width: min(340px, 25vw);
+  }
+}
