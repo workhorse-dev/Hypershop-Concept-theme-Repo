@@ -72,41 +72,6 @@
         "parallax_direction": "vertical"
       }
     },
-    "empty_space_wtzhWj": {
-      "type": "empty-space",
-      "disabled": true,
-      "settings": {
-        "desktop_height": 40,
-        "mobile_height": 28,
-        "color_background": "",
-        "gradient_background": ""
-      }
-    },
-    "video_hero_8DUt4z": {
-      "type": "video-hero",
-      "disabled": true,
-      "settings": {
-        "transparent_header": false,
-        "video": "shopify://files/videos/20240517_HYPERCHARGE_COMMERCIAL_OFFLINE_COPYS.mp4",
-        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-        "description": "",
-        "enable_video_autoplay": true,
-        "enable_video_looping": true,
-        "content_width": "medium",
-        "video_url_mobile": "",
-        "color_text": "#ffffff",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "video_height": true,
-        "full_width": true,
-        "rounded": false
-      }
-    },
     "rich_text_HgDAEi": {
       "type": "rich-text",
       "blocks": {
@@ -134,6 +99,7 @@
         },
         "button_m4nMhh": {
           "type": "button",
+          "disabled": true,
           "settings": {
             "button_label": "Shop Now",
             "button_link": "shopify://collections/wall-chargers",
@@ -174,7 +140,7 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 72,
-        "padding_bottom": 44,
+        "padding_bottom": 72,
         "divider": false,
         "narrow": false,
         "rounded": false
@@ -413,27 +379,10 @@
           "settings": {
             "image": "shopify://shop_images/Hyper-GaN-LP-22_-Cooler-v01-r01-660x600.webp",
             "image_mobile": "shopify://shop_images/Hyper-GaN-LP-22_-Cooler-v01-r01-660x600.webp",
-            "subheading": "22% Cooler",
-            "heading": "22% Cooler Than a Leading Charger Brand*",
-            "heading_tag": "h2",
-            "text": "<p>The HyperJuice GaN Charger is 22% cooler than leading charger brand. With its efficient thermal management and safe operation, Hyper's advanced GaN (Gallium Nitride) technology allows for more efficient power conversion, leading to a cooler charging experience. This innovation ensures devices are charged quickly and safely.</p><p>*HyperJuice 70W charger vs. a leading brand’s 65W charger</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_ypYDce": {
-          "type": "content",
-          "settings": {
-            "image": "shopify://shop_images/Hyper-GaN-LP-22_-Cooler-v01-r01-660x600.webp",
             "subheading": "",
             "heading": "22% Cooler Than a Leading Charger Brand*",
             "heading_tag": "h2",
-            "text": "<p>The HyperJuice GaN Charger is 22% cooler than leading charger brand. With its efficient thermal management and safe operation, Hyper's advanced GaN (Gallium Nitride) technology allows for more efficient power conversion, leading to cooler charging. This innovation ensures devices are charged quickly and safely.*HyperJuice 70W charger vs. a leading brand’s 65W charger</p>",
+            "text": "<p>The HyperJuice GaN Charger is 22% cooler than leading charger brand. With its efficient thermal management and safe operation, Hyper's advanced GaN (Gallium Nitride) technology allows for efficient power conversion, leading to cooler charging. This innovation ensures devices are charged quickly and safely. *HyperJuice 70W charger vs. a leading brand’s 65W charger</p>",
             "button_label": "",
             "button_link": "",
             "button_style": "primary",
@@ -448,7 +397,7 @@
           "settings": {
             "image": "shopify://shop_images/Hyper-GaN-LP-Experience-Intelligent-fast-charging-v01-r01-660x600.webp",
             "image_mobile": "shopify://shop_images/Hyper-GaN-LP-Experience-Intelligent-fast-charging-v01-r01-660x600.webp",
-            "subheading": "Intelligent Fast Charging",
+            "subheading": "",
             "heading": "Experience Intelligent Fast Charging",
             "heading_tag": "h2",
             "text": "<p>Intelligent charging with a Programmable Power Supply (PPS) adapts in real time to deliver the perfect wattage your devices demand. PPS provides a variable amount of power depending on what your device requires.</p><p>*Based on charging speeds provided by Apple</p>",
@@ -466,7 +415,7 @@
           "settings": {
             "image": "shopify://shop_images/Hyper-GaN-LP-Go-Beyond-Safety-v01-r01-660x600.webp",
             "image_mobile": "shopify://shop_images/Hyper-GaN-LP-Charge-Anywhere-Around-World-v01-r01-660x520_8f369c37-9b9b-407f-b991-9987e502fa2f.webp",
-            "subheading": "Safety",
+            "subheading": "",
             "heading": "Go Beyond Safety",
             "heading_tag": "h2",
             "text": "<p>Charge safely with industry-leading testing, third-party certifications, and intelligent chips designed to protect against a range of electrical issues, including over-voltage, over-current, over-temperature, and over-powering of your device.</p>",
@@ -482,24 +431,10 @@
         "content_PppeaU": {
           "type": "content",
           "settings": {
-            "subheading": "Text",
-            "heading": "Heading",
-            "heading_tag": "h2",
-            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
-            "button_label": "",
-            "button_link": "",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": true,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "content_LADXVi": {
-          "type": "content",
-          "settings": {
-            "subheading": "Text",
-            "heading": "Heading",
+            "image": "shopify://shop_images/Hyper-GaN-LP-Charge-4-Devices-Simultaneously-v01-r01-660x600.webp",
+            "image_mobile": "shopify://shop_images/Hyper-GaN-LP-Charge-4-Devices-Simultaneously-v01-r01-660x600.webp",
+            "subheading": "",
+            "heading": "Charge up to 4 Devices Simultaneously",
             "heading_tag": "h2",
             "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
             "button_label": "",
@@ -514,16 +449,14 @@
       },
       "block_order": [
         "content_hDKGWQ",
-        "content_ypYDce",
         "content_AQtNWb",
         "content_j9HWFD",
-        "content_PppeaU",
-        "content_LADXVi"
+        "content_PppeaU"
       ],
       "settings": {
         "image_ratio": "square",
         "image_ratio_mobile": "wide",
-        "heading": "Timeline",
+        "heading": "Go Beyond with GaN",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -540,10 +473,10 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 72,
-        "padding_bottom": 72,
+        "padding_bottom": 84,
         "divider": false,
-        "full_width": false,
-        "rounded": false
+        "full_width": true,
+        "rounded": true
       }
     },
     "scrolling_banner_akhCdT": {
@@ -686,7 +619,7 @@
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "color_text": "",
-        "color_background": "",
+        "color_background": "#f5f5f5",
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
@@ -1752,8 +1685,6 @@
   "order": [
     "main-page",
     "slideshow_whBdME",
-    "empty_space_wtzhWj",
-    "video_hero_8DUt4z",
     "rich_text_HgDAEi",
     "portfolio_6TJRPx",
     "multicolumn_zem9t8",
