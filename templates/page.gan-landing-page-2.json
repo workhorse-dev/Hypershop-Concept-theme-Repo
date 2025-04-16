@@ -114,21 +114,89 @@
         "button_link": "",
         "button_external": false,
         "button_icon": true,
-        "highlighted_text": "none",
+        "highlighted_text": "text",
         "highlighted_scribble": "circle",
         "color_text": "",
         "color_background": "",
         "gradient_background": "",
-        "color_highlight": "",
+        "color_highlight": "#f59e0b",
         "gradient_highlight": "",
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 100,
+        "padding_top": 68,
+        "padding_bottom": 44,
         "divider": false,
         "narrow": true,
         "rounded": false
+      }
+    },
+    "image_with_text_overlay_LRJY6F": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_afThTK": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_WkP6bN": {
+          "type": "heading",
+          "settings": {
+            "heading": "Rapid & Reliable Travel Charging",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_m6W9Jh": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Introducing our newest HyperJuice GaN Chargers, capable of powering up to 4 devices simultaneously, including laptops, tablets, and phones. Compact and perfect for global travel, they come with travel adapters and a C8 adapter for flexible desktop charging. Designed for creators, entrepreneurs, and students, this all-in-one solution meets even the most demanding needs.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_afThTK",
+        "heading_WkP6bN",
+        "text_m6W9Jh"
+      ],
+      "name": "t:sections.image-with-text-overlay.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/Hyper-GaN-LP-Fast-Compact-GaN-Charging-Anywhere-v01-r01-1360x600.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/hyper-gan-fullwidth-mobile-module-1-v01-r01-430x502.webp",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 70,
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "rich_text_HgDAEi": {
@@ -174,10 +242,11 @@
         "text_mTfkaU",
         "button_m4nMhh"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
-        "heading": "HyperJuice GaN Travel Chargers",
+        "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "small",
@@ -459,7 +528,7 @@
             "subheading": "",
             "heading": "Experience Intelligent Fast Charging",
             "heading_tag": "h2",
-            "text": "<p>Intelligent charging with a Programmable Power Supply (PPS) adapts in real time to deliver the perfect wattage your devices demand. PPS provides a variable amount of power depending on what your device requires.</p><p>*Based on charging speeds provided by Apple</p>",
+            "text": "<p>Intelligent charging with a Programmable Power Supply (PPS) adapts in real time to deliver the perfect wattage your devices demand. PPS provides a variable amount of power depending on what your device requires.*Based on charging speeds provided by Apple</p>",
             "button_label": "",
             "button_link": "",
             "button_style": "primary",
@@ -1383,6 +1452,7 @@
         "text_NGzQ66",
         "button_cRxrKf"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
@@ -1505,23 +1575,11 @@
             "vertical_mobile": 75,
             "horizontal_mobile": 65
           }
-        },
-        "product_yhytcd": {
-          "type": "product",
-          "settings": {
-            "product": "",
-            "color_text": "#ffffff",
-            "vertical": 50,
-            "horizontal": 50,
-            "vertical_mobile": 50,
-            "horizontal_mobile": 50
-          }
         }
       },
       "block_order": [
         "product_fTUar7",
-        "product_RktmKU",
-        "product_yhytcd"
+        "product_RktmKU"
       ],
       "settings": {
         "image": "shopify://shop_images/Hyper-GaN-LP-Full-Width-3_Devices-Simultaneously-v01-r01-1360x600.webp",
@@ -1747,6 +1805,7 @@
     "main-page",
     "slideshow_whBdME",
     "highlight_text_R9EV8m",
+    "image_with_text_overlay_LRJY6F",
     "rich_text_HgDAEi",
     "portfolio_6TJRPx",
     "multicolumn_zem9t8",
