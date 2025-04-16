@@ -269,6 +269,24 @@
   cursor: pointer;
 }
 
+.dropdown__navigation {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  background: white;
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
+  border-radius: 1rem;
+  margin-top: 8px;
+  padding: 0;
+  list-style: none;
+  min-width: 200px;
+  opacity: 0;
+  visibility: hidden;
+  transform: translateY(10px);
+  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
+  z-index: 999;
+}
+
 .dropdown-container:hover .dropdown__navigation {
   opacity: 1;
   visibility: visible;
@@ -287,33 +305,7 @@
   opacity: 0;
   transform: translateX(20px);
 }
-/* Dropdown container fade/slide from top */
-.dropdown__navigation {
-  position: absolute;
-  top: 100%;
-  left: 0;
-  background: white;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-  border-radius: 1rem;
-  margin-top: 8px;
-  padding: 0;
-  list-style: none;
-  min-width: 200px;
-  opacity: 0;
-  visibility: hidden;
-  transform: translateY(-10px); /* move upward */
-  transition: opacity 0.3s ease, transform 0.3s ease, visibility 0.3s ease;
-  z-index: 999;
-}
-
-.dropdown-container:hover .dropdown__navigation {
-  opacity: 1;
-  visibility: visible;
-  transform: translateY(0);
-}
-
-/* Animate each <li> from right to left */
-@keyframes fadeInRightToLeft {
+  @keyframes fadeInRightToLeft {
   from {
     opacity: 0;
     transform: translateX(20px);
@@ -324,18 +316,11 @@
   }
 }
 
-/* Initial state of li */
-.dropdown__navigation .menu-link {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-/* On dropdown hover: animate each li */
 .dropdown-container:hover .dropdown__navigation .menu-link {
   animation: fadeInRightToLeft 0.3s ease forwards;
 }
 
-/* Stagger the animations */
+/* Add stagger effect */
 .dropdown-container:hover .dropdown__navigation .menu-link:nth-child(1) {
   animation-delay: 0.05s;
 }
@@ -351,7 +336,8 @@
 .dropdown-container:hover .dropdown__navigation .menu-link:nth-child(5) {
   animation-delay: 0.25s;
 }
-/* Add more nth-childs as needed */
+/* Add more nth-child rules if needed based on how many grandchild links you have */
+
 
 </style>
 
