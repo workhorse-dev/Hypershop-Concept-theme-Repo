@@ -225,22 +225,46 @@
                 {%- if block.settings[tab_target_link].type == 'collection_link'
                   or block.settings[tab_target_link].type == 'product_link'
                 -%}
-                  <button
-                    type="button"
-                    class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text"
-                    role="tab"
-                    aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
-                    data-index="{{ forloop_index }}"
-                    {% if forloop_first %}
-                      disabled
-                    {% endif %}
-                  >
-                    {{- tab_heading -}}
-                  </button>
-                  {%- liquid
-                    assign forloop_first = false
-                    assign forloop_index = forloop_index | plus: 1
-                  -%}
+                  <div class="mega-menu__nav-item-wrapper group relative">
+                    <div class="dropdown-container">
+                      <button
+                        type="button"
+                        class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
+                        role="tab"
+                        aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
+                        data-index="{{ forloop_index }}"
+                        {% if forloop_first %}
+                          disabled
+                        {% endif %}
+                      >
+                        {{- tab_heading -}}
+                      </button>
+
+                      <!-- Dropdown menu -->
+                      <ul class="dropdown__navigation ">
+                        {% for link in section.settings.menu.links %}
+                          {% if link.title == block.settings.menu_title %}
+                            {% for child_link in link.links %}
+                              {% if child_link.title == tab_target_heading %}
+                                {% for grandchild_link in child_link.links %}
+                                  <li class="menu-link ">
+                                    <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">
+                                      {{- grandchild_link.title -}}
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {{ 'dropdown-menu-child-link.css' | asset_url | stylesheet_tag }}
+
+                    {%- liquid
+                      assign forloop_first = false
+                      assign forloop_index = forloop_index | plus: 1
+                    -%}
                 {%- else -%}
                   <a
                     href="{{ block.settings[tab_target_link].url }}"
@@ -302,101 +326,6 @@
                     {%- if block.settings.heading_2 != blank -%}
                       <p class="text-sm text-opacity leading-none uppercase">{{ block.settings.heading_2 | escape }}</p>
                     {%- endif -%}
-
-                    <details
-                      is="details-dropdown"
-                      trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}"
-                      level="top"
-                    >
-                      <summary
-                        data-link="{{ link.url }}"
-                        class="z-2 relative{% if section.settings.menu_active == 'block' %} rounded-full{% endif %}"
-                      >
-                        <button
-                          type="button"
-                          class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"
-                          is="magnet-button"
-                          {% if section.settings.menu_active == 'block' %}
-                            data-magnet="0"
-                          {% endif %}
-                          tabindex="-1"
-                        >
-                          <span class="btn-text" data-text>
-                            {%- liquid
-                              echo 'Sub-category'
-                              unless section.settings.hover_menu
-                                render 'icon', icon: 'chevron-menu'
-                              endunless
-                            -%}
-                          </span>
-                          {%- if section.settings.menu_active == 'block' -%}
-                            <span class="btn-text btn-duplicate">
-                              {%- liquid
-                                echo 'Sub-category'
-                                unless section.settings.hover_menu
-                                  render 'icon', icon: 'chevron-menu'
-                                endunless
-                              -%}
-                            </span>
-                          {%- endif -%}
-                        </button>
-                      </summary>
-                      <style>
-                        .header .subCategory {
-                            padding-block-start: 4rem;
-                        }
-                      </style>
-                      <div
-                        id="DropdownMenu-{{ section.id }}-{{ forloop.index }}-{{ dir }}"
-                        class="subCategory dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none z-2"
-                      >
-                        <div class="dropdown__container relative">
-                          {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
-                          <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
-                            {%- for childlink in link.links -%}
-                              {%- if childlink.links != blank -%}
-                                <li class="opacity-0 relative">
-                                  <details
-                                    is="details-dropdown"
-                                    trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}"
-                                    level="child"
-                                  >
-                                    <summary data-link="{{ childlink.url }}">
-                                      <a href="{{ childlink.url }}" class="reversed-link text-sm-base" tabindex="-1">
-                                        {{- childlink.title -}}
-                                      </a>
-                                    </summary>
-                                    <div class="dropdown opacity-0 invisible absolute top-0 left-100 max-w-full pointer-events-none">
-                                      <div class="dropdown__container">
-                                        <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
-                                          {%- for grandchildlink in childlink.links -%}
-                                            <li class="opacity-0">
-                                              <p>
-                                                <a href="{{ grandchildlink.url }}" class="reversed-link text-sm-base">
-                                                  {{- grandchildlink.title -}}
-                                                </a>
-                                              </p>
-                                            </li>
-                                          {%- endfor -%}
-                                        </ul>
-                                      </div>
-                                    </div>
-                                  </details>
-                                </li>
-                              {%- else -%}
-                                <li class="opacity-0">
-                                  <p>
-                                    <a href="{{ childlink.url }}" class="reversed-link text-sm-base">
-                                      {{- childlink.title -}}
-                                    </a>
-                                  </p>
-                                </li>
-                              {%- endif -%}
-                            {%- endfor -%}
-                          </ul>
-                        </div>
-                      </div>
-                    </details>
 
                     {% if block.settings[tab_target_link].type == 'collection_link' %}
                       <a
