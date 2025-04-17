@@ -226,48 +226,45 @@
                   or block.settings[tab_target_link].type == 'product_link'
                 -%}
                   <div class="mega-menu__nav-item-wrapper group relative">
+                    <div class="dropdown-container">
+                      <button
+                        type="button"
+                        class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
+                        role="tab"
+                        aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
+                        data-index="{{ forloop_index }}"
+                        {% if forloop_first %}
+                          disabled
+                        {% endif %}
+                      >
+                        {{- tab_heading -}}
+                      </button>
 
-                    
-<div class="dropdown-container">
-  <button
-    type="button"
-    class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
-    role="tab"
-    aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
-    data-index="{{ forloop_index }}"
-    {% if forloop_first %}
-      disabled
-    {% endif %}
-  >
-    {{- tab_heading -}}
-  </button>
+                      <!-- Dropdown menu -->
+                      <ul class="dropdown__navigation ">
+                        {% for link in section.settings.menu.links %}
+                          {% if link.title == block.settings.menu_title %}
+                            {% for child_link in link.links %}
+                              {% if child_link.title == tab_target_heading %}
+                                {% for grandchild_link in child_link.links %}
+                                  <li class="menu-link ">
+                                    <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">
+                                      {{- grandchild_link.title -}}
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {{ 'dropdown-menu-child-link.css' | asset_url | stylesheet_tag }}
 
-  <!-- Dropdown menu -->
- <ul class="dropdown__navigation ">
-    {% for link in section.settings.menu.links %}
-     
-      {% if link.title == block.settings.menu_title %}
-        {% for child_link in link.links %}
-          {% assign link_title = child_link.title | downcase %}
-            {{ link_title }}
-          {% if child_link.title == tab_target_heading %}
-            {% for grandchild_link in child_link.links %}
-              <li class="menu-link ">
-                <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">{{ grandchild_link.title }}</a>
-              </li>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
-{{ 'dropdown-menu-child-link.css' | asset_url|  stylesheet_tag }}
-
-                  {%- liquid
-                    assign forloop_first = false
-                    assign forloop_index = forloop_index | plus: 1
-                  -%}
+                    {%- liquid
+                      assign forloop_first = false
+                      assign forloop_index = forloop_index | plus: 1
+                    -%}
                 {%- else -%}
                   <a
                     href="{{ block.settings[tab_target_link].url }}"
@@ -330,10 +327,6 @@
                       <p class="text-sm text-opacity leading-none uppercase">{{ block.settings.heading_2 | escape }}</p>
                     {%- endif -%}
 
-                    
-                          
-                        
-                    
                     {% if block.settings[tab_target_link].type == 'collection_link' %}
                       <a
                         class="mega-menu__link link icon-with-text"
