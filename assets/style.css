@@ -109,3 +109,8 @@ button.shopify-payment-button__button--unbranded,
     --nav-tabs-width: min(340px, 25vw);
   }
 }
+
+/* Image banner */
+.slideshow-dots {
+  border-block-start: none;
+}
