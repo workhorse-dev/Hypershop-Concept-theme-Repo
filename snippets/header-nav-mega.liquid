@@ -245,6 +245,8 @@
   <!-- Dropdown menu -->
  <ul class="dropdown__navigation ">
     {% for link in section.settings.menu.links %}
+      {% assign link_title = link.title | | downcase %}
+      {{ link_title }}
       {% if link.title == block.settings.menu_title %}
         {% for child_link in link.links %}
           {% if child_link.title == tab_target_heading %}
