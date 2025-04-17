@@ -245,10 +245,11 @@
   <!-- Dropdown menu -->
  <ul class="dropdown__navigation ">
     {% for link in section.settings.menu.links %}
-      {% assign link_title = link.title | downcase %}
-      {{ link_title }}
+     
       {% if link.title == block.settings.menu_title %}
         {% for child_link in link.links %}
+          {% assign link_title = child_link.title | downcase %}
+            {{ link_title }}
           {% if child_link.title == tab_target_heading %}
             {% for grandchild_link in child_link.links %}
               <li class="menu-link ">
