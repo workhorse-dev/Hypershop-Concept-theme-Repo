@@ -1,4 +1,3 @@
-{{ 'dropdown-menu-child-link.css' | asset_url|  stylesheet_tag }}
 {%- liquid
   assign section_rendering_api = false
   if section.index == null
@@ -260,7 +259,7 @@
     {% endfor %}
   </ul>
 </div>
-
+{{ 'dropdown-menu-child-link.css' | asset_url|  stylesheet_tag }}
 
                   {%- liquid
                     assign forloop_first = false
