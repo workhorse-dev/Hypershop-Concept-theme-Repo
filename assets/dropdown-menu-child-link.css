@@ -61,8 +61,11 @@
 .dropdown-container:hover .dropdown__navigation .menu-link {
   animation: fadeInRightToLeft 0.5s ease forwards;
 }
+.dropdown-container svg {
+  transition: transform 0.3s ease;
+}
 .dropdown-container:hover svg {
-  transform: rotate(90deg);
+  transform: rotate(180deg);
 }
 
 /* Staggered delays */
