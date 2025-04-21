@@ -110,7 +110,14 @@ button.shopify-payment-button__button--unbranded,
   }
 }
 
-/* Image banner */
+/* Image banner CSS*/
 .slideshow-dots {
   border-block-start: none;
+}
+
+/* Product image thumbnails  CSS*/
+@media screen and (min-width: 1700px) {
+    .product__thumbnails--beside .product__thumbnails-list {
+        max-height: 700px;
+    }
 }
