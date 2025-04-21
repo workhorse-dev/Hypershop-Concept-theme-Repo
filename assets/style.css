@@ -110,7 +110,24 @@ button.shopify-payment-button__button--unbranded,
   }
 }
 
-/* Image banner */
+/* Image banner CSS*/
 .slideshow-dots {
   border-block-start: none;
+}
+
+/* Product image thumbnails  CSS*/
+@media screen and (min-width: 1700px) {
+    .product__thumbnails--beside .product__thumbnails-list {
+        max-height: 700px;
+    }
+}
+@media screen and (min-width: 1800px) {
+    .product__thumbnails--beside .product__thumbnails-list {
+        max-height: 800px;
+    }
+}
+@media screen and (min-width: 1900px) {
+    .product__thumbnails--beside .product__thumbnails-list {
+        max-height: 870px;
+    }
 }
