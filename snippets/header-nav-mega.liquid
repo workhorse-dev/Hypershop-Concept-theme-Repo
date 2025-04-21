@@ -226,127 +226,40 @@
                   or block.settings[tab_target_link].type == 'product_link'
                 -%}
                   <div class="mega-menu__nav-item-wrapper group relative">
-                   <div class="dropdown-container-pushdown">
-  <!-- Trigger Button -->
-  <button
-    type="button"
-    class="dropdown-trigger-pushdown"
-    aria-controls="dropdown-pushdown-{{ forloop_index }}"
-    {% if forloop_first %}
-      disabled
-    {% endif %}
-  >
-    {{- tab_heading -}}
-  </button>
+                    <div class="dropdown-container">
+                      <button
+                        type="button"
+                        class="mega-menu__nav-item flex gap-2 items-center link icon-with-text dropdown-trigger"
+                        role="tab"
+                        aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}"
+                        data-index="{{ forloop_index }}"
+                        {% if forloop_first %}
+                          disabled
+                        {% endif %}
+                      >
+                        {{- tab_heading -}}
+                      </button>
 
-  <!-- Dropdown Menu -->
-  <ul class="dropdown__navigation-pushdown" id="dropdown-pushdown-{{ forloop_index }}">
-    {% for link in section.settings.menu.links %}
-      {% if link.title == block.settings.menu_title %}
-        {% for child_link in link.links %}
-          {% if child_link.title == tab_target_heading %}
-            {% for grandchild_link in child_link.links %}
-              <li class="menu-link">
-                <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">
-                  {{ grandchild_link.title }}
-                </a>
-              </li>
-            {% endfor %}
-          {% endif %}
-        {% endfor %}
-      {% endif %}
-    {% endfor %}
-  </ul>
-</div>
-
-<style>
-/* Container (standard flow) */
-.dropdown-container-pushdown {
-  display: block;
-  width: 100%;
-}
-
-/* Button styling */
-.dropdown-trigger-pushdown {
-  display: inline-flex;
-  gap: 0.5rem;
-  align-items: center;
-  cursor: pointer;
-  padding: 10px 16px;
-  font-weight: bold;
-}
-
-/* Dropdown: collapses and expands with smooth transition */
-.dropdown__navigation-pushdown {
-  overflow: hidden;
-  max-height: 0;
-  opacity: 0;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  background: #fff;
-  border-radius: 1rem;
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
-}
-
-/* Show dropdown on container hover */
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown {
-  max-height: 1000px; /* large enough to fit content */
-  opacity: 1;
-}
-
-/* Animate each <li> */
-@keyframes fadeInRightToLeft {
-  from {
-    opacity: 0;
-    transform: translateX(20px);
-  }
-  to {
-    opacity: 1;
-    transform: translateX(0);
-  }
-}
-
-.dropdown__navigation-pushdown .menu-link {
-  opacity: 0;
-  transform: translateX(20px);
-}
-
-/* Trigger animation only when dropdown is open */
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link {
-  animation: fadeInRightToLeft 0.3s ease forwards;
-}
-
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link:nth-child(1) {
-  animation-delay: 0.05s;
-}
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link:nth-child(2) {
-  animation-delay: 0.1s;
-}
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link:nth-child(3) {
-  animation-delay: 0.15s;
-}
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link:nth-child(4) {
-  animation-delay: 0.2s;
-}
-.dropdown-container-pushdown:hover .dropdown__navigation-pushdown .menu-link:nth-child(5) {
-  animation-delay: 0.25s;
-}
-
-/* Link styling */
-.menu-link a {
-  display: block;
-  padding: 10px 16px;
-  text-decoration: none;
-  color: #111;
-}
-
-.menu-link a:hover {
-  background-color: #f3f3f3;
-}
-</style>
-
+                      <!-- Dropdown menu -->
+                      <ul class="dropdown__navigation ">
+                        {% for link in section.settings.menu.links %}
+                          {% if link.title == block.settings.menu_title %}
+                            {% for child_link in link.links %}
+                              {% if child_link.title == tab_target_heading %}
+                                {% for grandchild_link in child_link.links %}
+                                  <li class="menu-link ">
+                                    <a href="{{ grandchild_link.url }}" class="reversed-link text-sm-base">
+                                      {{- grandchild_link.title -}}
+                                    </a>
+                                  </li>
+                                {% endfor %}
+                              {% endif %}
+                            {% endfor %}
+                          {% endif %}
+                        {% endfor %}
+                      </ul>
+                    </div>
+                    {{ 'dropdown-menu-child-link.css' | asset_url | stylesheet_tag }}
 
                     {%- liquid
                       assign forloop_first = false
