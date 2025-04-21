@@ -123,15 +123,10 @@ button.shopify-payment-button__button--unbranded,
 }
 @media screen and (min-width: 1800px) {
     .product__thumbnails--beside .product__thumbnails-list {
-        max-height: 760px;
-    }
-}
-@media screen and (min-width: 1900px) {
-    .product__thumbnails--beside .product__thumbnails-list {
         max-height: 800px;
     }
 }
-@media screen and (min-width: 2000px) {
+@media screen and (min-width: 1900px) {
     .product__thumbnails--beside .product__thumbnails-list {
         max-height: 870px;
     }
