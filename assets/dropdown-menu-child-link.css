@@ -19,7 +19,7 @@
   max-height: 0;
   opacity: 0;
   overflow: hidden;
-  transition: max-height 0.4s ease, opacity 0.4s ease;
+  transition: max-height 0.8s ease, opacity 0.8s ease;
 }
 .dropdown-container:hover .dropdown__navigation {
   max-height: 500px; /* Adjust based on your expected content */
