@@ -131,3 +131,9 @@ button.shopify-payment-button__button--unbranded,
         max-height: 870px;
     }
 }
+
+/* header nav CSS */
+button.mega-menu__nav-item{
+    text-align: start;
+    width: max-content;
+}
