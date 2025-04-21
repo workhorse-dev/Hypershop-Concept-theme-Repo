@@ -12,8 +12,8 @@
   background: white;
   box-shadow: 0 8px 16px rgba(0, 0, 0, 0.1);
   border-radius: 1rem;
-  padding: 1rem;
   margin-top: 8px;
+  padding: 0;
   list-style: none;
   min-width: 200px;
   max-height: 0;
@@ -24,6 +24,7 @@
 .dropdown-container:hover .dropdown__navigation {
   max-height: 500px; /* Adjust based on your expected content */
   opacity: 1;
+  padding: 1rem;
 }
 .menu-link {
   opacity: 0;
