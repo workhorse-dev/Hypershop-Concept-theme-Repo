@@ -53,7 +53,7 @@
               {%- elsif block.settings.image != blank -%}
                 {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
                 <a class="block media media--{{ block.settings.image_ratio }} media--transparent relative overflow-hidden"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} aria-label="{{ block.settings.heading | escape }}">
-                  {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', sizes: sizes, is: 'lazy-image', class: 'inline-block' -}}
+                  {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', sizes: sizes, is: 'lazy-image', class: 'inline-block w-full' -}}
                 </a>
               {%- endif -%}
 
