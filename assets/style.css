@@ -88,13 +88,7 @@ button.shopify-payment-button__button--unbranded,
 .shop-the-feed .media img.loaded {
   width: 100%;
 }
-/* Shop the look */
-.shop-the--look .product-card__media  {
-    /* padding: 0 1rem; */
-}
-.shop-the--look .product-card__media  {
-    /* background-color: white; */
-}
+
 /* Header CSS */
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
@@ -123,27 +117,26 @@ button.shopify-payment-button__button--unbranded,
 
 /* Product image thumbnails  CSS*/
 @media screen and (min-width: 1700px) {
-    .product__thumbnails--beside .product__thumbnails-list {
-        max-height: 700px;
-    }
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 700px;
+  }
 }
 @media screen and (min-width: 1800px) {
-    .product__thumbnails--beside .product__thumbnails-list {
-        max-height: 800px;
-    }
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 800px;
+  }
 }
 @media screen and (min-width: 1900px) {
-    .product__thumbnails--beside .product__thumbnails-list {
-        max-height: 870px;
-    }
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 870px;
+  }
 }
 
 /* header nav CSS */
-button.mega-menu__nav-item{
-    text-align: start;
-    width: max-content;
-}
+button.mega-menu__nav-item {text-align: start;width: max-content;}
+
 /* Timeline Section CSS */
-.timeline-dots button {
-    white-space: nowrap;
-}
+.timeline-dots button {white-space: nowrap;}
+
+/* Shop the look CSS */
+.shop-the--look .card.product-card{padding: 0 1rem;}
