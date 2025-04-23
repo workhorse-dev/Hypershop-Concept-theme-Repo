@@ -89,7 +89,7 @@ button.shopify-payment-button__button--unbranded,
   width: 100%;
 }
 /* Shop the look */
-.shop-the--look .product-card__media {
+.shop-the--look .product-card__media ,.shop-the--look .product-card__content {
     padding: 0 1rem;
     background-color: white;
 }
