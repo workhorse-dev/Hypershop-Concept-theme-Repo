@@ -91,9 +91,10 @@ button.shopify-payment-button__button--unbranded,
 /* Shop the look */
 .shop-the--look .product-card__media ,.shop-the--look .product-card__content {
     padding: 0 1rem;
+}
+.shop-the--look .product-card__media  {
     background-color: white;
 }
-
 /* Header CSS */
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
