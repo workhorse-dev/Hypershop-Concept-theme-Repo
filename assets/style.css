@@ -140,3 +140,11 @@ button.mega-menu__nav-item {text-align: start;width: max-content;}
 
 /* Shop the look CSS */
 .shop-the--look .card.product-card{padding: 0 1rem;}
+
+/* Sticky add to cart */
+@media screen and (max-width: 767px) {
+    .product-sticky-form .button {
+       
+        width: 10rem;
+    }
+}
