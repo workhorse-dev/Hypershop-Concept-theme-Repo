@@ -380,18 +380,18 @@
     </div>
   {%- endif -%}
 </div>
-<form action="{{ routes.cart_url }}" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
-                    
-                      <button class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" type="submit" name="checkout" is="hover-button">
-                        <span class="btn-fill" data-fill></span>
-                        <span class="btn-text">
-                          {%- liquid
-                            render 'icon', icon: 'lock', size: 'sm', class: 'hidden sm:block'
-                            echo 'cart.general.checkout' | t
-                          -%}
-                        </span>
-                      </button>
-                    
-                    
-                   
-                  </form>
+<button
+  type="submit"
+  name="checkout"
+  form="{{ product_form_id }}"
+  class="product-form__submit button button--primary button--fixed grow"
+  is="hover-button"
+  formaction="/checkout"
+  {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+>
+  <span class="btn-fill" data-fill></span>
+  <span class="btn-text">
+    <span>{{ 'products.product.buy_now' | t }}</span>
+  </span>
+</button>
+
