@@ -257,7 +257,8 @@
           <button type="button"
                 class="button button--primary icon-with-text col-span-full w-full"
                 is="hover-button"
-                onclick="redirectToCheckout(this)">
+                onclick="redirectToCheckout(this)"
+                {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}>
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
             <svg class="icon icon-lock icon-sm hidden sm:block" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
