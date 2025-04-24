@@ -146,9 +146,9 @@
                               <div class="grid gap-1">
                                 <div class="price{% if item.original_price != item.final_price %} price--on-sale{% endif %} text-sm flex flex-wrap gap-1d5">
                                   {%- liquid
-                                    assign money_price = item.original_price | money
+                                    assign money_price = item.original_price | money | replace: ' ', '' 
                                     if settings.currency_code_enabled
-                                      assign money_price = item.original_price | money_with_currency
+                                      assign money_price = item.original_price | money_with_currency | replace: ' ', '' 
                                     endif
                                   -%}
                                   {%- if item.original_price != item.final_price -%}
@@ -158,9 +158,9 @@
                                     <span class="price__regular whitespace-nowrap">
                                       {%- liquid
                                         if settings.currency_code_enabled
-                                          echo item.final_price | money_with_currency
+                                          echo item.final_price | money_with_currency| replace: ' ', '' 
                                         else
-                                          echo item.final_price | money
+                                          echo item.final_price | money| replace: ' ', '' 
                                         endif
                                       -%}
                                     </span>
