@@ -15,7 +15,7 @@
       "type": "cart-drawer",
       "settings": {
         "show_vendor": false,
-        "show_cart_note": true,
+        "show_cart_note": false,
         "show_shipping_calculator": true,
         "show_view_cart_button": true,
         "show_checkout_button": true,
@@ -28,7 +28,9 @@
         "show_cart_recommendations_price": true,
         "cart_recommendations_products": [
           "hyperjuice-magnetic-wireless-battery-pack",
-          "hyperpack-pro-with-apple-find-my"
+          "hyperpack-pro-with-apple-find-my",
+          "hyperdrive-usb-c-to-hdmi-4k60hz-cable",
+          "hyperdrive-next-usb4-type-c-performance-cable-1-2m-4ft"
         ],
         "empty_cart_message": "<p>Not sure where to start?<br/>Try these collections:</p>",
         "empty_cart_collections": [],
