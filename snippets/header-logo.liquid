@@ -52,8 +52,7 @@
         {%- comment -%} Mobile logo {%- endcomment -%}
         {%- capture mobile_sizes -%}{{ settings.logo_width_mobile }}px{%- endcapture -%}
         {%- capture mobile_widths -%}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 2 | at_most: white_logo_mobile.width }}{%- endcapture -%}
-        {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: white_logo_mobile.aspect_ratio }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
-{{ white_logo_mobile.aspect_ratio }}
+        {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: 2 }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
         {%- liquid
           echo white_logo | image_url: width: white_logo.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo hidden md:block absolute'
           echo white_logo_mobile | image_url: width: white_logo_mobile.width | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo md:hidden absolute'
