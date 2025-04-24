@@ -381,7 +381,7 @@
   {%- endif -%}
 </div>
 <form action="{{ routes.cart_url }}" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
-                    {%- if section.settings.show_checkout_button -%}
+                    
                       <button class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" type="submit" name="checkout" is="hover-button">
                         <span class="btn-fill" data-fill></span>
                         <span class="btn-text">
@@ -391,12 +391,7 @@
                           -%}
                         </span>
                       </button>
-                    {%- endif -%}
                     
-                    {%- if section.settings.show_view_cart_button -%}
-                      <a href="{{ routes.cart_url }}" class="button button--secondary{% if section.settings.show_checkout_button %} col-span-6 md:col-span-5{% else %} col-span-full{% endif %}" is="hover-link" data-no-instant>
-                        <span class="btn-fill" data-fill></span>
-                        <span class="btn-text">{{ 'general.cart.view_cart' | t }}</span>
-                      </a>
-                    {%- endif -%}
+                    
+                   
                   </form>
