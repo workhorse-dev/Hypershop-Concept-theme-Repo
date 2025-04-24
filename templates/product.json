@@ -87,6 +87,7 @@
           "type": "buy_buttons",
           "settings": {
             "show_quantity_selector": true,
+            "show_buy_now": true,
             "show_price": false,
             "show_dynamic_checkout": false,
             "show_payment_icons": true,
@@ -305,8 +306,8 @@
           "type": "column",
           "settings": {
             "show_border": false,
-            "text_alignment": "left",
-            "text_alignment_mobile": "left",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
             "image_ratio": "adapt",
             "heading": "Example title",
             "heading_size": "text-lg-2xl",
@@ -324,8 +325,8 @@
           "type": "column",
           "settings": {
             "show_border": false,
-            "text_alignment": "left",
-            "text_alignment_mobile": "left",
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
             "image_ratio": "adapt",
             "heading": "Example title",
             "heading_size": "text-lg-2xl",
