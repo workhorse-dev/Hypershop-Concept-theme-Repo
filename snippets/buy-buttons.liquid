@@ -282,7 +282,7 @@
                 const formData = new FormData(form);
                 const variantId = formData.get('id');
                 const quantity = formData.get('quantity') || 1;
-                console.log(variantId);
+                console.log(variantId, "666");
                 window.location.href = `/cart/${variantId}:${quantity}`;
               }
             </script>
