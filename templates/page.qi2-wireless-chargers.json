@@ -122,67 +122,37 @@
         "image_TXdrrT": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/iPhone-v01-r01_1_1_copy_1.jpg",
+            "image": "shopify://shop_images/iPhone-v01-r01_1_1_copy_1_17e3e46d-4a34-43d9-b724-75e6a7946242.jpg",
             "image_mobile": "shopify://shop_images/iPhone-v01-r01_1_1_copy_1_17e3e46d-4a34-43d9-b724-75e6a7946242.jpg",
             "heading": "HyperJuice Next  Qi2 4-in-1 Magnetic Charging Stand",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "View Product",
             "button_link": "https://www.hypershop.com/products/hyperjuice-qi2-4-in-1-magnetic-charging-stand",
-            "button_style": "secondary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "image_fkhHXB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/untitled_1_645x_60a09135-1fbc-4adf-8dc6-3875c3486c72.webp",
-            "heading": "HyperJuice Qi2 3-in-1 Magnetic Charging Stand",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "View Product",
-            "button_link": "https://www.hypershop.com/products/hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
-            "button_style": "secondary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "image_EBigH7": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Frame_17_645x_61291987-b9bd-4e7e-8cc7-5d840475da3b.webp",
-            "heading": "HyperJuice Qi2 2-in-1 Magnetic Charging Stand",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "View Product",
-            "button_link": "https://www.hypershop.com/products/hyperjuice-next-qi2-2-in-1-magnetic-charging-stand",
-            "button_style": "secondary",
+            "button_style": "primary",
             "button_external": false,
             "button_icon": false
           }
         }
       },
       "block_order": [
-        "image_TXdrrT",
-        "image_fkhHXB",
-        "image_EBigH7"
+        "image_TXdrrT"
       ],
       "settings": {
         "autoplay": false,
         "autoplay_speed": 5,
         "show_navigation": true,
-        "image_height": "650px",
+        "image_height": "750px",
         "content_width": "small",
         "image_height_mobile": "auto",
         "color_text": "#ffffff",
         "color_background": "#ffffff",
         "gradient_background": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "color_overlay": "#171717",
-        "overlay_opacity": 10,
+        "overlay_opacity": 0,
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
@@ -190,6 +160,100 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "collage_grid_8zGf6P": {
+      "type": "collage-grid",
+      "blocks": {
+        "image_BrTTb4": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        },
+        "image_nyjWTV": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "",
+            "heading": "",
+            "link": "",
+            "invert_subheading_heading": false,
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        }
+      },
+      "block_order": [
+        "image_BrTTb4",
+        "image_nyjWTV"
+      ],
+      "name": "t:sections.collage-grid.presets.name",
+      "settings": {
+        "row_height": 300,
+        "row_height_mobile": 150,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true
       }
     },
     "images_with_text_qbWQ6X": {
@@ -493,6 +557,7 @@
     "video_CzXDnH",
     "rich_text_gTJxjX",
     "slideshow_pGYbWN",
+    "collage_grid_8zGf6P",
     "images_with_text_qbWQ6X",
     "image_with_text_PdLPwr",
     "video_with_text_overlay_EbwHA7",
