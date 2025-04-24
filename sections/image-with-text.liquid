@@ -84,7 +84,7 @@
               {%- when 'heading' -%}
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
-                  <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  <{{ block.settings.heading_tag }} class="heading leading-tight {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                     {%- if block.settings.highlighted_text == 'none' -%}
                       <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ block.settings.heading }}</split-words>
                     {%- else -%}
