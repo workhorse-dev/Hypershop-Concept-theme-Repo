@@ -394,9 +394,9 @@
                           <span class="price text-base-xl"> tbody
                             {%- liquid
                               if settings.currency_code_enabled
-                                echo item.final_line_price | money_with_currency
+                                echo item.final_line_price | money_with_currency | replace: ' ', '' 
                               else
-                                echo item.final_line_price | money
+                                echo item.final_line_price | money | replace: ' ', '' 
                               endif
                             -%}
                           </span>
