@@ -8,10 +8,13 @@
 
 /*! blog-posts */
 
-.blog-grid {
+
+
+@media screen and (min-width: 769px) {
+  .blog-grid {
   --card-grid-gap: var(--sp-10) var(--sp-4);
 }
-
+}
 @media screen and (min-width: 1024px) {
   .blog-grid {
     --card-grid-gap: clamp(40px, 3.5vw, 60px);
