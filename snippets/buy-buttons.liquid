@@ -267,28 +267,9 @@
             {%- endif -%}
           </span>
         </button>
-         <button 
-          type="button" 
-          class=" w-full buy-now-button product-form__submit button button--primary button--fixed grow{"
-          onclick="redirectToBuyNow(button)"
-          is="hover-button"
-          >
-              <span class="btn-fill" data-fill></span>
-              <span class="btn-text">
-                <span>
-                  Buy Now
-                </span
-              </span>
-        </button>
-        <script>
-           function redirectToBuyNow(button) {
-            const form = button.closest('form');
-            const formData = new FormData(form);
-            const variantId = formData.get('id');
-            const quantity = formData.get('quantity') || 1;
-            window.location.href = `/cart/${variantId}:${quantity}`;
-          }
-        </script>
+        <button type="button" class="buy-now-button" onclick="window.location.href='/checkout'">
+  Buy Now
+</button>
         {%- if enable_back_in_stock -%}
           <button
             type="button"
