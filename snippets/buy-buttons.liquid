@@ -380,18 +380,42 @@
     </div>
   {%- endif -%}
 </div>
-<button
-  type="submit"
-  name="checkout"
-  form="{{ product_form_id }}"
-  class="product-form__submit button button--primary button--fixed grow"
-  is="hover-button"
-  formaction="/checkout"
-  {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+<form
+  action="/cart/add"
+  method="POST"
+  novalidate
+  class="drawer__footer-buttons grid grid-cols-12 gap-4"
+  onsubmit="event.preventDefault(); redirectToCheckout(this);"
 >
-  <span class="btn-fill" data-fill></span>
-  <span class="btn-text">
-    <span>{{ 'products.product.buy_now' | t }}</span>
-  </span>
-</button>
+  <input
+    type="hidden"
+    name="id"
+    value="{{ product.selected_or_first_available_variant.id }}"
+  >
+  <input type="hidden" name="quantity" value="1">
+
+  <button
+    class="button button--primary icon-with-text col-span-full"
+    type="submit"
+    is="hover-button"
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        render 'icon', icon: 'lock', size: 'sm', class: 'hidden sm:block'
+        echo 'Buy Now'
+      -%}
+    </span>
+  </button>
+</form>
+
+<script>
+  function redirectToCheckout(form) {
+    const variantId = form.querySelector('[name="id"]').value;
+    const quantity = form.querySelector('[name="quantity"]').value || 1;
+
+    const checkoutUrl = `/cart/${variantId}:${quantity}`;
+    window.location.href = checkoutUrl;
+  }
+</script>
 
