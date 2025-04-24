@@ -307,10 +307,10 @@
         "parallax_direction": "vertical"
       }
     },
-    "images_with_text_qbWQ6X": {
-      "type": "images-with-text",
+    "image_with_text_CHi6Ht": {
+      "type": "image-with-text",
       "blocks": {
-        "heading_TpMQ8A": {
+        "heading_dnGEyw": {
           "type": "heading",
           "settings": {
             "heading": "Wireless Qi2 iPhone Charging with up to 15W",
@@ -320,7 +320,7 @@
             "highlighted_scribble": "circle"
           }
         },
-        "text_77aUrc": {
+        "text_z4GC6D": {
           "type": "text",
           "settings": {
             "text": "<p>No more waiting around for your devices to charge. Wirelessly charge 2X faster with the power of Qi2, delivering up to 15W of charging power to fast charge Qi2-enabled devices. Providing optimal energy usage and safeguarding your device's battery life, ensuring you stay powered up and ready for anything.</p>",
@@ -331,34 +331,52 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_RcLp7G": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
-        "heading_TpMQ8A",
-        "text_77aUrc"
+        "heading_dnGEyw",
+        "text_z4GC6D",
+        "button_RcLp7G"
       ],
+      "name": "t:sections.image-with-text.presets.name",
       "settings": {
-        "image": "shopify://shop_images/image_1_10_1024x1024_78effa0f-6e78-457c-b95d-51b4ccee929f.webp",
-        "image_2": "shopify://shop_images/HJ3320-v02-r02_1.webp",
-        "image_ratio": "portrait",
+        "image": "shopify://shop_images/HJ3320-v02-r02_1.jpg",
+        "image_height": "900px",
         "image_width": "medium",
         "layout": "image_first",
         "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/HJ3320-v02-r02_1.jpg",
+        "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
         "color_background": "",
         "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 84,
+        "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
         "rounded": false,
-        "enable_parallax": true
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "image_with_text_PdLPwr": {
@@ -393,7 +411,7 @@
       ],
       "settings": {
         "image": "shopify://shop_images/Image_1_1024x1024_cf68ec7a-606a-4042-b6bf-15382d56d280.jpg",
-        "image_height": "650px",
+        "image_height": "850px",
         "image_width": "medium",
         "layout": "text_first",
         "text_alignment": "left",
@@ -416,6 +434,55 @@
         "full_width": false,
         "rounded": false,
         "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "slideshow_niqJG4": {
+      "type": "slideshow",
+      "blocks": {
+        "video_mgiPqH": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/hyper-HJ3004-qi2-4-in-1-4-devices-animation-v01-r01-1360x600.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "",
+            "video_url_mobile": "",
+            "heading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "video_mgiPqH"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "color_text": "#ffffff",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
         "parallax_direction": "vertical"
       }
     },
@@ -451,6 +518,7 @@
         "heading_XCrxEC",
         "text_7BMBgV"
       ],
+      "disabled": true,
       "settings": {
         "transparent_header": false,
         "video": "shopify://files/videos/hyper-HJ3004-qi2-4-in-1-4-devices-animation-v01-r01-1360x600.mp4",
@@ -481,42 +549,47 @@
         "rounded": false
       }
     },
-    "portfolio_on_scroll_mUpPmm": {
-      "type": "portfolio-on-scroll",
+    "rich_text_YCzyhx": {
+      "type": "rich-text",
       "blocks": {
-        "profile_L9NHNM": {
-          "type": "profile",
+        "heading_dbrA9y": {
+          "type": "heading",
           "settings": {
-            "image": "shopify://shop_images/Frame_53_1024x1024_996522ff-f7fe-4d34-8ecd-d673fc7725bf.webp",
-            "heading": "Made For Apple Watch",
-            "text": "<p>Featuring a dedicated 5W Apple Watch-optimized charging module, that ensures optimal charging performance and security for your smartwatch. Keep track of your health metrics and notifications without worrying about running out of battery.</p>",
-            "color_text": "#ffffff",
-            "color_background": "#171717"
+            "heading": "Charge up to four Devices Simultaneously",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         },
-        "profile_7MYeED": {
-          "type": "profile",
+        "text_Vwwj7x": {
+          "type": "text",
           "settings": {
-            "image": "shopify://shop_images/Image_2_1024x1024_27c21889-d9ed-4ba5-b244-986d259713c0.webp",
-            "heading": "Widely Compatible",
-            "text": "<p>The HyperJuice Qi2 chargers aren't only for Apple users. It works with all Qi-compatible devices, including Android smartphones, making it a versatile addition to any tech setup.</p>",
-            "color_text": "#ffffff",
-            "color_background": "#171717"
+            "text": "<p>No more juggling chargers and cables. Power up your iPhone (up to 15W), Apple Watch (up to 5W), AirPods (up to 5W), and an additional Qi-compatible device (up to 10W), all at once. Perfect for Apple users that want to ensure essential devices are always charged and ready.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
           }
         }
       },
       "block_order": [
-        "profile_L9NHNM",
-        "profile_7MYeED"
+        "heading_dbrA9y",
+        "text_Vwwj7x"
       ],
+      "name": "t:sections.rich-text.presets.name",
       "settings": {
-        "image_ratio": "portrait",
-        "heading": "Charge up to four Devices Simultaneously",
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "<p>No more juggling chargers and cables. Power up your iPhone (up to 15W), Apple Watch (up to 5W), AirPods (up to 5W), and an additional Qi-compatible device (up to 10W), all at once. Perfect for Apple users that want to ensure essential devices are always charged and ready.</p>",
+        "description": "",
         "button_label": "",
         "button_link": "",
         "button_external": false,
@@ -532,11 +605,130 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 72,
+        "padding_bottom": 32,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_hQGJpy": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_q7qWwT": {
+          "type": "heading",
+          "settings": {
+            "heading": "Made For Apple Watch",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_MBVEgw": {
+          "type": "text",
+          "settings": {
+            "text": "<p>eaturing a dedicated 5W Apple Watch-optimized charging module, that ensures optimal charging performance and security for your smartwatch. Keep track of your health metrics and notifications without worrying about running out of battery.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_q7qWwT",
+        "text_MBVEgw"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/HJ3320-v02-r02_1.jpg",
+        "image_height": "850px",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/HJ3320-v02-r02_1.jpg",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
         "rounded": false,
-        "enable_parallax": true
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_NVKGik": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_QnWC68": {
+          "type": "heading",
+          "settings": {
+            "heading": "Multiple Viewing Angles",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_RCt6Gf": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Designed with adjustable angles for comfortable device viewing. Whether you’re checking notifications, watching videos, making video calls, or using iOS StandBy Mode, you can position your device for optimal use without disrupting the charging process.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_QnWC68",
+        "text_RCt6Gf"
+      ],
+      "name": "t:sections.image-with-text.presets.name",
+      "settings": {
+        "image": "shopify://shop_images/Image_1.jpg",
+        "image_height": "850px",
+        "image_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/Image_1.jpg",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "video_with_text_i4ehz6": {
@@ -575,7 +767,7 @@
         "description": "",
         "enable_video_autoplay": false,
         "enable_video_looping": true,
-        "image_height": "adapt",
+        "image_height": "850px",
         "video_width": "medium",
         "layout": "video_first",
         "text_alignment": "left",
@@ -610,10 +802,13 @@
     "slideshow_pGYbWN",
     "collage_grid_8zGf6P",
     "slideshow_xXVQ7j",
-    "images_with_text_qbWQ6X",
+    "image_with_text_CHi6Ht",
     "image_with_text_PdLPwr",
+    "slideshow_niqJG4",
     "video_with_text_overlay_EbwHA7",
-    "portfolio_on_scroll_mUpPmm",
+    "rich_text_YCzyhx",
+    "image_with_text_hQGJpy",
+    "image_with_text_NVKGik",
     "video_with_text_i4ehz6"
   ]
 }
