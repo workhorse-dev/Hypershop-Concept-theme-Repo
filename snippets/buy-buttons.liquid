@@ -267,9 +267,11 @@
             {%- endif -%}
           </span>
         </button>
-        <button type="button" class="buy-now-button" onclick="window.location.href='/checkout'">
+        <a 
+  href="/cart/{{ product.variants.first.id }}:1"
+  class="buy-now-button">
   Buy Now
-</button>
+</a>
         {%- if enable_back_in_stock -%}
           <button
             type="button"
