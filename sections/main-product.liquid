@@ -1197,8 +1197,9 @@
             >
               <span class="btn-fill" data-fill></span>
               <span class="btn-text">
-                {%- render 'icon', icon: 'cart', size: 'sm', class: 'md:hidden' -%}
-                <span class="hidden md:block" data-sold-out="{{ 'products.product.sold_out' | t | escape }}">
+                <span class= "hidden">{%- render 'icon', icon: 'cart', size: 'sm', class: 'md:hidden' -%}</span>
+                
+                <span class=" md:block" data-sold-out="{{ 'products.product.sold_out' | t | escape }}">
                   {%- liquid
                     if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
                       echo 'products.product.sold_out' | t
