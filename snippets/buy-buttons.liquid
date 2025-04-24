@@ -176,7 +176,7 @@
               </price-per-item>
             {%- endif -%}
           </div>
-
+  
           {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
             <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
               {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
@@ -267,7 +267,12 @@
             {%- endif -%}
           </span>
         </button>
-
+         <button 
+          type="button" 
+          class="buy-now-button product-form__submit button button--primary button--fixed grow{"
+          onclick="handleBuyNow(this)">
+          Buy Now
+        </button>
         {%- if enable_back_in_stock -%}
           <button
             type="button"
