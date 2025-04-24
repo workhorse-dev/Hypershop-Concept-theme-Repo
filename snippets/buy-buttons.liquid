@@ -267,25 +267,21 @@
             {%- endif -%}
           </span>
         </button>
-        <form id="buy-now-form" action="" method="GET" onsubmit="handleBuyNowSubmit(event, this)">
-              <input type="hidden" name="id" value="{{ product.variants.first.id }}">
-              <input type="number" name="quantity" value="1" min="1" max="10" />
-              
-              <button type="submit" class="buy-now-button">
-                Buy Now
-              </button>
-            </form>
-            
-            <script>
-              function handleBuyNowSubmit(event, form) {
-                event.preventDefault(); // Stop the default form submission
-                const formData = new FormData(form);
-                const variantId = formData.get('id');
-                const quantity = formData.get('quantity') || 1;
-                console.log(variantId, "666");
-                window.location.href = `/cart/${variantId}:${quantity}`;
-              }
-            </script>
+        <button
+            type="submit"
+            name="checkout"
+            form="{{ product_form_id }}"
+            class="product-form__submit button button--primary button--fixed grow"
+            is="hover-button"
+            formaction="/checkout"
+            {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              <span>Buy Now</span>
+            </span>
+          </button>
+
 
         {%- if enable_back_in_stock -%}
           <button
