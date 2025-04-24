@@ -1,28 +1,3 @@
-/* Font CSS for the site */
-@font-face {
-  font-family: "myFontRegular";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{ 'NiveauGroteskRegular.woff2' | asset_url }}") format("woff2"),
-       url("{{ 'NiveauGroteskRegular.woff' | asset_url }}") format("woff"),
-       url("{{ 'NiveauGroteskRegular.otf' | asset_url }}") format("truetype");
-}
-@font-face {
-  font-family: "myFontMedium";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{ 'NiveauGroteskMedium.woff2' | asset_url }}") format("woff2"),
-       url("{{ 'NiveauGroteskMedium.woff' | asset_url }}") format("woff"),
-       url("{{ 'NiveauGroteskMedium.otf' | asset_url }}") format("truetype");
-}
-@font-face {
-  font-family: "myFontBold";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{ 'NiveauGroteskBold.woff2' | asset_url }}") format("woff2"),
-       url("{{ 'NiveauGroteskBold.woff' | asset_url }}") format("woff"),
-       url("{{ 'NiveauGroteskBold.otf' | asset_url }}") format("truetype");
-}
 
 html,
 body {
