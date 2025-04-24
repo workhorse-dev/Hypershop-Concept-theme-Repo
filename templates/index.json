@@ -1449,7 +1449,6 @@
         "image-5",
         "image-6"
       ],
-      "disabled": true,
       "settings": {
         "direction": "right",
         "speed": 5,
@@ -1464,6 +1463,93 @@
         "padding_top": 36,
         "padding_bottom": 36,
         "divider": false,
+        "rounded": false
+      }
+    },
+    "logo_list_UxfgMd": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_VVdTqC": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/brand2.webp",
+            "height": 52,
+            "link": ""
+          }
+        },
+        "logo_jgpBex": {
+          "type": "logo",
+          "settings": {
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_47thqA": {
+          "type": "logo",
+          "settings": {
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_tCUWUy": {
+          "type": "logo",
+          "settings": {
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_LxpeBK": {
+          "type": "logo",
+          "settings": {
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_6hCM9G": {
+          "type": "logo",
+          "settings": {
+            "height": 80,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_VVdTqC",
+        "logo_jgpBex",
+        "logo_47thqA",
+        "logo_tCUWUy",
+        "logo_LxpeBK",
+        "logo_6hCM9G"
+      ],
+      "settings": {
+        "layout": "marquee",
+        "grid_horizontal": 70,
+        "direction": "right",
+        "speed": 5,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
         "rounded": false
       }
     },
@@ -1599,6 +1685,7 @@
     "shop-the-look",
     "testimonials-banner",
     "scrolling-text-2",
+    "logo_list_UxfgMd",
     "featured-collections",
     "blog-posts-collage"
   ]
