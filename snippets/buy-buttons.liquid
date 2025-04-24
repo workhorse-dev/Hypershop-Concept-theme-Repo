@@ -412,6 +412,7 @@
   <input
     type="hidden"
     name="id"
+    id="buy-now-variant-id"
     value="{{ product.selected_or_first_available_variant.id }}"
   >
   <input type="hidden" name="quantity" value="1">
@@ -430,14 +431,24 @@
     </span>
   </button>
 </form>
-
 <script>
   function redirectToCheckout(form) {
     const variantId = form.querySelector('[name="id"]').value;
     const quantity = form.querySelector('[name="quantity"]').value || 1;
-
     const checkoutUrl = `/cart/${variantId}:${quantity}`;
     window.location.href = checkoutUrl;
   }
+
+  // This watches for variant change and updates the hidden input
+  document.addEventListener('variant:change', function(event) {
+    const newVariant = event.detail.variant;
+    if (newVariant) {
+      const buyNowInput = document.getElementById('buy-now-variant-id');
+      if (buyNowInput) {
+        buyNowInput.value = newVariant.id;
+      }
+    }
+  });
 </script>
+
 
