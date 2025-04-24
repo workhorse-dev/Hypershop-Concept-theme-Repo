@@ -323,7 +323,45 @@
       -%}
     </div>
   {%- endform -%}
+<form
+  action="/cart/add"
+  method="POST"
+  novalidate
+  class="drawer__footer-buttons grid grid-cols-12 gap-4"
+  onsubmit="event.preventDefault(); redirectToCheckout(this);"
+>
+  <input
+    type="hidden"
+    name="id"
+    value="{{ product.selected_or_first_available_variant.id }}"
+  >
+  <input type="hidden" name="quantity" value="1">
 
+  <button
+    class="button button--primary icon-with-text col-span-full"
+    type="submit"
+    is="hover-button"
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        render 'icon', icon: 'lock', size: 'sm', class: 'hidden sm:block'
+        echo 'Buy Now'
+      -%}
+    </span>
+  </button>
+</form>
+
+<script>
+  function redirectToCheckout(form) {
+    const variantId = form.querySelector('[name="id"]').value;
+    const quantity = form.querySelector('[name="quantity"]').value || 1;
+
+    const checkoutUrl = `/cart/${variantId}:${quantity}`;
+    window.location.href = checkoutUrl;
+  }
+</script>
+  
   {%- if enable_back_in_stock -%}
     <div id="BackInStock-{{ section_id }}-{{ product_id }}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
