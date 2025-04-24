@@ -73,6 +73,15 @@
             "description": "<p>Sign up to be the first to know when it's here</p>"
           }
         },
+        "complementary": {
+          "type": "complementary",
+          "settings": {
+            "heading": "Pairs well with",
+            "product_limit": 4,
+            "show_vendor": false,
+            "show_price": true
+          }
+        },
         "buy_buttons": {
           "type": "buy_buttons",
           "settings": {
@@ -98,16 +107,6 @@
             "help_label": "Need help?",
             "help_type": "drawer",
             "help_page": ""
-          }
-        },
-        "complementary": {
-          "type": "complementary",
-          "disabled": true,
-          "settings": {
-            "heading": "Pairs well with",
-            "product_limit": 4,
-            "show_vendor": false,
-            "show_price": true
           }
         },
         "sticky_buy_button": {
@@ -169,10 +168,10 @@
         "variant_picker",
         "inventory",
         "back_in_stock_PDW773",
+        "complementary",
         "buy_buttons",
         "pickup_availability",
         "share",
-        "complementary",
         "sticky_buy_button",
         "collapsible_tab_J7X8LN",
         "collapsible_tab_hHFPKK",
