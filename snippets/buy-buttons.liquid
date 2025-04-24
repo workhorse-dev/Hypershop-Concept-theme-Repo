@@ -280,30 +280,7 @@
                 </span
               </span>
         </button>
-        <script>
-          function handleBuyNow(button) {
-            const form = button.closest('form');
-            const formData = new FormData(form);
-        
-            fetch('/cart/clear.js', {
-              method: 'POST',
-              headers: {
-                'Accept': 'application/json'
-              }
-            }).then(() => {
-              fetch('/cart/add.js', {
-                method: 'POST',
-                headers: {
-                  'Accept': 'application/json'
-                },
-                body: formData
-              }).then(() => {
-                window.location.href = '/checkout';
-              });
-            });
-          }
-        </script>
-
+        <script src="{{ 'buy-now.js' | asset_url }}"></script>
         {%- if enable_back_in_stock -%}
           <button
             type="button"
