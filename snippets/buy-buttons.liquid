@@ -34,8 +34,6 @@
     if back_in_stock_block
       assign enable_back_in_stock = false
     endif
-
-    assign show_price = block.settings.show_price
   -%}
   {%- form 'product',
     product,
@@ -176,7 +174,7 @@
               </price-per-item>
             {%- endif -%}
           </div>
-  
+
           {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
             <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
               {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
@@ -198,11 +196,11 @@
           {%- endif -%}
         </div>
       {%- endif -%}
-      <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price %} flex flex-wrap{% else %} grid{% endif %} gap-4">
+      <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector %} flex{% else %} grid{% endif %} gap-4">
         {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
           {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
           <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
-          <quantity-input class="quantity inline-flex shrink-0 relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
+          <quantity-input class="quantity inline-flex flex-auto relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
             <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
               {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
             </button>
@@ -235,7 +233,7 @@
           type="submit"
           name="add"
           form="{{ product_form_id }}"
-          class="product-form__submit button button--primary button--fixed grow{% if show_price %} with-price{% endif %}"
+          class="product-form__submit button button--primary button--fixed w-full"
           is="hover-button"
           {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
           {%- if product.template_suffix == 'pre-order' %} data-pre-order{% endif -%}
@@ -243,63 +241,17 @@
         >
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
-            <span>
-              {%- liquid
-                if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
-                  echo 'products.product.sold_out' | t
-                elsif product.template_suffix != 'pre-order'
-                  echo 'products.product.add_to_cart' | t
-                else
-                  echo 'products.product.pre_order' | t
-                endif
-              -%}
-            </span>
-            {%- if show_price -%}
-              <div id="BuyButtonPrice-{{ section.id }}-{{ product.id }}" class="flex">
-                <span class="relative">&nbsp;&nbsp;-&nbsp;&nbsp;</span>
-                {%- liquid
-                  if product == null
-                    assign placeholder = true
-                  endif
-                  render 'product-price', product: product, placeholder: placeholder, use_variant: true
-                -%}
-              </div>
-            {%- endif -%}
+            {%- liquid
+              if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+                echo 'products.product.sold_out' | t
+              elsif product.template_suffix != 'pre-order'
+                echo 'products.product.add_to_cart' | t
+              else
+                echo 'products.product.pre_order' | t
+              endif
+            -%}
           </span>
         </button>
-         <button type="button"
-        class="button button--primary icon-with-text col-span-full"
-        is="hover-button"
-        onclick="redirectToCheckout(this)">
-  <span class="btn-fill" data-fill></span>
-  <span class="btn-text">
-    <svg class="icon icon-lock icon-sm hidden sm:block" viewBox="0 0 20 20" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-      <path stroke-linecap="round" d="M5.83333 6.66675V5.83341C5.83333 4.74781 5.83333 4.205 5.97218 3.76463C6.26651 2.83114 6.99772 2.09993 7.93122 1.8056C8.37159 1.66675 8.91439 1.66675 10 1.66675V1.66675C11.0856 1.66675 11.6284 1.66675 12.0688 1.8056C13.0023 2.09993 13.7335 2.83114 14.0278 3.76463C14.1667 4.205 14.1667 4.74781 14.1667 5.83341V6.66675M10 11.6667V13.3334M8.33333 18.3334H11.6667C13.3741 18.3334 14.2278 18.3334 14.909 18.077C15.9871 17.6713 16.8379 16.8205 17.2436 15.7424C17.5 15.0612 17.5 14.2075 17.5 12.5001V12.5001C17.5 10.7926 17.5 9.93892 17.2436 9.25775C16.8379 8.17969 15.9871 7.32888 14.909 6.92312C14.2278 6.66675 13.3741 6.66675 11.6667 6.66675H8.33333C6.62589 6.66675 5.77218 6.66675 5.091 6.92312C4.01294 7.32888 3.16213 8.17969 2.75638 9.25775C2.5 9.93892 2.5 10.7926 2.5 12.5001V12.5001C2.5 14.2075 2.5 15.0612 2.75638 15.7424C3.16213 16.8205 4.01294 17.6713 5.091 18.077C5.77218 18.3334 6.62589 18.3334 8.33333 18.3334Z"></path>
-    </svg>
-    Buy Now
-  </span>
-</button>
-<script>
-  function redirectToCheckout(button) {
-    // Traverse up to find the form
-    const form = button.closest('form');
-    if (!form) return;
-
-    const variantIdInput = form.querySelector('input[name="id"]');
-    const quantityInput = form.querySelector('input[name="quantity"]');
-
-    const variantId = variantIdInput?.value;
-    const quantity = quantityInput?.value || 1;
-
-    if (variantId) {
-      const checkoutUrl = `/cart/${variantId}:${quantity}?checkout`;
-      window.location.href = checkoutUrl;
-    } else {
-      alert("Please select a variant before proceeding to checkout.");
-    }
-  }
-</script>
-
 
         {%- if enable_back_in_stock -%}
           <button
@@ -315,7 +267,7 @@
         {%- endif -%}
 
         {%- liquid
-          unless product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price
+          unless product.quantity_price_breaks_configured? != true and show_quantity_selector
             if show_dynamic_checkout
               echo form | payment_button
             endif
@@ -346,7 +298,7 @@
       {%- endif -%}
 
       {%- liquid
-        if product.quantity_price_breaks_configured? != true and show_quantity_selector or show_price
+        if product.quantity_price_breaks_configured? != true and show_quantity_selector
           if show_dynamic_checkout
             echo form | payment_button
           endif
@@ -354,11 +306,11 @@
       -%}
     </div>
   {%- endform -%}
-  
+
   {%- if enable_back_in_stock -%}
     <div id="BackInStock-{{ section_id }}-{{ product_id }}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
           role="dialog"
           aria-modal="true"
           aria-label="{{ product.title | escape }}"
@@ -374,7 +326,7 @@
                   <dl class="grid gap-1d5">
                     {%- for option in product.options_with_values -%}
                       <div class="flex gap-2 text-sm text-opacity leading-tight">
-                        <dt class="font-normal">{{ option.name | escape }}:</dt>
+                        <dt>{{ option.name | escape }}:</dt>
                         <dd>
                           {%- for value in option.values -%}
                             {%- if option.selected_value == value -%}
@@ -406,11 +358,8 @@
               </div>
             </div>
           </div>
-        </back-in-stock-drawer>
+        </back-in-stock-drawer>        
       {%- endif -%}
     </div>
   {%- endif -%}
 </div>
-
-
-
