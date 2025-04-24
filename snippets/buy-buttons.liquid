@@ -284,6 +284,8 @@
             function redirectToCheckout(form) {
               const variantId = form.querySelector('[name="id"]').value;
               const quantity = form.querySelector('[name="quantity"]').value || 1;
+
+    console.log(variantId , quantity ,'jjj')
           
               const checkoutUrl = `/cart/${variantId}:${quantity}`;
               window.location.href = checkoutUrl;
