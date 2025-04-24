@@ -42,14 +42,13 @@
     render 'css-variables'
     
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
-    echo 'custom-font.liquid' 
     echo 'style.css' | asset_url | stylesheet_tag: preload: true
     
     if direction == 'rtl'
       echo 'rtl.css' | asset_url | stylesheet_tag: preload: true
     endif
   -%}
-
+  {% render 'custom-fonts' %}
   <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
 
   {{ content_for_header }}
