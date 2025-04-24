@@ -42,7 +42,7 @@
     render 'css-variables'
     
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
-    echo 'custom-font.css.liquid' | asset_url | stylesheet_tag: preload: true  
+    echo 'custom-font.liquid' | asset_url | stylesheet_tag: preload: true  
     echo 'style.css' | asset_url | stylesheet_tag: preload: true
     
     if direction == 'rtl'
