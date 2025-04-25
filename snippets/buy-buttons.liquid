@@ -318,13 +318,6 @@
                     observer.disconnect(); // Stop observing once done
                   }
           });
-      
-          // Observe the container where Shopify injects the payment button
-          const container = document.querySelector('div.shopify-payment-button');
-          if (container) {
-            observer.observe(container, { childList: true, subtree: true });
-          }
-        });
       </script>
 
       </div>
