@@ -142,7 +142,7 @@
     </slideshow-element>
     <div class="mobile-position page-width absolute bottom-0 left-0 w-full pointer-events-none">
       <div class="slideshow-content">
-        <slideshow-words class="slideshow-words grid items-center" aria-controls="Slider-{{ section.id }}">
+        <slideshow-words class=" mobile-content-color slideshow-words grid items-center" aria-controls="Slider-{{ section.id }}">
           {%- for block in section.blocks -%}
             <div class="slideshow-word flex flex-col md:flex-column justify-between gap-6" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
               {%- if block.settings.heading != blank -%}
