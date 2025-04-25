@@ -309,18 +309,31 @@
             endif
           endunless
         -%}
-    <script>
-    console.log('hello');
+         <script>
         document.addEventListener('DOMContentLoaded', function() {
-    console.log("2");
-           const morePaymentOptions = document.querySelector('.shopify-payment-button__more-options');
-    console.log(morePaymentOptions.textContent);
-            console.log('heelo');
-                  if (morePaymentOptions) {
-                    morePaymentOptions.textContent = 'Buy Now';
-                  }
+          const container = document.querySelector('.shopify-payment-button');
+          if (!container) return;
+      
+          // Try immediately in case it’s already there
+          const immediate = document.getElementById('more-payment-options-link');
+          if (immediate) {
+            immediate.textContent = 'Buy Now';
+            return;
+          }
+      
+          // Otherwise watch for it
+          const observer = new MutationObserver((mutations, obs) => {
+            const el = document.getElementById('more-payment-options-link');
+            if (el) {
+              el.textContent = 'Buy Now';
+              obs.disconnect();
+            }
           });
+      
+          observer.observe(container, { childList: true, subtree: true });
+        });
       </script>
+
 
       </div>
 
