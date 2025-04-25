@@ -312,7 +312,8 @@
     <script>
     console.log('hello');
         document.addEventListener('DOMContentLoaded', function() {
-           const morePaymentOptions = node.querySelector('.shopify-payment-button__more-options');
+    console.log("2");
+           const morePaymentOptions = document.querySelector('.shopify-payment-button__more-options');
             console.log('heelo');
                   if (morePaymentOptions) {
                     morePaymentOptions.textContent = 'Buy Now';
