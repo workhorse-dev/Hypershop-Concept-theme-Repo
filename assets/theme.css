@@ -12868,7 +12868,7 @@ button:is([is=media-lightbox-button], [is=media-hover-button]):focus-visible {
   }
 
   .image-with-text .rich-text>*+*:not(.spacing-section) {
-    margin-block-start: var(--sp-10);
+    margin-block-start: var(--sp-4);
   }
 
   .image-with-text__item+.image-with-text__item .rich-text {
