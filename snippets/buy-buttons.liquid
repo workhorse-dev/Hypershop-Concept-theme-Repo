@@ -302,13 +302,9 @@
           </button>
         {%- endif -%}
 
-        {%- liquid
-          unless product.quantity_price_breaks_configured? != true and show_quantity_selector
-            if show_dynamic_checkout
-              echo form | payment_button
-            endif
-          endunless
-        -%}
+        {% form 'product', product %}
+          {{ form | payment_button }}
+        {% endform %}
       </div>
 
       {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
