@@ -309,30 +309,66 @@
             endif
           endunless
         -%}
-         <script>
+        <script>
         document.addEventListener('DOMContentLoaded', function() {
-          const container = document.querySelector('.shopify-payment-button');
-          if (!container) return;
-      
-          // Try immediately in case it’s already there
-          const immediate = document.getElementById('more-payment-options-link');
-          if (immediate) {
-            immediate.textContent = 'Buy Now';
+          // helper to do the swap
+          function replaceMoreLink() {
+            const anchor = document.getElementById('more-payment-options-link');
+            if (!anchor) return;
+        
+            // build your new button
+            const btn = document.createElement('button');
+            btn.type = 'button';
+            btn.className = 'product-form__submit button button--primary button--fixed w-full';
+            btn.setAttribute('is','hover-button');
+        
+            // fill span
+            const fill = document.createElement('span');
+            fill.className = 'btn-fill';
+            fill.setAttribute('data-fill','');
+            btn.appendChild(fill);
+        
+            // text span
+            const text = document.createElement('span');
+            text.className = 'btn-text';
+            text.textContent = 'Buy Now';
+            btn.appendChild(text);
+        
+            // loader spans (optional—matches your Add to cart loader)
+            const loader = document.createElement('span');
+            loader.className = 'btn-loader';
+            for (let i = 0; i < 3; i++) loader.appendChild(document.createElement('span'));
+            btn.appendChild(loader);
+        
+            // when clicked, forward to the original anchor's click handler
+            btn.addEventListener('click', e => {
+              e.preventDefault();
+              anchor.click();
+            });
+        
+            // swap it in
+            anchor.parentNode.replaceChild(btn, anchor);
+          }
+        
+          // if it’s already there, do it immediately
+          if (document.getElementById('more-payment-options-link')) {
+            replaceMoreLink();
             return;
           }
-      
-          // Otherwise watch for it
-          const observer = new MutationObserver((mutations, obs) => {
-            const el = document.getElementById('more-payment-options-link');
-            if (el) {
-              el.textContent = 'Buy Now';
-              obs.disconnect();
+        
+          // otherwise watch the payment-button container for injection
+          const container = document.querySelector('.shopify-payment-button');
+          if (!container) return;
+          const obs = new MutationObserver((mutations, o) => {
+            if (document.getElementById('more-payment-options-link')) {
+              replaceMoreLink();
+              o.disconnect();
             }
           });
-      
-          observer.observe(container, { childList: true, subtree: true });
+          obs.observe(container, { childList: true, subtree: true });
         });
-      </script>
+        </script>
+
 
 
       </div>
