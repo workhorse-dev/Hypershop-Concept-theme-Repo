@@ -19,9 +19,12 @@
   {% endif -%}
 
   {% if section.settings.mobile_content_outside %}
-    .mobile-position{
-      position:relative;
+    @media screen and (max-width : 769px){
+      .mobile-position{
+        position:relative;
+      }
     }
+    
   {% endif %}
 </style>
 
