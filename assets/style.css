@@ -148,6 +148,8 @@ button.mega-menu__nav-item {
 }
 
 /* Product main CSS */
-.shopify-payments{
-  gap; var(--sp-8);
+@media screen and (max-width: 500px) {
+  .shopify-payments{
+    gap; var(--sp-8);
+  }
 }
