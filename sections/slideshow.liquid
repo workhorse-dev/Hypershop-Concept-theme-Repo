@@ -132,7 +132,7 @@
       <div class="slideshow-content">
         <slideshow-words class="slideshow-words grid items-center" aria-controls="Slider-{{ section.id }}">
           {%- for block in section.blocks -%}
-            <div class="slideshow-word flex flex-col md:flex-row md:items-end justify-between gap-6" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+            <div class="slideshow-word flex flex-col md:flex-column justify-between gap-6" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
               {%- if block.settings.heading != blank -%}
                 <div class="banner__box banner__box--{{ section.settings.content_width }}">
                   <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}">
