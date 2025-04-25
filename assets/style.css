@@ -134,6 +134,11 @@ button.mega-menu__nav-item {
     width: 8rem;
   }
 }
-.product-bundle__footer .btn-price .money{
+.product-bundle__footer .btn-price .money {
   white-space: nowrap;
+}
+@media screen and (max-width: 1023px) {
+  .product-bundle-wrapper > .lg\:grow-0 {
+    z-index: 19;
+  }
 }
