@@ -23,7 +23,7 @@ endif
   <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
     <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
       <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight"></span>
-      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+      <button class="button button--secondary button--close drawer__close  sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
         <span class="btn-fill" data-fill></span>
         <span class="btn-text">
           {%- render 'icon', icon: 'close', size: 'sm' -%}

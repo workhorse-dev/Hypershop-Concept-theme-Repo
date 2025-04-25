@@ -68,6 +68,16 @@ button.shopify-payment-button__button--unbranded,
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
 }
+@media screen and (max-width: 769px) {
+  .drawer__inner .drawer__header .button--close{
+        right: 0;
+        top: 15px;
+        clip: unset;
+        margin: 0 1rem;
+        height: 40px;
+        width: 40px;
+  }
+}
 @media screen and (max-width: 1023px) {
   .header__logo {
     height: 70px;
@@ -134,6 +144,22 @@ button.mega-menu__nav-item {
     width: 8rem;
   }
 }
-.product-bundle__footer .btn-price .money{
+.product-bundle__footer .btn-price .money {
   white-space: nowrap;
+}
+@media screen and (max-width: 1023px) {
+  .product-bundle-wrapper > .lg\:grow-0 {
+    z-index: 19;
+  }
+}
+/* Slide show banner */
+.button-12{
+  max-width: 12rem;
+}
+
+/* Product main CSS */
+@media screen and (max-width: 500px) {
+  .shopify-payments{
+    gap: var(--sp-8);
+  }
 }

@@ -87,9 +87,9 @@
           "type": "buy_buttons",
           "settings": {
             "show_quantity_selector": true,
-            "show_buy_now": true,
+            "show_buy_now": false,
             "show_price": false,
-            "show_dynamic_checkout": false,
+            "show_dynamic_checkout": true,
             "show_payment_icons": true,
             "show_gift_card_recipient": true,
             "enable_back_in_stock": false,
@@ -575,10 +575,10 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "subheading": "",
+            "subheading": " The  world’s fastest 40Gbps",
             "heading": "Fast charging",
             "link": "",
-            "invert_subheading_heading": false,
+            "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
             "image_ratio": "square",
             "content_position": "md:items-end md:justify-center",

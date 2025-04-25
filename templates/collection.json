@@ -50,6 +50,7 @@
       "settings": {
         "transparent_header": false,
         "show_image": true,
+        "image": "{{ collection.metafields.custom.mobile_collection_image.value }}",
         "image_height": "750px",
         "content_position": "md:items-end md:justify-start",
         "text_alignment": "left",
