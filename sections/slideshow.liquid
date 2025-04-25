@@ -17,6 +17,12 @@
       }
     }
   {% endif -%}
+
+  {% if section.settings.mobile_content_outside %}
+    .mobile-position{
+      position:relative;
+    }
+  {% endif %}
 </style>
 
 {%- if section.blocks.size > 0 -%}
