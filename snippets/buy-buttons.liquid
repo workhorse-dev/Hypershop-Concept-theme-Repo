@@ -341,29 +341,33 @@
           padding: 1.3rem;
           text-decoration: none;
         }
-       /* 1) Apply a two-tone gradient and set up the background for animation */
-.product-form__submit, /* your Add to Cart button selector */
-#more-payment-options-link /* or whatever button you’re targeting */ {
-  /* two shades so you see the shift */
-  background-image: linear-gradient(to top, #000 50%, #222 50%);
-  background-size: 100% 200%;       /* twice as tall as the element */
-  background-position: 0 100%;      /* start with the darker half showing */
-  color: #fff;
-  border: none;
+       #more-payment-options-link {
   position: relative;
+  display: inline-block;
+  background: #000;
+  color: #fff;
+  border-radius: 2rem;
+  padding: 1.3rem;
+  text-decoration: none;
   overflow: hidden;
 }
 
-/* 2) Define the “flow up then down” keyframes */
-@keyframes flowUpDown {
-  0%, 100%   { background-position: 0 100%; } /* start & end at bottom */
-  50%        { background-position: 0 0;   }   /* mid-point at top */
+#more-payment-options-link::before {
+  content: '';
+  position: absolute;
+  top: 0; left: -100%;
+  width: 100%; height: 100%;
+  background: rgba(255,255,255,0.15);
+  transform: skewX(-25deg);
+  transition: all 0.5s ease;
 }
 
-/* 3) Trigger the animation on hover */
-.product-form__submit:hover,
+#more-payment-options-link:hover::before {
+  left: 200%;
+}
+
 #more-payment-options-link:hover {
-  animation: flowUpDown 1.5s ease-in-out forwards;
+  color: #fff;
 }
 
       </style>
