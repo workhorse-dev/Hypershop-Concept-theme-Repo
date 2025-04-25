@@ -311,20 +311,12 @@
         -%}
     <script>
         document.addEventListener('DOMContentLoaded', function() {
-          // Use MutationObserver to watch for changes
-          const observer = new MutationObserver(function(mutations) {
-            mutations.forEach(function(mutation) {
-              mutation.addedNodes.forEach(function(node) {
-                if (node.nodeType === 1) { // Node.ELEMENT_NODE
-                  const morePaymentOptions = node.querySelector('shopify-payment-button__more-options');
-      
+           const morePaymentOptions = node.querySelector('shopify-payment-button__more-options');
+            console.log('heelo;
                   if (morePaymentOptions) {
                     morePaymentOptions.textContent = 'Buy Now';
                     observer.disconnect(); // Stop observing once done
                   }
-                }
-              });
-            });
           });
       
           // Observe the container where Shopify injects the payment button
