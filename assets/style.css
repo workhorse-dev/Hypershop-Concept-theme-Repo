@@ -68,6 +68,14 @@ button.shopify-payment-button__button--unbranded,
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
 }
+@media screen and (max-width: 769px) {
+  .drawer__inner . drawer__header .button--close{
+    right: 0;
+    margin: 0 1rem;
+    height: 40px;
+    width: 40px;
+  }
+}
 @media screen and (max-width: 1023px) {
   .header__logo {
     height: 70px;
