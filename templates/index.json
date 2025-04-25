@@ -103,7 +103,7 @@
         "show_navigation": true,
         "image_height": "750px",
         "content_width": "small",
-        "image_height_mobile": "500px",
+        "image_height_mobile": "400px",
         "color_text": "#ffffff",
         "color_background": "#ffffff",
         "gradient_background": "",
@@ -323,7 +323,7 @@
         "carousel_on_desktop": true,
         "image_type": "collection",
         "image_ratio": "square",
-        "show_products_count": true,
+        "show_products_count": false,
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
@@ -576,7 +576,7 @@
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
-        "narrow": true,
+        "narrow": false,
         "rounded": false
       }
     },
@@ -863,7 +863,7 @@
         "mobile_layout": "full_width",
         "image_ratio_mobile": "adapt_first",
         "mobile_thumbnail": true,
-        "padding_top": 120,
+        "padding_top": 32,
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
@@ -1467,6 +1467,98 @@
         "rounded": false
       }
     },
+    "logo_list_UxfgMd": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_VVdTqC": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/brand2.webp",
+            "height": 52,
+            "link": ""
+          }
+        },
+        "logo_jgpBex": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/The_Verge_Logo_79f5091c-9c5e-4888-b6f2-844f84971b09.png",
+            "height": 148,
+            "link": ""
+          }
+        },
+        "logo_47thqA": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/brand4.webp",
+            "height": 52,
+            "link": ""
+          }
+        },
+        "logo_tCUWUy": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/brand5.webp",
+            "height": 52,
+            "link": ""
+          }
+        },
+        "logo_LxpeBK": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Macworld.png",
+            "height": 152,
+            "link": ""
+          }
+        },
+        "logo_6hCM9G": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/MacRumors.png",
+            "height": 152,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_VVdTqC",
+        "logo_jgpBex",
+        "logo_47thqA",
+        "logo_tCUWUy",
+        "logo_LxpeBK",
+        "logo_6hCM9G"
+      ],
+      "settings": {
+        "layout": "marquee",
+        "grid_horizontal": 70,
+        "direction": "right",
+        "speed": 5,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "featured-collections": {
       "type": "featured-collections",
       "blocks": {
@@ -1599,6 +1691,7 @@
     "shop-the-look",
     "testimonials-banner",
     "scrolling-text-2",
+    "logo_list_UxfgMd",
     "featured-collections",
     "blog-posts-collage"
   ]

@@ -1,28 +1,3 @@
-/* Font CSS for the site */
-@font-face {
-  font-family: "myFontRegular";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{'NiveauGroteskRegular.woff2' | file_url}}") format("woff2"),
-    url("{{'NiveauGroteskRegular.woff' | file_url}}") format("woff"),
-    url("{{ 'NiveauGroteskRegular.otf' | file_url }}") format("truetype");
-}
-@font-face {
-  font-family: "myFontMedium";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{'NiveauGroteskMedium.woff2' | file_url}}") format("woff2"),
-    url("{{'NiveauGroteskMedium.woff' | file_url}}") format("woff"),
-    url("{{ 'NiveauGroteskMedium.otf' | file_url }}") format("truetype");
-}
-@font-face {
-  font-family: "myFontBold";
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{'NiveauGroteskBold.woff2' | file_url}}") format("woff2"),
-    url("{{'NiveauGroteskBold.woff' | file_url}}") format("woff"),
-    url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
-}
 html,
 body {
   font-family: myFontRegular, sans-serif;
@@ -93,6 +68,11 @@ button.shopify-payment-button__button--unbranded,
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
 }
+@media screen and (max-width: 1023px) {
+  .header__logo {
+    height: 70px;
+  }
+}
 @media screen and (min-width: 1380px) {
   .mega-menu__list--tabs {
     --nav-tabs-width: min(300px, 25vw);
@@ -133,10 +113,27 @@ button.shopify-payment-button__button--unbranded,
 }
 
 /* header nav CSS */
-button.mega-menu__nav-item {text-align: start;width: max-content;}
+button.mega-menu__nav-item {
+  text-align: start;
+  width: max-content;
+}
 
 /* Timeline Section CSS */
-.timeline-dots button {white-space: nowrap;}
+.timeline-dots button {
+  white-space: nowrap;
+}
 
 /* Shop the look CSS */
-.shop-the--look .card.product-card{padding: 0 1rem;}
+.shop-the--look .card.product-card {
+  padding: 0 1rem;
+}
+
+/* Sticky add to cart */
+@media screen and (max-width: 767px) {
+  .product-sticky-form .button {
+    width: 8rem;
+  }
+}
+.product-bundle__footer .btn-price .money{
+  white-space: nowrap;
+}

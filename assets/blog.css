@@ -8,10 +8,13 @@
 
 /*! blog-posts */
 
-.blog-grid {
+
+
+@media screen and (min-width: 769px) {
+  .blog-grid {
   --card-grid-gap: var(--sp-10) var(--sp-4);
 }
-
+}
 @media screen and (min-width: 1024px) {
   .blog-grid {
     --card-grid-gap: clamp(40px, 3.5vw, 60px);
@@ -96,7 +99,8 @@
 
 /*! collage layout */
 
-.blog-collage .article-card:nth-child(1) .article-card__media::after {
+@media screen and (min-width: 769px) {
+  .blog-collage .article-card:nth-child(1) .article-card__media::after {
   content: '';
   position: absolute;
   inset: 0;
@@ -127,6 +131,8 @@
 .blog-collage .article-card:nth-child(1) .reversed-link {
   --reversed-link-gap: min(100%, 1.12em);
 }
+}
+
 
 @media screen and (max-width: 639px) {
   .blog-collage {

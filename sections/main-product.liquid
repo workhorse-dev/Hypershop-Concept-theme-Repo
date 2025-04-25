@@ -1196,9 +1196,10 @@
               {% endif -%}
             >
               <span class="btn-fill" data-fill></span>
-              <span class="btn-text">
-                {%- render 'icon', icon: 'cart', size: 'sm', class: 'md:hidden' -%}
-                <span class="hidden md:block" data-sold-out="{{ 'products.product.sold_out' | t | escape }}">
+              <span class="btn-text" style="gap: 0.6rem;">
+                <span class= "icon" >{%- render 'icon', icon: 'cart', size: 'sm', class: '' -%}</span>
+                
+                <span class=" md:block" data-sold-out="{{ 'products.product.sold_out' | t | escape }}">
                   {%- liquid
                     if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
                       echo 'products.product.sold_out' | t
@@ -2087,6 +2088,12 @@
           "id": "show_quantity_selector",
           "default": true,
           "label": "t:sections.main-product.blocks.buy_buttons.settings.show_quantity_selector.label"
+        },
+        {
+          "type": "checkbox",
+          "id": "show_buy_now",
+          "default": true,
+          "label": "Show Buy Now button"
         },
         {
           "type": "checkbox",

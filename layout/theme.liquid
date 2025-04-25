@@ -48,7 +48,7 @@
       echo 'rtl.css' | asset_url | stylesheet_tag: preload: true
     endif
   -%}
-
+  {% render 'custom-fonts' %}
   <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
 
   {{ content_for_header }}
