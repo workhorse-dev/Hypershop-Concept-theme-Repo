@@ -140,7 +140,15 @@
                   </{{ block.settings.heading_tag }}>
                 </div>
               {%- endif -%}
-
+            
+              {%- if block.settings.subheading != blank -%}
+                <div class="banner__box banner__box--{{ section.settings.content_width }}">
+                  <p class="heading leading-none {{ block.settings.heading_size }}">
+                    <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="250">{{ block.settings.subheading }}</split-words>
+                  </p>
+                </div>
+              {%- endif -%}
+            
               {%- if block.settings.button_label != blank -%}
                 {%- render 'button',
                   label: block.settings.button_label,
@@ -477,6 +485,12 @@
           "id": "heading",
           "label": "t:sections.global.settings.heading.label",
           "default": "Image slide"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "subheading",
+          "default": "Subheading text for the slideshow"
         },
         {
           "type": "select",
