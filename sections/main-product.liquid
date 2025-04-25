@@ -592,7 +592,7 @@
               {%- if block.settings.show_payment_icons and shop.enabled_payment_types.size > 0 -%}
                 <div class="flex flex-col gap-3">
                   <span class="text-xs text-opacity text-center">{{ 'cart.general.we_accept' | t }}</span>
-                  <div class="flex flex-wrap justify-center gap-2">
+                  <div class="shopify-payments flex flex-wrap justify-center gap-2">
                     {%- liquid
                       for type in shop.enabled_payment_types
                         echo type | payment_type_svg_tag
