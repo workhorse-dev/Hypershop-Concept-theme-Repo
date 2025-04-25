@@ -401,6 +401,7 @@
             const observer = new MutationObserver((mutations, obs) => {
               const el = document.getElementById('more-payment-options-link');
               const acc = document.querySelector('.accelerated-checkout-button');
+    console.log(acc, "*********")
               if (el) {
                 el.textContent = 'Buy Now';
                 obs.disconnect();
