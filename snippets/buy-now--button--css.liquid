@@ -26,12 +26,10 @@
 }
 #more-payment-options-link:hover::before { left: 200%; }
 
-/* DISABLED STATE: no href → greyed‐out, no pointer events */
 .shopify-payment-button__more-options:not([href]),
 #more-payment-options-link:not([href]) {
   opacity: 0.6;                      /* slight fade */
-  cursor: not-allowed;
-  pointer-events: none;              /* completely non‐clickable */
+  cursor: not-allowed;          /* completely non‐clickable */
 }
 
 /* remove shimmer when disabled */
