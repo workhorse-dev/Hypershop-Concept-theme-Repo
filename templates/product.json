@@ -772,7 +772,7 @@
             "icon": "file_text",
             "icon_width": 24,
             "heading": "Features",
-            "content": "{{ product.metafields.custom.product_feature | metafield_tag }}<p>{{ product.metafields.custom.features_tab | metafield_tag }}</p>",
+            "content": "{{ product.metafields.custom.product_feature | metafield_tag }}",
             "metafields": ""
           }
         },
