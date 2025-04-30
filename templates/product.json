@@ -279,7 +279,7 @@
       "type": "video-hero",
       "settings": {
         "transparent_header": false,
-        "video": "shopify://files/videos/HyperJuice_4-in-1_-_Folding_Bag.mp4",
+        "video": "{{ product.metafields.custom.product_page_video.value }}",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "enable_video_autoplay": true,
