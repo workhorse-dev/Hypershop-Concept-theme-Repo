@@ -576,7 +576,7 @@
           "type": "image",
           "settings": {
             "subheading": " The  world’s fastest 40Gbps",
-            "heading": "Fast charging",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
@@ -599,7 +599,7 @@
           "type": "image",
           "settings": {
             "subheading": "<em>Quick</em>",
-            "heading": "Latest Technology",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_2.value }}",
             "link": "",
             "invert_subheading_heading": false,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_2.value }}",
@@ -622,7 +622,7 @@
           "type": "image",
           "settings": {
             "subheading": "",
-            "heading": "Most Reliable",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_3.value }}",
             "link": "",
             "invert_subheading_heading": false,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_3.value }}",
@@ -645,7 +645,7 @@
           "type": "image",
           "settings": {
             "subheading": "",
-            "heading": "",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_4.value }}",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_4.value }}",
