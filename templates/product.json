@@ -575,7 +575,7 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "subheading": " The  world’s fastest 40Gbps",
+            "subheading": " The  world’s fastest 40Gbps{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
             "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
             "link": "",
             "invert_subheading_heading": true,
@@ -598,7 +598,7 @@
         "image-2": {
           "type": "image",
           "settings": {
-            "subheading": "<em>Quick</em>",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_2.value }}",
             "heading": "{{ product.metafields.custom.collage_on_scroll_text_2.value }}",
             "link": "",
             "invert_subheading_heading": false,
@@ -621,7 +621,7 @@
         "image-3": {
           "type": "image",
           "settings": {
-            "subheading": "",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_3.value }}",
             "heading": "{{ product.metafields.custom.collage_on_scroll_text_3.value }}",
             "link": "",
             "invert_subheading_heading": false,
@@ -644,7 +644,7 @@
         "image-4": {
           "type": "image",
           "settings": {
-            "subheading": "",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_4.value }}",
             "heading": "{{ product.metafields.custom.collage_on_scroll_text_4.value }}",
             "link": "",
             "invert_subheading_heading": true,
