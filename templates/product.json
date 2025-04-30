@@ -279,7 +279,7 @@
       "type": "video-hero",
       "settings": {
         "transparent_header": false,
-        "video": "shopify://files/videos/HyperJuice_4-in-1_-_Folding_Bag.mp4",
+        "video": "{{ product.metafields.custom.product_page_video.value }}",
         "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
         "description": "",
         "enable_video_autoplay": true,
@@ -575,8 +575,8 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "subheading": " The  world’s fastest 40Gbps",
-            "heading": "Fast charging",
+            "subheading": " The  world’s fastest 40Gbps{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
@@ -598,8 +598,8 @@
         "image-2": {
           "type": "image",
           "settings": {
-            "subheading": "<em>Quick</em>",
-            "heading": "Latest Technology",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_2.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_2.value }}",
             "link": "",
             "invert_subheading_heading": false,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_2.value }}",
@@ -621,8 +621,8 @@
         "image-3": {
           "type": "image",
           "settings": {
-            "subheading": "",
-            "heading": "Most Reliable",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_3.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_3.value }}",
             "link": "",
             "invert_subheading_heading": false,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_3.value }}",
@@ -644,8 +644,8 @@
         "image-4": {
           "type": "image",
           "settings": {
-            "subheading": "",
-            "heading": "",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_4.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_4.value }}",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_4.value }}",
