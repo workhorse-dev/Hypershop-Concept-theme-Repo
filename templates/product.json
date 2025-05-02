@@ -580,7 +580,7 @@
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
-            "image_ratio": "square",
+            "image_ratio": "adapt",
             "content_position": "md:items-end md:justify-center",
             "text_alignment": "center",
             "image_ratio_mobile": "landscape",
