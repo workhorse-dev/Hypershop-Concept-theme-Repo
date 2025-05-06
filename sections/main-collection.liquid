@@ -23,6 +23,7 @@
   assign subcollections = section.blocks | where: "type", "subcollections" | first
 
   assign enable_sorting = section.settings.enable_sorting
+  assign enable_product_icon = section.settings.enable_product_icon_list
   assign enable_filtering = section.settings.enable_filtering
   assign filter_type = section.settings.filter_type
 -%}
@@ -231,7 +232,8 @@
                   show_quick_view: settings.product_quick_view,
                   show_save_amount: settings.product_save_amount,
                   save_type: settings.product_save_type,
-                  show_icon_list: settings.product_icon_list
+                  show_icon_list: settings.product_icon_list,
+                  show_product_icon_list: enable_product_icon
                 -%}
               {%- endfor -%}
             </motion-list>
