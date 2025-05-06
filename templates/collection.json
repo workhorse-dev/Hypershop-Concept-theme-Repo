@@ -148,7 +148,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "In-Ear Clarity & ConvenienceSlide",
+            "heading": "{{ collection.metafields.custom.collection_additional_title.value }}",
             "heading_size": "title-sm",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -158,7 +158,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p> into a world where detail meets portability. Our in-ear selections deliver a powerful auditory experience, ensuring that every genre of music feels alive. Lightweight and ergonomic, they're designed for both music aficionados and everyday listeners.</p>",
+            "text": "<p>{{ collection.metafields.custom.collections_additional | metafield_tag }}</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -208,8 +208,8 @@
         "question_7JbGmA": {
           "type": "question",
           "settings": {
-            "title": "Frequently asked question",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "title": "{{ collection.metafields.custom.faq_question1.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer1 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -217,8 +217,8 @@
         "question_TrmMrt": {
           "type": "question",
           "settings": {
-            "title": "Frequently asked question",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "title": "{{ collection.metafields.custom.faq_question2.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer2 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -226,8 +226,44 @@
         "question_C7fmkb": {
           "type": "question",
           "settings": {
-            "title": "Frequently asked question",
-            "text": "<p>Use this text to answer questions in as much detail as possible for your customers.</p>",
+            "title": "{{ collection.metafields.custom.faq_question3.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer3 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_HfFJWF": {
+          "type": "question",
+          "settings": {
+            "title": "{{ collection.metafields.custom.faq_question4.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer4 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_jNX9qW": {
+          "type": "question",
+          "settings": {
+            "title": "{{ collection.metafields.custom.faq_question5.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer5 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_MX3BGE": {
+          "type": "question",
+          "settings": {
+            "title": "{{ collection.metafields.custom.faq_question6.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer6 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_J4JBrb": {
+          "type": "question",
+          "settings": {
+            "title": "{{ collection.metafields.custom.faq_question7.value }}",
+            "text": "<p>{{ collection.metafields.custom.faq_answer7 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -236,7 +272,11 @@
       "block_order": [
         "question_7JbGmA",
         "question_TrmMrt",
-        "question_C7fmkb"
+        "question_C7fmkb",
+        "question_HfFJWF",
+        "question_jNX9qW",
+        "question_MX3BGE",
+        "question_J4JBrb"
       ],
       "settings": {
         "style": "with-border",
