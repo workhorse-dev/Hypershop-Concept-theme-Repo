@@ -159,7 +159,8 @@
             <button type="button" class="button button--primary w-full" is="hover-button" data-product-bundle-submit disabled>
               <span class="btn-fill" data-fill></span>
               <span class="flex gap-3d5">
-                <span class="btn-price lg:hidden relative" data-product-bundle-total>{{ 0 | money }}</span>
+                {% assign price = 0 | money | replace: ' ', '' %}
+                <span class="btn-price lg:hidden relative" data-product-bundle-total>{{ price }}</span>
                 <span class="btn-text whitespace-nowrap">{{ 'sections.product_bundle.add_to_cart' | t }}</span>
               </span>
             </button>
