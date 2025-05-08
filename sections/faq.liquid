@@ -88,7 +88,7 @@
                     <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
                       <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                         <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
-                          {% assign title = block.settings.title %}
+                          {% assign title = block.settings.title  | strip %}
                 {% if title %}{{ title }}{% endif %}
 
                           {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
