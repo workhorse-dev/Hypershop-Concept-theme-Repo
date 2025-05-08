@@ -31,7 +31,8 @@
                     {%- if section.settings.heading != blank -%}
                       <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
                         {%- if section.settings.highlighted_text == 'none' -%}
-                          <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+                          
+                          <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }} 111</split-words>
                         {%- else -%}
                           {%- render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient -%}
                         {%- endif -%}
