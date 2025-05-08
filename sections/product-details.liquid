@@ -204,6 +204,7 @@
             <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ section.settings.specifications_heading | escape }}</p>
             <ul class="flex flex-wrap items-start justify-center gap-6 md:gap-10">
               {%- for block in specifications -%}
+                {{  block.settings.heading }}
                 {%- if block.settings.icon != blank or block.settings.heading != blank -%}
                   <li class="shrink-0 grid gap-2d5">
                     {%- if block.settings.icon != blank -%}
