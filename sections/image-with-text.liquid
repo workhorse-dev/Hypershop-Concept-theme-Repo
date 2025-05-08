@@ -82,8 +82,9 @@
                 {%- endif -%}
                 
               {%- when 'heading' -%}
-              {% assign check = block.settings.heading | strip_html %}
-              {%- if check == blank -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
+                {% assign check = block.settings.heading | strip_html %}
+                {%- if check == blank and template.name == 'product' -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
+              
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
                   <{{ block.settings.heading_tag }} class="heading leading-tight {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
