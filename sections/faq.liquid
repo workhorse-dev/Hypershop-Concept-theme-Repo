@@ -5,6 +5,11 @@
     {%- render 'section-variables', section: section -%}
   }
 </style>
+{% if template.name != 'product' %}
+  {% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
+  {% else %}
+    {% assign faq_check = ''  %}
+{% endif %}
 {% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
 {% if template.name == 'product' and faq_check == '' %}
 {% else %}
