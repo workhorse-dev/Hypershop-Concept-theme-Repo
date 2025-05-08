@@ -89,10 +89,8 @@
                       <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                         <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
                           {% assign title = block.settings.title | strip_html %}
-                            {% if title %} hello
-                            <style>
-                              /* .faqs{display:none;} */
-                            </style>
+                            {% if title %} {{ title }}
+                            
                             
                             {% endif %}
 
