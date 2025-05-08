@@ -574,7 +574,7 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "subheading": " The  world’s fastest 40Gbps{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
             "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
             "link": "",
             "invert_subheading_heading": true,
