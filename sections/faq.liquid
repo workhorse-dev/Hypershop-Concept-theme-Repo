@@ -89,7 +89,12 @@
                       <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                         <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
                           {% assign title = block.settings.title | strip_html %}
-                {% if title %}heelo{% endif %}
+                            {% if title %}
+                            <style>
+                              .faq{display:none;}
+                            </style>
+                            
+                            {% endif %}
 
                           {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                         </span>
