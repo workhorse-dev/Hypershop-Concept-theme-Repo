@@ -14,7 +14,70 @@
     }
   </style>
 </noscript>
+
 {% if  section.settings.video and template.name == 'product' %}
+    <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
+    <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
+      <div class="video-hero banner sticky left-0 top-0 w-full  {% if section.settings.video_height %} h-screen  {% else %} h-screen-66 {% endif %}">
+        {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
+        {%- if section.settings.video_mobile or section.settings.video_url_mobile -%}
+          {%- render 'video',
+            sizes: sizes,
+            video: section.settings.video_mobile,
+            video_url: section.settings.video_url_mobile,
+            muted: section.settings.enable_video_autoplay,
+            autoplay: section.settings.enable_video_autoplay,
+            loop: section.settings.enable_video_looping,
+            description: section.settings.description,
+            cover_image: section.settings.cover_image_mobile,
+            show_play_button: true,
+            is_mobile: true,
+            class: 'banner__media media w-full h-full relative overflow-hidden pointer-events-none'
+          -%}
+        {%- endif -%}
+  
+        {%- render 'video',
+          sizes: sizes,
+          video: section.settings.video,
+          video_url: section.settings.video_url,
+          muted: section.settings.enable_video_autoplay,
+          autoplay: section.settings.enable_video_autoplay,
+          loop: section.settings.enable_video_looping,
+          description: section.settings.description,
+          cover_image: section.settings.cover_image,
+          show_play_button: true,
+          class: 'banner__media media w-full h-full relative overflow-hidden pointer-events-none'
+        -%}
+        <parallax-overlay class="banner__overlay block absolute left-0 top-0 w-full h-full pointer-events-none" data-target="opacity" data-start="1" data-stop="{{ section.settings.overlay_opacity | divided_by: 100.0 }}"></parallax-overlay>
+      </div>
+      {%- if section.blocks.size > 0 -%}
+        <div class="video-hero__content{% if section.settings.full_width %} page-width{% endif %} text-center relative pointer-events-none">
+          <text-scrolling class="banner__box banner__box--{{ section.settings.content_width }} inline-block">
+            {%- liquid
+              assign with_gradient = false
+              if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+                assign with_gradient = true
+              endif
+            -%}
+            {%- for block in section.blocks -%}
+              <div {{ block.shopify_attributes }}>
+                {%- if block.settings.heading != blank -%}
+                  <{{ block.settings.heading_tag }} class="heading {{ block.settings.heading_size }}">
+                    {%- if block.settings.highlighted_text == 'none' -%}
+                      <split-words class="split-words block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
+                    {%- else -%}
+                      {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+                    {%- endif -%}
+                  </{{ block.settings.heading_tag }}>
+                {%- endif -%}
+              </div>
+            {%- endfor -%}
+          </text-scrolling>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+  {% else %}
     <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
     <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
       <div class="video-hero banner sticky left-0 top-0 w-full  {% if section.settings.video_height %} h-screen  {% else %} h-screen-66 {% endif %}">
