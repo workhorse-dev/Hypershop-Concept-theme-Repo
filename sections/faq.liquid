@@ -91,7 +91,7 @@
                 11111{{ block.settings.title }}2222
                           {% assign title = block.settings.title | strip %}
                 [[ {{ title }} ]]
-                          {% if title == ' ' %}hello{% endif %}
+                          {% unless title != ' ' %}hello{% endunless %}
                           {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                         </span>
                         {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
