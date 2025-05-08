@@ -18,7 +18,7 @@
     assign product_limit = products.count
   endif
 -%}
-{% for product in section.settings.products %}
+{% for product in section.settings.products.value %}
   <p>{{ product.title }}</p>
 {% endfor %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
