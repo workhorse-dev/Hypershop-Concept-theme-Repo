@@ -85,9 +85,9 @@
               {% assign heading_check = block.settings.heading | strip_html %}
               {% if  template.name == 'product' %}
                 {% if  heading_check == blank %}
-                    {% assign check  = true %}
-                  {% else %}
                     {% assign check  = false %}
+                  {% else %}
+                    {% assign check  = true %}
                 {% endif %}
               {% else %}
                 {% assign check  = true %}
