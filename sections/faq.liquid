@@ -13,7 +13,13 @@
     {% else %}
       {% assign faq_check  = false %}
   {% endif %}
-  
+{% elsif  template.name == 'collection' %}
+    {% assign question_check = collection.metafields.custom.faq_question1 | strip_html %}
+    {% if  question_check == blank %}
+      {% assign faq_check  = true %}
+    {% else %}
+      {% assign faq_check  = false %}
+    {% endif %}
 {% else %}
   {% assign faq_check  = false %}
 {% endif %}
