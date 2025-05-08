@@ -6,7 +6,7 @@
   }
 </style>
 {% if template.name == 'product' %}
-  
+  {{ product.metafields.custom.faq_question1 }}
 {% endif %}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
