@@ -14,7 +14,7 @@
     }
   </style>
 </noscript>
-{% if  section.settings.video %}
+{% if  section.settings.video and template.name == 'product' %}
     <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
     <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
       <div class="video-hero banner sticky left-0 top-0 w-full  {% if section.settings.video_height %} h-screen  {% else %} h-screen-66 {% endif %}">
