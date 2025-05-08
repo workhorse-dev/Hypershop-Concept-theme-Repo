@@ -82,6 +82,7 @@
                 {%- endif -%}
                 
               {%- when 'heading' -%}
+              {%- if block.settings.heading != blank -%}<style>.image-with-text{display:none}</style>{% endif %}
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
                   <{{ block.settings.heading_tag }} class="heading leading-tight {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
