@@ -9,6 +9,7 @@
 {% if template.name == 'product' %}
   {% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
 {% elsif template.name == 'collection' %}
+     hello
    {% assign faq_check = collection.metafields.custom.faq_question1 | strip_html %}
 {% else %}
   {% assign faq_check = '' %}
