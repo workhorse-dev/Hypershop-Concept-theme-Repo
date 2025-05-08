@@ -82,8 +82,18 @@
                 {%- endif -%}
                 
               {%- when 'heading' -%}
-                {% assign check = block.settings.heading | strip_html %}
-                {%- if check == blank and template.name == 'product' -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
+              {% assign heading_check = block.settings.heading | strip_html %}
+              {% if  template.name == 'product' %}
+                {% if  heading_check %}
+                    {% assign check  = true %}
+                  {% else %}
+                    {% assign check  = false %}
+                {% endif %}
+              {% else %}
+                {% assign check  = true %}
+              {% endif %}
+                
+                {%- if check == false -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
               
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
