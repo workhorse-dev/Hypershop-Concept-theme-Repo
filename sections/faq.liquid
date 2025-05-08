@@ -5,7 +5,9 @@
     {%- render 'section-variables', section: section -%}
   }
 </style>
-{{ template.name }}
+{% if template.name == 'product' %}
+  
+{% endif %}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
   <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
@@ -89,12 +91,6 @@
                     <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
                       <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
                         <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
-                          {% assign title = block.settings.title | strip_html %}
-                            {% if title == '' %} {{ title }} kkkele
-                            <style>.faqs{display:none;}</style>
-                            
-                            {% endif %}
-
                           {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                         </span>
                         {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
