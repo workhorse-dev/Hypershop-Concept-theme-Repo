@@ -74,7 +74,10 @@
             {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' ,class: 'w-full' -}}
           {%- else -%}
             {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
-            {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+            {% comment %}
+              {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+            {% endcomment %}
+            
           {%- endif -%}
         </picture>
         {{- block_content -}}
