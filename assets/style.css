@@ -69,13 +69,13 @@ button.shopify-payment-button__button--unbranded,
   --nav-tabs-width: min(260px, 25vw);
 }
 @media screen and (max-width: 769px) {
-  .drawer__inner .drawer__header .button--close{
-        right: 0;
-        top: 15px;
-        clip: unset;
-        margin: 0 1rem;
-        height: 40px;
-        width: 40px;
+  .drawer__inner .drawer__header .button--close {
+    right: 0;
+    top: 15px;
+    clip: unset;
+    margin: 0 1rem;
+    height: 40px;
+    width: 40px;
   }
 }
 @media screen and (max-width: 1023px) {
@@ -136,6 +136,10 @@ button.mega-menu__nav-item {
 /* Shop the look CSS */
 .shop-the--look .card.product-card {
   padding: 0 1rem;
+  background-color: #fff;
+}
+.shop-the--look .card.product-card .product-card__content{
+  background-color: #fafafa;
 }
 
 /* Sticky add to cart */
@@ -153,13 +157,25 @@ button.mega-menu__nav-item {
   }
 }
 /* Slide show banner */
-.button-12{
+.button-12 {
   max-width: 12rem;
 }
 
 /* Product main CSS */
 @media screen and (max-width: 500px) {
-  .shopify-payments{
+  .shopify-payments {
     gap: var(--sp-8);
   }
+}
+
+/* Related products CSS */
+@media screen and (max-width: 639px) {
+  .slider--tablet .mobile\:card-grid--1 {
+    --slider-item-width: 90vw;
+  }
+}
+
+/* Contact us CSS */
+#shopify-section-template--16549102190654__rich_text_DCHjF6 , #shopify-section-template--16549102190654__rich_text_t7hN8a, #shopify-section-template--16549102190654__rich_text_FAcN4e {
+  scroll-margin-top: 100px;
 }

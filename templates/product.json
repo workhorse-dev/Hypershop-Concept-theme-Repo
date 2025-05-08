@@ -155,8 +155,8 @@
         "icon_list_qVynwF": {
           "type": "icon_list",
           "settings": {
-            "heading": "Product highlights",
-            "enable_carousel": false,
+            "heading": "Satisfaction Guarantee",
+            "enable_carousel": true,
             "show_below_media": true
           }
         }
@@ -575,7 +575,7 @@
           "type": "image",
           "settings": {
             "subheading": " The  world’s fastest 40Gbps{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
-            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}Fasting Charging",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",

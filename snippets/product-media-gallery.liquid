@@ -187,7 +187,7 @@
       {%- if gallery_layout != 'dots' -%}
         <scroll-shadow id="SliderThumbnails-{{ section_id }}-{{ product_id }}" class="product__thumbnails{% unless mobile_thumbnail %} with-dots{% endunless %}{% if gallery_layout == 'scroll' or gallery_layout == 'columns' %} lg:hidden{% endif %} product__thumbnails--{{ thumbnail_position }} grid items-center relative w-full">
         {%- endif -%}
-          <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-4 w-full" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
+          <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-2 w-full" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
             {%- if featured_media != null -%}
               {%- render 'product-thumbnail',
                 product: product,

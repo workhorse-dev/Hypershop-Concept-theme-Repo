@@ -165,7 +165,7 @@
           <div class="localization__item h-full relative" role="combobox" aria-controls="CountryLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.country_label' | t | escape }}">
             <button type="button" class="flex items-center gap-3 h-full z-2 relative"{% unless section_rendering_api %} is="api-button" data-id="announcement_localization_country_form" data-section-id="{{ section.id }}"{% endunless %}>
               {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden xl:block' -%}
-              <span class="leading-tight">{{ localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})</span>
+              <span class="leading-tight">{{ localization.country.name }}</span>
               {%- render 'icon', icon: 'chevron-down', size: 'xs' -%}
             </button>
             <dropdown-localization class="dropdown opacity-0 invisible z-30 absolute top-100 right-0 pointer-events-none" id="CountryLocalization-{{ section.id }}">
@@ -187,7 +187,7 @@
                             title="{{ country.name | escape }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})"
                             data-no-instant
                           >
-                            {{- country.name }} ({{ country.currency.iso_code }} {{ country.currency.symbol }})
+                            {{- country.name }}
                           </a>
                         </p>
                       </li>
