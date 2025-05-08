@@ -5,6 +5,7 @@
     {%- render 'section-variables', section: section -%}
   }
 </style>
+{{ template.name }}
 {% if template.name == 'product' %}
   {% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
 {% elsif template.name == 'collection' %}
