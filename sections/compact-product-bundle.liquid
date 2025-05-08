@@ -18,9 +18,7 @@
     assign product_limit = products.count
   endif
 -%}
-{% for product in section.settings.products.value %}
-  <p>{{ product.title }}</p>
-{% endfor %}
+{{ section.settings.products.value[0].title }}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     <div class="compact-product-bundle-wrapper flex flex-col gap-6 lg:grid lg:gap-10{% if section.settings.layout == 'image_first' %} lg:grid-row{% else %} lg:grid-row-reverse{% endif %}">
