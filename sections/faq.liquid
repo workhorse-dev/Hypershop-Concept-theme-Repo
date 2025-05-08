@@ -5,12 +5,12 @@
     {%- render 'section-variables', section: section -%}
   }
 </style>
-{% if template.name != 'product' %}
+{% if template.name == 'product' %}
   {% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
-  {% else %}
-    {% assign faq_check = ''  %}
+{% else %}
+  {% assign faq_check = '' %}
 {% endif %}
-{% assign faq_check = product.metafields.custom.faq_question1 | strip_html %}
+
 {% if template.name == 'product' and faq_check == '' %}
 {% else %}
   <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
