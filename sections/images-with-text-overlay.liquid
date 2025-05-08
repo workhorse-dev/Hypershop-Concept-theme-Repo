@@ -7,7 +7,7 @@
 </style>
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %} section--{{ section.id }}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
-  <div class="image-with-text-overlay{% unless section.settings.full_width %}page-width {% endunless %}relative">
+  <div class="image-with-text-overlay {% unless section.settings.full_width %}page-width {% endunless %}relative">
     <div class="banner media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} relative">
       <span class="banner__overlay absolute top-0 left-0 w-full h-full pointer-events-none"></span>
       {%- if section.settings.image_1 != blank or section.settings.image_2 != blank or section.settings.image_3 != blank or section.settings.image_4 != blank or section.settings.image_5 != blank -%}
