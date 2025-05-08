@@ -195,6 +195,7 @@
       </div>
       {%- if specifications.size > 0 -%}
         <div class="grow-0">
+        {% if product.metafields.custom.what_s_in_the_box_1 %}
           <sticky-element class="specs__sidebar flex flex-col gap-7d5 md:gap-10 sticky top-0 text-center">
             <svg class="icon-box" viewBox="0 0 234 74" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 20C0 8.95431 8.95431 0 20 0H214C225.046 0 234 8.9543 234 20V74H0V20Z" fill="currentColor"/>
@@ -204,6 +205,7 @@
             <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ section.settings.specifications_heading | escape }}</p>
             <ul class="flex flex-wrap items-start justify-center gap-6 md:gap-10">
               {%- for block in specifications -%}
+                {% if block.settings.heading == blank %} {% endif %}
                 {%- if block.settings.icon != blank or block.settings.heading != blank -%}
                   <li class="shrink-0 grid gap-2d5">
                     {%- if block.settings.icon != blank -%}
@@ -220,6 +222,7 @@
               {%- endfor -%}
             </ul>
           </sticky-element>
+          {% endif %}
         </div>
       {%- endif -%}
     </div>

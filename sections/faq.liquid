@@ -6,214 +6,275 @@
   }
 </style>
 
-<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
-  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
-    {%- if section.settings.style == 'with-border' -%}
-      {%- render 'section-heading', section: section -%}
-    {%- endif -%}
+{% if  template.name == 'product' %}
+  {% assign question_check = product.metafields.custom.faq_question1 | strip_html %}
+  {% if  question_check == blank %}
+      {% assign faq_check  = true %}
+    {% else %}
+      {% assign faq_check  = false %}
+  {% endif %}
+{% elsif  template.name == 'collection' %}
+    {% assign question_check = collection.metafields.custom.faq_question1 | strip_html %}
+    {% if  question_check == blank %}
+      {% assign faq_check  = true %}
+    {% else %}
+      {% assign faq_check  = false %}
+    {% endif %}
+{% else %}
+  {% assign faq_check  = false %}
+{% endif %}
+{% if faq_check == false %}
+  <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
+    <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+      {%- if section.settings.style == 'with-border' -%}
+        {%- render 'section-heading', section: section -%}
+      {%- endif -%}
 
-    {%- if section.blocks.size > 0 -%}
-      {%- liquid
-        assign with_gradient = false
-        if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
-          assign with_gradient = true
-        endif
+      {%- if section.blocks.size > 0 -%}
+        {%- liquid
+          assign with_gradient = false
+          if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+            assign with_gradient = true
+          endif
 
-        assign contact = section.blocks | where: "type", "contact" | first
-      -%}
-      <div class="faqs {{ section.settings.style }} flex flex-col lg:flex-row relative z-1">
-        <div class="grow grid gap-8 md:gap-12">
-          {%- if section.settings.style == 'with-background' -%}
-            {%- if section.settings.heading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
-              <div class="grid gap-4 {{ section.settings.heading_alignment }}">
-                {%- if section.settings.heading != blank or section.settings.description != blank -%}
-                  <div class="title-wrapper leading-none grid gap-4 {{ section.settings.heading_alignment }}">
-                    {%- if section.settings.heading != blank -%}
-                      <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
-                        {%- if section.settings.highlighted_text == 'none' -%}
-                          <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
-                        {%- else -%}
-                          {%- render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient -%}
-                        {%- endif -%}
-                      </{{ section.settings.heading_tag }}>
-                    {%- endif -%}
-                    
-                    {%- if section.settings.description != blank -%}
-                      <div class="page-width--narrow rte leading-normal text-sm xl:text-base">
-                        {{- section.settings.description -}}
-                      </div>
-                    {%- endif -%}
-                  </div>
-                {%- endif -%}
+          assign contact = section.blocks | where: 'type', 'contact' | first
+        -%}
+        <div class="faqs {{ section.settings.style }} flex flex-col lg:flex-row relative z-1">
+          <div class="grow grid gap-8 md:gap-12">
+            {%- if section.settings.style == 'with-background' -%}
+              {%- if section.settings.heading != blank
+                or section.settings.description != blank
+                or section.settings.button_label != blank
+              -%}
+                <div class="grid gap-4 {{ section.settings.heading_alignment }}">
+                  {%- if section.settings.heading != blank or section.settings.description != blank -%}
+                    <div class="title-wrapper leading-none grid gap-4 {{ section.settings.heading_alignment }}">
+                      {%- if section.settings.heading != blank -%}
+                        <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
+                          {%- if section.settings.highlighted_text == 'none' -%}
+                            <split-words class="split-words block" data-animate="fade-up-large">
+                              {{- section.settings.heading }}</split-words
+                            >
+                          {%- else -%}
+                            {%- render 'highlighted-text',
+                              content: section.settings.heading,
+                              style: section.settings.highlighted_text,
+                              scribble: section.settings.highlighted_scribble,
+                              gradient: with_gradient
+                            -%}
+                          {%- endif -%}
+                        </{{ section.settings.heading_tag }}>
+                      {%- endif -%}
 
-                {%- if section.settings.button_label != blank -%}
-                  <p>
-                    {%- render 'button',
-                      style: 'secondary',
-                      label: section.settings.button_label,
-                      link: section.settings.button_link,
-                      external: section.settings.button_external,
-                      show_icon: section.settings.button_icon
-                    -%}
-                  </p>
-                {%- endif -%}
-              </div>
-            {%- endif -%}
-          {%- endif -%}
-          <div class="faq">
-            {%- for block in section.blocks -%}
-              {%- case block.type -%}
-                {%- when 'rich-text' -%}
-                  {%- if forloop.index0 > 0 -%}
-                    {% # theme-check-disable UnclosedHTMLElement %}
+                      {%- if section.settings.description != blank -%}
+                        <div class="page-width--narrow rte leading-normal text-sm xl:text-base">
+                          {{- section.settings.description -}}
+                        </div>
+                      {%- endif -%}
                     </div>
-                    <div class="faq">
-                    {% # theme-check-enable UnclosedHTMLElement %}
                   {%- endif -%}
-                  <div class="accordion accordion--text" {{ block.shopify_attributes }}>
-                    <div class="grid gap-2d5">
-                      <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">
-                        {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
-                      </p>
-                      <div class="text-opacity text-base rte">
-                        {{- block.settings.text -}}
+
+                  {%- if section.settings.button_label != blank -%}
+                    <p>
+                      {%- render 'button',
+                        style: 'secondary',
+                        label: section.settings.button_label,
+                        link: section.settings.button_link,
+                        external: section.settings.button_external,
+                        show_icon: section.settings.button_icon
+                      -%}
+                    </p>
+                  {%- endif -%}
+                </div>
+              {%- endif -%}
+            {%- endif -%}
+            <div class="faq">
+              {%- for block in section.blocks -%}
+                {%- case block.type -%}
+                  {%- when 'rich-text' -%}
+                    {%- if forloop.index0 > 0 -%}
+                      {% # theme-check-disable UnclosedHTMLElement %}
+                      </div>
+                      <div class="faq">
+                        {% # theme-check-enable UnclosedHTMLElement %}
+                    {%- endif -%}
+                    <div class="accordion accordion--text" {{ block.shopify_attributes }}>
+                      <div class="grid gap-2d5">
+                        <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">
+                          {%- render 'highlighted-text',
+                            content: block.settings.heading,
+                            style: block.settings.highlighted_text,
+                            scribble: block.settings.highlighted_scribble,
+                            gradient: with_gradient
+                          -%}
+                        </p>
+                        <div class="text-opacity text-base rte">
+                          {{- block.settings.text -}}
+                        </div>
                       </div>
                     </div>
-                  </div>
-    
-                {%- when 'question' -%}
-                  <div class="accordion">
-                    <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
-                      <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-                        <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
-                          {%- render 'highlighted-text', content: block.settings.title, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
-                        </span>
-                        {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
-                      </summary>
-                      <div class="details__content text-base rte">
-                        {{- block.settings.text -}}
-                      </div>
-                    </details>
-                  </div>
-              {%- endcase -%}
-            {%- endfor -%}
+
+                  {%- when 'question' -%}
+                    <div class="accordion">
+                      <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
+                        <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                          <span class="text-base lg:text-lg xl:text-xl font-medium leading-tight">
+                            {%- render 'highlighted-text',
+                              content: block.settings.title,
+                              style: block.settings.highlighted_text,
+                              scribble: block.settings.highlighted_scribble,
+                              gradient: with_gradient
+                            -%}
+                          </span>
+                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
+                        </summary>
+                        <div class="details__content text-base rte">
+                          {{- block.settings.text -}}
+                        </div>
+                      </details>
+                    </div>
+                {%- endcase -%}
+              {%- endfor -%}
+            </div>
           </div>
-        </div>
 
-        {%- if contact != blank -%}
-          {%- assign form_id = 'ContactForm-' | append: section.id -%}
-          {%- form 'contact', id: form_id, class: 'grow-0' -%}
-            <sticky-element class="contact__sidebar grid gap-7d5 md:gap-10 sticky top-0">
-              <div class="flex justify-between gap-6">
-                <div class="grid gap-2d5">
-                  <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">
-                    {%- render 'highlighted-text', content: contact.settings.heading, style: contact.settings.highlighted_text, scribble: contact.settings.highlighted_scribble, gradient: with_gradient -%}
-                  </p>
-                  <div class="text-opacity text-base rte">
-                    {{- contact.settings.text -}}
+          {%- if contact != blank -%}
+            {%- assign form_id = 'ContactForm-' | append: section.id -%}
+            {%- form 'contact', id: form_id, class: 'grow-0' -%}
+              <sticky-element class="contact__sidebar grid gap-7d5 md:gap-10 sticky top-0">
+                <div class="flex justify-between gap-6">
+                  <div class="grid gap-2d5">
+                    <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">
+                      {%- render 'highlighted-text',
+                        content: contact.settings.heading,
+                        style: contact.settings.highlighted_text,
+                        scribble: contact.settings.highlighted_scribble,
+                        gradient: with_gradient
+                      -%}
+                    </p>
+                    <div class="text-opacity text-base rte">
+                      {{- contact.settings.text -}}
+                    </div>
                   </div>
+
+                  {%- if contact.settings.avatar != blank -%}
+                    {%- capture sizes -%}{{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}px{%- endcapture -%}
+                    {%- capture widths -%}{{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}, {{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio | times: 2 | at_most: contact.settings.avatar.width }}{%- endcapture -%}
+                    {%- capture style -%}--image-width: {{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}px; --image-height: {{ contact.settings.avatar_height }}px;{%- endcapture -%}
+
+                    <div class="media media--transparent relative">
+                      {{-
+                        contact.settings.avatar
+                        | image_url: width: contact.settings.avatar.width
+                        | image_tag: loading: 'lazy', sizes: sizes, widths: widths, style: style, is: 'lazy-image'
+                      -}}
+                    </div>
+                  {%- endif -%}
                 </div>
+                <div class="grid gap-4d5 md:gap-6">
+                  {%- if form.errors -%}
+                    <div class="field">
+                      {%- liquid
+                        assign form_errors = form.errors | default_errors
+                        render 'alert', status: 'error', content: form_errors
+                      -%}
+                    </div>
+                  {%- endif -%}
 
-                {%- if contact.settings.avatar != blank -%}
-                  {%- capture sizes -%}{{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}px{%- endcapture -%}
-                  {%- capture widths -%}{{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}, {{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio | times: 2 | at_most: contact.settings.avatar.width }}{%- endcapture -%}
-                  {%- capture style -%}--image-width: {{ contact.settings.avatar_height | times: contact.settings.avatar.aspect_ratio }}px; --image-height: {{ contact.settings.avatar_height }}px;{%- endcapture -%}
+                  {%- if form.posted_successfully? -%}
+                    <div class="field">
+                      {%- liquid
+                        assign success_message = 'contact.form.post_success' | t
+                        render 'alert', status: 'success', content: success_message
+                      -%}
+                    </div>
+                  {%- endif -%}
 
-                  <div class="media media--transparent relative">
-                    {{- contact.settings.avatar | image_url: width: contact.settings.avatar.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, style: style, is: 'lazy-image' -}}
-                  </div>
-                {%- endif -%}
-              </div>
-              <div class="grid gap-4d5 md:gap-6">
-                {%- if form.errors -%}
-                  <div class="field">
-                    {%- liquid
-                      assign form_errors = form.errors | default_errors
-                      render 'alert', status: 'error', content: form_errors
-                    -%}
-                  </div>
-                {%- endif -%}
-      
-                {%- if form.posted_successfully? -%}
-                  <div class="field">
-                    {%- liquid
-                      assign success_message = 'contact.form.post_success' | t
-                      render 'alert', status: 'success', content: success_message
-                    -%}
-                  </div>
-                {%- endif -%}
-
-                <div class="field">
-                  <input
-                    class="input is-floating"
-                    autocomplete="name"
-                    type="text"
-                    id="ContactFormName-{{ section.id }}"
-                    name="contact[{{ 'contact.form.name' | t }}]"
-                    value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
-                    placeholder="{{ 'contact.form.name' | t | escape }}"
-                  />
-                  <label class="label is-floating" for="ContactFormName-{{ section.id }}">{{ 'contact.form.name' | t }}</label>
-                </div>
-                <div class="field">
-                  <input
-                    class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
-                    autocomplete="email"
-                    type="email"
-                    id="ContactFormEmail-{{ section.id }}"
-                    name="contact[email]"
-                    spellcheck="false"
-                    autocapitalize="off"
-                    value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
-                    placeholder="{{ 'contact.form.email' | t | escape }}"
-                    required
-                  >
-                  <label class="label is-floating" for="ContactFormEmail-{{ section.id }}">{{ 'contact.form.email' | t }}</label>
-                </div>
-
-                {%- if contact.settings.show_phone -%}
                   <div class="field">
                     <input
                       class="input is-floating"
-                      autocomplete="phone"
-                      type="tel"
-                      id="ContactFormPhone-{{ section.id }}"
-                      name="contact[{{ 'contact.form.phone' | t }}]"
-                      value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
-                      placeholder="{{ 'contact.form.phone' | t | escape }}"
-                      pattern="[0-9\-]*"
-                    />
-                    <label class="label is-floating" for="ContactFormPhone-{{ section.id }}">{{ 'contact.form.phone' | t }}</label>
+                      autocomplete="name"
+                      type="text"
+                      id="ContactFormName-{{ section.id }}"
+                      name="contact[{{ 'contact.form.name' | t }}]"
+                      value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+                      placeholder="{{ 'contact.form.name' | t | escape }}"
+                    >
+                    <label class="label is-floating" for="ContactFormName-{{ section.id }}">
+                      {{- 'contact.form.name' | t -}}
+                    </label>
                   </div>
-                {%- endif -%}
+                  <div class="field">
+                    <input
+                      class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+                      autocomplete="email"
+                      type="email"
+                      id="ContactFormEmail-{{ section.id }}"
+                      name="contact[email]"
+                      spellcheck="false"
+                      autocapitalize="off"
+                      value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+                      placeholder="{{ 'contact.form.email' | t | escape }}"
+                      required
+                    >
+                    <label class="label is-floating" for="ContactFormEmail-{{ section.id }}">
+                      {{- 'contact.form.email' | t -}}
+                    </label>
+                  </div>
 
-                <div class="field">
-                  <textarea
-                    class="textarea is-floating"
-                    rows="4"
-                    id="ContactFormMessage-{{ section.id }}"
-                    name="contact[{{ 'contact.form.message' | t }}]"
-                    placeholder=" "
-                  >
+                  {%- if contact.settings.show_phone -%}
+                    <div class="field">
+                      <input
+                        class="input is-floating"
+                        autocomplete="phone"
+                        type="tel"
+                        id="ContactFormPhone-{{ section.id }}"
+                        name="contact[{{ 'contact.form.phone' | t }}]"
+                        value="{% if form.phone %}{{ form.phone }}{% elsif customer %}{{ customer.phone }}{% endif %}"
+                        placeholder="{{ 'contact.form.phone' | t | escape }}"
+                        pattern="[0-9\-]*"
+                      >
+                      <label class="label is-floating" for="ContactFormPhone-{{ section.id }}">
+                        {{- 'contact.form.phone' | t -}}
+                      </label>
+                    </div>
+                  {%- endif -%}
+
+                  <div class="field">
+                    <textarea
+                      class="textarea is-floating"
+                      rows="4"
+                      id="ContactFormMessage-{{ section.id }}"
+                      name="contact[{{ 'contact.form.message' | t }}]"
+                      placeholder=" "
+                    >
                     {{- form.body -}}
                   </textarea>
-                  <label class="label is-floating" for="ContactFormMessage-{{ section.id }}">{{ 'contact.form.message' | t }}</label>
+                    <label class="label is-floating" for="ContactFormMessage-{{ section.id }}">
+                      {{- 'contact.form.message' | t -}}
+                    </label>
+                  </div>
+                  <div class="field">
+                    <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label>
+                    <button
+                      type="submit"
+                      id="ContactSubmit-{{ section.id }}"
+                      class="button button--primary button--fixed"
+                      is="hover-button"
+                    >
+                      <span class="btn-fill" data-fill></span>
+                      <span class="btn-text">{{ 'contact.form.send' | t }}</span>
+                    </button>
+                  </div>
                 </div>
-                <div class="field">
-                  <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label>
-                  <button type="submit" id="ContactSubmit-{{ section.id }}" class="button button--primary button--fixed" is="hover-button">
-                    <span class="btn-fill" data-fill></span>
-                    <span class="btn-text">{{ 'contact.form.send' | t }}</span>
-                  </button>
-                </div>
-              </div>
-            </sticky-element>
-          {%- endform -%}
-        {%- endif -%}
-      </div>
-    {%- endif -%}
+              </sticky-element>
+            {%- endform -%}
+          {%- endif -%}
+        </div>
+      {%- endif -%}
+    </div>
   </div>
-</div>
+{% endif %}
 
 {%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
 {%- if question_blocks.size > 0 -%}

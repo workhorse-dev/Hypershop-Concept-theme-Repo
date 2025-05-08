@@ -18,7 +18,7 @@
   {% endif -%}
 </style>
 
-<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %} section--{{ section.id }}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- liquid
       assign with_background = false
@@ -82,6 +82,19 @@
                 {%- endif -%}
                 
               {%- when 'heading' -%}
+              {% assign heading_check = block.settings.heading | strip_html %}
+              {% if  template.name == 'product' %}
+                {% if  heading_check == blank %}
+                    {% assign check  = false %}
+                  {% else %}
+                    {% assign check  = true %}
+                {% endif %}
+              {% else %}
+                {% assign check  = true %}
+              {% endif %}
+                
+                {%- if check == false -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
+              
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
                   <{{ block.settings.heading_tag }} class="heading leading-tight {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>

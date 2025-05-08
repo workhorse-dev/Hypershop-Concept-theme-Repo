@@ -574,8 +574,8 @@
         "image-1": {
           "type": "image",
           "settings": {
-            "subheading": " The  world’s fastest 40Gbps{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
-            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}Fasting Charging",
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_1.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_1.value }}",
             "link": "",
             "invert_subheading_heading": true,
             "image": "{{ product.metafields.custom.collage_on_scroll_image_1.value }}",
@@ -809,42 +809,42 @@
         "specification_PqmHwt": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/usb_7459efbc-bff9-43fa-9548-28fdcff07c2e.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_1.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_1.value }}"
           }
         },
         "specification_JiyDm3": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/cable.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_2.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_2.value }}"
           }
         },
         "specification_MJykRh": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/shield.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_3.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_3.value }}"
           }
         },
         "specification_gKn9CF": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/cool.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_4.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_4.value }}"
           }
         },
         "specification_3Jwphm": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/cellphone-in-a-hand.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_5.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_5.value }}"
           }
         },
         "specification_pVRTiF": {
           "type": "specification",
           "settings": {
-            "icon": "shopify://shop_images/manual.png",
+            "icon": "{{ product.metafields.custom.what_s_in_the_box_icon_6.value }}",
             "heading": "{{ product.metafields.custom.what_s_in_the_box_6.value }}"
           }
         }
