@@ -15,7 +15,19 @@
   {% assign faq_check = '' %}
 {% endif %}
 
-{% if faq_check != '' %}
+
+{% if  template.name == 'product' %}
+  {% assign question_check = product.metafields.custom.faq_question1 | strip_html %}
+  {% if  question_check == blank %}
+      {% assign faq_check  = true %}
+    {% else %}
+      {% assign faq_check  = false %}
+  {% endif %}
+  
+{% else %}
+  {% assign faq_check  = false %}
+{% endif %}
+{% if faq_check == false %}
   <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if section.settings.style == 'with-background' %} section--plain{% endif %}">
     <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
       {%- if section.settings.style == 'with-border' -%}
