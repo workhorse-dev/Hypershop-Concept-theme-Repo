@@ -726,13 +726,12 @@
             "icon": "devices",
             "icon_width": 24,
             "heading": "Specifications",
-            "content": "{{ product.metafields.custom.product_specifications | metafield_tag }}",
+            "content": "<p>{{ product.metafields.custom.product_specifications | metafield_tag }}</p>",
             "metafields": ""
           }
         },
         "collapsible_tab-3": {
           "type": "collapsible_tab",
-          "disabled": true,
           "settings": {
             "icon": "box",
             "icon_width": 24,
