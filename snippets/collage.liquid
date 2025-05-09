@@ -11,7 +11,7 @@
     assign with_gradient = true
   endif
 -%}
-
+Hello
 {%- for block in section.blocks limit: limit offset: offset -%}
   {%- capture block_content -%}
     {%- if block.settings.subheading != blank or block.settings.heading != blank -%}
