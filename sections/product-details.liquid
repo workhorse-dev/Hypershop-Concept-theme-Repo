@@ -17,7 +17,15 @@
     assign enable_split_mode = true
   endif
 -%}
+{% assign product_details = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.product_feature | strip_html %}
+  {% if content-check == blank %}
+    {% assign product_details = false %}
+  {% endif %}
+{% endif %}
 
+{% if product_details %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if enable_split_mode == false %} specifications-section{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- render 'section-heading', section: section -%}
@@ -228,7 +236,7 @@
     </div>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.product-details.name",
