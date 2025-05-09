@@ -594,29 +594,6 @@
             "overlay_opacity": 40
           }
         },
-        "image-2": {
-          "type": "image",
-          "settings": {
-            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_2.value }}",
-            "heading": "{{ product.metafields.custom.collage_on_scroll_text_2.value }}",
-            "link": "",
-            "invert_subheading_heading": false,
-            "image": "{{ product.metafields.custom.collage_on_scroll_image_2.value }}",
-            "image_ratio": "adapt",
-            "content_position": "md:items-end md:justify-start",
-            "text_alignment": "left",
-            "image_ratio_mobile": "adapt",
-            "content_position_mobile": "items-end justify-start",
-            "text_alignment_mobile": "left",
-            "highlighted_text": "text",
-            "highlighted_scribble": "circle",
-            "color_text": "#ffffff",
-            "color_highlight": "#3c3fbc",
-            "gradient_highlight": "",
-            "color_overlay": "#000000",
-            "overlay_opacity": 40
-          }
-        },
         "image-3": {
           "type": "image",
           "settings": {
@@ -635,6 +612,29 @@
             "highlighted_scribble": "circle",
             "color_text": "#ffffff",
             "color_highlight": "#fde047",
+            "gradient_highlight": "",
+            "color_overlay": "#000000",
+            "overlay_opacity": 40
+          }
+        },
+        "image-2": {
+          "type": "image",
+          "settings": {
+            "subheading": "{{ product.metafields.custom.collage_on_scroll_subtext_2.value }}",
+            "heading": "{{ product.metafields.custom.collage_on_scroll_text_2.value }}",
+            "link": "",
+            "invert_subheading_heading": false,
+            "image": "{{ product.metafields.custom.collage_on_scroll_image_2.value }}",
+            "image_ratio": "adapt",
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "image_ratio_mobile": "adapt",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "text",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "#3c3fbc",
             "gradient_highlight": "",
             "color_overlay": "#000000",
             "overlay_opacity": 40
@@ -666,8 +666,8 @@
       },
       "block_order": [
         "image-1",
-        "image-2",
         "image-3",
+        "image-2",
         "image-4"
       ],
       "settings": {
