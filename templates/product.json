@@ -403,7 +403,7 @@
           "type": "counter",
           "settings": {
             "title": "{{ product.metafields.custom.number_counter_title_1.value }}",
-            "number": "100",
+            "number": "{{ product.metafields.custom.number_counter_1.value }}",
             "unit": "",
             "duration": 2
           }
@@ -412,7 +412,7 @@
           "type": "counter",
           "settings": {
             "title": "{{ product.metafields.custom.number_counter_title_2.value }}",
-            "number": "100",
+            "number": "{{ product.metafields.custom.number_counter_2.value }}",
             "unit": "",
             "duration": 2
           }
