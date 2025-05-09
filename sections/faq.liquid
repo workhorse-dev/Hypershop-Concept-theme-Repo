@@ -115,7 +115,7 @@
                     </div>
 
                   {%- when 'question' -%}
-                  {{ block.settings.title }}
+                  {% if  block.settings.title %}
                     <div class="accordion">
                       <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
                         <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
@@ -134,6 +134,7 @@
                         </div>
                       </details>
                     </div>
+                  {% endif %}
                 {%- endcase -%}
               {%- endfor -%}
             </div>
