@@ -396,61 +396,6 @@
         "rounded": false
       }
     },
-    "number_counter_tmQDTn": {
-      "type": "number-counter",
-      "blocks": {
-        "counter_xJxwr6": {
-          "type": "counter",
-          "settings": {
-            "title": "{{ product.metafields.custom.number_counter_title_1.value }}",
-            "number": "100",
-            "unit": "",
-            "duration": 2
-          }
-        },
-        "counter_w63qcL": {
-          "type": "counter",
-          "settings": {
-            "title": "{{ product.metafields.custom.number_counter_title_2.value }}",
-            "number": "100",
-            "unit": "",
-            "duration": 2
-          }
-        },
-        "counter_e6Mmtc": {
-          "type": "counter",
-          "settings": {
-            "title": "{{ product.metafields.custom.number_counter_title_3.value }}",
-            "number": "40",
-            "unit": "",
-            "duration": 3.3
-          }
-        }
-      },
-      "block_order": [
-        "counter_xJxwr6",
-        "counter_w63qcL",
-        "counter_e6Mmtc"
-      ],
-      "settings": {
-        "gap": "large",
-        "columns": 3,
-        "text_alignment": "center",
-        "columns_mobile": "1",
-        "swipe_on_mobile": true,
-        "text_alignment_mobile": "center",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
     "image-with-text-2": {
       "type": "image-with-text",
       "blocks": {
@@ -500,7 +445,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
+        "padding_top": 40,
         "padding_bottom": 72,
         "divider": false,
         "full_width": false,
@@ -1114,7 +1059,6 @@
     "help-drawer",
     "video-hero",
     "multicolumn_F9B6AF",
-    "number_counter_tmQDTn",
     "image-with-text-2",
     "image-with-text-1",
     "collage",
