@@ -116,7 +116,7 @@
 
                   {%- when 'question' -%}
                   {% assign title_check = block.settings.title | strip_html %}
-                  {% if  title_check %}
+                  {% if  title_check == blank %}
                     <div class="accordion">
                       <details class="details" is="accordion-details" {{ block.shopify_attributes }}>
                         <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
