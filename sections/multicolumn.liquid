@@ -11,7 +11,15 @@
     }
   }
 </style>
+{% assign multicolumn = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.multicolumn_title_1 | strip_html%}
+  {% if content-check == blank %}
+    {% assign multicolumn = false %}
+  {% endif %}
+{% endif %}
 
+{% if multicolumn %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- render 'section-heading', section: section -%}
@@ -91,7 +99,7 @@
     </slider-element>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.multicolumn.name",

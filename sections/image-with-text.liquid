@@ -17,7 +17,14 @@
     }
   {% endif -%}
 </style>
-
+{% assign image-with-text = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.image_with_text_right_1_title | strip_html%}
+  {% if content-check == blank %}
+    {% assign image-with-text = false %}
+  {% endif %}
+{% endif %}
+{% if image-with-text %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %} section--{{ section.id }}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- liquid
@@ -178,7 +185,7 @@
     </div>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.image-with-text.name",
