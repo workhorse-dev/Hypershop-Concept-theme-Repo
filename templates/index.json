@@ -177,7 +177,7 @@
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
-        "padding_top": 52,
+        "padding_top": 60,
         "padding_bottom": 0,
         "divider": false,
         "rounded": false
@@ -350,8 +350,8 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 52,
-        "padding_bottom": 64,
+        "padding_top": 32,
+        "padding_bottom": 40,
         "divider": false,
         "full_width": false,
         "rounded": false
@@ -1570,7 +1570,13 @@
           "type": "collection",
           "settings": {
             "collection": "thunderbolt-compatible",
-            "products": [],
+            "products": [
+              "hyperdrive-thunderbolt-4-docking-station",
+              "hyperdrive-6-in-1-usb-c-media-hub",
+              "hyperdrive-dual-4k-hdmi-adaptor-for-m1-macbook",
+              "hyperdrivenext-10-port-usb-c-hub",
+              "hyperdrivenext-11-port-usb-c-hub"
+            ],
             "title": "Docks & Hubs"
           }
         },
@@ -1586,7 +1592,12 @@
           "type": "collection",
           "settings": {
             "collection": "sale-and-deals",
-            "products": [],
+            "products": [
+              "hyperdrivenext-dual-4k-hdmi-7-port-usb-c-dock",
+              "hyperdrive-gen2-15-in-1-usb-c-docking-station",
+              "hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
+              "hyperdrive-gen2-12-port-usb-c-docking-station"
+            ],
             "title": ""
           }
         }
