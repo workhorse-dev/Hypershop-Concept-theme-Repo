@@ -581,9 +581,120 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 72,
-        "padding_bottom": 72,
+        "padding_bottom": 24,
         "divider": false,
         "narrow": false,
+        "rounded": false
+      }
+    },
+    "shop_the_look_KbgLmh": {
+      "type": "shop-the-look",
+      "blocks": {
+        "product_NqMmdX": {
+          "type": "product",
+          "settings": {
+            "product": "hyperjuice-245w-usb-c-battery-pack",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 20,
+            "vertical_mobile": 80,
+            "horizontal_mobile": 20
+          }
+        },
+        "product_YQzEbc": {
+          "type": "product",
+          "settings": {
+            "product": "hyperspace-bluetooth-wireless-keyboard",
+            "color_text": "#ffffff",
+            "vertical": 60,
+            "horizontal": 50,
+            "vertical_mobile": 60,
+            "horizontal_mobile": 50
+          }
+        },
+        "product_t8yrGg": {
+          "type": "product",
+          "settings": {
+            "product": "hyperjuice-qi2-4-in-1-magnetic-charging-stand",
+            "color_text": "#ffffff",
+            "vertical": 45,
+            "horizontal": 85,
+            "vertical_mobile": 45,
+            "horizontal_mobile": 85
+          }
+        },
+        "product_aw67F8": {
+          "type": "product",
+          "settings": {
+            "product": "hyperdrive-dual-4k-hdmi-adaptor-for-m1-macbook",
+            "color_text": "#ffffff",
+            "vertical": 50,
+            "horizontal": 30,
+            "vertical_mobile": 50,
+            "horizontal_mobile": 30
+          }
+        },
+        "product_ggcRtY": {
+          "type": "product",
+          "settings": {
+            "product": "hyperdrive-thunderbolt-4-docking-station",
+            "color_text": "#ffffff",
+            "vertical": 25,
+            "horizontal": 55,
+            "vertical_mobile": 25,
+            "horizontal_mobile": 55
+          }
+        },
+        "product_FXka3V": {
+          "type": "product",
+          "settings": {
+            "product": "hyperspace-bluetooth-mouse",
+            "color_text": "#ffffff",
+            "vertical": 65,
+            "horizontal": 75,
+            "vertical_mobile": 65,
+            "horizontal_mobile": 75
+          }
+        }
+      },
+      "block_order": [
+        "product_NqMmdX",
+        "product_YQzEbc",
+        "product_t8yrGg",
+        "product_aw67F8",
+        "product_ggcRtY",
+        "product_FXka3V"
+      ],
+      "name": "t:sections.shop-the-look.name",
+      "settings": {
+        "image": "shopify://shop_images/Shop_The_Look.webp",
+        "image_mobile": "shopify://shop_images/Shop_The_Look-v01-r01-1176x662.webp",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 30,
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
         "rounded": false
       }
     },
@@ -665,6 +776,7 @@
         "product_rKPx4i",
         "product_U3UCK6"
       ],
+      "disabled": true,
       "settings": {
         "image": "shopify://shop_images/Shop_The_Look.webp",
         "image_mobile": "shopify://shop_images/Shop_The_Look.webp",
@@ -1681,6 +1793,7 @@
     "collection-list",
     "collage_grid_JPH37M",
     "rich_text_mbyy46",
+    "shop_the_look_KbgLmh",
     "lookbook_xC8fKB",
     "video-with-text-overlay",
     "featured-product",
