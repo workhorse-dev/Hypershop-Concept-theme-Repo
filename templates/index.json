@@ -12,6 +12,24 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "slide-3": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "",
+            "video_url_mobile": "",
+            "heading": "Lightning Fast USB4 Speeds",
+            "subheading": "The world's fastest 40Gbps  USB4 SSD Enclosure is back. Be productive and creative anywhere you work, with ultra-fast USB4 speeds.",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-1": {
           "type": "image",
           "settings": {
@@ -75,32 +93,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "slide-3": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
-            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "description": "",
-            "video_url_mobile": "",
-            "heading": "Lightning Fast USB4 Speeds",
-            "subheading": "The world's fastest 40Gbps  USB4 SSD Enclosure is back. Be productive and creative anywhere you work, with ultra-fast USB4 speeds.",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
+        "slide-3",
         "slide-1",
         "slide-2",
         "image_PGrzFE",
-        "image_eMMdBB",
-        "slide-3"
+        "image_eMMdBB"
       ],
       "settings": {
         "autoplay": true,
