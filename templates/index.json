@@ -30,17 +30,17 @@
             "button_icon": false
           }
         },
-        "slide-1": {
+        "image_eMMdBB": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/HDG212BP-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/HDG212BP-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Save $150 on HyperDrive GEN2 12-in-1 USB-C Docking Station",
-            "subheading": "Easily connect up to 3 external displays with the flexibility of 2 HDMI and 2 DP ports. Now for less!",
-            "heading_size": "title-sm",
+            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
+            "heading": "Charge 2X Faster with Qi2",
+            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
+            "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://products/hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
+            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -64,6 +64,7 @@
         },
         "image_PGrzFE": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/HDM1H-hp-web-v01-r01-2000x2000.webp",
             "image_mobile": "shopify://shop_images/HDM1H-hp-mobile-v01-r01-500x600.webp",
@@ -78,17 +79,17 @@
             "button_icon": false
           }
         },
-        "image_eMMdBB": {
+        "slide-1": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Charge 2X Faster with Qi2",
-            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
-            "heading_size": "title-lg tracking-heading",
+            "image": "shopify://shop_images/HDG212BP-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/HDG212BP-hp-mobile-v01-r01-500x600.webp",
+            "heading": "Save $150 on HyperDrive GEN2 12-in-1 USB-C Docking Station",
+            "subheading": "Easily connect up to 3 external displays with the flexibility of 2 HDMI and 2 DP ports. Now for less!",
+            "heading_size": "title-sm",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
+            "button_link": "shopify://products/hyperdrive-gen2-12-in-1-usb-c-docking-station-with-power",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -97,10 +98,10 @@
       },
       "block_order": [
         "slide-3",
-        "slide-1",
+        "image_eMMdBB",
         "slide-2",
         "image_PGrzFE",
-        "image_eMMdBB"
+        "slide-1"
       ],
       "settings": {
         "autoplay": true,
