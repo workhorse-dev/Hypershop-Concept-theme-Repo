@@ -385,48 +385,42 @@
             endif
           endunless
         -%}
-    {% if  template.suffix == 'modal'%}
-      <script>
-            const container = document.querySelector('.shopify-payment-button');
-            const immediate = document.getElementById('more-payment-options-link');
-      
-            if (immediate) {
-              immediate.textContent = 'Buy Now';
-            }
-            const observer = new MutationObserver((mutations, obs) => {
-              const el = document.getElementById('more-payment-options-link');
-              if (el) {
-                el.textContent = 'Buy Now';
-                obs.disconnect();
-              }
-            });
+    <script>
+  (function() {
+    // Helper: if the “More payment options” link exists, rename it
+    function renameLink(el) {
+      if (el) el.textContent = 'Buy Now';
+    }
 
-            observer.observe(container, { childList: true, subtree: true });
-        </script>
+    // 1) Run once on initial load in case the link is already there
+    renameLink(document.getElementById('more-payment-options-link'));
 
-        {% else %}
-          <script>
-          document.addEventListener('DOMContentLoaded', function() {
-            const container = document.querySelector('.shopify-payment-button');
-            if (!container) return;
+    // 2) Observe the whole document body for any new nodes (e.g. modal content)
+    const observer = new MutationObserver(mutations => {
+      for (let { addedNodes } of mutations) {
+        for (let node of addedNodes) {
+          if (node.nodeType !== 1) continue;        // only element nodes
+          
+          // if the added node _is_ the link
+          if (node.id === 'more-payment-options-link') {
+            renameLink(node);
+          }
+          // or if it contains the link somewhere within it
+          else {
+            const inner = node.querySelector('#more-payment-options-link');
+            if (inner) renameLink(inner);
+          }
+        }
+      }
+    });
 
-            const immediate = document.getElementById('more-payment-options-link');
-            if (immediate) {
-              immediate.textContent = 'Buy Now';
-              return;
-            }
-            const observer = new MutationObserver((mutations, obs) => {
-              const el = document.getElementById('more-payment-options-link');
-              if (el) {
-                el.textContent = 'Buy Now';
-                obs.disconnect();
-              }
-            });
+    observer.observe(document.body, {
+      childList: true,
+      subtree: true
+    });
+  })();
+</script>
 
-            observer.observe(container, { childList: true, subtree: true });
-          });
-        </script>
-    {% endif %}
     
     {% render 'buy-now--button--css' %}
         
