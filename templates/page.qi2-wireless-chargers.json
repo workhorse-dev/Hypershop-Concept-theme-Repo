@@ -125,7 +125,7 @@
             "image": "shopify://shop_images/iPhone-v01-r01_1_1_copy_1.jpg",
             "image_mobile": "shopify://shop_images/iPhone-v01-r01_1_1_copy_1_17e3e46d-4a34-43d9-b724-75e6a7946242.jpg",
             "heading": "HyperJuice Next  Qi2 4-in-1 Magnetic Charging Stand",
-            "subheading": "Subheading text for the slideshow",
+            "subheading": "",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "View Product",
@@ -140,7 +140,7 @@
           "settings": {
             "image": "shopify://shop_images/untitled_1_645x_60a09135-1fbc-4adf-8dc6-3875c3486c72.webp",
             "heading": "HyperJuice Qi2 3-in-1 Magnetic Charging Stand",
-            "subheading": "Subheading text for the slideshow",
+            "subheading": "",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "View Product",
@@ -155,7 +155,7 @@
           "settings": {
             "image": "shopify://shop_images/Frame_17_645x_61291987-b9bd-4e7e-8cc7-5d840475da3b.webp",
             "heading": "HyperJuice Qi2 2-in-1 Magnetic Charging Stand",
-            "subheading": "Subheading text for the slideshow",
+            "subheading": "",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "View Product",
@@ -488,6 +488,41 @@
         "enable_parallax": false,
         "parallax_direction": "vertical"
       }
+    },
+    "featured_collection_zrzRcw": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "hyperjuice-qi2-wireless-charging-stands",
+        "products": [],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Shop Qi2 Wireless Chargers",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
@@ -499,6 +534,7 @@
     "image_with_text_PdLPwr",
     "video_with_text_overlay_EbwHA7",
     "portfolio_on_scroll_mUpPmm",
-    "video_with_text_i4ehz6"
+    "video_with_text_i4ehz6",
+    "featured_collection_zrzRcw"
   ]
 }
