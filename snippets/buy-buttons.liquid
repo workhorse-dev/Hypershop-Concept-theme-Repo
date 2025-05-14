@@ -385,44 +385,31 @@
             endif
           endunless
         -%}
+    {{ template.name }}
         <script>
-  function updateBuyNowButtonText(context = document) {
-    const container = context.querySelector('.shopify-payment-button');
-    if (!container) return;
+          document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.shopify-payment-button');
+            if (!container) return;
 
-    const setText = () => {
-      const el = container.querySelector('#more-payment-options-link');
-      if (el) {
-        el.textContent = 'Buy Now';
-        return true;
-      }
-      return false;
-    };
+            // Try immediately in case it’s already there
+            const immediate = document.getElementById('more-payment-options-link');
+            if (immediate) {
+              immediate.textContent = 'Buy Now';
+              return;
+            }
 
-    if (setText()) return;
+            // Otherwise watch for it
+            const observer = new MutationObserver((mutations, obs) => {
+              const el = document.getElementById('more-payment-options-link');
+              if (el) {
+                el.textContent = 'Buy Now';
+                obs.disconnect();
+              }
+            });
 
-    const observer = new MutationObserver((mutations, obs) => {
-      if (setText()) {
-        obs.disconnect();
-      }
-    });
-
-    observer.observe(container, { childList: true, subtree: true });
-  }
-
-  // Run on page load
-  document.addEventListener('DOMContentLoaded', function () {
-    updateBuyNowButtonText();
-  });
-
-  // Optional: Run again when a popup/modal opens
-  // Replace `.your-modal-class` with the actual class or event trigger
-  document.addEventListener('popup:opened', function (e) {
-    const modalContent = document.querySelector('.quick-view__content'); // or use e.detail if available
-    if (modalContent) updateBuyNowButtonText(modalContent);
-  });
-</script>
-
+            observer.observe(container, { childList: true, subtree: true });
+          });
+        </script>
     {% render 'buy-now--button--css' %}
         
       </div>
