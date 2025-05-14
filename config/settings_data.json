@@ -251,15 +251,26 @@
           "custom_css": ""
         }
       },
+      "6804981206030897614": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/lang_codes/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "top",
+          "native_language_names": true,
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
       "4730719560732683355": {
         "type": "shopify://apps/g-translate-shop-translator/blocks/float/408a74ac-f92d-43cf-a1b1-a044341e66bd",
         "disabled": false,
         "settings": {
-          "horizontal_position": "left",
-          "vertical_position": "bottom",
+          "horizontal_position": "right",
+          "vertical_position": "top",
           "open_direction": "top",
-          "native_language_names": true,
-          "flag_style": "2d",
+          "native_language_names": false,
+          "flag_style": "3d",
           "wrapper_selector": "",
           "custom_css": ""
         }
