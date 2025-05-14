@@ -121,6 +121,7 @@
 
     {%- if enable_language_selector or enable_country_selector -%}
       <div class="localization hidden lg:flex items-center h-full">
+      <div class=''>{% render 'gtranslate' %}</div>
         {%- if enable_language_selector -%}
           <div class="localization__item h-full relative" role="combobox" aria-controls="LanguageLocalization-{{ section.id }}" aria-expanded="false" aria-label="{{ 'localization.language_label' | t | escape }}">
             <button type="button" class="flex items-center gap-3 h-full z-2 relative"{% unless section_rendering_api %} is="api-button" data-id="announcement_localization_language_form" data-section-id="{{ section.id }}"{% endunless %}>
