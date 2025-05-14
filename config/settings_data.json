@@ -189,12 +189,77 @@
       },
       "10008203421340698720": {
         "type": "shopify://apps/g-translate-shop-translator/blocks/dropdown/408a74ac-f92d-43cf-a1b1-a044341e66bd",
-        "disabled": false,
+        "disabled": true,
         "settings": {
           "horizontal_position": "left",
           "vertical_position": "bottom",
           "select_language_label": "Select Language",
           "native_language_names": true,
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
+      "14032133030156696076": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/flags/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "bottom",
+          "native_language_names": true,
+          "flag_size": "32",
+          "flag_style": "2d",
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
+      "3963213073043125682": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/globe/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "bottom",
+          "native_language_names": true,
+          "flag_size": "32",
+          "globe_size": "60",
+          "globe_color": "#66aaff",
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
+      "6623373142120236592": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/lang_names/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "bottom",
+          "native_language_names": true,
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
+      "14094420250765385864": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/popup/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "bottom",
+          "native_language_names": true,
+          "flag_size": "32",
+          "flag_style": "2d",
+          "wrapper_selector": "",
+          "custom_css": ""
+        }
+      },
+      "14631529263461341981": {
+        "type": "shopify://apps/g-translate-shop-translator/blocks/flags_dropdown/408a74ac-f92d-43cf-a1b1-a044341e66bd",
+        "disabled": true,
+        "settings": {
+          "horizontal_position": "left",
+          "vertical_position": "top",
+          "native_language_names": false,
+          "add_new_line": false,
+          "flag_size": "32",
+          "flag_style": "3d",
           "wrapper_selector": "",
           "custom_css": ""
         }
