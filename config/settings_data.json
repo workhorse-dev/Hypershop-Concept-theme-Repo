@@ -272,7 +272,7 @@
           "native_language_names": false,
           "flag_style": "3d",
           "wrapper_selector": "",
-          "custom_css": "div#gt_float_wrapper {\n    top: 0px !important;\n}\n.gt_float_switcher.notranslate , .gt_float_switcher .gt-selected{\n    background: #000 !important;\n}\n.gt_float_switcher .gt-selected .gt-current-lang {\n    color: white !important;\n}"
+          "custom_css": "div#gt_float_wrapper {\n    top: 0px !important;\n}\n.gt_float_switcher.notranslate , .gt_float_switcher .gt-selected{\n    background: #000 !important;\n}\n.gt_float_switcher .gt-selected .gt-current-lang {\n    color: white !important;\n}\n.gt_float_switcher .gt_options a {\n    color: white !important;\n}"
         }
       }
     }
