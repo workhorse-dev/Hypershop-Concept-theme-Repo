@@ -29,7 +29,7 @@
     background: #fff;
     border: 1px solid #ccc;
     border-radius: 4px;
-    max-height: 200px;
+    max-height: 300px;
     overflow-y: auto;
     z-index: 1000;
   }
@@ -55,15 +55,16 @@
     <span id="lang-label">English</span>
   </button>
   <ul role="listbox" id="lang-list" hidden>
-    <li role="option" data-lang="en"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" alt="English flag" /> English</li>
-    <li role="option" data-lang="ar"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/ar.png" alt="Arabic flag" /> Arabic</li>
-    <li role="option" data-lang="es"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/es.png" alt="Spanish flag" /> Spanish</li>
-    <li role="option" data-lang="fr"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/fr.png" alt="French flag" /> French</li>
-    <!-- Add more languages here -->
+    {% assign languages = "af:Afrikaans,sq:Albanian,am:Amharic,ar:Arabic,hy:Armenian,az:Azerbaijani,eu:Basque,be:Belarusian,bn:Bengali,bs:Bosnian,bg:Bulgarian,ca:Catalan,ceb:Cebuano,ny:Chichewa,zh-CN:Chinese (Simplified),zh-TW:Chinese (Traditional),co:Corsican,hr:Croatian,cs:Czech,da:Danish,nl:Dutch,en:English,eo:Esperanto,et:Estonian,tl:Filipino,fi:Finnish,fr:French,fy:Frisian,gl:Galician,ka:Georgian,de:German,el:Greek,gu:Gujarati,ht:Haitian Creole,ha:Hausa,haw:Hawaiian,iw:Hebrew,hi:Hindi,hmn:Hmong,hu:Hungarian,is:Icelandic,ig:Igbo,id:Indonesian,ga:Irish,it:Italian,ja:Japanese,jw:Javanese,kn:Kannada,kk:Kazakh,km:Khmer,ko:Korean,ku:Kurdish (Kurmanji),ky:Kyrgyz,lo:Lao,la:Latin,lv:Latvian,lt:Lithuanian,lb:Luxembourgish,mk:Macedonian,mg:Malagasy,ms:Malay,ml:Malayalam,mt:Maltese,mi:Maori,mr:Marathi,mn:Mongolian,my:Myanmar (Burmese),ne:Nepali,no:Norwegian,ps:Pashto,fa:Persian,pl:Polish,pt:Portuguese,pa:Punjabi,ro:Romanian,ru:Russian,sm:Samoan,gd:Scottish Gaelic,sr:Serbian,st:Sesotho,sn:Shona,sd:Sindhi,si:Sinhala,sk:Slovak,sl:Slovenian,so:Somali,es:Spanish,su:Sudanese,sw:Swahili,sv:Swedish,tg:Tajik,ta:Tamil,te:Telugu,th:Thai,tr:Turkish,uk:Ukrainian,ur:Urdu,uz:Uzbek,vi:Vietnamese,cy:Welsh,xh:Xhosa,yi:Yiddish,yo:Yoruba,zu:Zulu" | split: ',' %}
+    {% for lang in languages %}
+      {% assign parts = lang | split: ':' %}
+      <li role="option" data-lang="{{ parts[0] }}">
+        <img src="//cdn.gtranslate.net/shopify/assets/flags/16/{{ parts[0] }}.png" alt="{{ parts[1] }} flag" /> {{ parts[1] }}
+      </li>
+    {% endfor %}
   </ul>
 </div>
 
-<!-- Hidden container for Google Translate widget -->
 <div id="google_translate_element2" style="display:none"></div>
 
 <script>
@@ -76,18 +77,14 @@
     function loadGTranslate() {
       if (gtranslateLoaded) return;
       gtranslateLoaded = true;
-      // Load Google Translate element script
       const el = document.createElement('script');
       el.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2';
       el.defer = true;
       document.head.appendChild(el);
-      // Load GTranslate float.js for doGTranslate
       const floatJs = document.createElement('script');
       floatJs.src = '//cdn.gtranslate.net/widgets/latest/float.js';
       floatJs.async = true;
       document.head.appendChild(floatJs);
-
-      // Callback to initialize widget
       window.googleTranslateElementInit2 = function() {
         new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element2');
       };
@@ -104,14 +101,11 @@
       const opt = e.target.closest('li[role="option"]');
       if (!opt) return;
       const lang = opt.getAttribute('data-lang');
-      // Update button label and flag
       label.textContent = opt.textContent.trim();
       const img = opt.querySelector('img').cloneNode(true);
       toggleBtn.querySelector('img').replaceWith(img);
-      // Close dropdown
       listbox.hidden = true;
       toggleBtn.setAttribute('aria-expanded', 'false');
-      // Perform translation (always from English)
       if (typeof doGTranslate === 'function') {
         doGTranslate('en|' + lang);
       } else {
@@ -127,3 +121,5 @@
     });
   });
 </script>
+
+<!-- Usage: {% render 'language-switcher' %} -->
