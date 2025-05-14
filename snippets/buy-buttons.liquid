@@ -385,17 +385,14 @@
             endif
           endunless
         -%}
-    {{ template.suffix }}####
-        <script>
-          document.addEventListener('DOMContentLoaded', function() {
+    {{ template.suffix }}
+    {% if  template.suffix == 'modal'%}
+      <script>
             const container = document.querySelector('.shopify-payment-button');
-            if (!container) return;
 
-            // Try immediately in case it’s already there
             const immediate = document.getElementById('more-payment-options-link');
             if (immediate) {
               immediate.textContent = 'Buy Now';
-              return;
             }
 
             // Otherwise watch for it
@@ -408,8 +405,32 @@
             });
 
             observer.observe(container, { childList: true, subtree: true });
+        </script>
+
+        {% else %}
+          <script>
+          document.addEventListener('DOMContentLoaded', function() {
+            const container = document.querySelector('.shopify-payment-button');
+            if (!container) return;
+
+            const immediate = document.getElementById('more-payment-options-link');
+            if (immediate) {
+              immediate.textContent = 'Buy Now';
+              return;
+            }
+            const observer = new MutationObserver((mutations, obs) => {
+              const el = document.getElementById('more-payment-options-link');
+              if (el) {
+                el.textContent = 'Buy Now';
+                obs.disconnect();
+              }
+            });
+
+            observer.observe(container, { childList: true, subtree: true });
           });
         </script>
+    {% endif %}
+    
     {% render 'buy-now--button--css' %}
         
       </div>
