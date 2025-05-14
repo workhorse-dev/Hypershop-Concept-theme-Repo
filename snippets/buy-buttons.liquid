@@ -344,7 +344,12 @@
         <script>
           document.addEventListener('DOMContentLoaded', function() {
             const container = document.querySelector('.shopify-payment-button');
-            if (!container) return;
+            if (!container) {
+    console.log('hello container not found');
+    return;
+            }
+    
+    
 
             // Try immediately in case it’s already there
             const immediate = document.getElementById('more-payment-options-link');
