@@ -388,11 +388,20 @@
     {% if  template.suffix == 'modal'%}
       <script>
             const container = document.querySelector('.shopify-payment-button');
-
             const immediate = document.getElementById('more-payment-options-link');
+      
             if (immediate) {
               immediate.textContent = 'Buy Now';
             }
+            const observer = new MutationObserver((mutations, obs) => {
+              const el = document.getElementById('more-payment-options-link');
+              if (el) {
+                el.textContent = 'Buy Now';
+                obs.disconnect();
+              }
+            });
+
+            observer.observe(container, { childList: true, subtree: true });
         </script>
 
         {% else %}
