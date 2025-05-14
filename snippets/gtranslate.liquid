@@ -1,0 +1,119 @@
+<!-- snippets/language-switcher.liquid -->
+<style>
+  .language-switcher {
+    position: relative;
+    display: inline-block;
+    font-family: Arial, sans-serif;
+  }
+  .language-switcher button {
+    display: flex;
+    align-items: center;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    padding: 5px 10px;
+    cursor: pointer;
+  }
+  .language-switcher button img {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+  .language-switcher ul {
+    list-style: none;
+    margin: 4px 0 0;
+    padding: 0;
+    position: absolute;
+    left: 0;
+    right: 0;
+    background: #fff;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    max-height: 200px;
+    overflow-y: auto;
+    z-index: 1000;
+  }
+  .language-switcher li {
+    display: flex;
+    align-items: center;
+    padding: 8px 10px;
+    cursor: pointer;
+  }
+  .language-switcher li:hover {
+    background: #f5f5f5;
+  }
+  .language-switcher li img {
+    margin-right: 8px;
+    width: 16px;
+    height: 16px;
+  }
+</style>
+
+<div class="language-switcher" id="language-switcher">
+  <button aria-haspopup="listbox" aria-expanded="false" id="lang-toggle">
+    <img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" alt="English flag" />
+    <span id="lang-label">English</span>
+  </button>
+  <ul role="listbox" id="lang-list" hidden>
+    <!-- Example entries; duplicate for each supported language -->
+    <li role="option" data-lang="ar">
+      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/ar.png" alt="Arabic flag" /> Arabic
+    </li>
+    <li role="option" data-lang="es">
+      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/es.png" alt="Spanish flag" /> Spanish
+    </li>
+    <li role="option" data-lang="fr">
+      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/fr.png" alt="French flag" /> French
+    </li>
+    <!-- Add more <li> items here -->
+  </ul>
+</div>
+
+<script>
+  document.addEventListener('DOMContentLoaded', function() {
+    const toggleBtn = document.getElementById('lang-toggle');
+    const listbox = document.getElementById('lang-list');
+    const label = document.getElementById('lang-label');
+
+    // Toggle dropdown
+    toggleBtn.addEventListener('click', () => {
+      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
+      toggleBtn.setAttribute('aria-expanded', String(!expanded));
+      listbox.hidden = expanded;
+    });
+
+    // Handle selection
+    listbox.addEventListener('click', (e) => {
+      const option = e.target.closest('li[role="option"]');
+      if (!option) return;
+      const lang = option.getAttribute('data-lang');
+      const text = option.textContent.trim();
+
+      // Update UI
+      label.textContent = text;
+      const img = option.querySelector('img').cloneNode(true);
+      toggleBtn.querySelector('img').replaceWith(img);
+
+      // Close dropdown
+      listbox.hidden = true;
+      toggleBtn.setAttribute('aria-expanded', 'false');
+
+      // Trigger translation
+      if (typeof doGTranslate === 'function') {
+        doGTranslate('en|' + lang);
+      } else {
+        console.warn('GTranslate script not loaded');
+      }
+    });
+
+    // Close dropdown on outside click
+    document.addEventListener('click', (e) => {
+      if (!document.getElementById('language-switcher').contains(e.target)) {
+        listbox.hidden = true;
+        toggleBtn.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
+</script>
+
+<!-- Usage: {% render 'language-switcher' %} in your theme header or footer -->
