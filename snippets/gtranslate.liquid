@@ -55,7 +55,11 @@
     <span id="lang-label">English</span>
   </button>
   <ul role="listbox" id="lang-list" hidden>
-    <!-- Example entries; duplicate for each supported language -->
+    <!-- Add English option -->
+    <li role="option" data-lang="en">
+      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" alt="English flag" /> English
+    </li>
+    <!-- Other language entries -->
     <li role="option" data-lang="ar">
       <img src="//cdn.gtranslate.net/shopify/assets/flags/16/ar.png" alt="Arabic flag" /> Arabic
     </li>
@@ -75,16 +79,23 @@
     const listbox = document.getElementById('lang-list');
     const label = document.getElementById('lang-label');
     let gtranslateLoaded = false;
+    let currentLang = 'en';  // track source language
 
     function loadGTranslate() {
       if (gtranslateLoaded) return;
       gtranslateLoaded = true;
-      // Load Google Translate element script
-      const gtScript = document.createElement('script');
-      gtScript.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      gtScript.defer = true;
-      document.head.appendChild(gtScript);
-      // Define callback
+      // Load Google Translate element
+      const gtEl = document.createElement('script');
+      gtEl.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
+      gtEl.defer = true;
+      document.head.appendChild(gtEl);
+
+      // Load GTranslate widget for doGTranslate function
+      const widget = document.createElement('script');
+      widget.src = '//cdn.gtranslate.net/widgets/latest/float.js';
+      widget.async = true;
+      document.head.appendChild(widget);
+
       window.googleTranslateElementInit = function() {
         new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false});
       };
@@ -96,17 +107,14 @@
       toggleBtn.setAttribute('aria-expanded', String(!expanded));
       listbox.hidden = expanded;
 
-      // Load GTranslate on first open
-      if (!expanded) {
-        loadGTranslate();
-      }
+      if (!expanded) loadGTranslate();
     });
 
     // Handle selection
     listbox.addEventListener('click', (e) => {
       const option = e.target.closest('li[role="option"]');
       if (!option) return;
-      const lang = option.getAttribute('data-lang');
+      const newLang = option.getAttribute('data-lang');
       const text = option.textContent.trim();
 
       // Update UI
@@ -118,11 +126,12 @@
       listbox.hidden = true;
       toggleBtn.setAttribute('aria-expanded', 'false');
 
-      // Trigger translation
+      // Trigger translation from currentLang to newLang
       if (typeof doGTranslate === 'function') {
-        doGTranslate('en|' + lang);
+        doGTranslate(currentLang + '|' + newLang);
+        currentLang = newLang;
       } else {
-        console.warn('GTranslate function not available yet');
+        console.warn('doGTranslate not ready');
       }
     });
 
