@@ -55,23 +55,16 @@
     <span id="lang-label">English</span>
   </button>
   <ul role="listbox" id="lang-list" hidden>
-    <!-- Add English option -->
-    <li role="option" data-lang="en">
-      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" alt="English flag" /> English
-    </li>
-    <!-- Other language entries -->
-    <li role="option" data-lang="ar">
-      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/ar.png" alt="Arabic flag" /> Arabic
-    </li>
-    <li role="option" data-lang="es">
-      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/es.png" alt="Spanish flag" /> Spanish
-    </li>
-    <li role="option" data-lang="fr">
-      <img src="//cdn.gtranslate.net/shopify/assets/flags/16/fr.png" alt="French flag" /> French
-    </li>
-    <!-- Add more <li> items here -->
+    <li role="option" data-lang="en"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" alt="English flag" /> English</li>
+    <li role="option" data-lang="ar"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/ar.png" alt="Arabic flag" /> Arabic</li>
+    <li role="option" data-lang="es"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/es.png" alt="Spanish flag" /> Spanish</li>
+    <li role="option" data-lang="fr"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/fr.png" alt="French flag" /> French</li>
+    <!-- Add more languages here -->
   </ul>
 </div>
+
+<!-- Hidden container for Google Translate widget -->
+<div id="google_translate_element2" style="display:none"></div>
 
 <script>
   document.addEventListener('DOMContentLoaded', function() {
@@ -79,63 +72,53 @@
     const listbox = document.getElementById('lang-list');
     const label = document.getElementById('lang-label');
     let gtranslateLoaded = false;
-    let currentLang = 'en';  // track source language
 
     function loadGTranslate() {
       if (gtranslateLoaded) return;
       gtranslateLoaded = true;
-      // Load Google Translate element
-      const gtEl = document.createElement('script');
-      gtEl.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit';
-      gtEl.defer = true;
-      document.head.appendChild(gtEl);
+      // Load Google Translate element script
+      const el = document.createElement('script');
+      el.src = '//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2';
+      el.defer = true;
+      document.head.appendChild(el);
+      // Load GTranslate float.js for doGTranslate
+      const floatJs = document.createElement('script');
+      floatJs.src = '//cdn.gtranslate.net/widgets/latest/float.js';
+      floatJs.async = true;
+      document.head.appendChild(floatJs);
 
-      // Load GTranslate widget for doGTranslate function
-      const widget = document.createElement('script');
-      widget.src = '//cdn.gtranslate.net/widgets/latest/float.js';
-      widget.async = true;
-      document.head.appendChild(widget);
-
-      window.googleTranslateElementInit = function() {
-        new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false});
+      // Callback to initialize widget
+      window.googleTranslateElementInit2 = function() {
+        new google.translate.TranslateElement({pageLanguage: 'en', autoDisplay: false}, 'google_translate_element2');
       };
     }
 
-    // Toggle dropdown and lazy-load translate
     toggleBtn.addEventListener('click', () => {
-      const expanded = toggleBtn.getAttribute('aria-expanded') === 'true';
-      toggleBtn.setAttribute('aria-expanded', String(!expanded));
-      listbox.hidden = expanded;
-
-      if (!expanded) loadGTranslate();
+      const open = listbox.hidden;
+      toggleBtn.setAttribute('aria-expanded', String(open));
+      listbox.hidden = !open;
+      if (open) loadGTranslate();
     });
 
-    // Handle selection
     listbox.addEventListener('click', (e) => {
-      const option = e.target.closest('li[role="option"]');
-      if (!option) return;
-      const newLang = option.getAttribute('data-lang');
-      const text = option.textContent.trim();
-
-      // Update UI
-      label.textContent = text;
-      const img = option.querySelector('img').cloneNode(true);
+      const opt = e.target.closest('li[role="option"]');
+      if (!opt) return;
+      const lang = opt.getAttribute('data-lang');
+      // Update button label and flag
+      label.textContent = opt.textContent.trim();
+      const img = opt.querySelector('img').cloneNode(true);
       toggleBtn.querySelector('img').replaceWith(img);
-
       // Close dropdown
       listbox.hidden = true;
       toggleBtn.setAttribute('aria-expanded', 'false');
-
-      // Trigger translation from currentLang to newLang
+      // Perform translation (always from English)
       if (typeof doGTranslate === 'function') {
-        doGTranslate(currentLang + '|' + newLang);
-        currentLang = newLang;
+        doGTranslate('en|' + lang);
       } else {
-        console.warn('doGTranslate not ready');
+        console.error('Translation function not available.');
       }
     });
 
-    // Close dropdown on outside click
     document.addEventListener('click', (e) => {
       if (!document.getElementById('language-switcher').contains(e.target)) {
         listbox.hidden = true;
@@ -144,5 +127,3 @@
     });
   });
 </script>
-
-<!-- Usage: {% render 'language-switcher' %} in your theme header or footer -->
