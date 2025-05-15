@@ -46,6 +46,22 @@
             "button_icon": false
           }
         },
+        "slide-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/HS5910-launch-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/HS5910-launch-hp-mobile-v01-r01-500x600.webp",
+            "heading": "New! Tool-less Cable Lock for MacBook Pro",
+            "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "image_eMMdBB": {
           "type": "image",
           "settings": {
@@ -77,30 +93,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "slide-1": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/HS5910-launch-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/HS5910-launch-hp-mobile-v01-r01-500x600.webp",
-            "heading": "New! Tool-less Cable Lock for MacBook Pro",
-            "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
         "slide-3",
         "image_PGrzFE",
+        "slide-1",
         "image_eMMdBB",
-        "slide-2",
-        "slide-1"
+        "slide-2"
       ],
       "settings": {
         "autoplay": true,
@@ -114,7 +114,7 @@
         "color_background": "#ffffff",
         "gradient_background": "",
         "color_button_text": "#ffffff",
-        "color_button_background": "#171717",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "color_overlay": "#000000",
         "overlay_opacity": 0,
