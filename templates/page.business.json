@@ -550,15 +550,25 @@
         "narrow": true,
         "rounded": false
       }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {}
     }
   },
   "order": [
+    "shogun-helper",
     "main-page",
     "image_with_text_overlay_Jj3tQd",
     "multicolumn_m4Yiyh",
     "multicolumn_fAQXCA",
     "multicolumn_with_icons_UUiEtH",
     "logo_list_yKitXX",
-    "rich_text_4BjEB3"
+    "rich_text_4BjEB3",
+    "shogun-optimizer"
   ]
 }
