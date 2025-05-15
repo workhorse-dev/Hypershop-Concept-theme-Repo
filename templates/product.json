@@ -9,12 +9,22 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
     "main-product": {
       "type": "main-product",
       "blocks": {
         "vendor": {
           "type": "text",
           "settings": {
+            "icon": "none",
+            "icon_width": 20,
             "text": "{{ product.vendor }}",
             "text_size": "text-base"
           }
@@ -59,6 +69,7 @@
           "settings": {
             "inventory_threshold": 15,
             "show_inventory_transfer": true,
+            "show_inventory_quantity": "low",
             "color_scheme": "accent-1"
           }
         },
@@ -66,8 +77,14 @@
           "type": "buy_buttons",
           "settings": {
             "show_quantity_selector": true,
+            "show_buy_now": false,
+            "show_price": false,
             "show_dynamic_checkout": true,
-            "show_gift_card_recipient": true
+            "show_payment_icons": true,
+            "show_gift_card_recipient": true,
+            "enable_back_in_stock": false,
+            "show_back_in_stock_name": false,
+            "show_back_in_stock_phone": false
           }
         },
         "pickup_availability": {
@@ -95,7 +112,9 @@
         },
         "sticky_buy_button": {
           "type": "sticky_buy_button",
-          "settings": {}
+          "settings": {
+            "sticky-atc-width": 550
+          }
         }
       },
       "block_order": [
@@ -116,11 +135,13 @@
         "media_size": 66,
         "gallery_layout": "scroll",
         "thumbnail_position": "beside",
+        "image_ratio": "adapt_first",
         "image_zoom": "lightbox",
         "hide_variants": false,
         "enable_video_autoplay": true,
         "enable_video_looping": true,
         "mobile_layout": "full_width",
+        "image_ratio_mobile": "adapt_first",
         "mobile_thumbnail": false,
         "padding_top": 0,
         "padding_bottom": 84,
@@ -270,6 +291,7 @@
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
+        "video_height": true,
         "full_width": true,
         "rounded": false
       }
@@ -284,7 +306,6 @@
             "heading": "Example heading",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "",
             "image_ratio": "landscape",
             "content_position": "md:items-end md:justify-center",
             "text_alignment": "center",
@@ -307,7 +328,6 @@
             "heading": "Example heading",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "",
             "image_ratio": "portrait",
             "content_position": "md:items-end md:justify-start",
             "text_alignment": "left",
@@ -330,7 +350,6 @@
             "heading": "Example heading",
             "link": "",
             "invert_subheading_heading": false,
-            "image": "",
             "image_ratio": "portrait",
             "content_position": "md:items-start md:justify-end",
             "text_alignment": "right",
@@ -353,7 +372,6 @@
             "heading": "Example heading",
             "link": "",
             "invert_subheading_heading": true,
-            "image": "",
             "image_ratio": "landscape",
             "content_position": "md:items-end md:justify-end",
             "text_alignment": "right",
@@ -385,6 +403,7 @@
         "description": "<p>Share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
         "button_label": "View more",
         "button_link": "",
+        "button_external": false,
         "button_icon": true,
         "highlighted_text": "scribble",
         "highlighted_scribble": "basic-underline",
@@ -410,7 +429,6 @@
         "image": {
           "type": "image",
           "settings": {
-            "image": "",
             "image_width": "custom",
             "image_max_width": 50,
             "image_max_width_mobile": 50
@@ -445,11 +463,11 @@
         "text"
       ],
       "settings": {
-        "image": "",
         "image_height": "600px",
         "image_width": "medium",
         "layout": "image_first",
         "text_alignment": "left",
+        "content_position": "align-self-center",
         "image_height_mobile": "400px",
         "text_alignment_mobile": "left",
         "color_text": "#171717",
@@ -465,6 +483,7 @@
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
+        "full_width": false,
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
@@ -496,6 +515,8 @@
         "color_text": "",
         "color_background": "",
         "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
         "padding_top": 28,
         "padding_bottom": 28,
         "divider": false,
@@ -508,7 +529,6 @@
         "image": {
           "type": "image",
           "settings": {
-            "image": "",
             "image_width": "custom",
             "image_max_width": 50,
             "image_max_width_mobile": 50
@@ -543,11 +563,11 @@
         "text"
       ],
       "settings": {
-        "image": "",
         "image_height": "600px",
         "image_width": "medium",
         "layout": "text_first",
         "text_alignment": "left",
+        "content_position": "align-self-center",
         "image_height_mobile": "400px",
         "text_alignment_mobile": "left",
         "color_text": "#171717",
@@ -563,6 +583,7 @@
         "padding_top": 72,
         "padding_bottom": 72,
         "divider": false,
+        "full_width": false,
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
@@ -575,7 +596,6 @@
           "type": "collapsible_tab",
           "settings": {
             "icon": "none",
-            "icon_image": "",
             "icon_width": 24,
             "heading": "Collapsible row 1",
             "content": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
@@ -586,7 +606,6 @@
           "type": "collapsible_tab",
           "settings": {
             "icon": "none",
-            "icon_image": "",
             "icon_width": 24,
             "heading": "Collapsible row 2",
             "content": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
@@ -597,7 +616,6 @@
           "type": "collapsible_tab",
           "settings": {
             "icon": "none",
-            "icon_image": "",
             "icon_width": 24,
             "heading": "Collapsible row 3",
             "content": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
@@ -608,7 +626,6 @@
           "type": "collapsible_tab",
           "settings": {
             "icon": "none",
-            "icon_image": "",
             "icon_width": 24,
             "heading": "Collapsible row 4",
             "content": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
@@ -623,6 +640,7 @@
         "collapsible_tab-4"
       ],
       "settings": {
+        "style": "with-border",
         "open_first_row": true,
         "specifications_heading": "",
         "heading": "Product details",
@@ -631,6 +649,10 @@
         "heading_tag": "h2",
         "subheading": "",
         "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "color_text": "#000000",
@@ -638,6 +660,9 @@
         "gradient_background": "",
         "color_highlight": "",
         "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
         "padding_top": 28,
         "padding_bottom": 28,
         "divider": false,
@@ -696,9 +721,9 @@
         "contact": {
           "type": "contact",
           "settings": {
+            "heading": "Didn’t find your answer?",
             "text": "<p>Don't hestitate to contact us</p>",
             "show_phone": false,
-            "avatar": "",
             "avatar_height": 60,
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -723,6 +748,7 @@
         "description": "<p>Please read our <a href=\"#\" title=\"FAQ's\">FAQs</a> page to find out more.</p>",
         "button_label": "",
         "button_link": "",
+        "button_external": false,
         "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
@@ -734,6 +760,8 @@
         "color_button_text": "#171717",
         "color_button_background": "#ffffff",
         "color_button_gradient": "",
+        "color_overlay": "#ffffff",
+        "overlay_opacity": 4,
         "padding_top": 84,
         "padding_bottom": 84,
         "divider": false,
@@ -804,16 +832,8 @@
         "rounded": false
       }
     },
-    "shogun-above": {
-      "type": "shogun-above",
-      "settings": {}
-    },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {}
-    },
-    "shogun-helper": {
-      "type": "shogun-helper",
       "settings": {}
     },
     "shogun-optimizer": {
