@@ -16,7 +16,7 @@
     assign gift_card_recipient_feature_active = false
     if block.settings.show_gift_card_recipient and product.gift_card?
       assign gift_card_recipient_feature_active = true
-    endif
+     endif
 
     assign show_dynamic_checkout = false
     if block.settings.show_dynamic_checkout and gift_card_recipient_feature_active == false
