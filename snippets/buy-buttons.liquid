@@ -23,13 +23,13 @@
       assign show_dynamic_checkout = true
     endif
 
-    assign quantity_block = section.blocks | where: "type", "quantity_selector" | first
+    assign quantity_block = section.blocks | where: 'type', 'quantity_selector' | first
     assign show_quantity_selector = block.settings.show_quantity_selector
     if quantity_block
       assign show_quantity_selector = false
     endif
 
-    assign back_in_stock_block = section.blocks | where: "type", "back_in_stock" | first
+    assign back_in_stock_block = section.blocks | where: 'type', 'back_in_stock' | first
     assign enable_back_in_stock = block.settings.enable_back_in_stock
     if back_in_stock_block
       assign enable_back_in_stock = false
@@ -43,7 +43,7 @@
     class: 'product-form grid gap-8',
     is: 'product-form'
   -%}
-    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
+    <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled>
 
     {%- liquid
       if gift_card_recipient_feature_active
@@ -51,7 +51,7 @@
       endif
 
       assign check_against_inventory = true
-      if product.selected_or_first_available_variant.inventory_management != 'shopify' or  product.selected_or_first_available_variant.inventory_policy == 'continue'
+      if product.selected_or_first_available_variant.inventory_management != 'shopify' or product.selected_or_first_available_variant.inventory_policy == 'continue'
         assign check_against_inventory = false
       endif
       if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
@@ -59,21 +59,44 @@
       endif
     -%}
 
-    <div class="product-form__buttons grid gap-4"{% unless product.quantity_price_breaks_configured? and show_quantity_selector %} id="QuantityForm-{{ section_id }}-{{ product_id }}"{% endunless %}>
-      <div class="product-form__error-message alert alert--error text-sm font-medium leading-tight" role="alert" hidden></div>
+    <div
+      class="product-form__buttons grid gap-4"
+      {% unless product.quantity_price_breaks_configured? and show_quantity_selector %}
+        id="QuantityForm-{{ section_id }}-{{ product_id }}"
+      {% endunless %}
+    >
+      <div
+        class="product-form__error-message alert alert--error text-sm font-medium leading-tight"
+        role="alert"
+        hidden
+      ></div>
 
       {%- if product.quantity_price_breaks_configured? and show_quantity_selector -%}
         <div id="QuantityForm-{{ section_id }}-{{ product_id }}" class="field">
           {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
           <label for="Quantity-{{ section_id }}-{{ product_id }}" class="quantity__label label" is="quantity-label">
             {{ 'products.quantity.label' | t }}
-            <span id="QuantityRulesCart-{{ section_id }}-{{ product_id }}" class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %} relative">
-              <span class="quantity-cart font-medium">({{ 'products.quantity.in_cart_html' | t: quantity: cart_qty }})</span>
+            <span
+              id="QuantityRulesCart-{{ section_id }}-{{ product_id }}"
+              class="quantity__rules-cart{% if cart_qty == 0 %} hidden{% endif %} relative"
+            >
+              <span class="quantity-cart font-medium"
+                >({{ 'products.quantity.in_cart_html' | t: quantity: cart_qty }})</span
+              >
             </span>
           </label>
           <div class="flex items-center gap-4">
-            <quantity-input class="quantity inline-flex relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
-              <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+            <quantity-input
+              class="quantity inline-flex relative"
+              data-section-id="{{ section_id }}"
+              data-product-id="{{ product_id }}"
+            >
+              <button
+                type="button"
+                name="minus"
+                class="quantity__button"
+                aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}"
+              >
                 {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
               </button>
               <input
@@ -94,8 +117,13 @@
                 step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
                 value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
                 form="{{ product_form_id }}"
-              />
-              <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+              >
+              <button
+                type="button"
+                name="plus"
+                class="quantity__button"
+                aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+              >
                 {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
               </button>
             </quantity-input>
@@ -129,7 +157,7 @@
                   </span>
                   <span class="sr-only">{{ 'products.price.sale_price' | t }}</span>
                 {%- endif -%}
-                
+
                 {%- if product.selected_or_first_available_variant.quantity_price_breaks.size > 0 -%}
                   {%- if current_qty_for_volume_pricing < volume_pricing_array.last.minimum_quantity -%}
                     {%- liquid
@@ -175,21 +203,36 @@
             {%- endif -%}
           </div>
 
-          {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
-            <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
+          {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1
+            or product.selected_or_first_available_variant.quantity_rule.min > 1
+            or product.selected_or_first_available_variant.quantity_rule.max != null
+          -%}
+            <div
+              class="quantity__rules text-sm font-medium leading-tight"
+              id="QuantityRules-{{ section_id }}-{{ product_id }}"
+            >
               {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
                 <span class="divider">
-                  {{- 'products.quantity.multiples_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment -}}
+                  {{-
+                    'products.quantity.multiples_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                  -}}
                 </span>
               {%- endif -%}
               {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
                 <span class="divider">
-                  {{- 'products.quantity.minimum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.min -}}
+                  {{-
+                    'products.quantity.minimum_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                  -}}
                 </span>
               {%- endif -%}
               {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
                 <span class="divider">
-                  {{- 'products.quantity.maximum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.max -}}
+                  {{-
+                    'products.quantity.maximum_of'
+                    | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                  -}}
                 </span>
               {%- endif -%}
             </div>
@@ -199,9 +242,20 @@
       <div class="buy-buttons{% if enable_back_in_stock %} back-in-stock{% endif %}{% if product.quantity_price_breaks_configured? != true and show_quantity_selector %} flex{% else %} grid{% endif %} gap-4">
         {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
           {%- assign cart_qty = cart | item_count_for_variant: product.selected_or_first_available_variant.id -%}
-          <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">{{ 'products.quantity.label' | t }}</label>
-          <quantity-input class="quantity inline-flex flex-auto relative" data-section-id="{{ section_id }}" data-product-id="{{ product_id }}">
-            <button type="button" name="minus" class="quantity__button" aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}">
+          <label for="Quantity-{{ section_id }}-{{ product_id }}" class="label sr-only">
+            {{- 'products.quantity.label' | t -}}
+          </label>
+          <quantity-input
+            class="quantity inline-flex flex-auto relative"
+            data-section-id="{{ section_id }}"
+            data-product-id="{{ product_id }}"
+          >
+            <button
+              type="button"
+              name="minus"
+              class="quantity__button"
+              aria-label="{{ 'products.quantity.decrease' | t: product: product.title | escape }}"
+            >
               {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'stroke-2 transform' -%}
             </button>
             <input
@@ -222,22 +276,33 @@
               step="{{ product.selected_or_first_available_variant.quantity_rule.increment }}"
               value="{{ product.selected_or_first_available_variant.quantity_rule.min }}"
               form="{{ product_form_id }}"
-            />
-            <button type="button" name="plus" class="quantity__button" aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}">
+            >
+            <button
+              type="button"
+              name="plus"
+              class="quantity__button"
+              aria-label="{{ 'products.quantity.increase' | t: product: product.title | escape }}"
+            >
               {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'stroke-2 transform' -%}
             </button>
           </quantity-input>
         {%- endif -%}
-        
+
         <button
           type="submit"
           name="add"
           form="{{ product_form_id }}"
           class="product-form__submit button button--primary button--fixed w-full"
           is="hover-button"
-          {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
-          {%- if product.template_suffix == 'pre-order' %} data-pre-order{% endif -%}
-          {%- if enable_back_in_stock %} data-back-in-stock{% endif -%}
+          {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+            disabled
+          {% endif -%}
+          {%- if product.template_suffix == 'pre-order' %}
+            data-pre-order
+          {% endif -%}
+          {%- if enable_back_in_stock %}
+            data-back-in-stock
+          {% endif -%}
         >
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
@@ -252,6 +317,51 @@
             -%}
           </span>
         </button>
+        {% if block.settings.show_buy_now %}
+          <button
+            type="button"
+            class="button button--primary icon-with-text col-span-full w-full product-form__submit"
+            is="hover-button"
+            onclick="redirectToCheckout(this)"
+            {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %}
+              disabled
+            {% endif -%}
+          >
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              <svg
+                class="icon icon-lock icon-sm hidden sm:block"
+                viewBox="0 0 20 20"
+                stroke="currentColor"
+                fill="none"
+                xmlns="http://www.w3.org/2000/svg"
+              >
+                <path stroke-linecap="round" d="M5.83333 6.66675V5.83341C5.83333 4.74781 5.83333 4.205 5.97218 3.76463C6.26651 2.83114 6.99772 2.09993 7.93122 1.8056C8.37159 1.66675 8.91439 1.66675 10 1.66675V1.66675C11.0856 1.66675 11.6284 1.66675 12.0688 1.8056C13.0023 2.09993 13.7335 2.83114 14.0278 3.76463C14.1667 4.205 14.1667 4.74781 14.1667 5.83341V6.66675M10 11.6667V13.3334M8.33333 18.3334H11.6667C13.3741 18.3334 14.2278 18.3334 14.909 18.077C15.9871 17.6713 16.8379 16.8205 17.2436 15.7424C17.5 15.0612 17.5 14.2075 17.5 12.5001V12.5001C17.5 10.7926 17.5 9.93892 17.2436 9.25775C16.8379 8.17969 15.9871 7.32888 14.909 6.92312C14.2278 6.66675 13.3741 6.66675 11.6667 6.66675H8.33333C6.62589 6.66675 5.77218 6.66675 5.091 6.92312C4.01294 7.32888 3.16213 8.17969 2.75638 9.25775C2.5 9.93892 2.5 10.7926 2.5 12.5001V12.5001C2.5 14.2075 2.5 15.0612 2.75638 15.7424C3.16213 16.8205 4.01294 17.6713 5.091 18.077C5.77218 18.3334 6.62589 18.3334 8.33333 18.3334Z"></path>
+              </svg>
+              Buy Now
+            </span>
+          </button>
+          <script>
+          function redirectToCheckout(button) {
+            // Traverse up to find the form
+            const form = button.closest('form');
+            if (!form) return;
+        
+            const variantIdInput = form.querySelector('input[name="id"]');
+            const quantityInput = form.querySelector('input[name="quantity"]');
+        
+            const variantId = variantIdInput?.value;
+            const quantity = quantityInput?.value || 1;
+        
+            if (variantId) {
+              const checkoutUrl = `/cart/${variantId}:${quantity}?checkout`;
+              window.location.href = checkoutUrl;
+            } else {
+              alert("Please select a variant before proceeding to checkout.");
+            }
+          }
+          </script>
+        {% endif %}
 
         {%- if enable_back_in_stock -%}
           <button
@@ -262,7 +372,9 @@
             aria-expanded="false"
           >
             <span class="btn-fill" data-fill></span>
-            <span class="btn-text">{{ 'products.product.sold_out' | t }} - {{ 'products.back_in_stock.label' | t }}</span>
+            <span class="btn-text">
+              {{- 'products.product.sold_out' | t }} - {{ 'products.back_in_stock.label' | t -}}
+            </span>
           </button>
         {%- endif -%}
 
@@ -273,24 +385,77 @@
             endif
           endunless
         -%}
+    <script>
+      (function() {
+        // Helper: if the “More payment options” link exists, rename it
+        function renameLink(el) {
+          if (el) el.textContent = 'Buy Now';
+        }
+    
+        // 1) Run once on initial load in case the link is already there
+        renameLink(document.getElementById('more-payment-options-link'));
+    
+        // 2) Observe the whole document body for any new nodes (e.g. modal content)
+        const observer = new MutationObserver(mutations => {
+          for (let { addedNodes } of mutations) {
+            for (let node of addedNodes) {
+              if (node.nodeType !== 1) continue;        // only element nodes
+              
+              // if the added node _is_ the link
+              if (node.id === 'more-payment-options-link') {
+                renameLink(node);
+              }
+              // or if it contains the link somewhere within it
+              else {
+                const inner = node.querySelector('#more-payment-options-link');
+                if (inner) renameLink(inner);
+              }
+            }
+          }
+        });
+        observer.observe(document.body, {
+          childList: true,
+          subtree: true
+        });
+      })();
+</script>
+
+    
+    {% render 'buy-now--button--css' %}
+        
       </div>
 
       {%- if product.quantity_price_breaks_configured? != true and show_quantity_selector -%}
-        {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 or product.selected_or_first_available_variant.quantity_rule.min > 1 or product.selected_or_first_available_variant.quantity_rule.max != null -%}
-          <div class="quantity__rules text-sm font-medium leading-tight" id="QuantityRules-{{ section_id }}-{{ product_id }}">
+        {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1
+          or product.selected_or_first_available_variant.quantity_rule.min > 1
+          or product.selected_or_first_available_variant.quantity_rule.max != null
+        -%}
+          <div
+            class="quantity__rules text-sm font-medium leading-tight"
+            id="QuantityRules-{{ section_id }}-{{ product_id }}"
+          >
             {%- if product.selected_or_first_available_variant.quantity_rule.increment > 1 -%}
               <span class="divider">
-                {{- 'products.quantity.multiples_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment -}}
+                {{-
+                  'products.quantity.multiples_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.increment
+                -}}
               </span>
             {%- endif -%}
             {%- if product.selected_or_first_available_variant.quantity_rule.min > 1 -%}
               <span class="divider">
-                {{- 'products.quantity.minimum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.min -}}
+                {{-
+                  'products.quantity.minimum_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.min
+                -}}
               </span>
             {%- endif -%}
             {%- if product.selected_or_first_available_variant.quantity_rule.max != null -%}
               <span class="divider">
-                {{- 'products.quantity.maximum_of' | t: quantity: product.selected_or_first_available_variant.quantity_rule.max -}}
+                {{-
+                  'products.quantity.maximum_of'
+                  | t: quantity: product.selected_or_first_available_variant.quantity_rule.max
+                -}}
               </span>
             {%- endif -%}
           </div>
@@ -310,14 +475,20 @@
   {%- if enable_back_in_stock -%}
     <div id="BackInStock-{{ section_id }}-{{ product_id }}">
       {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout -%}
-        <back-in-stock-drawer id="BackInStockDrawer-{{ section_id }}-{{ product_id }}" class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+        <back-in-stock-drawer
+          id="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+          class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
           role="dialog"
           aria-modal="true"
           aria-label="{{ product.title | escape }}"
           shopify-design-mode
           hidden
         >
-          <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+          <overlay-element
+            class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none"
+            aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+            aria-expanded="false"
+          ></overlay-element>
           <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
             <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
               <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight grid gap-4">
@@ -339,7 +510,14 @@
                   </dl>
                 {%- endunless -%}
               </span>
-              <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+              <button
+                class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center"
+                type="button"
+                is="hover-button"
+                aria-controls="BackInStockDrawer-{{ section_id }}-{{ product_id }}"
+                aria-expanded="false"
+                aria-label="{{ 'general.accessibility.close' | t | escape }}"
+              >
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
                   {%- render 'icon', icon: 'close', size: 'sm' -%}
@@ -358,7 +536,7 @@
               </div>
             </div>
           </div>
-        </back-in-stock-drawer>        
+        </back-in-stock-drawer>
       {%- endif -%}
     </div>
   {%- endif -%}

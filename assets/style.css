@@ -1,0 +1,181 @@
+html,
+body {
+  font-family: myFontRegular, sans-serif;
+}
+blockquote,
+.heading,
+h1,
+h2,
+h3,
+h4,
+h5 .h0,
+.h1,
+.h2,
+.h3,
+.h4,
+.h5 {
+  font-family: myFontBold, sans-serif;
+}
+h6,
+.h6 {
+  font-family: myFontMedium, sans-serif;
+}
+.button,
+.shopify-challenge__button,
+button.shopify-payment-button__button--unbranded,
+#shopify-product-reviews .spr-summary-actions-newreview,
+#shopify-pc__banner__btn-accept,
+#shopify-pc__banner__btn-decline {
+  font-family: myFontMedium, sans-serif;
+}
+/* Blogpost CSS */
+
+.article img {
+  border-radius: 2rem;
+}
+
+/* General CSS */
+@media screen and (min-width: 1280px) {
+  .grid-col-span-2 {
+    grid-column: span 2;
+  }
+  .grid-col-span-5 {
+    grid-column: span 5;
+  }
+}
+
+/* Footer CSS */
+@media screen and (min-width: 1280px) {
+  .footer__right {
+    padding-inline: clamp(var(--sp-10), 4.421vw, var(--sp-40)) !important;
+  }
+  .footer {
+    grid-template-columns: repeat(7, minmax(0, 1fr)) !important;
+  }
+}
+@media screen and (min-width: 768px) {
+  .footer__left {
+    gap: 2rem !important;
+  }
+}
+
+/* Shop the feed */
+.shop-the-feed .media img.loaded {
+  width: 100%;
+}
+
+/* Header CSS */
+.mega-menu__list--tabs {
+  --nav-tabs-width: min(260px, 25vw);
+}
+@media screen and (max-width: 769px) {
+  .drawer__inner .drawer__header .button--close {
+    right: 0;
+    top: 15px;
+    clip: unset;
+    margin: 0 1rem;
+    height: 40px;
+    width: 40px;
+  }
+}
+@media screen and (max-width: 1023px) {
+  .header__logo {
+    height: 70px;
+  }
+}
+@media screen and (min-width: 1380px) {
+  .mega-menu__list--tabs {
+    --nav-tabs-width: min(300px, 25vw);
+  }
+}
+@media screen and (min-width: 1536px) {
+  .mega-menu__list--tabs {
+    --nav-tabs-width: min(320px, 25vw);
+  }
+}
+
+@media screen and (min-width: 1920px) {
+  .mega-menu__list--tabs {
+    --nav-tabs-width: min(340px, 25vw);
+  }
+}
+
+/* Image banner CSS*/
+.slideshow-dots {
+  border-block-start: none;
+}
+
+/* Product image thumbnails  CSS*/
+@media screen and (min-width: 1700px) {
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 700px;
+  }
+}
+@media screen and (min-width: 1800px) {
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 800px;
+  }
+}
+@media screen and (min-width: 1900px) {
+  .product__thumbnails--beside .product__thumbnails-list {
+    max-height: 870px;
+  }
+}
+
+/* header nav CSS */
+button.mega-menu__nav-item {
+  text-align: start;
+  width: max-content;
+}
+
+/* Timeline Section CSS */
+.timeline-dots button {
+  white-space: nowrap;
+}
+
+/* Shop the look CSS */
+.shop-the--look .card.product-card {
+  padding: 0 1rem;
+  background-color: #fff;
+}
+.shop-the--look .card.product-card .product-card__content{
+  background-color: #fafafa;
+}
+
+/* Sticky add to cart */
+@media screen and (max-width: 767px) {
+  .product-sticky-form .button {
+    width: 8rem;
+  }
+}
+.product-bundle__footer .btn-price .money {
+  white-space: nowrap;
+}
+@media screen and (max-width: 1023px) {
+  .product-bundle-wrapper > .lg\:grow-0 {
+    z-index: 19;
+  }
+}
+/* Slide show banner */
+.button-12 {
+  max-width: 12rem;
+}
+
+/* Product main CSS */
+@media screen and (max-width: 500px) {
+  .shopify-payments {
+    gap: var(--sp-8);
+  }
+}
+
+/* Related products CSS */
+@media screen and (max-width: 639px) {
+  .slider--tablet .mobile\:card-grid--1 {
+    --slider-item-width: 90vw;
+  }
+}
+
+/* Contact us CSS */
+#shopify-section-template--16549102190654__rich_text_DCHjF6 , #shopify-section-template--16549102190654__rich_text_t7hN8a, #shopify-section-template--16549102190654__rich_text_FAcN4e {
+  scroll-margin-top: 100px;
+}

@@ -17,7 +17,15 @@
     assign enable_split_mode = true
   endif
 -%}
+{% assign product_details = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.product_feature | strip_html %}
+  {% if content-check == blank %}
+    {% assign product_details = false %}
+  {% endif %}
+{% endif %}
 
+{% if product_details %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}{% if enable_split_mode == false %} specifications-section{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- render 'section-heading', section: section -%}
@@ -67,7 +75,7 @@
                             {%- endif -%}
                             {{- block.settings.heading | escape -}}
                           </span>
-                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                         </summary>
                         <div class="details__content text-base rte">
                           <div class="specification">
@@ -171,7 +179,7 @@
                             {%- endif -%}
                             {{- block.settings.heading | escape -}}
                           </span>
-                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'flex-auto' -%}
+                          {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
                         </summary>
                         <div class="details__content text-base rte">
                           <div class="specification grid grid-cols-12 gap-6 md:gap-10">
@@ -195,6 +203,7 @@
       </div>
       {%- if specifications.size > 0 -%}
         <div class="grow-0">
+        {% if product.metafields.custom.what_s_in_the_box_1 %}
           <sticky-element class="specs__sidebar flex flex-col gap-7d5 md:gap-10 sticky top-0 text-center">
             <svg class="icon-box" viewBox="0 0 234 74" fill="none" xmlns="http://www.w3.org/2000/svg">
               <path d="M0 20C0 8.95431 8.95431 0 20 0H214C225.046 0 234 8.9543 234 20V74H0V20Z" fill="currentColor"/>
@@ -204,8 +213,9 @@
             <p class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ section.settings.specifications_heading | escape }}</p>
             <ul class="flex flex-wrap items-start justify-center gap-6 md:gap-10">
               {%- for block in specifications -%}
+                {% if block.settings.heading == blank %} {% endif %}
                 {%- if block.settings.icon != blank or block.settings.heading != blank -%}
-                  <li class="flex-auto grid gap-2d5">
+                  <li class="shrink-0 grid gap-2d5">
                     {%- if block.settings.icon != blank -%}
                       <div class="media relative flex items-center justify-center rounded-full">
                         {{- block.settings.icon | image_url: width: block.settings.icon.width | image_tag: loading: 'lazy', widths: '80,96,160,192', is: 'lazy-image' -}}
@@ -220,12 +230,13 @@
               {%- endfor -%}
             </ul>
           </sticky-element>
+          {% endif %}
         </div>
       {%- endif -%}
     </div>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.product-details.name",
@@ -800,7 +811,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 24,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"
@@ -1070,7 +1081,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 24,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"

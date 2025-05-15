@@ -15,6 +15,9 @@
   <link rel="dns-prefetch" href="https://maps.gstatic.com">
   {% # theme-check-enable RemoteAsset %}
 
+  <script async type="module" blocking="render" fetchpriority="high" src="https://cdn.intelligems.io/esm/96695abc99c8/bundle.js"></script>
+  <script src="https://cdn.userway.org/widget.js" data-account="2xDigTdBpS" defer></script>
+
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
   {%- endif -%}
@@ -35,18 +38,20 @@
   {%- if page_description -%}
     <meta name="description" content="{{ page_description | escape }}">
   {%- endif -%}
-
+  
   {%- liquid
     render 'social-meta-tags'
     
     render 'css-variables'
+    
     echo 'theme.css' | asset_url | stylesheet_tag: preload: true
+    echo 'style.css' | asset_url | stylesheet_tag: preload: true
     
     if direction == 'rtl'
       echo 'rtl.css' | asset_url | stylesheet_tag: preload: true
     endif
   -%}
-
+  {% render 'custom-fonts' %}
   <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
 
   {{ content_for_header }}
@@ -63,6 +68,13 @@
   {%- endif -%}
 
   {%- render 'js-variables' -%}
+
+  {% if template contains '404' %}
+      <script>window.location.href = "/";</script>
+  {% endif %}
+
+  {% render 'utm-store' %}
+  {% render 'utm-append' %}
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}"{% if settings.enable_lazy_image %} data-lazy-image{% endif %} data-title-animation data-page-rendering>
@@ -97,5 +109,6 @@
   {%- if request.design_mode == false and settings.preload_links -%}
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
+  {% render 'Microsoft-omnichannel' %}
 </body>
 </html>

@@ -50,7 +50,7 @@
       <div class="drawer__content opacity-0 invisible">
         <div class="newsletter-grid{% if section.settings.image != blank %} with-image{% endif %} flex">
           {%- if section.settings.image != blank -%}
-            <div class="newsletter__image flex-auto media media--height relative hidden sm:block">
+            <div class="newsletter__image shrink-0 media media--height relative hidden sm:block">
               {%- capture sizes -%}min(calc(100vw - 16px), 310px){%- endcapture -%}
               {%- capture widths -%}{{ section.settings.image.width }}, {{ section.settings.image.width | times: 2 | at_most: section.settings.image.width }}{%- endcapture -%}
               {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, is: 'lazy-image' -}}
@@ -967,7 +967,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 48,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"

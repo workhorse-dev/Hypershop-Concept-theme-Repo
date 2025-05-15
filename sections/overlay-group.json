@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "name": "t:sections.overlay-group.name",
   "type": "custom.overlay",
@@ -6,22 +15,25 @@
       "type": "cart-drawer",
       "settings": {
         "show_vendor": false,
-        "show_cart_note": true,
+        "show_cart_note": false,
         "show_shipping_calculator": true,
-        "show_view_cart_button": true,
+        "show_view_cart_button": false,
         "show_checkout_button": true,
         "show_free_shipping_bar": true,
-        "free_shipping_minimum_amount": "1000",
+        "free_shipping_minimum_amount": "40",
         "cart_recommendations_enabled": true,
         "cart_recommendations_heading": "You may also like",
         "cart_recommendations_limit": 5,
         "show_cart_recommendations_vendor": false,
         "show_cart_recommendations_price": true,
         "cart_recommendations_products": [
+          "hyperjuice-magnetic-wireless-battery-pack",
+          "hyperpack-pro-with-apple-find-my",
+          "hyperdrive-usb-c-to-hdmi-4k60hz-cable",
+          "hyperdrive-next-usb4-type-c-performance-cable-1-2m-4ft"
         ],
-        "empty_cart_message": "<p>Not sure where to start?<br\/>Try these collections:</p>",
-        "empty_cart_collections": [
-        ],
+        "empty_cart_message": "<p>Not sure where to start?<br/>Try these collections:</p>",
+        "empty_cart_collections": [],
         "recent_products_enabled": true,
         "recent_products_heading": "Recently viewed",
         "recent_products_limit": 5,
@@ -31,8 +43,7 @@
     },
     "search-drawer": {
       "type": "search-drawer",
-      "settings": {
-      }
+      "settings": {}
     },
     "newsletter-popup": {
       "type": "newsletter-popup",
@@ -52,7 +63,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Sign up and get <em>20% off</em> your first order",
+            "heading": "Sign up and get 15<em>% off</em> your first order",
             "heading_size": "text-2xl lg:text-3xl",
             "heading_tag": "h2",
             "highlighted_text": "scribble",
@@ -68,8 +79,7 @@
         },
         "form": {
           "type": "form",
-          "settings": {
-          }
+          "settings": {}
         },
         "text-2": {
           "type": "text",
@@ -85,13 +95,12 @@
         },
         "media": {
           "type": "media",
-          "settings": {
-          }
+          "settings": {}
         },
         "floating": {
           "type": "floating",
           "settings": {
-            "heading": "Get 20% Off",
+            "heading": "Get 15% Off",
             "content_position": "left-0",
             "show_social": true,
             "social_heading": "Follow us",
@@ -119,10 +128,9 @@
         "expiry": 30,
         "text_alignment": "left",
         "content_position": "right-0",
-        "image": "",
         "color_drawer_text": "#171717",
         "color_drawer_background": "#ffffff",
-        "color_drawer_highlight": "#ffddbf",
+        "color_drawer_highlight": "#3c3fbc",
         "color_drawer_button_text": "#ffffff",
         "color_drawer_button_background": "#171717",
         "color_drawer_button_gradient": "",
@@ -166,7 +174,8 @@
           "settings": {
             "button_label_1": "Yes, I am",
             "button_label_2": "No, I’m not",
-            "button_link_2": ""
+            "button_link_2": "",
+            "button_external_2": false
           }
         }
       },
@@ -182,8 +191,6 @@
         "expiry": 30,
         "text_alignment": "center",
         "content_position": "center-0",
-        "image": "",
-        "background_image": "",
         "blur_background_image": false,
         "color_drawer_text": "#171717",
         "color_drawer_background": "#ffffff",
@@ -240,6 +247,7 @@
         "spacing",
         "buttons"
       ],
+      "disabled": true,
       "settings": {
         "mode": "enabled",
         "delay": 5,
@@ -282,7 +290,8 @@
           "settings": {
             "custom_icon": "",
             "title": "Shop",
-            "link": "shopify:\/\/collections\/all"
+            "link": "shopify://collections/all",
+            "external": false
           }
         },
         "mobile-dock-5": {
@@ -308,6 +317,7 @@
         "mobile-dock-5",
         "mobile-dock-6"
       ],
+      "disabled": true,
       "settings": {
         "color_text": "#000000",
         "color_background": "#ffffff",

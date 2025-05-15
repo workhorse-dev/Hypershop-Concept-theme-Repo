@@ -17,8 +17,15 @@
     }
   {% endif -%}
 </style>
-
-<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+{% assign image-with-text = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.image_with_text_right_1_title | strip_html%}
+  {% if content-check == blank %}
+    {% assign image-with-text = false %}
+  {% endif %}
+{% endif %}
+{% if image-with-text %}
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %} section--{{ section.id }}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- liquid
       assign with_background = false
@@ -82,9 +89,22 @@
                 {%- endif -%}
                 
               {%- when 'heading' -%}
+              {% assign heading_check = block.settings.heading | strip_html %}
+              {% if  template.name == 'product' %}
+                {% if  heading_check == blank %}
+                    {% assign check  = false %}
+                  {% else %}
+                    {% assign check  = true %}
+                {% endif %}
+              {% else %}
+                {% assign check  = true %}
+              {% endif %}
+                
+                {%- if check == false -%}<style>.section--{{ section.id }} .image-with-text{display:none}</style>{% endif %}
+              
                 {%- if block.settings.heading != blank -%}
                   {%- assign delay = delay | plus: 1 -%}
-                  <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
+                  <{{ block.settings.heading_tag }} class="heading leading-tight {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                     {%- if block.settings.highlighted_text == 'none' -%}
                       <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ block.settings.heading }}</split-words>
                     {%- else -%}
@@ -165,7 +185,7 @@
     </div>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.image-with-text.name",
@@ -1156,7 +1176,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 48,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"

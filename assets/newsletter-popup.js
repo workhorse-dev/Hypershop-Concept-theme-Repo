@@ -7,11 +7,11 @@ class NewsletterModal extends ModalElement {
       return;
     }
 
-    if (theme.config.isTouch) {
-      new theme.initWhenVisible(this.init.bind(this));
+    if (!theme.config.isTouch || Shopify.designMode) {
+      this.init();
     }
     else {
-      this.init();
+      new theme.initWhenVisible(theme.utils.throttle(this.init.bind(this)));
     }
   }
 
@@ -40,6 +40,9 @@ class NewsletterModal extends ModalElement {
   }
 
   init() {
+    if (this.initialized) return;
+    this.initialized = true;
+    
     // Open modal if errors or success message exist
     if (this.submited) {
       this.load(1);
@@ -52,7 +55,7 @@ class NewsletterModal extends ModalElement {
   }
 
   load(delay) {
-    if (Shopify && Shopify.designMode) return;
+    if (Shopify.designMode) return;
 
     setTimeout(() => this.show(), delay * 1000);
   }

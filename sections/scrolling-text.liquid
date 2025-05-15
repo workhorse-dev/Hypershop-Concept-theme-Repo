@@ -23,11 +23,11 @@
             assign with_gradient = true
           endif
         -%}
-        <div class="marquee{% if with_dot %} with-dot{% endif %} flex items-center flex-auto whitespace-nowrap">
+        <div class="marquee{% if with_dot %} with-dot{% endif %} flex items-center shrink-0 whitespace-nowrap">
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'text' -%}
-                <div class="scrolling-text__item with-text flex items-center flex-auto {{ block.settings.text_font }} tracking-heading" style="--font-size: {{ block.settings.text_size }}px;{% if block.settings.text_size >= 100 %}--stencil-stroke-width: 0.01em;{% endif %}" {{ block.shopify_attributes }}>
+                <div class="scrolling-text__item with-text flex items-center shrink-0 {{ block.settings.text_font }} tracking-heading" style="--font-size: {{ block.settings.text_size }}px;{% if block.settings.text_size >= 100 %}--stencil-stroke-width: 0.01em;{% endif %}" {{ block.shopify_attributes }}>
                   {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                 </div>
               {%- when 'image' -%}
@@ -35,7 +35,7 @@
                   assign image_height = block.settings.height
                   assign image_height_2x = block.settings.height | times: 2
                 -%}
-                <div class="scrolling-text__item with-media flex items-center flex-auto media media--transparent relative" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
+                <div class="scrolling-text__item with-media flex items-center shrink-0 media media--transparent relative" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
                   {%- if block.settings.image != blank -%}
                     <img
                       srcset="{{ block.settings.image | image_url: height: image_height }} 1x, {{ block.settings.image | image_url: height: image_height_2x }} 2x"

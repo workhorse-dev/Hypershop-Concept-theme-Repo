@@ -268,7 +268,7 @@
   <td>
     <div class="variant-item__inner flex items-start md:items-center gap-4d5 md:gap-10">
       {%- if show_image and image != blank -%}
-        <picture class="variant-item__media media relative overflow-hidden flex-auto">
+        <picture class="variant-item__media media relative overflow-hidden shrink-0">
           {{- image | image_url: width: image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
         </picture>
       {%- endif -%}

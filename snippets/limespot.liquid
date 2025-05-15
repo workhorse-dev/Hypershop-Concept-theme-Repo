@@ -1,0 +1,33 @@
+<script async src="https://edge.personalizer.io/storefront/2.0.0/js/shopify/storefront.min.js?key=oetyc-mk1h1dpo1bwf1fba1epa6gp-rvevj&shop=sanho.myshopify.com"></script>
+<script>
+window.LimeSpot = window.LimeSpot === undefined ? {} : LimeSpot;{% assign t = template | prepend: '/' | append: '.' %}
+{% if t contains '/product.' %}LimeSpot.PageInfo = { Type: "Product", ReferenceIdentifier: "{{ product.id }}"};
+{% elsif t contains '/collection.' %}LimeSpot.PageInfo = { Type: "Collection", ReferenceIdentifier: "{{ collection.id }}", Personalized: {%if collection.metafields.LimeSpot['Personalized'] == "true"%}true{%else%}false{%endif%} };
+{% elsif t contains '/list-collections.' %}LimeSpot.PageInfo = { Type: "CollectionsList", ReferenceIdentifier: null };
+{% elsif t contains '/index.' %}LimeSpot.PageInfo = { Type: "Home", ReferenceIdentifier: null };
+{% elsif t contains '/cart.' %}LimeSpot.PageInfo = { Type: "Cart", ReferenceIdentifier: null };
+{% elsif t contains '/search.' %}LimeSpot.PageInfo = { Type: "Search", ReferenceIdentifier: null };
+{% elsif t contains '/404.' %}LimeSpot.PageInfo = { Type: "Four04", ReferenceIdentifier: null };
+{% elsif checkout.id != blank and checkout.order_id == blank %}LimeSpot.PageInfo = { Type: "Checkout", ReferenceIdentifier: null };
+{% endif %}{% if customer %}LimeSpot.UserInfo = { Identifier: "{{ customer.id }}", Email: "{{ customer.email }}", CellPhone: "{{ customer.phone }}", FirstName: "{{ customer.first_name }}", LastName: "{{ customer.last_name }}", Tags: {{ customer.tags | json }} };
+{% endif %}
+LimeSpot.StoreInfo = { Theme: "{{ theme.name | escape }}" };
+{% assign cart_product_ids = "" %}
+{% if checkout.id != blank and checkout.order_id == blank %}
+	{% for item in checkout.line_items %}
+		{% assign cart_product_ids = cart_product_ids | append: ',' | append: item.product.id %}
+	{% endfor %}
+{% else %}
+	{% for item in cart.items %}
+		{% assign cart_product_ids = cart_product_ids | append: ',' | append: item.product.id %}
+	{% endfor %}
+{% endif %}
+LimeSpot.CartItems = [{{ cart_product_ids | remove_first: "," }}];
+</script>
+{% if t contains '/collection.' and collection.metafields.LimeSpot['CuratedCollectionVariation'] == "true" %}
+<link rel="canonical" data-owner="LimeSpot" href="https://{{ request.host }}{{ collection.metafields.LimeSpot['StartingCollectionPath'] }}">
+{% endif %}
+
+
+
+{% comment %}Checksum: e48ae4c5aa85c5ce4d308739a794ae53{% endcomment %}

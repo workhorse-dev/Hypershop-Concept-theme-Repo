@@ -22,7 +22,7 @@
                 assign image_height = block.settings.height
                 assign image_height_2x = block.settings.height | times: 2
               -%}
-              <div class="logo__media media media--transparent relative overflow-hidden flex-auto" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
+              <div class="logo__media media media--transparent relative overflow-hidden shrink-0" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
                 {%- if block.settings.image != blank -%}
                   <img
                     srcset="{{ block.settings.image | image_url: height: image_height }} 1x, {{ block.settings.image | image_url: height: image_height_2x }} 2x"

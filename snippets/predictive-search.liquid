@@ -95,6 +95,8 @@
               {%- for product in predictive_search.resources.products -%}
                 {%- render 'product-card-horizontal',
                   product: product,
+                  product_id: product.id,
+                  section_id: section_id,
                   image_ratio: settings.product_image_ratio,
                   image_fill: settings.product_image_fill,
                   show_vendor: settings.predictive_search_show_vendor,

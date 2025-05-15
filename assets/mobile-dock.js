@@ -2,7 +2,12 @@ class MobileDock extends HTMLElement {
   constructor() {
     super();
 
-    new theme.initWhenVisible(this.init.bind(this));
+    if (Shopify.designMode) {
+      this.init();
+    }
+    else {
+      new theme.initWhenVisible(theme.utils.throttle(this.init.bind(this)));
+    }
   }
 
   get section() {
@@ -10,10 +15,23 @@ class MobileDock extends HTMLElement {
   }
 
   init() {
+    if (this.initialized) return;
+    this.initialized = true;
+    this.setAttribute('loaded', '');
+
     this.detectForHeader();
     this.detectForFooter();
     setTimeout(this.setHeight.bind(this));
     document.addEventListener('matchSmall', this.setHeight.bind(this));
+
+    if (Shopify.designMode) {
+      this.section.addEventListener('shopify:section:select', () => {
+        this.section.classList.add('shopify-active');
+      });
+      this.section.addEventListener('shopify:section:deselect', () => {
+        this.section.classList.remove('shopify-active');
+      });
+    }
   }
 
   detectForHeader() {

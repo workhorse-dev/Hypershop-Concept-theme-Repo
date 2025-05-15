@@ -4,6 +4,12 @@
     <script src="{{ 'gift-wrapping.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
+  {%- liquid
+    assign section_rendering_api = false
+    if section.index == nil
+      assign section_rendering_api = true
+    endif
+  -%}
   <cart-drawer id="CartDrawer" class="cart-drawer drawer drawer--end z-35 fixed bottom-0 left-0 h-full w-full pointer-events-none"
     role="dialog"
     aria-modal="true"
@@ -136,7 +142,7 @@
                     {%- capture cart_item -%}
                       <li id="CartDrawer-Item-{{ item.key }}" class="horizontal-product flex items-center gap-4 md:gap-6" data-variant-id="{{ item.variant_id }}" data-handle="{{ item.product.handle }}" data-quantity="{{ item.quantity }}" data-price="{{ item.original_price }}">
                         {%- if item.image -%}
-                          <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto" href="{{ item.url }}" tabindex="-1">
+                          <a class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0" href="{{ item.url }}" tabindex="-1">
                             {{- item.image | image_url: width: item.image.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                           </a>
                         {%- endif -%}
@@ -164,7 +170,7 @@
                                   {%- assign property_first_char = property.first | slice: 0 -%}
                                   {%- if property.last != blank and property_first_char != '_' -%}
                                     <div class="flex gap-1 text-xs text-opacity leading-tight">
-                                      <dt>{{ property.first }}:&nbsp;</dt>
+                                      <dt class="font-medium">{{ property.first }}:&nbsp;</dt>
                                       <dd>
                                         {%- if property.last contains '/uploads/' -%}
                                           <a href="{{ property.last }}" class="link" target="_blank" aria-describedby="a11y-new-window-message">
@@ -485,13 +491,13 @@
                 <div class="drawer__footer-top flex">
                   {%- if section.settings.show_cart_note -%}
                     <button type="button" class="flex gap-2d5 grow items-center justify-center" aria-controls="CartNote-{{ section.id }}" aria-expanded="false">
-                      {%- render 'icon', icon: 'note', size: 'lg', class: 'icon-light flex-auto' -%}
+                      {%- render 'icon', icon: 'note', size: 'lg', class: 'icon-light shrink-0' -%}
                       <span class="reversed-link text-sm leading-tight">{{ 'general.cart.note.title' | t }}</span>
                     </button>
                   {%- endif -%}
                   {%- if section.settings.show_shipping_calculator -%}
-                    <button type="button" class="flex gap-2d5 grow items-center justify-center" aria-controls="ShippingCalculator-{{ section.id }}" aria-expanded="false"> 
-                      {%- render 'icon', icon: 'package', size: 'lg', class: 'icon-light flex-auto' -%}
+                    <button type="button" class="flex gap-2d5 grow items-center justify-center" aria-controls="ShippingCalculator-{{ section.id }}" aria-expanded="false"{% unless section_rendering_api %} is="api-button" data-id="cart_drawer_shipping_calculator" data-section-id="{{ section.id }}"{% endunless %}>
+                      {%- render 'icon', icon: 'package', size: 'lg', class: 'icon-light shrink-0' -%}
                       <span class="reversed-link text-sm leading-tight">{{ 'general.cart.shipping_calculator.title' | t }}</span>
                     </button>
                   {%- endif -%}
@@ -502,7 +508,7 @@
                       <div class="modal__container flex flex-col z-3 absolute left-0 bottom-0 w-full">
                         <div class="modal__header flex items-center justify-between relative">
                           <span class="font-medium text-sm md:text-base">{{ 'general.cart.note.caption' | t }}</span>
-                          <button class="close flex items-center justify-center absolute top-0 right-0" type="button" is="magnet-button" aria-controls="CartNote-{{ section.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                          <button type="button" class="close flex items-center justify-center absolute top-0 right-0" is="magnet-button" aria-controls="CartNote-{{ section.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
                             {%- render 'icon', icon: 'close' -%}
                           </button>
                         </div>
@@ -529,61 +535,65 @@
                       <div class="modal__container flex flex-col z-3 absolute left-0 bottom-0 w-full">
                         <div class="modal__header flex items-center justify-between relative">
                           <span class="font-medium text-sm md:text-base">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
-                          <button class="close flex items-center justify-center absolute top-0 right-0" type="button" aria-controls="ShippingCalculator-{{ section.id }}" aria-expanded="false" is="magnet-button" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                          <button type="button" class="close flex items-center justify-center absolute top-0 right-0" is="magnet-button" aria-controls="ShippingCalculator-{{ section.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
                             {%- render 'icon', icon: 'close' -%}
                           </button>
                         </div>
-                        <div class="modal__content flex flex-col overflow-hidden">
-                          <form class="modal__scrollable grid gap-4" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
-                            <country-province class="grid gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
+                        {%- unless section_rendering_api -%}
+                          <div class="modal__content flex flex-col overflow-hidden" id="cart_drawer_shipping_calculator"></div>
+                        {%- else -%}
+                          <div class="modal__content flex flex-col overflow-hidden" id="cart_drawer_shipping_calculator">
+                            <form class="modal__scrollable grid gap-4" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
+                              <country-province class="grid gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
+                                <div class="field">
+                                  <select
+                                    name="address[country]"
+                                    class="select is-floating"
+                                    autocomplete="country"
+                                    is="custom-select"
+                                    id="ShippingCalculatorCountry-{{ section.id }}"
+                                  >
+                                    {{- all_country_option_tags -}}
+                                  </select>
+                                  {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                                  <label class="label is-floating" for="ShippingCalculatorCountry-{{ section.id }}">{{ 'customer.addresses.country' | t }}</label>
+                                </div>
+                                <div class="field" hidden>
+                                  <select
+                                    name="address[province]"
+                                    class="select is-floating"
+                                    autocomplete="address-level1"
+                                    is="custom-select"
+                                    id="ShippingCalculatorProvince-{{ section.id }}"
+                                  >
+                                  </select>
+                                  {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                                  <label class="label is-floating" for="ShippingCalculatorProvince-{{ section.id }}">{{ 'customer.addresses.province' | t }}</label>
+                                </div>
+                              </country-province>
                               <div class="field">
-                                <select
-                                  name="address[country]"
-                                  class="select is-floating"
-                                  autocomplete="country"
-                                  is="custom-select"
-                                  id="ShippingCalculatorCountry-{{ section.id }}"
-                                >
-                                  {{- all_country_option_tags -}}
-                                </select>
-                                {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
-                                <label class="label is-floating" for="ShippingCalculatorCountry-{{ section.id }}">{{ 'customer.addresses.country' | t }}</label>
+                                <input
+                                  name="address[zip]"
+                                  class="input is-floating"
+                                  type="text"
+                                  autocapitalize="characters"
+                                  autocomplete="postal-code"
+                                  placeholder=" "
+                                  id="ShippingCalculatorZip-{{ section.id }}"
+                                  {% if shop.customer_accounts_enabled and customer %}value="{{ customer.default_address.zip }}"{% endif %}
+                                />
+                                <label class="label is-floating" for="ShippingCalculatorZip-{{ section.id }}">{{ 'customer.addresses.zip' | t }}</label>
                               </div>
-                              <div class="field" hidden>
-                                <select
-                                  name="address[province]"
-                                  class="select is-floating"
-                                  autocomplete="address-level1"
-                                  is="custom-select"
-                                  id="ShippingCalculatorProvince-{{ section.id }}"
-                                >
-                                </select>
-                                {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
-                                <label class="label is-floating" for="ShippingCalculatorProvince-{{ section.id }}">{{ 'customer.addresses.province' | t }}</label>
+                              <div class="justify-self-start">
+                                <button class="button button--primary" type="submit" is="hover-button">
+                                  <span class="btn-fill" data-fill></span>
+                                  <span class="btn-text">{{ 'general.cart.shipping_calculator.button' | t }}</span>
+                                </button>
                               </div>
-                            </country-province>
-                            <div class="field">
-                              <input
-                                name="address[zip]"
-                                class="input is-floating"
-                                type="text"
-                                autocapitalize="characters"
-                                autocomplete="postal-code"
-                                placeholder=" "
-                                id="ShippingCalculatorZip-{{ section.id }}"
-                                {% if shop.customer_accounts_enabled and customer %}value="{{ customer.default_address.zip }}"{% endif %}
-                              />
-                              <label class="label is-floating" for="ShippingCalculatorZip-{{ section.id }}">{{ 'customer.addresses.zip' | t }}</label>
-                            </div>
-                            <div class="justify-self-start">
-                              <button class="button button--primary" type="submit" is="hover-button">
-                                <span class="btn-fill" data-fill></span>
-                                <span class="btn-text">{{ 'general.cart.shipping_calculator.button' | t }}</span>
-                              </button>
-                            </div>
-                            <div class="grid gap-3 text-sm"></div>
-                          </form>
-                        </div>
+                              <div class="grid gap-3 text-sm"></div>
+                            </form>
+                          </div>
+                        {%- endunless -%}
                       </div>
                     </modal-element>
                   {%- endif -%}
@@ -661,7 +671,7 @@
                       assign product_id = parsed_term | split: 'id:' | last | times: 1
                       for item in search.results
                         if item.id == product_id
-                          render 'product-card-horizontal', product: item, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: section.settings.show_recent_products_vendor, show_price: section.settings.show_recent_products_price, show_quick_add: true, show_quick_view: settings.product_quick_view
+                          render 'product-card-horizontal', product: item, product_id: item.id, section_id: section.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: section.settings.show_recent_products_vendor, show_price: section.settings.show_recent_products_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view
                         endif
                       endfor
                     endfor
@@ -694,7 +704,7 @@
     {
       "type": "checkbox",
       "id": "show_vendor",
-      "label": "t:sections.cart-drawer.settings.show_vendor.label",
+      "label": "t:sections.global.settings.show_vendor.label",
       "default": true
     },
     {
@@ -754,7 +764,7 @@
       "type": "text",
       "id": "cart_recommendations_heading",
       "default": "You may also like",
-      "label": "t:sections.cart-drawer.settings.cart_recommendations_heading.label"
+      "label": "t:sections.global.settings.heading.label"
     },
     {
       "type": "range",
@@ -763,18 +773,18 @@
       "max": 10,
       "step": 1,
       "default": 5,
-      "label": "t:sections.cart-drawer.settings.cart_recommendations_limit.label"
+      "label": "t:sections.global.settings.product_limit.label"
     },
     {
       "type": "checkbox",
       "id": "show_cart_recommendations_vendor",
-      "label": "t:sections.cart-drawer.settings.show_cart_recommendations_vendor.label",
+      "label": "t:sections.global.settings.show_vendor.label",
       "default": false
     },
     {
       "type": "checkbox",
       "id": "show_cart_recommendations_price",
-      "label": "t:sections.cart-drawer.settings.show_cart_recommendations_price.label",
+      "label": "t:sections.global.settings.show_price.label",
       "default": true
     },
     {
@@ -811,7 +821,7 @@
       "type": "text",
       "id": "recent_products_heading",
       "default": "Recently viewed",
-      "label": "t:sections.cart-drawer.settings.recent_products_heading.label"
+      "label": "t:sections.global.settings.heading.label"
     },
     {
       "type": "range",
@@ -820,18 +830,18 @@
       "max": 10,
       "step": 1,
       "default": 5,
-      "label": "t:sections.cart-drawer.settings.recent_products_limit.label"
+      "label": "t:sections.global.settings.product_limit.label"
     },
     {
       "type": "checkbox",
       "id": "show_recent_products_vendor",
-      "label": "t:sections.cart-drawer.settings.show_recent_products_vendor.label",
+      "label": "t:sections.global.settings.show_vendor.label",
       "default": false
     },
     {
       "type": "checkbox",
       "id": "show_recent_products_price",
-      "label": "t:sections.cart-drawer.settings.show_recent_products_price.label",
+      "label": "t:sections.global.settings.show_price.label",
       "default": true
     }
   ],

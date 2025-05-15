@@ -5,14 +5,14 @@
   endif
 -%}
 
-<div class="card product-card product-card--promo block leading-none relative overflow-hidden" id="shopify-block-{{ block.id }}">
+<div class="card product-card product-card--promo block leading-none relative" id="shopify-block-{{ block.id }}">
   <style>
     #shopify-block-{{ block.id }} {
       {%- render 'section-variables', section: block -%}
       --card-column-size: {{ block.settings.column_size }};
     }
   </style>
-  <div class="product-card__media{% unless promotion_has_content %} without-content{% endunless %} relative top-0 left-0 w-full h-full">
+  <div class="product-card__media{% unless promotion_has_content %} without-content{% endunless %} relative top-0 left-0 w-full h-full overflow-hidden">
     <media-element class="flex relative top-0 left-0 w-full h-full"{% if block.type == 'promotion' %} data-parallax="0.3"{% endif %}>
       {%- if block.type == 'promotion' -%}
         <picture class="media block w-full h-full relative overflow-hidden">

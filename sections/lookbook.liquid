@@ -106,26 +106,27 @@
               -%}
               {% if product != blank %}
                 {%- if settings.product_quick_view -%}
-                  <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+                  {%- capture quick_view_id -%}Quickview-{{ section.id }}-{{ block.id }}-{{ product.id }}{%- endcapture -%}
+                  <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="{{ quick_view_id }}" aria-expanded="false" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
                     <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
                       {%- if product.featured_media -%}
-                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
                           {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                         </div>
                       {%- endif -%}
                       <div class="rte text-sm leading-none grid gap-2">
-                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                        <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
 
                         {%- render 'product-price', product: product, placeholder: placeholder -%}
                       </div>
                       {%- render 'icon', icon: 'caret', class: 'absolute' -%}
                     </div>
                   </hover-element>
-                  <quick-view id="Quickview-{{ section.id }}-{{ product.id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true">
-                    <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false"></overlay-element>
+                  <quick-view id="{{ quick_view_id }}" class="quick-view x-modal drawer z-40 fixed bottom-0 left-0 h-full w-full pointer-events-none" data-product-url="{{ product.url }}" role="dialog" aria-label="{{ 'products.product.choose_product_options' | t: product_name: product.title | escape }}" aria-modal="true" hidden>
+                    <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="{{ quick_view_id }}" aria-expanded="false"></overlay-element>
                     <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
                       <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
-                        <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="Quickview-{{ section.id }}-{{ product.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                        <button class="button button--secondary button--close drawer__close z-1 absolute top-0 right-0 flex items-center justify-center opacity-0" type="button" is="hover-button" aria-controls="{{ quick_view_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
                           <span class="btn-fill" data-fill></span>
                           <span class="btn-text">
                             {%- render 'icon', icon: 'close', size: 'sm' -%}
@@ -139,12 +140,12 @@
                   <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
                     <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
                       {%- if product.featured_media -%}
-                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden flex-auto">
+                        <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
                           {{- product.featured_media | image_url: width: product.featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540', is: 'lazy-image' -}}
                         </div>
                       {%- endif -%}
                       <div class="rte text-sm leading-none grid gap-2">
-                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
+                        <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ product.title }}</p>
 
                         {%- render 'product-price', product: product, placeholder: placeholder -%}
                       </div>
@@ -153,7 +154,7 @@
                   </a>
                 {%- endif -%}
               {%- else -%}
-                <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} aria-disabled="true"{% endif %} id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>&nbsp;</a>
+                <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
               {%- endif -%}
 
             {%- when 'content'-%}
@@ -171,7 +172,7 @@
                         {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
                       {%- endif -%}
                       {%- if block.settings.heading != blank -%}
-                        <p class="heading lg:text-base lg:font-medium leading-tight">{{ block.settings.heading }}</p>
+                        <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ block.settings.heading }}</p>
                       {%- endif -%}
 
                       {{- block.settings.text -}}
@@ -599,7 +600,7 @@
         {
           "type": "color",
           "id": "color_text",
-          "label": "t:sections.global.settings.color_text.label",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
           "default": "#ffffff"
         },
         {
@@ -899,7 +900,7 @@
           "id": "icon_width",
           "label": "t:sections.global.settings.icon_width.label",
           "default": 24,
-          "min": 20,
+          "min": 10,
           "max": 120,
           "step": 2,
           "unit": "px"
@@ -926,7 +927,7 @@
         {
           "type": "color",
           "id": "color_text",
-          "label": "t:sections.global.settings.color_text.label",
+          "label": "t:sections.lookbook.blocks.global.settings.color.label",
           "default": "#ffffff"
         },
         {

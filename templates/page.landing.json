@@ -1,0 +1,1084 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image-with-text-overlay": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Go Beyond with Hyper",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h3",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_VyjNzY": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hyper’s mission to Go Beyond with our connectivity and power solutions. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text_VyjNzY"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/About_Us-Header_Banner-Image-V01-r01-2880x1200.webp",
+        "image_height": "adapt",
+        "content_width": "large",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/About_Us-Banner-v01-r01-860x1005.webp",
+        "image_height_mobile": "400px",
+        "content_position_mobile": "items-center justify-center",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#000000",
+        "overlay_opacity": 50,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": true,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "images-with-text": {
+      "type": "images-with-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Hypers' <em>Mission</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "sketch-underline"
+          }
+        },
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button": {
+          "type": "button",
+          "settings": {
+            "button_label": "Our history",
+            "button_link": "#",
+            "button_style": "secondary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading",
+        "text",
+        "button"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/About_Us-Beyond_Performance-v01-r01-1320x1040.webp",
+        "image_2": "shopify://shop_images/About_Us-Beyond_Peace_of_Mind-v01-r01-1320x1040..webp",
+        "image_ratio": "portrait",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 100,
+        "divider": false,
+        "full_width": false,
+        "rounded": true,
+        "enable_parallax": false
+      }
+    },
+    "portfolio": {
+      "type": "portfolio",
+      "blocks": {
+        "profile-1": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-Beyond_Performance-v01-r01-1320x1040.webp",
+            "heading": "Beyond Performance",
+            "text": "<p>Seamlessly connect your devices, transfer data, and charge quickly and efficiently. HYPER high-performance products, HyperDrive, HyperJuice, and HyperPack, are designed to help you achieve more, faster.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        },
+        "profile-2": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-Beyond_Peace_of_Mind-v01-r01-1320x1040..webp",
+            "heading": "Beyond Peace of Mind",
+            "text": "<p>We have rigorous safety testing standards and adhere to all 3rd party testing requirements to ensure every HYPER solution meets or exceeds all safety parameters, so you and your data remain secure.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        },
+        "profile_R68h9Q": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-Beyond_Sustainability-v01-r01-1320x1040.webp",
+            "heading": "Beyond Sustainability",
+            "text": "<p>We consider our impact on the environment in everything we do. That’s why as we move forward we have committed to using sustainable materials and applying the highest environmental standards wherever we can, to ensure a legacy that is responsible, ethical and as clean as possible. </p>",
+            "color_text": "#ffffff",
+            "color_background": "#171717"
+          }
+        },
+        "profile-3": {
+          "type": "profile",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-Beyond_Service-v01-r01-1320x1040.webp",
+            "heading": "Beyond Service",
+            "text": "<p>Our investment in customer service includes a 300% increase in our customer service team as well as a comprehensive help section which underscores our unyielding dedication to helping you Go Beyond.</p>",
+            "color_text": "#ffffff",
+            "color_background": "#000000"
+          }
+        }
+      },
+      "block_order": [
+        "profile-1",
+        "profile-2",
+        "profile_R68h9Q",
+        "profile-3"
+      ],
+      "settings": {
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "layout": "default",
+        "image_ratio": "portrait",
+        "image_ratio_mobile": "portrait",
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Go Beyond with <em>Hyper  Solutions</em>",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left justify-start",
+        "heading_tag": "h2",
+        "subheading": "Our Core Values",
+        "description": "<p>Seamlessly connect your devices, transfer data, and charge quickly and efficiently. HYPER high-performance products, HyperDrive, HyperJuice, and HyperPack, are designed to help you achieve more, faster.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "scribble",
+        "highlighted_scribble": "squiggle-underline",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "rgba(0,0,0,0)",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "scrolling-text": {
+      "type": "scrolling-text",
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<em><strong>Free shipping and returns</strong></em>",
+            "text_size": 160,
+            "text_font": "body",
+            "highlighted_text": "stencil",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "text"
+      ],
+      "disabled": true,
+      "settings": {
+        "direction": "left",
+        "speed": 20,
+        "grid_horizontal": 70,
+        "enable_twin": false,
+        "enable_parallax": true,
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "timeline_TwpLjM": {
+      "type": "timeline",
+      "blocks": {
+        "content_JE36Vt": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_MacBook_Battery_Pack-v01-r01-880x638_18da414a-03b1-409c-9ed6-12a87f2b2025.webp",
+            "subheading": "2009",
+            "heading": "World's 1st MacBook Battery Pack",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_3yRNP8": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_USB-C_Hub_for_MacBook-v01-r01-880x638.webp",
+            "subheading": "2016",
+            "heading": "World’s 1st USB-C Hub for MacBook2016",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_ekJRHt": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_100W_USB-C_Battery_Pack-v01-r01-880x638_bfdbb13e-1c4c-4107-bbc0-58c96071fdc1.webp",
+            "subheading": "2018",
+            "heading": "World’s 1st 100W USB-C Battery Pack",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_VbmCGE": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_USB-C_Hub_for_iPad-v01-r01-880x638_862638a2-7319-469a-8d4f-061a3a2cabb9.webp",
+            "subheading": "2019",
+            "heading": "World’s 1st USB-C Hub for iPad",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_TYT7wN": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_100W_GaN_Charger-v01-r01-880x638.webp",
+            "subheading": "2019",
+            "heading": "World’s 1st 100W GaN Charger",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_6q3mPw": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/About_Us-World_COs_1st_Fan-less_GaN_Thunderbolt_4_Power_Hub-v01-r01-880x638.webp",
+            "subheading": "2022",
+            "heading": "World’s 1st Fan-less GaN Thunderbolt 4 Power Hub",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_b3DVgQ": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/HJ245B_Blog-2.jpg",
+            "subheading": "2023",
+            "heading": "Massive Power Plays",
+            "heading_tag": "h2",
+            "text": "<p>Launched a $1M+ crowdfunding campaign for our 245W family.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "content_KWgJ3T": {
+          "type": "content",
+          "settings": {
+            "image": "shopify://shop_images/hyper-go-beyond-v01-r01-600x500.webp",
+            "subheading": "2025",
+            "heading": "Wait and see...",
+            "heading_tag": "h2",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "content_JE36Vt",
+        "content_3yRNP8",
+        "content_ekJRHt",
+        "content_VbmCGE",
+        "content_TYT7wN",
+        "content_6q3mPw",
+        "content_b3DVgQ",
+        "content_KWgJ3T"
+      ],
+      "settings": {
+        "image_ratio": "adapt",
+        "image_ratio_mobile": "wide",
+        "heading": "Innovation is in our DNA",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>We're passionate about staying ahead of the curve, as demonstrated by our history of world-firsts and awards. Our early dedication to supporting the Apple ecosystem has earned us a loyal following through creative crowdfunding campaigns and groundbreaking product launches. </p>",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "rich_text_tXztGp": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_HhL8Wx": {
+          "type": "heading",
+          "settings": {
+            "heading": "Go Beyond with Hyper",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h3",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_HhL8Wx"
+      ],
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_QDgUq8": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_Mjw6qV": {
+          "type": "heading",
+          "settings": {
+            "heading": "Go Beyond Your Devices Capabilities with HyperDrive connectivity",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_EVPkag": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Unleash limitless creativity with HyperDrive: professional-grade docking stations, hubs, Thunderbolt docks, and adapters  for high-performance creators. Our universal and form-fit docking station and USB-C hubs for MacBook, expand your computer's capabilities and unlocking new ways of creating. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_tNYYkB": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://pages/hyperdrive-dual-4k-hdmi-usb-hub-and-adapter-for-m1-macbooks",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_Mjw6qV",
+        "text_EVPkag",
+        "button_tNYYkB"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/About_Us-Go_Beyond_Your_Devices_Capabilities_with_HyperDrive_Connectivity-v01-r01-1616x1040_0a59cf8e-e332-4ea1-b702-bc34b064ec08.webp",
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_bKJdmX": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_iiiQni": {
+          "type": "heading",
+          "settings": {
+            "heading": "Charge Beyond Expectations with HyperJuice Charging Solutions",
+            "heading_size": "title-sm",
+            "heading_tag": "h4",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_btV7GB": {
+          "type": "text",
+          "settings": {
+            "text": "<p>HyperJuice empowers creators with the freedom to unleash their creativity anywhere, from multi-port GaN wall chargers, wireless chargers, and portable chargers provide the necessary power to fuel your imagination on the go.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_bH6hyr": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/power-accessories",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_iiiQni",
+        "text_btV7GB",
+        "button_bH6hyr"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/About_Us-Charge_Beyond_Expectations_with_HyperJuice_Charging_Solutions--v01-r01-1616x1040..webp",
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "text_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "image_with_text_N4nXWD": {
+      "type": "image-with-text",
+      "blocks": {
+        "heading_gpbpgU": {
+          "type": "heading",
+          "settings": {
+            "heading": "Go Beyond your Boundaries with HyperPack Mobility",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_kN9Er4": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Laptop backpacks and laptop sleeves for tech and creators. Designed for on-the-go convenience and protection, travel backpack HyperPack combines functionality, style, and durability. With compartments and pockets for laptops, tablets, and accessories, it keeps you organized. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_TVxNYW": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/bags-and-sleeves",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "heading_gpbpgU",
+        "text_kN9Er4",
+        "button_TVxNYW"
+      ],
+      "settings": {
+        "image": "shopify://shop_images/About_Us-Go_Beyond_your_Boundaries_with_HyperPack_Mobility-v01-r01-1616x1040..webp",
+        "image_height": "adapt",
+        "image_width": "medium",
+        "layout": "image_first",
+        "text_alignment": "left",
+        "content_position": "align-self-center",
+        "image_height_mobile": "auto",
+        "text_alignment_mobile": "left",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_background_2": "",
+        "gradient_background_2": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "testimonials": {
+      "type": "testimonials",
+      "blocks": {
+        "testimonial": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>iPad Pro's potential becomes clear with this HyperDrive USB-C hub</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-5_180x_4ea2235d-26e3-432c-8ca9-dd085c1d2c5c.webp",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_WHTYkb": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>Hyper Thunderbolt 4 Power Hub review: Fast connectivity for demanding users ​</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/HP-Logos-_0003_Layer-4_180x_93c8923a-12f2-4fd6-be80-64cacbb9c472.webp",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_ygWUQQ": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>The HyperDrive 10-in-1 USB-C Hub is the best dual 4K hub for M1/M2 Macs​</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-3_180x_0ea536cb-730c-41a7-8fcd-c582ee30118e.webp",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_dyqeim": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>The HyperDrive Thunderbolt Power Hub makes for one of the best Thunderbolt hubs we have come across thus far​</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-1_180x_ece88601-962c-4c8c-80b8-270f5c41cd32.webp",
+            "image_ratio": "rounded",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_NCe9Dz": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>The HyperDrive 10-in-1 USB-C Hub is a great way to expand your Mac's I/O but is particularly useful for M1-based Macs if you want to use two external displays</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_3p8rYB": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>The HyperDrive Hub should be considered an essential addition to any home office or graphic/video design environment​</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-4_180x_3b7a8be8-2744-4860-9615-7c8f5fb7799d.webp",
+            "image_ratio": "rounded",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_YUidxb": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>Best MagSafe stands for Standby​ in iOS 17​</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "testimonial_Wcg3h9": {
+          "type": "testimonial",
+          "settings": {
+            "icon": "quote",
+            "text": "<p>The new Hyper 245W GaN Desktop Charger is compact, sleek, and the most powerful multi charger you can have at the ready</p>",
+            "author": "",
+            "author_info": "",
+            "author_url": "",
+            "image": "shopify://shop_images/Hyper-Press-Lgogos-2.png",
+            "image_ratio": "adapt",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "testimonial",
+        "testimonial_WHTYkb",
+        "testimonial_ygWUQQ",
+        "testimonial_dyqeim",
+        "testimonial_NCe9Dz",
+        "testimonial_3p8rYB",
+        "testimonial_YUidxb",
+        "testimonial_Wcg3h9"
+      ],
+      "settings": {
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 84,
+        "padding_bottom": 120,
+        "divider": false,
+        "rounded": false
+      }
+    },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Featured Enterprise <em>Partners</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "squiggle-underline"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "#3c3fbc",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "logo-list": {
+      "type": "logo-list",
+      "blocks": {
+        "logo-1": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-About_Us-Allstate-Icon-304x64.webp",
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-2": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-About_Us-LinkedIn-Icon-254x64.webp",
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-3": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-About_Us-USPS-Icon-370x60.webp",
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-About_Us-Uber-Icon-202x92.webp",
+            "height": 60,
+            "link": ""
+          }
+        },
+        "logo-5": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/Hyper-About_Us-Nasa-Icon-116x100.webp",
+            "height": 124,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo-1",
+        "logo-2",
+        "logo-3",
+        "logo-4",
+        "logo-5"
+      ],
+      "settings": {
+        "layout": "marquee",
+        "grid_horizontal": 120,
+        "direction": "right",
+        "speed": 10,
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 120,
+        "divider": false,
+        "full_width": true,
+        "rounded": true
+      }
+    },
+    "rich_text_gf9VPy": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_KUWQnP": {
+          "type": "heading",
+          "settings": {
+            "heading": "Awards",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_KUWQnP"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_YLeTJ9": {
+      "type": "image-with-text-overlay",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/hyper-awards-desktop.webp",
+        "image_height": "adapt",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 0,
+        "padding_top": 0,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    }
+  },
+  "order": [
+    "main",
+    "image-with-text-overlay",
+    "images-with-text",
+    "portfolio",
+    "scrolling-text",
+    "timeline_TwpLjM",
+    "rich_text_tXztGp",
+    "image_with_text_QDgUq8",
+    "image_with_text_bKJdmX",
+    "image_with_text_N4nXWD",
+    "testimonials",
+    "rich-text",
+    "logo-list",
+    "rich_text_gf9VPy",
+    "image_with_text_overlay_YLeTJ9"
+  ]
+}

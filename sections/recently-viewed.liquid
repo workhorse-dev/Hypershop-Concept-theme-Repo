@@ -16,7 +16,7 @@
             assign product_id = parsed_term | split: 'id:' | last | times: 1
             for item in search.results
               if item.id == product_id
-                render 'product-card', product: item, product_id: item.id, section_id: section.id, lazy_load: false, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_secondary_image: settings.product_secondary_image, show_vendor: settings.product_vendor, show_rating: settings.product_rating, show_color_swatches: settings.product_color_swatches, show_countdown: settings.product_countdown, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view, show_save_amount: settings.product_save_amount, save_type: settings.product_save_type
+                render 'product-card', product: item, product_id: item.id, section_id: section.id, lazy_load: false, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_secondary_image: settings.product_secondary_image, show_vendor: settings.product_vendor, show_rating: settings.product_rating, show_color_swatches: settings.product_color_swatches, show_countdown: settings.product_countdown, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view, show_save_amount: settings.product_save_amount, save_type: settings.product_save_type, show_icon_list: settings.product_icon_list
               endif
             endfor
           endfor
@@ -25,7 +25,7 @@
       <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative overflow-hidden md:overflow-visible">
         {%- capture indicators -%}
           {%- if section.settings.carousel_on_desktop -%}
-            <div class="indicators hidden lg:flex gap-2d5">
+            <div class="indicators  lg:flex gap-2d5">
               <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">

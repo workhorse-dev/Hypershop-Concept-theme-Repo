@@ -125,9 +125,9 @@
                             {%- capture filter_label -%}{{ filter_value.label }} ({{ filter_value.count }}){%- endcapture -%}
                             {%- liquid
                               if filter.presentation == 'swatch'
-                                render 'swatch', allow_multiple: true, value: filter_value.value, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, swatch: filter_value.swatch
+                                render 'swatch', allow_multiple: true, value: filter_value.value, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, value_label: filter_value.label, swatch: filter_value.swatch
                               else
-                                render 'swatch', allow_multiple: true, value: filter_value.label, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, file_extension: 'png'
+                                render 'swatch', allow_multiple: true, value: filter_value.label, name: filter_value.param_name, id: filter_value_id, selected: filter_value.active, disabled: is_disabled, tooltip: filter_label, value_label: filter_value.label
                               endif
                             -%}
                           </magnet-element>
@@ -153,7 +153,7 @@
                         <li>
                           <magnet-element class="flex flex-col gap-1 pointer-events-none">
                             <input class="sr-only" name="{{ filter_value.param_name }}" value="{{ filter_value.value | escape }}" class="checkbox" id="{{ filter_value_id }}" type="checkbox"{% if filter_value.active %} checked{% endif %}{% if is_disabled %} disabled{% endif %} />
-                            <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative pointer-events-auto" for="{{ filter_value_id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %} background-image: url({{ swatch_image }});{% endif %}">
+                            <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative pointer-events-auto" for="{{ filter_value_id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %} --swatch-background-image: url({{ swatch_image }});{% endif %}">
                               {%- if settings.swatch_image_tooltip -%}
                                 <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ filter_value.label | escape }} ({{ filter_value.count }})</span>
                               {%- else -%}

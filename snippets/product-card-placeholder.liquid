@@ -1,6 +1,6 @@
-<div class="card product-card product-card--{{ settings.card_style }} flex flex-col leading-none relative overflow-hidden">
-  <div class="product-card__media relative h-auto overflow-hidden">
-    <a class="block relative media media--{{ image_ratio }}" href="#" aria-label="{{ 'onboarding.product_title' | t | escape }}" tabindex="-1">
+<div class="card product-card product-card--{{ settings.card_style }} flex flex-col leading-none relative">
+  <div class="product-card__media relative h-auto">
+    <a class="block relative media media--{{ image_ratio }} overflow-hidden" href="#" aria-label="{{ 'onboarding.product_title' | t | escape }}" tabindex="-1">
       {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
     </a>
   </div>

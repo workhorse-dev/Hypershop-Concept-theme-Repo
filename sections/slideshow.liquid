@@ -17,6 +17,22 @@
       }
     }
   {% endif -%}
+
+  {% if section.settings.mobile_content_outside %}
+    @media screen and (max-width : 769px){
+      .mobile-position{
+        position:relative;
+      }
+      .mobile-content-color{
+        color: #000;
+      }
+      .slideshow-content .slideshow-word{
+        text-align: center;
+        align-items: center;
+      }
+    }
+    
+  {% endif %}
 </style>
 
 {%- if section.blocks.size > 0 -%}
@@ -128,19 +144,27 @@
         {%- endcase -%}
       {%- endfor -%}
     </slideshow-element>
-    <div class="page-width absolute bottom-0 left-0 w-full pointer-events-none">
+    <div class="mobile-position page-width absolute bottom-0 left-0 w-full pointer-events-none">
       <div class="slideshow-content">
-        <slideshow-words class="slideshow-words grid items-center" aria-controls="Slider-{{ section.id }}">
+        <slideshow-words class=" mobile-content-color slideshow-words grid items-center" aria-controls="Slider-{{ section.id }}">
           {%- for block in section.blocks -%}
-            <div class="slideshow-word flex flex-col md:flex-row md:items-end justify-between gap-6" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
+            <div class="slideshow-word flex flex-col md:flex-column justify-between gap-6" data-index="{{ forloop.index0 }}" aria-current="{% if forloop.first %}true{% else %}false{% endif %}">
               {%- if block.settings.heading != blank -%}
                 <div class="banner__box banner__box--{{ section.settings.content_width }}">
-                  <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}">
+                  <{{ block.settings.heading_tag }} class=" mobile-content-color heading leading-none {{ block.settings.heading_size }}">
                     <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="250">{{ block.settings.heading }}</split-words>
                   </{{ block.settings.heading_tag }}>
                 </div>
               {%- endif -%}
-
+            
+              {%- if block.settings.subheading != blank -%}
+                <div class="banner__box banner__box--{{ section.settings.content_width }}">
+                  <p class=" leading-none ">
+                    <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="250">{{ block.settings.subheading }}</split-words>
+                  </p>
+                </div>
+              {%- endif -%}
+            
               {%- if block.settings.button_label != blank -%}
                 {%- render 'button',
                   label: block.settings.button_label,
@@ -148,7 +172,7 @@
                   style: block.settings.button_style,
                   external: block.settings.button_external,
                   show_icon: block.settings.button_icon,
-                  classes: 'button--blur button--fixed pointer-events-auto',
+                  classes: 'button--blur button-12 pointer-events-auto',
                   shopify_attributes: block.shopify_attributes
                 -%}
               {%- endif -%}
@@ -329,6 +353,12 @@
       "default": "auto",
       "label": "t:sections.global.settings.image_height_mobile.label"
     },
+     {
+      "type": "checkbox",
+      "id": "mobile_content_outside",
+      "label": "Content Position Outside the image",
+      "default": false
+    },
     {
       "type": "header",
       "content": "t:sections.global.settings.header__colors.content",
@@ -479,6 +509,12 @@
           "default": "Image slide"
         },
         {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "subheading",
+          "default": "Subheading text for the slideshow"
+        },
+        {
           "type": "select",
           "id": "heading_size",
           "options": [
@@ -623,6 +659,7 @@
           "id": "cover_image",
           "label": "t:sections.video.settings.cover_image.label"
         },
+        
         {
           "type": "text",
           "id": "description",
@@ -658,6 +695,12 @@
           "type": "inline_richtext",
           "id": "heading",
           "label": "t:sections.global.settings.heading.label",
+          "default": "Video slide"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "subheading",
+          "label": "Subheading",
           "default": "Video slide"
         },
         {

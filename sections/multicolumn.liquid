@@ -11,7 +11,15 @@
     }
   }
 </style>
+{% assign multicolumn = true %}
+{% if template.name == "product" %}
+  {% assign content-check = product.metafields.custom.multicolumn_title_1 | strip_html%}
+  {% if content-check == blank %}
+    {% assign multicolumn = false %}
+  {% endif %}
+{% endif %}
 
+{% if multicolumn %}
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     {%- render 'section-heading', section: section -%}
@@ -46,14 +54,14 @@
                   <video-media class="block" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }}" autoplay>
                     {{- poster -}}
                     <template>
-                      {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '800x' -}}
+                      {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '400x' -}}
                     </template>
                   </video-media>
                 </a>
               {%- elsif block.settings.image != blank -%}
                 {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
                 <a class="block media media--{{ block.settings.image_ratio }} media--transparent relative overflow-hidden"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} aria-label="{{ block.settings.heading | escape }}">
-                  {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', sizes: sizes, is: 'lazy-image', class: 'inline-block' -}}
+                  {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080,1600', sizes: sizes, is: 'lazy-image', class: "inline-block w-full" -}}
                 </a>
               {%- endif -%}
 
@@ -91,7 +99,7 @@
     </slider-element>
   </div>
 </div>
-
+{% endif %}
 {% schema %}
 {
   "name": "t:sections.multicolumn.name",

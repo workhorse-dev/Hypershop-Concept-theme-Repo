@@ -1,0 +1,564 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "image_with_text_overlay_Jj3tQd": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_y9NyRP": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "HYPER FOR BUSINESS",
+            "subheading_size": "subtitle-lg",
+            "secondary_color": true
+          }
+        },
+        "heading_949RKm": {
+          "type": "heading",
+          "settings": {
+            "heading": "GETS MORE WORK DONE.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_8BG8mp": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hyper makes the world’s most crowdfunded USB-C hubs, power solutions, and professional grade battery packs for increased productivity and connectivity.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "subheading_y9NyRP",
+        "heading_949RKm",
+        "text_8BG8mp"
+      ],
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/landing-large-image-top-hq.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-center md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 70,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "multicolumn_m4Yiyh": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_VT66gQ": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_top_1.jpg",
+            "image_ratio": "adapt",
+            "heading": "COMMERCIAL",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>Our professional-grade connectivity and power solutions will keep your in-office team and the road warrior productive and connected.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_74Qxxt": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_top_2.jpg",
+            "image_ratio": "adapt",
+            "heading": "GOVERNMENT",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>Whether work is done on-site or in the field, we have professional-grade hardware solutions for your IT demands.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_BQbKdN": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_top_3.jpg",
+            "image_ratio": "adapt",
+            "heading": "HEALTHCARE",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>Healthcare facilities require connectivity and portable power solutions that are reliable and safely manufactured.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_3NzbEE": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_top_4.jpg",
+            "image_ratio": "adapt",
+            "heading": "EDUCATION",
+            "heading_size": "text-lg-2xl",
+            "text": "<p>Teachers and students need tech accessories more than ever. We have the solutions to keep everyone connected and learning.</p>",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_VT66gQ",
+        "column_74Qxxt",
+        "column_BQbKdN",
+        "column_3NzbEE"
+      ],
+      "settings": {
+        "gap": "large",
+        "columns": 2,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "BUSINESS SOLUTIONS",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "FOR EVERY SECTOR",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_fAQXCA": {
+      "type": "multicolumn",
+      "blocks": {
+        "column_M8X6xN": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_btm_1.jpg",
+            "image_ratio": "adapt",
+            "heading": "USB-C HUBS",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_G6tUUJ": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_btm_2.jpg",
+            "image_ratio": "adapt",
+            "heading": "BATTERY PACKS",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_imqy9c": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_btm_3.jpg",
+            "image_ratio": "adapt",
+            "heading": "CHARGING",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_4jbBtf": {
+          "type": "column",
+          "settings": {
+            "show_border": false,
+            "text_alignment": "center",
+            "text_alignment_mobile": "center",
+            "image": "shopify://shop_images/landing_btm_4.jpg",
+            "image_ratio": "adapt",
+            "heading": "CABLES",
+            "heading_size": "text-lg-2xl",
+            "text": "",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "secondary",
+            "button_external": false,
+            "button_icon": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_M8X6xN",
+        "column_G6tUUJ",
+        "column_imqy9c",
+        "column_4jbBtf"
+      ],
+      "settings": {
+        "gap": "large",
+        "columns": 2,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "<strong>CONNECTIVITY & POWER</strong>",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "multicolumn_with_icons_UUiEtH": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "column_VUMnG3": {
+          "type": "column",
+          "settings": {
+            "icon": "phone",
+            "custom_icon": "",
+            "heading": "+1 (888) 202-1888",
+            "text": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_YQbHfd": {
+          "type": "column",
+          "settings": {
+            "icon": "email",
+            "custom_icon": "",
+            "heading": "sales@hypershop.com",
+            "text": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_YdPMaT": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "",
+            "heading": "support@hypershop.com",
+            "text": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_nLw4Nf": {
+          "type": "column",
+          "settings": {
+            "icon": "chat_bubble",
+            "custom_icon": "",
+            "heading": "Live Chat",
+            "text": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_VUMnG3",
+        "column_YQbHfd",
+        "column_YdPMaT",
+        "column_nLw4Nf"
+      ],
+      "settings": {
+        "style": "with-border",
+        "columns": 4,
+        "text_alignment": "left",
+        "heading": "CONTACT OUR TEAM",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "logo_list_yKitXX": {
+      "type": "logo-list",
+      "blocks": {
+        "logo_HRrxFj": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_1.png",
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_LCUtgL": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_2.png",
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_faV8aq": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_3.png",
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_BAqRA4": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_4.png",
+            "height": 80,
+            "link": ""
+          }
+        },
+        "logo_7abK6X": {
+          "type": "logo",
+          "settings": {
+            "image": "shopify://shop_images/logo_5.png",
+            "height": 80,
+            "link": ""
+          }
+        }
+      },
+      "block_order": [
+        "logo_HRrxFj",
+        "logo_LCUtgL",
+        "logo_faV8aq",
+        "logo_BAqRA4",
+        "logo_7abK6X"
+      ],
+      "settings": {
+        "layout": "default",
+        "grid_horizontal": 70,
+        "direction": "left",
+        "speed": 5,
+        "heading": "ALSO AVAILABLE AT",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "rich_text_4BjEB3": {
+      "type": "rich-text",
+      "blocks": {
+        "button_YVxicG": {
+          "type": "button",
+          "settings": {
+            "button_label": "Contact Us",
+            "button_link": "mailto:sales@hypershop.com?subject=Inquiry%20from%20Website&body=Hi%20Hyper%20Team%2C%0D%0A%0D%0AI%27m%20interested%20in%20learning%20more%20about%20your%20products.%20Please%20get%20in%20touch.%0D%0A%0D%0AThanks%2C%0D%0A%5BYour%20Name%5D",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "button_YVxicG"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main-page",
+    "image_with_text_overlay_Jj3tQd",
+    "multicolumn_m4Yiyh",
+    "multicolumn_fAQXCA",
+    "multicolumn_with_icons_UUiEtH",
+    "logo_list_yKitXX",
+    "rich_text_4BjEB3"
+  ]
+}
