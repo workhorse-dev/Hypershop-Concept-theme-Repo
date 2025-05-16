@@ -1,9 +1,9 @@
-<style>
+<style> 
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
     {%- render 'section-variables', section: section -%}
-  }
+    }
 </style>
 
 {% if  template.name == 'product' %}
@@ -279,28 +279,33 @@
   </div>
 {% endif %}
 
-{%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
-{%- if question_blocks.size > 0 -%}
-  <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "FAQPage",
-      "mainEntity": [
-        {%- for block in question_blocks -%}
-          {
-            "@type": "Question",
-            "name": {{ block.settings.title | json }},
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": {{ block.settings.text | json }}
-            }
-          }{% unless forloop.last %},{% endunless %}
-        {% endfor -%}
-      ]
-    }
-  </script>
-{%- endif -%}
 
+{%- assign question_blocks = section.blocks | where: 'type', 'question' -%}
+
+{% assign faq_structure = question_blocks[0].settings.title | strip_html %}
+
+{% if faq_structure != blank %}                         
+  {%- if question_blocks.size > 0 -%}
+    <script type="application/ld+json">
+      {
+        "@context": "https://schema.org",
+        "@type": "FAQPage",
+        "mainEntity": [
+          {%- for block in question_blocks -%}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.title | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.text | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {% endfor -%}
+        ]
+      }
+    </script>
+  {%- endif -%}
+{% endif %} 
 {% schema %}
 {
   "name": "t:sections.faq.name",
