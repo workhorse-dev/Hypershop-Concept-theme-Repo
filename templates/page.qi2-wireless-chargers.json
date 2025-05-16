@@ -523,9 +523,18 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {}
     }
   },
   "order": [
+    "shogun-helper",
     "main-page",
     "video_CzXDnH",
     "rich_text_gTJxjX",
@@ -535,6 +544,7 @@
     "video_with_text_overlay_EbwHA7",
     "portfolio_on_scroll_mUpPmm",
     "video_with_text_i4ehz6",
-    "featured_collection_zrzRcw"
+    "featured_collection_zrzRcw",
+    "shogun-optimizer"
   ]
 }

@@ -1052,9 +1052,27 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
+    "shogun-below": {
+      "type": "shogun-below",
+      "settings": {}
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {}
     }
   },
   "order": [
+    "shogun-helper",
+    "shogun-above",
     "main-product",
     "help-drawer",
     "video-hero",
@@ -1067,6 +1085,8 @@
     "compact_product_bundle_h8tfiJ",
     "faq",
     "product-recommendations",
-    "recently-viewed"
+    "recently-viewed",
+    "shogun-below",
+    "shogun-optimizer"
   ]
 }

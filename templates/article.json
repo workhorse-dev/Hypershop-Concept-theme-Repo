@@ -132,11 +132,21 @@
         "full_width": false,
         "rounded": true
       }
+    },
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "settings": {}
     }
   },
   "order": [
+    "shogun-helper",
     "main-article-banner",
     "main-article",
-    "blog-posts"
+    "blog-posts",
+    "shogun-optimizer"
   ]
 }
