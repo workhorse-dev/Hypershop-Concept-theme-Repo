@@ -13,11 +13,13 @@
     <input type="hidden" name="g" value="MuExiJ">
     <input type="hidden" name="$fields" value="email">
     <input type="hidden" name="$list_fields" value="email"><input type="hidden" name="form_type" value="customer">
-    
-    <input type="hidden" name="form_type" value="customer">
+
+    {% comment %}
+    <!-- <input type="hidden" name="form_type" value="customer">
     <input type="hidden" name="utf8" value="✓">
   <input type="hidden" name="contact[tags]" value="newsletter" />
-  <input type="hidden" name="contact[context]" value="{{ context }}" />
+  <input type="hidden" name="contact[context]" value="{{ context }}" /> -->
+  {% endcomment %}
   <div class="field relative">
     <input
       id="NewsletterForm--{{ section_id }} k_id_email"
