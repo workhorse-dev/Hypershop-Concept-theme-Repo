@@ -287,15 +287,17 @@
       "@type": "FAQPage",
       "mainEntity": [
         {%- for block in question_blocks -%}
-          {{ block.settings.title | strip_html }}
-          {
-            "@type": "Question",
-            "name": {{ block.settings.title | json }},
-            "acceptedAnswer": {
-              "@type": "Answer",
-              "text": {{ block.settings.text | json }}
-            }
-          }{% unless forloop.last %},{% endunless %}
+          {% assign schema = block.settings.title | strip_html %}
+          {% if schema != blank %}
+            {
+              "@type": "Question",
+              "name": {{ block.settings.title | json }},
+              "acceptedAnswer": {
+                "@type": "Answer",
+                "text": {{ block.settings.text | json }}
+              }
+            }{% unless forloop.last %},{% endunless %}
+          {% endif %}
         {% endfor -%}
       ]
     }
