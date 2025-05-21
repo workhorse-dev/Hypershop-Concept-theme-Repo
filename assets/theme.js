@@ -3557,7 +3557,7 @@ class CarouselElement extends HTMLElement {
       this.carousel = new Flickity(this, {
         watchCSS: this.watchCSS,
         prevNextButtons: false,
-        adaptiveHeight: true,
+        adaptiveHeight: false,
         wrapAround: true,
         rightToLeft: theme.config.rtl,
         initialIndex: this.initialIndex,
