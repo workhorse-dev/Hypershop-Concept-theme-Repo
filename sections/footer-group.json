@@ -84,6 +84,33 @@
         "rounded": false
       }
     },
+    "1747834461787c9007": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_Yz8WEQ": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_Yz8WEQ"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "footer": {
       "type": "footer",
       "blocks": {
@@ -215,6 +242,7 @@
   },
   "order": [
     "multicolumn-with-icons",
+    "1747834461787c9007",
     "footer",
     "footer-copyright"
   ]
