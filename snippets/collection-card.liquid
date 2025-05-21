@@ -51,7 +51,7 @@
   {%- endif -%}
   {%- if collection != blank -%}
     <a href="{{ collection.url }}" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ collection_title | escape }}">
-      <div class="media media--{{ image_ratio }} relative overflow-hidden">
+      <div class="media media--{{ image_ratio }} relative overflow-hidden whatthehello">
         {%- if collection_image != blank -%}
           {{- collection_image | image_url: width: collection_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
         {%- else -%}
