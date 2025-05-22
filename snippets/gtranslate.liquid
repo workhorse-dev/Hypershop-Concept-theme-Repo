@@ -1,8 +1,11 @@
+<!-- snippets/lang-switcher.liquid -->
+
+<div id="google_translate_element" style="display: none;"></div>
+
 <style>
   .lang-switcher {
     position: relative;
     width: 200px;
-    font-family: Arial, sans-serif;
   }
 
   .lang-selected {
@@ -37,9 +40,7 @@
 
 <div class="lang-switcher">
   <div class="lang-selected" onclick="toggleDropdown()">🌐 Select Language</div>
-  <div class="lang-options" id="langOptions">
-    <!-- Language items will be inserted here by JavaScript -->
-  </div>
+  <div class="lang-options" id="langOptions"></div>
 </div>
 
 <script>
@@ -47,16 +48,9 @@
     window.customLangDropdownInitialized = true;
 
     const languages = [
-      { name: "Afrikaans", code: "af" }, { name: "Albanian", code: "sq" },
-      { name: "Amharic", code: "am" }, { name: "Arabic", code: "ar" },
-      { name: "Armenian", code: "hy" }, { name: "Urdu", code: "ur" },
-      { name: "Uzbek", code: "uz" }, { name: "Vietnamese", code: "vi" },
-      { name: "Welsh", code: "cy" }, { name: "Xhosa", code: "xh" },
-      { name: "Yiddish", code: "yi" }, { name: "Yoruba", code: "yo" },
-      { name: "Zulu", code: "zu" }, { name: "English", code: "en" },
-      { name: "French", code: "fr" }, { name: "German", code: "de" },
-      { name: "Hindi", code: "hi" }, { name: "Spanish", code: "es" },
-      { name: "Chinese (Simplified)", code: "zh-CN" }
+      { name: "English", code: "en" }, { name: "French", code: "fr" },
+      { name: "German", code: "de" }, { name: "Hindi", code: "hi" },
+      { name: "Spanish", code: "es" }, { name: "Chinese (Simplified)", code: "zh-CN" }
     ];
 
     function toggleDropdown() {
@@ -69,6 +63,8 @@
       if (combo) {
         combo.value = langCode;
         combo.dispatchEvent(new Event("change"));
+      } else {
+        console.log("Google Translate combo not found.");
       }
     }
 
@@ -90,4 +86,12 @@
   }
 </script>
 
-
+<script type="text/javascript">
+  function googleTranslateElementInit() {
+    new google.translate.TranslateElement({
+      pageLanguage: 'en',
+      autoDisplay: false
+    }, 'google_translate_element');
+  }
+</script>
+<script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit"></script>
