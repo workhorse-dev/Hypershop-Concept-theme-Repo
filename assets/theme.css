@@ -12838,11 +12838,11 @@ button:is([is=media-lightbox-button], [is=media-hover-button]):focus-visible {
 }
 
 .image-with-text__image-second .media {
-  transform: rotate(calc(-4deg * var(--transform-logical)));
+  /* transform: rotate(calc(-4deg * var(--transform-logical))); */
 }
 
 .image-with-text__image-second+.image-with-text__image-first {
-  transform: rotate(calc(3deg * var(--transform-logical)));
+  /* transform: rotate(calc(3deg * var(--transform-logical))); */
   width: 75%;
   margin-inline-start: auto;
 }
