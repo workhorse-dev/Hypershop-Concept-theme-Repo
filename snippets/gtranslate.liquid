@@ -1,3 +1,85 @@
+<style>
+  .switcher {
+   font-size: 10pt;
+   text-align: left;
+   cursor: pointer;
+   overflow: hidden;
+   width: 163px;
+   line-height: 17px;
+   padding-top: 0px;
+ }
+ .switcher a {
+   text-decoration: none;
+   display: block;
+   font-size: 10pt;
+   box-sizing: content-box;
+ }
+ .switcher a img {
+   vertical-align: middle;
+   display: inline;
+   border: 0;
+   padding: 0;
+   margin: 0;
+   opacity: 0.8;
+ }
+ .switcher a:hover img {
+   opacity: 1;
+ }
+ .switcher .selected {
+   background: #FFFFFF url(//cdn.gtranslate.net/shopify/assets/switcher.png) repeat-x;
+   position: relative;
+   z-index: 9999;
+ }
+ .switcher .selected a {
+   background: url(//cdn.gtranslate.net/shopify/assets/arrow_down.png) 146px center no-repeat;
+   color: #666666;
+   padding: 3px 5px;
+   width: 151px;
+ }
+ .switcher .selected a.open {
+   background-image: url(//cdn.gtranslate.net/shopify/assets/arrow_up.png);
+ }
+ .switcher .selected a:hover {
+   background: #F0F0F0 url(//cdn.gtranslate.net/shopify/assets/arrow_down.png) 146px center no-repeat;
+ }
+ .switcher .option {
+   max-height: unset;
+   overflow-y: auto;
+   overflow-x: hidden;
+   left: 0;
+   display: none;
+ }
+ .switcher .option a {
+   color: #000;
+   padding: 7px 12px;
+   display: inline-block;
+   width: 100%;
+ }
+ .switcher .option::-webkit-scrollbar-track {
+   -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,0.3);
+   border-radius: 5px;
+   background-color: #F5F5F5;
+ }
+ .switcher .option::-webkit-scrollbar {
+   width: 5px;
+ }
+ .switcher .option::-webkit-scrollbar-thumb {
+   border-radius: 5px;
+   -webkit-box-shadow: inset 0 0 3px rgba(0,0,0,.3);
+   background-color: #888;
+ }
+ #goog-gt-tt, .goog-te-banner-frame, #google_translate_element2 {
+   display: none !important;
+ }
+ body {
+   top: 0 !important;
+ }
+ /* RTL support for languages like Arabic */
+ .switcher[dir="rtl"] {
+   direction: rtl;
+   text-align: right;
+ }
+</style>
 <div class="switcher notranslate" role="combobox" aria-expanded="false">
        <div class="selected site-nav__anchor" aria-controls="language-options">
          <a href="#" onclick="return false;" aria-label="Select language"><img src="//cdn.gtranslate.net/shopify/assets/flags/16/en.png" height="16" width="16" alt="en" /> English</a>
