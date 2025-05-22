@@ -41,65 +41,53 @@
     <!-- Language items will be inserted here by JavaScript -->
   </div>
 </div>
+
 <script>
-  const languages = [
-    { name: "Afrikaans", code: "af" }, { name: "Albanian", code: "sq" },
-    { name: "Amharic", code: "am" }, { name: "Arabic", code: "ar" },
-    { name: "Armenian", code: "hy" }, { name: "Urdu", code: "ur" },
-    { name: "Uzbek", code: "uz" }, { name: "Vietnamese", code: "vi" },
-    { name: "Welsh", code: "cy" }, { name: "Xhosa", code: "xh" },
-    { name: "Yiddish", code: "yi" }, { name: "Yoruba", code: "yo" },
-    { name: "Zulu", code: "zu" },
-    { name: "English", code: "en" }, { name: "French", code: "fr" },
-    { name: "German", code: "de" }, { name: "Hindi", code: "hi" },
-    { name: "Spanish", code: "es" }, { name: "Chinese (Simplified)", code: "zh-CN" },
-    // Add more as needed (50+ entries)
-  ];
+  if (!window.customLangDropdownInitialized) {
+    window.customLangDropdownInitialized = true;
 
-  const langOptionsDiv = document.getElementById('langOptions');
+    const languages = [
+      { name: "Afrikaans", code: "af" }, { name: "Albanian", code: "sq" },
+      { name: "Amharic", code: "am" }, { name: "Arabic", code: "ar" },
+      { name: "Armenian", code: "hy" }, { name: "Urdu", code: "ur" },
+      { name: "Uzbek", code: "uz" }, { name: "Vietnamese", code: "vi" },
+      { name: "Welsh", code: "cy" }, { name: "Xhosa", code: "xh" },
+      { name: "Yiddish", code: "yi" }, { name: "Yoruba", code: "yo" },
+      { name: "Zulu", code: "zu" }, { name: "English", code: "en" },
+      { name: "French", code: "fr" }, { name: "German", code: "de" },
+      { name: "Hindi", code: "hi" }, { name: "Spanish", code: "es" },
+      { name: "Chinese (Simplified)", code: "zh-CN" }
+    ];
 
-  // Populate dropdown
-  languages.forEach(lang => {
-    const option = document.createElement('div');
-    option.textContent = lang.name;
-    option.onclick = () => {
-      doGTranslate(`en|${lang.code}`);
-      document.querySelector('.lang-selected').textContent = lang.name;
-      langOptionsDiv.style.display = 'none';
-    };
-    langOptionsDiv.appendChild(option);
-  });
-
-  // Toggle dropdown
-  function toggleDropdown() {
-    const options = document.getElementById('langOptions');
-    options.style.display = options.style.display === 'block' ? 'none' : 'block';
-  }
-
-  // Close if clicked outside
-  document.addEventListener('click', function (e) {
-    if (!document.querySelector('.lang-switcher').contains(e.target)) {
-      langOptionsDiv.style.display = 'none';
+    function toggleDropdown() {
+      const options = document.getElementById("langOptions");
+      options.style.display = options.style.display === "block" ? "none" : "block";
     }
-  });
 
-  // Translate function
-  function GTranslateFireEvent(element, event) {
-    const evt = document.createEvent("HTMLEvents");
-    evt.initEvent(event, true, true);
-    element.dispatchEvent(evt);
-  }
-
-  function doGTranslate(lang_pair) {
-    if (lang_pair === '') return;
-    const lang = lang_pair.split('|')[1];
-    const select = document.querySelector('.goog-te-combo');
-    if (!select) {
-      setTimeout(() => doGTranslate(lang_pair), 500);
-    } else {
-      select.value = lang;
-      GTranslateFireEvent(select, 'change');
+    function doGTranslate(langCode) {
+      const combo = document.querySelector(".goog-te-combo");
+      if (combo) {
+        combo.value = langCode;
+        combo.dispatchEvent(new Event("change"));
+      }
     }
+
+    document.addEventListener("DOMContentLoaded", () => {
+      const container = document.getElementById("langOptions");
+      if (container) {
+        languages.forEach(lang => {
+          const div = document.createElement("div");
+          div.textContent = lang.name;
+          div.onclick = () => {
+            doGTranslate(lang.code);
+            document.querySelector(".lang-selected").textContent = lang.name;
+            container.style.display = "none";
+          };
+          container.appendChild(div);
+        });
+      }
+    });
   }
 </script>
+
 
