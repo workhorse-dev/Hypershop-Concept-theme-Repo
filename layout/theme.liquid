@@ -90,7 +90,7 @@
       {%- sections 'footer-group' -%}
     </footer-group>
   </div>
-  <div id="google_translate_element2"></div>
+  
 
   <ul hidden>
     <li id="a11y-refresh-page-message">{{ 'general.accessibility.refresh_page' | t }}</li>
@@ -100,5 +100,12 @@
   {%- if request.design_mode == false and settings.preload_links -%}
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
+  <div id="google_translate_element2"></div>
+    <script type="text/javascript">
+      function googleTranslateElementInit2() {
+        new google.translate.TranslateElement({ pageLanguage: 'en', autoDisplay: false }, 'google_translate_element2');
+      }
+    </script>
+    <script src="//translate.google.com/translate_a/element.js?cb=googleTranslateElementInit2" defer></script>
 </body>
 </html>
