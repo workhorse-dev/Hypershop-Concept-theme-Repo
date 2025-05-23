@@ -15303,8 +15303,11 @@ video-media:not([playing]) .deferred-poster .play-button .icon:last-child:not(:o
     position: sticky;
     z-index: 25;
     inset-block-end: 0;
-    padding-block-start: 60vh;
-    padding-block-start: 60lvh;
+    /* padding-block-start: 60vh;
+    padding-block-start: 60lvh; */
+    inset-block-start: 0;
+    padding-block-start: 0;     
+    padding-block-end: 60lvh;
   }
 
   .product-bundle-wrapper>.lg\:grow-0.active {

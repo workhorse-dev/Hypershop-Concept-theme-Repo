@@ -35,7 +35,7 @@
 
             {%- if block.settings.subheading != blank and block.settings.invert_subheading_heading == true -%}
               <span class="block"></span>
-              <p class="text-base leading-tight">
+              <p class="text-base leading-none">
                 {%- render 'highlighted-text', content: block.settings.subheading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
               </p>
             {%- endif -%}

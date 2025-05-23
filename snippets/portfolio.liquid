@@ -27,7 +27,7 @@
         {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
       {%- endif -%}
     </picture>
-    <div class="profile__content absolute left-0 bottom-0 w-full flex items-center justify-between gap-8">
+    <div class="profile__content h-150 absolute left-0 bottom-0 w-full flex items-center justify-between gap-8">
       <p id="ProfileHeading-{{ block.id }}" class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ block.settings.heading | escape }}</p>
       <button type="button" class="profile__button flex items-center justify-center rounded-full shrink-0" aria-labelledby="ProfileHeading-{{ block.id }}" aria-controls="Profile-{{ section.id }}-{{ block.id }}" aria-expanded="false">
         {%- render 'icon', icon: 'plus-2' -%}
