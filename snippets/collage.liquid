@@ -19,7 +19,7 @@
         <div class="banner__box w-full h-full flex {{ block.settings.content_position }} {{ block.settings.content_position_mobile }}">
           <div class="md:text-{{ block.settings.text_alignment }} text-{{ block.settings.text_alignment_mobile }} w-full">
             {%- if block.settings.subheading != blank and block.settings.invert_subheading_heading == false -%}
-              <p class="text-base leading-tight">
+              <p class="text-base leading-none">
                 {%- render 'highlighted-text', content: block.settings.subheading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
               </p>
               <span class="block"></span>
