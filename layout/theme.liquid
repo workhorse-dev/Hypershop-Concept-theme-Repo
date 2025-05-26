@@ -18,6 +18,7 @@
 
   <script async type="module" blocking="render" fetchpriority="high" src="https://cdn.intelligems.io/esm/96695abc99c8/bundle.js"></script>
   <script src="https://cdn.userway.org/widget.js" data-account="2xDigTdBpS" defer></script>
+  {%- comment -%}
   <script>
       (function() {
           const currentUrl = window.location.href;
@@ -28,7 +29,7 @@
           }
       })();
    </script>
-  
+  {%- endcomment-%}
 
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
