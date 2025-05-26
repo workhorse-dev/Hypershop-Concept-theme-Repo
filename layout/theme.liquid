@@ -86,7 +86,7 @@
       <script>window.location.href = "/";</script>
   {% endif %}
 
-  {% render 'mouseflow' %}
+  
   {% render 'utm-store' %}
   {% render 'utm-append' %}
 
@@ -126,5 +126,6 @@
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
   {% render 'Microsoft-omnichannel' %}
+  {% render 'mouseflow' %}
 </body>
 </html>
