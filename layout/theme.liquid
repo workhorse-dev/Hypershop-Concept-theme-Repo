@@ -18,6 +18,7 @@
 
   <script async type="module" blocking="render" fetchpriority="high" src="https://cdn.intelligems.io/esm/96695abc99c8/bundle.js"></script>
   <script src="https://cdn.userway.org/widget.js" data-account="2xDigTdBpS" defer></script>
+  {%- comment -%}
   <script>
       (function() {
           const currentUrl = window.location.href;
@@ -28,7 +29,7 @@
           }
       })();
    </script>
-  
+  {%- endcomment-%}
 
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
@@ -85,7 +86,7 @@
       <script>window.location.href = "/";</script>
   {% endif %}
 
-  {% render 'mouseflow' %}
+  
   {% render 'utm-store' %}
   {% render 'utm-append' %}
 
@@ -125,5 +126,6 @@
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
   {% render 'Microsoft-omnichannel' %}
+  {% render 'mouseflow' %}
 </body>
 </html>
