@@ -633,7 +633,7 @@
                 </div>
   
                 {%- if section.settings.show_checkout_button or section.settings.show_view_cart_button -%}
-                  <form action="{{ routes.cart_url }}" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
+                  <form action="{{ routes.cart_url }}" data-shopify-captcha="true" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
                     {%- if section.settings.show_checkout_button -%}
                       <button class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" type="submit" name="checkout" is="hover-button">
                         <span class="btn-fill" data-fill></span>
