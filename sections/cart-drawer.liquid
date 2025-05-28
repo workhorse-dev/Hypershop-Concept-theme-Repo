@@ -635,7 +635,7 @@
                 
   
                 {%- if section.settings.show_checkout_button or section.settings.show_view_cart_button -%}
-                 <form id="checkout-form" action="{{ routes.cart_url }}" method="POST" data-shopify-captcha="true" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
+                 <form id="checkout-form" action="{{ routes.cart_url }}" method="POST" data-shopify-captcha="true"  class="drawer__footer-buttons grid grid-cols-12 gap-4">
                 <input type="hidden" name="checkout">
               
                 {%- if section.settings.show_checkout_button -%}
