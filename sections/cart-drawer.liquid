@@ -658,32 +658,35 @@
                 {%- endif -%}
               </form>
               
-              <!-- Invisible hCaptcha element -->
-              <div class="h-captcha" data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe"  data-callback="onCaptchaSuccess"></div>
+              <div
+  class="h-captcha"
+  data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe"
+  data-callback="onCaptchaSuccess"
+  data-theme="light"
+  data-size="normal">
+</div>
                {%- endif -%}
 
-             <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
-
+<script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 <script>
-  let captchaVerified = false;
+  let captchaPassed = false;
 
-  // hCaptcha callback (executed after successful completion)
+  // Called by hCaptcha when completed
   function onCaptchaSuccess(token) {
-    captchaVerified = true;
+    captchaPassed = true;
     document.getElementById('checkout-form').submit();
   }
 
-  // Button click handler
+  // Protect the button until captcha is solved
   document.getElementById('protected-checkout').addEventListener('click', function () {
-    if (!captchaVerified) {
-      // Force user to solve CAPTCHA first
+    if (!captchaPassed) {
       alert("Please complete the CAPTCHA to continue.");
     } else {
-      // Already passed CAPTCHA (edge case: back button, etc.)
       document.getElementById('checkout-form').submit();
     }
   });
 </script>
+
 
 
 
