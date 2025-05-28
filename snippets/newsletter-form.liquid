@@ -9,7 +9,7 @@
 {%- endcomment -%}
 
 {%- assign form_id = 'newsletter-' | append: section_id -%}
-{%- form 'customer', id: form_id, class: 'newsletter-form grid gap-5' -%}
+{%- form 'customer', id: form_id, class: 'newsletter-form grid gap-5', data-shopify-captcha: "true" -%}
   <input type="hidden" name="contact[tags]" value="newsletter" />
   <input type="hidden" name="contact[context]" value="{{ context }}" />
   <div class="field relative">
