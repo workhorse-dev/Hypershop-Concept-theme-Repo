@@ -662,18 +662,29 @@
               <div class="h-captcha" data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe"  data-callback="onCaptchaSuccess"></div>
                {%- endif -%}
 
-              <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+             <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
 
-              <script>
-                document.getElementById('protected-checkout').addEventListener('click', function () {
-                  hcaptcha.execute();
-                });
-              
-                function onCaptchaSuccess(token) {
-                  // Optional: validate token with your server
-                  document.getElementById('checkout-form').submit();
-                }
-              </script>
+<script>
+  let captchaVerified = false;
+
+  // hCaptcha callback (executed after successful completion)
+  function onCaptchaSuccess(token) {
+    captchaVerified = true;
+    document.getElementById('checkout-form').submit();
+  }
+
+  // Button click handler
+  document.getElementById('protected-checkout').addEventListener('click', function () {
+    if (!captchaVerified) {
+      // Force user to solve CAPTCHA first
+      alert("Please complete the CAPTCHA to continue.");
+    } else {
+      // Already passed CAPTCHA (edge case: back button, etc.)
+      document.getElementById('checkout-form').submit();
+    }
+  });
+</script>
+
 
 
                 
