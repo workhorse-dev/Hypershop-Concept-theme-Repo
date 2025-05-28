@@ -631,29 +631,52 @@
                     </div>
                   </div>
                 </div>
+
+                
   
                 {%- if section.settings.show_checkout_button or section.settings.show_view_cart_button -%}
-                  <form action="{{ routes.cart_url }}" data-shopify-captcha="true" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
-                    {%- if section.settings.show_checkout_button -%}
-                      <button class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" type="submit" name="checkout" is="hover-button">
-                        <span class="btn-fill" data-fill></span>
-                        <span class="btn-text">
-                          {%- liquid
-                            render 'icon', icon: 'lock', size: 'sm', class: 'hidden sm:block'
-                            echo 'cart.general.checkout' | t
-                          -%}
-                        </span>
-                      </button>
-                    {%- endif -%}
-                    
-                    {%- if section.settings.show_view_cart_button -%}
-                      <a href="{{ routes.cart_url }}" class="button button--secondary{% if section.settings.show_checkout_button %} col-span-6 md:col-span-5{% else %} col-span-full{% endif %}" is="hover-link" data-no-instant>
-                        <span class="btn-fill" data-fill></span>
-                        <span class="btn-text">{{ 'general.cart.view_cart' | t }}</span>
-                      </a>
-                    {%- endif -%}
-                  </form>
+                 <form id="checkout-form" action="{{ routes.cart_url }}" method="POST" data-shopify-captcha="true" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
+                <input type="hidden" name="checkout">
+              
+                {%- if section.settings.show_checkout_button -%}
+                  <button id="protected-checkout" type="button" class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" is="hover-button">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- liquid
+                        render 'icon', icon: 'lock', size: 'sm', class: 'hidden sm:block'
+                        echo 'cart.general.checkout' | t
+                      -%}
+                    </span>
+                  </button>
                 {%- endif -%}
+              
+                {%- if section.settings.show_view_cart_button -%}
+                  <a href="{{ routes.cart_url }}" class="button button--secondary{% if section.settings.show_checkout_button %} col-span-6 md:col-span-5{% else %} col-span-full{% endif %}" is="hover-link" data-no-instant>
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">{{ 'general.cart.view_cart' | t }}</span>
+                  </a>
+                {%- endif -%}
+              </form>
+              
+              <!-- Invisible hCaptcha element -->
+              <div class="h-captcha" data-sitekey="f06e6c50-85a8-45c8-87d0-21a2b65856fe" data-size="invisible" data-callback="onCaptchaSuccess"></div>
+               {%- endif -%}
+
+              <script src="https://js.hcaptcha.com/1/api.js" async defer></script>
+
+              <script>
+                document.getElementById('protected-checkout').addEventListener('click', function () {
+                  hcaptcha.execute();
+                });
+              
+                function onCaptchaSuccess(token) {
+                  // Optional: validate token with your server
+                  document.getElementById('checkout-form').submit();
+                }
+              </script>
+
+
+                
               </div>
             </div>
           </div>
