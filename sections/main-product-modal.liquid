@@ -76,7 +76,6 @@
         {%- endif -%}
   
         {%- assign first_read_more = section.blocks | where: 'type', 'read_more' | first -%}
-        {{ first_read_more.type }}
         <animate-element class="product__content block w-full overflow-hidden" data-animate="fade-up" data-immediate>
           <product-info
             id="ProductInfo-{{ section.id }}-{{ product.id }}"
