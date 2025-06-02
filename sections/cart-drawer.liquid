@@ -534,6 +534,7 @@
                           </button>
                         </div>
                         <div class="modal__content flex flex-col overflow-hidden">
+                    heelo2222
                           <form class="modal__scrollable grid gap-4" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
                             <country-province class="grid gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
                               <div class="field">
@@ -623,7 +624,7 @@
                 </div>
   
                 {%- if section.settings.show_checkout_button or section.settings.show_view_cart_button -%}
-                  heelo
+                  
                   <form action="{{ routes.cart_url }}" method="POST" novalidate class="drawer__footer-buttons grid grid-cols-12 gap-4">
                     {%- if section.settings.show_checkout_button -%}
                       <button class="button button--primary icon-with-text{% if section.settings.show_view_cart_button %} col-span-6 md:col-span-7{% else %} col-span-full{% endif %}" type="submit" name="checkout" is="hover-button">
