@@ -119,7 +119,7 @@
                     {{- product.description -}}
                   </div>
                 
-                {%- when 'title1' -%}
+                {%- when 'title' -%}
                   {%- liquid
                     assign price_block = section.blocks | where: "type", "price" | first
                     assign rating_block = section.blocks | where: "type", "rating" | first
