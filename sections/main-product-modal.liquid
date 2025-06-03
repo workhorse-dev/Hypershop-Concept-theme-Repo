@@ -183,6 +183,9 @@
                       endif
                     -%}
                   </div>
+                  <div class="product__text rte {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+                      {{- product.description | truncate: 250, ", ...." -}}
+                    </div>
     
                   {%- if price_block == blank and block.settings.show_price -%}
                     {%- assign product_form_installment_id = 'ProductFormInstallment-' | append: section.id | append: '-' | append: product.id -%}
