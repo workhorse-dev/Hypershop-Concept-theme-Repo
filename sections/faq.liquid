@@ -292,14 +292,16 @@
         "@type": "FAQPage",
         "mainEntity": [
           {%- for block in question_blocks -%}
-            {
-              "@type": "Question",
-              "name": {{ block.settings.title | json }},
-              "acceptedAnswer": {
-                "@type": "Answer",
-                "text": {{ block.settings.text | json }}
-              }
-            }{% unless forloop.last %},{% endunless %}
+            {% if block.settings.title != blank %}
+              {
+                "@type": "Question",
+                "name": {{ block.settings.title | json }},
+                "acceptedAnswer": {
+                  "@type": "Answer",
+                  "text": {{ block.settings.text | json }}
+                }
+              }{% unless forloop.last %},{% endunless %}
+            {% endif %}
           {% endfor -%}
         ]
       }

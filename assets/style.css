@@ -45,6 +45,9 @@ button.shopify-payment-button__button--unbranded,
 }
 
 /* Footer CSS */
+.rte.text-sm.leading-tight a {
+    white-space: nowrap;
+}
 @media screen and (min-width: 1280px) {
   .footer__right {
     padding-inline: clamp(var(--sp-10), 4.421vw, var(--sp-40)) !important;
@@ -182,4 +185,17 @@ button.mega-menu__nav-item {
 /* Portfolio CSS */
 .h-150{
   height: 150px;
+}
+/* Gtranslate CSS */
+.gt_float_switcher .gt-selected .gt-current-lang{
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+.gt-lang-code{
+  font-family: myFontBold, sans-serif;
+}
+.gt_float_switcher {
+  font-family: myFontRegular, sans-serif !important;
+  font-size: 17px !important;
 }
