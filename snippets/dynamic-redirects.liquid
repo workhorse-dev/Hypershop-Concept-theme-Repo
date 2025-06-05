@@ -1,0 +1,30 @@
+ <script>
+  (function() {
+  const { pathname, search, hash } = window.location;
+  
+  // Combined regex for both product and tag redirects
+  const redirectRegex = /^\/collections\/([^\/?#]+)(?:\/(products\/[^\/?#]+|[^\/?#]+))?(?:[\/?#]|$)/i;
+  const match = pathname.match(redirectRegex);
+  
+  if (match) {
+    const [, collectionHandle, subPath] = match;
+    
+    // Case 1: Product redirect (/collections/*/products/* -> /products/*)
+    if (subPath?.startsWith('products/')) {
+      const cleanUrl = `/${subPath}${search}${hash}`;
+      if (pathname !== cleanUrl) {
+        window.location.replace(cleanUrl);
+      }
+      return;
+    }
+    
+    // Case 2: Tag redirect (/collections/*/tag -> /collections/*)
+    if (subPath && !['products', 'all'].includes(subPath)) {
+      const cleanUrl = `/collections/${collectionHandle}${search}${hash}`;
+      if (pathname !== cleanUrl) {
+        window.location.replace(cleanUrl);
+      }
+    }
+  }
+})();
+</script>
