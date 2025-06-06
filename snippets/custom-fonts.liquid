@@ -1,26 +1,28 @@
+
+{{ 'NiveauGroteskRegular.woff2'| asset_url  | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'NiveauGroteskMedium.woff2' | asset_url  | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+{{ 'NiveauGroteskBold.woff2'   | asset_url  | preload_tag: as: 'font', type: 'font/woff2', crossorigin: 'anonymous' }}
+
 <style>
   @font-face {
     font-family: 'myFontRegular';
     font-style: normal;
-    font-weight: normal;
-    src: url("{{'NiveauGroteskRegular.woff2' | file_url}}") format('woff2'),
-         url("{{'NiveauGroteskRegular.woff' | file_url}}") format('woff'),
-         url("{{ 'NiveauGroteskRegular.otf' | file_url }}") format("truetype");
+    font-weight: 400;
+    font-display: swap;
+    src: url("{{ 'NiveauGroteskRegular.woff2' | file_url }}") format("woff2");
   }
-@font-face {
-  font-family: 'myFontMedium';
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{'NiveauGroteskMedium.woff2' | file_url}}") format('woff2'),
-       url("{{'NiveauGroteskMedium.woff' | file_url}}") format('woff'),
-       url("{{ 'NiveauGroteskMedium.otf' | file_url }}") format("truetype");
-}
-@font-face {
-  font-family: 'myFontBold';
-  font-style: normal;
-  font-weight: normal;
-  src: url("{{'NiveauGroteskBold.woff2' | file_url}}") format('woff2'),
-       url("{{'NiveauGroteskBold.woff' | file_url}}") format('woff'),
-       url("{{ 'NiveauGroteskBold.otf' | file_url }}") format("truetype");
-}
-</style> 
+  @font-face {
+    font-family: 'myFontMedium';
+    font-style: normal;
+    font-weight: 500;
+    font-display: swap;
+    src: url("{{ 'NiveauGroteskMedium.woff2' | file_url }}") format("woff2");
+  }
+  @font-face {
+    font-family: 'myFontBold';
+    font-style: normal;
+    font-weight: 700;
+    font-display: swap;
+    src: url("{{ 'NiveauGroteskBold.woff2' | file_url }}") format("woff2");
+  }
+</style>
