@@ -12,22 +12,6 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
-        "slide-2": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/hyper-email-5-bby-flex-launch-web-banner-v01-r03-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-5-bby-flex-launch-mobile-banner-v01-r02-500x600.webp",
-            "heading": "Plug In & Stand Out",
-            "subheading": "The HyperDrive Flex USB-C Hubs combine bold style and powerful features to keep your creative flow going. Available now at Best Buy®.",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&qp=brand_facet%3DBrand%7EHyper%5Ecurrentprice_facet%3DPrice%7E%2425+-+%2449.99%5Ecurrentprice_facet%3DPrice%7E%2450+-+%2474.99%5Econdition_facet%3DCondition%7ENew&sp=New-Arrivals&st=hyperdrive+flex",
-            "button_style": "primary",
-            "button_external": true,
-            "button_icon": false
-          }
-        },
         "image_PGrzFE": {
           "type": "image",
           "settings": {
@@ -41,6 +25,22 @@
             "button_link": "shopify://collections/save-25-on-tech-for-everyday-heroes",
             "button_style": "primary",
             "button_external": false,
+            "button_icon": false
+          }
+        },
+        "slide-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-5-bby-flex-launch-web-banner-v01-r03-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-5-bby-flex-launch-mobile-banner-v01-r02-500x600.webp",
+            "heading": "Plug In & Stand Out",
+            "subheading": "The HyperDrive Flex USB-C Hubs combine bold style and powerful features to keep your creative flow going. Available now at Best Buy®.",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&qp=brand_facet%3DBrand%7EHyper%5Ecurrentprice_facet%3DPrice%7E%2425+-+%2449.99%5Ecurrentprice_facet%3DPrice%7E%2450+-+%2474.99%5Econdition_facet%3DCondition%7ENew&sp=New-Arrivals&st=hyperdrive+flex",
+            "button_style": "primary",
+            "button_external": true,
             "button_icon": false
           }
         },
@@ -96,8 +96,8 @@
         }
       },
       "block_order": [
-        "slide-2",
         "image_PGrzFE",
+        "slide-2",
         "slide-3",
         "slide-1",
         "image_eMMdBB"
@@ -666,7 +666,6 @@
         "product_ggcRtY",
         "product_FXka3V"
       ],
-      "name": "t:sections.shop-the-look.name",
       "settings": {
         "image": "shopify://shop_images/Shop_The_Look.webp",
         "image_mobile": "shopify://shop_images/Shop_The_Look-v01-r01-1176x662.webp",
