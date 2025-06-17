@@ -42,28 +42,7 @@
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
   {%- endif -%}
-
-     <link
-  rel="preload"
-  as="image"
-  href="https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1800"
-  type="image/webp"
-  imagesrcset="
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=300 300w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=400 400w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=500 500w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=600 600w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=700 700w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=800 800w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=900 900w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1000 1000w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1200 1200w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1400 1400w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1600 1600w,
-    https://www.hypershop.com/cdn/shop/files/preview_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp?v=1750141281&width=1800 1800w
-  "
-  imagesizes="100vw"
->
+  
   <title>
     {{- page_title -}}
     {%- if current_tags -%}
