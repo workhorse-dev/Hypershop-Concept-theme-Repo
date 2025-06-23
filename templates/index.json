@@ -16,10 +16,10 @@
           "type": "image",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/hyper-email-4-fathers-day-sale-web-banner-v01-r02-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-4-fathers-day-sale-mobile-banner-v01-r02-500x600.webp",
-            "heading": "Tech for Everyday Heroes ",
-            "subheading": "Celebrate dads with cutting-edge tech designed to match his ambitions. Shop now and save 25% on perfect gifts for Father’s Day!",
+            "image": "shopify://shop_images/hyper-email-10-4th-of-july-sale-2025-web-banner-v01-r02-2000x2000_fde4e97d-e2c0-4b07-a9fa-79c1c11c1de5.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-10-4th-of-july-sale-2025-banner-v01-r02-500x600_68a075e6-e2d7-4f73-8dd9-1d6337ce2e95.webp",
+            "heading": "Fully Charged for Fireworks",
+            "subheading": "Celebrate the 4th of July with 25% off accessories to keep your devices powered, whether you're snapping fireworks photos, streaming BBQ playlists, or transferring files.",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
@@ -34,6 +34,7 @@
           "settings": {
             "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
             "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "cover_image": "shopify://shop_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp",
             "description": "",
             "video_url_mobile": "",
             "heading": "Lightning Fast USB4 Speeds",
@@ -42,22 +43,6 @@
             "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "slide-1": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/HS5910-launch-web-v01-r01-2000x2000_fd437e87-64d5-49be-a32d-61553097e382.webp",
-            "image_mobile": "shopify://shop_images/HS5910-launch-hp-mobile-v01-r01-500x600_717803c0-450f-4fff-91ec-9235d9388b8a.webp",
-            "heading": "New! Tool-less Cable Lock for MacBook Pro",
-            "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -79,19 +64,35 @@
             "button_icon": false
           }
         },
+        "slide-1": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/HS5910-launch-web-v01-r01-2000x2000_fd437e87-64d5-49be-a32d-61553097e382.webp",
+            "image_mobile": "shopify://shop_images/HS5910-launch-hp-mobile-v01-r01-500x600_717803c0-450f-4fff-91ec-9235d9388b8a.webp",
+            "heading": "New! Tool-less Cable Lock for MacBook Pro",
+            "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
+            "heading_size": "title-sm",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/HS2100-HS2310-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/HS2100-HS2310-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Ergonomic Comfort, Seamless Switching",
-            "subheading": "The HyperSpace Mouse and Keyboard combine ergonomic design with seamless multi-device connectivity for precision and comfort.",
+            "image": "shopify://shop_images/hyper-email-5-bby-flex-launch-web-banner-v01-r03-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-5-bby-flex-launch-mobile-banner-v01-r02-500x600.webp",
+            "heading": "Plug In & Stand Out",
+            "subheading": "The HyperDrive Flex USB-C Hubs combine bold style and powerful features to keep your creative flow going. Available now at Best Buy®.",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/mouse-and-keyboard",
+            "button_link": "https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&qp=brand_facet%3DBrand%7EHyper%5Ecurrentprice_facet%3DPrice%7E%2425+-+%2449.99%5Ecurrentprice_facet%3DPrice%7E%2450+-+%2474.99%5Econdition_facet%3DCondition%7ENew&sp=New-Arrivals&st=hyperdrive+flex",
             "button_style": "primary",
-            "button_external": false,
+            "button_external": true,
             "button_icon": false
           }
         }
@@ -99,8 +100,8 @@
       "block_order": [
         "image_PGrzFE",
         "slide-3",
-        "slide-1",
         "image_eMMdBB",
+        "slide-1",
         "slide-2"
       ],
       "settings": {
@@ -667,7 +668,6 @@
         "product_ggcRtY",
         "product_FXka3V"
       ],
-      "name": "t:sections.shop-the-look.name",
       "settings": {
         "image": "shopify://shop_images/Shop_The_Look.webp",
         "image_mobile": "shopify://shop_images/Shop_The_Look-v01-r01-1176x662.webp",

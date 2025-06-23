@@ -42,7 +42,7 @@
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
   {%- endif -%}
-
+  
   <title>
     {{- page_title -}}
     {%- if current_tags -%}
