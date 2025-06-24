@@ -277,9 +277,9 @@
         "disabled": false,
         "settings": {}
       },
-"4730719560732683355": {
+      "4730719560732683355": {
         "type": "shopify://apps/g-translate-shop-translator/blocks/float/408a74ac-f92d-43cf-a1b1-a044341e66bd",
-        "disabled": true,
+        "disabled": false,
         "settings": {
           "horizontal_position": "right",
           "vertical_position": "top",
@@ -309,19 +309,6 @@
         "type": "shopify://apps/armex/blocks/armex-extension/7fd274f7-e6a1-4512-8228-f11c90d2ef69",
         "disabled": false,
         "settings": {}
-      },
-      "4730719560732683355": {
-        "type": "shopify://apps/g-translate-shop-translator/blocks/float/408a74ac-f92d-43cf-a1b1-a044341e66bd",
-        "disabled": true,
-        "settings": {
-          "horizontal_position": "right",
-          "vertical_position": "top",
-          "open_direction": "bottom",
-          "native_language_names": false,
-          "flag_style": "3d",
-          "wrapper_selector": "",
-          "custom_css": "div#gt_float_wrapper {\n    top: 0px !important;\n       position: absolute !important;\n}\n.gt_float_switcher.notranslate , .gt_float_switcher .gt-selected{\n    background: #1F1F1F !important;\n}\n.gt_float_switcher .gt-selected .gt-current-lang {\n    color: white !important;\n}\n.gt_float_switcher .gt_options a {\n    color: white !important;\n}\n.gt_float_switcher .gt_options {\n    max-height: 270px !important;\n   scrollbar-width: none !important;\n}\n@media screen and (max-width: 769px) {\n  div#gt_float_wrapper {\n    display: none;\n  }\n}"
-        }
       }
     }
   },
