@@ -1,69 +1,75 @@
 <style>
-      .switcher{
-        z-index: 10;
-      }
-      .goog-te-banner-frame.skiptranslate, .skiptranslate, #goog-gt-tt, .goog-te-balloon-frame, .goog-te-menu-frame, .goog-te-gadget-icon, .goog-te-combo{
-        display: none !important;
-      }
-      body{
-          top:0 !important;
-      }
-      .custom-lang-switcher {
-        position: relative;
-        display: inline-block;
-        font-family: sans-serif;
-      }
+  .switcher {
+    z-index: 10;
+  }
+  .goog-te-banner-frame.skiptranslate,
+  .skiptranslate,
+  #goog-gt-tt,
+  .goog-te-balloon-frame,
+  .goog-te-menu-frame,
+  .goog-te-gadget-icon,
+  .goog-te-combo {
+    display: none !important;
+  }
+  body {
+    top: 0 !important;
+  }
+  .custom-lang-switcher {
+    position: relative;
+    display: inline-block;
+    font-family: sans-serif;
+  }
 
-    #lang-toggle {
-      background: transparent;
-      padding: 6px 10px;
-      font-size: inherit;
-      font-family: inherit;
-      display: flex;
-      align-items: center;
-      gap: 6px;
-      cursor: pointer;
-    }
+  #lang-toggle {
+    background: transparent;
+    padding: 6px 10px;
+    font-size: inherit;
+    font-family: inherit;
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    cursor: pointer;
+  }
 
-    #lang-toggle .arrow {
-      margin-left: auto;
-      font-size: 10px;
-    }
+  #lang-toggle .arrow {
+    margin-left: auto;
+    font-size: 10px;
+  }
 
-    .lang-options {
-      position: absolute;
-      scrollbar-width: none;
-      z-index: 1000;
-      background: #1f1f1f;
-      margin-top: 4px;
-      padding: 4px 0;
-      list-style: none;
-      padding: 1rem;
-      max-height: 200px;
-      overflow-y: auto;
-      border-radius: 10px;
-      box-shadow: 0 4px 6px rgba(0,0,0,0.1);
-    }
+  .lang-options {
+    position: absolute;
+    scrollbar-width: none;
+    z-index: 1000;
+    background: #1f1f1f;
+    margin-top: 4px;
+    padding: 4px 0;
+    list-style: none;
+    padding: 1rem;
+    max-height: 200px;
+    overflow-y: auto;
+    border-radius: 10px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+  }
 
-    .lang-options li {
-      padding: 8px 12px;
-      display: flex;
-      align-items: center;
-      border-radius: 10rem;
-      gap: 6px;
-      cursor: pointer;
-      transition: background 0.2s;
-    }
+  .lang-options li {
+    padding: 8px 12px;
+    display: flex;
+    align-items: center;
+    border-radius: 10rem;
+    gap: 6px;
+    cursor: pointer;
+    transition: background 0.2s;
+  }
 
-    .lang-options li:hover {
-      background: #fff;
-      color: black;
-    }
+  .lang-options li:hover {
+    background: #fff;
+    color: black;
+  }
 
-    .lang-options img {
-      width: 30px;
-      height:30px;
-    }
+  .lang-options img {
+    width: 30px;
+    height: 30px;
+  }
 
   @keyframes fadeIn {
     from {
@@ -102,203 +108,126 @@
     <span class="arrow">▼</span>
   </button>
   <ul id="lang-dropdown" class="lang-options notranslate dropdown-content" hidden>
-    <li data-lang="af" data-name="Afrikaans" class="notranslate">Afrikaans</li>
-    <li data-lang="sq" data-name="Albanian" class="notranslate">Albanian</li>
-    <li data-lang="am" data-name="Amharic" class="notranslate">Amharic</li>
-    <li data-lang="ar" data-name="Arabic" class="notranslate">Arabic</li>
-    <li data-lang="hy" data-name="Armenian" class="notranslate">Armenian</li>
-    <li data-lang="az" data-name="Azerbaijani" class="notranslate">Azerbaijani</li>
-    <li data-lang="eu" data-name="Basque" class="notranslate">Basque</li>
-    <li data-lang="be" data-name="Belarusian" class="notranslate">Belarusian</li>
-    <li data-lang="bn" data-name="Bengali" class="notranslate">Bengali</li>
-    <li data-lang="bs" data-name="Bosnian" class="notranslate">Bosnian</li>
-    <li data-lang="bg" data-name="Bulgarian" class="notranslate">Bulgarian</li>
-    <li data-lang="ca" data-name="Catalan" class="notranslate">Catalan</li>
-    <li data-lang="ceb" data-name="Cebuano" class="notranslate">Cebuano</li>
-    <li data-lang="ny" data-name="Chichewa" class="notranslate">Chichewa</li>
-    <li data-lang="zh-CN" data-name="Chinese (Simplified)" class="notranslate">Chinese (Simplified)</li>
-    <li data-lang="zh-TW" data-name="Chinese (Traditional)" class="notranslate">Chinese (Traditional)</li>
-    <li data-lang="co" data-name="Corsican" class="notranslate">Corsican</li>
-    <li data-lang="hr" data-name="Croatian" class="notranslate">Croatian</li>
-    <li data-lang="cs" data-name="Czech" class="notranslate">Czech</li>
-    <li data-lang="da" data-name="Danish" class="notranslate">Danish</li>
-    <li data-lang="nl" data-name="Dutch" class="notranslate">Dutch</li>
-    <li data-lang="en" data-name="English" class="notranslate">English</li>
-    <li data-lang="eo" data-name="Esperanto" class="notranslate">Esperanto</li>
-    <li data-lang="et" data-name="Estonian" class="notranslate">Estonian</li>
-    <li data-lang="tl" data-name="Filipino" class="notranslate">Filipino</li>
-    <li data-lang="fi" data-name="Finnish" class="notranslate">Finnish</li>
-    <li data-lang="fr" data-name="French" class="notranslate">French</li>
-    <li data-lang="fy" data-name="Frisian" class="notranslate">Frisian</li>
-    <li data-lang="gl" data-name="Galician" class="notranslate">Galician</li>
-    <li data-lang="ka" data-name="Georgian" class="notranslate">Georgian</li>
-    <li data-lang="de" data-name="German" class="notranslate">German</li>
-    <li data-lang="el" data-name="Greek" class="notranslate">Greek</li>
-    <li data-lang="gu" data-name="Gujarati" class="notranslate">Gujarati</li>
-    <li data-lang="ht" data-name="Haitian Creole" class="notranslate">Haitian Creole</li>
-    <li data-lang="ha" data-name="Hausa" class="notranslate">Hausa</li>
-    <li data-lang="haw" data-name="Hawaiian" class="notranslate">Hawaiian</li>
-    <li data-lang="iw" data-name="Hebrew" class="notranslate">Hebrew</li>
-    <li data-lang="hi" data-name="Hindi" class="notranslate">Hindi</li>
-    <li data-lang="hmn" data-name="Hmong" class="notranslate">Hmong</li>
-    <li data-lang="hu" data-name="Hungarian" class="notranslate">Hungarian</li>
-    <li data-lang="is" data-name="Icelandic" class="notranslate">Icelandic</li>
-    <li data-lang="ig" data-name="Igbo" class="notranslate">Igbo</li>
-    <li data-lang="id" data-name="Indonesian" class="notranslate">Indonesian</li>
-    <li data-lang="ga" data-name="Irish" class="notranslate">Irish</li>
-    <li data-lang="it" data-name="Italian" class="notranslate">Italian</li>
-    <li data-lang="ja" data-name="Japanese" class="notranslate">Japanese</li>
-    <li data-lang="jw" data-name="Javanese" class="notranslate">Javanese</li>
-    <li data-lang="kn" data-name="Kannada" class="notranslate">Kannada</li>
-    <li data-lang="kk" data-name="Kazakh" class="notranslate">Kazakh</li>
-    <li data-lang="km" data-name="Khmer" class="notranslate">Khmer</li>
-    <li data-lang="ko" data-name="Korean" class="notranslate">Korean</li>
-    <li data-lang="ku" data-name="Kurdish (Kurmanji)" class="notranslate">Kurdish (Kurmanji)</li>
-    <li data-lang="ky" data-name="Kyrgyz" class="notranslate">Kyrgyz</li>
-    <li data-lang="lo" data-name="Lao" class="notranslate">Lao</li>
-    <li data-lang="la" data-name="Latin" class="notranslate">Latin</li>
-    <li data-lang="lv" data-name="Latvian" class="notranslate">Latvian</li>
-    <li data-lang="lt" data-name="Lithuanian" class="notranslate">Lithuanian</li>
-    <li data-lang="lb" data-name="Luxembourgish" class="notranslate">Luxembourgish</li>
-    <li data-lang="mk" data-name="Macedonian" class="notranslate">Macedonian</li>
-    <li data-lang="mg" data-name="Malagasy" class="notranslate">Malagasy</li>
-    <li data-lang="ms" data-name="Malay" class="notranslate">Malay</li>
-    <li data-lang="ml" data-name="Malayalam" class="notranslate">Malayalam</li>
-    <li data-lang="mt" data-name="Maltese" class="notranslate">Maltese</li>
-    <li data-lang="mi" data-name="Maori" class="notranslate">Maori</li>
-    <li data-lang="mr" data-name="Marathi" class="notranslate">Marathi</li>
-    <li data-lang="mn" data-name="Mongolian" class="notranslate">Mongolian</li>
-    <li data-lang="my" data-name="Myanmar (Burmese)" class="notranslate">Myanmar (Burmese)</li>
-    <li data-lang="ne" data-name="Nepali" class="notranslate">Nepali</li>
-    <li data-lang="no" data-name="Norwegian" class="notranslate">Norwegian</li>
-    <li data-lang="ps" data-name="Pashto" class="notranslate">Pashto</li>
-    <li data-lang="fa" data-name="Persian" class="notranslate">Persian</li>
-    <li data-lang="pl" data-name="Polish" class="notranslate">Polish</li>
-    <li data-lang="pt" data-name="Portuguese" class="notranslate">Portuguese</li>
-    <li data-lang="pa" data-name="Punjabi" class="notranslate">Punjabi</li>
-    <li data-lang="ro" data-name="Romanian" class="notranslate">Romanian</li>
-    <li data-lang="ru" data-name="Russian" class="notranslate">Russian</li>
-    <li data-lang="sm" data-name="Samoan" class="notranslate">Samoan</li>
-    <li data-lang="gd" data-name="Scots Gaelic" class="notranslate">Scots Gaelic</li>
-    <li data-lang="sr" data-name="Serbian" class="notranslate">Serbian</li>
-    <li data-lang="st" data-name="Sesotho" class="notranslate">Sesotho</li>
-    <li data-lang="sn" data-name="Shona" class="notranslate">Shona</li>
-    <li data-lang="sd" data-name="Sindhi" class="notranslate">Sindhi</li>
-    <li data-lang="si" data-name="Sinhala" class="notranslate">Sinhala</li>
-    <li data-lang="sk" data-name="Slovak" class="notranslate">Slovak</li>
-    <li data-lang="sl" data-name="Slovenian" class="notranslate">Slovenian</li>
-    <li data-lang="so" data-name="Somali" class="notranslate">Somali</li>
-    <li data-lang="es" data-name="Spanish" class="notranslate">Spanish</li>
-    <li data-lang="su" data-name="Sundanese" class="notranslate">Sundanese</li>
-    <li data-lang="sw" data-name="Swahili" class="notranslate">Swahili</li>
-    <li data-lang="sv" data-name="Swedish" class="notranslate">Swedish</li>
-    <li data-lang="tg" data-name="Tajik" class="notranslate">Tajik</li>
-    <li data-lang="ta" data-name="Tamil" class="notranslate">Tamil</li>
-    <li data-lang="te" data-name="Telugu" class="notranslate">Telugu</li>
-    <li data-lang="th" data-name="Thai" class="notranslate">Thai</li>
-    <li data-lang="tr" data-name="Turkish" class="notranslate">Turkish</li>
-    <li data-lang="uk" data-name="Ukrainian" class="notranslate">Ukrainian</li>
-    <li data-lang="ur" data-name="Urdu" class="notranslate">Urdu</li>
-    <li data-lang="uz" data-name="Uzbek" class="notranslate">Uzbek</li>
-    <li data-lang="vi" data-name="Vietnamese" class="notranslate">Vietnamese</li>
-    <li data-lang="cy" data-name="Welsh" class="notranslate">Welsh</li>
-    <li data-lang="xh" data-name="Xhosa" class="notranslate">Xhosa</li>
-    <li data-lang="yi" data-name="Yiddish" class="notranslate">Yiddish</li>
-    <li data-lang="yo" data-name="Yoruba" class="notranslate">Yoruba</li>
-    <li data-lang="zu" data-name="Zulu" class="notranslate">Zulu</li>
+    {%- assign languages = '
+    af:Afrikaans, sq:Albanian, am:Amharic, ar:Arabic, hy:Armenian, az:Azerbaijani,
+    eu:Basque, be:Belarusian, bn:Bengali, bs:Bosnian, bg:Bulgarian, ca:Catalan,
+    ceb:Cebuano, ny:Chichewa, zh-CN:Chinese (Simplified), zh-TW:Chinese (Traditional),
+    co:Corsican, hr:Croatian, cs:Czech, da:Danish, nl:Dutch, en:English, eo:Esperanto,
+    et:Estonian, tl:Filipino, fi:Finnish, fr:French, fy:Frisian, gl:Galician, ka:Georgian,
+    de:German, el:Greek, gu:Gujarati, ht:Haitian Creole, ha:Hausa, haw:Hawaiian,
+    iw:Hebrew, hi:Hindi, hmn:Hmong, hu:Hungarian, is:Icelandic, ig:Igbo, id:Indonesian,
+    ga:Irish, it:Italian, ja:Japanese, jw:Javanese, kn:Kannada, kk:Kazakh, km:Khmer,
+    ko:Korean, ku:Kurdish (Kurmanji), ky:Kyrgyz, lo:Lao, la:Latin, lv:Latvian, lt:Lithuanian,
+    lb:Luxembourgish, mk:Macedonian, mg:Malagasy, ms:Malay, ml:Malayalam, mt:Maltese,
+    mi:Maori, mr:Marathi, mn:Mongolian, my:Myanmar (Burmese), ne:Nepali, no:Norwegian,
+    ps:Pashto, fa:Persian, pl:Polish, pt:Portuguese, pa:Punjabi, ro:Romanian, ru:Russian,
+    sm:Samoan, gd:Scots Gaelic, sr:Serbian, st:Sesotho, sn:Shona, sd:Sindhi, si:Sinhala,
+    sk:Slovak, sl:Slovenian, so:Somali, es:Spanish, su:Sundanese, sw:Swahili, sv:Swedish,
+    tg:Tajik, ta:Tamil, te:Telugu, th:Thai, tr:Turkish, uk:Ukrainian, ur:Urdu, uz:Uzbek,
+    vi:Vietnamese, cy:Welsh, xh:Xhosa, yi:Yiddish, yo:Yoruba, zu:Zulu
+  '
+      | split: ','
+    -%}
+
+    {%- for item in languages -%}
+      {%- assign parts = item | strip | split: ':' -%}
+      {%- assign code = parts[0] -%}
+      {%- assign name = parts[1] -%}
+      <li data-lang="{{ code }}" data-name="{{ name }}" class="notranslate">{{ name }}</li>
+    {%- endfor -%}
   </ul>
 </div>
 
 <script>
-    function GTranslateFireEvent(element, eventName) {
-        const event = new Event(eventName, {
-            bubbles: true
-        });
-        element.dispatchEvent(event);
+  function GTranslateFireEvent(element, eventName) {
+    const event = new Event(eventName, {
+      bubbles: true,
+    });
+    element.dispatchEvent(event);
+  }
+
+  function doGTranslate(lang_pair) {
+    if (!lang_pair) return;
+    const lang = lang_pair.split('|')[1];
+    const combo = document.querySelector('.goog-te-combo');
+
+    if (!combo) {
+      setTimeout(() => doGTranslate(lang_pair), 500);
+      return;
     }
 
-    function doGTranslate(lang_pair) {
-        if (!lang_pair) return;
-        const lang = lang_pair.split('|')[1];
-        const combo = document.querySelector('.goog-te-combo');
-    
-        if (!combo) {
-            setTimeout(() => doGTranslate(lang_pair), 500);
-            return;
-        }
-    
-        combo.value = lang;
-        GTranslateFireEvent(combo, 'change');
-        GTranslateFireEvent(combo, 'change');
-    }
-    
-    document.addEventListener('DOMContentLoaded', () => {
-        const toggle = document.getElementById('lang-toggle');
-        const dropdown = document.getElementById('lang-dropdown');
-        const selectedName = document.getElementById('selected-lang-name');
-        const toggleFlag = toggle.querySelector('img');
-    
-        // Function to dynamically generate flag image URL
-        const getFlagUrl = (langCode) => {
-            const normalized = langCode === 'zh-CN' ? 'zh-CN' : langCode;
-            return `//cdn.gtranslate.net/flags/16/${normalized}.png`;
-        };
-    
-        // Toggle dropdown open/close with animation
-        toggle.addEventListener('click', () => {
-            const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
-            toggle.setAttribute('aria-expanded', String(!isExpanded));
-    
-            if (isExpanded) {
-                dropdown.classList.remove('fade-in');
-                dropdown.classList.add('fade-out');
-    
-                dropdown.addEventListener('animationend', function handleFadeOut() {
-                    dropdown.hidden = true;
-                    dropdown.classList.remove('fade-out');
-                    dropdown.removeEventListener('animationend', handleFadeOut);
-                });
-            } else {
-                dropdown.hidden = false;
-                dropdown.classList.remove('fade-out');
-                dropdown.classList.add('fade-in');
-            }
+    combo.value = lang;
+    GTranslateFireEvent(combo, 'change');
+    GTranslateFireEvent(combo, 'change');
+  }
+
+  document.addEventListener('DOMContentLoaded', () => {
+    const toggle = document.getElementById('lang-toggle');
+    const dropdown = document.getElementById('lang-dropdown');
+    const selectedName = document.getElementById('selected-lang-name');
+    const toggleFlag = toggle.querySelector('img');
+
+    // Function to dynamically generate flag image URL
+    const getFlagUrl = (langCode) => {
+      const normalized = langCode === 'zh-CN' ? 'zh-CN' : langCode;
+      return `//cdn.gtranslate.net/flags/16/${normalized}.png`;
+    };
+
+    // Toggle dropdown open/close with animation
+    toggle.addEventListener('click', () => {
+      const isExpanded = toggle.getAttribute('aria-expanded') === 'true';
+      toggle.setAttribute('aria-expanded', String(!isExpanded));
+
+      if (isExpanded) {
+        dropdown.classList.remove('fade-in');
+        dropdown.classList.add('fade-out');
+
+        dropdown.addEventListener('animationend', function handleFadeOut() {
+          dropdown.hidden = true;
+          dropdown.classList.remove('fade-out');
+          dropdown.removeEventListener('animationend', handleFadeOut);
         });
-    
-        // Language option selection
-        dropdown.querySelectorAll('li').forEach(li => {
-            li.addEventListener('click', () => {
-                const langCode = li.getAttribute('data-lang');
-                const langName = li.getAttribute('data-name');
-    
-                doGTranslate(`en|${langCode}`);
-                selectedName.innerText = langName;
-                toggleFlag.setAttribute('src', getFlagUrl(langCode));
-    
-                toggle.setAttribute('aria-expanded', 'false');
-                dropdown.hidden = true;
-            });
-        });
-    
-        // Initialize selected language from cookie
-        const match = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
-        if (match) {
-            const lang = match[2].split('/')[2];
-            const current = dropdown.querySelector(`[data-lang="${lang}"]`);
-            if (current) {
-                selectedName.innerText = current.getAttribute('data-name');
-                toggleFlag.setAttribute('src', getFlagUrl(lang));
-            }
-        }
-    
-        // Close dropdown if clicked outside
-        document.addEventListener('click', (e) => {
-            if (!e.target.closest('.custom-lang-switcher')) {
-                dropdown.hidden = true;
-                toggle.setAttribute('aria-expanded', 'false');
-            }
-        });
+      } else {
+        dropdown.hidden = false;
+        dropdown.classList.remove('fade-out');
+        dropdown.classList.add('fade-in');
+      }
     });
+
+    // Language option selection
+    dropdown.querySelectorAll('li').forEach((li) => {
+      li.addEventListener('click', () => {
+        const langCode = li.getAttribute('data-lang');
+        const langName = li.getAttribute('data-name');
+
+        doGTranslate(`en|${langCode}`);
+        selectedName.innerText = langName;
+        toggleFlag.setAttribute('src', getFlagUrl(langCode));
+
+        toggle.setAttribute('aria-expanded', 'false');
+        dropdown.hidden = true;
+      });
+    });
+
+    // Initialize selected language from cookie
+    const match = document.cookie.match('(^|;) ?googtrans=([^;]*)(;|$)');
+    if (match) {
+      const lang = match[2].split('/')[2];
+      const current = dropdown.querySelector(`[data-lang="${lang}"]`);
+      if (current) {
+        selectedName.innerText = current.getAttribute('data-name');
+        toggleFlag.setAttribute('src', getFlagUrl(lang));
+      }
+    }
+
+    // Close dropdown if clicked outside
+    document.addEventListener('click', (e) => {
+      if (!e.target.closest('.custom-lang-switcher')) {
+        dropdown.hidden = true;
+        toggle.setAttribute('aria-expanded', 'false');
+      }
+    });
+  });
 </script>
 
 <div id="google_translate_element2"></div>
