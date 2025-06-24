@@ -1,0 +1,305 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
+{
+  "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "disabled": true,
+      "settings": {}
+    },
+    "main-page": {
+      "type": "main-page",
+      "disabled": true,
+      "settings": {
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left",
+        "heading_tag": "h1",
+        "text_size": "text-base",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "shogun-optimizer": {
+      "type": "shogun-optimizer",
+      "disabled": true,
+      "settings": {}
+    },
+    "slideshow_bkiGzf": {
+      "type": "slideshow",
+      "blocks": {
+        "image_wL7tHi": {
+          "type": "image",
+          "settings": {
+            "heading": "Image slide",
+            "subheading": "Subheading text for the slideshow",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_wL7tHi"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "mobile_content_outside": false,
+        "color_text": "#ffffff",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_pyURKg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_qnGdJ3": {
+          "type": "heading",
+          "settings": {
+            "heading": "Ultimate Desktop Builder",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_Ew33YR": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_qnGdJ3",
+        "text_Ew33YR"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "product_bundle_C6GLDB": {
+      "type": "product-bundle",
+      "name": "t:sections.product-bundle.presets.name",
+      "settings": {
+        "collection": "desktop-bundle-builder",
+        "products": [],
+        "product_limit": 6,
+        "columns": 3,
+        "columns_mobile": "1",
+        "minimum_quantity": 3,
+        "maximum_quantity": 3,
+        "prevent_duplicate_products": true,
+        "allow_quantity_change": true,
+        "quantity_increment": "1",
+        "quantity_minimum": "1",
+        "quantity_maximum": "",
+        "show_variant_labels": true,
+        "picker_type": "button",
+        "enable_color_swatches": true,
+        "color_swatch_type": "color",
+        "heading": "Your bundle",
+        "heading_size": "lg:text-5xl text-2xl",
+        "heading_alignment": "text-left",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "rich_text_MA7th4": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_nTrVGG": {
+          "type": "heading",
+          "settings": {
+            "heading": "Work from Anywhere Bundle",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_hxyXMP": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Use this text to share information about your brand with your customers. Describe a product, share announcements, or welcome customers to your store.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_nTrVGG",
+        "text_hxyXMP"
+      ],
+      "name": "t:sections.rich-text.presets.name",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 100,
+        "divider": false,
+        "narrow": true,
+        "rounded": false
+      }
+    },
+    "product_bundle_AaE6aV": {
+      "type": "product-bundle",
+      "name": "t:sections.product-bundle.presets.name",
+      "settings": {
+        "collection": "the-work-from-anywhere-bundle",
+        "products": [],
+        "product_limit": 6,
+        "columns": 3,
+        "columns_mobile": "1",
+        "minimum_quantity": 3,
+        "maximum_quantity": 3,
+        "prevent_duplicate_products": true,
+        "allow_quantity_change": true,
+        "quantity_increment": "1",
+        "quantity_minimum": "1",
+        "quantity_maximum": "",
+        "show_variant_labels": true,
+        "picker_type": "button",
+        "enable_color_swatches": true,
+        "color_swatch_type": "color",
+        "heading": "Your bundle",
+        "heading_size": "lg:text-5xl text-2xl",
+        "heading_alignment": "text-left",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "shogun-helper",
+    "main-page",
+    "shogun-optimizer",
+    "slideshow_bkiGzf",
+    "rich_text_pyURKg",
+    "product_bundle_C6GLDB",
+    "rich_text_MA7th4",
+    "product_bundle_AaE6aV"
+  ]
+}
