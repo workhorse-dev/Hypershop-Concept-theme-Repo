@@ -1,23 +1,18 @@
 <script>
     document.addEventListener('DOMContentLoaded', function () {
-      // Functions to manage UTM parameters in localStorage
       function deleteUTMFromLocalStorage(param) {
         localStorage.removeItem(param);
       }
-  
       function setUTMInLocalStorage(param, value) {
         localStorage.setItem(param, value);
         sessionStorage.setItem(param, value);
       }
   
       const utmParams = ['utm_source', 'utm_medium', 'utm_campaign', 'utm_term', 'utm_content'];
-  
-      // Check for UTM parameters in the URL
       const urlParams = new URLSearchParams(window.location.search);
       const hasUtmParams = utmParams.some(param => urlParams.has(param));
   
       if (hasUtmParams) {
-        // Clear previous UTM parameters from localStorage
         utmParams.forEach(param => deleteUTMFromLocalStorage(param));
   
         // Store new UTM parameters in localStorage
