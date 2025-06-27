@@ -203,3 +203,9 @@ button.mega-menu__nav-item {
 iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     transform: translateY(50%);
 }
+/* Collection banner CSS */
+@media screen and (min-width: 1500px) {
+  .banner__box {
+    max-width: 80rem;
+  }
+}
