@@ -8,6 +8,9 @@
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_button_background }}">
   <meta name="google-site-verification" content="Jf-0DovDM7NdRpyzsWbXDMwkp73dHu7etk4XSzE93Gs" />
+  {% if request.url contains '?page=' %}
+    <meta name="robots" content="noindex, follow"> 
+  {% endif %} 
   {% if canonical_url contains 'page=' %}
     {%- assign url_parts = canonical_url | split: '?' -%}
     {%- assign root_url = url_parts[0] -%}
