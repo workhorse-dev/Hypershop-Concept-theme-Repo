@@ -199,3 +199,7 @@ button.mega-menu__nav-item {
   font-family: myFontRegular, sans-serif !important;
   font-size: 17px !important;
 }
+/* Omnichannel CSS */
+iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
+    transform: translateY(50%);
+}
