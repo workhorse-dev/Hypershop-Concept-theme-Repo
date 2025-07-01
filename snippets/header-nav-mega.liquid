@@ -197,6 +197,24 @@
           {%- if block.settings.heading_1 != blank -%}
             <p class="text-base xl:text-lg font-medium">{{ block.settings.heading_1 | escape }}</p>
           {%- endif -%}
+          {%- if block.settings.button_label != blank -%}
+            <div class="mega-menu__footer relative">
+              <a
+                class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"
+                {% if block.settings.button_link != blank %}
+                  href="{{ block.settings.button_link }}"
+                  {%- if block.settings.button_external %} target="_blank" rel="noopener"{% endif -%}
+                {% else %}
+                  role="link" aria-disabled="true"
+                {% endif %}
+              >
+                <span class="heading link-text text-base-xl tracking-tight">
+                  {{- block.settings.button_label | escape -}}
+                </span>
+                {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform shrink-0' -%}
+              </a>
+            </div>
+          {%- endif -%}
           <tabs-element class="mega-menu__nav mega-menu__nav--tabs grid gap-1d5">
             {%- liquid
               assign forloop_first = true
@@ -277,24 +295,6 @@
               {%- endif -%}
             {%- endfor -%}
           </tabs-element>
-          {%- if block.settings.button_label != blank -%}
-            <div class="mega-menu__footer relative">
-              <a
-                class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"
-                {% if block.settings.button_link != blank %}
-                  href="{{ block.settings.button_link }}"
-                  {%- if block.settings.button_external %} target="_blank" rel="noopener"{% endif -%}
-                {% else %}
-                  role="link" aria-disabled="true"
-                {% endif %}
-              >
-                <span class="heading link-text text-base-xl tracking-tight">
-                  {{- block.settings.button_label | escape -}}
-                </span>
-                {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform shrink-0' -%}
-              </a>
-            </div>
-          {%- endif -%}
         </li>
         <li class="mega-menu__item mega-menu__item--panels opacity-0 w-full">
           {%- liquid
