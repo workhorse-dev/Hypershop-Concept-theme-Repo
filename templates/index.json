@@ -82,6 +82,7 @@
         },
         "slide-2": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/hyper-email-5-bby-flex-launch-web-banner-v01-r03-2000x2000.webp",
             "image_mobile": "shopify://shop_images/hyper-email-5-bby-flex-launch-mobile-banner-v01-r02-500x600.webp",
@@ -242,6 +243,7 @@
       "blocks": {
         "collection-1": {
           "type": "collection",
+          "disabled": true,
           "settings": {
             "collection": "all",
             "image": "shopify://shop_images/Hyper-all-products-category-2_1a3b0dc8-c0cd-4820-beb3-bf2f5d0d9fd9.webp",
@@ -336,7 +338,7 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "heading": "Shop Hyper Products",
+        "heading": "Shop by Category",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -485,6 +487,7 @@
         "image_c6kVTY",
         "image_9HtaaX"
       ],
+      "disabled": true,
       "settings": {
         "row_height": 300,
         "row_height_mobile": 150,
@@ -1721,6 +1724,7 @@
         "collection-3",
         "collection_nQFGtp"
       ],
+      "disabled": true,
       "settings": {
         "product_limit": 6,
         "columns": 4,
