@@ -97,7 +97,7 @@
 </style>
 <div class="custom-lang-switcher notranslate dropdown">
   <button id="lang-toggle" aria-haspopup="true" aria-expanded="false">
-    <img src="//cdn.gtranslate.net/shopify/assets/flags/32/en.png" alt="en" width="30" height="30">
+    <img src="//cdn.gtranslate.net/shopify/assets/flags/48/en-us.png" alt="en" width="30" height="30">
     <span id="selected-lang-name">English</span>
     <span class="arrow">▼</span>
   </button>
@@ -123,7 +123,7 @@
     <li data-lang="cs" data-name="Czech" class="notranslate">Czech</li>
     <li data-lang="da" data-name="Danish" class="notranslate">Danish</li>
     <li data-lang="nl" data-name="Dutch" class="notranslate">Dutch</li>
-    <li data-lang="en" data-name="English" class="notranslate">English</li>
+    <li data-lang="en-us" data-name="English" class="notranslate">English</li>
     <li data-lang="eo" data-name="Esperanto" class="notranslate">Esperanto</li>
     <li data-lang="et" data-name="Estonian" class="notranslate">Estonian</li>
     <li data-lang="tl" data-name="Filipino" class="notranslate">Filipino</li>
@@ -241,7 +241,7 @@
         // Function to dynamically generate flag image URL
         const getFlagUrl = (langCode) => {
             const normalized = langCode === 'zh-CN' ? 'zh-CN' : langCode;
-            return `//cdn.gtranslate.net/flags/16/${normalized}.png`;
+            return `//cdn.gtranslate.net/flags/32/${normalized}.png`;
         };
     
         // Toggle dropdown open/close with animation
