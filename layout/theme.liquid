@@ -137,5 +137,15 @@
   {%- endif -%}
   {% render 'Microsoft-omnichannel' %}
   {% render 'mouseflow' %}
+  <script>
+    document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.search.includes("customer_posted=true")) {
+      if (window.location.hash.includes("newsletter") || window.location.hash === "" ) {
+        fbq('track', 'SubmitApplication');
+        console.log("Meta Pixel: SubmitApplication event fired");
+      }
+    }
+  });
+  </script>
 </body>
 </html>
