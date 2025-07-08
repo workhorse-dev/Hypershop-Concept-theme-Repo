@@ -11,10 +11,12 @@ This file can be re-written at any time.
   <meta name="viewport" content="width=device-width,initial-scale=1">
   <meta name="theme-color" content="{{ settings.color_button_background }}">
   <meta name="google-site-verification" content="Jf-0DovDM7NdRpyzsWbXDMwkp73dHu7etk4XSzE93Gs" />
+  
   {% if canonical_url contains 'page=' %}
     {%- assign url_parts = canonical_url | split: '?' -%}
     {%- assign root_url = url_parts[0] -%}
     <link rel="canonical" href="{{ root_url }}">
+    <meta name="robots" content="noindex, follow"> 
   {% else %}
     <link rel="canonical" href="{{ canonical_url }}">
   {% endif %}
@@ -28,7 +30,7 @@ This file can be re-written at any time.
   <script src="https://www.google.com/recaptcha/api.js?render=6LfIQlorAAAAAEKuHgPFzXQMJvnwPP2_T0V4Kwdz" async></script>
   <script async type="module" fetchpriority="high" src="https://cdn.shopify.com/s/files/1/0872/6416/files/intelligems.js?v=1749207478"></script>
   <script src="https://cdn.shopify.com/s/files/1/0872/6416/files/widget.js?v=1749207346" data-account="2xDigTdBpS" defer></script>
-  {%- comment -%}
+  
   <script>
       (function() {
           const currentUrl = window.location.href;
@@ -39,9 +41,9 @@ This file can be re-written at any time.
           }
       })();
    </script>
-  {%- endcomment -%}
    {% render 'dynamic-redirects' %}
 
+  
   {%- if settings.favicon != blank -%}
     <link rel="shortcut icon" href="{{ settings.favicon | image_url: width: 32, height: 32 }}" type="image/png" />
   {%- endif -%}
@@ -111,6 +113,16 @@ This file can be re-written at any time.
     {{ content_for_layout }}
     
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer></script>
+<script>
+    document.addEventListener("DOMContentLoaded", function () {
+    if (window.location.search.includes("customer_posted=true")) {
+      if (window.location.hash.includes("newsletter") || window.location.hash === "" ) {
+        fbq('track', 'SubmitApplication');
+        console.log("Meta Pixel: SubmitApplication event fired");
+      }
+    }
+  });
+  </script>
     <style type="text/css">
       body, html {
         width: 100% !important;
