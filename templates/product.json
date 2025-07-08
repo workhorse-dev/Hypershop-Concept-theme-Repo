@@ -27,13 +27,15 @@
           "settings": {
             "title_size": "product-title-md",
             "title_size_mobile": "product-title-md",
-            "show_price": true,
+            "show_price": false,
             "show_rating": true
           }
         },
-        "bazaarvoice_reviews_photos_rating_summary_block_pzWBUa": {
-          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/rating-summary-block/766ed9d3-b120-48f3-8444-448f45152f47",
-          "settings": {}
+        "price_QJPxND": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": true
+          }
         },
         "description": {
           "type": "description",
@@ -168,7 +170,7 @@
       "block_order": [
         "vendor",
         "title",
-        "bazaarvoice_reviews_photos_rating_summary_block_pzWBUa",
+        "price_QJPxND",
         "description",
         "countdown",
         "variant_picker",
@@ -1073,33 +1075,6 @@
     "shogun-optimizer": {
       "type": "shogun-optimizer",
       "settings": {}
-    },
-    "175134969747097d10": {
-      "type": "apps",
-      "blocks": {
-        "bazaarvoice_reviews_photos_reviews_block_VHLDJU": {
-          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/reviews-block/766ed9d3-b120-48f3-8444-448f45152f47",
-          "settings": {}
-        }
-      },
-      "block_order": [
-        "bazaarvoice_reviews_photos_reviews_block_VHLDJU"
-      ],
-      "settings": {
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
     }
   },
   "order": [
@@ -1119,7 +1094,6 @@
     "product-recommendations",
     "recently-viewed",
     "shogun-below",
-    "shogun-optimizer",
-    "175134969747097d10"
+    "shogun-optimizer"
   ]
 }
