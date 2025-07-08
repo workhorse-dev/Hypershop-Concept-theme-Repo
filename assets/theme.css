@@ -7821,7 +7821,7 @@ details.active .drawer__promotions .mega-menu__item,
   position: absolute;
   height: 1px;
   inset-inline: 0;
-  inset-block-start: 0;
+  inset-block-end: 0;
   transform: scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
   transform-origin: center var(--transform-origin-start);
   transition: transform 1s cubic-bezier(.215, .61, .355, 1);
@@ -7834,7 +7834,7 @@ details.active .drawer__promotions .mega-menu__item,
 }
 
 .mega-menu__footer .mega-menu__link {
-  padding-block-start: var(--sp-3);
+  padding-block-end: var(--sp-3);
 }
 
 @media screen and (min-width: 1280px) {
