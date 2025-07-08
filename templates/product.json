@@ -27,8 +27,14 @@
           "settings": {
             "title_size": "product-title-md",
             "title_size_mobile": "product-title-md",
-            "show_price": true,
+            "show_price": false,
             "show_rating": true
+          }
+        },
+        "price_QJPxND": {
+          "type": "price",
+          "settings": {
+            "show_taxes_notice": true
           }
         },
         "description": {
@@ -164,6 +170,7 @@
       "block_order": [
         "vendor",
         "title",
+        "price_QJPxND",
         "description",
         "countdown",
         "variant_picker",
