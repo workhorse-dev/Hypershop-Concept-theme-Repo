@@ -212,7 +212,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question1.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer1 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_1 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -221,7 +221,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question2.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer2 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_2 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -230,7 +230,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question3.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer3 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_3 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -239,7 +239,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question4.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer4 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_4 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -248,7 +248,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question5.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer5 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_5 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -257,7 +257,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question6.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer6 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_6 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -266,7 +266,7 @@
           "type": "question",
           "settings": {
             "title": "{{ collection.metafields.custom.faq_question7.value }}",
-            "text": "<p>{{ collection.metafields.custom.faq_answer7 | metafield_tag }}</p>",
+            "text": "{{ collection.metafields.custom.faq_answer_7 | metafield_tag }}",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
