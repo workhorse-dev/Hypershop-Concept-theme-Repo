@@ -12,13 +12,6 @@
     "main-collection-banner": {
       "type": "main-collection-banner",
       "blocks": {
-        "spacing": {
-          "type": "spacing",
-          "settings": {
-            "height": 48,
-            "height_mobile": 0
-          }
-        },
         "title": {
           "type": "title",
           "settings": {
@@ -42,7 +35,6 @@
         }
       },
       "block_order": [
-        "spacing",
         "title",
         "description_FG7iHi",
         "breadcrumb"
@@ -54,7 +46,7 @@
         "content_position": "md:items-end md:justify-start",
         "text_alignment": "left",
         "image_mobile": "{{ collection.metafields.custom.mobile_collection_image.value }}",
-        "image_height_mobile": "500px",
+        "image_height_mobile": "auto",
         "content_position_mobile": "items-end justify-start",
         "text_alignment_mobile": "left",
         "color_text": "#ffffff",
