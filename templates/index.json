@@ -19,6 +19,7 @@
             "image_mobile": "shopify://shop_images/email-2-summer-setup-sale-2025-mobile-banner-v01-r02-500x600.webp",
             "heading": "Summer Setup Upgrade Sale ",
             "subheading": "Upgrade your setup with 25% off chargers, hubs, docks, and accessories. Transform your workspace and stay productive all summer long.",
+
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
@@ -33,7 +34,6 @@
           "settings": {
             "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
             "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "cover_image": "shopify://shop_images/8dfb0b4f7f7f4b9b80d607b400aecc91.thumbnail.0000000000.webp",
             "description": "",
             "video_url_mobile": "",
             "heading": "Lightning Fast USB4 Speeds",
@@ -42,22 +42,6 @@
             "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "image_eMMdBB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Charge 2X Faster with Qi2",
-            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -79,20 +63,35 @@
             "button_icon": false
           }
         },
+        "image_eMMdBB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
+            "heading": "Charge 2X Faster with Qi2",
+            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/hyper-email-5-bby-flex-launch-web-banner-v01-r03-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-5-bby-flex-launch-mobile-banner-v01-r02-500x600.webp",
-            "heading": "Plug In & Stand Out",
-            "subheading": "The HyperDrive Flex USB-C Hubs combine bold style and powerful features to keep your creative flow going. Available now at Best Buy®.",
+            "image": "shopify://shop_images/HS2100-HS2310-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/HS2100-HS2310-hp-mobile-v01-r01-500x600.webp",
+            "heading": "Ergonomic Comfort, Seamless Switching",
+            "subheading": "The HyperSpace Mouse and Keyboard combine ergonomic design with seamless multi-device connectivity for precision and comfort.",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "https://www.bestbuy.com/site/searchpage.jsp?id=pcat17071&qp=brand_facet%3DBrand%7EHyper%5Ecurrentprice_facet%3DPrice%7E%2425+-+%2449.99%5Ecurrentprice_facet%3DPrice%7E%2450+-+%2474.99%5Econdition_facet%3DCondition%7ENew&sp=New-Arrivals&st=hyperdrive+flex",
+            "button_link": "shopify://collections/mouse-and-keyboard",
             "button_style": "primary",
-            "button_external": true,
+            "button_external": false,
             "button_icon": false
           }
         }
@@ -100,8 +99,8 @@
       "block_order": [
         "image_PGrzFE",
         "slide-3",
-        "image_eMMdBB",
         "slide-1",
+        "image_eMMdBB",
         "slide-2"
       ],
       "settings": {
@@ -242,7 +241,6 @@
       "blocks": {
         "collection-1": {
           "type": "collection",
-          "disabled": true,
           "settings": {
             "collection": "all",
             "image": "shopify://shop_images/Hyper-all-products-category-2_1a3b0dc8-c0cd-4820-beb3-bf2f5d0d9fd9.webp",
@@ -337,7 +335,7 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "heading": "Shop by Category",
+        "heading": "Shop Hyper Products",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -486,7 +484,6 @@
         "image_c6kVTY",
         "image_9HtaaX"
       ],
-      "disabled": true,
       "settings": {
         "row_height": 300,
         "row_height_mobile": 150,
@@ -670,6 +667,7 @@
         "product_ggcRtY",
         "product_FXka3V"
       ],
+      "name": "t:sections.shop-the-look.name",
       "settings": {
         "image": "shopify://shop_images/Shop_The_Look.webp",
         "image_mobile": "shopify://shop_images/Shop_The_Look-v01-r01-1176x662.webp",
@@ -1603,7 +1601,7 @@
         "logo_jgpBex": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/The_Verge_Logo_79f5091c-9c5e-4888-b6f2-844f84971b09.webp",
+            "image": "shopify://shop_images/The_Verge_Logo_79f5091c-9c5e-4888-b6f2-844f84971b09.png",
             "height": 148,
             "link": ""
           }
@@ -1619,7 +1617,7 @@
         "logo_6hCM9G": {
           "type": "logo",
           "settings": {
-            "image": "shopify://shop_images/MacRumors_1.webp",
+            "image": "shopify://shop_images/MacRumors.png",
             "height": 152,
             "link": ""
           }
@@ -1723,7 +1721,6 @@
         "collection-3",
         "collection_nQFGtp"
       ],
-      "disabled": true,
       "settings": {
         "product_limit": 6,
         "columns": 4,
