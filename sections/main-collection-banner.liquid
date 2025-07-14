@@ -28,7 +28,7 @@
   {% endif -%}
 </style>
 
-<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header and desktop_image != blank %} allow-transparent-header{% endif %}>
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %} collection__banner"{% if section.settings.transparent_header and desktop_image != blank %} allow-transparent-header{% endif %} >
   <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
     <div class="banner relative{% if desktop_image != blank %} media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }}{% endif %}">
       {%- if desktop_image != blank -%}
@@ -124,6 +124,17 @@
     </div>
   </div>
 </div>
+
+{% if  section.settings.image_height_mobile == "auto" %}
+<script>
+  const collection = document.querySelector(".collection__banner");
+  const content = collection.querySelector(".banner__box");
+  const image = collection.querySelector(".banner");
+
+  const contentHeight = content.offsetHeight;
+  image.style.height = contentHeight + "px";
+</script>
+{% endif %}
 
 {% schema %}
 {
@@ -302,6 +313,15 @@
           "label": "t:sections.global.settings.image_height_mobile.options__7.label",
           "value": "600px"
         },
+         {
+          "label": "700px",
+          "value": "700px"
+        },
+        {
+          "label": "900px",
+          "value": "900px"
+        },
+        
         {
           "label": "t:sections.global.settings.image_height_mobile.options__8.label",
           "value": "100vh"
