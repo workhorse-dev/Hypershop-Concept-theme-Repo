@@ -5,17 +5,21 @@ body {
 blockquote,
 .heading,
 h1,
-h2,
 h3,
 h4,
 h5 .h0,
 .h1,
-.h2,
 .h3,
 .h4,
 .h5 {
   font-family: myFontBold, sans-serif;
 }
+h2,
+.h2 {
+  font-family: myFontLight, sans-serif !important;
+  font-weight: 500;
+}
+
 h6,
 .h6 {
   font-family: myFontMedium, sans-serif;
@@ -65,6 +69,9 @@ button.shopify-payment-button__button--unbranded,
 /* Shop the feed */
 .shop-the-feed .media img.loaded {
   width: 100%;
+}
+.grid-template-auto {
+  grid-template-columns: auto auto;
 }
 
 /* Header CSS */
@@ -216,4 +223,39 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 /* Mega Menu CSS */
 .mega-menu__item--tabs .mega-menu__footer {
     margin-block-start: 0;
+}
+
+/* Product genius */
+.pg-card-product-cart button, .pg-card-product-options button{
+  padding: 16px 29px !important;
+  border-radius: var(--buttons-radius) !important;
+}
+.pg-card-section .pg-card-product-title {
+    font-family: inherit !important;
+}
+.pg-card-product .pg-card-product-highlights .pg-card-product-highlight{
+    background-color: #E11D48 !important;
+    color: white !important;
+    padding: 0.5rem 1rem !important;
+    border-radius: 3.75rem !important;
+    font-size: 1rem !important;
+}
+
+
+
+.pg-card-product-price{
+  padding: 2px 0;
+}
+@media screen and (min-width: 769px) {
+  .pg-card-product-details .pg-card-section:first-of-type{
+    grid-template-columns: 75% 25% !important;
+  }
+  .pg-card-product-price .pg-card-price-attr{
+    display: block;
+    width: 100%;
+  }
+  .pg-card-section .pg-card-product-title {
+    font-family: inherit !important;
+    min-height: 65px !important;
+  }
 }

@@ -19,7 +19,6 @@
             "image_mobile": "shopify://shop_images/email-2-summer-setup-sale-2025-mobile-banner-v01-r02-500x600.webp",
             "heading": "Summer Setup Upgrade Sale ",
             "subheading": "Upgrade your setup with 25% off chargers, hubs, docks, and accessories. Transform your workspace and stay productive all summer long.",
-
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
@@ -167,6 +166,7 @@
         "text_hkwmXd",
         "text_6myjAH"
       ],
+      "disabled": true,
       "settings": {
         "direction": "left",
         "speed": 20,
@@ -1785,10 +1785,85 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "multicolumn_with_icons_bwTyDq": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "column_JiQAKM": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "",
+            "heading": "Customer service",
+            "text": "<p>Have questions? Reach out to our Customer Service team!</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_kYMbwp": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "",
+            "heading": "Fast Free Shipping",
+            "text": "<p>Get free shipping on orders of $40 or more</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_pf47qf": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "",
+            "heading": "Secure payment",
+            "text": "<p>Your payment information is processed securely</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_JiQAKM",
+        "column_kYMbwp",
+        "column_pf47qf"
+      ],
+      "name": "t:sections.multicolumn-with-icons.presets.name",
+      "settings": {
+        "style": "with-border",
+        "columns": 3,
+        "text_alignment": "left",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
     "slideshow",
+    "multicolumn_with_icons_bwTyDq",
     "scrolling-text-1",
     "rich-text-1",
     "collection-list",
