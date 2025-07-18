@@ -20,7 +20,7 @@
             "heading": "Summer Setup Upgrade Sale ",
             "subheading": "Upgrade your setup with 25% off chargers, hubs, docks, and accessories. Transform your workspace and stay productive all summer long.",
             "heading_size": "title-md",
-            "heading_tag": "h2",
+            "heading_tag": "div",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/summer-setup-upgrade-sale",
             "button_style": "primary",
@@ -38,7 +38,7 @@
             "heading": "Lightning Fast USB4 Speeds",
             "subheading": "The world's fastest 40Gbps  USB4 SSD Enclosure is back. Be productive and creative anywhere you work, with ultra-fast USB4 speeds.",
             "heading_size": "title-md",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
             "button_style": "primary",
@@ -54,7 +54,7 @@
             "heading": "New! Tool-less Cable Lock for MacBook Pro",
             "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
             "heading_size": "title-sm",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
             "button_style": "primary",
@@ -70,7 +70,7 @@
             "heading": "Charge 2X Faster with Qi2",
             "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
             "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "button_label": "Shop Now",
             "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
@@ -86,7 +86,7 @@
             "heading": "Ergonomic Comfort, Seamless Switching",
             "subheading": "The HyperSpace Mouse and Keyboard combine ergonomic design with seamless multi-device connectivity for precision and comfort.",
             "heading_size": "title-md",
-            "heading_tag": "h2",
+            "heading_tag": "h3",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/mouse-and-keyboard",
             "button_style": "primary",
@@ -125,6 +125,80 @@
         "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "multicolumn_with_icons_bwTyDq": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "column_JiQAKM": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "",
+            "heading": "Customer service",
+            "text": "<p>Have questions? Reach out to our Customer Service team!</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_kYMbwp": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "",
+            "heading": "Fast Free Shipping",
+            "text": "<p>Get free shipping on orders of $40 or more</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_pf47qf": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "",
+            "heading": "Secure payment",
+            "text": "<p>Your payment information is processed securely</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_JiQAKM",
+        "column_kYMbwp",
+        "column_pf47qf"
+      ],
+      "name": "t:sections.multicolumn-with-icons.presets.name",
+      "settings": {
+        "style": "with-border",
+        "columns": 3,
+        "text_alignment": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 40,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
       }
     },
     "scrolling-text-1": {
@@ -335,7 +409,7 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "heading": "Shop Hyper Products",
+        "heading": "Shop by Category",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -421,6 +495,7 @@
         },
         "image_c6kVTY": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -450,6 +525,7 @@
         },
         "image_9HtaaX": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -492,7 +568,7 @@
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "<p>A curated lineup of gear designed to keep you moving—whether you're at home, in the office, or on the go. Power and connectivity that support you from whatever your commute looks like to wherever you make your office.</p>",
+        "description": "<p>A curated lineup of gear designed to keep you moving.</p>",
         "button_label": "",
         "button_link": "",
         "button_external": false,
@@ -582,7 +658,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 36,
+        "padding_top": 24,
         "padding_bottom": 24,
         "divider": false,
         "narrow": false,
@@ -1141,7 +1217,7 @@
         "heading": "Shop the <em>Look</em>",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "p",
+        "heading_tag": "h2",
         "subheading": "",
         "description": "<p>Discover the top products everyone’s talking about.</p>",
         "button_label": "Follow",
@@ -1178,7 +1254,7 @@
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "large",
-        "heading_tag": "p",
+        "heading_tag": "h2",
         "subheading": "",
         "description": "<p>Stay powered on-the-go with our Mobile Power Bundle. Featuring high-capacity portable battery packs, fast USB-C chargers, and multi-port hubs, this bundle is ideal for remote work, travel, and mobile productivity. Keep your devices charged and connected, anytime, anywhere.</p>",
         "button_label": "",
@@ -1654,8 +1730,8 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
+        "padding_top": 40,
+        "padding_bottom": 40,
         "divider": false,
         "full_width": false,
         "rounded": false
@@ -1744,7 +1820,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 100,
+        "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
@@ -1753,11 +1829,12 @@
     },
     "blog-posts-collage": {
       "type": "blog-posts-collage",
+      "disabled": true,
       "settings": {
         "blog": "news",
         "post_limit": 3,
         "show_view_all": true,
-        "image_ratio": "landscape",
+        "image_ratio": "square",
         "show_tags": true,
         "show_date": true,
         "show_comments": false,
@@ -1786,63 +1863,29 @@
         "rounded": false
       }
     },
-    "multicolumn_with_icons_bwTyDq": {
-      "type": "multicolumn-with-icons",
-      "blocks": {
-        "column_JiQAKM": {
-          "type": "column",
-          "settings": {
-            "icon": "support",
-            "custom_icon": "",
-            "heading": "Customer service",
-            "text": "<p>Have questions? Reach out to our Customer Service team!</p>",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "column_kYMbwp": {
-          "type": "column",
-          "settings": {
-            "icon": "box",
-            "custom_icon": "",
-            "heading": "Fast Free Shipping",
-            "text": "<p>Get free shipping on orders of $40 or more</p>",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "column_pf47qf": {
-          "type": "column",
-          "settings": {
-            "icon": "shield",
-            "custom_icon": "",
-            "heading": "Secure payment",
-            "text": "<p>Your payment information is processed securely</p>",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "column_JiQAKM",
-        "column_kYMbwp",
-        "column_pf47qf"
-      ],
-      "name": "t:sections.multicolumn-with-icons.presets.name",
+    "blog_posts_q9F3Kf": {
+      "type": "blog-posts",
+      "name": "t:sections.blog-posts.presets.name",
       "settings": {
-        "style": "with-border",
+        "blog": "news",
+        "post_limit": 7,
         "columns": 3,
-        "text_alignment": "left",
-        "heading": "",
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "image_ratio": "landscape",
+        "show_tags": true,
+        "show_date": true,
+        "show_comments": false,
+        "show_author": false,
+        "show_excerpt": false,
+        "heading": "Latest Tech Blogs",
         "heading_size": "title-md",
-        "heading_alignment": "text-center md:items-center",
+        "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
         "subheading": "",
         "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
         "highlighted_text": "none",
         "highlighted_scribble": "circle",
         "color_text": "",
@@ -1853,8 +1896,8 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
+        "padding_top": 40,
+        "padding_bottom": 0,
         "divider": false,
         "full_width": false,
         "rounded": false
@@ -1882,6 +1925,7 @@
     "scrolling-text-2",
     "logo_list_UxfgMd",
     "featured-collections",
-    "blog-posts-collage"
+    "blog-posts-collage",
+    "blog_posts_q9F3Kf"
   ]
 }
