@@ -1070,6 +1070,24 @@
         "parallax_direction": "vertical"
       }
     },
+    "video_CXnjPC": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "image_height": "adapt",
+        "image_height_mobile": "auto",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
     "featured_collection_VRgmzf": {
       "type": "featured-collection",
       "name": "t:sections.featured-collection.presets.name",
@@ -1122,6 +1140,7 @@
     "logo-list",
     "rich_text_gf9VPy",
     "image_with_text_overlay_YLeTJ9",
+    "video_CXnjPC",
     "featured_collection_VRgmzf"
   ]
 }
