@@ -240,11 +240,12 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     border-radius: 3.75rem !important;
     font-size: 1rem !important;
 }
-
-
-
 .pg-card-product-price{
   padding: 2px 0;
+  padding-bottom: 2rem;
+}
+.pg-card-section .pg-card-product-price [data-attr="discount"] {
+  display: none;
 }
 @media screen and (min-width: 769px) {
   .pg-card-product-details .pg-card-section:first-of-type{
