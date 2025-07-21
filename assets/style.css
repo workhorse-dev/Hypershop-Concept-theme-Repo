@@ -272,13 +272,13 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
   }
   .pg-card-product-price .pg-card-price-attr{
     display: block;
-    width: 100%;
+    /* width: 100%; */
   }
   .pg-card-section .pg-card-product-title {
     font-family: inherit !important;
     min-height: 65px !important;
   }
   .pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
-  width: 60%;
+  /* width: 60%; */
  }
 }
