@@ -1,0 +1,51 @@
+<script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const seenElements = new WeakSet();
+
+  function formatPercentage(saved) {
+    return `Save ${Math.round(saved)}%`;
+  }
+
+  function handleHighlights(context = document) {
+    const highlights = context.querySelectorAll(".pg-card-product-highlight");
+
+    highlights.forEach((highlight) => {
+      if (seenElements.has(highlight)) return;
+
+      const priceWrapper = highlight.closest(".pg-card-product")?.querySelector(".pg-card-product-price");
+      if (!priceWrapper) return;
+
+      const currentPriceText = priceWrapper.childNodes[0]?.nodeValue?.trim().replace(/[^0-9.]/g, "");
+      const comparePriceText = priceWrapper.querySelector('[data-attr="slashed"]')?.textContent?.trim().replace(/[^0-9.]/g, "");
+
+      const currentPrice = parseFloat(currentPriceText);
+      const comparePrice = parseFloat(comparePriceText);
+
+      if (!isNaN(currentPrice) && !isNaN(comparePrice) && comparePrice > currentPrice) {
+        const discount = ((comparePrice - currentPrice) / comparePrice) * 100;
+        highlight.textContent = formatPercentage(discount);
+      }
+
+      seenElements.add(highlight);
+    });
+  }
+
+  // Handle initially present
+  handleHighlights();
+
+  // Handle future dynamically added
+  const observer = new MutationObserver((mutations) => {
+    mutations.forEach((mutation) => {
+      mutation.addedNodes.forEach((node) => {
+        if (node.nodeType !== 1) return;
+        handleHighlights(node);
+      });
+    });
+  });
+
+  observer.observe(document.body, {
+    childList: true,
+    subtree: true,
+  });
+});
+</script>
