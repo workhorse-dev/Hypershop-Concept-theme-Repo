@@ -247,6 +247,25 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 .pg-card-section .pg-card-product-price [data-attr="discount"] {
   display: none;
 }
+.pg-card-product-price .pg-card-price-attr[data-attr="slashed"] {
+  position: relative;
+  text-decoration: unset !important;
+}
+.pg-card-product-highlights {
+    top: 14px;
+    right: unset;
+    left: 14px;
+}
+
+.pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
+  content: '';
+  position: absolute;
+  inset-block-start: 50%;
+  width: 100%;
+  transform: rotate(-15deg);
+  border-block-end: 1px solid red;
+  
+}
 @media screen and (min-width: 769px) {
   .pg-card-product-details .pg-card-section:first-of-type{
     grid-template-columns: 75% 25% !important;
@@ -259,4 +278,7 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     font-family: inherit !important;
     min-height: 65px !important;
   }
+  .pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
+  width: 60%;
+ }
 }
