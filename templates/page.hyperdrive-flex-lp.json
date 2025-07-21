@@ -494,6 +494,55 @@
         "rounded": false
       }
     },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Featured Enterprise <em>Partners</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "squiggle-underline"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "#3c3fbc",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
     "image_with_text_QDgUq8": {
       "type": "image-with-text",
       "blocks": {
@@ -830,6 +879,7 @@
         "testimonial_YUidxb",
         "testimonial_Wcg3h9"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "title-md",
@@ -855,54 +905,6 @@
         "padding_bottom": 120,
         "divider": false,
         "rounded": false
-      }
-    },
-    "rich-text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Featured Enterprise <em>Partners</em>",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "scribble",
-            "highlighted_scribble": "squiggle-underline"
-          }
-        }
-      },
-      "block_order": [
-        "heading"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "#fafafa",
-        "gradient_background": "",
-        "color_highlight": "#3c3fbc",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 120,
-        "padding_bottom": 20,
-        "divider": false,
-        "narrow": true,
-        "rounded": true
       }
     },
     "logo-list": {
@@ -956,6 +958,7 @@
         "logo-4",
         "logo-5"
       ],
+      "disabled": true,
       "settings": {
         "layout": "marquee",
         "grid_horizontal": 120,
@@ -1005,6 +1008,7 @@
       "block_order": [
         "heading_KUWQnP"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
@@ -1038,6 +1042,7 @@
     },
     "image_with_text_overlay_YLeTJ9": {
       "type": "image-with-text-overlay",
+      "disabled": true,
       "settings": {
         "transparent_header": false,
         "image": "shopify://shop_images/hyper-awards-desktop.webp",
@@ -1064,6 +1069,41 @@
         "enable_parallax": false,
         "parallax_direction": "vertical"
       }
+    },
+    "featured_collection_VRgmzf": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "hyperdrive-flex",
+        "products": [],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Shop HyperDrive Next Collection",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
@@ -1074,13 +1114,14 @@
     "scrolling-text",
     "timeline_TwpLjM",
     "rich_text_tXztGp",
+    "rich-text",
     "image_with_text_QDgUq8",
     "image_with_text_bKJdmX",
     "image_with_text_N4nXWD",
     "testimonials",
-    "rich-text",
     "logo-list",
     "rich_text_gf9VPy",
-    "image_with_text_overlay_YLeTJ9"
+    "image_with_text_overlay_YLeTJ9",
+    "featured_collection_VRgmzf"
   ]
 }
