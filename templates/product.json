@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
     "main-product": {
       "type": "main-product",
       "blocks": {
@@ -947,6 +955,15 @@
             "highlighted_scribble": "circle"
           }
         },
+        "question_NGyNxV": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.faq_question_5.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer_5 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
         "contact": {
           "type": "contact",
           "settings": {
@@ -964,6 +981,7 @@
         "question-2",
         "question-3",
         "question-4",
+        "question_NGyNxV",
         "contact"
       ],
       "settings": {
@@ -1060,16 +1078,8 @@
         "rounded": false
       }
     },
-    "shogun-above": {
-      "type": "shogun-above",
-      "settings": {}
-    },
     "shogun-below": {
       "type": "shogun-below",
-      "settings": {}
-    },
-    "shogun-helper": {
-      "type": "shogun-helper",
       "settings": {}
     },
     "shogun-optimizer": {
