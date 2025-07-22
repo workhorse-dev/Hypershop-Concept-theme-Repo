@@ -960,6 +960,24 @@
             "highlighted_scribble": "circle"
           }
         },
+        "question_zMXTUt": {
+          "type": "question",
+          "settings": {
+            "title": "<strong>{{ product.metafields.custom.faq_question_5.value }}</strong>",
+            "text": "<p>{{ product.metafields.custom.faq_answer_5 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_KafDne": {
+          "type": "question",
+          "settings": {
+            "title": "<strong>{{ product.metafields.custom.faq_question_6.value }}</strong>",
+            "text": "<p>{{ product.metafields.custom.faq_answer_6 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
         "contact": {
           "type": "contact",
           "settings": {
@@ -977,6 +995,8 @@
         "question-2",
         "question-3",
         "question-4",
+        "question_zMXTUt",
+        "question_KafDne",
         "contact"
       ],
       "settings": {
