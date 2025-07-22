@@ -958,7 +958,7 @@
         "question_NGyNxV": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question_5.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question_5.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer_5 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -967,7 +967,7 @@
         "question_CeQ7nw": {
           "type": "question",
           "settings": {
-            "title": "{{ product.metafields.custom.faq_question_6.value }}",
+            "title": "<strong>{{ product.metafields.custom.faq_question_6.value }}</strong>",
             "text": "<p>{{ product.metafields.custom.faq_answer_6 | metafield_tag }}</p>",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
