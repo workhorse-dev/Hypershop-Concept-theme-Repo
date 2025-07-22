@@ -1095,6 +1095,19 @@
     "shogun-optimizer": {
       "type": "shogun-optimizer",
       "settings": {}
+    },
+    "product_genius_app_section_79bd9015": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_b24b4220": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_b24b4220"
+      ],
+      "settings": {}
     }
   },
   "order": [
@@ -1111,6 +1124,7 @@
     "product-details",
     "compact_product_bundle_h8tfiJ",
     "faq",
+    "product_genius_app_section_79bd9015",
     "product-recommendations",
     "recently-viewed",
     "shogun-below",
