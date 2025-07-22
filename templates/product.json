@@ -964,6 +964,15 @@
             "highlighted_scribble": "circle"
           }
         },
+        "question_CeQ7nw": {
+          "type": "question",
+          "settings": {
+            "title": "{{ product.metafields.custom.faq_question_6.value }}",
+            "text": "<p>{{ product.metafields.custom.faq_answer_6 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
         "contact": {
           "type": "contact",
           "settings": {
@@ -982,6 +991,7 @@
         "question-3",
         "question-4",
         "question_NGyNxV",
+        "question_CeQ7nw",
         "contact"
       ],
       "settings": {
