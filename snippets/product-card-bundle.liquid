@@ -192,14 +192,14 @@
         </div>
       {%- endif -%}
 
-      <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+      <div class="product-card__details flex flex-col  items-baseline gap-2 w-full">
         <p class="grow">
           <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ product_url }}" data-product-bundle-title>
             {{- product.title | escape -}}
           </a>
         </p>
         <div id="Price-{{ section_id }}-{{ product_id }}">
-          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap  lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
         </div>
       </div>
 
