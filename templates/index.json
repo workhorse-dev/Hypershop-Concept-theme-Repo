@@ -21,7 +21,7 @@
             "heading": "Back to School, Ready for Anything",
             "subheading": "Preparation is key to confidence. With     our back-to-school deals, you’ll be ready for every class, project, and     creative pursuit this year.",
             "heading_size": "title-md",
-            "heading_tag": "div",
+            "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/back-to-school",
             "button_style": "primary",
@@ -39,7 +39,7 @@
             "heading": "Lightning Fast USB4 Speeds",
             "subheading": "The world's fastest 40Gbps  USB4 SSD Enclosure is back. Be productive and creative anywhere you work, with ultra-fast USB4 speeds.",
             "heading_size": "title-md",
-            "heading_tag": "h3",
+            "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
             "button_style": "primary",
@@ -55,7 +55,7 @@
             "heading": "New! Tool-less Cable Lock for MacBook Pro",
             "subheading": "Fast, sleek, and hassle-free security for life on the go. Keep your MacBook Pro safe anywhere.",
             "heading_size": "title-sm",
-            "heading_tag": "h3",
+            "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hypershield-macbook-pro-cable-lock",
             "button_style": "primary",
@@ -71,7 +71,7 @@
             "heading": "Charge 2X Faster with Qi2",
             "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
             "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h3",
+            "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
@@ -87,7 +87,7 @@
             "heading": "Ergonomic Comfort, Seamless Switching",
             "subheading": "The HyperSpace Mouse and Keyboard combine ergonomic design with seamless multi-device connectivity for precision and comfort.",
             "heading_size": "title-md",
-            "heading_tag": "h3",
+            "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/mouse-and-keyboard",
             "button_style": "primary",
@@ -1821,7 +1821,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 0,
+        "padding_top":100,
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
@@ -1903,8 +1903,35 @@
         "full_width": false,
         "rounded": false
       }
-    }
-  },
+    },
+    "1753091884a817fc18": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_YgjrLY": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_YgjrLY"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      },
+  }
+},
   "order": [
     "slideshow",
     "multicolumn_with_icons_bwTyDq",
@@ -1927,6 +1954,7 @@
     "logo_list_UxfgMd",
     "featured-collections",
     "blog-posts-collage",
-    "blog_posts_q9F3Kf"
+    "blog_posts_q9F3Kf",
+    "1753091884a817fc18"
   ]
 }
