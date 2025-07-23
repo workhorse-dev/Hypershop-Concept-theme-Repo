@@ -282,6 +282,9 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     font-family: inherit !important;
     /* min-height: 65px !important; */
   }
+  .pg-card-section.pg-spacing {
+      max-height: 80px;
+  }
   .pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
   /* width: 60%; */
  }
