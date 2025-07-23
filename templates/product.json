@@ -9,6 +9,14 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
+    "shogun-above": {
+      "type": "shogun-above",
+      "settings": {}
+    },
     "main-product": {
       "type": "main-product",
       "blocks": {
@@ -947,6 +955,24 @@
             "highlighted_scribble": "circle"
           }
         },
+        "question_NGyNxV": {
+          "type": "question",
+          "settings": {
+            "title": "<strong>{{ product.metafields.custom.faq_question_5.value }}</strong>",
+            "text": "<p>{{ product.metafields.custom.faq_answer_5 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "question_CeQ7nw": {
+          "type": "question",
+          "settings": {
+            "title": "<strong>{{ product.metafields.custom.faq_question_6.value }}</strong>",
+            "text": "<p>{{ product.metafields.custom.faq_answer_6 | metafield_tag }}</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
         "contact": {
           "type": "contact",
           "settings": {
@@ -964,6 +990,8 @@
         "question-2",
         "question-3",
         "question-4",
+        "question_NGyNxV",
+        "question_CeQ7nw",
         "contact"
       ],
       "settings": {
@@ -1060,20 +1088,25 @@
         "rounded": false
       }
     },
-    "shogun-above": {
-      "type": "shogun-above",
-      "settings": {}
-    },
     "shogun-below": {
       "type": "shogun-below",
       "settings": {}
     },
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "settings": {}
-    },
     "shogun-optimizer": {
       "type": "shogun-optimizer",
+      "settings": {}
+    },
+    "product_genius_app_section_79bd9015": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_b24b4220": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_b24b4220"
+      ],
       "settings": {}
     }
   },
@@ -1091,6 +1124,7 @@
     "product-details",
     "compact_product_bundle_h8tfiJ",
     "faq",
+    "product_genius_app_section_79bd9015",
     "product-recommendations",
     "recently-viewed",
     "shogun-below",
