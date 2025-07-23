@@ -115,6 +115,9 @@ button.shopify-payment-button__button--unbranded,
 .slideshow-dots {
   border-block-start: none;
 }
+.slideshow-words .slideshow-word{
+  max-width: 40rem;
+}
 
 /* Product image thumbnails  CSS*/
 @media screen and (min-width: 1700px) {
