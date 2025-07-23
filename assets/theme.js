@@ -7026,7 +7026,7 @@ class ProductBundle extends HTMLElement {
       content.innerHTML = `
         <div class="flex flex-col gap-1">
           <p class="horizontal-product__title font-medium text-base leading-tight">${product.querySelector('[data-product-bundle-title]').textContent}</p>
-          ${variant.options.length > 1 ? `
+          ${variant.options.length > 0 ? `
             <ul class="grid gap-1d5">
               ${variant.options.map(option => {
                 if (option === "Default Title") return '';
