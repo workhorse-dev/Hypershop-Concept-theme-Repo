@@ -272,7 +272,7 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 }
 @media screen and (min-width: 769px) {
   .pg-card-product-details .pg-card-section:first-of-type{
-    grid-template-columns: 75% 25% !important;
+    /* grid-template-columns: 75% 25% !important; */
   }
   .pg-card-product-price .pg-card-price-attr{
     display: block;
@@ -280,7 +280,7 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
   }
   .pg-card-section .pg-card-product-title {
     font-family: inherit !important;
-    min-height: 65px !important;
+    /* min-height: 65px !important; */
   }
   .pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
   /* width: 60%; */
