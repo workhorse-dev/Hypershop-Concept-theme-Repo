@@ -7026,10 +7026,10 @@ class ProductBundle extends HTMLElement {
       content.innerHTML = `
         <div class="flex flex-col gap-1">
           <p class="horizontal-product__title font-medium text-base leading-tight">${product.querySelector('[data-product-bundle-title]').textContent}</p>
-          ${variant.options.length > 0 ? `
+          ${variant.options.length > 1 ? `
             <ul class="grid gap-1d5">
               ${variant.options.map(option => {
-                return `<li class="text-xs text-opacity leading-tight">${option} ${variant.options} </li>`;
+                return `<li class="text-xs text-opacity leading-tight">${option} </li>`;
               }).join('')}
             </ul>
           ` : ''}
