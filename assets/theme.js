@@ -7029,7 +7029,7 @@ class ProductBundle extends HTMLElement {
           ${variant.options.length > 0 ? `
             <ul class="grid gap-1d5">
               ${variant.options.map(option => {
-                return `<li class="text-xs text-opacity leading-tight">${option}</li>`;
+                return `<li class="text-xs text-opacity leading-tight">${option} 11 </li>`;
               }).join('')}
             </ul>
           ` : ''}
