@@ -283,3 +283,8 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
   /* width: 60%; */
  }
 }
+
+/* Richtext Css */
+.rich-text>*+*:not(.spacing-section) {
+    margin-block-start: var(--sp-2);
+}
