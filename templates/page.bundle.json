@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main-page": {
@@ -20,7 +29,20 @@
       "blocks": {
         "breadcrumb": {
           "type": "breadcrumb",
+          "disabled": true,
           "settings": {}
+        },
+        "text_qVrmMN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Buy any 3 items for your setup and save 15%</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
         },
         "heading": {
           "type": "heading",
@@ -35,11 +57,12 @@
       },
       "block_order": [
         "breadcrumb",
+        "text_qVrmMN",
         "heading"
       ],
       "settings": {
         "transparent_header": true,
-        "image": "",
+        "image": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-web-banner-v01-r02-2000x2000.webp",
         "image_height": "750px",
         "content_width": "large",
         "content_position": "md:items-end md:justify-start",
@@ -72,7 +95,7 @@
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
-        "heading": "Buy 3 and <em>save 30%</em>",
+        "heading": "Buy 3 and <em>save 15%</em>",
         "heading_size": "title-sm",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "large",
@@ -106,7 +129,7 @@
         "@media screen and (min-width: 1536px) {.product-bundle {flex: 0 0 25%; } .product-bundle__sidebar {width: 100%; }}"
       ],
       "settings": {
-        "collection": "",
+        "collection": "the-creative-pro-bundle",
         "products": [],
         "product_limit": 6,
         "columns": 3,
@@ -145,79 +168,6 @@
         "rounded": false
       }
     },
-    "floating-product-bundle": {
-      "type": "floating-product-bundle",
-      "blocks": {
-        "icon": {
-          "type": "icon",
-          "settings": {
-            "icon": "none",
-            "icon_image": "",
-            "icon_width": 48
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Create Your Bundle",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Save $30 when buying all 3 items</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "icon",
-        "heading",
-        "text"
-      ],
-      "settings": {
-        "collection": "",
-        "products": [],
-        "product_limit": 3,
-        "image": "",
-        "image_height": "900px",
-        "layout": "image_first",
-        "content_position": "md:items-end",
-        "text_alignment": "left",
-        "image_height_mobile": "400px",
-        "content_position_mobile": "items-center",
-        "text_alignment_mobile": "center",
-        "swipe_on_mobile": true,
-        "show_variant_labels": true,
-        "picker_type": "button",
-        "enable_color_swatches": true,
-        "color_swatch_type": "color",
-        "color_text": "#ffffff",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
-        "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
-        "padding_top": 0,
-        "padding_bottom": 0,
-        "divider": false,
-        "full_width": true,
-        "rounded": true,
-        "enable_parallax": false,
-        "parallax_direction": "vertical"
-      }
-    },
     "compact-product-bundle": {
       "type": "compact-product-bundle",
       "blocks": {
@@ -225,7 +175,6 @@
           "type": "icon",
           "settings": {
             "icon": "none",
-            "icon_image": "",
             "icon_width": 48
           }
         },
@@ -261,7 +210,6 @@
         "collection": "",
         "products": [],
         "product_limit": 3,
-        "image": "",
         "layout": "text_first",
         "content_position": "md:items-end",
         "text_alignment": "right",
@@ -291,6 +239,70 @@
         "enable_parallax": false,
         "parallax_direction": "vertical"
       }
+    },
+    "image_with_text_overlay_RgHpY9": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "breadcrumb_bmHYK8": {
+          "type": "breadcrumb",
+          "disabled": true,
+          "settings": {}
+        },
+        "text_zzPpHj": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Buy any 3 items for your setup and save 15%</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "heading_ttbYFf": {
+          "type": "heading",
+          "settings": {
+            "heading": "Build Your Bundle",
+            "heading_size": "title-xl tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "breadcrumb_bmHYK8",
+        "text_zzPpHj",
+        "heading_ttbYFf"
+      ],
+      "settings": {
+        "transparent_header": true,
+        "image": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-web-banner-v01-r02-2000x2000.webp",
+        "image_height": "750px",
+        "content_width": "large",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-banner-v01-r02-500x600.webp",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#000000",
+        "overlay_opacity": 40,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
     }
   },
   "order": [
@@ -298,7 +310,7 @@
     "image-with-text-overlay",
     "rich-text",
     "product-bundle",
-    "floating-product-bundle",
-    "compact-product-bundle"
+    "compact-product-bundle",
+    "image_with_text_overlay_RgHpY9"
   ]
 }
