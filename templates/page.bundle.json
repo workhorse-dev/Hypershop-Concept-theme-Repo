@@ -60,6 +60,7 @@
         "text_qVrmMN",
         "heading"
       ],
+      "disabled": true,
       "settings": {
         "transparent_header": true,
         "image": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-web-banner-v01-r02-2000x2000.webp",
@@ -84,6 +85,55 @@
         "full_width": true,
         "rounded": false,
         "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
+    "slideshow_Unid4Y": {
+      "type": "slideshow",
+      "blocks": {
+        "image_ymBLWg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-web-banner-v01-r02-2000x2000_21904a7f-e87f-4991-be2d-3cda4a649183.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-banner-v01-r02-500x600_0db59690-6b9f-4c75-b0e3-487adca6c5b5.webp",
+            "heading": "Next Level Desktop",
+            "subheading": "Save 15% when you bundle 3 items",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_ymBLWg"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "mobile_content_outside": false,
+        "color_text": "#ffffff",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
         "parallax_direction": "vertical"
       }
     },
@@ -116,7 +166,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 100,
+        "padding_top": 28,
         "padding_bottom": 28,
         "divider": false,
         "narrow": false,
@@ -168,67 +218,52 @@
         "rounded": false
       }
     },
-    "image_with_text_overlay_RgHpY9": {
-      "type": "image-with-text-overlay",
+    "slideshow_6HjkLU": {
+      "type": "slideshow",
       "blocks": {
-        "breadcrumb_bmHYK8": {
-          "type": "breadcrumb",
-          "disabled": true,
-          "settings": {}
-        },
-        "text_zzPpHj": {
-          "type": "text",
+        "image_zkHBtY": {
+          "type": "image",
           "settings": {
-            "text": "<p>Buy any 3 items for your setup and save 15%</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "heading_ttbYFf": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build Your Bundle",
-            "heading_size": "title-xl tracking-heading",
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-web-banner-v01-r02-2000x2000_21904a7f-e87f-4991-be2d-3cda4a649183.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-banner-v01-r02-500x600_0db59690-6b9f-4c75-b0e3-487adca6c5b5.webp",
+            "heading": "Next Level Desktop",
+            "subheading": "Save 15% when you bundle 3 items",
+            "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
           }
         }
       },
       "block_order": [
-        "breadcrumb_bmHYK8",
-        "text_zzPpHj",
-        "heading_ttbYFf"
+        "image_zkHBtY"
       ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "transparent_header": true,
-        "image": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-web-banner-v01-r02-2000x2000.webp",
-        "image_height": "750px",
-        "content_width": "large",
-        "content_position": "md:items-end md:justify-start",
-        "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-banner-v01-r02-500x600.webp",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
         "image_height_mobile": "auto",
-        "content_position_mobile": "items-end justify-start",
-        "text_alignment_mobile": "left",
+        "mobile_content_outside": false,
         "color_text": "#ffffff",
-        "color_highlight": "#e0a580",
-        "gradient_highlight": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
         "color_button_text": "#171717",
         "color_button_background": "#ffffff",
         "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
         "full_width": true,
         "rounded": false,
-        "enable_parallax": true,
+        "enable_parallax": false,
         "parallax_direction": "vertical"
       }
     },
@@ -307,67 +342,52 @@
         "rounded": false
       }
     },
-    "image_with_text_overlay_Wfkpbw": {
-      "type": "image-with-text-overlay",
+    "slideshow_cdidQX": {
+      "type": "slideshow",
       "blocks": {
-        "breadcrumb_pcwJBQ": {
-          "type": "breadcrumb",
-          "disabled": true,
-          "settings": {}
-        },
-        "text_Hy9RmF": {
-          "type": "text",
+        "image_ehcFXh": {
+          "type": "image",
           "settings": {
-            "text": "<p>Buy any 3 items for your setup and save 15%</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "heading_zG9BLc": {
-          "type": "heading",
-          "settings": {
-            "heading": "Build Your Bundle",
-            "heading_size": "title-xl tracking-heading",
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-web-banner-v01-r02-2000x2000_0c699df6-b5b8-499e-8b46-1cd7477a20d2.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-banner-v01-r02-500x600_dbb4e6c2-9b46-4835-9187-5bbbe68163e7.webp",
+            "heading": "For The Digital Nomad",
+            "subheading": "",
+            "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
           }
         }
       },
       "block_order": [
-        "breadcrumb_pcwJBQ",
-        "text_Hy9RmF",
-        "heading_zG9BLc"
+        "image_ehcFXh"
       ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "transparent_header": true,
-        "image": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-web-banner-v01-r02-2000x2000.webp",
-        "image_height": "750px",
-        "content_width": "large",
-        "content_position": "md:items-end md:justify-start",
-        "text_alignment": "left",
-        "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-banner-v01-r02-500x600.webp",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
         "image_height_mobile": "auto",
-        "content_position_mobile": "items-end justify-start",
-        "text_alignment_mobile": "left",
+        "mobile_content_outside": false,
         "color_text": "#ffffff",
-        "color_highlight": "#e0a580",
-        "gradient_highlight": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
         "color_button_text": "#171717",
         "color_button_background": "#ffffff",
         "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
         "full_width": true,
         "rounded": false,
-        "enable_parallax": true,
+        "enable_parallax": false,
         "parallax_direction": "vertical"
       }
     },
@@ -450,12 +470,13 @@
   "order": [
     "main-page",
     "image-with-text-overlay",
+    "slideshow_Unid4Y",
     "rich-text",
     "product-bundle",
-    "image_with_text_overlay_RgHpY9",
+    "slideshow_6HjkLU",
     "rich_text_QNrh6W",
     "product_bundle_dXjzpK",
-    "image_with_text_overlay_Wfkpbw",
+    "slideshow_cdidQX",
     "rich_text_4yYKfd",
     "product_bundle_WmnJqj"
   ]
