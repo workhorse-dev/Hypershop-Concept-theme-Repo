@@ -15,9 +15,10 @@ h5 .h0,
   font-family: myFontBold, sans-serif;
 }
 h2,
-.h2 {
-  font-family: myFontLight, sans-serif !important;
-  font-weight: 500;
+.h2,
+.heading{
+  font-family: myFontMedium, sans-serif !important;
+  font-weight: 500 !important;
 }
 
 h6,
@@ -113,6 +114,9 @@ button.shopify-payment-button__button--unbranded,
 /* Image banner CSS*/
 .slideshow-dots {
   border-block-start: none;
+}
+.slideshow-words .slideshow-word{
+  max-width: 40rem;
 }
 
 /* Product image thumbnails  CSS*/
@@ -268,17 +272,25 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 }
 @media screen and (min-width: 769px) {
   .pg-card-product-details .pg-card-section:first-of-type{
-    grid-template-columns: 75% 25% !important;
+    /* grid-template-columns: 75% 25% !important; */
   }
   .pg-card-product-price .pg-card-price-attr{
     display: block;
-    width: 100%;
+    /* width: 100%; */
   }
   .pg-card-section .pg-card-product-title {
     font-family: inherit !important;
-    min-height: 65px !important;
+    /* min-height: 65px !important; */
+  }
+  .pg-card-section.pg-spacing {
+      max-height: 80px;
   }
   .pg-card-product-price .pg-card-price-attr[data-attr="slashed"]::before {
-  width: 60%;
+  /* width: 60%; */
  }
+}
+
+/* Richtext Css */
+.rich-text>*+*:not(.spacing-section) {
+    margin-block-start: var(--sp-2);
 }

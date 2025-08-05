@@ -7029,6 +7029,7 @@ class ProductBundle extends HTMLElement {
           ${variant.options.length > 0 ? `
             <ul class="grid gap-1d5">
               ${variant.options.map(option => {
+                if (option === "Default Title") return '';
                 return `<li class="text-xs text-opacity leading-tight">${option}</li>`;
               }).join('')}
             </ul>
