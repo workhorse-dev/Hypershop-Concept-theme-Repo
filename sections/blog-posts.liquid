@@ -31,7 +31,7 @@
     {%- endcapture -%}
     {%- capture indicators -%}
       {%- if blog != blank and section.settings.carousel_on_desktop -%}
-        <div class="flex gap-5">
+        <div class="flex gap-5 md\:hidden">
          <p class="">
           <a class="button button--secondary icon-with-text" href="{{ blog.url }}" is="hover-link">
             <span class="btn-fill" data-fill></span>
