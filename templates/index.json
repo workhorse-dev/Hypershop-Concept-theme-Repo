@@ -15,7 +15,6 @@
         "image_PGrzFE": {
           "type": "image",
           "settings": {
-
             "image": "shopify://shop_images/hyper-email-6-back-to-school-sale-web-banner-v01-r02-2000x2000.webp",
             "image_mobile": "shopify://shop_images/hyper-email-back-to-school-sale-2025-mobile-banner-v01-r02-500x600.webp",
             "heading": "Back to School, Ready for Anything",
@@ -589,7 +588,8 @@
         "divider": false,
         "full_width": false,
         "rounded": false,
-        "enable_parallax": true
+        "enable_parallax": true,
+        "enable_gap": false
       }
     },
     "rich_text_mbyy46": {
@@ -1821,7 +1821,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top":100,
+        "padding_top": 100,
         "padding_bottom": 0,
         "divider": false,
         "full_width": false,
@@ -1872,7 +1872,7 @@
         "post_limit": 7,
         "columns": 3,
         "carousel_on_desktop": true,
-        "show_view_all": false,
+        "show_view_all": true,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
         "image_ratio": "landscape",
@@ -1929,9 +1929,9 @@
         "divider": false,
         "full_width": false,
         "rounded": false
-      },
-  }
-},
+      }
+    }
+  },
   "order": [
     "slideshow",
     "multicolumn_with_icons_bwTyDq",
