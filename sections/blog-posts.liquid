@@ -32,17 +32,7 @@
     {%- capture indicators -%}
       {%- if blog != blank and section.settings.carousel_on_desktop -%}
         <div class="indicators hidden lg:flex gap-2d5">
-          {%- if section.settings.show_view_all and blog != blank and section.settings.post_limit < blog.articles_count -%}
-            <a class="button button--secondary icon-with-text" href="{{ blog.url }}" is="hover-link">
-              <span class="btn-fill" data-fill></span>
-              <span class="btn-text">
-                {%- liquid
-                  render 'icon', icon: 'newspaper'
-                  echo 'sections.blog_posts.view_all' | t
-                -%}
-              </span>
-            </a>
-          {%- endif -%}
+          
           <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
