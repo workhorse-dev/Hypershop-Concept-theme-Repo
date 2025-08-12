@@ -216,14 +216,9 @@
 
       <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
     </variant-selects>
-     <div id="Price-{{ section_id }}-{{ product_id }}">
-      {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
-    </div>
   {%- else -%}
     <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
-     <div id="Price-{{ section_id }}-{{ product_id }}">
-        {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
-      </div>
+     
   {%- endunless -%}
 
   <noscript>
@@ -247,6 +242,10 @@
       </div>
     </div>
   </noscript>
+
+   <div id="Price-{{ section_id }}-{{ product_id }}">
+      {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+   </div>
 
   <button
     type="submit"
