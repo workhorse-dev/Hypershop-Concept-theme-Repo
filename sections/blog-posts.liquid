@@ -32,7 +32,7 @@
     {%- capture indicators -%}
       {%- if blog != blank and section.settings.carousel_on_desktop -%}
         <div class="indicators hidden lg:flex gap-2d5">
-          
+           <p class="">{{ view_all }}</p>
           <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
@@ -46,7 +46,7 @@
             </span>
           </button>
         </div>
-        <p class="">{{ view_all }}</p>
+       
       {%- else -%}
         <p>{{ view_all }}</p>
       {%- endif -%}
