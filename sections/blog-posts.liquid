@@ -31,7 +31,20 @@
     {%- endcapture -%}
     {%- capture indicators -%}
       {%- if blog != blank and section.settings.carousel_on_desktop -%}
+        <div class="flex gap-5 hidden">
+         <p class="">
+          <a class="button button--secondary icon-with-text" href="{{ blog.url }}" is="hover-link">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">
+              {%- liquid
+                render 'icon', icon: 'newspaper'
+                echo 'sections.blog_posts.view_all' | t
+              -%}
+            </span>
+          </a>
+         </p>
         <div class="indicators hidden lg:flex gap-2d5">
+          
           <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
@@ -45,7 +58,7 @@
             </span>
           </button>
         </div>
-        <p class="lg:hidden">{{ view_all }}</p>
+       </div>
       {%- else -%}
         <p>{{ view_all }}</p>
       {%- endif -%}
