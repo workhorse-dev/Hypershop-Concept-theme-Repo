@@ -31,6 +31,7 @@
     {%- endcapture -%}
     {%- capture indicators -%}
       {%- if blog != blank and section.settings.carousel_on_desktop -%}
+        <div>
          <p class="">{{ view_all }}</p>
         <div class="indicators hidden lg:flex gap-2d5">
           
@@ -47,7 +48,7 @@
             </span>
           </button>
         </div>
-       
+       </div>
       {%- else -%}
         <p>{{ view_all }}</p>
       {%- endif -%}
