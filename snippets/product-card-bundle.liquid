@@ -198,9 +198,9 @@
             {{- product.title | escape -}}
           </a>
         </p>
-        <div id="Price-{{ section_id }}-{{ product_id }}">
+        {% comment %} <div id="Price-{{ section_id }}-{{ product_id }}">
           {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
-        </div>
+        </div> {% endcomment %}
       </div>
 
       <div class="product-card__variants grow">
