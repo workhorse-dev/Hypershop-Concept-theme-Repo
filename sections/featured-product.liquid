@@ -238,7 +238,7 @@
   
                   {%- if price_block == blank and block.settings.show_price -%}
                     <div id="Price-{{ section.id }}-{{ product.id }}" class="product__price">
-                      {%- render 'product-price', product: product, placeholder: placeholder, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:flex-col xl:items-end lg:gap-1d5' -%}
+                      {%- render 'product-price', product: product, placeholder: placeholder, use_variant: true, class: 'flex flex-wrap items-baseline gap-2 lg:flex-row xl:items-end lg:gap-1d5' -%}
                       
                       {%- if product.quantity_price_breaks_configured? -%}
                         <div class="text-opacity text-sm font-medium leading-tight" id="VolumeNote-{{ section.id }}-{{ product.id }}">
