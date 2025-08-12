@@ -44,6 +44,12 @@ button.shopify-payment-button__button--unbranded,
 .mt-auto{
   margin-top: auto;
 }
+@media screen and (max-width: 778px) {
+  sm-hidden{
+    display: none;
+  }
+}
+
 @media screen and (min-width: 1280px) {
   .grid-col-span-2 {
     grid-column: span 2;
