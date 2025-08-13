@@ -225,7 +225,6 @@
           assign metafield_key = metafield_parts | last
           assign product_icon_list_metafield = product.metafields[metafield_namespace][metafield_key]
         -%}
-        {%- if product_icon_list_metafield.value != blank and product_icon_list_metafield.list? and  show_product_icon_list -%}
           <scroll-shadow class="product-card__spec block overflow-hidden">
             <div class="product-card__icons{% unless settings.product_icon_list_carousel %} product-card__icons--grid md:grid md:grid-cols-2{% endunless %} flex flex-nowrap"{% if settings.product_icon_list_carousel %} is="icons-carousel"{% endif %}>
               {%- for item in product_icon_list_metafield.value limit: settings.product_icon_list_max -%}
@@ -262,7 +261,6 @@
               </style>
             </template>
           </scroll-shadow>
-        {%- endif -%}
       {%- endif -%}
     <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
      
