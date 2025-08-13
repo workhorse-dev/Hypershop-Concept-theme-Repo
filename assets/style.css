@@ -304,3 +304,23 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 .rich-text>*+*:not(.spacing-section) {
     margin-block-start: var(--sp-2);
 }
+/* Featured Product */
+
+@media screen and (min-width: 1280px) {
+    .product__title.with-price .price__sale, .product__title .product__price {
+        place-self: center;
+    }
+}
+/* Product bundle card CSS */
+.options-scroll{
+    grid-auto-flow: column;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 1rem 2rem;
+}
+.options-scroll-variant-position{
+  position:absolute;
+  top:-33%;
+  border-block-end: unset !important;
+  width: 100%;
+}
