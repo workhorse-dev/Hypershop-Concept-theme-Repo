@@ -318,5 +318,6 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 .options-scroll-variant-position{
   position:absolute;
   top:-33%;
-  left:0;
+  border-block-end: unset !important;
+  width: 100%;
 }
