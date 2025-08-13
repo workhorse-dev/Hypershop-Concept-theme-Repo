@@ -217,6 +217,54 @@
       <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
     </variant-selects>
   {%- else -%}
+    {%- if show_icon_list -%}
+      {%- if settings.product_icon_list_metafield != blank -%}
+        {%- liquid
+          assign metafield_parts = settings.product_icon_list_metafield | split: '.'
+          assign metafield_namespace = metafield_parts | first
+          assign metafield_key = metafield_parts | last
+          assign product_icon_list_metafield = product.metafields[metafield_namespace][metafield_key]
+        -%}
+        {%- if product_icon_list_metafield.value != blank and product_icon_list_metafield.list? and  show_product_icon_list -%}
+          <scroll-shadow class="product-card__spec block overflow-hidden">
+            <div class="product-card__icons{% unless settings.product_icon_list_carousel %} product-card__icons--grid md:grid md:grid-cols-2{% endunless %} flex flex-nowrap"{% if settings.product_icon_list_carousel %} is="icons-carousel"{% endif %}>
+              {%- for item in product_icon_list_metafield.value limit: settings.product_icon_list_max -%}
+                <div class="product-card__icon shrink-0">
+                  <div class="flex flex-col items-center md:flex-row md:items-start gap-2">
+                    {%- if item.icon != blank -%}
+                      <figure class="shrink-0 media media--transparent relative inline-block">
+                        {{- item.icon | image_url: width: item.icon.width | image_tag: loading: 'lazy', sizes: '24px', widths: '80,96,160,192', class: 'w-full h-full', is: 'lazy-image' -}}
+                      </figure>
+                    {%- endif -%}
+                    <div class="flex flex-col items-center md:items-start gap-1 text-center md:text-left text-xs font-medium leading-none">
+                      {{- item.title -}}
+                      {%- if item.description != blank -%}
+                        <p class="text-opacity font-normal text-3xs leading-tight">{{ item.description }}</p>
+                      {%- endif -%}
+                    </div>
+                  </div>
+                </div>
+              {%- endfor -%}
+            </div>
+            <template>
+              <slot></slot>
+              <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+                <span class="l"></span>
+                <span class="r"></span>
+              </s>
+              <style>
+                :host{display:inline-block;position:relative}:host([hidden]){display:none}
+                s{position:absolute;inset:0;pointer-events:none;border-radius:var(--card-shadow-radius);overflow:hidden;}
+                s span{position:absolute;inset-block:0;width:clamp(var(--sp-12),4.73vw,var(--sp-23));opacity:0;transition:opacity var(--animation-short);}
+                s .l{inset-inline-start:0;opacity:var(--l);background:linear-gradient(90deg,rgb(var(--color-background)) 0%,transparent 100%);}
+                s .r{inset-inline-end:0;opacity:var(--r);background:linear-gradient(270deg,rgb(var(--color-background)) 0%,transparent 100%);}
+                s[dir=rtl] :is(.icon-chevron-left,.icon-chevron-right){transform:scaleX(-1);}
+              </style>
+            </template>
+          </scroll-shadow>
+        {%- endif -%}
+      {%- endif -%}
+    {%- endif -%}
     <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
      
   {%- endunless -%}
