@@ -185,6 +185,18 @@
       data-product-url="{{ product.url }}"
       data-update-url="false"
     >
+       <div class="product-card__variants grow">
+        {%- render 'product-bundle-variant-picker',
+          product: product,
+          product_id: product_id,
+          section_id: section_id,
+          show_variant_labels: show_variant_labels,
+          picker_type: picker_type,
+          enable_color_swatches: enable_color_swatches,
+          color_swatch_type: color_swatch_type,
+          controls: controls
+        -%}
+      </div>
       {%- if show_vendor -%}
         <div class="product-card__top w-full">
           <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
@@ -203,18 +215,7 @@
         </div> {% endcomment %}
       </div>
 
-      <div class="product-card__variants grow">
-        {%- render 'product-bundle-variant-picker',
-          product: product,
-          product_id: product_id,
-          section_id: section_id,
-          show_variant_labels: show_variant_labels,
-          picker_type: picker_type,
-          enable_color_swatches: enable_color_swatches,
-          color_swatch_type: color_swatch_type,
-          controls: controls
-        -%}
-      </div>
+     
     </product-bundle-info>
   </div>
 {%- else -%}
