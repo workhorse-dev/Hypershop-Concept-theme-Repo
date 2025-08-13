@@ -217,7 +217,7 @@
       <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
     </variant-selects>
   {%- else -%}
-    {%- if show_icon_list -%}
+    
       {%- if settings.product_icon_list_metafield != blank -%}
         {%- liquid
           assign metafield_parts = settings.product_icon_list_metafield | split: '.'
@@ -264,7 +264,6 @@
           </scroll-shadow>
         {%- endif -%}
       {%- endif -%}
-    {%- endif -%}
     <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
      
   {%- endunless -%}
