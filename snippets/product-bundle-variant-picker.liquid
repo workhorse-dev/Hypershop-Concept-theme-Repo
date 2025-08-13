@@ -33,7 +33,7 @@
 -%}
   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
 
-  
+  {%- unless product.has_only_default_variant -%}
     <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden">
       {%- for option in product.options_with_values -%}
         {%- if picker_type == 'button' -%}
@@ -216,7 +216,10 @@
 
       <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
     </variant-selects>
-
+  {%- else -%}
+    <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+     
+  {%- endunless -%}
 
   <noscript>
     <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
