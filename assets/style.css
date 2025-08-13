@@ -45,9 +45,7 @@ button.shopify-payment-button__button--unbranded,
 .mt-auto{
   margin-top: auto;
 }
-.align-center{
-  align-self: center;
-}
+
 @media screen and (min-width: 1280px) {
   .grid-col-span-2 {
     grid-column: span 2;
@@ -301,4 +299,12 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
 /* Richtext Css */
 .rich-text>*+*:not(.spacing-section) {
     margin-block-start: var(--sp-2);
+}
+
+/* Featured Product */
+
+@media screen and (min-width: 1280px) {
+    .product__title.with-price .price__sale, .product__title .product__price {
+        place-self: center;
+    }
 }
