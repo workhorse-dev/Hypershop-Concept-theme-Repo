@@ -309,3 +309,9 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     }
 }
 /* Product bundle card CSS */
+.options-scroll{
+    grid-auto-flow: column;
+    overflow-x: scroll;
+    white-space: nowrap;
+    padding: 1rem 2rem;
+}

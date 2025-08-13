@@ -178,7 +178,7 @@
                     {%- endif -%}
                   </div>
                   <scroll-shadow class="product-card__bottom grid w-full">
-                    <ul class="scroll-area swatches swatches--{{ settings.rounded_swatch }}{% if color_swatch_type == 'variant' %} swatches--variant{% endif %} grid justify-start gap-4">
+                    <ul class="options-scroll scroll-area swatches swatches--{{ settings.rounded_swatch }}{% if color_swatch_type == 'variant' %} swatches--variant{% endif %} grid justify-start gap-4">
                       {%- for value in option.values -%}
                         <li>
                           <magnet-element class="block">
