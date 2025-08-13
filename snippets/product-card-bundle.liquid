@@ -139,7 +139,7 @@
           {%- endunless -%}
         </a>
          {%- unless product.has_only_default_variant -%}
-          <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden">
+          <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden options-scroll-variant-css">
             {%- for option in product.options_with_values -%}
               {%- if picker_type == 'button' -%}
                 {%- liquid
