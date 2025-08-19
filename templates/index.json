@@ -128,6 +128,80 @@
         "parallax_direction": "vertical"
       }
     },
+    "multicolumn_with_icons_bwTyDq": {
+      "type": "multicolumn-with-icons",
+      "blocks": {
+        "column_JiQAKM": {
+          "type": "column",
+          "settings": {
+            "icon": "support",
+            "custom_icon": "",
+            "heading": "Customer service",
+            "text": "<p>Have questions? Reach out to our Customer Service team!</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_kYMbwp": {
+          "type": "column",
+          "settings": {
+            "icon": "box",
+            "custom_icon": "",
+            "heading": "Fast Free Shipping",
+            "text": "<p>Get free shipping on orders of $40 or more</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "column_pf47qf": {
+          "type": "column",
+          "settings": {
+            "icon": "shield",
+            "custom_icon": "",
+            "heading": "Secure payment",
+            "text": "<p>Your payment information is processed securely</p>",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "column_JiQAKM",
+        "column_kYMbwp",
+        "column_pf47qf"
+      ],
+      "name": "t:sections.multicolumn-with-icons.presets.name",
+      "settings": {
+        "style": "with-border",
+        "columns": 3,
+        "text_alignment": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "scrolling-text-1": {
       "type": "scrolling-text",
       "blocks": {
@@ -167,6 +241,7 @@
         "text_hkwmXd",
         "text_6myjAH"
       ],
+      "disabled": true,
       "settings": {
         "direction": "left",
         "speed": 20,
@@ -335,7 +410,7 @@
         "show_view_all": false,
         "columns_mobile": "1",
         "swipe_on_mobile": true,
-        "heading": "Shop Hyper Products",
+        "heading": "Shop by Category",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -421,6 +496,7 @@
         },
         "image_c6kVTY": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -450,6 +526,7 @@
         },
         "image_9HtaaX": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -492,7 +569,8 @@
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "<p>Curated gear to keep you powered and connected at home, in the office, or on the go.</p>",
+        "description": "<p>A curated lineup of gear designed to keep you moving.</p>",
+
         "button_label": "",
         "button_link": "",
         "button_external": false,
@@ -508,11 +586,12 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 0,
-        "padding_bottom": 72,
+        "padding_bottom": 32,
         "divider": false,
         "full_width": false,
         "rounded": false,
-        "enable_parallax": true
+        "enable_parallax": true,
+        "enable_gap": false
       }
     },
     "rich_text_mbyy46": {
@@ -522,7 +601,7 @@
           "type": "heading",
           "settings": {
             "heading": "Create Your Perfect Workspace",
-            "heading_size": "title-lg tracking-heading",
+            "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -582,7 +661,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 36,
+        "padding_top": 24,
         "padding_bottom": 24,
         "divider": false,
         "narrow": false,
@@ -1141,7 +1220,7 @@
         "heading": "Shop the <em>Look</em>",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "p",
+        "heading_tag": "h2",
         "subheading": "",
         "description": "<p>Discover the top products everyone’s talking about.</p>",
         "button_label": "Follow",
@@ -1158,8 +1237,8 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 32,
-        "padding_bottom": 100,
+        "padding_top": 0,
+        "padding_bottom": 32,
         "divider": false,
         "full_width": false,
         "rounded": false
@@ -1178,7 +1257,7 @@
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "large",
-        "heading_tag": "p",
+        "heading_tag": "h2",
         "subheading": "",
         "description": "<p>Stay powered on-the-go with our Mobile Power Bundle. Featuring high-capacity portable battery packs, fast USB-C chargers, and multi-port hubs, this bundle is ideal for remote work, travel, and mobile productivity. Keep your devices charged and connected, anytime, anywhere.</p>",
         "button_label": "",
@@ -1654,8 +1733,8 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 72,
+        "padding_top": 0,
+        "padding_bottom": 0,
         "divider": false,
         "full_width": false,
         "rounded": false
@@ -1753,11 +1832,12 @@
     },
     "blog-posts-collage": {
       "type": "blog-posts-collage",
+      "disabled": true,
       "settings": {
         "blog": "news",
         "post_limit": 3,
         "show_view_all": true,
-        "image_ratio": "landscape",
+        "image_ratio": "square",
         "show_tags": true,
         "show_date": true,
         "show_comments": false,
@@ -1785,10 +1865,78 @@
         "full_width": false,
         "rounded": false
       }
+    },
+    "blog_posts_q9F3Kf": {
+      "type": "blog-posts",
+      "name": "t:sections.blog-posts.presets.name",
+      "settings": {
+        "blog": "news",
+        "post_limit": 7,
+        "columns": 3,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "image_ratio": "landscape",
+        "show_tags": true,
+        "show_date": true,
+        "show_comments": false,
+        "show_author": false,
+        "show_excerpt": false,
+        "heading": "Latest Tech Blogs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 40,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "1753091884a817fc18": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_YgjrLY": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_YgjrLY"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
     "slideshow",
+    "multicolumn_with_icons_bwTyDq",
     "scrolling-text-1",
     "rich-text-1",
     "collection-list",
@@ -1807,6 +1955,8 @@
     "scrolling-text-2",
     "logo_list_UxfgMd",
     "featured-collections",
-    "blog-posts-collage"
+    "blog-posts-collage",
+    "blog_posts_q9F3Kf",
+    "1753091884a817fc18"
   ]
 }

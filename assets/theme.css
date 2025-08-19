@@ -10191,8 +10191,8 @@ html.touch .logo-list--right .logo-bar.animate {
 }
 
 .product-card__variants .variant-picker {
-  padding-block: var(--sp-4);
-  border-block-start: 1px solid rgb(var(--color-border));
+  padding-bottom: var(--sp-4);
+  border-block-end: 1px solid rgb(var(--color-border));
 }
 
 .product-card__content.text-center .product-card__variants .variant-picker {

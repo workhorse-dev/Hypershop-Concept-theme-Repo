@@ -34,7 +34,7 @@
   <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
 
   {%- unless product.has_only_default_variant -%}
-    <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden">
+    <variant-selects id="VariantPicker-{{ section_id }}-{{ product_id }}" class="variant-picker grid gap-5 no-js-hidden options-scroll-variant-position">
       {%- for option in product.options_with_values -%}
         {%- if picker_type == 'button' -%}
           {%- liquid
@@ -64,14 +64,14 @@
             data-option-slug="{{ option.name | handleize }}"
           >
             <legend class="sr-only">{{ option.name }}</legend>
-            <div class="form__label flex items-center justify-between gap-2 w-full">
+            {% comment %} <div class="form__label flex items-center justify-between gap-2 w-full">
               {%- if show_variant_labels -%}
                 <div class="flex gap-2">
                   {{- option.name -}}:
                   <span class="font-medium" id="{{ section_id }}-{{ product_id }}-option{{ option.position }}">{{ option.selected_value }}</span>
                 </div>
               {%- endif -%}
-            </div>
+            </div> {% endcomment %}
             <scroll-shadow class="product-card__bottom grid w-full">
               <ul class="scroll-area swatches swatches--{{ settings.rounded_swatch }}{% if color_swatch_type == 'variant' %} swatches--variant{% endif %} grid justify-start gap-4">
                 {%- for value in option.values -%}
@@ -217,7 +217,9 @@
       <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
     </variant-selects>
   {%- else -%}
+    
     <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+     
   {%- endunless -%}
 
   <noscript>
@@ -241,6 +243,12 @@
       </div>
     </div>
   </noscript>
+  
+  <div class="mt-auto grid gap-2">
+
+   <div id="Price-{{ section_id }}-{{ product_id }}">
+      {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+   </div>
 
   <button
     type="submit"
@@ -260,4 +268,5 @@
       -%}
     </span>
   </button>
+  </div>
 {%- endform -%}
