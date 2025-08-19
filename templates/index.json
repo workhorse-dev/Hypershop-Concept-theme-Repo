@@ -1244,6 +1244,7 @@
     },
     "rich-text-2": {
       "type": "rich-text",
+      "disabled": true,
       "custom_css": [
         "@media screen and (min-width: 1536px) and (max-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: 0; }}",
         "@media screen and (min-width: 1920px) {.collage, .collage .title-wrapper {padding-inline: var(--grid-gap); }}"
