@@ -143,7 +143,7 @@
           "settings": {
             "heading": "{{ collection.metafields.custom.collection_additional_title.value }}",
             "heading_size": "title-sm",
-            "heading_tag": "h2",
+            "heading_tag": "h1",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -304,6 +304,33 @@
         "rounded": false
       }
     },
+    "product_genius_app_section_f554e415": {
+      "type": "apps",
+      "blocks": {
+        "product_genius_ai_product_genius_liquid_65ca7b1f": {
+          "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
+          "settings": {}
+        }
+      },
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_65ca7b1f"
+      ],
+      "settings": {
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
     "recently-viewed": {
       "type": "recently-viewed",
       "settings": {
@@ -341,6 +368,7 @@
     "main-collection",
     "images-with-text-overlay",
     "faq_8mQyFn",
+    "product_genius_app_section_f554e415",
     "recently-viewed"
   ]
 }

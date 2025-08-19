@@ -30,9 +30,9 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Go Beyond with Hyper",
+            "heading": "<strong>Plug In, Stand Out</strong>",
             "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h1",
+            "heading_tag": "h3",
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
@@ -40,7 +40,7 @@
         "text_VyjNzY": {
           "type": "text",
           "settings": {
-            "text": "<p>Hyper’s mission to Go Beyond with our connectivity and power solutions. </p>",
+            "text": "<p>The HyperDrive Flex USB-C Hubs combine bold design and powerful functionality to keep your creativity flowing with style.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -88,7 +88,7 @@
         "heading": {
           "type": "heading",
           "settings": {
-            "heading": "Hypers' <em>Mission</em>",
+            "heading": "<strong>Why Choose HyperDrive Flex Hubs?</strong>",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "scribble",
@@ -98,7 +98,7 @@
         "text": {
           "type": "text",
           "settings": {
-            "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
+            "text": "<p><strong>Vibrant Design, Limitless Functionality</strong><br/>Stand out with sleek, colorful hubs made from sustainable materials for style and substance.</p><p><strong>Connections That Enable</strong><br/>Effortlessly connect devices with 4K support, fast transfers, and 100W power delivery.</p><p><strong>Built for Multitaskers</strong><br/>Tackle tasks easily with reliable, high-speed connectivity and smooth performance.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -110,7 +110,7 @@
         "button": {
           "type": "button",
           "settings": {
-            "button_label": "Our history",
+            "button_label": "",
             "button_link": "#",
             "button_style": "secondary",
             "button_size": "md",
@@ -198,6 +198,7 @@
         "profile_R68h9Q",
         "profile-3"
       ],
+      "disabled": true,
       "settings": {
         "columns": 4,
         "carousel_on_desktop": true,
@@ -418,6 +419,7 @@
         "content_b3DVgQ",
         "content_KWgJ3T"
       ],
+      "disabled": true,
       "settings": {
         "image_ratio": "adapt",
         "image_ratio_mobile": "wide",
@@ -450,7 +452,7 @@
         "heading_HhL8Wx": {
           "type": "heading",
           "settings": {
-            "heading": "Go Beyond with Hyper",
+            "heading": "<strong>One Hub, Endless Possibilities</strong>",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h3",
             "highlighted_text": "none",
@@ -492,13 +494,62 @@
         "rounded": false
       }
     },
+    "rich-text": {
+      "type": "rich-text",
+      "blocks": {
+        "heading": {
+          "type": "heading",
+          "settings": {
+            "heading": "Featured Enterprise <em>Partners</em>",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "highlighted_text": "scribble",
+            "highlighted_scribble": "squiggle-underline"
+          }
+        }
+      },
+      "block_order": [
+        "heading"
+      ],
+      "disabled": true,
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "#fafafa",
+        "gradient_background": "",
+        "color_highlight": "#3c3fbc",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 120,
+        "padding_bottom": 20,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
     "image_with_text_QDgUq8": {
       "type": "image-with-text",
       "blocks": {
         "heading_Mjw6qV": {
           "type": "heading",
           "settings": {
-            "heading": "Go Beyond Your Devices Capabilities with HyperDrive connectivity",
+            "heading": "<strong>HyperDrive Flex 8 Port USB-C Hub</strong>",
             "heading_size": "title-sm",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -508,7 +559,7 @@
         "text_EVPkag": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash limitless creativity with HyperDrive: professional-grade docking stations, hubs, Thunderbolt docks, and adapters  for high-performance creators. Our universal and form-fit docking station and USB-C hubs for MacBook, expand your computer's capabilities and unlocking new ways of creating. </p>",
+            "text": "<p>Get 4K monitor support, fast charging, and eco-friendly design in one sleek hub.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -568,7 +619,7 @@
         "heading_iiiQni": {
           "type": "heading",
           "settings": {
-            "heading": "Charge Beyond Expectations with HyperJuice Charging Solutions",
+            "heading": "<strong>HyperDrive Flex 5 Port USB-C Hub</strong>",
             "heading_size": "title-sm",
             "heading_tag": "h4",
             "highlighted_text": "none",
@@ -578,7 +629,7 @@
         "text_btV7GB": {
           "type": "text",
           "settings": {
-            "text": "<p>HyperJuice empowers creators with the freedom to unleash their creativity anywhere, from multi-port GaN wall chargers, wireless chargers, and portable chargers provide the necessary power to fuel your imagination on the go.</p>",
+            "text": "<p>Compact and lightweight with 4K support and fast transfers wherever you go.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -638,7 +689,7 @@
         "heading_gpbpgU": {
           "type": "heading",
           "settings": {
-            "heading": "Go Beyond your Boundaries with HyperPack Mobility",
+            "heading": "<strong>HyperDrive Flex MagCharge USB-C Dock</strong>",
             "heading_size": "title-sm",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -648,7 +699,7 @@
         "text_kN9Er4": {
           "type": "text",
           "settings": {
-            "text": "<p>Laptop backpacks and laptop sleeves for tech and creators. Designed for on-the-go convenience and protection, travel backpack HyperPack combines functionality, style, and durability. With compartments and pockets for laptops, tablets, and accessories, it keeps you organized. </p>",
+            "text": "<p>Qi wireless charging, 4K displays, and bold design in a high-performance dock.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -828,6 +879,7 @@
         "testimonial_YUidxb",
         "testimonial_Wcg3h9"
       ],
+      "disabled": true,
       "settings": {
         "heading": "",
         "heading_size": "title-md",
@@ -853,54 +905,6 @@
         "padding_bottom": 120,
         "divider": false,
         "rounded": false
-      }
-    },
-    "rich-text": {
-      "type": "rich-text",
-      "blocks": {
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Featured Enterprise <em>Partners</em>",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "scribble",
-            "highlighted_scribble": "squiggle-underline"
-          }
-        }
-      },
-      "block_order": [
-        "heading"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "#fafafa",
-        "gradient_background": "",
-        "color_highlight": "#3c3fbc",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 120,
-        "padding_bottom": 20,
-        "divider": false,
-        "narrow": true,
-        "rounded": true
       }
     },
     "logo-list": {
@@ -954,6 +958,7 @@
         "logo-4",
         "logo-5"
       ],
+      "disabled": true,
       "settings": {
         "layout": "marquee",
         "grid_horizontal": 120,
@@ -1003,6 +1008,7 @@
       "block_order": [
         "heading_KUWQnP"
       ],
+      "disabled": true,
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
@@ -1036,6 +1042,7 @@
     },
     "image_with_text_overlay_YLeTJ9": {
       "type": "image-with-text-overlay",
+      "disabled": true,
       "settings": {
         "transparent_header": false,
         "image": "shopify://shop_images/hyper-awards-desktop.webp",
@@ -1062,6 +1069,59 @@
         "enable_parallax": false,
         "parallax_direction": "vertical"
       }
+    },
+    "video_CXnjPC": {
+      "type": "video",
+      "name": "t:sections.video.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+        "description": "",
+        "enable_video_autoplay": false,
+        "enable_video_looping": false,
+        "image_height": "adapt",
+        "image_height_mobile": "auto",
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false
+      }
+    },
+    "featured_collection_VRgmzf": {
+      "type": "featured-collection",
+      "name": "t:sections.featured-collection.presets.name",
+      "settings": {
+        "collection": "hyperdrive-flex",
+        "products": [],
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "show_view_all": false,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "Shop HyperDrive Flex USB-C Hubs",
+        "heading_size": "title-md",
+        "heading_alignment": "text-center md:items-center",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
     }
   },
   "order": [
@@ -1072,13 +1132,15 @@
     "scrolling-text",
     "timeline_TwpLjM",
     "rich_text_tXztGp",
+    "rich-text",
     "image_with_text_QDgUq8",
     "image_with_text_bKJdmX",
     "image_with_text_N4nXWD",
     "testimonials",
-    "rich-text",
     "logo-list",
     "rich_text_gf9VPy",
-    "image_with_text_overlay_YLeTJ9"
+    "image_with_text_overlay_YLeTJ9",
+    "video_CXnjPC",
+    "featured_collection_VRgmzf"
   ]
 }

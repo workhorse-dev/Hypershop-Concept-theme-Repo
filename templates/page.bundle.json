@@ -1,3 +1,12 @@
+/*
+ * ------------------------------------------------------------
+ * IMPORTANT: The contents of this file are auto-generated.
+ *
+ * This file may be updated by the Shopify admin theme editor
+ * or related systems. Please exercise caution as any changes
+ * made to this file may be overwritten.
+ * ------------------------------------------------------------
+ */
 {
   "sections": {
     "main-page": {
@@ -20,7 +29,20 @@
       "blocks": {
         "breadcrumb": {
           "type": "breadcrumb",
+          "disabled": true,
           "settings": {}
+        },
+        "text_qVrmMN": {
+          "type": "text",
+          "settings": {
+            "text": "",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
         },
         "heading": {
           "type": "heading",
@@ -35,11 +57,13 @@
       },
       "block_order": [
         "breadcrumb",
+        "text_qVrmMN",
         "heading"
       ],
+      "disabled": true,
       "settings": {
         "transparent_header": true,
-        "image": "",
+        "image": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-web-banner-v01-r02-2000x2000.webp",
         "image_height": "750px",
         "content_width": "large",
         "content_position": "md:items-end md:justify-start",
@@ -64,6 +88,55 @@
         "parallax_direction": "vertical"
       }
     },
+    "slideshow_Unid4Y": {
+      "type": "slideshow",
+      "blocks": {
+        "image_ymBLWg": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-web-banner-v01-r02-2000x2000_31b14f29-996b-4ff8-9f32-c94d96f34e3e.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-creative-pro-banner-v01-r02-500x600_08c23c80-6dd4-43ef-a49b-4b21cad0191c.webp",
+            "heading": "Bundle & Save 15%",
+            "subheading": "Boost your productivity with our     exclusive bundles! Get 3 premium products for Creative, Desktop, or Mobile     needs and save 15%. Streamline your workflow and save today!",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_ymBLWg"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "mobile_content_outside": false,
+        "color_text": "#ffffff",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": false,
+        "parallax_direction": "vertical"
+      }
+    },
     "rich-text": {
       "type": "rich-text",
       "custom_css": [
@@ -72,13 +145,13 @@
       "settings": {
         "text_alignment": "left",
         "text_alignment_mobile": "left",
-        "heading": "Buy 3 and <em>save 30%</em>",
+        "heading": "Creative Pro Bundle: Tools to Elevate     Your Creativity",
         "heading_size": "title-sm",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "large",
         "heading_tag": "h2",
         "subheading": "",
-        "description": "<p>The choice is yours. With our bundle builder, you can select any combination from our range of products. The easiest way to keep everyone happy.</p>",
+        "description": "<p>Power your projects with cutting-edge tools designed to enhance productivity and streamline your workflow.</p>",
         "button_label": "",
         "button_link": "",
         "button_external": false,
@@ -93,7 +166,7 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "padding_top": 100,
+        "padding_top": 48,
         "padding_bottom": 28,
         "divider": false,
         "narrow": false,
@@ -106,7 +179,7 @@
         "@media screen and (min-width: 1536px) {.product-bundle {flex: 0 0 25%; } .product-bundle__sidebar {width: 100%; }}"
       ],
       "settings": {
-        "collection": "",
+        "collection": "the-creative-pro-bundle",
         "products": [],
         "product_limit": 6,
         "columns": 3,
@@ -122,7 +195,7 @@
         "picker_type": "button",
         "enable_color_swatches": true,
         "color_swatch_type": "color",
-        "heading": "Your bundle",
+        "heading": "Add 3 Items to Build Your Bundle",
         "heading_size": "lg:text-5xl text-2xl",
         "heading_alignment": "text-left",
         "heading_tag": "h2",
@@ -145,134 +218,73 @@
         "rounded": false
       }
     },
-    "floating-product-bundle": {
-      "type": "floating-product-bundle",
+    "slideshow_6HjkLU": {
+      "type": "slideshow",
       "blocks": {
-        "icon": {
-          "type": "icon",
+        "image_zkHBtY": {
+          "type": "image",
           "settings": {
-            "icon": "none",
-            "icon_image": "",
-            "icon_width": 48
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Create Your Bundle",
-            "heading_size": "title-md",
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-web-banner-v01-r02-2000x2000_21904a7f-e87f-4991-be2d-3cda4a649183.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-desktop-banner-v01-r02-500x600_0db59690-6b9f-4c75-b0e3-487adca6c5b5.webp",
+            "heading": "Next Level Desktop",
+            "subheading": "",
+            "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Save $30 when buying all 3 items</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
           }
         }
       },
       "block_order": [
-        "icon",
-        "heading",
-        "text"
+        "image_zkHBtY"
       ],
+      "name": "t:sections.slideshow.presets.name",
       "settings": {
-        "collection": "",
-        "products": [],
-        "product_limit": 3,
-        "image": "",
-        "image_height": "900px",
-        "layout": "image_first",
-        "content_position": "md:items-end",
-        "text_alignment": "left",
-        "image_height_mobile": "400px",
-        "content_position_mobile": "items-center",
-        "text_alignment_mobile": "center",
-        "swipe_on_mobile": true,
-        "show_variant_labels": true,
-        "picker_type": "button",
-        "enable_color_swatches": true,
-        "color_swatch_type": "color",
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "mobile_content_outside": false,
         "color_text": "#ffffff",
-        "color_highlight": "",
-        "gradient_highlight": "",
+        "color_background": "#ffffff",
+        "gradient_background": "",
         "color_button_text": "#171717",
         "color_button_background": "#ffffff",
         "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
         "padding_top": 0,
         "padding_bottom": 0,
         "divider": false,
         "full_width": true,
-        "rounded": true,
+        "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
       }
     },
-    "compact-product-bundle": {
-      "type": "compact-product-bundle",
-      "blocks": {
-        "icon": {
-          "type": "icon",
-          "settings": {
-            "icon": "none",
-            "icon_image": "",
-            "icon_width": 48
-          }
-        },
-        "heading": {
-          "type": "heading",
-          "settings": {
-            "heading": "Create Your Bundle",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Save $30 when buying all 3 items</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "icon",
-        "heading",
-        "text"
-      ],
+    "rich_text_QNrh6W": {
+      "type": "rich-text",
       "settings": {
-        "collection": "",
-        "products": [],
-        "product_limit": 3,
-        "image": "",
-        "layout": "text_first",
-        "content_position": "md:items-end",
-        "text_alignment": "right",
-        "image_height_mobile": "400px",
-        "content_position_mobile": "items-center",
-        "text_alignment_mobile": "center",
-        "swipe_on_mobile": true,
-        "show_variant_labels": true,
-        "picker_type": "button",
-        "enable_color_swatches": true,
-        "color_swatch_type": "color",
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "The Desktop Bundle: All-in-One Workspace Upgrade",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "large",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Upgrade your workspace with tools designed for productivity and efficiency.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "scribble",
+        "highlighted_scribble": "squiggle-underline",
         "color_text": "",
         "color_background": "",
         "gradient_background": "",
@@ -281,24 +293,191 @@
         "color_button_text": "",
         "color_button_background": "",
         "color_button_gradient": "",
-        "color_overlay": "#000000",
-        "overlay_opacity": 40,
-        "padding_top": 100,
+        "padding_top": 48,
+        "padding_bottom": 28,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    },
+    "product_bundle_dXjzpK": {
+      "type": "product-bundle",
+      "settings": {
+        "collection": "desktop-bundle-builder",
+        "products": [],
+        "product_limit": 6,
+        "columns": 3,
+        "columns_mobile": "1",
+        "minimum_quantity": 3,
+        "maximum_quantity": 3,
+        "prevent_duplicate_products": true,
+        "allow_quantity_change": true,
+        "quantity_increment": "1",
+        "quantity_minimum": "1",
+        "quantity_maximum": "",
+        "show_variant_labels": true,
+        "picker_type": "button",
+        "enable_color_swatches": true,
+        "color_swatch_type": "color",
+        "heading": "Add 3 Items to Build Your Bundle",
+        "heading_size": "lg:text-5xl text-2xl",
+        "heading_alignment": "text-left",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
         "padding_bottom": 100,
         "divider": false,
         "full_width": false,
-        "rounded": true,
+        "rounded": false
+      }
+    },
+    "slideshow_cdidQX": {
+      "type": "slideshow",
+      "blocks": {
+        "image_ehcFXh": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-web-banner-v01-r02-2000x2000_0c699df6-b5b8-499e-8b46-1cd7477a20d2.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-8-build-your-bundle-mobile-banner-v01-r02-500x600_dbb4e6c2-9b46-4835-9187-5bbbe68163e7.webp",
+            "heading": "For The Digital Nomad",
+            "subheading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "",
+            "button_link": "",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        }
+      },
+      "block_order": [
+        "image_ehcFXh"
+      ],
+      "name": "t:sections.slideshow.presets.name",
+      "settings": {
+        "autoplay": false,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "image_height": "650px",
+        "content_width": "small",
+        "image_height_mobile": "auto",
+        "mobile_content_outside": false,
+        "color_text": "#ffffff",
+        "color_background": "#ffffff",
+        "gradient_background": "",
+        "color_button_text": "#171717",
+        "color_button_background": "#ffffff",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 20,
+        "padding_top": 0,
+        "padding_bottom": 0,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
         "enable_parallax": false,
         "parallax_direction": "vertical"
+      }
+    },
+    "rich_text_4yYKfd": {
+      "type": "rich-text",
+      "settings": {
+        "text_alignment": "left",
+        "text_alignment_mobile": "left",
+        "heading": "Mobile Bundle: Charge, Connect, and Protect on the Go",
+        "heading_size": "title-sm",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "large",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Keep your day running smoothly with essentials made for professionals on the move.</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "scribble",
+        "highlighted_scribble": "squiggle-underline",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 48,
+        "padding_bottom": 28,
+        "divider": false,
+        "narrow": false,
+        "rounded": true
+      }
+    },
+    "product_bundle_WmnJqj": {
+      "type": "product-bundle",
+      "settings": {
+        "collection": "the-mobile-power-bundle",
+        "products": [],
+        "product_limit": 6,
+        "columns": 3,
+        "columns_mobile": "1",
+        "minimum_quantity": 3,
+        "maximum_quantity": 3,
+        "prevent_duplicate_products": true,
+        "allow_quantity_change": true,
+        "quantity_increment": "1",
+        "quantity_minimum": "1",
+        "quantity_maximum": "",
+        "show_variant_labels": true,
+        "picker_type": "button",
+        "enable_color_swatches": true,
+        "color_swatch_type": "color",
+        "heading": "Add 3 Items to Build Your Bundle",
+        "heading_size": "lg:text-5xl text-2xl",
+        "heading_alignment": "text-left",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 24,
+        "padding_bottom": 100,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
       }
     }
   },
   "order": [
     "main-page",
     "image-with-text-overlay",
+    "slideshow_Unid4Y",
     "rich-text",
     "product-bundle",
-    "floating-product-bundle",
-    "compact-product-bundle"
+    "slideshow_6HjkLU",
+    "rich_text_QNrh6W",
+    "product_bundle_dXjzpK",
+    "slideshow_cdidQX",
+    "rich_text_4yYKfd",
+    "product_bundle_WmnJqj"
   ]
 }

@@ -9,6 +9,10 @@
  */
 {
   "sections": {
+    "shogun-helper": {
+      "type": "shogun-helper",
+      "settings": {}
+    },
     "main-page": {
       "type": "main-page",
       "disabled": true,
@@ -188,7 +192,7 @@
         "heading": "BUSINESS SOLUTIONS",
         "heading_size": "title-md",
         "heading_alignment": "text-center md:items-center",
-        "heading_tag": "h2",
+        "heading_tag": "h1",
         "subheading": "FOR EVERY SECTOR",
         "description": "",
         "button_label": "",
@@ -550,10 +554,6 @@
         "narrow": true,
         "rounded": false
       }
-    },
-    "shogun-helper": {
-      "type": "shogun-helper",
-      "settings": {}
     },
     "shogun-optimizer": {
       "type": "shogun-optimizer",
