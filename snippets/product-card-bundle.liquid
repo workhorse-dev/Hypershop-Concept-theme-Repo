@@ -138,6 +138,7 @@
             -%}
           {%- endunless -%}
         </a>
+         
 
         {%- if show_countdown and product.metafields.theme.countdown.value != blank -%}
           {%- liquid
@@ -185,6 +186,7 @@
       data-product-url="{{ product.url }}"
       data-update-url="false"
     >
+      
       {%- if show_vendor -%}
         <div class="product-card__top w-full">
           <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
@@ -192,15 +194,15 @@
         </div>
       {%- endif -%}
 
-      <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
+      <div class="product-card__details flex flex-col items-baseline gap-2 w-full">
         <p class="grow">
           <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ product_url }}" data-product-bundle-title>
             {{- product.title | escape -}}
           </a>
         </p>
-        <div id="Price-{{ section_id }}-{{ product_id }}">
-          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
-        </div>
+        {% comment %} <div id="Price-{{ section_id }}-{{ product_id }}">
+          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+        </div> {% endcomment %}
       </div>
 
       <div class="product-card__variants grow">
