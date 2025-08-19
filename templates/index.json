@@ -437,6 +437,7 @@
       "blocks": {
         "image_ntwfPY": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -495,7 +496,6 @@
         },
         "image_c6kVTY": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "column_size": 5,
             "row_size": 2,
@@ -669,17 +669,6 @@
     "shop_the_look_KbgLmh": {
       "type": "shop-the-look",
       "blocks": {
-        "product_NqMmdX": {
-          "type": "product",
-          "settings": {
-            "product": "hyperjuice-245w-usb-c-battery-pack",
-            "color_text": "#ffffff",
-            "vertical": 80,
-            "horizontal": 20,
-            "vertical_mobile": 80,
-            "horizontal_mobile": 20
-          }
-        },
         "product_YQzEbc": {
           "type": "product",
           "settings": {
@@ -724,6 +713,17 @@
             "horizontal_mobile": 55
           }
         },
+        "product_NqMmdX": {
+          "type": "product",
+          "settings": {
+            "product": "hyperjuice-245w-usb-c-battery-pack",
+            "color_text": "#ffffff",
+            "vertical": 80,
+            "horizontal": 20,
+            "vertical_mobile": 80,
+            "horizontal_mobile": 20
+          }
+        },
         "product_FXka3V": {
           "type": "product",
           "settings": {
@@ -737,11 +737,11 @@
         }
       },
       "block_order": [
-        "product_NqMmdX",
         "product_YQzEbc",
         "product_t8yrGg",
         "product_aw67F8",
         "product_ggcRtY",
+        "product_NqMmdX",
         "product_FXka3V"
       ],
       "name": "t:sections.shop-the-look.name",
@@ -1281,6 +1281,7 @@
     },
     "product-bundle": {
       "type": "product-bundle",
+      "disabled": true,
       "custom_css": [
         "@media screen and (min-width: 1536px) {.product-bundle {flex: 0 0 25%; } .product-bundle__sidebar {width: 100%; }}",
         "@media screen and (min-width: 1920px) {.product-bundle-wrapper {padding-inline: calc(var(--grid-gap) * 2); }}"
