@@ -141,29 +141,55 @@
             -%}
           {%- endif -%}
 
-          {%- for media in product.media -%}
-            {%- if media.id != featured_media.id -%}
-              {%- render 'product-media',
-                product: product,
-                product_id: product_id,
-                section_id: section_id,
-                product_variant: product_variant,
-                media: media,
-                featured_media: featured_media,
-                variant_images: variant_images,
-                hide_variants: hide_variants,
-                gallery_layout: gallery_layout,
-                image_zoom: image_zoom,
-                image_fill: image_fill,
-                image_ratio: image_ratio,
-                image_ratio_mobile: image_ratio_mobile,
-                preload: false,
-                sizes: sizes,
-                autoplay: enable_video_autoplay,
-                loop: enable_video_looping
-              -%}
-            {%- endif -%}
-          {%- endfor -%}
+          {% if  product.variants_count > 1 and product.selected_or_first_available_variant.metafields.custom.variant_1_images.value %}
+            {%- for media in product.selected_or_first_available_variant.metafields.custom.variant_1_images.value-%}
+              {%- if media.id != featured_media.id -%}
+                {%- render 'product-media',
+                  product: product,
+                  product_id: product_id,
+                  section_id: section_id,
+                  product_variant: product_variant,
+                  media: media,
+                  featured_media: featured_media,
+                  variant_images: variant_images,
+                  hide_variants: hide_variants,
+                  gallery_layout: gallery_layout,
+                  image_zoom: image_zoom,
+                  image_fill: image_fill,
+                  image_ratio: image_ratio,
+                  image_ratio_mobile: image_ratio_mobile,
+                  preload: false,
+                  sizes: sizes,
+                  autoplay: enable_video_autoplay,
+                  loop: enable_video_looping
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {% else %}
+            {%- for media in product.media -%}
+              {%- if media.id != featured_media.id -%}
+                {%- render 'product-media',
+                  product: product,
+                  product_id: product_id,
+                  section_id: section_id,
+                  product_variant: product_variant,
+                  media: media,
+                  featured_media: featured_media,
+                  variant_images: variant_images,
+                  hide_variants: hide_variants,
+                  gallery_layout: gallery_layout,
+                  image_zoom: image_zoom,
+                  image_fill: image_fill,
+                  image_ratio: image_ratio,
+                  image_ratio_mobile: image_ratio_mobile,
+                  preload: false,
+                  sizes: sizes,
+                  autoplay: enable_video_autoplay,
+                  loop: enable_video_looping
+                -%}
+              {%- endif -%}
+            {%- endfor -%}
+          {% endif %}         
         </div>
       </slider-element>
 
@@ -201,22 +227,39 @@
                 image_ratio_mobile: image_ratio_mobile
               -%}
             {%- endif -%}
-    
-            {%- for media in product.media -%}
-              {%- if media.id != featured_media.id -%}
-                {%- render 'product-thumbnail',
-                  product: product,
-                  product_variant: product_variant,
-                  media: media,
-                  featured_media: featured_media,
-                  variant_images: variant_images,
-                  hide_variants: hide_variants,
-                  image_fill: image_fill,
-                  image_ratio: image_ratio,
-                  image_ratio_mobile: image_ratio_mobile
-                -%}
-              {%- endif -%}
-            {%- endfor -%}
+            {% if product.variants_count > 1  and product.selected_or_first_available_variant.metafields.custom.variant_1_images.value %}
+              {%- for media in product.selected_or_first_available_variant.metafields.custom.variant_1_images.value -%}
+                {%- if media.id != featured_media.id -%}
+                  {%- render 'product-thumbnail',
+                    product: product,
+                    product_variant: product_variant,
+                    media: media,
+                    featured_media: featured_media,
+                    variant_images: variant_images,
+                    hide_variants: hide_variants,
+                    image_fill: image_fill,
+                    image_ratio: image_ratio,
+                    image_ratio_mobile: image_ratio_mobile
+                  -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {% else %}
+              {%- for media in product.media -%}
+                {%- if media.id != featured_media.id -%}
+                  {%- render 'product-thumbnail',
+                    product: product,
+                    product_variant: product_variant,
+                    media: media,
+                    featured_media: featured_media,
+                    variant_images: variant_images,
+                    hide_variants: hide_variants,
+                    image_fill: image_fill,
+                    image_ratio: image_ratio,
+                    image_ratio_mobile: image_ratio_mobile
+                  -%}
+                {%- endif -%}
+              {%- endfor -%}
+            {% endif %}            
           </media-dots>
         {%- if gallery_layout != 'dots' -%}
           <template>
