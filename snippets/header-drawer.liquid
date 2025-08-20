@@ -35,7 +35,7 @@ endif
         <ul class="drawer__scrollable drawer__menu relative w-full h-full" role="list" data-parent>
           {%- assign main_menu = section.settings.menu_mobile | default: section.settings.menu -%}
           {%- for link in main_menu.links -%}
-            <li class="drawer__menu-group {{block.settings.menu_title}} ">
+            <li class="drawer__menu-group  ">
               {%- liquid
                 assign enable_mega_menu = false
                 assign mega_menu_block = nil
@@ -54,7 +54,7 @@ endif
               {%- if link.links != blank or enable_mega_menu -%}
                 {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block, position: forloop.index -%}
               {%- else -%}
-                <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight" href="{{ link.url }}">{{ link.title | escape }}</a>
+                <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight {{block.settings.menu_title}}" href="{{ link.url }}">{{ link.title | escape }}</a>
               {%- endif -%}
             </li>
           {%- endfor -%}
