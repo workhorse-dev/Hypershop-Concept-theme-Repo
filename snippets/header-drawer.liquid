@@ -54,7 +54,7 @@ endif
               {%- if link.links != blank or enable_mega_menu -%}
                 {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block, position: forloop.index -%}
               {%- else -%}
-                <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight {{block.settings.menu_title}}" href="{{ link.url }}">{{ link.title | escape }}</a>
+                <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight" href="{{ link.url }}" {% if link.title == section.settings.highlight_text  %} style="color:{{ section.settings.highlight_nav }}" {% endif %} >{{ link.title | escape }}</a>
               {%- endif -%}
             </li>
           {%- endfor -%}
