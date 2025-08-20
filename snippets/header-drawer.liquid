@@ -35,7 +35,7 @@ endif
         <ul class="drawer__scrollable drawer__menu relative w-full h-full" role="list" data-parent>
           {%- assign main_menu = section.settings.menu_mobile | default: section.settings.menu -%}
           {%- for link in main_menu.links -%}
-            <li class="drawer__menu-group hello">
+            <li class="drawer__menu-group block.settings.menu_title ">
               {%- liquid
                 assign enable_mega_menu = false
                 assign mega_menu_block = nil
