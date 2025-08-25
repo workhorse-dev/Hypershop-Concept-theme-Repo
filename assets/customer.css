@@ -1,0 +1,221 @@
+.customer {
+  max-width: 32rem;
+  margin: 0 auto;
+}
+
+@media screen and (min-width: 768px) {
+
+  .customer .button-group>.button,
+  .addresses .button-group>.button {
+    min-height: 3.75rem;
+  }
+}
+
+#Recover,
+#Recover+div {
+  display: none;
+}
+
+#Recover:target {
+  display: grid;
+}
+
+#Recover:target+div {
+  display: block;
+}
+
+#Recover:target~#Login,
+#Recover:target~#Login+div {
+  display: none;
+}
+
+.customer .field .select {
+  padding-block: var(--sp-2);
+  height: calc(var(--input-height) + var(--sp-2d5));
+}
+
+.customer__content {
+  gap: var(--grid-gap);
+}
+
+.customer__sidebar {
+  background-color: rgb(var(--color-foreground)/ 0.025);
+  padding: var(--sp-7d5) var(--gap-padding);
+  border-radius: var(--rounded-block);
+}
+
+@media screen and (min-width: 768px) {
+  .customer__sidebar {
+    padding: var(--sp-10);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .customer__sidebar {
+    width: clamp(340px, 25vw, 430px);
+    padding-inline: var(--sp-12);
+  }
+}
+
+.addresses [aria-expanded=false]~div[id] {
+  display: none;
+}
+
+.addresses [aria-expanded=true]~div[id] {
+  display: block;
+}
+
+.address-grid {
+  --address-grid-per-row: 1;
+  --address-grid-template: auto-flow dense/repeat(var(--address-grid-per-row), minmax(0, 1fr));
+  --address-grid-gap: var(--sp-3);
+  grid: var(--address-grid-template);
+  gap: var(--address-grid-gap);
+}
+
+@media screen and (min-width: 768px) {
+  .address-grid {
+    --address-grid-per-row: 2;
+    --address-grid-gap: clamp(var(--sp-4), 1.263vw, var(--sp-6));
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .address-grid {
+    --address-grid-per-row: 3;
+    --address-grid-gap: clamp(var(--sp-4), 1.263vw, var(--sp-6));
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .address-grid {
+    --address-grid-per-row: 4;
+  }
+}
+
+.addresses .address {
+  background-color: rgb(var(--color-foreground)/ 0.025);
+  padding: clamp(var(--sp-6), 2.315vw, var(--sp-12)) var(--sp-5);
+  border-radius: var(--rounded-block);
+}
+
+@media screen and (min-width: 1024px) {
+  .addresses .address {
+    padding-inline: var(--sp-12);
+  }
+}
+
+.addresses .address>div:first-child {
+  margin-block-end: auto;
+}
+
+.address__fields .field {
+  flex-grow: 1;
+  flex-shrink: 0;
+  width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+  .address__fields .field {
+    width: calc(50% - var(--sp-6) / 2);
+  }
+
+  .address__fields .field--full {
+    width: 100%;
+  }
+}
+
+.order-details .price__regular {
+  font-size: var(--text-lg);
+}
+
+.order-details :is(.price__sale, .unit-price) {
+  font-size: var(--text-sm);
+}
+
+@media screen and (max-width: 767px) {
+  .customer__content :is(thead, th),
+  .customer__content tfoot td:first-of-type {
+    display: none
+  }
+
+  .customer__content tbody tr {
+    display: grid;
+    gap: var(--sp-5);
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+    padding: var(--sp-5);
+  }
+
+  .customer__content tbody tr:first-child {
+    border-block-start: 0;
+  }
+
+  .customer__content td {
+    padding: 0;
+    display: grid;
+    text-align: start;
+    font-size: var(--text-base);
+  }
+
+  .customer__content td:first-of-type {
+    display: block;
+    grid-column: 1/-1;
+    font-size: var(--text-lg);
+  }
+
+  .customer__content td::before {
+    content: attr(data-label);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    color: rgb(var(--color-foreground)/ 0.5);
+  }
+
+  .order-history td:first-of-type::before {
+    font-size: inherit;
+    font-weight: var(--font-medium);
+    text-transform: none;
+    color: rgb(var(--color-foreground));
+  }
+
+  .order-details td:first-of-type::before {
+    content: none;
+  }
+
+  .order-details tfoot tr {
+    display: block;
+    padding: var(--sp-5);
+  }
+
+  .order-details tfoot tr+tr {
+    padding-block-start: 0;
+  }
+
+  .order-details tfoot tr td {
+    padding: 0;
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+  }
+
+  .order-details tfoot tr:last-child td {
+    font-weight: var(--font-medium);
+    font-size: var(--text-lg);
+  }
+
+  .order-details tfoot tr:last-child td::before {
+    font-size: inherit;
+    text-transform: none;
+    color: rgb(var(--color-foreground));
+  }
+
+  .order-details .price {
+    display: flex;
+    flex-wrap: wrap;
+    align-items: center;
+    gap: var(--sp-0d5);
+  }
+
+  .order-details .price__regular {
+    font-size: var(--text-base);
+  }
+}

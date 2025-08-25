@@ -1,0 +1,64 @@
+{%- doc -%}
+  Renders product variant selectors as buttons with color swatches or dropdown menus.
+
+  Supports size charts, variant images, and dynamic option display based on availability.
+
+  @param {object} product - Product object with variants and options
+  @param {object} block - Section block with picker settings
+  @param {string} product_form_id - Form ID for variant inputs
+  @param {string} product_id - Product ID for targeting
+  @param {string} section_id - Section ID for uniqueness
+  @param {string} [image_ratio] - Swatch image aspect ratio
+  @param {string} [image_ratio_mobile] - Mobile swatch aspect ratio
+  @param {boolean} [image_fill] - Fill vs contain swatch images
+
+  @example
+  {% render 'product-variant-picker',
+    product: product,
+    block: block,
+    product_form_id: product_form_id,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+{%- unless product.has_only_default_variant -%}
+  {%- liquid
+    case block.settings.picker_type
+      when 'button'
+        if block.settings.enable_color_swatches
+          if block.settings.color_swatch_type == 'variant'
+            render 'product-variant-picker-variant', product: product, product_id: product_id, section_id: section_id, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product', image_ratio: image_ratio, image_ratio_mobile: image_ratio_mobile, image_fill: image_fill
+          else
+            render 'product-variant-picker-swatch', product: product, product_id: product_id, section_id: section_id, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+          endif
+        else
+          render 'product-variant-picker-button', product: product, product_id: product_id, section_id: section_id, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+        endif
+      when 'dropdown'
+        render 'product-variant-picker-dropdown', product: product, product_id: product_id, section_id: section_id, show_variant_labels: block.settings.show_variant_labels, size_chart: block.settings.size_chart, shopify_attributes: block.shopify_attributes, context: 'product'
+    endcase
+  -%}
+{%- endunless -%}
+
+<noscript>
+  <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+    <label class="form__label flex gap-2" for="Variants-{{ section_id }}-{{ product_id }}">{{ 'products.product.product_variants' | t }}</label>
+    <div class="field">
+      <select name="id" id="Variants-{{ section_id }}-{{ product_id }}" class="select" form="{{ product_form_id }}">
+        {%- for variant in product.variants -%}
+          <option
+            {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+            {% if variant.available == false %}disabled{% endif %}
+            value="{{ variant.id }}"
+          >
+            {{ variant.title }}
+            {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+            - {{ variant.price | money | strip_html }}
+          </option>
+        {%- endfor -%}
+      </select>
+      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+    </div>
+  </div>
+</noscript>

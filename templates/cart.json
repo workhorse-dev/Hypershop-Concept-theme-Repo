@@ -1,0 +1,84 @@
+{
+  "sections": {
+    "main": {
+      "type": "main-cart",
+      "blocks": {
+        "free_shipping": {
+          "type": "free_shipping",
+          "settings": {
+            "minimum_amount": "1000"
+          }
+        },
+        "subtotal": {
+          "type": "subtotal",
+          "settings": {
+          }
+        },
+        "cart_note": {
+          "type": "cart_note",
+          "settings": {
+            "heading": "Add a note to your order"
+          }
+        },
+        "buttons": {
+          "type": "buttons",
+          "settings": {
+          }
+        }
+      },
+      "block_order": [
+        "free_shipping",
+        "subtotal",
+        "cart_note",
+        "buttons"
+      ],
+      "settings": {
+        "heading_size": "title-xl tracking-heading",
+        "heading_alignment": "md:items-end",
+        "heading_tag": "h1",
+        "show_vendor": false,
+        "show_shipping_calculator": true,
+        "padding_top": 72,
+        "padding_bottom": 60,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    },
+    "recently-viewed": {
+      "type": "recently-viewed",
+      "settings": {
+        "product_limit": 6,
+        "columns": 4,
+        "carousel_on_desktop": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": true,
+        "heading": "You may also like",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 60,
+        "padding_bottom": 100,
+        "divider": false,
+        "full_width": false,
+        "rounded": false
+      }
+    }
+  },
+  "order": [
+    "main",
+    "recently-viewed"
+  ]
+}

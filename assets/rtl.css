@@ -1,0 +1,48 @@
+:root {
+  --transform-logical: -1;
+  --transform-origin-start: right;
+  --transform-origin-end: left;
+}
+
+/*! base */
+
+.icon-arrow-left,
+.icon-arrow-right,
+.icon-arrow-left-long,
+.icon-arrow-right-long,
+.icon-chevron-left,
+.icon-chevron-right {
+  --tw-scale-x: -1;
+}
+
+.mouse-cursor {
+  inset-inline-start: calc(100% - var(--x));
+}
+
+/*! image-comparison */
+
+.image-comparison[data-layout=horizontal] {
+  --percent: 90%;
+}
+
+.image-comparison[data-layout=horizontal][animate] {
+  --percent: 50%;
+}
+
+.image-comparison[data-layout=horizontal] .comparison__after {
+  clip-path: inset(0px calc(100% - var(--percent)) 0px 0px);
+}
+
+.image-comparison[data-layout=horizontal] .comparison__button {
+  inset-inline-start: calc(100% - var(--percent));
+}
+
+[data-lazy-image] .image-comparison[data-layout=horizontal] .media.loading::before,
+[data-lazy-image] .image-comparison[data-layout=horizontal] .media.loading::after {
+  inset-inline-start: calc(calc(100% - var(--percent)) / 2);
+}
+
+[data-lazy-image] .image-comparison[data-layout=horizontal] .comparison__after .media.loading::before,
+[data-lazy-image] .image-comparison[data-layout=horizontal] .comparison__after .media.loading::after {
+  inset-inline-start: calc(100% - calc(var(--percent) / 2));
+}

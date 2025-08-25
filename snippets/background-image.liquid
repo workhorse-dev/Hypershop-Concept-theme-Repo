@@ -1,0 +1,47 @@
+{%- doc -%}
+  Renders a responsive background image with lazy loading and positioning options.
+
+  Creates an absolute-positioned image container for section/block backgrounds.
+
+  @param {object} background_image - Shopify image object to display
+  @param {string} [background_image_position] - Image sizing mode ('cover' or 'contain')
+  @param {string} [loading] - Loading strategy ('lazy' or 'eager')
+  @param {string} [fetchpriority] - Resource priority ('auto', 'high', or 'low')
+  @param {string} [lazyimage] - Lazy image animation
+  @param {string} [context] - Rendering context ('section' adds banner styling, others use default)
+
+  @example
+  {% render 'background-image',
+     background_image: section.settings.hero_image,
+     background_image_position: 'cover',
+     loading: 'eager',
+     fetchpriority: 'high'
+  %}
+{%- enddoc -%}
+
+<div class="group-block__media{% if context == 'section' %} banner__media{% endif %} block absolute top-0 left-0 w-full h-full overflow-hidden">
+  {%- liquid
+    assign loading = loading | default: 'lazy'
+    assign fetchpriority = fetchpriority | default: 'auto'
+    assign lazyimage = lazyimage | default: 'lazy-image'
+    
+    assign media_width_desktop = '100vw'
+    assign media_width_mobile = '100vw'
+    assign sizes = '(min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+    assign widths = '300, 450, 600, 750, 900, 1050, 1200, 1350, 1500, 1650, 1800, 1950, 2000, 2500, 3000, 3500, 4000, 5000'
+  -%}
+
+  <picture class="media{% if background_image_position == 'contain' %} media--contain media--transparent{% endif %} media--height block w-full h-full relative overflow-hidden">
+    {%- liquid
+      if background_image != blank
+        echo background_image | image_url: width: background_image.width | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetchpriority, is: lazyimage, class: 'banner__image'
+      else
+        assign placeholder = 'banner__image placeholder'
+        if context == 'section'
+          assign placeholder = 'banner__overlay ' | append: placeholder
+        endif
+        echo 'lifestyle-1' | placeholder_svg_tag: placeholder
+      endif
+    -%}
+  </picture>
+</div>

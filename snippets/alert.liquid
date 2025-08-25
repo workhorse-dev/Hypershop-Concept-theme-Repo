@@ -1,0 +1,51 @@
+{%- doc -%}
+  Renders a status alert component with contextual styling and icons.
+
+  Displays inline alerts with automatic icon selection based on status type.
+
+  @param {string} status - Alert status determining style and icon
+    - 'success' - Check circle icon, success styling
+    - 'error' - Alert triangle icon, error styling
+    - 'info' - Alert circle icon, info styling
+    - undefined - No status class, requires parent styling
+  @param {string} content - Alert message content (HTML supported)
+  @param {boolean} [hide_icon] - Hide the status icon
+
+  @example Success alert
+  {% render 'alert',
+     status: 'success',
+     content: 'Order completed successfully!'
+  %}
+
+  @example Error with HTML content
+  {% render 'alert',
+     status: 'error',
+     content: '<strong>Error:</strong> Invalid email format'
+  %}
+
+  @example Info without icon
+  {% render 'alert',
+     status: 'info',
+     content: 'Free shipping on orders over $50',
+     hide_icon: true
+  %}
+{%- enddoc -%}
+
+<div class="alert alert--{{ status }} flex items-start gap-3 text-sm md:text-base leading-tight">
+  {%- liquid
+    unless hide_icon
+      case status
+        when 'success'
+          assign icon = 'check-circle'
+        when 'info'
+          assign icon = 'alert-circle'
+        when 'error'
+          assign icon = 'alert-triangle'
+      endcase
+
+      render 'icon', icon: icon, size: 'sm', class: 'shrink-0'
+    endunless
+
+    echo content
+  -%}
+</div>

@@ -1,0 +1,150 @@
+<div class="number-counter flex flex-wrap w-full text-{{ block.settings.alignment_mobile }} md:text-{{ block.settings.alignment }}" {{ block.shopify_attributes }}>
+  {% content_for 'blocks' %}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.number-counter.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_counter"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__layout.content"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:blocks.group.settings.alignment.label",
+      "default": "left"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment_mobile",
+      "label": "t:blocks.group.settings.alignment_mobile.label",
+      "default": "left"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.number-counter.name",
+      "category": "t:categories.other_sections",
+      "settings": {
+        "alignment": "center",
+        "alignment_mobile": "center"
+      },
+      "blocks": {
+        "counter-1": {
+          "type": "_counter",
+          "settings": {
+            "number": "150",
+            "unit": "K+",
+            "duration": 2,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 50,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Happy<br>customers</p>",
+                "text_font": "subtitle"
+              }
+            }
+          },
+          "block_order": ["text"]
+        },
+        "counter-2": {
+          "type": "_counter",
+          "settings": {
+            "number": "16",
+            "unit": "",
+            "duration": 2,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 50,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Years of<br>craftsmanship</p>",
+                "text_font": "subtitle"
+              }
+            }
+          },
+          "block_order": ["text"]
+        },
+        "counter-3": {
+          "type": "_counter",
+          "settings": {
+            "number": "95",
+            "unit": "%",
+            "duration": 2,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 50,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Sustainable<br>materials</p>",
+                "text_font": "subtitle"
+              }
+            }
+          },
+          "block_order": ["text"]
+        },
+        "counter-4": {
+          "type": "_counter",
+          "settings": {
+            "number": "32",
+            "unit": "",
+            "duration": 2,
+            "width": "custom",
+            "custom_width": 50,
+            "width_mobile": "custom",
+            "custom_width_mobile": 50,
+            "padding-block-start": 10,
+            "padding-block-end": 10,
+            "padding-inline-start": 10,
+            "padding-inline-end": 10
+          },
+          "blocks": {
+            "text": {
+              "type": "text",
+              "settings": {
+                "text": "<p>Countries<br>reached</p>",
+                "text_font": "subtitle"
+              }
+            }
+          },
+          "block_order": ["text"]
+        }
+      },
+      "block_order": ["counter-1", "counter-2", "counter-3", "counter-4"]
+    }
+  ]
+}
+{% endschema %}

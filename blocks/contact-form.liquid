@@ -1,0 +1,208 @@
+<div class="contact size-style spacing-style" style="{% render 'section-size-style', settings: block.settings %}{% render 'section-spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  {%- assign form_id = 'ContactForm-' | append: block.id -%}
+  {%- form 'contact', id: form_id -%}
+    <div class="contact__fields flex flex-wrap gap-4d5 md:gap-6">
+      {%- if form.errors -%}
+        <div class="field field--full">
+          {%- liquid
+            assign form_errors = form.errors | default_errors
+            render 'alert', status: 'error', content: form_errors
+          -%}
+        </div>
+      {%- endif -%}
+
+      {%- if form.posted_successfully? -%}
+        <div class="field field--full">
+          {%- liquid
+            assign success_message = 'contact.form.post_success' | t
+            render 'alert', status: 'success', content: success_message
+          -%}
+        </div>
+      {%- endif -%}
+
+      <div class="field">
+        <input
+          class="input is-floating"
+          autocomplete="name"
+          type="text"
+          id="ContactFormName-{{ block.id }}"
+          name="contact[{{ 'contact.form.name' | t }}]"
+          value="{% if form.name %}{{ form.name }}{% elsif customer %}{{ customer.name }}{% endif %}"
+          placeholder="{{ 'contact.form.name' | t | escape }}"
+        />
+        <label class="label is-floating" for="ContactFormName-{{ block.id }}">{{ 'contact.form.name' | t }}</label>
+      </div>
+      <div class="field">
+        <input
+          class="input is-floating{% if form.errors contains 'email' %} invalid{% endif %}"
+          autocomplete="email"
+          type="email"
+          id="ContactFormEmail-{{ block.id }}"
+          name="contact[email]"
+          spellcheck="false"
+          autocapitalize="off"
+          value="{% if form.email %}{{ form.email }}{% elsif customer %}{{ customer.email }}{% endif %}"
+          placeholder="{{ 'contact.form.email' | t | escape }}"
+          required
+        >
+        <label class="label is-floating" for="ContactFormEmail-{{ block.id }}">{{ 'contact.form.email' | t }}</label>
+      </div>
+
+      {% content_for 'blocks' %}
+
+      <div class="field field--full">
+        <textarea
+          class="textarea is-floating"
+          rows="5"
+          id="ContactFormMessage-{{ block.id }}"
+          name="contact[{{ 'contact.form.message' | t }}]"
+          placeholder=" "
+        >
+          {{- form.body -}}
+        </textarea>
+        <label class="label is-floating" for="ContactFormMessage-{{ block.id }}">{{ 'contact.form.message' | t }}</label>
+      </div>
+      <div class="field field--full">
+        <label for="ContactSubmit-{{ block.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label>
+        <button type="submit" id="ContactSubmit-{{ block.id }}" class="button button--primary button--fixed" is="hover-button">
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">{{ 'contact.form.send' | t }}</span>
+        </button>
+      </div>
+
+      {%- comment -%}
+        Remove the following three lines of code to remove the note
+        about being protected by Google's reCAPTCHA service.
+        By removing it, the small reCAPTCHA widget will appear in the
+        bottom right corner of the page.
+      {%- endcomment -%}
+      <div class="field field--full rte text-sm">
+        {% # theme-check-disable TranslationKeyExists %}
+        {{- 'shopify.online_store.spam_detection.disclaimer_html' | t -}}
+        {% # theme-check-enable TranslationKeyExists %}
+      </div>
+    </div>
+  {%- endform -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.contact-form.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "_custom-field"
+    }
+  ],
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:blocks.group.settings.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:blocks.group.settings.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:blocks.group.settings.padding_left.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:blocks.group.settings.padding_right.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.contact-form.name",
+      "category": "t:categories.forms"
+    }
+  ]
+}
+{% endschema %}

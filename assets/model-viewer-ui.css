@@ -1,0 +1,70 @@
+.shopify-model-viewer-ui {
+  cursor: unset;
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__controls-area {
+  background: rgb(var(--color-background));
+  border-color: rgb(var(--color-border));
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button {
+  color: rgb(var(--color-foreground)/ 0.75);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:hover {
+  color: rgb(var(--color-foreground)/ 0.55);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:active,
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control.focus-visible:focus {
+  color: rgb(var(--color-foreground)/ 0.55);
+  background: rgb(var(--color-foreground)/ 0.025)
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--control:not(:last-child)::after {
+  border-color: rgb(var(--color-border));
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster {
+  width: var(--sp-10);
+  height: var(--sp-10);
+  inset: unset;
+  inset-inline-end: var(--sp-4);
+  inset-block-start: var(--sp-4);
+  border: none;
+  border-radius: var(--rounded-full);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-background)/ 0.7);
+  box-shadow: inset 0 0 0 1px rgb(var(--color-border));
+  backdrop-filter: blur(12px);
+  transform: scale(1);
+  transition: transform var(--animation-short);
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__poster-control-icon {
+  width: 90%;
+  height: 90%;
+  display: inline-block;
+}
+
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster:hover,
+.shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster:focus {
+  color: rgb(var(--color-foreground));
+}
+
+@media screen and (pointer: fine) {
+  @keyframes beat {
+    0%,
+    to {
+      transform: scale(1)
+    }
+
+    50% {
+      transform: scale(1.2)
+    }
+  }
+
+  .shopify-model-viewer-ui .shopify-model-viewer-ui__button--poster:hover>svg {
+    animation: beat .6s infinite ease;
+  }
+}

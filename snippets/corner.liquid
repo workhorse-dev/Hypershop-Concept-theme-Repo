@@ -1,0 +1,47 @@
+{%- doc -%}
+  Renders decorative SVG curved corner elements for visual container enhancement.
+
+  Creates symmetrical left and right corner ornaments with optional border cutout.
+
+  @param {string} prefix - Component namespace for CSS class generation
+    - Used to create BEM-style classes: '[prefix]__corner', '[prefix]__cutout'
+    - Examples: 'dropdown', 'header', 'modal', 'drawer'
+    - If blank, uses generic 'corner' and 'cutout' classes
+  @param {string} dir - Vertical positioning direction
+    - 'top' - Corners positioned at top of container
+    - 'bottom' - Corners positioned at bottom of container
+  @param {boolean} [border] - Include cutout border element
+
+  @example
+  {% render 'corner',
+     dir: 'bottom',
+     prefix: 'header',
+     border: true
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  if prefix != blank
+    assign corner = prefix | append: '__corner corner'
+    assign cutout = prefix | append: '__cutout cutout'
+  else
+    assign corner = 'corner'
+    assign cutout = 'cutout'
+  endif
+-%}
+
+<span class="{{ corner }} left {{ dir }} flex absolute pointer-events-none">
+  <svg class="w-full h-auto" viewBox="0 0 101 101" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M101 0H0V101H1C1 45.7715 45.7715 1 101 1V0Z"></path>
+    <path d="M1 101C1 45.7715 45.7715 1 101 1" fill="none"></path>
+  </svg>
+</span>
+<span class="{{ corner }} right {{ dir }} flex absolute pointer-events-none">
+  <svg class="w-full h-auto" viewBox="0 0 101 101" stroke="none" fill="currentColor" xmlns="http://www.w3.org/2000/svg">
+    <path fill-rule="evenodd" clip-rule="evenodd" d="M101 0H0V101H1C1 45.7715 45.7715 1 101 1V0Z"></path>
+    <path d="M1 101C1 45.7715 45.7715 1 101 1" fill="none"></path>
+  </svg>
+</span>
+{%- if border == true -%}
+  <span class="{{ cutout }} opacity-0 absolute left-0 top-100 w-full pointer-events-none"></span>
+{%- endif -%}

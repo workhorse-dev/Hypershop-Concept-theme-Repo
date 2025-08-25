@@ -1,0 +1,45 @@
+{%- doc -%}
+  Renders subcollection tiles based on active navigation menu hierarchy.
+
+  Traverses up to 3 levels deep in menu structure to find and display relevant subcollections.
+
+  @param {object} main_menu - Shopify navigation menu object with hierarchical links
+  @param {boolean} [show_count] - Display product count on collection tiles
+
+  @example
+  {% render 'subcollections', main_menu: main_menu, show_count: true %}
+{%- enddoc -%}
+
+{%- liquid
+  assign current_items = ''
+
+  for link in main_menu.links
+    if link.active and link.levels > 0 and link.child_active == false
+      unless current_items contains link.title
+        render 'sub-collections', show_count: show_count, sub_collection_links: link.links
+        assign current_items = current_items | append: link.title
+      endunless
+    endif
+    for sub_link in link.links
+      if sub_link.active and sub_link.levels > 0 and sub_link.child_active == false
+        unless current_items contains sub_link.title
+          render 'sub-collections', show_count: show_count, parent_link: sub_link, sub_collection_links: sub_link.links
+          assign current_items = current_items | append: sub_link.title
+        endunless
+      endif
+      for sub_sub_link in sub_link.links
+        if sub_sub_link.active and sub_sub_link.url == sub_link.url
+          unless current_items contains sub_sub_link.title
+            render 'sub-collections', show_count: show_count, parent_link: sub_link, sub_collection_links: sub_link.links
+            assign current_items = current_items | append: sub_sub_link.title
+          endunless
+        elsif sub_sub_link.active and sub_sub_link.levels > 0
+          unless current_items contains sub_sub_link.title
+            render 'sub-collections', show_count: show_count, parent_link: sub_sub_link, sub_collection_links: sub_sub_link.links
+            assign current_items = current_items | append: sub_sub_link.title
+          endunless
+        endif
+      endfor
+    endfor
+  endfor
+-%}

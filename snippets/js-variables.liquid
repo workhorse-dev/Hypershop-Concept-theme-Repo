@@ -1,0 +1,123 @@
+<script>
+  document.documentElement.classList.replace('no-js', 'js');
+
+  window.theme = window.theme || {};
+  theme.routes = {
+    shop_url: '{{ request.origin }}',
+    root_url: '{{ routes.root_url }}',
+    cart_url: '{{ routes.cart_url }}',
+    cart_add_url: '{{ routes.cart_add_url }}',
+    cart_change_url: '{{ routes.cart_change_url }}',
+    cart_update_url: '{{ routes.cart_update_url }}',
+    search_url: '{{ routes.search_url }}',
+    predictive_search_url: '{{ routes.predictive_search_url }}'
+  };
+
+  theme.variantStrings = {
+    preOrder: {{ 'products.product.pre_order' | t | json }},
+    addToCart: {{ 'products.product.add_to_cart' | t | json }},
+    soldOut: {{ 'products.product.sold_out' | t | json }},
+    unavailable: {{ 'products.product.unavailable' | t | json }},
+    addToBundle: {{ 'products.product.add_to_bundle' | t | json }},
+    backInStock: {{ 'products.back_in_stock.label' | t | json }}
+  };
+
+  theme.shippingCalculatorStrings = {
+    error: {{ 'general.cart.shipping_calculator.error' | t | json }},
+    notFound: {{ 'general.cart.shipping_calculator.not_found' | t | json }},
+    oneResult: {{ 'general.cart.shipping_calculator.one_result' | t | json }},
+    multipleResults: {{ 'general.cart.shipping_calculator.multiple_results' | t | json }}
+  };
+
+  theme.discountStrings = {
+    error: {{ 'general.cart.discount.error' | t | json }},
+    shippingError: {{ 'general.cart.discount.shipping_error' | t | json }}
+  };
+
+  theme.recipientFormStrings = {
+    expanded: {{ 'recipient.form.expanded' | t | json }},
+    collapsed: {{ 'recipient.form.collapsed' | t | json }}
+  };
+
+  theme.quickOrderListStrings = {
+    itemsAdded: {{ 'sections.quick_order_list.items_added.other' | t: quantity: '[quantity]' | json }},
+    itemAdded: {{ 'sections.quick_order_list.items_added.one' | t: quantity: '[quantity]' | json }},
+    itemsRemoved: {{ 'sections.quick_order_list.items_removed.other' | t: quantity: '[quantity]' | json }},
+    itemRemoved: {{ 'sections.quick_order_list.items_removed.one' | t: quantity: '[quantity]' | json }},
+    viewCart: {{ 'sections.quick_order_list.view_cart' | t | json }},
+    each: {{ 'sections.quick_order_list.each' | t: money: '[money]' | json }},
+    minError: {{ 'sections.quick_order_list.min_error' | t: min: '[min]' | json }},
+    maxError: {{ 'sections.quick_order_list.max_error' | t: max: '[max]' | json }},
+    stepError: {{ 'sections.quick_order_list.step_error' | t: step: '[step]' | json }}
+  };
+
+  theme.cartStrings = {
+    error: {{ 'cart.general.cart_error' | t | json }},
+    quantityError: {{ 'cart.general.cart_quantity_error_html' | t: quantity: '[quantity]' | json }}
+  };
+
+  theme.dateStrings = {
+    d: {{ 'general.date.d' | t | json }},
+    day: {{ 'general.date.day' | t | json }},
+    days: {{ 'general.date.days' | t | json }},
+    h: {{ 'general.date.h' | t | json }},
+    hour: {{ 'general.date.hour' | t | json }},
+    hours: {{ 'general.date.hours' | t | json }},
+    m: {{ 'general.date.m' | t | json }},
+    minute: {{ 'general.date.minute' | t | json }},
+    minutes: {{ 'general.date.minutes' | t | json }},
+    s: {{ 'general.date.s' | t | json }},
+    second: {{ 'general.date.second' | t | json }},
+    seconds: {{ 'general.date.seconds' | t | json }}
+  };
+
+  {%- if settings.enable_tab_attention -%}
+    theme.tabAttentionStrings = {
+      firstMessage: {{ settings.tab_attention_message_1 | json }},
+      nextMessage: {{ settings.tab_attention_message_2 | json }},
+      messageDelay: {{ settings.tab_attention_message_delay | json }}
+    };
+  {%- endif -%}
+
+  theme.strings = {
+    recentlyViewedEmpty: {{ 'general.cart.recently_viewed.empty' | t | json }},
+    close: {{ 'general.accessibility.close' | t | json }},
+    next: {{ 'general.pagination.next' | t | json }},
+    previous: {{ 'general.pagination.previous' | t | json }},
+    qrImageAlt: {{ 'gift_cards.issued.qr_image_alt' | t | json }}
+  };
+
+  theme.settings = {
+    moneyFormat: {{ shop.money_format | json }},
+    moneyWithCurrencyFormat: {{ shop.money_with_currency_format | json }},
+    currencyCodeEnabled: {{ settings.currency_code_enabled | json }},
+    externalLinksNewTab: {{ settings.external_links_new_tab | json }},
+    cartType: {{ settings.cart_type | json }},
+    isCartTemplate: {% if request.page_type == 'cart' %}true{% else %}false{% endif %},
+    pswpModule: {{ 'photoswipe.min.js' | asset_url | json }},
+    themeName: 'Concept',
+    themeVersion: '4.3.1',
+    agencyId: ''
+  };
+
+  {%- if request.page_type == 'product' -%}
+    // We save the product ID in local storage to be eventually used for recently viewed section
+    try {
+      const recentlyViewedProducts = new Set(JSON.parse(window.localStorage.getItem(`${theme.settings.themeName}:recently-viewed`) || '[]'));
+
+      recentlyViewedProducts.delete({{ product.id }}); // Delete first to re-move the product
+      recentlyViewedProducts.add({{ product.id }});
+
+      window.localStorage.setItem(`${theme.settings.themeName}:recently-viewed`, JSON.stringify(Array.from(recentlyViewedProducts.values()).reverse()));
+    } catch (e) {
+      // Safari in private mode does not allow setting item, we silently fail
+    }
+  {%- endif -%}
+
+  {%- if request.page_type == 'policy' -%}
+    document.addEventListener('DOMContentLoaded', () => {
+      document.querySelector('.shopify-policy__title').classList.add('h2');
+      document.querySelector('.shopify-policy__body .rte').classList.add('text-base');
+    });
+  {%- endif -%}
+</script>

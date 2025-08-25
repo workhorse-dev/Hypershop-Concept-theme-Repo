@@ -1,0 +1,49 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+<header class="giftcard-header section section--padding" role="banner">
+  <div class="page-width">
+    <div class="flex justify-center">
+      {%- render 'header-logo' -%}
+    </div>
+  </div>
+</header>
+
+{% schema %}
+{
+  "name": "t:sections.main-giftcard-header.name",
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.header.settings.paragraph__logo_help.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 36
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 36
+    }
+  ],
+  "default": {
+    "settings": {}
+  }
+}
+{% endschema %}

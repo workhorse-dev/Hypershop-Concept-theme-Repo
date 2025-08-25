@@ -1,0 +1,602 @@
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+  }
+</style>
+
+{%- liquid
+  assign collection = section.settings.collection
+  assign products = section.settings.products | default: collection.products
+  assign controls = 'ProductBundle-' | append: section.id
+-%}
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <div class="product-bundle-wrapper block lg:flex lg:gap-10">
+      <div class="lg:grow">
+        <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
+          {%- for product in products limit: section.settings.product_limit -%}
+            {%- render 'product-card-bundle',
+              product: product,
+              product_id: product.id,
+              section_id: section.id,
+              lazy_load: false,
+              image_ratio: settings.product_image_ratio,
+              image_fill: settings.product_image_fill,
+              show_secondary_image: settings.product_secondary_image,
+              show_vendor: settings.product_vendor,
+              show_rating: settings.product_rating,
+              show_color_swatches: settings.product_color_swatches,
+              show_countdown: settings.product_countdown,
+              show_quick_add: settings.product_quick_add,
+              show_quick_view: settings.product_quick_view,
+              show_save_amount: settings.product_save_amount,
+              save_type: settings.product_save_type,
+              show_variant_labels: section.settings.show_variant_labels,
+              picker_type: section.settings.picker_type,
+              enable_color_swatches: section.settings.enable_color_swatches,
+              color_swatch_type: section.settings.color_swatch_type,
+              controls: controls
+            -%}
+          {%- else -%}
+            {%- for i in (1..section.settings.product_limit) -%}
+              {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
+              {%- render 'product-card-placeholder',
+                placeholder: placeholder
+                image_ratio: settings.product_image_ratio,
+                show_vendor: settings.product_vendor
+              -%}
+            {%- endfor -%}
+          {%- endfor -%}
+        </motion-list>
+      </div>
+      <product-bundle class="product-bundle lg:grow-0 block pointer-events-none" id="{{ controls }}" data-minimum="{{ section.settings.minimum_quantity }}" data-maximum="{{ section.settings.maximum_quantity }}"{% if section.settings.prevent_duplicate_products %} data-prevent-duplicate{% endif %}>
+        <sticky-element class="product-bundle__sidebar flex flex-col gap-7d5 md:gap-10 sticky top-0 pointer-events-auto overflow-hidden">
+          {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
+            <div class="title-wrapper leading-none grid gap-2 {{ section.settings.heading_alignment }} relative z-1">
+              {%- if section.settings.subheading != blank -%}
+                <p class="heading normal-case subtitle-sm leading-none tracking-none">
+                  {{- section.settings.subheading | escape -}}
+                </p>
+              {%- endif -%}
+              {%- if section.settings.heading != blank -%}
+                <product-bundle-toggle-button class="product-bundle__toggle flex items-center justify-between gap-3" aria-controls="{{ controls }}">
+                  <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }} leading-none tracking-tight">
+                    {%- if section.settings.highlighted_text == 'none' -%}
+                      <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+                    {%- else -%}
+                      {%- liquid
+                        assign with_gradient = false
+                        if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+                          assign with_gradient = true
+                        endif
+                      -%}
+                      {%- render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient -%}
+                    {%- endif -%}
+                  </{{ section.settings.heading_tag }}>
+                  
+                  {%- render 'icon', icon: 'chevron-up', class: 'lg:hidden' -%}
+                </product-bundle-toggle-button>
+              {%- endif -%}
+              {%- if section.settings.description != blank -%}
+                <div class="rte leading-normal">
+                  {{- section.settings.description -}}
+                </div>
+              {%- endif -%}
+
+              <div class="free-shipping-bar w-full">
+                <progress-bar class="overflow-hidden rounded-full block" style="--progress: 0%;" data-product-bundle-progress-bar></progress-bar>
+              </div>
+            </div>
+          {%- endif -%}
+
+          <div class="product-bundle__body flex flex-col gap-6 md:gap-5">
+            {%- for i in (1..section.settings.minimum_quantity) -%}
+              {%- assign product = products[forloop.index0] -%}
+              <div class="horizontal-product flex items-center gap-3" data-product-bundle-variant available>
+                <figure class="horizontal-product__media media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} aspect-{{ settings.product_image_ratio }} relative overflow-hidden shrink-0" data-product-bundle-variant-media></figure>
+                <div class="horizontal-product__details grow flex flex-col justify-start gap-2d5" data-product-bundle-variant-content>
+                  <span class="horizontal-product__skeleton"></span>
+                  <span class="horizontal-product__skeleton"></span>
+                </div>
+                <div class="horizontal-product__quantity shrink-0 text-sm sm:block">
+                  <div class="grid gap-3">
+                    <quantity-input class="cart-quantity flex items-center relative"{% unless section.settings.allow_quantity_change %} hidden{% endunless %}>
+                      <label class="sr-only" for="Quantity-{{ section.id }}-{{ forloop.index }}">
+                        {{- 'products.quantity.label' | t -}}
+                      </label>
+                      <input class="quantity__input input text-center w-full h-full"
+                        type="number"
+                        id="Quantity-{{ section.id }}-{{ forloop.index }}"
+                        inputmode="numeric"
+                        autocomplete="off"
+                        data-min="{{ section.settings.quantity_minimum | default: 1 }}"
+                        min="{{ section.settings.quantity_minimum | default: 1 }}"
+                        {% if section.settings.quantity_maximum != blank %}
+                          data-max="{{ section.settings.quantity_maximum }}"
+                          max="{{ section.settings.quantity_maximum }}"
+                        {% endif %}
+                        step="{{ section.settings.quantity_increment | default: 1 }}"
+                        value="{{ section.settings.quantity_minimum | default: 1 }}"
+                      />
+                      <div class="quantity__buttons absolute right-0 hidden xl:flex flex-col items-center justify-center h-full">
+                        <button type="button" name="plus" class="quantity__button flex justify-center w-full items-end" aria-label="{{ 'products.quantity.increase' | t }}">
+                          {%- render 'icon', icon: 'increase', size: 'sm', class: 'stroke-1' -%}
+                        </button>
+                        <button type="button" name="minus" class="quantity__button flex justify-center w-full items-start" aria-label="{{ 'products.quantity.decrease' | t }}">
+                          {%- render 'icon', icon: 'decrease', size: 'sm', class: 'stroke-1' -%}
+                        </button>
+                      </div>
+                    </quantity-input>
+                    <div class="text-xs text-right relative">
+                      <product-bundle-remove-button class="link cursor-pointer" aria-controls="{{ controls }}">{{ 'sections.product_bundle.remove' | t }}</product-bundle-remove-button>
+                    </div>
+                  </div>
+                </div>
+              </div>
+            {%- endfor -%}
+          </div>
+          <div class="product-bundle__footer grid gap-2d5">
+            <div class="hidden lg:flex gap-4">
+              <div class="heading text-xl shrink-0">{{ 'sections.product_bundle.total' | t }}</div>
+              <div class="heading text-xl grow font-bold text-right" data-product-bundle-total-with-currency>{{ 0 | money_with_currency }}</div>
+            </div>
+            <button type="button" class="button button--primary w-full" is="hover-button" data-product-bundle-submit disabled>
+              <span class="btn-fill" data-fill></span>
+              <span class="flex gap-3d5">
+                <span class="btn-price lg:hidden relative" data-product-bundle-total>{{ 0 | money }}</span>
+                <span class="btn-text">{{ 'sections.product_bundle.add_to_cart' | t }}</span>
+              </span>
+            </button>
+            <p class="text-xs text-opacity text-center">{{ 'sections.product_bundle.discounts_at_checkout' | t }}</p>
+            <div class="product-form__error-message alert alert--error text-sm font-medium leading-tight text-center" role="alert" hidden></div>
+          </div>
+        </sticky-element>
+      </product-bundle>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.product-bundle.name",
+  "settings": [
+    {
+      "type": "collection",
+      "id": "collection",
+      "label": "t:sections.global.settings.collection.label"
+    },
+    {
+      "type": "product_list",
+      "id": "products",
+      "label": "t:sections.global.settings.products.label",
+      "info": "t:sections.global.settings.products.info"
+    },
+    {
+      "type": "range",
+      "id": "product_limit",
+      "label": "t:sections.global.settings.product_limit.label",
+      "default": 6,
+      "min": 2,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "columns",
+      "min": 1,
+      "max": 4,
+      "step": 1,
+      "default": 3,
+      "label": "t:sections.global.settings.columns.label"
+    },
+    {
+      "type": "select",
+      "id": "columns_mobile",
+      "options": [
+        {
+          "value": "1",
+          "label": "t:sections.global.settings.columns_mobile.options__1.label"
+        },
+        {
+          "value": "2",
+          "label": "t:sections.global.settings.columns_mobile.options__2.label"
+        }
+      ],
+      "default": "1",
+      "label": "t:sections.global.settings.columns_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.product-bundle.settings.header__discount.content",
+      "info": "t:sections.product-bundle.settings.header__discount.info"
+    },
+    {
+      "type": "range",
+      "id": "minimum_quantity",
+      "label": "t:sections.product-bundle.settings.minimum_quantity.label",
+      "default": 3,
+      "min": 2,
+      "max": 6,
+      "step": 1
+    },
+    {
+      "type": "range",
+      "id": "maximum_quantity",
+      "label": "t:sections.product-bundle.settings.maximum_quantity.label",
+      "default": 3,
+      "min": 2,
+      "max": 12,
+      "step": 1
+    },
+    {
+      "type": "checkbox",
+      "id": "prevent_duplicate_products",
+      "default": true,
+      "label": "t:sections.product-bundle.settings.prevent_duplicate_products.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "allow_quantity_change",
+      "default": true,
+      "label": "t:sections.product-bundle.settings.allow_quantity_change.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.product-bundle.settings.header__quantity_rules.content"
+    },
+    {
+      "type": "text",
+      "id": "quantity_increment",
+      "label": "t:sections.product-bundle.settings.quantity_increment.label",
+      "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "quantity_minimum",
+      "label": "t:sections.product-bundle.settings.quantity_minimum.label",
+      "default": "1"
+    },
+    {
+      "type": "text",
+      "id": "quantity_maximum",
+      "label": "t:sections.product-bundle.settings.quantity_maximum.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__product.content"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_variant_labels",
+      "default": true,
+      "label": "t:sections.main-product.blocks.variant_picker.settings.show_variant_labels.label"
+    },
+    {
+      "type": "select",
+      "id": "picker_type",
+      "options": [
+        {
+          "value": "dropdown",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__1.label"
+        },
+        {
+          "value": "button",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.options__2.label"
+        }
+      ],
+      "default": "button",
+      "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
+    },
+    {
+      "visible_if": "{{ section.settings.picker_type == 'button' }}",
+      "type": "checkbox",
+      "id": "enable_color_swatches",
+      "default": true,
+      "label": "t:sections.main-product.blocks.variant_picker.settings.enable_color_swatches.label",
+      "info": "t:sections.main-product.blocks.variant_picker.settings.enable_color_swatches.info"
+    },
+    {
+      "visible_if": "{{ section.settings.picker_type == 'button' and section.settings.enable_color_swatches == true }}",
+      "type": "select",
+      "id": "color_swatch_type",
+      "options": [
+        {
+          "value": "color",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.color_swatch_type.options__1.label"
+        },
+        {
+          "value": "variant",
+          "label": "t:sections.main-product.blocks.variant_picker.settings.color_swatch_type.options__2.label"
+        }
+      ],
+      "default": "color",
+      "label": "t:sections.main-product.blocks.variant_picker.settings.color_swatch_type.label",
+      "info": "t:sections.main-product.blocks.variant_picker.settings.color_swatch_type.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Your bundle"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "lg:text-2xl text-2xl",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "lg:text-3xl text-2xl",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "lg:text-4xl text-2xl",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "lg:text-5xl text-2xl",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "lg:text-5xl text-2xl",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_alignment",
+      "label": "t:sections.global.settings.heading_alignment.label",
+      "options": [
+        {
+          "value": "text-left",
+          "label": "t:sections.global.settings.heading_alignment.options__1.label"
+        },
+        {
+          "value": "text-center",
+          "label": "t:sections.global.settings.heading_alignment.options__2.label"
+        },
+        {
+          "value": "text-right",
+          "label": "t:sections.global.settings.heading_alignment.options__3.label"
+        }
+      ],
+      "default": "text-left"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "text",
+      "id": "subheading",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "richtext",
+      "id": "description",
+      "label": "t:sections.global.settings.description.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 72
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 72
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.product-bundle.name"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ],
+    "templates": [
+      "password"
+    ]
+  }
+}
+{% endschema %}

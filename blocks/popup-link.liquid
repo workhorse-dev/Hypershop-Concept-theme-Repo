@@ -1,0 +1,270 @@
+{%- if block.settings.style == 'link' -%}
+  <button type="button" class="link inline-block{% if block.settings.show_icon %} icon-with-text{% endif %} size-style" style="{% render 'section-size-style', settings: block.settings %}" is="hover-link" aria-controls="PopupLink-{{ block.id }}" aria-expanded="false" {{ block.shopify_attributes }}>
+    <span class="link-text">{{ block.settings.label | escape }}</span>
+    {%- liquid
+      if block.settings.show_icon
+        render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+      endif
+    -%}
+  </button>
+{%- else -%}
+  <button type="button" class="button button--{{ block.settings.style }} button--{{ block.settings.size }}{% if block.settings.show_icon %} icon-with-text{% endif %} size-style" style="{% render 'section-size-style', settings: block.settings %}" is="hover-button" aria-controls="PopupLink-{{ block.id }}" aria-expanded="false" {{ block.shopify_attributes }}>
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        echo block.settings.label | escape
+        if block.settings.show_icon
+          render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+        endif
+      -%}
+    </span>
+  </button>
+{%- endif -%}
+
+{%- capture popup_content -%}
+  <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="PopupLink-{{ block.id }}" aria-expanded="false"></overlay-element>
+  <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+    <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+      <span class="drawer__title heading {{ block.settings.heading_size }}">{{ block.settings.heading | escape }}</span>
+      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="PopupLink-{{ block.id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+        <span class="btn-fill" data-fill></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'close', size: 'sm' -%}
+        </span>
+      </button>
+    </gesture-element>
+    <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+      <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+        <div class="rte">
+          {% content_for 'blocks' %}
+        </div>
+      </div>
+    </div>
+  </div>
+{%- endcapture -%}
+
+{%- if block.settings.behavior == 'default' -%}
+  <x-modal id="PopupLink-{{ block.id }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ block.settings.heading | escape }}"
+    hidden
+  >
+    {{- popup_content -}}
+  </x-modal>
+{%- else -%}
+  <drawer-element id="PopupLink-{{ block.id }}" class="drawer drawer--end z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+    role="dialog"
+    aria-modal="true"
+    aria-label="{{ block.settings.heading | escape }}"
+    hidden
+  >
+    {{- popup_content -}}
+  </drawer-element>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.popup-link.name",
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "tag": null,
+  "settings": [
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__popup.content"
+    },
+    {
+      "type": "select",
+      "id": "behavior",
+      "options": [
+        {
+          "value": "default",
+          "label": "t:blocks.popup-link.settings.behavior.options__1.label"
+        },
+        {
+          "value": "drawer",
+          "label": "t:blocks.popup-link.settings.behavior.options__2.label"
+        }
+      ],
+      "default": "default",
+      "label": "t:blocks.popup-link.settings.behavior.label"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Example heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__link.content"
+    },
+    {
+      "type": "text",
+      "id": "label",
+      "label": "t:sections.global.settings.text.label",
+      "default": "Learn more"
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.global.settings.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.global.settings.button_style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.global.settings.button_style.options__3.label"
+        }
+      ],
+      "default": "link",
+      "label": "t:blocks.popup-link.settings.style.label"
+    },
+    {
+      "type": "select",
+      "id": "size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.global.settings.button_size.options__1.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.global.settings.button_size.options__2.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.global.settings.button_size.options__3.label"
+        }
+      ],
+      "default": "md",
+      "label": "t:blocks.popup-link.settings.size.label",
+      "visible_if": "{{ block.settings.style == 'primary' or block.settings.style == 'secondary' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "show_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": true
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.popup-link.name",
+      "category": "t:categories.links",
+      "settings": {
+        "heading": "When will I get my order?",
+        "label": "Learn more"
+      },
+      "blocks": {
+        "text": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+            "alignment": "left"
+          }
+        }
+      },
+      "block_order": ["text"]
+    }
+  ]
+}
+{% endschema %}

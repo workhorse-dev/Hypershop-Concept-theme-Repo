@@ -1,0 +1,239 @@
+<style>
+  {%- liquid
+    assign header_font = settings.type_header_font
+    assign header_font_medium = header_font | font_modify: 'weight', '500'
+    assign header_font_bold = header_font | font_modify: 'weight', '700'
+
+    assign body_font = settings.type_body_font
+    assign body_font_medium = body_font | font_modify: 'weight', '500'
+    assign body_font_bold = body_font | font_modify: 'weight', '700'
+    assign body_font_italic = body_font | font_modify: 'style', 'italic'
+    assign body_font_bold_italic = body_font_bold | font_modify: 'style', 'italic'
+
+    if header_font.family != body_font.family
+      echo header_font | font_face: font_display: 'swap'
+      echo header_font_medium | font_face: font_display: 'swap'
+      echo header_font_bold | font_face: font_display: 'swap'
+    endif
+
+    echo body_font | font_face: font_display: 'swap'
+    echo body_font_medium | font_face: font_display: 'swap'
+    echo body_font_bold | font_face: font_display: 'swap'
+    echo body_font_italic | font_face: font_display: 'swap'
+    echo body_font_bold_italic | font_face: font_display: 'swap'
+
+    assign rounded_button = 0.75
+    if settings.rounded_button == 'round'
+      assign rounded_button = 3.75
+    elsif settings.rounded_button == 'square'
+      assign rounded_button = 0
+    endif
+
+    assign rounded_input = 0.75
+    if settings.rounded_input == 'round'
+      assign rounded_input = 3.75
+    elsif settings.rounded_input == 'square'
+      assign rounded_input = 0
+    endif
+  -%}
+
+  :root {
+    /*! General */
+    --color-base-text: {{ settings.color_text.rgb }};
+    --color-base-highlight: {{ settings.color_highlight.rgb }};
+    --color-base-background: {{ settings.color_background.rgb }};
+    --color-base-button: {{ settings.color_button_background.rgb }};
+    --color-base-button-gradient: {% if settings.color_button_gradient != blank %}{{ settings.color_button_gradient }}{% else %}{{ settings.color_button_background }}{% endif %};
+    --color-base-button-text: {{ settings.color_button_text.rgb }};
+    --color-keyboard-focus: {{ settings.color_keyboard_focus.rgb }};
+    --color-shadow: {{ settings.color_shadow.rgb }};
+    --color-price: {{ settings.color_price.rgb }};
+    --color-sale-price: {{ settings.color_sale_price.rgb }};
+    --color-sale-tag: {{ settings.color_sale_tag.rgb }};
+    --color-sale-tag-text: {{ settings.color_sale_tag_text.rgb }};
+    --color-rating: {{ settings.color_rating.rgb }};
+    --color-placeholder: {{ settings.color_image_background.rgb }};
+    --color-success-text: {{ settings.color_success_text.rgb }};
+    --color-success-background: {{ settings.color_success_background.rgb }};
+    --color-error-text: {{ settings.color_error_text.rgb }};
+    --color-error-background: {{ settings.color_error_background.rgb }};
+    --color-info-text: {{ settings.color_info_text.rgb }};
+    --color-info-background: {{ settings.color_info_background.rgb }};
+    
+    /*! Menu and drawers */
+    --color-drawer-text: {{ settings.color_drawer_text.rgb }};
+    --color-drawer-background: {{ settings.color_drawer_background.rgb }};
+    --color-drawer-button-background: {{ settings.color_drawer_button_background.rgb }};
+    --color-drawer-button-gradient: {% if settings.color_drawer_button_gradient != blank %}{{ settings.color_drawer_button_gradient }}{% else %}{{ settings.color_drawer_button_background }}{% endif %};
+    --color-drawer-button-text: {{ settings.color_drawer_button_text.rgb }};
+    --color-drawer-overlay: {{ settings.color_drawer_overlay.rgb }};
+
+    /*! Product card */
+    --card-radius: var(--rounded-card);
+    --card-border-width: {{ settings.card_border_thickness | divided_by: 10.0 }}rem;
+    --card-border-opacity: {{ settings.card_border_opacity | divided_by: 100.0 }};
+    --card-shadow-opacity: {{ settings.card_shadow_opacity | divided_by: 100.0 }};
+    --card-shadow-horizontal-offset: {{ settings.card_shadow_horizontal_offset | divided_by: 10.0 }}rem;
+    --card-shadow-vertical-offset: {{ settings.card_shadow_vertical_offset | divided_by: 10.0 }}rem;
+
+    /*! Buttons */
+    --buttons-radius: var(--rounded-button);
+    --buttons-border-width: {{ settings.buttons_border_thickness }}px;
+    --buttons-border-opacity: {{ settings.buttons_border_opacity | divided_by: 100.0 }};
+    --buttons-shadow-opacity: {{ settings.buttons_shadow_opacity | divided_by: 100.0 }};
+    --buttons-shadow-horizontal-offset: {{ settings.buttons_shadow_horizontal_offset }}px;
+    --buttons-shadow-vertical-offset: {{ settings.buttons_shadow_vertical_offset }}px;
+
+    /*! Inputs */
+    --inputs-radius: var(--rounded-input);
+    --inputs-border-width: {{ settings.inputs_border_thickness }}px;
+    --inputs-border-opacity: {{ settings.inputs_border_opacity | divided_by: 100.0 }};
+
+    /*! Spacing */
+    --sp-0d5: 0.125rem;
+    --sp-1: 0.25rem;
+    --sp-1d5: 0.375rem;
+    --sp-2: 0.5rem;
+    --sp-2d5: 0.625rem;
+    --sp-3: 0.75rem;
+    --sp-3d5: 0.875rem;
+    --sp-4: 1rem;
+    --sp-4d5: 1.125rem;
+    --sp-5: 1.25rem;
+    --sp-5d5: 1.375rem;
+    --sp-6: 1.5rem;
+    --sp-6d5: 1.625rem;
+    --sp-7: 1.75rem;
+    --sp-7d5: 1.875rem;
+    --sp-8: 2rem;
+    --sp-8d5: 2.125rem;
+    --sp-9: 2.25rem;
+    --sp-9d5: 2.375rem;
+    --sp-10: 2.5rem;
+    --sp-10d5: 2.625rem;
+    --sp-11: 2.75rem;
+    --sp-12: 3rem;
+    --sp-13: 3.25rem;
+    --sp-14: 3.5rem;
+    --sp-15: 3.875rem;
+    --sp-16: 4rem;
+    --sp-18: 4.5rem;
+    --sp-20: 5rem;
+    --sp-23: 5.625rem;
+    --sp-24: 6rem;
+    --sp-28: 7rem;
+    --sp-32: 8rem;
+    --sp-36: 9rem;
+    --sp-40: 10rem;
+    --sp-44: 11rem;
+    --sp-48: 12rem;
+    --sp-52: 13rem;
+    --sp-56: 14rem;
+    --sp-60: 15rem;
+    --sp-64: 16rem;
+    --sp-68: 17rem;
+    --sp-72: 18rem;
+    --sp-80: 20rem;
+    --sp-96: 24rem;
+    --sp-100: 32rem;
+
+    /*! Font family */
+    --font-heading-family: {{ header_font.family }}, {{ header_font.fallback_families }};
+    --font-heading-style: {{ header_font.style }};
+    --font-heading-weight: {{ header_font.weight }};
+    --font-heading-line-height: {{ settings.type_header_line_height }};
+    --font-heading-letter-spacing: {{ settings.type_header_spacing | divided_by: 1000.00 }}em;
+    {% if settings.type_header_capitalize %}
+      --font-heading-text-transform: uppercase;
+    {% endif %}
+
+    --font-body-family: {{ body_font.family }}, {{ body_font.fallback_families }};
+    --font-body-style: {{ body_font.style }};
+    --font-body-weight: {{ body_font.weight }};
+    --font-body-line-height: {{ settings.type_body_line_height }};
+    --font-body-letter-spacing: {{ settings.type_body_spacing | divided_by: 1000.00 }}em;
+
+    --font-navigation-family: var(--font-{{ settings.type_navigation_font }}-family);
+    --font-navigation-size: clamp({{ settings.type_navigation_size | minus: 2 | at_least: 12 | divided_by: 16.0 }}rem, 0.748rem + 0.3174vw, {{ settings.type_navigation_size | plus: 2 | divided_by: 16.0 }}rem);
+    --font-navigation-weight: {{ settings.type_navigation_weight }};
+    {% if settings.type_navigation_capitalize %}
+      --font-navigation-text-transform: uppercase;
+    {% endif %}
+
+    --font-button-family: var(--font-{{ settings.type_button_font }}-family);
+    --font-button-size: clamp({{ settings.type_button_size | minus: 2 | at_least: 12 | divided_by: 16.0 }}rem, 0.8115rem + 0.1587vw, {{ settings.type_button_size | divided_by: 16.0 }}rem);
+    --font-button-weight: {{ settings.type_button_weight }};
+    {% if settings.type_button_capitalize %}
+      --font-button-text-transform: uppercase;
+    {% endif %}
+
+    --font-product-family: var(--font-{{ settings.type_product_font }}-family);
+    --font-product-size: clamp({{ settings.type_product_size | divided_by: 16.0 }}rem, 0.873rem + 0.3175vw, {{ settings.type_product_size | plus: 4 | divided_by: 16.0 }}rem);
+    --font-product-weight: {{ settings.type_product_weight }};
+    {% if settings.type_product_capitalize %}
+      --font-product-text-transform: uppercase;
+    {% endif %}
+
+    /*! Font size */
+    --text-3xs: {{ settings.type_body_size | minus: 6 | at_least: 9 | divided_by: 16.0 }}rem;
+    --text-2xs: {{ settings.type_body_size | minus: 5 | at_least: 10 | divided_by: 16.0 }}rem;
+    --text-xs: {{ settings.type_body_size | minus: 4 | at_least: 11 | divided_by: 16.0 }}rem;
+    --text-2sm: {{ settings.type_body_size | minus: 3 | at_least: 12 | divided_by: 16.0 }}rem;
+    --text-sm: {{ settings.type_body_size | minus: 2 | at_least: 12 | divided_by: 16.0 }}rem;
+    --text-base: {{ settings.type_body_size | divided_by: 16.0 }}rem;
+    --text-lg: {{ settings.type_body_size | plus: 2 | divided_by: 16.0 }}rem;
+    --text-xl: {{ settings.type_body_size | plus: 4 | divided_by: 16.0 }}rem;
+    --text-2xl: {{ settings.type_body_size | plus: 8 | divided_by: 16.0 }}rem;
+    --text-3xl: {{ settings.type_body_size | plus: 14 | divided_by: 16.0 }}rem;
+    --text-4xl: {{ settings.type_body_size | plus: 20 | divided_by: 16.0 }}rem;
+    --text-5xl: {{ settings.type_body_size | plus: 32 | divided_by: 16.0 }}rem;
+    --text-6xl: {{ settings.type_body_size | plus: 44 | divided_by: 16.0 }}rem;
+    --text-7xl: {{ settings.type_body_size | plus: 56 | divided_by: 16.0 }}rem;
+    --text-8xl: {{ settings.type_body_size | plus: 80 | divided_by: 16.0 }}rem;
+
+    /*! Layout */
+    --page-width: {{ settings.page_width }}px;
+    --gap-padding: clamp(var(--sp-5), 2.526vw, var(--sp-12));
+    --grid-gap: clamp(40px, 20vw, 60px);
+    --page-padding: var(--sp-5);
+    --page-container: min(calc(100vw - var(--scrollbar-width, 0px) - var(--page-padding) * 2), var(--page-width));
+    --rounded-button: {{ rounded_button }}rem;
+    --rounded-input: {{ rounded_input }}rem;
+    --rounded-card: {% if settings.rounded_card == 'round' %}clamp(var(--sp-2d5), 1.053vw, var(--sp-5)){% else %}0rem{% endif %};
+    --rounded-block: {% if settings.rounded_block == 'round' %}clamp(var(--sp-2d5), 1.053vw, var(--sp-5)){% else %}0rem{% endif %};
+
+    /*! Other */
+    --icon-weight: {{ settings.icon_weight }}px;
+  }
+
+  @media screen and (min-width: 1024px) {
+    :root {
+      --page-padding: var(--sp-9);
+    }
+  }
+
+  @media screen and (min-width: 1280px) {
+    :root {
+      --gap-padding: var(--sp-12);
+      --page-padding: var(--sp-12);
+      --page-container: min(calc(100vw - var(--scrollbar-width, 0px) - var(--page-padding) * 2), max(var(--page-width), 1280px));
+    }
+  }
+
+  @media screen and (min-width: 1536px) {
+    :root {
+      --page-padding: max(var(--sp-12), 50vw - var(--scrollbar-width, 0px)/2 - var(--page-width)/2);
+    }
+  }
+</style>
+
+{%- unless settings.type_body_font.system? -%}
+  {% # theme-check-disable AssetPreload %}
+  <link rel="preload" as="font" href="{{ settings.type_body_font | font_url }}" type="font/woff2" crossorigin>
+  {% # theme-check-enable AssetPreload %}
+{%- endunless -%}
+{%- unless settings.type_header_font.system? -%}
+  {% # theme-check-disable AssetPreload %}
+  <link rel="preload" as="font" href="{{ settings.type_header_font | font_url }}" type="font/woff2" crossorigin>
+  {% # theme-check-enable AssetPreload %}
+{%- endunless -%}

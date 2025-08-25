@@ -1,0 +1,388 @@
+{%- capture accordion_content -%}
+  <details class="details{% if block.settings.reduce_size %} product__accordion {{ block.settings.style }}{% endif %}" is="accordion-details"{% if block.settings.open_by_default %} aria-expanded="true" open{% endif %} {{ block.shopify_attributes }}>
+    <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+      <span class="{% if block.settings.reduce_size %}text-base{% else %}heading text-base-xl{% endif %} font-medium leading-none flex items-center gap-2d5 md:gap-3">
+        {%- if block.settings.icon_image != blank -%}
+          {%- liquid
+            if block.settings.iwidth == 'fit'
+              assign icon_width = block.settings.icon_image.width
+            else
+              assign icon_width = block.settings.icon_width
+            endif
+          -%}
+          <figure class="media media--transparent relative inline-block">
+            {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+            {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+            {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+            {%- assign image_alt = image_alt | default: block.settings.heading | escape -%}
+            {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
+          </figure>
+        {%- elsif block.settings.icon != 'none' -%}
+          {%- liquid
+            if block.settings.iwidth == 'fit'
+              render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block'
+            else
+              render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block', width: block.settings.icon_width
+            endif
+          -%}
+        {%- endif -%}
+        {{- block.settings.heading | escape -}}
+      </span>
+      {%- render 'icon', icon: 'plus-2', size: 'xs', class: 'shrink-0' -%}
+    </summary>
+    <div class="details__content group-block__content rich-text">
+      {% content_for 'blocks' %}
+    </div>
+  </details>
+{%- endcapture -%}
+
+{%- if block.settings.reduce_size -%}
+  {{- accordion_content -}}
+{%- else -%}
+  <div class="accordion">
+    {{- accordion_content -}}
+  </div>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.accordion-row.name",
+  "tag": null,
+  "blocks": [
+    {
+      "type": "@theme"
+    },
+    {
+      "type": "@app"
+    }
+  ],
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "reduce_size",
+      "label": "t:blocks.accordion.settings.reduce_size.label",
+      "default": true
+    },
+    {
+      "type": "select",
+      "id": "style",
+      "label": "t:sections.main-product.blocks.collapsible_tab.settings.style.label",
+      "options": [
+        {
+          "value": "with-border",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.style.options__1.label"
+        },
+        {
+          "value": "with-background",
+          "label": "t:sections.main-product.blocks.collapsible_tab.settings.style.options__2.label"
+        }
+      ],
+      "default": "with-border",
+      "visible_if": "{{ block.settings.reduce_size }}"
+    },
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Accordion heading",
+      "label": "t:sections.global.settings.heading.label",
+      "info": "t:sections.main-product.blocks.collapsible_tab.settings.heading.info"
+    },
+    {
+      "type": "checkbox",
+      "id": "open_by_default",
+      "label": "t:sections.main-product.blocks.collapsible_tab.settings.opened.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__icon.content"
+    },
+    {
+      "type": "select",
+      "id": "icon",
+      "label": "t:sections.global.settings.icon.label",
+      "default": "none",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.icon.options__1.label"
+        },
+        {
+          "value": "alert",
+          "label": "t:sections.global.settings.icon.options__2.label"
+        },
+        {
+          "value": "award",
+          "label": "t:sections.global.settings.icon.options__3.label"
+        },
+        {
+          "value": "bag",
+          "label": "t:sections.global.settings.icon.options__4.label"
+        },
+        {
+          "value": "box",
+          "label": "t:sections.global.settings.icon.options__5.label"
+        },
+        {
+          "value": "briefcase",
+          "label": "t:sections.global.settings.icon.options__6.label"
+        },
+        {
+          "value": "calendar",
+          "label": "t:sections.global.settings.icon.options__7.label"
+        },
+        {
+          "value": "chat_bubble",
+          "label": "t:sections.global.settings.icon.options__8.label"
+        },
+        {
+          "value": "check_mark",
+          "label": "t:sections.global.settings.icon.options__9.label"
+        },
+        {
+          "value": "clipboard",
+          "label": "t:sections.global.settings.icon.options__10.label"
+        },
+        {
+          "value": "cosmetics",
+          "label": "t:sections.global.settings.icon.options__11.label"
+        },
+        {
+          "value": "creadit_card",
+          "label": "t:sections.global.settings.icon.options__12.label"
+        },
+        {
+          "value": "dairy",
+          "label": "t:sections.global.settings.icon.options__13.label"
+        },
+        {
+          "value": "dairy_free",
+          "label": "t:sections.global.settings.icon.options__14.label"
+        },
+        {
+          "value": "devices",
+          "label": "t:sections.global.settings.icon.options__15.label"
+        },
+        {
+          "value": "email",
+          "label": "t:sections.global.settings.icon.options__16.label"
+        },
+        {
+          "value": "eye",
+          "label": "t:sections.global.settings.icon.options__17.label"
+        },
+        {
+          "value": "file_text",
+          "label": "t:sections.global.settings.icon.options__18.label"
+        },
+        {
+          "value": "gift",
+          "label": "t:sections.global.settings.icon.options__19.label"
+        },
+        {
+          "value": "gluten",
+          "label": "t:sections.global.settings.icon.options__20.label"
+        },
+        {
+          "value": "gluten_free",
+          "label": "t:sections.global.settings.icon.options__21.label"
+        },
+        {
+          "value": "headphone",
+          "label": "t:sections.global.settings.icon.options__22.label"
+        },
+        {
+          "value": "heart",
+          "label": "t:sections.global.settings.icon.options__23.label"
+        },
+        {
+          "value": "iron",
+          "label": "t:sections.global.settings.icon.options__24.label"
+        },
+        {
+          "value": "lightning",
+          "label": "t:sections.global.settings.icon.options__25.label"
+        },
+        {
+          "value": "lock",
+          "label": "t:sections.global.settings.icon.options__26.label"
+        },
+        {
+          "value": "map_pin",
+          "label": "t:sections.global.settings.icon.options__27.label"
+        },
+        {
+          "value": "newspaper",
+          "label": "t:sections.global.settings.icon.options__28.label"
+        },
+        {
+          "value": "organic",
+          "label": "t:sections.global.settings.icon.options__29.label"
+        },
+        {
+          "value": "perfume",
+          "label": "t:sections.global.settings.icon.options__30.label"
+        },
+        {
+          "value": "phone",
+          "label": "t:sections.global.settings.icon.options__31.label"
+        },
+        {
+          "value": "plane",
+          "label": "t:sections.global.settings.icon.options__32.label"
+        },
+        {
+          "value": "planet",
+          "label": "t:sections.global.settings.icon.options__33.label"
+        },
+        {
+          "value": "planet_2",
+          "label": "t:sections.global.settings.icon.options__34.label"
+        },
+        {
+          "value": "recycling",
+          "label": "t:sections.global.settings.icon.options__35.label"
+        },
+        {
+          "value": "return",
+          "label": "t:sections.global.settings.icon.options__36.label"
+        },
+        {
+          "value": "rocket",
+          "label": "t:sections.global.settings.icon.options__37.label"
+        },
+        {
+          "value": "ruler",
+          "label": "t:sections.global.settings.icon.options__38.label"
+        },
+        {
+          "value": "ruler_2",
+          "label": "t:sections.global.settings.icon.options__39.label"
+        },
+        {
+          "value": "ruler_3",
+          "label": "t:sections.global.settings.icon.options__40.label"
+        },
+        {
+          "value": "sale",
+          "label": "t:sections.global.settings.icon.options__41.label"
+        },
+        {
+          "value": "shield",
+          "label": "t:sections.global.settings.icon.options__42.label"
+        },
+        {
+          "value": "shirt",
+          "label": "t:sections.global.settings.icon.options__43.label"
+        },
+        {
+          "value": "shoe",
+          "label": "t:sections.global.settings.icon.options__44.label"
+        },
+        {
+          "value": "star",
+          "label": "t:sections.global.settings.icon.options__45.label"
+        },
+        {
+          "value": "support",
+          "label": "t:sections.global.settings.icon.options__46.label"
+        },
+        {
+          "value": "swatchbook",
+          "label": "t:sections.global.settings.icon.options__47.label"
+        },
+        {
+          "value": "tag",
+          "label": "t:sections.global.settings.icon.options__48.label"
+        },
+        {
+          "value": "tags",
+          "label": "t:sections.global.settings.icon.options__49.label"
+        },
+        {
+          "value": "time",
+          "label": "t:sections.global.settings.icon.options__50.label"
+        },
+        {
+          "value": "trophy",
+          "label": "t:sections.global.settings.icon.options__51.label"
+        },
+        {
+          "value": "truck",
+          "label": "t:sections.global.settings.icon.options__52.label"
+        },
+        {
+          "value": "users",
+          "label": "t:sections.global.settings.icon.options__53.label"
+        },
+        {
+          "value": "wallet",
+          "label": "t:sections.global.settings.icon.options__54.label"
+        },
+        {
+          "value": "wash",
+          "label": "t:sections.global.settings.icon.options__55.label"
+        },
+        {
+          "value": "watch",
+          "label": "t:sections.global.settings.icon.options__56.label"
+        },
+        {
+          "value": "wrench",
+          "label": "t:sections.global.settings.icon.options__57.label"
+        }
+      ]
+    },
+    {
+      "type": "image_picker",
+      "id": "icon_image",
+      "label": "t:sections.global.settings.icon_image.label"
+    },
+    {
+      "type": "select",
+      "id": "iwidth",
+      "label": "t:sections.global.settings.icon_width.label",
+      "options": [
+        {
+          "value": "fit",
+          "label": "t:sections.global.settings.icon_width.options__1.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:sections.global.settings.icon_width.options__2.label"
+        }
+      ],
+      "default": "fit"
+    },
+    {
+      "type": "range",
+      "id": "icon_width",
+      "label": "t:sections.global.settings.custom_width.label",
+      "default": 24,
+      "min": 10,
+      "max": 120,
+      "step": 2,
+      "unit": "px",
+      "visible_if": "{{ block.settings.iwidth == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.accordion-row.name",
+      "blocks": {
+        "text-1": {
+          "type": "text",
+          "settings": {
+            "text": "<p>We will work quickly to ship your order as soon as possible. Once your order has shipped, you will receive an email with further information. Delivery times vary depending on your location.</p>",
+            "width": "100%"
+          }
+        }
+      },
+      "block_order": ["text-1"],
+      "settings": {
+        "heading": "When will I get my order?"
+      }
+    }
+  ]
+}
+{% endschema %}

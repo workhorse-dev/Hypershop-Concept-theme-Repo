@@ -1,0 +1,178 @@
+{
+  "type": "header",
+  "name": "t:sections.header-group.name",
+  "sections": {
+    "announcement-bar": {
+      "type": "announcement-bar",
+      "blocks": {
+        "announcement-1": {
+          "type": "announcement",
+          "settings": {
+            "icon": "truck",
+            "text": "Free shipping and returns",
+            "link": "",
+            "hide_icon_mobile": true,
+            "text_mobile": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "announcement-2": {
+          "type": "announcement",
+          "settings": {
+            "icon": "email",
+            "text": "A question? Visit our contact page",
+            "link": "",
+            "hide_icon_mobile": true,
+            "text_mobile": "",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "announcement-1",
+        "announcement-2"
+      ],
+      "settings": {
+        "show_social": true,
+        "enable_language_selector": true,
+        "enable_country_selector": true,
+        "invert_icons_selectors": false,
+        "announcement_position": "center",
+        "autoplay": true,
+        "autoplay_speed": 5,
+        "show_navigation": true,
+        "color_text": "#fafafa",
+        "color_background": "#1f1f1f",
+        "gradient_background": "",
+        "color_highlight": "#ffddbf",
+        "gradient_highlight": "",
+        "hide_homepage": false,
+        "full_width": true,
+        "rounded": true
+      }
+    },
+    "header": {
+      "type": "header",
+      "blocks": {
+        "mega-menu": {
+          "type": "mega_menu_tab",
+          "disabled": true,
+          "settings": {
+            "menu_title": "Catalog",
+            "button_label": "View All Products",
+            "button_link": "shopify://collections/all",
+            "heading_1": "Collections",
+            "heading_2": "Most popular",
+            "show_vendor": false,
+            "show_price": true,
+            "tab_target_1": "Headphones",
+            "tab_target_link_1": "shopify://collections/all",
+            "tab_products_1": [],
+            "tab_icon_1": "",
+            "tab_icon_width_1": 42,
+            "promo_image_1": "",
+            "promo_image_ratio_1": "square",
+            "promo_heading_1": "Build your bundle",
+            "promo_subtext_1": "Buy 3 and save 30%",
+            "promo_overlay_content_1": true,
+            "promo_link_1": "",
+            "promo_tag_1": "",
+            "promo_color_text_1": "#ffffff",
+            "promo_color_overlay_1": "#171717",
+            "promo_overlay_opacity_1": 0,
+            "tab_target_2": "Earphones",
+            "tab_target_link_2": "shopify://collections/all",
+            "tab_products_2": [],
+            "tab_icon_2": "",
+            "tab_icon_width_2": 42,
+            "promo_image_2": "",
+            "promo_image_ratio_2": "adapt",
+            "promo_heading_2": "RhythmiQ",
+            "promo_subtext_2": "Compact Power Unleashed",
+            "promo_overlay_content_2": true,
+            "promo_link_2": "",
+            "promo_tag_2": "New Arrival",
+            "promo_color_text_2": "#ffffff",
+            "promo_color_overlay_2": "#171717",
+            "promo_overlay_opacity_2": 0,
+            "tab_target_3": "Speakers",
+            "tab_target_link_3": "shopify://collections/all",
+            "tab_products_3": [],
+            "tab_icon_3": "",
+            "tab_icon_width_3": 42,
+            "promo_image_3": "",
+            "promo_image_ratio_3": "adapt",
+            "promo_heading_3": "Home Audio",
+            "promo_subtext_3": "View the collection",
+            "promo_overlay_content_3": true,
+            "promo_link_3": "",
+            "promo_tag_3": "New Arrival",
+            "promo_color_text_3": "#ffffff",
+            "promo_color_overlay_3": "#171717",
+            "promo_overlay_opacity_3": 0,
+            "tab_target_4": "Accessories",
+            "tab_target_link_4": "shopify://collections/all",
+            "tab_products_4": [],
+            "tab_icon_4": "",
+            "tab_icon_width_4": 42,
+            "promo_image_4": "",
+            "promo_image_ratio_4": "adapt",
+            "promo_heading_4": "Build your bundle",
+            "promo_subtext_4": "Save $30 when buying all 3 items",
+            "promo_overlay_content_4": true,
+            "promo_link_4": "",
+            "promo_tag_4": "",
+            "promo_color_text_4": "#ffffff",
+            "promo_color_overlay_4": "#171717",
+            "promo_overlay_opacity_4": 0,
+            "tab_target_5": "",
+            "tab_target_link_5": "",
+            "tab_products_5": [],
+            "tab_icon_width_5": 32,
+            "promo_image_ratio_5": "adapt",
+            "promo_heading_5": "",
+            "promo_subtext_5": "",
+            "promo_overlay_content_5": true,
+            "promo_link_5": "",
+            "promo_tag_5": "",
+            "promo_color_text_5": "#ffffff",
+            "promo_color_overlay_5": "#171717",
+            "promo_overlay_opacity_5": 30
+          }
+        }
+      },
+      "block_order": [
+        "mega-menu"
+      ],
+      "settings": {
+        "menu": "main-menu",
+        "menu_mobile": "",
+        "menu_active": "block",
+        "hover_menu": true,
+        "header_layout": "left-center",
+        "sticky_header_type": "always",
+        "enable_language_selector_desktop": false,
+        "enable_country_selector_desktop": false,
+        "show_country_name_dekstop": false,
+        "show_country_flag_desktop": false,
+        "logo_position_mobile": "center",
+        "show_social": true,
+        "enable_language_selector": true,
+        "enable_country_selector": true,
+        "transparent_color_text": "#ffffff",
+        "color_text": "#171717",
+        "color_background": "#ffffff",
+        "padding_top": 32,
+        "padding_bottom": 32,
+        "full_width": true,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "announcement-bar",
+    "header"
+  ]
+}

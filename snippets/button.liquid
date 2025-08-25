@@ -1,0 +1,68 @@
+{%- doc -%}
+  Renders a button or link component with customizable styling and behavior.
+
+  Creates either a button-styled link or plain text link based on style parameter.
+
+  @param {string} label - Button text content (HTML-escaped)
+  @param {string} [link] - Target URL (omit for disabled state)
+  @param {string} [size] - Button size variant
+    - 'sm' - Small button
+    - 'md' - Medium button (default)
+    - 'lg' - Large button
+  @param {string} [style] - Visual style variant
+    - 'primary' - Primary button with fill animation
+    - 'secondary' - Secondary button with fill animation
+    - 'link' - Plain text link without button styling
+  @param {boolean} [external] - Open link in new tab with security
+  @param {boolean} [show_icon] - Display arrow-right icon after label
+  @param {string} [size_style] - Custom styles
+  @param {string} [classes] - Additional CSS classes
+  @param {string} [shopify_attributes] - Shopify-specific attributes
+
+  @example Primary button with icon
+  {% render 'button',
+     label: 'Shop Now',
+     link: '/collections/all',
+     style: 'primary',
+     show_icon: true
+  %}
+
+  @example Secondary small button
+  {% render 'button',
+     label: 'Learn More',
+     link: '/pages/about',
+     style: 'secondary',
+     size: 'sm'
+  %}
+
+  @example External link button
+  {% render 'button',
+     label: 'Visit Instagram',
+     link: 'https://instagram.com/brand',
+     external: true,
+     show_icon: true
+  %}
+{%- enddoc -%}
+
+{%- if style == 'link' -%}
+  <a class="link inline-block{% if classes != blank %} {{ classes }}{% endif %}{% if show_icon %} icon-with-text{% endif %}"{% if link != blank %} href="{{ link }}"{% if external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}{% if size_style != blank %} style="{{ size_style }}"{% endif %} is="hover-link" {{ shopify_attributes }}>
+    <span class="link-text">{{ label | escape }}</span>
+    {%- liquid
+      if show_icon
+        render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+      endif
+    -%}
+  </a>
+{%- else -%}
+  <a class="button button--{{ style | default: 'primary' }} button--{{ size | default: 'md' }}{% if classes != blank %} {{ classes }}{% endif %}{% if show_icon %} icon-with-text{% endif %}"{% if link != blank %} href="{{ link }}"{% if external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}{% if size_style != blank %} style="{{ size_style }}"{% endif %} is="hover-link" {{ shopify_attributes }}>
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        echo label | escape
+        if show_icon
+          render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+        endif
+      -%}
+    </span>
+  </a>
+{%- endif -%}

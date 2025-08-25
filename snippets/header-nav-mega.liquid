@@ -1,0 +1,328 @@
+{%- doc -%}
+  Renders desktop mega menu with navigation links, product grids, or tabbed collections.
+
+  Supports standard multi-column navigation or advanced tabbed product showcases.
+
+  @param {object} section - Section object with menu configuration
+  @param {object} link - Parent navigation link with child items
+  @param {object} block - Mega menu block settings and content
+  @param {number} position - Menu position for unique IDs
+  @param {string} context - Context identifier for ID generation
+  @param {boolean} full_width - Enable full-width container
+
+  @example
+  {% render 'header-nav-mega',
+     section: section,
+     link: link,
+     block: block,
+     position: forloop.index,
+     context: 'start'
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  assign section_rendering_api = false
+  if section.index == nil
+    assign section_rendering_api = true
+  endif
+-%}
+
+{%- if block.type == 'mega_menu' -%}
+  {%- liquid
+    assign show_promotions = false
+    if block.settings.promo_image_1 != blank or block.settings.promo_image_2 != blank or block.settings.promo_image_3 != blank or block.settings.promo_image_4 != blank or block.settings.promo_image_5 != blank
+      assign show_promotions = true
+    endif
+  -%}
+  <div class="mega-menu__container invisible">
+    {%- unless section_rendering_api -%}
+      <ul id="HeaderNavMega-{{ section.id }}-{{ position }}-{{ context }}" class="mega-menu__list page-width{% if full_width %} page-width--full{% endif %} flex flex-wrap w-full h-full overflow-hidden" role="list" tabindex="-1">
+        {%- for i in (1..5) -%}
+          <li class="mega-menu__item flex opacity-0 w-full aspect-square">
+            <span class="media-card media-card--card w-full h-full"></span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <ul id="HeaderNavMega-{{ section.id }}-{{ position }}-{{ context }}" class="mega-menu__list page-width{% if full_width %} page-width--full{% endif %} flex flex-wrap w-full h-full overflow-hidden" role="list" tabindex="-1">
+        {%- if link.links != blank -%}
+          <li class="mega-menu__item mega-menu__item--nav mega-menu__item--{{ block.settings.menu_width }}{% unless show_promotions %} mega-menu__item--full{% endunless %} opacity-0 w-full grid">
+            <ul class="mega-menu__nav{% if link.links.size > 6 %} mega-menu__nav--more{% endif %}{% if show_promotions %} grid{% else %} flex flex-wrap{% endif %}">
+              {%- for childlink in link.links -%}
+                <li class="mega-menu__nav-item opacity-0">
+                  {%- if block.settings.show_menu_image and childlink.type == 'collection_link' and childlink.object.image != blank -%}
+                    <a href="{{ childlink.url }}" class="media media--wide block relative overflow-hidden">
+                      {{- childlink.object.image | image_url: width: childlink.object.image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                    </a>
+                  {%- endif -%}
+                  <a href="{{ childlink.url }}" class="{% if block.settings.menu_width != 'small' %}heading {% endif %}reversed-link text-base-xl leading-tight tracking-tight{% if childlink.current %} is-active{% endif %}"{% if childlink.current %} aria-current="page"{% endif %}>
+                    {{- childlink.title | escape -}}
+                  </a>
+                  {%- if childlink.links != blank -%}
+                    <ul>
+                      {%- for grandchildlink in childlink.links -%}
+                        <li>
+                          <a href="{{ grandchildlink.url }}" class="{% if block.settings.menu_width != 'small' %}reversed-link text-base xl:text-lg{% else %}heading reversed-link text-xl-3xl tracking-tighter leading-tight{% endif %}{% if grandchildlink.current %} is-active{% endif %}"{% if grandchildlink.current %} aria-current="page"{% endif %}>
+                            {{- grandchildlink.title | escape -}}
+                          </a>
+                        </li>
+                      {%- endfor -%}
+                    </ul>
+                  {%- endif -%}
+                </li>
+              {%- endfor -%}
+            </ul>
+            {%- if block.settings.button_label != blank -%}
+              <div class="mega-menu__footer relative">
+                <a class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
+                  <span class="{% if block.settings.menu_width != 'small' %}heading {% endif %}link-text text-lg-2xl tracking-tight">{{ block.settings.button_label | escape }}</span>
+                  {%- render 'icon', icon: 'arrow-right', size: 'lg', class: 'transform' -%}
+                </a>
+              </div>
+            {%- endif -%}
+          </li>
+        {%- endif -%}
+
+        {%- if show_promotions -%}
+          {%- for i in (1..5) -%}
+            {%- assign promo_image = 'promo_image_' | append: i -%}
+            {%- if block.settings[promo_image] != blank -%}
+              {%- liquid
+                assign promo_image_ratio = 'promo_image_ratio_' | append: i
+                assign promo_heading = 'promo_heading_' | append: i
+                assign promo_subtext = 'promo_subtext_' | append: i
+                assign promo_overlay_content = 'promo_overlay_content_' | append: i
+                assign promo_link = 'promo_link_' | append: i
+                assign promo_tag = 'promo_tag_' | append: i
+                assign promo_color_text = 'promo_color_text_' | append: i
+                assign promo_color_overlay = 'promo_color_overlay_' | append: i
+                assign promo_overlay_opacity = 'promo_overlay_opacity_' | append: i
+              -%}
+              <li class="mega-menu__item flex opacity-0 w-full{% if link.links != blank %} align-self-start{% endif %}">
+                <div class="media-card media-card--{{ settings.card_style }}{% if block.settings[promo_overlay_content] %} media-card--overlap{% endif %}">
+                  <a class="media-card__link flex flex-col w-full h-full relative"{% if block.settings[promo_link] != blank %} href="{{ block.settings[promo_link] }}"{% else %} role="link" aria-disabled="true"{% endif %}
+                    aria-label="{{ block.settings[promo_heading] | default: block.settings[promo_subtext] | escape }}"
+                    style="--color-foreground: {{ block.settings[promo_color_text].rgb }};--color-overlay: {{ block.settings[promo_color_overlay].rgb }};--overlay-opacity: {{ block.settings[promo_overlay_opacity] | divided_by: 100.0 }};"
+                  >
+                    {%- if block.settings[promo_tag] != blank -%}
+                      <div class="badges z-2 absolute grid gap-3 pointer-events-none">
+                        <span class="badge badge--onsale flex items-center gap-1d5 font-medium leading-none rounded-full">{{ block.settings[promo_tag] | escape }}</span>
+                      </div>
+                    {%- endif -%}
+                    <div class="media media--{{ block.settings[promo_image_ratio] }} relative overflow-hidden">
+                      {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                    </div>
+                    {%- if block.settings[promo_heading] != blank or block.settings[promo_subtext] != blank -%}
+                      <div class="media-card__content flex justify-between items-center gap-4 w-full">
+                        <div class="media-card__text opacity-0 shrink-1 grid gap-0d5">
+                          {%- if block.settings[promo_heading] != blank -%}
+                            <p>
+                              <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
+                            </p>
+                          {%- endif -%}
+                          {%- if block.settings[promo_subtext] != blank -%}
+                            <p class="leading-none text-xs">{{ block.settings[promo_subtext] }}</p>
+                          {%- endif -%}
+                        </div>
+                        {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0 hidden xl:block' -%}
+                      </div>
+                    {%- endif -%}
+                  </a>
+                </div>
+              </li>
+            {%- endif -%}
+          {%- endfor -%}
+        {%- endif -%}
+      </ul>
+    {%- endunless -%}
+  </div>
+{%- else -%}
+  <div class="mega-menu__container invisible">
+    {%- unless section_rendering_api -%}
+      <ul id="HeaderNavMega-{{ section.id }}-{{ position }}-{{ context }}" class="mega-menu__list page-width{% if full_width %} page-width--full{% endif %} flex flex-wrap w-full h-full overflow-hidden" role="list" tabindex="-1">
+        {%- for i in (1..5) -%}
+          <li class="mega-menu__item flex opacity-0 w-full aspect-square">
+            <span class="media-card media-card--card w-full h-full"></span>
+          </li>
+        {%- endfor -%}
+      </ul>
+    {%- else -%}
+      <ul id="HeaderNavMega-{{ section.id }}-{{ position }}-{{ context }}" class="mega-menu__list mega-menu__list--tabs page-width{% if full_width %} page-width--full{% endif %} flex flex-wrap w-full h-full overflow-hidden" role="list" tabindex="-1">
+        <li class="mega-menu__item mega-menu__item--tabs opacity-0 w-full flex flex-col gap-8">
+          {%- if block.settings.heading_1 != blank -%}
+            <p class="text-base xl:text-lg font-medium">{{ block.settings.heading_1 | escape }}</p>
+          {%- endif -%}
+          <tabs-element class="mega-menu__nav mega-menu__nav--tabs grid gap-1d5">
+            {%- liquid
+              assign forloop_first = true
+              assign forloop_index = 0
+            -%}
+            {%- for i in (1..5) -%}
+              {%- assign tab_target_link = 'tab_target_link_' | append: i -%}
+              {%- if block.settings[tab_target_link] != blank -%}
+                {%- liquid
+                  assign tab_target = 'tab_target_' | append: i
+                  assign tab_target_heading = block.settings[tab_target] | default: block.settings[tab_target_link].object.title
+                  assign tab_icon = 'tab_icon_' | append: i
+                  assign tab_icon_width = 'tab_icon_width_' | append: i
+                -%}
+                {%- capture tab_heading -%}
+                  {%- if block.settings[tab_icon] != blank -%}
+                    <figure class="media media--transparent relative inline-block">
+                      {%- capture sizes -%}{{ block.settings[tab_icon_width] }}px{%- endcapture -%}
+                      {%- capture widths -%}{{ block.settings[tab_icon_width] }}, {{ block.settings[tab_icon_width] | times: 2 | at_most: block.settings[tab_icon].width }}{%- endcapture -%}
+                      {{- block.settings[tab_icon] | image_url: width: block.settings[tab_icon].width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
+                    </figure>
+                  {%- endif -%}
+                  <span class="heading link-text text-xl-3xl tracking-tighter leading-tight">{{ tab_target_heading | escape }}</span>
+                {%- endcapture -%}
+                {%- if block.settings[tab_target_link].type == 'collection_link' or block.settings[tab_target_link].type == 'catalog_link' -%}
+                  <button type="button" class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text" role="tab" aria-controls="TabPanel-{{ block.id }}-{{ forloop_index }}" data-index="{{ forloop_index }}"{% if forloop_first %} disabled{% endif %}>
+                    {{- tab_heading -}}
+                  </button>
+                  {%- liquid
+                    assign forloop_first = false
+                    assign forloop_index = forloop_index | plus: 1
+                  -%}
+                {%- else -%}
+                  <a href="{{ block.settings[tab_target_link].url }}" class="mega-menu__nav-item flex gap-2 items-center opacity-0 link icon-with-text">
+                    {{- tab_heading -}}
+                  </a>
+                {%- endif -%}
+              {%- endif -%}
+            {%- endfor -%}
+          </tabs-element>
+          {%- if block.settings.button_label != blank -%}
+            <div class="mega-menu__footer relative">
+              <a class="mega-menu__link link icon-with-text flex items-center justify-between w-full h-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
+                <span class="heading link-text text-base-xl tracking-tight">{{ block.settings.button_label | escape }}</span>
+                {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform shrink-0' -%}
+              </a>
+            </div>
+          {%- endif -%}
+        </li>
+        <li class="mega-menu__item mega-menu__item--panels opacity-0 w-full">
+          {%- liquid
+            assign forloop_first = true
+            assign forloop_index = 0
+          -%}
+          {%- for i in (1..5) -%}
+            {%- assign tab_target_link = 'tab_target_link_' | append: i -%}
+            {%- if block.settings[tab_target_link] != blank and block.settings[tab_target_link].type == 'collection_link' or block.settings[tab_target_link].type == 'catalog_link' -%}
+              {%- liquid
+                assign promo_image = 'promo_image_' | append: i
+                assign tab_target = 'tab_target_' | append: i
+                assign tab_target_heading = block.settings[tab_target] | default: block.settings[tab_target_link].object.title
+                assign tab_products = 'tab_products_' | append: i
+                
+                assign products_count = block.settings[tab_target_link].object.products_count
+                assign products = block.settings[tab_products] | default: block.settings[tab_target_link].object.products
+                if block.settings[tab_target_link].type == 'catalog_link'
+                  assign products_count = collections.all.products_count
+                  assign products = products | default: collections.all.products
+                endif
+              -%}
+              <div id="TabPanel-{{ block.id }}-{{ forloop_index }}" class="mega-menu__panel{% if block.settings[promo_image] == blank %} without-promo{% endif %} flex w-full" role="tabpanel"{% unless forloop_first %} hidden{% endunless %}>
+                <div class="grid gap-8">
+                  <div class="flex items-center justify-between gap-4">
+                    {%- if block.settings.heading_2 != blank -%}
+                      <p class="text-sm text-opacity leading-none uppercase">{{ block.settings.heading_2 | escape }}</p>
+                    {%- endif -%}
+                    <a class="mega-menu__link link icon-with-text" href="{{ block.settings[tab_target_link].object.url }}">
+                      <span class="heading link-text text-base-xl tracking-tight flex items-center gap-1">
+                        {{- 'collections.subcollections.all_products' | t: collection: tab_target_heading -}}
+                        {%- if products_count > 0 -%}
+                          <span class="text-base font-medium tracking-tight">({{ products_count }})</span>
+                        {%- endif -%}
+                      </span>
+                      {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform shrink-0' -%}
+                    </a>
+                  </div>
+                  <motion-list class="product-grid card-grid card-grid--4 mobile:card-grid--1 grid" initialized>
+                    {%- for product in products limit: 4 -%}
+                      {%- render 'product-card',
+                        product: product,
+                        product_id: product.id,
+                        section_id: section.id,
+                        block_id: block.id,
+                        lazy_load: false,
+                        image_ratio: settings.product_image_ratio,
+                        image_fill: settings.product_image_fill,
+                        show_secondary_image: settings.product_secondary_image,
+                        show_vendor: settings.product_vendor,
+                        show_rating: settings.product_rating,
+                        show_color_swatches: settings.product_color_swatches,
+                        show_countdown: settings.product_countdown,
+                        show_quick_add: settings.product_quick_add,
+                        show_quick_view: settings.product_quick_view,
+                        show_save_amount: settings.product_save_amount,
+                        save_type: settings.product_save_type,
+                        show_icon_list: false
+                      -%}
+                    {%- else -%}
+                      {%- for i in (1..4) -%}
+                        {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4' %}{%- endcapture -%}
+                        {%- render 'product-card-placeholder',
+                          placeholder: placeholder
+                          image_ratio: settings.product_image_ratio,
+                          show_vendor: settings.product_vendor
+                        -%}
+                      {%- endfor -%}
+                    {%- endfor -%}
+                  </motion-list>
+                </div>
+                {%- if block.settings[promo_image] != blank -%}
+                  {%- liquid
+                    assign promo_image_ratio = 'promo_image_ratio_' | append: i
+                    assign promo_heading = 'promo_heading_' | append: i
+                    assign promo_subtext = 'promo_subtext_' | append: i
+                    assign promo_overlay_content = 'promo_overlay_content_' | append: i
+                    assign promo_link = 'promo_link_' | append: i
+                    assign promo_tag = 'promo_tag_' | append: i
+                    assign promo_color_text = 'promo_color_text_' | append: i
+                    assign promo_color_overlay = 'promo_color_overlay_' | append: i
+                    assign promo_overlay_opacity = 'promo_overlay_opacity_' | append: i
+                  -%}
+                  <div class="media-card media-card--{{ settings.card_style }}{% if block.settings[promo_overlay_content] %} media-card--overlap{% endif %}">
+                    <a class="media-card__link flex flex-col w-full h-full relative"{% if block.settings[promo_link] != blank %} href="{{ block.settings[promo_link] }}"{% else %} role="link" aria-disabled="true"{% endif %}
+                      aria-label="{{ block.settings[promo_heading] | default: block.settings[promo_subtext] | escape }}"
+                      style="--color-foreground: {{ block.settings[promo_color_text].rgb }};--color-overlay: {{ block.settings[promo_color_overlay].rgb }};--overlay-opacity: {{ block.settings[promo_overlay_opacity] | divided_by: 100.0 }};"
+                    >
+                      {%- if block.settings[promo_tag] != blank -%}
+                        <div class="badges z-2 absolute grid gap-3 pointer-events-none">
+                          <span class="badge badge--onsale flex items-center gap-1d5 font-medium leading-none rounded-full">{{ block.settings[promo_tag] | escape }}</span>
+                        </div>
+                      {%- endif -%}
+                      <div class="media media--{{ block.settings[promo_image_ratio] }} relative overflow-hidden">
+                        {{- block.settings[promo_image] | image_url: width: block.settings[promo_image].width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                      </div>
+                      {%- if block.settings[promo_heading] != blank or block.settings[promo_subtext] != blank -%}
+                        <div class="media-card__content flex justify-between items-center gap-4 w-full">
+                          <div class="media-card__text opacity-0 shrink-1 grid gap-0d5">
+                            {%- if block.settings[promo_heading] != blank -%}
+                              <p>
+                                <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight">{{ block.settings[promo_heading] | escape }}</span>
+                              </p>
+                            {%- endif -%}
+                            {%- if block.settings[promo_subtext] != blank -%}
+                              <p class="leading-none text-xs">{{ block.settings[promo_subtext] }}</p>
+                            {%- endif -%}
+                          </div>
+                          {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0 hidden xl:block' -%}
+                        </div>
+                      {%- endif -%}
+                    </a>
+                  </div>
+                {%- endif -%}
+              </div>
+              {%- liquid
+                assign forloop_first = false
+                assign forloop_index = forloop_index | plus: 1
+              -%}
+            {%- endif -%}
+          {%- endfor -%}
+        </li>
+      </ul>
+    {%- endunless -%}
+  </div>
+{%- endif -%}

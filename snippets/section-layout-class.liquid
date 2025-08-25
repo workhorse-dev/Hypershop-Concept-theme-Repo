@@ -1,0 +1,33 @@
+{%- comment -%}
+  Intended for blocks and sections that provide values for all the referenced settings.
+  Accepts:
+     settings: {block.settings || section.settings}
+{%- endcomment -%}
+
+{%- liquid
+  assign content_direction = 'flex-' | append: settings.content_direction
+  
+  if settings.content_direction == 'row'
+    assign horizontal_alignment = 'justify-' | append: settings.horizontal_alignment
+    assign vertical_alignment = 'items-' | append: settings.vertical_alignment
+
+    if settings.vertical_on_mobile
+      assign content_direction = 'flex-col md:' | append: content_direction
+      assign horizontal_alignment = 'justify-' | append: settings.vertical_alignment | append: ' md:' | append: horizontal_alignment
+      assign vertical_alignment = 'items-' | append: settings.horizontal_alignment | append: ' md:' | append: vertical_alignment
+    endif
+  else
+    assign horizontal_alignment = 'justify-' | append: settings.vertical_alignment_flex_direction_column
+    assign vertical_alignment = 'items-' | append: settings.horizontal_alignment_flex_direction_column
+  endif
+
+  assign classes = 'flex ' | append: content_direction | append: ' ' | append: horizontal_alignment | append: ' ' | append: vertical_alignment
+
+  if settings.content_direction == 'row' and settings.content_wrap
+    assign classes = classes | append: ' flex-wrap'
+  else
+    assign classes = classes | append: ' flex-nowrap'
+  endif
+
+  echo classes
+-%}

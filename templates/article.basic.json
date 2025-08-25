@@ -1,0 +1,95 @@
+{
+  "sections": {
+    "main-article": {
+      "type": "main-article",
+      "blocks": {
+        "share": {
+          "type": "share",
+          "settings": {
+            "share_label": "Share",
+            "show_comments": true
+          }
+        },
+        "next_previous_posts": {
+          "type": "next_previous_posts",
+          "settings": {
+            "show_date": true,
+            "show_comments": false,
+            "show_author": true
+          }
+        },
+        "comments": {
+          "type": "comments",
+          "settings": {
+            "show_gravatar": true
+          }
+        }
+      },
+      "block_order": [
+        "share",
+        "next_previous_posts",
+        "comments"
+      ],
+      "settings": {
+        "heading_size": "title-lg tracking-heading",
+        "heading_tag": "h1",
+        "show_tags": true,
+        "show_date": true,
+        "show_comments": false,
+        "show_author": true,
+        "show_image": true,
+        "image_height": "750px",
+        "enable_parallax": true,
+        "parallax_direction": "vertical",
+        "padding_top": 72,
+        "padding_bottom": 120,
+        "divider": false,
+        "narrow": true,
+        "rounded": true
+      }
+    },
+    "blog-posts": {
+      "type": "blog-posts",
+      "settings": {
+        "blog": "",
+        "post_limit": 3,
+        "columns": 3,
+        "carousel_on_desktop": false,
+        "show_view_all": true,
+        "columns_mobile": "1",
+        "swipe_on_mobile": false,
+        "image_ratio": "landscape",
+        "show_tags": true,
+        "show_date": true,
+        "show_comments": true,
+        "show_author": false,
+        "show_excerpt": true,
+        "heading": "Latest Stories",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 72,
+        "padding_bottom": 72,
+        "divider": false,
+        "full_width": false,
+        "rounded": true
+      }
+    }
+  },
+  "order": [
+    "main-article",
+    "blog-posts"
+  ]
+}

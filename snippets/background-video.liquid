@@ -1,0 +1,59 @@
+{%- doc -%}
+  Renders a full-screen video background with poster image and lazy loading.
+
+  Creates an absolute-positioned video container with autoplay capabilities.
+
+  @param {object} background_video - Shopify video object with preview_image and alt properties
+  @param {string} [background_video_position] - Video sizing mode ('cover' or 'contain')
+  @param {string} [loading] - Image loading strategy ('lazy' or 'eager')
+  @param {string} [fetchpriority] - Resource fetch priority ('auto', 'high', or 'low')
+  @param {string} [lazyimage] - Lazy image animation
+  @param {string} [context] - Rendering context ('section' adds banner styling, others use default)
+
+  @example
+  {% render 'background-video',
+     background_video: section.settings.hero_video,
+     background_video_position: 'cover'
+     loading: 'eager',
+     fetchpriority: 'high'
+  %}
+{%- enddoc -%}
+
+<div class="group-block__media{% if context == 'section' %} banner__media{% endif %} block absolute top-0 left-0 w-full h-full overflow-hidden">
+  {%- liquid
+    assign loading = loading | default: 'lazy'
+    assign fetchpriority = fetchpriority | default: 'auto'
+    assign lazyimage = lazyimage | default: 'lazy-image'
+
+    assign media_width_desktop = '100vw'
+    assign media_width_mobile = '100vw'
+    assign sizes = '(min-width: 750px) ' | append: media_width_desktop | append: ', ' | append: media_width_mobile
+    assign widths = '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200'
+
+    assign video_alt = 'general.accessibility.load_video' | t: description: background_video.alt | escape
+    capture poster
+      if background_video.preview_image != blank
+        echo background_video.preview_image | image_url: width: background_video.preview_image.width | image_tag: sizes: sizes, widths: widths, loading: loading, fetchpriority: fetchpriority, is: lazyimage, alt: video_alt
+      else
+        assign placeholder = 'banner__image placeholder'
+        if context == 'section'
+          assign placeholder = 'banner__overlay ' | append: placeholder
+        endif
+        echo 'lifestyle-1' | placeholder_svg_tag: placeholder
+      endif
+    endcapture
+  -%}
+
+  {%- if background_video != blank -%}
+    <video-media class="media{% if background_video_position == 'contain' %} media--contain media--transparent{% endif %} media--height block w-full h-full relative overflow-hidden" style="--aspect-ratio: {{ background_video.aspect_ratio }};" autoplay>
+      {{- poster -}}
+      <template>
+        {{- background_video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '800x' -}}
+      </template>
+    </video-media>
+  {%- else -%}
+    <picture class="media{% if background_video_position == 'contain' %} media--contain media--transparent{% endif %} media--height block w-full h-full relative overflow-hidden">
+      {{- poster -}}
+    </picture>
+  {%- endif -%}
+</div>

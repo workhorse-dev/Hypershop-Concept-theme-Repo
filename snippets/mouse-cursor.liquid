@@ -1,0 +1,14 @@
+{%- doc -%}
+  Renders a custom mouse cursor with an X/close icon design.
+
+  Creates a fixed-position circular cursor that follows mouse movement, typically for interactive overlays or modals.
+
+  @example
+  {% render 'mouse-cursor' %}
+{%- enddoc -%}
+
+<mouse-cursor class="mouse-cursor z-50 fixed select-none flex items-center justify-center pointer-events-none rounded-full"> 
+  <svg class="icon icon-cursor" stroke="currentColor" viewBox="0 0 40 40" fill="none" xmlns="http://www.w3.org/2000/svg">
+    <path d="M10 30L30 10M10 10L30 30" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"></path>
+  </svg>
+</mouse-cursor>

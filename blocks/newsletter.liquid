@@ -1,0 +1,133 @@
+<div class="size-style spacing-style" style="{% render 'section-size-style', settings: block.settings %}{% render 'section-spacing-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+  {%- assign classes = 'w-' | append: block.settings.width | append: ' mobile:w-' | append: block.settings.width_mobile -%}
+  {%- render 'newsletter-form', section_id: block.id, context: 'section', classes: classes -%}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.newsletter.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "paragraph",
+      "content": "t:sections.newsletter.settings.paragraph.content"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fit-content"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__padding.content"
+    },
+    {
+      "type": "range",
+      "id": "padding-block-start",
+      "label": "t:blocks.group.settings.padding_top.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-block-end",
+      "label": "t:blocks.group.settings.padding_bottom.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-start",
+      "label": "t:blocks.group.settings.padding_left.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding-inline-end",
+      "label": "t:blocks.group.settings.padding_right.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "px",
+      "default": 0
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.newsletter.name",
+      "category": "t:categories.forms"
+    }
+  ]
+}
+{% endschema %}

@@ -1,0 +1,916 @@
+{%- liquid
+  assign display_map = false
+  if section.blocks.size > 0 and section.settings.map_api_key != blank
+    assign display_map = true
+    assign first_block = section.blocks | first
+  endif
+-%}
+
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+    {%- render 'section-variables', section: section -%}
+    {%- if section.settings.image != blank and section.settings.image_height == 'adapt' %}
+      --ratio-percent: {{ 1 | divided_by: section.settings.image.aspect_ratio | times: 100 }}%;
+    {% endif -%}
+  }
+</style>
+
+<script>
+  theme.strings.addressError = {{ 'sections.map.address_error' | t | json }};
+  theme.strings.addressNoResults = {{ 'sections.map.address_no_results' | t | json }};
+  theme.strings.addressQueryLimit = {{ 'sections.map.address_query_limit_html' | t | json }};
+  theme.strings.authError = {{ 'sections.map.auth_error_html' | t | json }};
+</script>
+
+<div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
+  <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
+    <div class="banner with-map mobile:banner--{{ section.settings.content_position_mobile }} relative">
+      <div class="media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} relative">
+        <media-element class="banner__media block w-full h-full overflow-hidden pointer-events-none{% if display_map %} opacity-0{% endif %}"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
+          <picture class="media media--height block w-full h-full relative overflow-hidden">
+            {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
+            {%- liquid
+              if section.settings.image != blank
+                echo section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: 'lazy-image', class: 'banner__image'
+              else
+                unless display_map
+                  echo 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                endunless
+              endif
+            -%}
+          </picture>
+        </media-element>
+        
+        {%- if display_map -%}
+          <media-element class="banner__map absolute top-0 left-0 w-full h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
+            <div class="media media--height block w-full h-full relative overflow-hidden">
+              <g-map
+                id="GMap-{{ section.id }}"
+                class="block h-full"
+                data-map-address="{{ first_block.settings.map_address | escape }}"
+                data-api-key="{{ section.settings.map_api_key }}"
+                data-zoom="{{ section.settings.map_zoom }}"
+                data-marker-color="{% if section.settings.map_style == 'standard' or section.settings.map_style == 'silver' or section.settings.map_style == 'retro' %}#000000{% else %}#ffffff{% endif %}"
+              ></g-map>
+              <a class="block absolute top-0 left-0 w-full h-full" href="https://www.google.com/maps/place/{{ first_block.settings.map_address | escape }}" target="_blank" rel="noopener" aria-label="{{ first_block.settings.map_address | escape }}">&nbsp;</a>
+              <script type="application/json" data-gmap-style>
+                {%- case section.settings.map_style -%}
+                  {%- when 'standard' -%}
+                    []
+            
+                  {%- when 'silver' -%}
+                    [
+                      { "elementType": "geometry", "stylers": [{"color": "#f5f5f5"}] },
+                      { "elementType": "labels.icon", "stylers": [{"visibility": "off"}] },
+                      { "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                      { "elementType": "labels.text.stroke", "stylers": [{"color": "#f5f5f5"}] },
+                      { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#bdbdbd"}] },
+                      { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#eeeeee"}] },
+                      { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                      { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#e5e5e5"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                      { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#ffffff"}] },
+                      { "featureType": "road.arterial", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                      { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#dadada"}] },
+                      { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                      { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                      { "featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#e5e5e5"}] },
+                      { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#eeeeee"}] },
+                      { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#c9c9c9"}] },
+                      { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] }
+                    ]
+            
+                  {%- when 'retro' -%}
+                    [
+                      { "elementType": "geometry", "stylers": [{"color": "#ebe3cd"}] },
+                      { "elementType": "labels.text.fill", "stylers": [{"color": "#523735"}] },
+                      { "elementType": "labels.text.stroke", "stylers": [{"color": "#f5f1e6"}] },
+                      { "featureType": "administrative", "elementType": "geometry.stroke", "stylers": [{"color": "#c9b2a6"}] },
+                      { "featureType": "administrative.land_parcel", "elementType": "geometry.stroke", "stylers": [{"color": "#dcd2be"}] },
+                      { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#ae9e90"}] },
+                      { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                      { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                      { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#93817c"}] },
+                      { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{"color": "#a5b076"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#447530"}] },
+                      { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#f5f1e6"}] },
+                      { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{"color": "#fdfcf8"}] },
+                      { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#f8c967"}] },
+                      { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#e9bc62"}] },
+                      { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{"color": "#e98d58"}] },
+                      { "featureType": "road.highway.controlled_access", "elementType": "geometry.stroke", "stylers": [{"color": "#db8555"}] },
+                      { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#806b63"}] },
+                      { "featureType": "transit.line", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                      { "featureType": "transit.line", "elementType": "labels.text.fill", "stylers": [{"color": "#8f7d77"}] },
+                      { "featureType": "transit.line", "elementType": "labels.text.stroke", "stylers": [{"color": "#ebe3cd"}] },
+                      { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#dfd2ae"}] },
+                      { "featureType": "water", "elementType": "geometry.fill", "stylers": [{"color": "#b9d3c2"}] },
+                      { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#92998d"}] }
+                    ]
+            
+                  {%- when 'dark' -%}
+                    [
+                      { "elementType": "geometry", "stylers": [{"color": "#212121"}] },
+                      { "elementType": "labels.icon", "stylers": [{"visibility": "off"}] },
+                      { "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                      { "elementType": "labels.text.stroke", "stylers": [{"color": "#212121"}] },
+                      { "featureType": "administrative", "elementType": "geometry", "stylers": [{"color": "#757575"}] },
+                      { "featureType": "administrative.country", "elementType": "labels.text.fill", "stylers": [{"color": "#9e9e9e"}] },
+                      { "featureType": "administrative.land_parcel", "stylers": [{"visibility": "off"}] },
+                      { "featureType": "administrative.locality", "elementType": "labels.text.fill", "stylers": [{"color": "#bdbdbd"}] },
+                      { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                      { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#181818"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.stroke", "stylers": [{"color": "#1b1b1b"}] },
+                      { "featureType": "road", "elementType": "geometry.fill", "stylers": [{"color": "#2c2c2c"}] },
+                      { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#8a8a8a"}] },
+                      { "featureType": "road.arterial", "elementType": "geometry", "stylers": [{"color": "#373737"}] },
+                      { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#3c3c3c"}] },
+                      { "featureType": "road.highway.controlled_access", "elementType": "geometry", "stylers": [{"color": "#4e4e4e"}] },
+                      { "featureType": "road.local", "elementType": "labels.text.fill", "stylers": [{"color": "#616161"}] },
+                      { "featureType": "transit", "elementType": "labels.text.fill", "stylers": [{"color": "#757575"}] },
+                      { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#000000"}] },
+                      { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#3d3d3d"}] }
+                    ]
+            
+                  {%- when 'night' -%}
+                    [
+                      { "elementType": "geometry", "stylers": [{"color": "#242f3e"}] },
+                      { "elementType": "labels.text.fill", "stylers": [{"color": "#746855"}] },
+                      { "elementType": "labels.text.stroke", "stylers": [{"color": "#242f3e"}] },
+                      { "featureType": "administrative.locality", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                      { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                      { "featureType": "poi.park", "elementType": "geometry", "stylers": [{"color": "#263c3f"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#6b9a76"}] },
+                      { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#38414e"}] },
+                      { "featureType": "road", "elementType": "geometry.stroke", "stylers": [{"color": "#212a37"}] },
+                      { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#9ca5b3"}] },
+                      { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#746855"}] },
+                      { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#1f2835"}] },
+                      { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#f3d19c"}] },
+                      { "featureType": "transit", "elementType": "geometry", "stylers": [{"color": "#2f3948"}] },
+                      { "featureType": "transit.station", "elementType": "labels.text.fill", "stylers": [{"color": "#d59563"}] },
+                      { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#17263c"}] },
+                      { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#515c6d"}] },
+                      { "featureType": "water", "elementType": "labels.text.stroke", "stylers": [{"color": "#17263c"}] }
+                    ]
+            
+                  {%- when 'aubergine' -%}
+                    [
+                      { "elementType": "geometry", "stylers": [{"color": "#1d2c4d"}] },
+                      { "elementType": "labels.text.fill", "stylers": [{"color": "#8ec3b9"}] },
+                      { "elementType": "labels.text.stroke", "stylers": [{"color": "#1a3646"}] },
+                      { "featureType": "administrative.country", "elementType": "geometry.stroke", "stylers": [{"color": "#4b6878"}] },
+                      { "featureType": "administrative.land_parcel", "elementType": "labels.text.fill", "stylers": [{"color": "#64779e"}] },
+                      { "featureType": "administrative.province", "elementType": "geometry.stroke", "stylers": [{"color": "#4b6878"}] },
+                      { "featureType": "landscape.man_made", "elementType": "geometry.stroke", "stylers": [{"color": "#334e87"}] },
+                      { "featureType": "landscape.natural", "elementType": "geometry", "stylers": [{"color": "#023e58"}] },
+                      { "featureType": "poi", "elementType": "geometry", "stylers": [{"color": "#283d6a"}] },
+                      { "featureType": "poi", "elementType": "labels.text.fill", "stylers": [{"color": "#6f9ba5"}] },
+                      { "featureType": "poi", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                      { "featureType": "poi.park", "elementType": "geometry.fill", "stylers": [{"color": "#023e58"}] },
+                      { "featureType": "poi.park", "elementType": "labels.text.fill", "stylers": [{"color": "#3C7680"}] },
+                      { "featureType": "road", "elementType": "geometry", "stylers": [{"color": "#304a7d"}] },
+                      { "featureType": "road", "elementType": "labels.text.fill", "stylers": [{"color": "#98a5be"}] },
+                      { "featureType": "road", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                      { "featureType": "road.highway", "elementType": "geometry", "stylers": [{"color": "#2c6675"}] },
+                      { "featureType": "road.highway", "elementType": "geometry.stroke", "stylers": [{"color": "#255763"}] },
+                      { "featureType": "road.highway", "elementType": "labels.text.fill", "stylers": [{"color": "#b0d5ce"}] },
+                      { "featureType": "road.highway", "elementType": "labels.text.stroke", "stylers": [{"color": "#023e58"}] },
+                      { "featureType": "transit", "elementType": "labels.text.fill", "stylers": [{"color": "#98a5be"}] },
+                      { "featureType": "transit", "elementType": "labels.text.stroke", "stylers": [{"color": "#1d2c4d"}] },
+                      { "featureType": "transit.line", "elementType": "geometry.fill", "stylers": [{"color": "#283d6a"}] },
+                      { "featureType": "transit.station", "elementType": "geometry", "stylers": [{"color": "#3a4762"}] },
+                      { "featureType": "water", "elementType": "geometry", "stylers": [{"color": "#0e1626"}] },
+                      { "featureType": "water", "elementType": "labels.text.fill", "stylers": [{"color": "#4e6d70"}] }
+                    ]
+                {%- endcase -%}
+              </script>
+            </div>
+          </media-element>
+        {%- endif -%}
+      </div>
+
+      {%- if section.blocks.size > 0 -%}
+        <div class="banner__content overflow-hidden absolute z-1 top-0 left-0 w-full h-full">
+          <div class="page-width w-full h-full flex items-center justify-center {{ section.settings.content_position }} relative">
+            <div class="banner__box flex flex-col md:text-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment_mobile }} relative overflow-hidden">
+              {%- liquid
+                assign with_gradient = false
+                if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+                  assign with_gradient = true
+                endif
+              -%}
+              {%- if section.settings.heading != blank -%}
+                <{{ section.settings.heading_tag }} class="banner__title heading leading-none tracking-none {{ section.settings.heading_size }}" {{ section.shopify_attributes }}>
+                  {%- if section.settings.highlighted_text == 'none' -%}
+                    <split-words class="split-words js-invisible block" data-animate="fade-up-large" data-animate-delay="250">{{ section.settings.heading }}</split-words>
+                  {%- else -%}
+                    {%- render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient -%}
+                  {%- endif -%}
+                </{{ section.settings.heading_tag }}>
+              {%- endif -%}
+
+              <ul class="help-list grid gap-4 md:gap-5" is="g-map-locations" aria-controls="GMap-{{ section.id }}" data-parent>
+                {%- for block in section.blocks -%}
+                  {%- if block.settings.map_address != blank -%}
+                    <li class="help-list__item grid gap-2 md:gap-3 cursor-pointer{% if forloop.first %} active{% endif %}" data-map-address="{{ block.settings.map_address | escape }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                      {%- if block.settings.heading != blank -%}
+                        <p class="h4 font-medium leading-tight md:text-lg">{{ block.settings.heading | escape }}</p>
+                      {%- endif -%}
+                      <div class="flex gap-1d5 items-start">
+                        <address class="text-sm leading-tight text-opacity not-italic">
+                          {{- block.settings.map_address -}}
+                        </address>
+                        {%- if block.settings.button_label != blank -%}
+                          <a class="button button--primary{% unless forloop.first %} button--secondary{% endunless %} grow-0 shrink-0"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} aria-label="{{ block.settings.button_label | default: block.settings.heading | escape }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %} is="hover-link" data-map-button>
+                            <span class="btn-fill" data-fill></span>
+                            <span class="btn-text">
+                              {%- render 'icon', icon: 'location', size: '2xs' -%}
+                            </span>
+                          </a>
+                        {%- endif -%}
+                      </div>
+                      {%- if block.settings.text != blank or block.settings.liquid != blank or block.settings.button_label != blank -%}
+                        <details is="menu-details">
+                          <summary class="inline-block" aria-expanded="false">
+                            <span class="reversed-link text-sm cursor-pointer">{{ 'sections.map.view_details' | t }}</span>
+                          </summary>
+                          <div class="drawer__submenu flex flex-col z-1 absolute top-0 left-0 w-full h-full">
+                            <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ 'sections.map.back' | t }}</button>
+                            <div class="drawer__scrollable flex flex-col justify-between h-full">
+                              <div class="banner__box">
+                                <div class="grid gap-2">
+                                  <p class="h4 text-base-xl font-medium leading-tight">{{ block.settings.heading | escape }}</p>
+                                  <p class="text-sm leading-tight text-opacity">{{ block.settings.map_address }}</p>
+                                </div>
+                                <div class="rte leading-normal subtext-sm">
+                                  {{ block.settings.text }}
+                                  {{ block.settings.liquid }}
+                                </div>
+                              </div>
+
+                              {%- if block.settings.button_label != blank -%}
+                                <p>
+                                  {%- if block.settings.button_style == 'link' -%}
+                                    <a class="link inline-block{% if block.settings.button_icon %} icon-with-text{% endif %}"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link" {{ block.shopify_attributes }}>
+                                      {%- liquid
+                                        if block.settings.button_icon
+                                          render 'icon', icon: 'direction', size: 'sm'
+                                        endif
+                                      -%}
+                                      <span class="link-text">{{ block.settings.button_label | escape }}</span>
+                                    </a>
+                                  {%- else -%}
+                                    <a class="button button--{{ block.settings.button_style }} button--{{ block.settings.button_size }} button--fixed{% if block.settings.button_icon %} icon-with-text{% endif %} w-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link" {{ block.shopify_attributes }}>
+                                      <span class="btn-fill" data-fill></span>
+                                      <span class="btn-text">
+                                        {%- liquid
+                                          if block.settings.button_icon
+                                            render 'icon', icon: 'direction', size: 'sm'
+                                          endif
+                                          echo block.settings.button_label | escape
+                                        -%}
+                                      </span>
+                                    </a>
+                                  {%- endif -%}
+                                </p>
+                              {%- endif -%}
+                            </div>
+                          </div>
+                        </details>
+                      {%- endif -%}
+                    </li>
+                  {%- endif -%}
+                {%- endfor -%}
+              </ul>
+            </div>
+          </div>
+        </div>
+      {%- endif -%}
+    </div>
+  </div>
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.maps.name",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "transparent_header",
+      "label": "t:sections.global.settings.transparent_header.label",
+      "info": "t:sections.global.settings.transparent_header.info",
+      "default": false
+    },
+    {
+      "id": "map_api_key",
+      "type": "text",
+      "label": "t:sections.map.settings.map_api_key.label",
+      "info": "t:sections.map.settings.map_api_key.info"
+    },
+    {
+      "type": "range",
+      "id": "map_zoom",
+      "min": 12,
+      "max": 20,
+      "step": 1,
+      "label": "t:sections.map.settings.map_zoom.label",
+      "default": 16
+    },
+    {
+      "type": "select",
+      "id": "map_style",
+      "label": "t:sections.map.settings.map_style.label",
+      "options": [
+        {
+          "value": "standard",
+          "label": "t:sections.map.settings.map_style.options__1.label"
+        },
+        {
+          "value": "silver",
+          "label": "t:sections.map.settings.map_style.options__2.label"
+        },
+        {
+          "value": "retro",
+          "label": "t:sections.map.settings.map_style.options__3.label"
+        },
+        {
+          "value": "dark",
+          "label": "t:sections.map.settings.map_style.options__4.label"
+        },
+        {
+          "value": "night",
+          "label": "t:sections.map.settings.map_style.options__5.label"
+        },
+        {
+          "value": "aubergine",
+          "label": "t:sections.map.settings.map_style.options__6.label"
+        }
+      ],
+      "default": "dark"
+    },
+    {
+      "type": "image_picker",
+      "id": "image",
+      "label": "t:sections.global.settings.image.label",
+      "info": "t:sections.map.settings.image.info"
+    },
+    {
+      "type": "select",
+      "id": "image_height",
+      "options": [
+        {
+          "label": "t:sections.global.settings.image_height.options__1.label",
+          "value": "adapt"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__2.label",
+          "value": "400px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__3.label",
+          "value": "450px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__4.label",
+          "value": "500px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__5.label",
+          "value": "550px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__6.label",
+          "value": "600px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__7.label",
+          "value": "650px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__8.label",
+          "value": "700px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__9.label",
+          "value": "750px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__10.label",
+          "value": "800px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__11.label",
+          "value": "850px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
+          "value": "100vh"
+        }
+      ],
+      "default": "650px",
+      "label": "t:sections.global.settings.image_height.label"
+    },
+    {
+      "type": "select",
+      "id": "content_position",
+      "options": [
+        {
+          "value": "md:items-start md:justify-start",
+          "label": "t:sections.global.settings.content_position.options__1.label"
+        },
+        {
+          "value": "md:items-start md:justify-center",
+          "label": "t:sections.global.settings.content_position.options__2.label"
+        },
+        {
+          "value": "md:items-start md:justify-end",
+          "label": "t:sections.global.settings.content_position.options__3.label"
+        },
+        {
+          "value": "md:items-center md:justify-start",
+          "label": "t:sections.global.settings.content_position.options__4.label"
+        },
+        {
+          "value": "md:items-center md:justify-center",
+          "label": "t:sections.global.settings.content_position.options__5.label"
+        },
+        {
+          "value": "md:items-center md:justify-end",
+          "label": "t:sections.global.settings.content_position.options__6.label"
+        },
+        {
+          "value": "md:items-end md:justify-start",
+          "label": "t:sections.global.settings.content_position.options__7.label"
+        },
+        {
+          "value": "md:items-end md:justify-center",
+          "label": "t:sections.global.settings.content_position.options__8.label"
+        },
+        {
+          "value": "md:items-end md:justify-end",
+          "label": "t:sections.global.settings.content_position.options__9.label"
+        }
+      ],
+      "default": "md:items-end md:justify-start",
+      "label": "t:sections.global.settings.content_position.label"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment",
+      "default": "left",
+      "label": "t:sections.global.settings.text_alignment.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__mobile.content"
+    },
+    {
+      "type": "select",
+      "id": "content_position_mobile",
+      "options": [
+        {
+          "value": "image_first",
+          "label": "t:sections.map.settings.content_position_mobile.options__1.label"
+        },
+        {
+          "value": "text_overlay",
+          "label": "t:sections.map.settings.content_position_mobile.options__2.label"
+        }
+      ],
+      "default": "image_first",
+      "label": "t:sections.map.settings.content_position_mobile.label"
+    },
+    {
+      "type": "select",
+      "id": "image_height_mobile",
+      "options": [
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__1.label",
+          "value": "auto"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__2.label",
+          "value": "200px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__3.label",
+          "value": "250px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__4.label",
+          "value": "300px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__5.label",
+          "value": "400px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__6.label",
+          "value": "500px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__7.label",
+          "value": "600px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__8.label",
+          "value": "100vh"
+        },
+        {
+          "label": "t:sections.global.settings.image_height_mobile.options__9.label",
+          "value": "adapt"
+        }
+      ],
+      "default": "400px",
+      "label": "t:sections.global.settings.image_height_mobile.label"
+    },
+    {
+      "type": "text_alignment",
+      "id": "text_alignment_mobile",
+      "default": "left",
+      "label": "t:sections.global.settings.text_alignment_mobile.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__heading.content"
+    },
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Our stores"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "text-base-xl",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "text-lg-2xl",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "text-2xl lg:text-3xl",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        }
+      ],
+      "default": "text-2xl lg:text-3xl",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.highlighted_text.options__1.label"
+        },
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "none",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__colors.content",
+      "info": "t:sections.global.settings.header__colors.info"
+    },
+    {
+      "type": "color",
+      "id": "color_text",
+      "label": "t:sections.global.settings.color_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_background",
+      "label": "t:sections.global.settings.color_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_background",
+      "label": "t:sections.global.settings.gradient_background.label"
+    },
+    {
+      "type": "color",
+      "id": "color_highlight",
+      "label": "t:sections.global.settings.color_highlight.label"
+    },
+    {
+      "type": "color_background",
+      "id": "gradient_highlight",
+      "label": "t:sections.global.settings.gradient_highlight.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_text",
+      "label": "t:sections.global.settings.color_button_text.label"
+    },
+    {
+      "type": "color",
+      "id": "color_button_background",
+      "label": "t:sections.global.settings.color_button_background.label"
+    },
+    {
+      "type": "color_background",
+      "id": "color_button_gradient",
+      "label": "t:sections.global.settings.color_button_gradient.label"
+    },
+    {
+      "type": "header",
+      "content": "t:sections.global.settings.header__section.content"
+    },
+    {
+      "type": "range",
+      "id": "padding_top",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_top.label",
+      "default": 0
+    },
+    {
+      "type": "range",
+      "id": "padding_bottom",
+      "min": 0,
+      "max": 120,
+      "step": 4,
+      "unit": "px",
+      "label": "t:sections.global.settings.padding_bottom.label",
+      "default": 0
+    },
+    {
+      "type": "checkbox",
+      "id": "divider",
+      "label": "t:sections.global.settings.divider.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "full_width",
+      "label": "t:sections.global.settings.full_width.label",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "rounded",
+      "default": false,
+      "label": "t:sections.global.settings.rounded.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "enable_parallax",
+      "label": "t:sections.global.settings.enable_parallax.label",
+      "default": true
+    },
+    {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
+      "type": "select",
+      "id": "parallax_direction",
+      "label": "t:sections.global.settings.parallax_direction.label",
+      "default": "vertical",
+      "options": [
+        {
+          "value": "vertical",
+          "label": "t:sections.global.settings.parallax_direction.options__1.label"
+        },
+        {
+          "value": "horizontal",
+          "label": "t:sections.global.settings.parallax_direction.options__2.label"
+        },
+        {
+          "value": "zoom",
+          "label": "t:sections.global.settings.parallax_direction.options__3.label"
+        }
+      ]
+    }
+  ],
+  "blocks": [
+    {
+      "type": "map",
+      "name": "t:sections.maps.blocks.map.name",
+      "settings": [
+        {
+          "id": "map_address",
+          "type": "text",
+          "label": "t:sections.map.settings.map_address.label",
+          "info": "t:sections.map.settings.map_address.info",
+          "default": "620 King St W, Toronto, ON M5V 1M7, Canada"
+        },
+        {
+          "type": "inline_richtext",
+          "id": "heading",
+          "default": "Store name",
+          "label": "t:sections.global.settings.heading.label"
+        },
+        {
+          "type": "richtext",
+          "id": "text",
+          "default": "<p>Pair text with an image to focus on your chosen product, collection, or blog post. Add details on availability, style, or even provide a review.</p>",
+          "label": "t:sections.global.settings.text.label"
+        },
+        {
+          "type": "liquid",
+          "id": "liquid",
+          "label": "t:sections.custom-liquid.settings.liquid.label",
+          "info": "t:sections.custom-liquid.settings.liquid.info"
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "default": "Button label",
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "select",
+          "id": "button_style",
+          "options": [
+            {
+              "value": "primary",
+              "label": "t:sections.global.settings.button_style.options__1.label"
+            },
+            {
+              "value": "secondary",
+              "label": "t:sections.global.settings.button_style.options__2.label"
+            },
+            {
+              "value": "link",
+              "label": "t:sections.global.settings.button_style.options__3.label"
+            }
+          ],
+          "default": "primary",
+          "label": "t:sections.global.settings.button_style.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "select",
+          "id": "button_size",
+          "options": [
+            {
+              "value": "sm",
+              "label": "t:sections.global.settings.button_size.options__1.label"
+            },
+            {
+              "value": "md",
+              "label": "t:sections.global.settings.button_size.options__2.label"
+            },
+            {
+              "value": "lg",
+              "label": "t:sections.global.settings.button_size.options__3.label"
+            }
+          ],
+          "default": "md",
+          "label": "t:sections.global.settings.button_size.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_icon",
+          "label": "t:sections.global.settings.button_icon.label",
+          "default": true
+        }
+      ]
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.maps.name"
+    }
+  ],
+  "disabled_on": {
+    "groups": [
+      "footer",
+      "header",
+      "custom.overlay"
+    ]
+  }
+}
+{% endschema %}

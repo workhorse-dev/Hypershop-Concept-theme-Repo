@@ -1,0 +1,64 @@
+{%- doc -%}
+  Renders newsletter subscription form with floating labels and inline submit button.
+
+  Features email validation, success/error states, and context tracking.
+
+  @param {string} section_id - Unique section ID for form identification
+  @param {string} context - Form location identifier for analytics/tracking ('footer', 'section', 'popup', etc.)
+  @param {string} [classes] - Additional CSS classes
+
+  @example
+  {% render 'newsletter-form',
+     section_id: section.id,
+     context: 'footer'
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  assign form_id = 'newsletter-' | append: section_id
+  assign form_class = 'newsletter-form grid gap-5'
+  if classes != blank
+    assign form_class = form_class | append: ' ' | append: classes
+  endif
+-%}
+{%- form 'customer', id: form_id, class: form_class -%}
+  <input type="hidden" name="contact[tags]" value="newsletter" />
+  <input type="hidden" name="contact[context]" value="{{ context }}" />
+  <div class="field relative">
+    <input
+      id="NewsletterForm--{{ section_id }}"
+      class="input is-floating input--fill"
+      type="email"
+      name="contact[email]"
+      value="{{ form.email }}"
+      autocorrect="off"
+      autocapitalize="off"
+      autocomplete="email"
+      placeholder="{{ 'general.newsletter.label' | t | escape }}"
+      required
+      {%- if form.errors %} autofocus{% endif -%}
+    />
+    <label class="label is-floating" for="NewsletterForm--{{ section_id }}">{{ 'general.newsletter.label' | t }}</label>
+    <div class="self-submit-button absolute">
+      <button type="submit" class="button button--primary self-button flex justify-center items-center" is="magnet-button" data-magnet="20" aria-label="{{ 'general.newsletter.submit' | t | escape }}">
+        <span class="btn-text">
+          <svg class="icon icon-arrow-right icon-xs transform" viewBox="0 0 16 16" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+            <path stroke-linecap="round" stroke-linejoin="round" d="M2 8.00012H14M14 8.00012L9.33333 3.3335M14 8.00012L9.33333 12.6668"></path>
+          </svg>
+        </span>
+      </button>
+    </div>
+  </div>
+  
+  {%- liquid
+    if form.errors and form.context == context
+      assign form_errors = form.errors | default_errors
+      render 'alert', status: 'error', content: form_errors
+    endif
+
+    if form.posted_successfully?
+      assign success_message = 'general.newsletter.success' | t
+      render 'alert', status: 'success', content: success_message
+    endif
+  -%}
+{%- endform -%}

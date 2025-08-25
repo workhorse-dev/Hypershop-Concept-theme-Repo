@@ -1,0 +1,145 @@
+{%- if block.settings.heading != blank -%}
+  {%- liquid
+    assign alignment = 'inherit'
+    if block.settings.width != 'fit-content'
+      assign alignment = block.settings.alignment
+    endif
+    assign alignment_mobile = 'inherit'
+    if block.settings.width != 'fit-content'
+      assign alignment_mobile = block.settings.alignment_mobile
+    endif
+  -%}
+  <p class="banner__subheading heading uppercase leading-none tracking-widest {{ block.settings.heading_size }}{% if block.settings.secondary_color %} banner__text--colored{% endif %} text-{{ alignment_mobile }} md:text-{{ alignment }} size-style" style="{% render 'section-size-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {{- block.settings.heading -}}
+  </p>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.subheading.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "heading",
+      "default": "Add a tagline",
+      "label": "t:sections.global.settings.subheading.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "subtitle-sm",
+          "label": "t:sections.global.settings.subheading_size.options__1.label"
+        },
+        {
+          "value": "subtitle-md",
+          "label": "t:sections.global.settings.subheading_size.options__2.label"
+        },
+        {
+          "value": "subtitle-lg",
+          "label": "t:sections.global.settings.subheading_size.options__3.label"
+        }
+      ],
+      "default": "subtitle-md",
+      "label": "t:sections.global.settings.subheading_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "secondary_color",
+      "default": false,
+      "label": "t:sections.global.settings.secondary_color.label"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:blocks.group.settings.alignment.label",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == 'fill' or block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment_mobile",
+      "label": "t:blocks.group.settings.alignment_mobile.label",
+      "default": "left",
+      "visible_if": "{{ block.settings.width_mobile == 'fill' or block.settings.width_mobile == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.subheading.name",
+      "category": "t:categories.basic",
+      "settings": {
+        "heading": "Tagline"
+      }
+    }
+  ]
+}
+{% endschema %}

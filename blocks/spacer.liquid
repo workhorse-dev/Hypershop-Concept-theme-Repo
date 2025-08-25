@@ -1,0 +1,131 @@
+{%- capture style -%}
+  {%- if block.settings.size == 'percent' -%}
+    --spacer-size: {{ block.settings.percent_size | divided_by: 100.00 }};
+  {%- else -%}
+    --spacer-size: {{ block.settings.pixel_size }}px;
+  {%- endif -%}
+
+  {%- assign size_mobile = block.settings.size -%}
+  {%- if block.settings.custom_mobile_size -%}
+    {%- assign size_mobile = block.settings.size_mobile -%}
+    {%- if block.settings.size_mobile == 'percent' -%}
+      --spacer-size-mobile: {{ block.settings.percent_size_mobile | divided_by: 100.00 }};
+      {%- liquid
+        if block.settings.percent_size_mobile == 0
+          assign hidden_mobile = true
+        endif
+      -%}
+    {%- else -%}
+      --spacer-size-mobile: {{ block.settings.pixel_size_mobile }}px;
+      {%- liquid
+        if block.settings.pixel_size_mobile == 0
+          assign hidden_mobile = true
+        endif
+      -%}
+    {%- endif -%}
+  {%- endif -%}
+{%- endcapture  -%}
+<div class="spacer-block spacer-block--{{ block.settings.size }} mobile:spacer-block--{{ size_mobile }}{% if hidden_mobile %} hidden md:block{% endif %}" style="{{ style }}" {{ block.shopify_attributes }}>&nbsp;</div>
+
+{% schema %}
+{
+  "name": "t:blocks.spacer.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "select",
+      "id": "size",
+      "label": "t:blocks.spacer.settings.unit.label",
+      "options": [
+        {
+          "value": "pixel",
+          "label": "t:blocks.spacer.settings.unit.options__1.label"
+        },
+        {
+          "value": "percent",
+          "label": "t:blocks.spacer.settings.unit.options__2.label"
+        }
+      ],
+      "default": "percent"
+    },
+    {
+      "type": "range",
+      "id": "percent_size",
+      "label": "t:blocks.spacer.settings.size.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.size == 'percent' }}"
+    },
+    {
+      "type": "range",
+      "id": "pixel_size",
+      "label": "t:blocks.spacer.settings.size.label",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 120,
+      "visible_if": "{{ block.settings.size == 'pixel' }}"
+    },
+    {
+      "type": "checkbox",
+      "id": "custom_mobile_size",
+      "label": "t:blocks.spacer.settings.custom_mobile_size.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.spacer.settings.header__size_mobile.content",
+      "visible_if": "{{ block.settings.custom_mobile_size == true }}"
+    },
+    {
+      "type": "select",
+      "id": "size_mobile",
+      "label": "t:blocks.spacer.settings.unit.label",
+      "options": [
+        {
+          "value": "pixel",
+          "label": "t:blocks.spacer.settings.unit.options__1.label"
+        },
+        {
+          "value": "percent",
+          "label": "t:blocks.spacer.settings.unit.options__2.label"
+        }
+      ],
+      "default": "percent",
+      "visible_if": "{{ block.settings.custom_mobile_size == true }}"
+    },
+    {
+      "type": "range",
+      "id": "percent_size_mobile",
+      "label": "t:blocks.spacer.settings.size.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.size_mobile == 'percent' and block.settings.custom_mobile_size == true}}"
+    },
+    {
+      "type": "range",
+      "id": "pixel_size_mobile",
+      "label": "t:blocks.spacer.settings.size.label",
+      "min": 0,
+      "max": 400,
+      "step": 4,
+      "unit": "px",
+      "default": 120,
+      "visible_if": "{{ block.settings.size_mobile == 'pixel' and block.settings.custom_mobile_size == true}}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.spacer.name",
+      "category": "t:categories.layout"
+    }
+  ]
+}
+{% endschema %}

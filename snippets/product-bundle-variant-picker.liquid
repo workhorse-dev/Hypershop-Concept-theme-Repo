@@ -1,0 +1,121 @@
+{%- doc -%}
+  Renders an isolated variant picker form for bundle products with customizable selection interfaces.
+
+  Creates a self-contained form for selecting and adding product variants to bundles with inventory awareness.
+
+  @param {object} product - Shopify product object with variants and option data
+  @param {string} product_id - Unique product identifier for element targeting
+  @param {string} section_id - Section identifier for form namespacing
+  @param {string} product_form_id - Form ID for variant change integration
+  @param {string} [picker_type] - Selection UI type ('button' or 'dropdown')
+  @param {boolean} [enable_color_swatches] - Enable color swatch rendering
+  @param {string} [color_swatch_type] - Swatch source ('variant' for variant images)
+  @param {string} [controls] - ARIA controls ID for accessibility integration
+
+  @example
+  {% render 'product-bundle-variant-picker',
+    product: product,
+    product_id: product.id,
+    section_id: section.id,
+    product_form_id: 'ProductForm-ID',
+    picker_type: 'button',
+    enable_color_swatches: true,
+    color_swatch_type: 'variant'
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  assign featured_image = ''
+  if product.featured_image
+    assign featured_image = product.featured_image | image_url
+  endif
+  
+  assign check_against_inventory = true
+  if product.selected_or_first_available_variant.inventory_management != 'shopify' or  product.selected_or_first_available_variant.inventory_policy == 'continue'
+    assign check_against_inventory = false
+  endif
+  if product.selected_or_first_available_variant.quantity_rule.min > product.selected_or_first_available_variant.inventory_quantity and check_against_inventory
+    assign quantity_rule_soldout = true
+  endif
+-%}
+{%- form 'product',
+  product,
+  id: product_form_id,
+  data-type: 'add-to-cart-form',
+  data-product-title: product.title,
+  data-product-image: featured_image,
+  class: 'product-form flex flex-col gap-2 lg:gap-4 h-full justify-between',
+  is: 'product-bundle-form',
+  aria-controls: controls
+-%}
+  <input type="hidden" name="id" value="{{ product.selected_or_first_available_variant.id }}" disabled />
+
+  {%- unless product.has_only_default_variant -%}
+    {%- liquid
+      case picker_type
+        when 'button'
+          if enable_color_swatches
+            if color_swatch_type == 'variant'
+              render 'product-variant-picker-variant', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+            else
+              render 'product-variant-picker-swatch', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+            endif
+          else
+            render 'product-variant-picker-button', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+          endif
+        when 'dropdown'
+          render 'product-variant-picker-dropdown', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+        else
+          render 'product-variant-picker-variant', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+          render 'product-variant-picker-swatch', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+          render 'product-variant-picker-button', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+          render 'product-variant-picker-dropdown', product: product, product_id: product_id, section_id: section_id, show_variant_labels: true, context: 'bundle'
+      endcase
+    -%}
+  {%- else -%}
+    <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+  {%- endunless -%}
+
+  {%- if picker_type != blank -%}
+    <noscript>
+      <div class="product-form__input{% if product.has_only_default_variant %} hidden{% endif %}">
+        <label class="form__label flex gap-2" for="Variants-{{ section_id }}-{{ product_id }}">{{ 'products.product.product_variants' | t }}</label>
+        <div class="field">
+          <select name="id" id="Variants-{{ section_id }}-{{ product_id }}" class="select">
+            {%- for variant in product.variants -%}
+              <option
+                {% if variant == product.selected_or_first_available_variant %}selected{% endif %}
+                {% if variant.available == false %}disabled{% endif %}
+                value="{{ variant.id }}"
+              >
+                {{ variant.title }}
+                {%- if variant.available == false %} - {{ 'products.product.sold_out' | t }}{% endif %}
+                - {{ variant.price | money | strip_html }}
+              </option>
+            {%- endfor -%}
+          </select>
+          {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+        </div>
+      </div>
+    </noscript>
+  {%- endif -%}
+
+  <button
+    type="submit"
+    name="add"
+    class="product-form__submit button button--primary w-full"
+    is="hover-button"
+    {%- if product.selected_or_first_available_variant.available == false or quantity_rule_soldout %} disabled{% endif -%}
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- liquid
+        if product.selected_or_first_available_variant.available == false or quantity_rule_soldout
+          echo 'products.product.sold_out' | t
+        else
+          echo 'products.product.add_to_bundle' | t
+        endif
+      -%}
+    </span>
+  </button>
+{%- endform -%}

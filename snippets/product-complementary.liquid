@@ -1,0 +1,73 @@
+{%- doc -%}
+  Renders a product recommendations carousel using Shopify's complementary products API.
+
+  Displays related products in a horizontal scrollable carousel with navigation controls. Automatically fetches recommendations based on the current product and displays them in a responsive grid that becomes swipeable on mobile devices.
+
+  @param {number} limit - Maximum products to display (1-10 recommended)
+  @param {string} heading - Section title text
+  @param {string} product_id - Source product ID for recommendations
+  @param {string} section_id - Unique section identifier
+  @param {string} [image_ratio] - Card image aspect ratio ('square', 'landscape', 'portrait')
+  @param {boolean} [image_fill] - Crop images to fill container
+  @param {boolean} [show_vendor] - Display product vendors
+  @param {boolean} [show_price] - Show product pricing
+  @param {object} [recommendations] - Pre-loaded recommendations object
+  @param {array} [recommendations_products] - Override product collection
+
+  @example
+  {% render 'product-complementary',
+     limit: 4,
+     heading: 'You may also like',
+     product_id: product.id,
+     section_id: section.id
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  if recommendations.performed
+    if recommendations_products != blank
+      assign products_count = recommendations_products.count
+    elsif recommendations.products_count > 0
+      assign recommendations_products = recommendations.products
+      assign products_count = recommendations.products_count
+    endif
+  endif
+-%}
+<product-recommendations class="complementary-products flex flex-col gap-5" data-url="{{ routes.product_recommendations_url }}?section_id={{ section_id }}&product_id={{ product_id }}&limit={{ limit }}&intent=complementary">
+  <div class="flex justify-between gap-4 items-center">
+    <p class="recommend__title font-medium text-lg grow">{{ heading | escape }}</p>
+    {%- if products_count > 1 -%}
+      <div class="indicators indicators--small flex gap-2">
+        <button class="button button--secondary" type="button" is="hover-button" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled data-prev-button>
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-left', size: 'sm', class: 'transform' -%}
+          </span>
+        </button>
+        <button class="button button--secondary" type="button" is="hover-button" aria-label="{{ 'general.pagination.next' | t | escape }}" data-next-button>
+          <span class="btn-fill" data-fill></span>
+          <span class="btn-text">
+            {%- render 'icon', icon: 'chevron-right', size: 'sm', class: 'transform' -%}
+          </span>
+        </button>
+      </div>
+    {%- endif -%}
+  </div>
+  {%- if recommendations.performed -%}
+    <product-complementary class="horizontal-products block{% if products_count > 1 %} flickity{% endif %}">
+      {%- liquid
+        for recommendation in recommendations_products
+          assign accessibility = true
+          if products_count > 1
+            unless forloop.first
+              assign accessibility = false
+            endunless
+          endif
+          render 'product-card-horizontal', product: recommendation, product_id: recommendation.id, section_id: section_id, image_ratio: image_ratio, image_fill: image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view, accessibility: accessibility
+        endfor
+      -%}
+    </product-complementary>
+  {%- else -%}
+    <div class="horizontal-products relative"></div>
+  {%- endif -%}
+</product-recommendations>

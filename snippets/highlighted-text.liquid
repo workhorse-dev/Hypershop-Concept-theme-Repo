@@ -1,0 +1,39 @@
+{%- doc -%}
+  Transforms emphasis tags into visually enhanced text with decorative highlighting effects.
+
+  Replaces standard `<em>` elements with custom highlighted text components.
+
+  @param {string} content - Text/HTML containing `<em>` tags to transform
+  @param {string} style - Highlight style type ('scribble', 'none', or other custom styles)
+  @param {string} [scribble] - Scribble icon type when using 'scribble' style
+  @param {boolean} [gradient] - Enable gradient color effects on highlighted text
+
+  @example
+  {% render 'highlighted-text',
+    content: 'This is <em>important text</em> with highlighting.',
+    style: 'scribble',
+    scribble: 'circle'
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  if style != 'none'
+    assign highlighted_class = 'highlighted-text inline-block not-italic relative'
+    if gradient
+      assign highlighted_class = highlighted_class | append: ' with-gradient'
+    endif
+
+    assign begin_tag = '<em is="highlighted-text" class="' | append: highlighted_class | append: '" data-style="' | append: style | append: '">'
+    assign content = content | replace: '<em>', begin_tag
+
+    if style == 'scribble'
+      capture scribble_icon
+        render 'icon-scribble', icon: scribble
+      endcapture
+      assign end_tag = scribble_icon | append: '</em>'
+      assign content = content | replace: '</em>', end_tag
+    endif
+  endif
+
+  echo content
+-%}

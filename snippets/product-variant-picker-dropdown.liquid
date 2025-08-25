@@ -1,0 +1,96 @@
+{%- doc -%}
+  Renders an isolated variant picker form for bundle products with customizable selection interfaces.
+
+  Creates a self-contained form for selecting and adding product variants to bundles with inventory awareness.
+
+  @param {object} product - Shopify product object with variants and option data
+  @param {string} product_id - Unique product identifier for element targeting
+  @param {string} section_id - Section identifier for form namespacing
+  @param {boolean} [show_variant_labels] - Show variant label
+  @param {object} [size_chart] - Shopify page object for size chart
+  @param {string} [context] - Context identifier for ID generation
+  @param {string} [shopify_attributes] - Shopify-specific attributes
+
+  @example
+  {% render 'product-variant-picker-dropdown',
+    product: product,
+    product_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
+
+<variant-picker id="VariantPicker-{{ section_id }}-{{ product_id }}{% if context == 'bundle' %}-dropdown{% endif %}" class="variant-picker grid gap-5 no-js-hidden">
+  {%- for option in product.options_with_values -%}
+    {%- liquid
+      assign is_size = false
+      if size_chart != blank
+        assign size_trigger = 'products.general.size_trigger' | t | downcase
+        assign downcased_option = option.name | downcase
+        if downcased_option contains size_trigger
+          assign is_size = true
+        endif
+      endif
+    -%}
+    <div class="product-form__input product-form__input--dropdown variant-input-wrapper"
+      data-option-index="option{{ forloop.index }}"
+      data-option-slug="{{ option.name | handleize }}"
+    >
+      <div class="form__label flex items-center justify-between gap-2 w-full">
+        {%- if show_variant_labels -%}
+          <label class="flex gap-2" for="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}">
+            {{- option.name -}}:
+            <span class="font-medium" id="{{ section_id }}-{{ product_id }}-option{{ option.position }}">{{ option.selected_value }}</span>
+          </label>
+        {%- endif -%}
+        {%- if is_size -%}
+          <div class="flex items-center gap-2">
+            {%- render 'icon', icon: 'ruler', size: 'xs', class: 'stroke-1' -%}
+            <button type="button" class="link text-sm leading-tight cursor-pointer" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false">
+              {{- 'products.general.size_chart' | t -}}
+            </button>
+            <x-modal id="SizeChart-{{ section_id }}-{{ product_id }}" class="x-modal drawer z-30 fixed bottom-0 left-0 h-full w-full pointer-events-none"
+              role="dialog"
+              aria-modal="true"
+              aria-label="{{ size_chart.title | escape }}"
+              hidden
+            >
+              <overlay-element class="overlay fixed-modal invisible opacity-0 fixed bottom-0 left-0 w-full h-screen pointer-events-none" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false"></overlay-element>
+              <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
+                <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
+                  <span class="drawer__title heading title-md">{{ size_chart.title | escape }}</span>
+                  <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="SizeChart-{{ section_id }}-{{ product_id }}" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+                    <span class="btn-fill" data-fill></span>
+                    <span class="btn-text">
+                      {%- render 'icon', icon: 'close', size: 'sm' -%}
+                    </span>
+                  </button>
+                </gesture-element>
+                <div class="drawer__content opacity-0 invisible flex flex-col h-full grow shrink">
+                  <div class="drawer__scrollable relative flex flex-col gap-5 md:gap-7 grow shrink">
+                    <div class="rte text-base md:text-lg">{{ size_chart.content }}</div>
+                  </div>
+                </div>
+              </div>
+            </x-modal>
+          </div>
+        {%- endif -%}
+      </div>
+      <div class="field">
+        <select id="Option-{{ section_id }}-{{ product_id }}-{{ forloop.index0 }}"
+          class="select"
+          name="options[{{ option.name | escape }}]"
+          is="custom-select"
+        >
+          {%- for value in option.values -%}
+            <option value="{{ value | escape }}" data-option-value-id="{{ value.id }}" {% if option.selected_value == value %}selected{% endif %}{% if value.product_url != blank and value.product_url != product.url %} data-product-url="{{ value.variant.url | default: value.product_url }}"{% endif %}>
+              {{ value }}
+            </option>
+          {%- endfor -%}
+        </select>
+        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+      </div>
+    </div>
+  {%- endfor -%}
+
+  <script type="application/json" data-selected-variant>{{ product.selected_or_first_available_variant | json }}</script>
+</variant-picker>

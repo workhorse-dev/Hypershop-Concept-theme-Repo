@@ -1,0 +1,292 @@
+{%- if block.settings.heading != blank -%}
+  {%- liquid
+    assign with_gradient = false
+    if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
+      assign with_gradient = true
+    endif
+
+    assign alignment = 'inherit'
+    if block.settings.width != 'fit-content'
+      assign alignment = block.settings.alignment
+    endif
+    assign alignment_mobile = 'inherit'
+    if block.settings.width != 'fit-content'
+      assign alignment_mobile = block.settings.alignment_mobile
+    endif
+  -%}
+  <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }} text-{{ alignment_mobile }} md:text-{{ alignment }} size-style" style="{% render 'section-size-style', settings: block.settings %}" {{ block.shopify_attributes }}>
+    {%- if block.settings.effects == 'reveal' -%}
+      <split-words class="split-words js-invisible block" data-animate="fade-up-large" data-animate-delay="250">{{ block.settings.heading }}</split-words>
+    {%- elsif block.settings.effects == 'highlight' -%}
+      {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
+    {%- else -%}
+      {{- block.settings.heading -}}
+    {%- endif -%}
+  </{{ block.settings.heading_tag }}>
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.heading.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "inline_richtext",
+      "id": "heading",
+      "label": "t:sections.global.settings.heading.label",
+      "default": "Example heading"
+    },
+    {
+      "type": "select",
+      "id": "heading_size",
+      "options": [
+        {
+          "value": "title-sm",
+          "label": "t:sections.global.settings.heading_size.options__1.label"
+        },
+        {
+          "value": "title-md",
+          "label": "t:sections.global.settings.heading_size.options__2.label"
+        },
+        {
+          "value": "title-lg tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__3.label"
+        },
+        {
+          "value": "title-xl tracking-heading",
+          "label": "t:sections.global.settings.heading_size.options__4.label"
+        }
+      ],
+      "default": "title-md",
+      "label": "t:sections.global.settings.heading_size.label"
+    },
+    {
+      "type": "select",
+      "id": "heading_tag",
+      "options": [
+        {
+          "value": "h1",
+          "label": "t:sections.global.settings.heading_tag.options__1.label"
+        },
+        {
+          "value": "h2",
+          "label": "t:sections.global.settings.heading_tag.options__2.label"
+        },
+        {
+          "value": "h3",
+          "label": "t:sections.global.settings.heading_tag.options__3.label"
+        },
+        {
+          "value": "h4",
+          "label": "t:sections.global.settings.heading_tag.options__4.label"
+        },
+        {
+          "value": "h5",
+          "label": "t:sections.global.settings.heading_tag.options__5.label"
+        },
+        {
+          "value": "h6",
+          "label": "t:sections.global.settings.heading_tag.options__6.label"
+        },
+        {
+          "value": "div",
+          "label": "t:sections.global.settings.heading_tag.options__7.label"
+        },
+        {
+          "value": "span",
+          "label": "t:sections.global.settings.heading_tag.options__8.label"
+        },
+        {
+          "value": "p",
+          "label": "t:sections.global.settings.heading_tag.options__9.label"
+        }
+      ],
+      "default": "h2",
+      "label": "t:sections.global.settings.heading_tag.label",
+      "info": "t:sections.global.settings.heading_tag.info"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment",
+      "label": "t:blocks.group.settings.alignment.label",
+      "default": "left",
+      "visible_if": "{{ block.settings.width == 'fill' or block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "text_alignment",
+      "id": "alignment_mobile",
+      "label": "t:blocks.group.settings.alignment_mobile.label",
+      "default": "left",
+      "visible_if": "{{ block.settings.width_mobile == 'fill' or block.settings.width_mobile == 'custom' }}"
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__animation.content"
+    },
+    {
+      "type": "select",
+      "id": "effects",
+      "label": "t:sections.global.settings.effects.label",
+      "options": [
+        {
+          "value": "none",
+          "label": "t:sections.global.settings.effects.options__1.label"
+        },
+        {
+          "value": "reveal",
+          "label": "t:sections.global.settings.effects.options__2.label"
+        },
+        {
+          "value": "highlight",
+          "label": "t:sections.global.settings.effects.options__3.label"
+        }
+      ],
+      "default": "none"
+    },
+    {
+      "visible_if": "{{ block.settings.effects == 'highlight' }}",
+      "type": "header",
+      "content": "t:sections.global.settings.header__highlight.content",
+      "info": "t:sections.global.settings.header__highlight.info"
+    },
+    {
+      "visible_if": "{{ block.settings.effects == 'highlight' }}",
+      "type": "select",
+      "id": "highlighted_text",
+      "options": [
+        {
+          "value": "text",
+          "label": "t:sections.global.settings.highlighted_text.options__2.label"
+        },
+        {
+          "value": "full_text",
+          "label": "t:sections.global.settings.highlighted_text.options__3.label"
+        },
+        {
+          "value": "half_text",
+          "label": "t:sections.global.settings.highlighted_text.options__4.label"
+        },
+        {
+          "value": "underline",
+          "label": "t:sections.global.settings.highlighted_text.options__5.label"
+        },
+        {
+          "value": "stencil",
+          "label": "t:sections.global.settings.highlighted_text.options__6.label"
+        },
+        {
+          "value": "scribble",
+          "label": "t:sections.global.settings.highlighted_text.options__7.label"
+        }
+      ],
+      "default": "text",
+      "label": "t:sections.global.settings.highlighted_text.label"
+    },
+    {
+      "visible_if": "{{ block.settings.effects == 'highlight' and block.settings.highlighted_text == 'scribble' }}",
+      "type": "select",
+      "id": "highlighted_scribble",
+      "options": [
+        {
+          "value": "circle",
+          "label": "t:sections.global.settings.highlighted_scribble.options__1.label"
+        },
+        {
+          "value": "basic-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__2.label"
+        },
+        {
+          "value": "sketch-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__3.label"
+        },
+        {
+          "value": "squiggle-underline",
+          "label": "t:sections.global.settings.highlighted_scribble.options__4.label"
+        },
+        {
+          "value": "squiggle-underline-2",
+          "label": "t:sections.global.settings.highlighted_scribble.options__5.label"
+        }
+      ],
+      "default": "circle",
+      "label": "t:sections.global.settings.highlighted_scribble.label",
+      "info": "t:sections.global.settings.highlighted_scribble.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.heading.name",
+      "category": "t:categories.basic",
+      "settings": {
+        "heading": "New arrivals"
+      }
+    }
+  ]
+}
+{% endschema %}
