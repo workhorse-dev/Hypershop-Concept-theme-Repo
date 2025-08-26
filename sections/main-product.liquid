@@ -263,6 +263,10 @@
                     render 'product-rating', product: product
                   endif
                 -%}
+                <!-- Add Bazaarvoice Review Container below price -->
+                <div id="bv-container" style="display:none;">
+                  <div data-bv-show="reviews"></div>
+                </div>
               </div>
 
               {%- if price_block == blank and block.settings.show_price -%}
