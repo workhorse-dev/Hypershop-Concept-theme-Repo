@@ -9,7 +9,6 @@
   if (match) {
     const [, collectionHandle, subPath] = match;
     
-    // Case 1: Product redirect (/collections/*/products/* -> /products/*)
     if (subPath?.startsWith('products/')) {
       const cleanUrl = `/${subPath}${search}${hash}`;
       if (pathname !== cleanUrl) {
@@ -18,7 +17,6 @@
       return;
     }
     
-    // Case 2: Tag redirect (/collections/*/tag -> /collections/*)
     if (subPath && !['products', 'all'].includes(subPath)) {
       const cleanUrl = `/collections/${collectionHandle}${search}${hash}`;
       if (pathname !== cleanUrl) {
