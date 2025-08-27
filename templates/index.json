@@ -266,9 +266,12 @@
           "disabled": true,
           "settings": {
             "text": "<p>At Hyper, we are driven by the mission of unlocking the boundless potential of creators through our innovative connectivity and power solutions. As a team of visionaries and makers, including creative marketers, product developers, and entrepreneurs—we recognize the importance of doing things differently, thinking big, and aiming for excellence. </p><p>We believe in technology that simplifies and enhances our customers' lives, enabling them to achieve their goals and unlock their full potential. With our solutions, we aim to Go Beyond device limitations and expectations, empowering our customers to pursue their passions and make a positive impact on the world. </p>",
+            "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 32,
-            "text_font": "body",
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
             "secondary_color": false,
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -609,9 +612,12 @@
           "type": "text",
           "settings": {
             "text": "<p>Explore the setup—hover, discover, and shop instantly. Build your dream workspace in just a few clicks.</p>",
+            "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 32,
-            "text_font": "body",
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
             "secondary_color": false,
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -956,6 +962,7 @@
           "disabled": true,
           "settings": {
             "icon": "none",
+            "iwidth": "custom",
             "icon_width": 20,
             "text": "{{ section.settings.product.vendor }}",
             "text_size": "text-base"
@@ -1027,7 +1034,8 @@
             "share_label": "Share",
             "show_help_desk": true,
             "help_label": "Need help?",
-            "help_page": ""
+            "help_page": "",
+            "help_page_external": false
           }
         },
         "read_more": {
@@ -1075,12 +1083,18 @@
           "type": "feed",
           "settings": {
             "image": "shopify://shop_images/hyper-hj3004-sleepingiant808-v01-r01-1080x1080_c318f480-ee1b-4fce-bb95-f02795cd83fc.webp",
+            "enable_video_autoplay": true,
+            "enable_video_looping": true,
             "video_on_hover": false,
+            "button_label": "",
+            "button_link": "",
+            "button_external": true,
+            "button_icon": false,
             "account_name": "@sleepingiant_808",
             "account_description": "We cultivate sonic excellence",
             "account_button": "Follow",
             "account_link": "https://www.instagram.com/reel/DCmruQVC9Zl/",
-            "button_external": true,
+            "account_link_external": false,
             "color_text": "#ffffff",
             "color_button_text": "#000000",
             "color_button_background": "#ffffff",
@@ -1107,12 +1121,18 @@
           "type": "feed",
           "settings": {
             "image": "shopify://shop_images/hyper-HP20P2BKGL-appledsign-v01-r01-1080x1080.webp",
+            "enable_video_autoplay": true,
+            "enable_video_looping": true,
             "video_on_hover": false,
+            "button_label": "",
+            "button_link": "",
+            "button_external": true,
+            "button_icon": false,
             "account_name": "@appledsign",
             "account_description": "",
             "account_button": "Follow",
             "account_link": "https://www.instagram.com/reel/CpvJsMvDaq5/?utm_source=ig_web_copy_link&igsh=MzRlODBiNWFlZA==",
-            "button_external": true,
+            "account_link_external": false,
             "color_text": "#ffffff",
             "color_button_text": "#000000",
             "color_button_background": "#ffffff",
@@ -1139,12 +1159,18 @@
           "type": "feed",
           "settings": {
             "image": "shopify://shop_images/hyper-hj1002-HD449-kevtechfr-v01-r01-1080x1080.webp",
+            "enable_video_autoplay": true,
+            "enable_video_looping": true,
             "video_on_hover": false,
+            "button_label": "",
+            "button_link": "",
+            "button_external": true,
+            "button_icon": false,
             "account_name": "@kevtech.fr",
             "account_description": "",
             "account_button": "Follow",
             "account_link": "",
-            "button_external": true,
+            "account_link_external": false,
             "color_text": "#ffffff",
             "color_button_text": "#000000",
             "color_button_background": "#ffffff",
@@ -1171,12 +1197,18 @@
           "type": "feed",
           "settings": {
             "image": "shopify://shop_images/hj3320-social-image.webp",
+            "enable_video_autoplay": true,
+            "enable_video_looping": true,
             "video_on_hover": false,
+            "button_label": "",
+            "button_link": "",
+            "button_external": false,
+            "button_icon": false,
             "account_name": "@jsetups",
             "account_description": "",
             "account_button": "Follow",
             "account_link": "",
-            "button_external": false,
+            "account_link_external": false,
             "color_text": "#ffffff",
             "color_button_text": "#000000",
             "color_button_background": "#ffffff",
@@ -1282,7 +1314,6 @@
     },
     "product-bundle": {
       "type": "product-bundle",
-      "disabled": true,
       "custom_css": [
         "@media screen and (min-width: 1536px) {.product-bundle {flex: 0 0 25%; } .product-bundle__sidebar {width: 100%; }}",
         "@media screen and (min-width: 1920px) {.product-bundle-wrapper {padding-inline: calc(var(--grid-gap) * 2); }}"
@@ -1334,9 +1365,12 @@
           "type": "text",
           "settings": {
             "text": "<h2>Never Lose Track of Your Gear</h2>",
+            "text_font": "body",
             "text_size": "subtext-custom",
             "text_max_size": 32,
-            "text_font": "body",
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
             "secondary_color": false,
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -1346,9 +1380,12 @@
           "type": "text",
           "settings": {
             "text": "<p>The HyperPack Pro with an Apple® Find My™ compatible location module keeps your gear safe, dry, and always by your side.</p>",
+            "text_font": "body",
             "text_size": "subtext-md",
             "text_max_size": 32,
-            "text_font": "body",
+            "text_line_height": 1.6,
+            "text_letter_spacing": 0,
+            "text_capitalize": false,
             "secondary_color": false,
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
@@ -1601,42 +1638,60 @@
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand2.webp",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         },
         "image-2": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand3.webp",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         },
         "image-3": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand4.webp",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         },
         "image-4": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand5.webp",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         },
         "image-5": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand6.webp",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         },
         "image-6": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/brand7.png",
-            "height": 60
+            "height": 60,
+            "link": "",
+            "accessibility_info": "",
+            "external": false
           }
         }
       },
