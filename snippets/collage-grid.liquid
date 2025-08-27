@@ -1,3 +1,14 @@
+{%- doc -%}
+  Renders a dynamic grid collage with image and video blocks, overlay content, and responsive layouts.
+
+  Creates a flexible grid system where each block can span multiple columns/rows with custom content.
+
+  @param {object} section - Shopify section object containing blocks and settings
+
+  @example
+  {% render 'collage-grid', section: section %}
+{%- enddoc -%}
+
 {%- liquid
   assign with_gradient = false
   if section.settings.gradient_highlight != blank and section.settings.gradient_highlight != 'rgba(0,0,0,0)'
@@ -43,7 +54,7 @@
   
   {%- case block.type -%}
     {%- when 'image' -%}
-      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size }}; --collage-row: {{ block.settings.row_size }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size }};--collage-row: {{ block.settings.row_size }};" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
         {%- if block.settings.image != blank -%}
           {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
           <picture class="media media--height block w-full h-full relative overflow-hidden">
@@ -67,7 +78,7 @@
         {%- else -%}
           <div class="media media--height w-full h-full relative overflow-hidden">
             {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
-            {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+            {{- placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent' -}}
           </div>
         {%- endif -%}
 
@@ -75,7 +86,7 @@
       </div>
 
     {%- when 'video' -%}
-      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size | default: 10 }}; --collage-row: {{ block.settings.row_size | default: 4 }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="collage__item with-image banner w-full h-full relative overflow-hidden" style="--collage-column: {{ block.settings.column_size | default: 10 }};--collage-row: {{ block.settings.row_size | default: 4 }};" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
         <div class="w-full h-full relative">
           {%- if block.settings.video_mobile or block.settings.video_url_mobile -%}
             {%- render 'video',

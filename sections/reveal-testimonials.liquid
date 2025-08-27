@@ -20,7 +20,7 @@
         assign limit = words.size | divided_by: 2
       -%}
       <{{ section.settings.heading_tag }} class="testimonials-title title-wrapper">
-        <split-words class="split-words heading {{ section.settings.heading_size }} md:flex md:justify-between" data-animate="fade-up-large">
+        <split-words class="split-words js-invisible heading {{ section.settings.heading_size }} md:flex md:justify-between" data-animate="fade-up-large">
           <span class="split-words inline">
             {%- liquid
               for word in words, limit: limit
@@ -348,6 +348,7 @@
           "label": "t:sections.testimonials.blocks.testimonial.settings.image.label"
         },
         {
+          "visible_if": "{{ block.settings.image != blank }}",
           "type": "select",
           "id": "image_ratio",
           "options": [
@@ -409,6 +410,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -442,7 +444,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.reveal-testimonials.presets.name",
+      "name": "t:sections.reveal-testimonials.name",
       "blocks": [
         {
           "type": "testimonial"

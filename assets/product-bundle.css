@@ -56,6 +56,18 @@
     }
   }
 
+
+  .compact-product-bundle-wrapper .mobile\:media--adapt {
+    height: 0;
+    padding-block-end: var(--ratio-percent);
+  }
+
+  .compact-product-bundle-wrapper .mobile\:media--adapt>.media {
+    position: absolute;
+    inset: 0;
+    width: 100%;
+  }
+
   .compact-product-bundle-wrapper .product-card--promo .product-card__media {
     position: relative;
   }

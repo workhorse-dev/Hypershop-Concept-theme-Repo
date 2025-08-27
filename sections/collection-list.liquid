@@ -44,7 +44,7 @@
     {%- endcapture -%}
     {%- render 'section-heading', section: section, section_button: indicators -%}
 
-    <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+    <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
       <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
         {%- for block in section.blocks -%}
           {%- assign collection = collections[block.settings.collection] -%}
@@ -54,7 +54,7 @@
             image_type: section.settings.image_type,
             image_ratio: section.settings.image_ratio,
             show_products_count: section.settings.show_products_count,
-            position: forloop.index,
+            position: forloop.index
           -%}
         {%- endfor -%}
       </motion-list>
@@ -339,6 +339,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -517,7 +518,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.collection-list.presets.name",
+      "name": "t:sections.collection-list.name",
       "blocks": [
         {
           "type": "collection"

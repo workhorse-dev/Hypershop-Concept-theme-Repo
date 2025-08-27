@@ -1,3 +1,16 @@
+{%- doc -%}
+  Renders horizontal subcollection navigation with optional thumbnails and product counts.
+
+  Displays collection links with hover effects and optional parent "All Products" link.
+
+  @param {array} sub_collection_links - Array of navigation link objects
+  @param {object} [parent_link] - Parent collection for "All Products" link
+  @param {boolean} [show_count] - Display product count badges
+
+  @example
+  {% render 'sub-collections', sub_collection_links: link.links, show_count: true %}
+{%- enddoc -%}
+
 <div class="grow">
   <ul class="subcollections inline-flex flex-wrap max-w-full">
     {%- if parent_link != blank -%}

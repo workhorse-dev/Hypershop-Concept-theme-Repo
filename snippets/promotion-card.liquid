@@ -1,3 +1,14 @@
+{%- doc -%}
+  Renders a promotional card with image or video background and optional content overlay.
+
+  Supports responsive media, parallax effects, and flexible content positioning with CTA buttons.
+
+  @param {object} block - Block object with settings and attributes
+
+  @example
+  {% render 'promotion-card', block: block %}
+{%- enddoc -%}
+
 {%- liquid
   assign promotion_has_content = false
   if block.settings.icon != blank or block.settings.heading != blank or block.settings.content != blank or block.settings.button_label != blank

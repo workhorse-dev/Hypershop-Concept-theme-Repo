@@ -1,9 +1,13 @@
-{%- comment -%}
-  Renders a header logo component
+{%- doc -%}
+  Renders responsive header logo with white variants and SEO optimization.
 
-  Usage:
-  {% render 'header-logo' %}
-{%- endcomment -%}
+  Displays site logo with mobile/desktop versions, overlay support, and text fallback.
+
+  @param {boolean} [logo_h1] - Wrap logo in H1 tag for homepage SEO
+
+  @example
+  {% render 'header-logo', logo_h1: true %}
+{%- enddoc -%}
 
 {%- liquid
   assign logo = settings.logo
@@ -13,13 +17,7 @@
   assign white_logo_mobile = settings.white_logo_mobile | default: white_logo
 -%}
 
-{%- if request.page_type == 'index' -%}
-  <h1 class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
-    <span class="sr-only">{{ shop.name }}</span>
-{%- else -%}
-  <div class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
-{%- endif -%}
-
+{%- capture logo_content -%}
   {%- if logo != blank -%}
     <a
       href="{{ routes.root_url }}"
@@ -52,7 +50,8 @@
         {%- comment -%} Mobile logo {%- endcomment -%}
         {%- capture mobile_sizes -%}{{ settings.logo_width_mobile }}px{%- endcapture -%}
         {%- capture mobile_widths -%}{{ settings.logo_width_mobile }}, {{ settings.logo_width_mobile | times: 2 | at_most: white_logo_mobile.width }}{%- endcapture -%}
-        {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: 2 }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
+        {%- capture mobile_style -%}max-height: {{ settings.logo_width_mobile | divided_by: white_logo_mobile.aspect_ratio }}px;max-width: {{ settings.logo_width_mobile }}px;{%- endcapture -%}
+
         {%- liquid
           echo white_logo | image_url: width: white_logo.width | image_tag: loading: 'lazy', widths: widths, sizes: sizes, style: style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo hidden md:block absolute'
           echo white_logo_mobile | image_url: width: white_logo_mobile.width | image_tag: loading: 'lazy', widths: mobile_widths, sizes: mobile_sizes, style: mobile_style, preload: true, itemprop: 'logo', is: 'lazy-image', class: 'white-logo md:hidden absolute'
@@ -62,9 +61,14 @@
   {%- else -%}
     <a href="{{ routes.root_url }}" itemprop="url" class="h3">{{ shop.name }}</a>
   {%- endif -%}
+{%- endcapture -%}
 
-{%- if request.page_type == 'index' -%}
+{%- if request.page_type == 'index' and logo_h1 -%}
+  <h1 class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
+    {{- logo_content -}}
   </h1>
 {%- else -%}
+  <div class="header__logo flex justify-center z-2" itemscope itemtype="http://schema.org/Organization">
+    {{- logo_content -}}
   </div>
 {%- endif -%}

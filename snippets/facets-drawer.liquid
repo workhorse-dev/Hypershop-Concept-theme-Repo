@@ -1,18 +1,27 @@
-{%- comment -%}
-  Renders facets drawer
+{%- doc -%}
+  Renders a mobile-optimized filter drawer with trigger button and full filtering interface.
 
-  Accepts:
-  - results: {Object} Liquid 'collection' or 'search' object
-  - enable_color_swatches: {Boolean}
-  - collapsed: {Boolean}
-  - enable_filtering: {Boolean}
-  - enable_sorting: {Boolean}
-  - filter_count: {Number}
-  - section_id: {String}
+  Provides slide-out drawer containing filters and sort options for collections/search.
 
-  Usage:
-  {% render 'facets-drawer', results: collection, collapsed: true, enable_color_swatches: true, filter_count: count %}
-{%- endcomment -%}
+  @param {object} results - Shopify collection or search results object
+  @param {boolean} [enable_filtering] - Display filter options
+  @param {boolean} [enable_sorting] - Display sort dropdown
+  @param {boolean} [enable_color_swatches] - Show colors as swatches
+  @param {boolean} [collapsed] - Start filter groups collapsed
+  @param {number} filter_count - Active filter count for badge
+  @param {string} section_id - Parent section ID for state management
+
+  @example
+  {% render 'facets-drawer',
+     results: collection,
+     enable_filtering: true,
+     enable_sorting: true,
+     enable_color_swatches: true,
+     collapsed: false,
+     filter_count: filter_count,
+     section_id: section.id
+  %}
+{%- enddoc -%}
 
 <div class="facet-wrapper">
   <button class="button button--secondary icon-with-text" type="button" is="hover-button" aria-controls="FacetDrawer" aria-expanded="false">

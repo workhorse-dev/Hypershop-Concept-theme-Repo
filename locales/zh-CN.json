@@ -123,6 +123,7 @@
       "note": {
         "title": "订单备注",
         "caption": "订购特别说明",
+        "placeholder": "订单备注",
         "button": "申请"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "抱歉，我们不会运送到您的地址。",
         "one_result": "您的地址有一种运费：",
         "multiple_results": "您的地址有多种运费："
+      },
+      "discount": {
+        "title": "折扣",
+        "caption": "折扣",
+        "placeholder": "折扣码",
+        "button": "申请",
+        "error": "折扣码无法应用于您的购物车",
+        "shipping_error": "添加地址后，结账时会显示运费折扣",
+        "applied": "已应用折扣码：{{ code }}",
+        "remove": "删除折扣 {{ code }}"
       },
       "recently_viewed": {
         "empty": "您最近查看的内容为空。"
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "轮播",
+      "announcement": "公告",
+      "announcement_bar": "公告栏"
+    },
     "blog_posts": {
       "view_all": "查看全部"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "验证您的 Google Maps 帐户时出现问题。请创建并启用您的应用的<a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a>和<a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a>权限。"
     },
     "slideshow": {
+      "carousel": "轮播",
       "play_slideshow": "播放幻灯片",
       "pause_slideshow": "暂停幻灯片放映"
     },
@@ -386,6 +403,7 @@
       "payment_status": "支付状态",
       "shipping_address": "收件地址",
       "fulfillment_status": "履行状态",
+      "discounts": "折扣",
       "discount": "折扣",
       "shipping": "船运",
       "tax": "税",

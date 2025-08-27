@@ -1,3 +1,29 @@
+{%- doc -%}
+  Renders a clickable thumbnail button for product media (images, videos, 3D models).
+
+  Handles variant-specific visibility through metafields or alt text patterns.
+
+  @param {object} product - Product object
+  @param {object} product_variant - Current variant
+  @param {object} media - Media object to display
+  @param {object} featured_media - Currently selected media
+  @param {array} variant_images - Array of variant image sources
+  @param {boolean} hide_variants - Hide variant-specific media
+  @param {string} image_ratio - Desktop aspect ratio
+  @param {string} image_ratio_mobile - Mobile aspect ratio
+  @param {boolean} image_fill - Fill container (vs contain)
+  @param {number} position - Media position index for accessibility
+
+  @example
+  {% render 'product-thumbnail',
+    product: product,
+    product_variant: current_variant,
+    media: media_item,
+    featured_media: product.featured_media,
+    position: forloop.index
+  %}
+{%- enddoc -%}
+
 {%- liquid
   assign show_product_media = true
 
@@ -58,6 +84,8 @@
   else
     assign media_alt = media.alt
   endif
+
+  assign media_alt = media_alt | default: product.title
 -%}
 
 {%- if show_product_media -%}
@@ -65,9 +93,10 @@
   class="product__thumbnail media media--{{ image_ratio }} mobile:media--{{ image_ratio_mobile }}{% unless image_fill %} media--contain{% endunless %} relative overflow-hidden
   {%- if hide_variants and variant_images contains media.src %} product__media--variant{% endif -%}"
   data-media-id="{{ media.id }}"
-  aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}"
+  aria-label="{{ 'general.accessibility.go_to_item' | t: index: position | escape }}"
   aria-current="{% if media.id != featured_media.id %}false{% else %}true{% endif %}"
   {%- if gang_exist == true %} data-gang-option="{{ gang_option_name }}" data-gang-connect="{{ gang_connect }}"{% if gang_media_active == false %} hidden{% endif %}{% else %} data-gang-default{% endif -%}
+  {%- if image_ratio == 'adapt' or image_ratio_mobile == 'adapt' %} style="--aspect-ratio: {{ media.aspect_ratio }};"{% endif -%}
 >
   {{- media.preview_image | image_url: width: 416 | image_tag: loading: 'lazy', sizes: '(max-width: 1280px) 90px, 98px', widths: '54,74,104,162,208,324,416', alt: media_alt, is: 'lazy-image' -}}
 

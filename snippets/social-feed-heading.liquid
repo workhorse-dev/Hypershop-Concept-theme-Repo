@@ -1,3 +1,14 @@
+{%- doc -%}
+  Renders a section header with optional social account integration.
+
+  Displays heading, subheading, description, and social profile with follow button.
+
+  @param {object} section - Section object with settings
+
+  @example
+  {% render 'social-feed-heading', section: section %}
+{%- enddoc -%}
+
 {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none gap-4 lg:gap-8 flex flex-col {{ section.settings.heading_alignment }} md:justify-between relative z-1">
@@ -19,7 +30,7 @@
           {%- if section.settings.heading != blank -%}
             <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
               {%- if section.settings.highlighted_text == 'none' -%}
-                <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+                <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
               {%- else -%}
                 {%- liquid
                   assign with_gradient = false
@@ -56,7 +67,7 @@
           {%- endif -%}
 
           {%- if section.settings.button_label != blank or section.settings.account_name != blank -%}
-            <div class="{% if section.settings.heading_alignment contains 'text-center' %}grid{% else %}grow md:grid flex items-center justify-between{% endif %} gap-2d5 grid-template-auto">
+            <div class="{% if section.settings.heading_alignment contains 'text-center' %}grid{% else %}grow md:grid flex items-center justify-between{% endif %} gap-2d5">
               {%- if section.settings.account_name != blank -%}
                 {%- liquid
                   if section.settings.heading_size == 'title-sm'

@@ -28,7 +28,7 @@
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
-    <slider-element class="grid slider{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+    <slider-element class="grid slider{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
       <div class="multicolumn with-{{ section.blocks.size }} card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid relative z-1">
         {%- for block in section.blocks -%}
           <div class="counter-card card flex gap-5 w-full flex-col items-start xl:flex-row md:text-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment_mobile }}" {{ block.shopify_attributes }}>
@@ -200,7 +200,7 @@
       "name": "t:sections.number-counter.blocks.counter.name",
       "settings": [
         {
-          "type": "inline_richtext",
+          "type": "textarea",
           "id": "title",
           "label": "t:sections.global.settings.title.label"
         },
@@ -230,7 +230,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.number-counter.presets.name",
+      "name": "t:sections.number-counter.name",
       "blocks": [
         {
           "type": "counter"

@@ -1,4 +1,14 @@
 {%- liquid
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign lazyimage = null
+  else
+    assign loading = 'lazy'
+    assign fetchpriority = 'low'
+    assign lazyimage = 'lazy-image'
+  endif
+
   if section.settings.show_image
     if article.image != blank
       assign article_image = article.image
@@ -35,7 +45,7 @@
         <media-element class="banner__media block w-full h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
           <picture class="media media--height block w-full h-full relative overflow-hidden" itemprop="image" is="animate-picture" data-animate="zoom-out">
             {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
-            {{- article_image | image_url: width: article_image.width | image_tag: loading: 'eager', widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: 'lazy-image', alt: article_alt -}}
+            {{- article_image | image_url: width: article_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: lazyimage, alt: article_alt -}}
           </picture>
         </media-element>
         <span class="banner__overlay absolute top-0 left-0 w-full h-full pointer-events-none"></span>
@@ -54,10 +64,10 @@
                 -%}
                 {%- case block.type -%}
                   {%- when 'spacing' -%}
-                    <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden md:block{% endif %}{% if block.settings.height == 0 %} md:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px; --spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
+                    <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden md:block{% endif %}{% if block.settings.height == 0 %} md:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px;--spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
 
                   {%- when 'breadcrumb' -%}
-                    <animate-element class="block" data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}" {{ block.shopify_attributes }}>
+                    <animate-element data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}" class="block" {{ block.shopify_attributes }}>
                       <nav class="breadcrumb" role="navigation" aria-label="breadcrumbs">
                         <ul class="inline-flex gap-4 md:gap-6">
                           <li class="flex items-center gap-4 md:gap-6">
@@ -77,11 +87,11 @@
                     <div class="grid gap-5" {{ block.shopify_attributes }}>
                       {%- if block.settings.show_tags or block.settings.show_date or block.settings.show_comments or block.settings.show_author -%}
                         <div>
-                          <animate-element class="inline-flex flex-wrap items-center gap-6" data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}">
+                          <animate-element data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}" class="inline-flex flex-wrap items-center gap-6">
                             {%- if block.settings.show_tags and article.tags.size > 0 -%}
                               {%- if article.metafields.theme.tag_color.value != blank and article.metafields.theme.tag_background.value != blank -%}
                                 {%- capture badge_style -%}
-                                  --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }}); --badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
+                                  --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }});--badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
                                 {%- endcapture -%}
                               {%- endif -%}
 
@@ -124,12 +134,12 @@
                       {%- endif -%}
 
                       <h1 class="banner__title heading leading-none {{ block.settings.title_size }}{% if block.settings.title_size == 'title-xl' %} tracking-heading{% endif %}{% unless article_image %} relative{% endunless %}" itemprop="headline">
-                        <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ article.title }}</split-words>
+                        <split-words class="split-words js-invisible block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ article.title }}</split-words>
                       </h1>
 
                       {%- if article_meta -%}
                         {%- assign delay = delay | plus: 1 -%}
-                        <animate-element class="block" data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}">
+                        <animate-element data-animate="fade-up" data-animate-delay="{{ delay | times: 250 }}" class="block">
                           <ul class="article__top inline-flex flex-wrap gap-4 md:hidden">
                             {{- article_meta -}}
                           </ul>
@@ -212,14 +222,18 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
           "value": "100vh"
         }
       ],
@@ -450,6 +464,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
       "type": "select",
       "id": "parallax_direction",
       "label": "t:sections.global.settings.parallax_direction.label",

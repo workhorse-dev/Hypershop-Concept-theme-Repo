@@ -10,7 +10,7 @@
     {%- if section.settings.heading != blank -%}
       <div class="title-wrapper leading-none {{ section.settings.heading_alignment }}">
         <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
-          <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading | escape }}</split-words>
+          <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading | escape }}</split-words>
         </{{ section.settings.heading_tag }}>
       </div>
     {%- endif -%}

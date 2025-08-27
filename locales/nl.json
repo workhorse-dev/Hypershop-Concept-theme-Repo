@@ -123,6 +123,7 @@
       "note": {
         "title": "Bestelnotitie",
         "caption": "Bestel speciale instructies",
+        "placeholder": "Bestelnotitie",
         "button": "Toepassen"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Helaas verzenden wij niet naar uw adres.",
         "one_result": "Er geldt één verzendtarief voor uw adres:",
         "multiple_results": "Er zijn meerdere verzendtarieven voor uw adres:"
+      },
+      "discount": {
+        "title": "Korting",
+        "caption": "Korting",
+        "placeholder": "Kortingscode",
+        "button": "Toepassen",
+        "error": "Kortingscode kan niet worden toegepast op je winkelwagen",
+        "shipping_error": "Verzendkortingen worden bij de checkout getoond nadat het adres is ingevoerd",
+        "applied": "Toegepaste kortingscode: {{ code }}",
+        "remove": "Kortingscode {{ code }} verwijderen"
       },
       "recently_viewed": {
         "empty": "Uw recent bekeken pagina is leeg."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carrousel",
+      "announcement": "Aankondiging",
+      "announcement_bar": "Aankondigingsbalk"
+    },
     "blog_posts": {
       "view_all": "Bekijk alles"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Er is een probleem opgetreden bij het verifiëren van uw Google Maps-account. Maak en activeer de <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API-</a> en <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API-</a> machtigingen van uw app."
     },
     "slideshow": {
+      "carousel": "Carrousel",
       "play_slideshow": "Diavoorstelling afspelen",
       "pause_slideshow": "Diavoorstelling pauzeren"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Betalingsstatus",
       "shipping_address": "Verzendadres",
       "fulfillment_status": "Uitvoeringsstatus",
+      "discounts": "Kortingen",
       "discount": "Korting",
       "shipping": "Verzending",
       "tax": "Belasting",

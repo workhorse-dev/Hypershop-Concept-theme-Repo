@@ -1,3 +1,38 @@
+{%- doc -%}
+  Renders individual product media items with variant-aware visibility, zoom controls, and responsive layouts.
+
+  Displays a single media element (image, video, or 3D model) with support for variant-specific grouping, multi-language ALT tag connections, and adaptive aspect ratios. Handles complex media visibility rules based on selected variants and gang media configurations.
+
+  @param {object} product - Shopify product object
+  @param {object} product_variant - Currently selected variant
+  @param {object} media - Media object to render
+  @param {object} featured_media - Product's featured media
+  @param {array} variant_images - Array of variant image sources
+  @param {boolean} [hide_variants] - Hide variant-attached media
+  @param {string} [image_ratio] - Desktop aspect ratio
+  @param {string} [image_ratio_mobile] - Mobile aspect ratio
+  @param {boolean} [image_fill] - Crop to fill (vs contain)
+  @param {string} [gallery_layout] - Parent gallery layout
+  @param {string} [image_zoom] - Zoom interaction type
+  @param {string} section_id - Section identifier
+  @param {string} product_id - Product identifier  
+  @param {string} sizes - Responsive image sizes attribute
+  @param {boolean} [preload] - Preload media resources
+  @param {boolean} [autoplay] - Auto-play videos
+  @param {boolean} [loop] - Loop video playback
+
+  @example
+  {% render 'product-media',
+    product: product,
+    product_variant: product.selected_or_first_available_variant,
+    media: media,
+    featured_media: product.featured_media,
+    variant_images: variant_images,
+    section_id: section.id,
+    product_id: product.id
+  %}
+{%- enddoc -%}
+
 {%- liquid
   assign show_product_media = true
 
@@ -58,6 +93,8 @@
   else
     assign media_alt = media.alt
   endif
+
+  assign media_alt = media_alt | default: product.title
 -%}
 
 {%- if show_product_media -%}
@@ -67,6 +104,7 @@
     data-media-type="{{ media.media_type }}"
     data-media-id="{{ media.id }}"
     {%- if gang_exist == true %} data-gang-option="{{ gang_option_name }}" data-gang-connect="{{ gang_connect }}"{% if gang_media_active == false %} hidden{% endif %}{% else %} data-gang-default{% endif -%}
+    {%- if image_ratio == 'adapt' or image_ratio_mobile == 'adapt' %} style="--aspect-ratio: {{ media.aspect_ratio }};"{% endif -%}
   >
     {%- render 'media', section_id: section_id, product_id: product_id, media: media, media_alt: media_alt, sizes: sizes, preload: preload, autoplay: autoplay, loop: loop -%}
 

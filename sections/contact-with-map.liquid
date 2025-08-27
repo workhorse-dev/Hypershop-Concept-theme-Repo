@@ -164,7 +164,7 @@
                             <option value="{{ option_2 }}">{{ option_2 }}</option>
                           {%- endfor -%}
                         </select>
-                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                       {%- endif -%}
                       <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="ContactFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
                   {%- endcase -%}
@@ -215,7 +215,9 @@
                   if section.settings.image != blank
                     echo section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image', class: 'banner__image'
                   else
-                    echo 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                    unless display_map
+                      echo 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                    endunless
                   endif
                 -%}
               </picture>
@@ -524,12 +526,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -577,6 +581,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -711,14 +716,18 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
           "value": "100vh"
         }
       ],
@@ -867,6 +876,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
       "type": "select",
       "id": "parallax_direction",
       "label": "t:sections.global.settings.parallax_direction.label",
@@ -978,39 +988,46 @@
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "checked_value",
           "label": "t:sections.contact-form.blocks.custom_field.settings.checked_value.label",
           "default": "Yes"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "unchecked_value",
           "label": "t:sections.contact-form.blocks.custom_field.settings.unchecked_value.label",
           "default": "No"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__radio.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__radio.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "text",
           "id": "radio_options",
           "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
           "info": "t:sections.contact-form.blocks.custom_field.settings.options.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "text",
           "id": "select_options",
           "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
@@ -1021,7 +1038,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.contact-with-map.presets.name"
+      "name": "t:sections.contact-with-map.name"
     }
   ],
   "disabled_on": {

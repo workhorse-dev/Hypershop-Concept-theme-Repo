@@ -1,0 +1,165 @@
+{%- if block.settings.button_label != blank -%}
+  {%- capture size_style -%}
+    {%- render 'section-size-style', settings: block.settings -%}
+  {%- endcapture -%}
+  {%- render 'button',
+    label: block.settings.button_label,
+    link: block.settings.button_link,
+    size: block.settings.button_size,
+    style: block.settings.button_style,
+    external: block.settings.button_external,
+    show_icon: block.settings.button_icon,
+    shopify_attributes: block.shopify_attributes,
+    size_style: size_style,
+    classes: 'size-style'
+  -%}
+{%- endif -%}
+
+{% schema %}
+{
+  "name": "t:blocks.button.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "text",
+      "id": "button_label",
+      "default": "Button label",
+      "label": "t:sections.global.settings.button_label.label",
+      "info": "t:sections.global.settings.button_label.info"
+    },
+    {
+      "type": "url",
+      "id": "button_link",
+      "label": "t:sections.global.settings.button_link.label"
+    },
+    {
+      "type": "select",
+      "id": "button_style",
+      "options": [
+        {
+          "value": "primary",
+          "label": "t:sections.global.settings.button_style.options__1.label"
+        },
+        {
+          "value": "secondary",
+          "label": "t:sections.global.settings.button_style.options__2.label"
+        },
+        {
+          "value": "link",
+          "label": "t:sections.global.settings.button_style.options__3.label"
+        }
+      ],
+      "default": "primary",
+      "label": "t:sections.global.settings.button_style.label"
+    },
+    {
+      "type": "select",
+      "id": "button_size",
+      "options": [
+        {
+          "value": "sm",
+          "label": "t:sections.global.settings.button_size.options__1.label"
+        },
+        {
+          "value": "md",
+          "label": "t:sections.global.settings.button_size.options__2.label"
+        },
+        {
+          "value": "lg",
+          "label": "t:sections.global.settings.button_size.options__3.label"
+        }
+      ],
+      "default": "md",
+      "label": "t:sections.global.settings.button_size.label"
+    },
+    {
+      "type": "checkbox",
+      "id": "button_external",
+      "label": "t:sections.global.settings.button_external.label",
+      "default": false
+    },
+    {
+      "type": "checkbox",
+      "id": "button_icon",
+      "label": "t:sections.global.settings.button_icon.label",
+      "default": false
+    },
+    {
+      "type": "header",
+      "content": "t:blocks.group.settings.header__size.content"
+    },
+    {
+      "type": "select",
+      "id": "width",
+      "label": "t:blocks.group.settings.width.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width == 'custom' }}"
+    },
+    {
+      "type": "select",
+      "id": "width_mobile",
+      "label": "t:blocks.group.settings.width_mobile.label",
+      "options": [
+        {
+          "value": "fit-content",
+          "label": "t:blocks.group.settings.width.options__1.label"
+        },
+        {
+          "value": "fill",
+          "label": "t:blocks.group.settings.width.options__2.label"
+        },
+        {
+          "value": "custom",
+          "label": "t:blocks.group.settings.width.options__3.label"
+        }
+      ],
+      "default": "fill"
+    },
+    {
+      "type": "range",
+      "id": "custom_width_mobile",
+      "label": "t:blocks.group.settings.custom_width.label",
+      "min": 0,
+      "max": 100,
+      "step": 1,
+      "unit": "%",
+      "default": 100,
+      "visible_if": "{{ block.settings.width_mobile == 'custom' }}"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:blocks.button.name",
+      "category": "t:categories.basic",
+      "settings": {
+        "button_label": "Shop now",
+        "button_link": "shopify://collections/all"
+      }
+    }
+  ]
+}
+{% endschema %}

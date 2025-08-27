@@ -57,7 +57,8 @@
           
                         {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
                       {%- else -%}
-                        {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder' -}}
+                        {%- capture placeholder -%}{% cycle 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+                        {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
                       {%- endif -%}
                     </picture>
 
@@ -84,18 +85,33 @@
     
           <div class="image-with-text__item grow shrink-0 {{ section.settings.content_position }}">
             <div class="rich-text lg:text-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment_mobile }} relative z-1">
-              {%- if block.settings.icon_image != blank -%}
+              {%- if block.settings.icon != 'none' or block.settings.icon_image != blank -%}
                 <div class="leading-none">
-                  <figure class="media media--transparent relative inline-block">
-                    {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
-                    {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
-                    {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
-                  </figure>
+                  {%- if block.settings.icon_image != blank -%}
+                    {%- liquid
+                      if block.settings.iwidth == 'fit'
+                        assign icon_width = block.settings.icon_image.width
+                      else
+                        assign icon_width = block.settings.icon_width
+                      endif
+                    -%}
+                    <figure class="media media--transparent relative inline-block">
+                      {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+                      {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                      {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+                      {%- assign image_alt = image_alt | default: block.settings.heading | escape -%}
+                      {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
+                    </figure>
+                  {%- elsif block.settings.icon != 'none' -%}
+                    {%- liquid
+                      if block.settings.iwidth == 'fit'
+                        render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block'
+                      else
+                        render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block', width: block.settings.icon_width
+                      endif
+                    -%}
+                  {%- endif -%}
                 </div>
-              {%- elsif block.settings.icon != 'none' -%}
-                <p class="leading-none">
-                  {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
-                </p>
               {%- endif -%}
 
               {%- if block.settings.subheading != blank -%}
@@ -114,7 +130,7 @@
               {%- if block.settings.heading != blank -%}
                 <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}">
                   {%- if block.settings.highlighted_text == 'none' -%}
-                    <split-words class="split-words block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
+                    <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
                   {%- else -%}
                     {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                   {%- endif -%}
@@ -170,7 +186,8 @@
           
                         {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
                       {%- else -%}
-                        {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder' -}}
+                        {%- capture placeholder -%}{% cycle 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
+                        {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
                       {%- endif -%}
                     </picture>
 
@@ -203,20 +220,35 @@
 
         <div class="image-with-text__item grow shrink-0{% if section.settings.image_width == 'large' %} lg:grow-0{% endif %} relative">
           {%- for block in section.blocks -%}
-            <div class="image-with-text__content flex {{ section.settings.content_position }} w-full h-full{% unless forloop.first %} absolute top-0 left-0 opacity-0 pointer-events-none{%  else %} relative{% endunless %}" id="shopify-block-{{ block.id }}" style="z-index:{{ forloop.index }}">
+            <div class="image-with-text__content flex {{ section.settings.content_position }} w-full h-full{% unless forloop.first %} absolute top-0 left-0 opacity-0 pointer-events-none{%  else %} relative{% endunless %}" id="shopify-block-{{ block.id }}" style="z-index: {{ forloop.index }};">
               <div class="rich-text lg:text-{{ section.settings.text_alignment }} text-{{ section.settings.text_alignment_mobile }} relative z-1">
-                {%- if block.settings.icon_image != blank -%}
+                {%- if block.settings.icon != 'none' or block.settings.icon_image != blank -%}
                   <div class="leading-none">
-                    <figure class="media media--transparent relative inline-block">
-                      {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
-                      {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
-                      {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
-                    </figure>
+                    {%- if block.settings.icon_image != blank -%}
+                      {%- liquid
+                        if block.settings.iwidth == 'fit'
+                          assign icon_width = block.settings.icon_image.width
+                        else
+                          assign icon_width = block.settings.icon_width
+                        endif
+                      -%}
+                      <figure class="media media--transparent relative inline-block">
+                        {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+                        {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                        {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+                        {%- assign image_alt = image_alt | default: block.settings.heading | escape -%}
+                        {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
+                      </figure>
+                    {%- elsif block.settings.icon != 'none' -%}
+                      {%- liquid
+                        if block.settings.iwidth == 'fit'
+                          render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block'
+                        else
+                          render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block', width: block.settings.icon_width
+                        endif
+                      -%}
+                    {%- endif -%}
                   </div>
-                {%- elsif block.settings.icon != 'none' -%}
-                  <p class="leading-none">
-                    {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
-                  </p>
                 {%- endif -%}
   
                 {%- if block.settings.subheading != blank -%}
@@ -235,7 +267,7 @@
                 {%- if block.settings.heading != blank -%}
                   <{{ block.settings.heading_tag }} class="heading leading-none {{ block.settings.heading_size }}">
                     {%- if block.settings.highlighted_text == 'none' -%}
-                      <split-words class="split-words block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
+                      <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
                     {%- else -%}
                       {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                     {%- endif -%}
@@ -315,18 +347,22 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
-          "value": "100vh"
+          "value": "900px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__13.label",
+          "value": "100vh"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__14.label",
           "value": "adapt"
         }
       ],
@@ -801,14 +837,31 @@
           "label": "t:sections.global.settings.icon_image.label"
         },
         {
+          "type": "select",
+          "id": "iwidth",
+          "label": "t:sections.global.settings.icon_width.label",
+          "options": [
+            {
+              "value": "fit",
+              "label": "t:sections.global.settings.icon_width.options__1.label"
+            },
+            {
+              "value": "custom",
+              "label": "t:sections.global.settings.icon_width.options__2.label"
+            }
+          ],
+          "default": "custom"
+        },
+        {
           "type": "range",
           "id": "icon_width",
-          "label": "t:sections.global.settings.icon_width.label",
-          "default": 48,
+          "label": "t:sections.global.settings.custom_width.label",
+          "default": 24,
           "min": 10,
           "max": 120,
           "step": 2,
-          "unit": "px"
+          "unit": "px",
+          "visible_if": "{{ block.settings.iwidth == 'custom' }}"
         },
         {
           "type": "inline_richtext",
@@ -907,6 +960,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -927,12 +981,14 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",
@@ -980,6 +1036,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -1283,14 +1340,31 @@
           "label": "t:sections.global.settings.icon_image.label"
         },
         {
+          "type": "select",
+          "id": "iwidth",
+          "label": "t:sections.global.settings.icon_width.label",
+          "options": [
+            {
+              "value": "fit",
+              "label": "t:sections.global.settings.icon_width.options__1.label"
+            },
+            {
+              "value": "custom",
+              "label": "t:sections.global.settings.icon_width.options__2.label"
+            }
+          ],
+          "default": "custom"
+        },
+        {
           "type": "range",
           "id": "icon_width",
-          "label": "t:sections.global.settings.icon_width.label",
-          "default": 48,
+          "label": "t:sections.global.settings.custom_width.label",
+          "default": 24,
           "min": 10,
           "max": 120,
           "step": 2,
-          "unit": "px"
+          "unit": "px",
+          "visible_if": "{{ block.settings.iwidth == 'custom' }}"
         },
         {
           "type": "inline_richtext",
@@ -1389,6 +1463,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -1409,12 +1484,14 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",
@@ -1462,6 +1539,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -1495,7 +1573,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.scrolling-banner.presets.name",
+      "name": "t:sections.scrolling-banner.name",
       "blocks": [
         {
           "type": "image",

@@ -123,6 +123,7 @@
       "note": {
         "title": "Nota",
         "caption": "Ordina istruzioni speciali",
+        "placeholder": "Nota",
         "button": "Applicare"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Siamo spiacenti, non effettuiamo spedizioni al tuo indirizzo.",
         "one_result": "C'è un'unica tariffa di spedizione per il tuo indirizzo:",
         "multiple_results": "Ci sono più tariffe di spedizione per il tuo indirizzo:"
+      },
+      "discount": {
+        "title": "Sconto",
+        "caption": "Sconto",
+        "placeholder": "Codice sconto",
+        "button": "Applicare",
+        "error": "Il codice sconto non può essere applicato al tuo carrello",
+        "shipping_error": "Gli sconti sulla spedizione vengono mostrati al momento del check-out dopo l'aggiunta di un indirizzo",
+        "applied": "Codice sconto applicato: {{ code }}",
+        "remove": "Rimuovi sconto {{ code }}"
       },
       "recently_viewed": {
         "empty": "Non ci sono articoli visualizzati di recente."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carousel",
+      "announcement": "Annuncio",
+      "announcement_bar": "Barra degli annunci"
+    },
     "blog_posts": {
       "view_all": "Visualizza tutto"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Si è verificato un problema durante l'autenticazione del tuo account Google Maps. Crea e attiva i permessi <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> e  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> della tua applicazione."
     },
     "slideshow": {
+      "carousel": "Carousel",
       "play_slideshow": "Avvia presentazione",
       "pause_slideshow": "Metti in pausa presentazione"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Stato del pagamento",
       "shipping_address": "Indirizzo di spedizione",
       "fulfillment_status": "Stato di evasione",
+      "discounts": "Sconti",
       "discount": "Sconto",
       "shipping": "Spedizione",
       "tax": "Imposta",

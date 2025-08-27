@@ -1,19 +1,25 @@
-{%- comment -%}
-  Renders a list of product's price (regular, sale)
+{%- doc -%}
+  Renders product pricing with sale detection, unit prices, and dynamic price ranges.
 
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - variant: {Object} Variant Liquid object (optional)
-  - placeholder: {Boolean} Renders a placeholder price (optional)
-  - use_variant: {Boolean} Renders selected or first variant price instead of overall product pricing (optional)
-  - show_badges: {Boolean} Renders 'Sale' and 'Sold Out' tags if the product matches the condition (optional)
-  - hide_unit_price: if set to true, unit pricing are hidden (optional)
-  - skip_to_price: if set to true, quantity price breaks configured are hidden (optional)
-  - class: {String} Adds a price class to the price element (optional)
+  Displays comprehensive pricing information including regular prices, sale prices, price ranges for products with variants, and unit pricing. Automatically detects sales, formats currencies, and handles various pricing scenarios with proper accessibility support.
 
-  Usage:
-  {% render 'product-price', product: product %}
-{%- endcomment -%}
+  @param {object} [product] - Shopify product object for pricing
+  @param {object} [variant] - Specific variant for single price display
+  @param {boolean} [use_variant] - Show variant price vs product range
+  @param {boolean} [placeholder] - Display placeholder $19.99 price
+  @param {boolean} [hide_unit_price] - Hide unit price information
+  @param {boolean} [skip_to_price] - Skip quantity break considerations
+  @param {boolean} [show_badges] - Show sale/sold out badges (reserved)
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'product-price',
+     product: product,
+     variant: product.selected_variant,
+     use_variant: true
+  %}
+{%- enddoc -%}
+
 {%- liquid
   if use_variant
     assign target = variant | default: product.selected_or_first_available_variant
@@ -45,7 +51,7 @@
       if product.quantity_price_breaks_configured? != true or skip_to_price
         if target == product and product.price_varies
           if settings.currency_code_enabled
-            assign price_min = product.price_min | money_with_currency 
+            assign price_min = product.price_min | money_with_currency
           else
             assign price_min = product.price_min | money
           endif

@@ -1,3 +1,24 @@
+{%- doc -%}
+  Renders a responsive blog article card with image, metadata, tags, and excerpt.
+
+  Displays article preview with configurable metadata elements and styling options.
+
+  @param {object} article - Shopify article object
+  @param {object} blog - Shopify blog object for tag URLs
+  @param {string} [image_ratio] - Image aspect ratio preset
+  @param {boolean} [show_tags] - Display article tags as badges
+  @param {boolean} [show_date] - Display publication date
+  @param {boolean} [show_comments] - Display comment count
+  @param {boolean} [show_author] - Display author name
+  @param {boolean} [show_excerpt] - Display article excerpt
+
+  @example
+  {% render 'article-card',
+     article: article,
+     blog: blog
+  %}
+{%- enddoc -%}
+
 <div class="card article-card relative flex flex-col gap-5 md:gap-8 leading-none{% if article.image == blank %} without-image{% endif %}">
   {%- if article.image != blank -%}
     <div class="article-card__media relative overflow-hidden">
@@ -5,7 +26,7 @@
         <div class="badges z-2 absolute grid gap-3">
           {%- if article.metafields.theme.tag_color.value != blank and article.metafields.theme.tag_background.value != blank -%}
             {%- capture badge_style -%}
-            --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }}); --badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
+              --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }});--badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
             {%- endcapture -%}
           {%- endif -%}
           

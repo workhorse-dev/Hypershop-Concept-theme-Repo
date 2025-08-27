@@ -1,3 +1,11 @@
+{%- liquid
+  assign display_map = false
+  if section.blocks.size > 0 and section.settings.map_api_key != blank
+    assign display_map = true
+    assign first_block = section.blocks | first
+  endif
+-%}
+
 <style>
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
@@ -16,26 +24,22 @@
   theme.strings.authError = {{ 'sections.map.auth_error_html' | t | json }};
 </script>
 
-{%- liquid
-  assign display_map = false
-  if section.blocks.size > 0 and section.settings.map_api_key != blank
-    assign display_map = true
-    assign first_block = section.blocks | first
-  endif
--%}
-
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}"{% if section.settings.transparent_header %} allow-transparent-header{% endif %}>
   <div class="{% unless section.settings.full_width %}page-width {% endunless %}relative">
     <div class="banner with-map mobile:banner--{{ section.settings.content_position_mobile }} relative">
       <div class="media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} relative">
         <media-element class="banner__media block w-full h-full overflow-hidden pointer-events-none{% if display_map %} opacity-0{% endif %}"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
           <picture class="media media--height block w-full h-full relative overflow-hidden">
-            {%- if section.settings.image != blank -%}
-              {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
-              {{- section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: 'lazy-image', class: 'banner__image' -}}
-            {%- else -%}
-              {{- 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder' -}}
-            {%- endif -%}
+            {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
+            {%- liquid
+              if section.settings.image != blank
+                echo section.settings.image | image_url: width: section.settings.image.width | image_tag: loading: 'lazy', widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: 'lazy-image', class: 'banner__image'
+              else
+                unless display_map
+                  echo 'lifestyle-1' | placeholder_svg_tag: 'banner__image banner__overlay placeholder'
+                endunless
+              endif
+            -%}
           </picture>
         </media-element>
         
@@ -50,7 +54,7 @@
                 data-zoom="{{ section.settings.map_zoom }}"
                 data-marker-color="{% if section.settings.map_style == 'standard' or section.settings.map_style == 'silver' or section.settings.map_style == 'retro' %}#000000{% else %}#ffffff{% endif %}"
               ></g-map>
-              <a class="block absolute top-0 left-0 w-full h-full" href="https://www.google.com/maps/place/{{ section.settings.map_address | escape }}" target="_blank" rel="noopener" aria-label="{{ section.settings.map_address | escape }}">&nbsp;</a>
+              <a class="block absolute top-0 left-0 w-full h-full" href="https://www.google.com/maps/place/{{ first_block.settings.map_address | escape }}" target="_blank" rel="noopener" aria-label="{{ first_block.settings.map_address | escape }}">&nbsp;</a>
               <script type="application/json" data-gmap-style>
                 {%- case section.settings.map_style -%}
                   {%- when 'standard' -%}
@@ -202,7 +206,7 @@
               {%- if section.settings.heading != blank -%}
                 <{{ section.settings.heading_tag }} class="banner__title heading leading-none tracking-none {{ section.settings.heading_size }}" {{ section.shopify_attributes }}>
                   {%- if section.settings.highlighted_text == 'none' -%}
-                    <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="250">{{ section.settings.heading }}</split-words>
+                    <split-words class="split-words js-invisible block" data-animate="fade-up-large" data-animate-delay="250">{{ section.settings.heading }}</split-words>
                   {%- else -%}
                     {%- render 'highlighted-text', content: section.settings.heading, style: section.settings.highlighted_text, scribble: section.settings.highlighted_scribble, gradient: with_gradient -%}
                   {%- endif -%}
@@ -232,7 +236,7 @@
                       {%- if block.settings.text != blank or block.settings.liquid != blank or block.settings.button_label != blank -%}
                         <details is="menu-details">
                           <summary class="inline-block" aria-expanded="false">
-                            <button type="button" class="reversed-link text-sm">{{ 'sections.map.view_details' | t }}</button>
+                            <span class="reversed-link text-sm cursor-pointer">{{ 'sections.map.view_details' | t }}</span>
                           </summary>
                           <div class="drawer__submenu flex flex-col z-1 absolute top-0 left-0 w-full h-full">
                             <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ 'sections.map.back' | t }}</button>
@@ -396,14 +400,18 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
           "value": "100vh"
         }
       ],
@@ -647,6 +655,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -769,6 +778,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
       "type": "select",
       "id": "parallax_direction",
       "label": "t:sections.global.settings.parallax_direction.label",
@@ -832,6 +842,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -852,6 +863,7 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_size",
           "options": [
@@ -872,12 +884,14 @@
           "label": "t:sections.global.settings.button_size.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",
@@ -888,7 +902,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.maps.presets.name"
+      "name": "t:sections.maps.name"
     }
   ],
   "disabled_on": {

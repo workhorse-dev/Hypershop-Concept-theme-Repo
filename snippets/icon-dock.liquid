@@ -1,3 +1,17 @@
+{%- doc -%}
+  Renders navigation and UI icons as inline SVGs with consistent stroke styling.
+
+  @param {string} icon - Icon name to render (e.g., 'account', 'home', 'search')
+  @param {string} [size] - Icon size: 'sm', 'md', 'lg'
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'icon-doc',
+    icon: 'cart',
+    size: 'md'
+  %}
+{%- enddoc -%}
+
 {%- capture class -%}icon icon-{{ icon | handle }} icon-{{ size | default: 'md' }}{% if class != blank %} {{ class }}{% endif %}{%- endcapture -%}
 {%- case icon -%}
   {%- when 'account' -%}

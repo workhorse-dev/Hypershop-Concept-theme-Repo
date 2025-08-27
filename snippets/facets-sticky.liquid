@@ -1,18 +1,26 @@
-{%- comment -%}
-  Renders facets sticky
+{%- doc -%}
+  Renders a scroll-triggered sticky filter button with drawer for mobile/tablet devices.
 
-  Accepts:
-  - results: {Object} Liquid 'collection' or 'search' object
-  - enable_color_swatches: {Boolean}
-  - collapsed: {Boolean}
-  - enable_filtering: {Boolean}
-  - enable_sorting: {Boolean}
-  - filter_count: {Number}
-  - section_id: {String}
+  Appears on scroll and provides access to filtering/sorting in a slide-out drawer.
 
-  Usage:
-  {% render 'facets-sticky', results: collection, enable_filtering: true, enable_sorting: true, filter_count: count %}
-{%- endcomment -%}
+  @param {object} results - Shopify collection or search results object
+  @param {boolean} [enable_filtering] - Enable filter options in drawer
+  @param {boolean} [enable_sorting] - Enable sort options in drawer
+  @param {boolean} [enable_color_swatches] - Display colors as swatches
+  @param {boolean} [collapsed] - Start filter groups collapsed
+  @param {number} filter_count - Active filter count for badge display
+  @param {string} section_id - Parent section ID for state tracking
+
+  @example
+  {% render 'facets-sticky',
+     results: collection,
+     enable_filtering: true,
+     enable_sorting: true,
+     enable_color_swatches: true,
+     filter_count: filter_count,
+     section_id: section.id
+  %}
+{%- enddoc -%}
 
 
 {%- if enable_filtering or enable_sorting -%}

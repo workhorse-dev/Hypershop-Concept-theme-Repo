@@ -21,6 +21,7 @@
           endif
           echo '.&nbsp;'
         endif
+        echo powered_by_link
       -%}
       {%- if section.settings.show_policy -%}
         <ul class="flex flex-wrap gap-3 justify-center lg:justify-start">
@@ -59,7 +60,10 @@
                 {{- 'localization.language_label' | t -}}
               </label>
               {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
-              <button type="button" class="localization__item cursor-pointer leading-tight w-full"{% unless section_rendering_api %} is="api-button" data-id="FooterLocalizationLanguageList" data-section-id="{{ section.id }}"{% endunless %}>
+              <button type="button" class="localization__item cursor-pointer leading-tight w-full">
+                {%- unless section_rendering_api -%}
+                  <api-button class="api-only" data-id="FooterLocalizationLanguageList" data-section-id="{{ section.id }}"></api-button>
+                {%- endunless -%}
                 {{- localization.language.endonym_name | capitalize -}}
               </button>
               {%- unless section_rendering_api -%}
@@ -88,7 +92,10 @@
                 {{- 'localization.country_label' | t -}}
               </label>
               {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 absolute pointer-events-none' -%}
-              <button type="button" class="localization__item cursor-pointer leading-tight w-full"{% unless section_rendering_api %} is="api-button" data-id="FooterLocalizationCountryList" data-section-id="{{ section.id }}"{% endunless %}>
+              <button type="button" class="localization__item cursor-pointer leading-tight w-full">
+                {%- unless section_rendering_api -%}
+                  <api-button class="api-only" data-id="FooterLocalizationCountryList" data-section-id="{{ section.id }}"></api-button>
+                {%- endunless -%}
                 {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})
               </button>
               {%- unless section_rendering_api -%}
@@ -175,6 +182,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.show_payment_icons == true }}",
       "type": "checkbox",
       "id": "monochrome_payment_icons",
       "label": "t:sections.footer-copyright.settings.monochrome_payment_icons.label",
@@ -190,6 +198,7 @@
       "label": "t:sections.footer-copyright.settings.show_copyright.label"
     },
     {
+      "visible_if": "{{ section.settings.show_copyright == true }}",
       "type": "text",
       "id": "copyright_text",
       "label": "t:sections.footer-copyright.settings.copyright_text.label"

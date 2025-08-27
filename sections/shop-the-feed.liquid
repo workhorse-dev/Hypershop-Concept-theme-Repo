@@ -19,14 +19,13 @@
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}" data-section-id="{{ section.id }}">
   {%- render 'social-feed-heading', section: section -%}
   
-  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative shop-the-feed">
-    <slider-element id="Slider-{{ section.id }}" class="shop-the-feed grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+  <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
+    <slider-element id="Slider-{{ section.id }}" class="shop-the-feed grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
       <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
         {%- for block in section.blocks -%}
           {%- render 'social-feed-card',
             section: section,
             block: block,
-            collection: collection,
             show_vendor: section.settings.show_vendor,
             show_price: section.settings.show_price,
             image_ratio: section.settings.image_ratio,
@@ -283,12 +282,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -336,6 +337,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -469,9 +471,47 @@
         },
         {
           "type": "checkbox",
+          "id": "enable_video_autoplay",
+          "label": "t:sections.video.settings.enable_video_autoplay.label",
+          "info": "t:sections.video.settings.enable_video_autoplay.info",
+          "default": true
+        },
+        {
+          "type": "checkbox",
+          "id": "enable_video_looping",
+          "label": "t:sections.video.settings.enable_video_looping.label",
+          "default": true
+        },
+        {
+          "type": "checkbox",
           "id": "video_on_hover",
           "label": "t:sections.shop-the-feed.blocks.feed.settings.video_on_hover.label",
           "default": true
+        },
+        {
+          "type": "text",
+          "id": "button_label",
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
+        },
+        {
+          "type": "url",
+          "id": "button_link",
+          "label": "t:sections.global.settings.button_link.label"
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
+        },
+        {
+          "visible_if": "{{ block.settings.button_label != blank }}",
+          "type": "checkbox",
+          "id": "button_icon",
+          "label": "t:sections.global.settings.button_icon.label",
+          "default": false
         },
         {
           "type": "header",
@@ -506,8 +546,9 @@
           "label": "t:sections.shop-the-feed.settings.account_link.label"
         },
         {
+          "visible_if": "{{ block.settings.account_button != blank }}",
           "type": "checkbox",
-          "id": "button_external",
+          "id": "account_link_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },

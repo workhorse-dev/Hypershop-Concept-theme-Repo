@@ -149,14 +149,18 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
           "value": "100vh"
         }
       ],
@@ -385,6 +389,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
       "type": "select",
       "id": "parallax_direction",
       "label": "t:sections.global.settings.parallax_direction.label",
@@ -474,6 +479,7 @@
           "label": "t:sections.testimonials.blocks.testimonial.settings.image.label"
         },
         {
+          "visible_if": "{{ block.settings.image != blank }}",
           "type": "select",
           "id": "image_ratio",
           "options": [
@@ -535,6 +541,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -568,7 +575,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.testimonials-banner.presets.name",
+      "name": "t:sections.testimonials-banner.name",
       "blocks": [
         {
           "type": "testimonial"

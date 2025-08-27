@@ -154,7 +154,7 @@
                   </a>
                 {%- endif -%}
               {%- else -%}
-                <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
+                <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-label="{{ 'onboarding.product_title' | t | escape }}" aria-disabled="true" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
               {%- endif -%}
 
             {%- when 'content'-%}
@@ -163,13 +163,28 @@
                   <div class="hotspot__content hidden md:flex gap-2 items-center absolute z-1 pointer-events-none{% if block.settings.horizontal < 15 %} with-left{% elsif block.settings.horizontal > 85 %} with-right{% endif %}{% if block.settings.vertical > 70 %} with-bottom{% endif %}">
                     <div class="rte text-sm leading-tight grid gap-2 md:gap-3">
                       {%- if block.settings.icon_image != blank -%}
+                        {%- liquid
+                          if block.settings.iwidth == 'fit'
+                            assign icon_width = block.settings.icon_image.width
+                          else
+                            assign icon_width = block.settings.icon_width
+                          endif
+                        -%}
                         <figure class="media media--transparent relative inline-block">
-                          {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
-                          {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
-                          {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
+                          {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+                          {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                          {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+                          {%- assign image_alt = image_alt | default: block.settings.heading | escape -%}
+                          {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
                         </figure>
                       {%- elsif block.settings.icon != 'none' -%}
-                        {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
+                        {%- liquid
+                          if block.settings.iwidth == 'fit'
+                            render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block'
+                          else
+                            render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block', width: block.settings.icon_width
+                          endif
+                        -%}
                       {%- endif -%}
                       {%- if block.settings.heading != blank -%}
                         <p class="horizontal-product__title lg:text-base lg:font-medium leading-tight">{{ block.settings.heading }}</p>
@@ -398,12 +413,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -451,6 +468,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -896,14 +914,31 @@
           "label": "t:sections.global.settings.icon_image.label"
         },
         {
+          "type": "select",
+          "id": "iwidth",
+          "label": "t:sections.global.settings.icon_width.label",
+          "options": [
+            {
+              "value": "fit",
+              "label": "t:sections.global.settings.icon_width.options__1.label"
+            },
+            {
+              "value": "custom",
+              "label": "t:sections.global.settings.icon_width.options__2.label"
+            }
+          ],
+          "default": "custom"
+        },
+        {
           "type": "range",
           "id": "icon_width",
-          "label": "t:sections.global.settings.icon_width.label",
+          "label": "t:sections.global.settings.custom_width.label",
           "default": 24,
           "min": 10,
           "max": 120,
           "step": 2,
-          "unit": "px"
+          "unit": "px",
+          "visible_if": "{{ block.settings.iwidth == 'custom' }}"
         },
         {
           "type": "text",

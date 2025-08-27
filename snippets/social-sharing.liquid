@@ -1,15 +1,23 @@
-{%- comment -%}
-  Accepts:
-  - share_label: {String}
-  - share_title: {String}
-  - share_link: {String}
-  - share_image: {String}
-  - share_id: {String}
-  - section_id: {String}
+{%- doc -%}
+  Renders responsive social sharing component with platform buttons and mobile drawer.
 
-  Usage:
-  {% render 'social-sharing', section_id: section.id, share_id: product.id %}
-{%- endcomment -%}
+  Desktop shows inline buttons, mobile displays drawer interface with full platform names.
+
+  @param {string} share_label - Display label (e.g., "Share", "Share this product")
+  @param {string} share_title - Content title for social posts (auto URL-encoded)
+  @param {string} share_link - Canonical URL to share
+  @param {string} share_image - Image URL for visual platforms (Pinterest, Telegram)
+  @param {string} share_id - Unique ID for multiple instances per page
+  @param {string} section_id - Section ID for drawer controls
+
+  @example
+  {% render 'social-sharing',
+    share_title: product.title,
+    share_image: product.featured_media,
+    share_id: product.id,
+    section_id: section.id
+  %}
+{%- enddoc -%}
 
 {%- if settings.share_facebook or settings.share_twitter or settings.share_pinterest or settings.share_telegram or settings.share_whatsapp or settings.share_email -%}
   <div class="hidden sm:flex items-center gap-3">

@@ -14,9 +14,9 @@
 -%}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}"{% if section.settings.enable_parallax %} is="footer-parallax"{% endif %}>
-  <footer class="footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid">
+  <div class="footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid" role="region" aria-label="Footer">
     {%- if section.blocks.size > 0 -%}
-      <div class="footer__left flex flex-col md:flex-row gap-10 grid-col-span-5">
+      <div class="footer__left flex flex-col md:flex-row gap-10">
         {%- liquid
           assign block = section.blocks | where: "type", "logo_social" | first
           if block
@@ -24,7 +24,7 @@
           endif
         -%}
 
-        <div class="footer__accordions flex flex-wrap flex-col md:flex-row md:grow md:gap-6">
+        <div class="footer__accordions flex flex-wrap flex-col md:flex-row md:grow md:gap-12">
           {%- liquid
             for block in section.blocks
               case block.type
@@ -44,7 +44,7 @@
     {%- endif -%}
 
     {%- if section.settings.enable_newsletter or section.settings.show_social or shop.features.follow_on_shop? and section.settings.enable_follow_on_shop -%}
-      <div class="footer__right grid gap-10 grid-col-span-2">
+      <div class="footer__right grid gap-10">
         {%- if section.settings.enable_newsletter -%}
           <div class="footer__newsletter grid gap-6">
             {%- if section.settings.newsletter_logo -%}
@@ -69,7 +69,7 @@
         {%- endif -%}
 
         {%- if section.settings.show_social -%}
-          <div class="footer__socials flex justify-start md:justify-end xl:justify-start">
+          <div class="footer__socials flex align-self-end justify-start md:justify-end xl:justify-start">
             {%- render 'social-icons', size: 'lg', gap: '7' -%}
           </div>
         {%- endif -%}
@@ -81,7 +81,7 @@
         {%- endif -%}
       </div>
     {%- endif -%}
-  </footer>
+  </div>
 
   {%- if section.settings.enable_parallax -%}
     <parallax-overlay class="footer-overlay hidden md:block z-20 absolute left-0 top-0 w-full pointer-events-none" data-target="height" data-start="100%" data-stop="0%"></parallax-overlay>
@@ -111,12 +111,14 @@
       "label": "t:sections.footer.settings.enable_newsletter.label"
     },
     {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
       "type": "text",
       "id": "newsletter_heading",
       "default": "Subscribe to our emails",
       "label": "t:sections.global.settings.heading.label"
     },
     {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
       "type": "select",
       "id": "newsletter_heading_size",
       "options": [
@@ -141,17 +143,20 @@
       "label": "t:sections.global.settings.heading_size.label"
     },
     {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
       "type": "richtext",
       "id": "newsletter_text",
       "label": "t:sections.global.settings.text.label",
       "info": "t:sections.global.settings.optional.label"
     },
     {
+      "visible_if": "{{ section.settings.enable_newsletter == true }}",
       "type": "image_picker",
       "id": "newsletter_logo",
       "label": "t:sections.footer.settings.newsletter_logo.label"
     },
     {
+      "visible_if": "{{ section.settings.enable_newsletter == true and section.settings.newsletter_logo != blank }}",
       "type": "range",
       "id": "newsletter_logo_height",
       "label": "t:sections.footer.settings.newsletter_logo_height.label",

@@ -11,7 +11,7 @@
   <div class="page-width relative">
     <div id="Recover" class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} text-center leading-none hidden gap-4">
       <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}" tabindex="-1">
-        <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.recover_password.title' | t }}</split-words>
+        <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ 'customer.recover_password.title' | t }}</split-words>
       </{{ section.settings.heading_tag }}>
       <p class="text-lg md:text-2xl">{{ 'customer.recover_password.subtext' | t }}</p>
     </div>
@@ -62,7 +62,7 @@
 
     <div id="Login" class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} text-center">
       <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
-        <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.login.title' | t }}</split-words>
+        <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ 'customer.login.title' | t }}</split-words>
       </{{ section.settings.heading_tag }}>
     </div>
     

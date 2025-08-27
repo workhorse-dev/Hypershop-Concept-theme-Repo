@@ -1,7 +1,23 @@
+{%- doc -%}
+  Renders a section header with title, optional subheading, description, and CTA button.
+
+  Supports text highlighting effects, animated text splits, and responsive typography sizing.
+
+  @param {object} section - Section object with settings
+  @param {boolean} [section_full_width] - Use page-width container
+  @param {string} [section_button] - Additional button HTML to append
+
+  @example
+  {% render 'section-heading',
+    section: section,
+    section_full_width: true
+  %}
+{%- enddoc -%}
+
 {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank or section.settings.button_label != blank -%}
   <div class="{% if section_full_width %}page-width {% endif %}title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none gap-4 lg:gap-8 flex flex-col {{ section.settings.heading_alignment }} md:justify-between relative z-1">
     {%- if section.settings.heading != blank or section.settings.subheading != blank or section.settings.description != blank -%}
-      <div class="grid {% if section.settings.enable_gap %} gap-4 {% endif %}">
+      <div class="grid gap-4">
         {%- if section.settings.subheading != blank -%}
           {%- liquid
             if section.settings.heading_size == 'title-sm'
@@ -18,7 +34,7 @@
         {%- if section.settings.heading != blank -%}
           <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
             {%- if section.settings.highlighted_text == 'none' -%}
-              <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+              <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
             {%- else -%}
               {%- liquid
                 assign with_gradient = false

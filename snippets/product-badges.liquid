@@ -1,3 +1,21 @@
+{%- doc -%}
+  Renders product badges including custom labels and sale indicators with flexible display options.
+
+  Displays promotional badges, custom labels, and calculated savings on product cards and pages.
+
+  @param {object} product - Shopify product object with price and metafield data
+  @param {boolean} [show_save_amount] - Enable savings badge display
+  @param {string} [save_type] - Savings calculation format
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'product-badges',
+     product: product,
+     show_save_amount: true,
+     save_type: 'dollar'
+  %}
+{%- enddoc -%}
+
 {%- liquid
   if product.compare_at_price > product.price and show_save_amount
     if save_type == 'label'
@@ -14,7 +32,7 @@
   {%- if product.metafields.theme.label.value != blank -%}
     {%- capture styles -%}
       {%- if product.metafields.theme.label_color.value != blank -%}
-        --badge-background: {{ product.metafields.theme.label_color.value }}; --badge-foreground: #ffffff;
+        --badge-background: {{ product.metafields.theme.label_color.value }};--badge-foreground: #ffffff;
       {%- endif -%}
     {%- endcapture -%}
     {%- for label in product.metafields.theme.label.value -%}

@@ -1,15 +1,29 @@
-{% comment %}
-  Variant List Row
+{% doc %}
+  Renders a table row for quick order lists with variant details and quantity controls.
 
-  Accepts:
-  - item: {Object} Variant or Product object
-  - sku: {String} Sku of Product or Variant (optional)
-  - image: {Object} Product or Variant image (optional)
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of section to which this snippet belongs.
-  Usage:
-  {% render 'quick-order-list-row' variant: variant %}
-{% endcomment %}
+  Displays pricing with volume discounts, quantity rules, and cart update functionality.
+
+  @param {object} item - Product or variant object to display
+  @param {object} variant - Specific variant for pricing and cart
+  @param {string} product_id - Product ID for targeting
+  @param {string} section_id - Section ID for uniqueness
+  @param {object} [image] - Product/variant image
+  @param {string} [sku] - SKU code to display
+  @param {boolean} [show_image] - Display product image
+  @param {boolean} [show_sku] - Display SKU below title
+
+  @example
+  {% render 'quick-order-list-row',
+    item: variant,
+    variant: variant,
+    product_id: product.id,
+    section_id: section.id,
+    image: variant.image,
+    show_image: true,
+    show_sku: true,
+    sku: variant.sku
+  %}
+{% enddoc %}
 
 {%- assign cart_qty = cart | item_count_for_variant: variant.id -%}
 {%- capture variant_price -%}

@@ -1,33 +1,53 @@
-{%- comment -%}
-  Renders a product card
+{%- doc -%}
+  Renders a bundle product card with integrated variant selection and dynamic media/pricing updates.
 
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
-  - image_ratio: {String} Size of the product image card. Values are "square", "landscape" and "portrait". Default is "square" (optional)
-  - image_fill: {Boolean} Zoom image to fill space. Default: false (optional)
-  - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
-  - show_vendor: {Boolean} Show the product vendor. Default: false
-  - show_rating: {Boolean} Show the product rating. Default: false
-  - show_countdown: {Boolean} Show the countdown timer.
-  - show_quick_add: {Boolean} Show the quick add button.
-  - show_quick_view: {Boolean} Show the quick view button.
-  - show_color_swatches: {Boolean} Show the color swatches.
-  - show_save_amount: {Boolean} Show save amount.
-  - amount_type: {String} Save amount type.
-  - show_variant_labels: {Boolean} Show the variant label.
-  - picker_type: {String} Variant picker type.
-  - enable_color_swatches: {Boolean} Enable the color swatches.
-  - color_swatch_type: {String} Color swatch type.
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of the section that contains this card.
+  Designed for products requiring variant selection within the card interface, supporting rich media and interactive features.
 
-  Usage:
-  {% render 'product-card-bundle', show_vendor: section.settings.show_vendor %}
-{%- endcomment -%}
+  @param {object} product - Shopify product object with variants and media
+  @param {string} product_id - Unique product identifier for element targeting
+  @param {string} section_id - Section identifier for component namespacing
+  @param {string} [image_ratio] - Media aspect ratio preset
+  @param {boolean} [image_fill] - Crop images to fill container
+  @param {boolean} [show_secondary_image] - Enable hover carousel
+  @param {boolean} [show_vendor] - Display brand/vendor name
+  @param {boolean} [show_rating] - Show review ratings
+  @param {boolean} [show_countdown] - Display countdown timer
+  @param {boolean} [show_quick_add] - Quick add button (unused in bundles)
+  @param {boolean} [show_quick_view] - Enable quick view modal
+  @param {boolean} [show_color_swatches] - Color swatches in picker
+  @param {boolean} [show_save_amount] - Display savings badges
+  @param {Boolean} [show_variant_labels] - Show the variant label.
+  @param {string} [picker_type] - Variant UI ('button' or 'dropdown')
+  @param {boolean} [enable_color_swatches] - Enable color detection
+  @param {string} [color_swatch_type] - Swatch source method
+  @param {string} [controls] - ARIA controls for accessibility
+  @param {string} [save_type] - Savings calculation type
+  @param {string} [amount_type] - Savings display format
+  @param {string} [display_mode] - Rating display format
+  @param {boolean} [lazy_load] - Reserved for future use
+
+  @example
+  {% render 'product-card-bundle',
+     product: product,
+     product_id: product.id,
+     section_id: section.id,
+     image_ratio: 'portrait',
+     image_fill: true,
+     show_secondary_image: true,
+     show_vendor: true,
+     show_rating: true,
+     show_countdown: true,
+     show_quick_view: true,
+     show_save_amount: true,
+     picker_type: 'button',
+     enable_color_swatches: true,
+     color_swatch_type: 'variant'
+  %}
+{%- enddoc -%}
 
 {%- if product != blank -%}
   {%- liquid
+    assign product_form_id = 'ProductForm-' | append: section_id | append: '-' | append: product_id
     assign product_variant = product.selected_or_first_available_variant
     assign featured_media = product_variant.featured_image | default: product.featured_image
     assign media_count = 0
@@ -45,6 +65,19 @@
     assign product_url = product.url | within: collection
     if settings.product_disable_collection_portion
       assign product_url = product.url
+    endif
+
+    assign bundle_type = 'dropdown'
+    if picker_type == 'button'
+      if enable_color_swatches
+        if color_swatch_type == 'variant'
+          assign bundle_type = 'variant'
+        else
+          assign bundle_type = 'swatch'
+        endif
+      else
+        assign bundle_type = 'button'
+      endif
     endif
   -%}
   <div class="card product-card product-card--{{ settings.card_style }}{% if settings.card_border_thickness > 0 %} product-card--thickness{% endif %}{% unless featured_media %} no-media{% endunless %} flex flex-col leading-none relative">
@@ -83,12 +116,6 @@
               assign rating_value = product.metafields.reviews.rating.value.rating | round: 1
               assign rating_count = product.metafields.reviews.rating_count.value
               assign rating_max = product.metafields.reviews.rating.value.scale_max
-            elsif show_empty
-              assign rating_value = 0.0
-              assign rating_count = 0
-            elsif show_placeholder
-              assign rating_value = 4.5
-              assign rating_count = 2
             else
               assign hide_rating = true
             endif
@@ -138,7 +165,6 @@
             -%}
           {%- endunless -%}
         </a>
-         
 
         {%- if show_countdown and product.metafields.theme.countdown.value != blank -%}
           {%- liquid
@@ -179,14 +205,15 @@
         <span class="block aspect-{{ image_ratio }}"></span>
       </div>
     {%- endif -%}
-    <product-bundle-info
+    <product-card-info
       class="product-card__content grow flex flex-col{% if featured_media %} justify-start text-{{ settings.card_text_alignment }}{% else %} justify-center items-center absolute top-0 left-0 w-full h-full{% endif %}"
       data-section-id="{{ section_id }}"
       data-product-id="{{ product_id }}"
       data-product-url="{{ product.url }}"
       data-update-url="false"
+      data-picker-type="{{ bundle_type }}"
+      form="{{ product_form_id }}"
     >
-      
       {%- if show_vendor -%}
         <div class="product-card__top w-full">
           <span class="sr-only">{{ 'general.accessibility.vendor' | t }}</span>
@@ -194,31 +221,31 @@
         </div>
       {%- endif -%}
 
-      <div class="product-card__details flex flex-col items-baseline gap-2 w-full">
+      <div class="product-card__details flex flex-col lg:flex-row items-baseline gap-2 w-full">
         <p class="grow">
           <a class="product-card__title reversed-link text-base-xl font-medium leading-tight" href="{{ product_url }}" data-product-bundle-title>
             {{- product.title | escape -}}
           </a>
         </p>
-        {% comment %} <div id="Price-{{ section_id }}-{{ product_id }}">
-          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
-        </div> {% endcomment %}
+        <div id="Price-{{ section_id }}-{{ product_id }}">
+          {%- render 'product-price', product: product, use_variant: true, class: 'flex flex-wrap lg:flex-col lg:items-end gap-2 md:gap-1d5', skip_to_price: true -%}
+        </div>
       </div>
 
-      <div class="product-card__variants grow">
+      <div class="product-card__variants{% unless show_variant_labels %} without-title {% endunless %} grow">
         {%- render 'product-bundle-variant-picker',
           product: product,
           product_id: product_id,
           section_id: section_id,
-          show_variant_labels: show_variant_labels,
+          product_form_id: product_form_id,
           picker_type: picker_type,
           enable_color_swatches: enable_color_swatches,
           color_swatch_type: color_swatch_type,
           controls: controls
         -%}
       </div>
-    </product-bundle-info>
+    </product-card-info>
   </div>
 {%- else -%}
-  {%- render 'product-card-placeholder', placeholder: 'image', image_ratio: image_ratio, text_alignment: text_alignment, show_vendor: show_vendor, show_rating: show_rating -%}
+  {%- render 'product-card-placeholder', placeholder: 'product-1', image_ratio: image_ratio, show_vendor: show_vendor -%}
 {%- endif -%}

@@ -31,15 +31,13 @@
 
           {%- when 'text' -%}
             {%- if block.settings.text != blank -%}
-              <div class="rte leading-tight {{ block.settings.text_font }} {{ block.settings.text_size }}{% if block.settings.secondary_color %} text-opacity{% endif %} inline"{% if block.settings.text_size == 'subtext-custom' %} style="--subtext-size:{{ block.settings.text_max_size }}px;"{% endif %} {{ block.shopify_attributes }}>
+              <div class="rte leading-tight {{ block.settings.text_font }} {{ block.settings.text_size }}{% if block.settings.text_font == 'subtitle' %} uppercase tracking-widest{% endif %}{% if block.settings.secondary_color %} text-opacity{% endif %} inline"{% if block.settings.text_size == 'subtext-custom' %} style="--subtext-size: {{ block.settings.text_max_size }}px;--subtext-line-height: {{ block.settings.text_line_height }};--subtext-letter-spacing: {{ block.settings.text_letter_spacing | divided_by: 1000.00 }}em;{% if block.settings.text_capitalize %}--subtext-text-transform: uppercase;{% endif %}"{% endif %} {{ block.shopify_attributes }}>
                 {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
               </div>
             {%- endif -%}
 
           {%- when 'image' -%}
-            {%- if block.settings.link != blank -%}
-              <a class="inline-block" href="{{ block.settings.link }}" aria-label="{{ block.settings.description | escape }}">
-            {%- endif -%}
+            {%- capture image_content -%}
               {%- liquid
                 assign image_width = block.settings.image_width
                 assign image_width_2x = block.settings.image_width | times: 2
@@ -61,7 +59,7 @@
                     >
                   {%- endif -%}
 
-                  {%- assign image_alt = block.settings.image.alt | default: block.settings.description | escape -%}
+                  {%- assign image_alt = block.settings.image.alt | default: block.settings.accessibility_info | escape -%}
                   {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, is: 'lazy-image' -}}
                 </picture>
               {%- else -%}
@@ -69,8 +67,14 @@
                   {{- 'lifestyle-1' | placeholder_svg_tag: 'placeholder' -}}
                 </animate-element>
               {%- endif -%}
+            {%- endcapture -%}
+
             {%- if block.settings.link != blank -%}
+              <a class="inline-block" href="{{ block.settings.link }}" aria-label="{{ block.settings.accessibility_info | escape }}">
+                {{- image_content -}}
               </a>
+            {%- else -%}
+              {{- image_content -}}
             {%- endif -%}
 
           {%- when 'line_break' -%}
@@ -224,12 +228,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -277,6 +283,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -518,6 +525,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -560,6 +568,26 @@
         },
         {
           "type": "select",
+          "id": "text_font",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.global.settings.text_font.options__1.label"
+            },
+            {
+              "value": "heading",
+              "label": "t:sections.global.settings.text_font.options__2.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.global.settings.text_font.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.global.settings.text_font.label"
+        },
+        {
+          "type": "select",
           "id": "text_size",
           "options": [
             {
@@ -587,6 +615,7 @@
           "label": "t:sections.global.settings.text_size.label"
         },
         {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
           "type": "range",
           "id": "text_max_size",
           "default": 32,
@@ -597,20 +626,30 @@
           "label": "t:sections.global.settings.text_max_size.label"
         },
         {
-          "type": "select",
-          "id": "text_font",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.global.settings.text_font.options__1.label"
-            },
-            {
-              "value": "heading",
-              "label": "t:sections.global.settings.text_font.options__2.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.global.settings.text_font.label"
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "range",
+          "id": "text_line_height",
+          "label": "t:sections.global.settings.text_line_height.label",
+          "default": 1.6,
+          "min": 0.8,
+          "max": 2,
+          "step": 0.1
+        },
+        {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "range",
+          "id": "text_letter_spacing",
+          "label": "t:sections.global.settings.text_letter_spacing.label",
+          "default": 0,
+          "min": -75,
+          "max": 250,
+          "step": 5
+        },
+        {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "checkbox",
+          "id": "text_capitalize",
+          "label": "t:sections.global.settings.text_capitalize.label"
         },
         {
           "type": "checkbox",
@@ -660,6 +699,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -726,9 +766,10 @@
         },
         {
           "type": "text",
-          "id": "description",
-          "label": "t:sections.highlight-text.blocks.image.settings.description.label",
-          "info": "t:sections.highlight-text.blocks.image.settings.description.info"
+          "id": "accessibility_info",
+          "label": "t:sections.global.settings.accessibility.label",
+          "info": "t:sections.global.settings.accessibility.info",
+          "visible_if": "{{ block.settings.link != blank }}"
         },
         {
           "type": "header",
@@ -788,7 +829,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.highlight-text.presets.name",
+      "name": "t:sections.highlight-text.name",
       "blocks": [
         {
           "type": "heading"

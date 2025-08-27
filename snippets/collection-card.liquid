@@ -1,15 +1,30 @@
-{%- comment -%}
-  Renders a collection card
+{%- doc -%}
+  Renders a responsive collection card with flexible image sources and customizable content.
 
-  Accepts:
-  - collection: {Object} Collection Liquid object
-  - image_type: {String} Type of the collection image card
-  - image_ratio: {String} Size of the collection image card
-  - block: {Object} Block object
+  Supports block overrides, product counts, and graceful onboarding placeholders.
 
-  Usage:
-  {% render 'collection-card' %}
-{%- endcomment -%}
+  @param {object} [collection] - Shopify collection object (shows placeholder if nil)
+  @param {string} [image_type] - Image source selection
+    - 'collection' - Uses collection.image
+    - 'product' - Uses first product's featured image
+  @param {string} [image_ratio] - Image aspect ratio class
+    - 'adapt' - Use image's natural ratio (defaults to 'wide' if no image)
+    - 'square' - 1:1 ratio
+    - 'portrait' - Portrait ratio
+    - 'landscape' - Landscape ratio
+    - 'wide' - Wide ratio
+  @param {boolean} [show_products_count] - Display product count badge
+  @param {number} [position] - Card position for placeholder cycling (1-5)
+  @param {object} [block] - Block object for content overrides
+
+  @example
+  {% render 'collection-card',
+     collection: collection,
+     image_type: 'product',
+     image_ratio: 'square',
+     show_products_count: true
+  %}
+{%- enddoc -%}
 
 {%- liquid
   if image_type == 'collection' and collection.image
@@ -76,21 +91,24 @@
       </div>
     </a>
   {%- else -%}
-    <a href="#" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ 'onboarding.collection_title' | t | escape }}">
+    <a href="#" class="media-card__link flex flex-col w-full h-full relative" aria-label="{{ collection_title | escape }}">
       <div class="media media--{{ image_ratio }} relative overflow-hidden">
         {%- liquid
           assign modulo = position | modulo: 5 | plus: 1
           assign placeholder = 'collection-' | append: modulo
-          echo placeholder | placeholder_svg_tag: 'placeholder'
+          echo placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent'
         -%}
       </div>
       <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
         <div class="media-card__text shrink-1 grid gap-0d5">
           <p>
             <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative">
-              {{- 'onboarding.collection_title' | t | escape -}}
+              {{- collection_title | escape -}}
             </span>
           </p>
+          {%- if collection_description != blank -%}
+            <p class="leading-none text-xs xl:text-sm">{{ collection_description }}</p>
+          {%- endif -%}
         </div>
         {%- render 'icon', icon: 'arrow-right', size: 'xs', class: 'transform shrink-0' -%}
       </div>

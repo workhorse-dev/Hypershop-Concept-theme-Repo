@@ -27,15 +27,16 @@
           {%- for block in section.blocks -%}
             {%- case block.type -%}
               {%- when 'text' -%}
-                <div class="scrolling-text__item with-text flex items-center shrink-0 {{ block.settings.text_font }} tracking-heading" style="--font-size: {{ block.settings.text_size }}px;{% if block.settings.text_size >= 100 %}--stencil-stroke-width: 0.01em;{% endif %}" {{ block.shopify_attributes }}>
+                <div class="scrolling-text__item with-text flex items-center shrink-0 {{ block.settings.text_font }}{% if block.settings.text_font == 'subtitle' %} uppercase tracking-widest{% endif %} tracking-heading" style="--font-size: {{ block.settings.text_size }}px;{% if block.settings.text_size >= 100 %}--stencil-stroke-width: 0.01em;{% endif %}" {{ block.shopify_attributes }}>
                   {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                 </div>
+
               {%- when 'image' -%}
                 {%- liquid
                   assign image_height = block.settings.height
                   assign image_height_2x = block.settings.height | times: 2
                 -%}
-                <div class="scrolling-text__item with-media flex items-center shrink-0 media media--transparent relative" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
+                {%- capture image -%}
                   {%- if block.settings.image != blank -%}
                     <img
                       srcset="{{ block.settings.image | image_url: height: image_height }} 1x, {{ block.settings.image | image_url: height: image_height_2x }} 2x"
@@ -48,6 +49,16 @@
                     />
                   {%- else -%}
                     {{- 'logo' | placeholder_svg_tag: 'placeholder' -}}
+                  {%- endif -%}
+                {%- endcapture -%}
+
+                <div class="scrolling-text__item with-media flex items-center shrink-0 media media--transparent relative" style="--image-height: {{ image_height }}px;" {{ block.shopify_attributes }}>
+                  {%- if block.settings.link != blank -%}
+                    <a class="leading-none" href="{{ block.settings.link }}"{% if block.settings.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ block.settings.accessibility_info | escape }}">
+                      {{- image -}}
+                    </a>
+                  {%- else -%}
+                    {{- image -}}
                   {%- endif -%}
                 </div>
             {%- endcase -%}
@@ -235,6 +246,10 @@
             {
               "value": "heading",
               "label": "t:sections.global.settings.text_font.options__2.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.global.settings.text_font.options__3.label"
             }
           ],
           "default": "body",
@@ -282,6 +297,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -330,13 +346,31 @@
           "default": 80,
           "unit": "px",
           "label": "t:sections.scrolling-text.blocks.image.settings.image_height.label"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.global.settings.link.label"
+        },
+        {
+          "type": "text",
+          "id": "accessibility_info",
+          "label": "t:sections.global.settings.accessibility.label",
+          "info": "t:sections.global.settings.accessibility.info",
+          "visible_if": "{{ block.settings.link != blank }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
         }
       ]
     }
   ],
   "presets": [
     {
-      "name": "t:sections.scrolling-text.presets.name",
+      "name": "t:sections.scrolling-text.name",
       "blocks": [
         {
           "type": "text"

@@ -1,3 +1,14 @@
+{%- doc -%}
+  Generates CSS custom properties for section colors, gradients, and theming.
+
+  Outputs variables for backgrounds, text, buttons, overlays, and highlights with automatic opacity variants.
+
+  @param {object} section - Section settings object
+
+  @example
+  {% render 'section-variables', section: section %}
+{%- enddoc -%}
+
 {%- if section.settings.gradient_background != blank and section.settings.gradient_background != 'rgba(0,0,0,0)' -%}
   --gradient-background: {{ section.settings.gradient_background }};
 {%- endif -%}

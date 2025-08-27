@@ -1,16 +1,15 @@
-{%- comment -%}
-  Renders a product rating
+{%- doc -%}
+  Renders product ratings with visual stars, numeric values, and review counts using Shopify review metafields.
 
-  Accepts:
-  - product: {Object} Product Liquid object
-  - show_empty: {Boolean} If set to true, the theme shows a 0.0 if there are no rating yet
-  - show_placeholder: {Boolean} If set to true, show random value (useful for the product card placeholder)
-  - display_mode: {String} Values "rating" (e.g.: 3.5) or "count" (e.g.: 4 reviews). Default: "rating"
-  - class: {String} Extra class to add
+  Displays customer ratings using a 5-star system with half-star precision, numeric rating values, and total review counts. Integrates with Shopify's native review metafields and provides responsive layouts with proper accessibility support.
 
-  Usage:
+  @param {object} product - Product with review metafields
+  @param {object} [block] - Section block for display variations
+  @param {string} [class] - Additional CSS classes
+
+  @example
   {% render 'product-rating', product: product %}
-{%- endcomment -%}
+{%- enddoc -%}
 
 {%- if product.metafields.reviews.rating.value != blank and product.metafields.reviews.rating_count.value > 0 -%}
   {% liquid
@@ -36,7 +35,7 @@
       <span
         aria-hidden="true"
         class="rating-star{% if block == blank %} hidden lg:block{% endif %}"
-        style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }}; --rating-max: {{ product.metafields.reviews.rating.value.scale_max }}; --rating-decimal: {{ rating_decimal }};"
+        style="--rating: {{ product.metafields.reviews.rating.value.rating | floor }};--rating-max: {{ product.metafields.reviews.rating.value.scale_max }};--rating-decimal: {{ rating_decimal }};"
       ></span>
     </div>
     <p class="rating-text text-sm leading-none">

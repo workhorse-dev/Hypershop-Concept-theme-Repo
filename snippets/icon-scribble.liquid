@@ -1,3 +1,13 @@
+{%- doc -%}
+  Renders decorative SVG shapes for text highlights and visual accents.
+
+  @param {string} icon - Shape style
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'icon-scribble', icon: 'circle' %}
+{%- enddoc -%}
+
 {%- capture class -%}icon icon-{{ icon | handle }}{% if class != blank %} {{ class }}{% endif %}{%- endcapture -%}
 {%- case icon -%}
   {%- when 'circle' -%}

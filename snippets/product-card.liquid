@@ -1,28 +1,37 @@
-{%- comment -%}
-  Renders a product card
+{%- doc -%}
+  Renders a feature-rich product card with media, pricing, and interactive elements for collection grids and product listings.
 
-  Accepts:
-  - product: {Object} Product Liquid object (optional)
-  - lazy_load: {Boolean} Image should be lazy loaded. Default: true (optional)
-  - image_ratio: {String} Size of the product image card. Values are "square", "landscape" and "portrait". Default is "square" (optional)
-  - image_fill: {Boolean} Zoom image to fill space. Default: false (optional)
-  - show_secondary_image: {Boolean} Show the secondary image on hover. Default: false (optional)
-  - show_vendor: {Boolean} Show the product vendor. Default: false
-  - show_rating: {Boolean} Show the product rating. Default: false
-  - show_countdown: {Boolean} Show the countdown timer.
-  - show_quick_add: {Boolean} Show the quick add button.
-  - show_quick_view: {Boolean} Show the quick view button.
-  - show_color_swatches: {Boolean} Show the color swatches.
-  - show_save_amount: {Boolean} Show save amount.
-  - amount_type: {String} Save amount type.
-  - show_icon_list: {Boolean} Show icon list.
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of the section that contains this card.
-  - block_id: {String} The ID of the block that contains this card.
+  Supports quick add functionality, variant swatches, ratings, badges, countdown timers, and responsive layouts with hover effects.
 
-  Usage:
-  {% render 'product-card', show_vendor: section.settings.show_vendor %}
-{%- endcomment -%}
+  @param {object} product - Shopify product object to display
+  @param {string} product_id - Unique product identifier for component targeting
+  @param {string} section_id - Section identifier for component namespacing
+  @param {string} [block_id] - Optional block identifier for additional uniqueness
+  @param {string} [image_ratio] - Image aspect ratio ('square', 'landscape', 'portrait')
+  @param {boolean} [image_fill] - Crop images to fill container
+  @param {boolean} [lazy_load] - Enable lazy loading (reserved for future use)
+  @param {boolean} [show_secondary_image] - Show hover image carousel
+  @param {boolean} [show_vendor] - Display product vendor name
+  @param {boolean} [show_rating] - Show product ratings from metafields
+  @param {boolean} [show_quick_add] - Display quick add button
+  @param {boolean} [show_quick_view] - Enable quick view modal
+  @param {boolean} [show_color_swatches] - Show color variant swatches
+  @param {boolean} [show_countdown] - Display countdown timer
+  @param {boolean} [show_save_amount] - Show savings badge
+  @param {boolean} [show_icon_list] - Display feature icons from metafields
+  @param {string} [save_type] - Savings calculation method for badges
+  @param {boolean} [mobile_quick_add] - Add mobile-specific quick add button
+  @param {string} [amount_type] - Savings display format for badges
+  @param {string} [display_mode] - Rating display mode ('count' or value)
+
+  @example
+  {% render 'product-card',
+     product: product,
+     product_id: product.id,
+     section_id: section.id,
+     image_ratio: 'square'
+  %}
+{%- enddoc -%}
 
 {%- if product != blank -%}
   {%- liquid
@@ -43,7 +52,7 @@
           <button type="button" class="quick-view__button button button--secondary z-2 absolute top-0 right-0 opacity-0" is="hover-button" aria-controls="{{ quick_view_id }}" aria-expanded="false">
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
-              {%- render 'icon', icon: 'cart', size: 'sm' -%}
+              {%- render 'icon', icon: 'eye', size: 'sm' -%}
               <span class="sr-only">{{ 'products.product.quick_view' | t }}</span>
             </span>
           </button>
@@ -71,12 +80,6 @@
               assign rating_value = product.metafields.reviews.rating.value.rating | round: 1
               assign rating_count = product.metafields.reviews.rating_count.value
               assign rating_max = product.metafields.reviews.rating.value.scale_max
-            elsif show_empty
-              assign rating_value = 0.0
-              assign rating_count = 0
-            elsif show_placeholder
-              assign rating_value = 4.5
-              assign rating_count = 2
             else
               assign hide_rating = true
             endif
@@ -324,9 +327,9 @@
           assign metafield_key = metafield_parts | last
           assign product_icon_list_metafield = product.metafields[metafield_namespace][metafield_key]
         -%}
-        {%- if product_icon_list_metafield.value != blank and product_icon_list_metafield.list? and  show_product_icon_list -%}
+        {%- if product_icon_list_metafield.value != blank and product_icon_list_metafield.list? -%}
           <scroll-shadow class="product-card__spec block overflow-hidden">
-            <div class="product-card__icons{% unless settings.product_icon_list_carousel %} product-card__icons--grid md:grid md:grid-cols-2{% endunless %} flex flex-nowrap"{% if settings.product_icon_list_carousel %} is="icons-carousel"{% endif %}>
+            <div class="product-card__icons{% unless settings.product_icon_list_carousel %} product-card__icons--grid md:grid md:grid-cols-2{% endunless %} flex flex-nowrap" is="icons-carousel" tabindex="0">
               {%- for item in product_icon_list_metafield.value limit: settings.product_icon_list_max -%}
                 <div class="product-card__icon shrink-0">
                   <div class="flex flex-col items-center md:flex-row md:items-start gap-2">
@@ -347,7 +350,7 @@
             </div>
             <template>
               <slot></slot>
-              <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+              <s dir="{% render 'direction' %}" style="--t: 0;--b: 0;--l: 0;--r: 0;">
                 <span class="l"></span>
                 <span class="r"></span>
               </s>
@@ -414,5 +417,5 @@
     {%- endif -%}
   </div>
 {%- else -%}
-  {%- render 'product-card-placeholder', placeholder: 'image', image_ratio: image_ratio, text_alignment: text_alignment, show_vendor: show_vendor, show_rating: show_rating -%}
+  {%- render 'product-card-placeholder', placeholder: 'product-1', image_ratio: image_ratio, show_vendor: show_vendor -%}
 {%- endif -%}

@@ -123,6 +123,7 @@
       "note": {
         "title": "Ordre notat",
         "caption": "Bestill spesielle instruksjoner",
+        "placeholder": "Ordre notat",
         "button": "Søk"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Vi sender dessverre ikke til din adresse.",
         "one_result": "Det er én fraktpris for din adresse:",
         "multiple_results": "Det finnes flere fraktpriser for din adresse:"
+      },
+      "discount": {
+        "title": "Rabatt",
+        "caption": "Rabatt",
+        "placeholder": "Rabattkode",
+        "button": "Søk",
+        "error": "Rabattkoden kan ikke brukes på handlekurven din",
+        "shipping_error": "Fraktrabatter vises i kassen etter at du har lagt til en adresse",
+        "applied": "Brukt rabattkode: {{ code }}",
+        "remove": "Fjern rabatten {{ code }}"
       },
       "recently_viewed": {
         "empty": "Det du nylig har sett er tomt."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karusell",
+      "announcement": "Kunngjøring",
+      "announcement_bar": "Kunngjøringslinje"
+    },
     "blog_posts": {
       "view_all": "Se alle"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Det oppstod et problem med å autentisere Google Maps-kontoen din. Opprett og aktiver <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> and  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> permissions of your app."
     },
     "slideshow": {
+      "carousel": "Karusell",
       "play_slideshow": "Spill av lysbildefremvisning",
       "pause_slideshow": "Pause lysbildefremvisning"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Betalingsstatus",
       "shipping_address": "Leveringsadresse",
       "fulfillment_status": "Distribusjonsstatus",
+      "discounts": "Rabatter",
       "discount": "Rabatt",
       "shipping": "Frakt",
       "tax": "Avgift",

@@ -123,6 +123,7 @@
       "note": {
         "title": "Beställningsanteckning",
         "caption": "Lägg till särskilda instruktioner",
+        "placeholder": "Beställningsanteckning",
         "button": "Tillämpa"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Tyvärr, vi levererar inte till din adress.",
         "one_result": "Det finns en fraktkostnad för din adress:",
         "multiple_results": "Det finns flera fraktkostnader för din adress:"
+      },
+      "discount": {
+        "title": "Rabatt",
+        "caption": "Rabatt",
+        "placeholder": "Rabattkod",
+        "button": "Tillämpa",
+        "error": "Rabattkoden kan inte tillämpas på din varukorg",
+        "shipping_error": "Leveransrabatter visas i kassan när du lägger till en adress",
+        "applied": "Tillämpad rabattkod: {{ code }}",
+        "remove": "Ta bort rabatt {{ code }}"
       },
       "recently_viewed": {
         "empty": "Dina nyligen visade är tomma."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karusell",
+      "announcement": "Meddelande",
+      "announcement_bar": "Meddelandefält"
+    },
     "blog_posts": {
       "view_all": "Visa alla"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Det uppstod ett problem med autentiseringen av ditt Google Maps-konto. Skapa och aktivera <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> och <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> behörigheter för din app."
     },
     "slideshow": {
+      "carousel": "Karusell",
       "play_slideshow": "Spela bildspel",
       "pause_slideshow": "Pausa bildspel"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Betalningsstatus",
       "shipping_address": "Leveransadress",
       "fulfillment_status": "Leveransstatus",
+      "discounts": "Rabatter",
       "discount": "Rabatt",
       "shipping": "Frakt",
       "tax": "Moms",

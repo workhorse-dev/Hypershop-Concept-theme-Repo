@@ -1,3 +1,20 @@
+{%- doc -%}
+  Renders a search form with optional predictive search and curated recommendations.
+
+  Features live search suggestions, typewriter effects, and multi-resource results.
+
+  @param {string} section_id - Unique section ID for targeting and AJAX updates
+  @param {string} context - Form context identifier ('page', 'drawer', 'header', etc.)
+  @param {object} [search] - Search results object (available on search.liquid template)
+  @param {object} [predictive_search] - Live search results (auto-populated via AJAX)
+
+  @example
+  {% render 'predictive-search',
+     section_id: section.id,
+     context: 'drawer'
+  %}
+{%- enddoc -%}
+
 <form class="search__form flex flex-col gap-8 h-full relative" action="{{ routes.search_url }}" method="GET" role="search"
   {%- if settings.predictive_search_enabled %}
     is="predictive-search"
@@ -8,12 +25,19 @@
   <input type="hidden" name="options[prefix]" value="last" />
   <label class="sr-only" for="SearchFormInput-{{ section_id }}">{{ 'general.search.title' | t }}</label>
   <div class="search__field field flex items-center gap-4 relative">
-    {%- if settings.predictive_search_enabled and settings.typewriter_effect_enabled -%}
-      {%- unless search.terms -%}
+    {%- if settings.predictive_search_enabled -%}
+      {%- liquid
+        assign typewriter_effect_enabled = settings.typewriter_effect_enabled
+
+        if context == 'page' and search.terms != blank
+          assign typewriter_effect_enabled = false
+        endif
+      -%}
+      {%- if typewriter_effect_enabled -%}
         <div class="typed absolute top-0 left-0 w-full h-full flex items-center justify-start gap-2 font-medium text-base md:text-lg leading-none pointer-events-none">
           <search-typed class="flex items-center h-full overflow-hidden whitespace-nowrap" data-delay="0.5" data-first-text="{{ settings.typewriter_starter_text | escape }}" data-last-text="{{ 'general.search.placeholder' | t | escape }}"></search-typed>
         </div>
-      {%- endunless -%}
+      {%- endif -%}
     {%- endif -%}
     <input
       class="input{% if settings.predictive_search_enabled or settings.predictive_search_recommendation != blank %} search__input{% endif %}"
@@ -102,7 +126,8 @@
                   show_vendor: settings.predictive_search_show_vendor,
                   show_price: settings.predictive_search_show_price,
                   show_quick_add: false,
-                  show_quick_view: false
+                  show_quick_view: false,
+                  accessibility: true
                 -%}
               {%- endfor -%}
             </div>

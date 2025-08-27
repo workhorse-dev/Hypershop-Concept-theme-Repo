@@ -123,6 +123,7 @@
       "note": {
         "title": "Notes",
         "caption": "Ajouter des instructions spéciales",
+        "placeholder": "Notes",
         "button": "Appliquer"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Désolé, nous ne livrons pas à votre adresse.",
         "one_result": "Il n'y a qu'un seul tarif d'expédition pour votre adresse:",
         "multiple_results": "Il y a plusieurs tarifs d'expédition pour votre adresse:"
+      },
+      "discount": {
+        "title": "Réduction",
+        "caption": "Réduction",
+        "placeholder": "Code de réduction",
+        "button": "Appliquer",
+        "error": "Le code de réduction ne peut pas être appliqué à votre panier",
+        "shipping_error": "Les réductions sur l’expédition sont affichées lors du paiement après avoir ajouté une adresse",
+        "applied": "Code de réduction appliqué : {{ code }}",
+        "remove": "Supprimer le {{ code }} de réduction"
       },
       "recently_viewed": {
         "empty": "Votre liste de produits récemment consultés est vide."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carrousel",
+      "announcement": "Annonce",
+      "announcement_bar": "Barre d’annonces"
+    },
     "blog_posts": {
       "view_all": "Tout afficher"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Il y avait un problème authentifier votre compte Google Maps . Créer et activer <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">l'API JavaScript</a> et  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">l'API de géocodage</a> les autorisations de application."
     },
     "slideshow": {
+      "carousel": "Carrousel",
       "play_slideshow": "Lire le diaporama",
       "pause_slideshow": "Diaporama Pause"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Statut de paiement",
       "shipping_address": "Adresse d'expédition",
       "fulfillment_status": "Statut des commandes",
+      "discounts": "Réductions",
       "discount": "Réduction",
       "shipping": "Expédition",
       "tax": "Taxes",

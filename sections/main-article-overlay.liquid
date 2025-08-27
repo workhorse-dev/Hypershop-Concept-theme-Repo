@@ -31,7 +31,7 @@
             {%- render block -%}
 
           {%- when 'spacing' -%}
-            <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px; --spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
+            <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px;--spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
 
           {%- when 'share' -%}
             <div class="flex flex-wrap items-center justify-between" {{ block.shopify_attributes }}>

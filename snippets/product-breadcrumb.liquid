@@ -1,3 +1,19 @@
+{%- doc -%}
+  Renders hierarchical breadcrumb navigation for product pages with desktop-only display.
+
+  Creates a structured navigation path showing the product's location within the site hierarchy.
+
+  @param {object} product - Shopify product object for current page
+  @param {object} block - Section block containing settings and Shopify attributes
+  @param {object} [collection] - Specific collection context (auto-detected if omitted)
+
+  @example
+  {% render 'product-breadcrumb',
+     product: product,
+     block: block
+  %}
+{%- enddoc -%}
+
 <nav class="product__breadcrumb breadcrumb hidden lg:flex" role="navigation" aria-label="breadcrumbs" {{ block.shopify_attributes }}>
   <ul class="inline-flex gap-4 md:gap-6">
     <li class="flex items-center gap-4 md:gap-6">
@@ -20,4 +36,8 @@
     </li>
     <li class="flex items-center gap-4 md:gap-6">{{ product.title }}</li>
   </ul>
+<<<<<<< HEAD
 </nav>
+=======
+</nav>
+>>>>>>> concept-upstream-1/master

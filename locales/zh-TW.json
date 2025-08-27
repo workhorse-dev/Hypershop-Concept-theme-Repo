@@ -123,6 +123,7 @@
       "note": {
         "title": "訂單備註",
         "caption": "訂單特殊說明",
+        "placeholder": "訂單備註",
         "button": "確認"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "抱歉，我們無法配送到您的地址",
         "one_result": "您的地址有一個運費選項：",
         "multiple_results": "您的地址有多個運費選項："
+      },
+      "discount": {
+        "title": "折扣",
+        "caption": "折扣",
+        "placeholder": "折扣代碼",
+        "button": "確認",
+        "error": "折扣代碼無法套用至您的購物車",
+        "shipping_error": "新增地址後，結帳時將顯示運費折扣",
+        "applied": "套用的折扣代碼：{{ code }}",
+        "remove": "移除折扣 {{ code }}"
       },
       "recently_viewed": {
         "empty": "您最近沒有瀏覽過的商品"
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "輪播",
+      "announcement": "公告",
+      "announcement_bar": "公告列"
+    },
     "blog_posts": {
       "view_all": "看全部"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "驗證您的 Google 地圖帳戶時出現問題。建立並啟用應用程式的<a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a>和<a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">地理編碼 API</a>權限。"
     },
     "slideshow": {
+      "carousel": "輪播",
       "play_slideshow": "播放幻燈片",
       "pause_slideshow": "暫停投影片放映"
     },
@@ -386,6 +403,7 @@
       "payment_status": "付款狀態",
       "shipping_address": "收件地址",
       "fulfillment_status": "履行狀態",
+      "discounts": "折扣",
       "discount": "折扣",
       "shipping": "船運",
       "tax": "稅",

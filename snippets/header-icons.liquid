@@ -1,17 +1,24 @@
-{%- comment -%}
-  Renders a header menu icons component
+{%- doc -%}
+  Renders header navigation icons with localization, search, account, and cart features.
 
-  Accepts:
-  - section: {Object}
-  - show_account: {Boolean}
-  - show_cart: {Boolean}
-  - show_hamburger: {Boolean}
-  - show_search: {Boolean}
-  - dir: {String}
+  Provides desktop/mobile navigation elements with dropdowns and dynamic functionality.
 
-  Usage:
-  {% render 'header-icons', section: section %}
-{%- endcomment -%}
+  @param {object} section - Section object with localization and menu settings
+  @param {string} context - Position identifier for unique IDs ('start' or 'end')
+  @param {boolean} [show_hamburger] - Display mobile menu button
+  @param {boolean} [show_search] - Display search icon/button
+  @param {boolean} [show_account] - Display account link
+  @param {boolean} [show_cart] - Display cart with item count
+  @param {boolean} [show_toggle] - Display desktop menu toggle
+
+  @example
+  {% render 'header-icons',
+     section: section,
+     context: 'start',
+     show_toggle: true,
+     show_search: true
+  %}
+{%- enddoc -%}
 
 {%- liquid
   if section.settings.enable_language_selector_desktop and localization.available_languages.size > 1
@@ -29,10 +36,10 @@
   endif
 -%}
 
-<div class="header__icons header__icons--{{ dir }} flex justify-{{ dir }} z-2">
+<div class="header__icons header__icons--{{ context }} flex justify-{{ context }} z-2">
   <div class="header__buttons flex items-center gap-1d5">
     {%- if show_toggle -%}
-      <button class="menu-toggle-button hidden lg:flex items-center justify-center" type="button" is="menu-toogle" aria-controls="MenuToggle" aria-expanded="false">
+      <button class="menu-toggle-button hidden lg:flex items-center justify-center" type="button" is="menu-toggle" aria-controls="MenuToggle" aria-expanded="false">
         <span class="sr-only">{{ 'general.drawers.navigation' | t }}</span>
         {%- render 'icon', icon: 'hamburger', size: 'lg' -%}
       </button>
@@ -44,8 +51,11 @@
           {%- if enable_language_selector -%}
             <li class="localization">
               <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
-                <summary data-link="{{ link.url }}">
-                  <button type="button" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% unless section_rendering_api %} is="api-button" data-id="header_localization_language_form_{{ dir }}" data-section-id="{{ section.id }}"{% endunless %}>
+                <summary data-link="">
+                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
+                    {%- unless section_rendering_api -%}
+                      <api-button class="api-only" data-id="header_localization_language_form_{{ context }}" data-section-id="{{ section.id }}"></api-button>
+                    {%- endunless -%}
                     <span class="btn-text" data-text>
                       {%- liquid
                         echo localization.language.endonym_name | capitalize
@@ -62,13 +72,13 @@
                         endunless
                       -%}
                     </span>
-                  </button>
+                  </magnet-element>
                 </summary>
                 <div class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
                   {%- unless section_rendering_api -%}
-                    <div id="header_localization_language_form_{{ dir }}" class="dropdown__container relative"></div>
+                    <div id="header_localization_language_form_{{ context }}" class="dropdown__container relative"></div>
                   {%- else -%}
-                    {%- assign form_id = 'header_localization_language_form_' | append: dir -%}
+                    {%- assign form_id = 'header_localization_language_form_' | append: context -%}
                     {%- form 'localization', id: form_id, class: 'dropdown__container relative', is: 'localization-listbox' -%}
                       {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
                       <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">
@@ -103,8 +113,11 @@
           {%- if enable_country_selector -%}
             <li class="localization">
               <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
-                <summary data-link="{{ link.url }}">
-                  <button type="button" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% unless section_rendering_api %} is="api-button" data-id="header_localization_country_form_{{ dir }}" data-section-id="{{ section.id }}"{% endunless %}>
+                <summary data-link="">
+                  <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" data-magnet="0">
+                    {%- unless section_rendering_api -%}
+                      <api-button class="api-only" data-id="header_localization_country_form_{{ context }}" data-section-id="{{ section.id }}"></api-button>
+                    {%- endunless -%}
                     {%- capture localization_country -%}
                       {%- if show_country_flag -%}
                         <span class="country-flag shrink-0 media media--rounded relative overflow-hidden">
@@ -127,13 +140,13 @@
 
                     <span class="btn-text" data-text>{{ localization_country }}</span>
                     <span class="btn-text btn-duplicate">{{ localization_country }}</span>
-                  </button>
+                  </magnet-element>
                 </summary>
                 <div class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
                   {%- unless section_rendering_api -%}
-                    <div id="header_localization_country_form_{{ dir }}" class="dropdown__container relative"></div>
+                    <div id="header_localization_country_form_{{ context }}" class="dropdown__container relative"></div>
                   {%- else -%}
-                    {%- assign form_id = 'header_localization_country_form_' | append: dir -%}
+                    {%- assign form_id = 'header_localization_country_form_' | append: context -%}
                     {%- form 'localization', id: form_id, class: 'dropdown__container relative', is: 'localization-listbox' -%}
                       {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
                       <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">

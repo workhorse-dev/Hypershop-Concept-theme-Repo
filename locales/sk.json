@@ -122,8 +122,9 @@
       },
       "note": {
         "title": "Poznámka k objednávke",
-        "button": "Použiť",
-        "caption": "Špeciálne pokyny k objednávke"
+        "caption": "Špeciálne pokyny k objednávke",
+        "placeholder": "Poznámka k objednávke",
+        "button": "Použiť"
       },
       "shipping_calculator": {
         "title": "Doprava",
@@ -134,6 +135,16 @@
         "not_found": "Ospravedlňujeme sa, ale na zadanú adresu nemožno tovar doručiť.",
         "one_result": "Na vašu adresu je k dispozícii jedna sadzba za dopravu. ",
         "multiple_results": "Na vašu adresu je k dispozícii niekoľko sadzieb za dopravu."
+      },
+      "discount": {
+        "title": "Zľava",
+        "caption": "Zľava",
+        "placeholder": "Zľavový kód",
+        "button": "Použiť",
+        "error": "Zľavový kód nie je vo vašom košíku možné použiť",
+        "shipping_error": "Zľavy na dopravu sa zobrazia pri platbe po pridaní adresy",
+        "applied": "Použitý zľavový kód: {{ code }}",
+        "remove": "Odobrať zľavový {{ code }}"
       },
       "recently_viewed": {
         "empty": "Vaše nedávno zobrazené položky sú prázdne."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karusel",
+      "announcement": "Oznámenie",
+      "announcement_bar": "Panel s oznámeniami"
+    },
     "blog_posts": {
       "view_all": "Zobraziť všetko"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Vyskytol sa problém s overením vášho účtu Google Maps. Vytvorte a povoľte <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> a <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> <a></a>oprávnenia pre vašu aplikáciu."
     },
     "slideshow": {
+      "carousel": "Karusel",
       "play_slideshow": "Spustiť prezentáciu",
       "pause_slideshow": "Pozastaviť prezentáciu"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Stav platby",
       "shipping_address": "Dodacia adresa",
       "fulfillment_status": "Stav vybavenia",
+      "discounts": "Zľavy",
       "discount": "Zľava",
       "shipping": "Doprava",
       "tax": "Daň",

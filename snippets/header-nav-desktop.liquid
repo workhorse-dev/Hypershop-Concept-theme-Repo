@@ -1,3 +1,23 @@
+{%- doc -%}
+  Renders desktop header navigation with mega menus, dropdowns, and advanced interactions.
+
+  Supports multi-level navigation, Section Rendering API, and sophisticated hover/click behaviors.
+
+  @param {object} section - Section object with navigation settings and mega menu blocks
+  @param {object} main_menu - Shopify navigation menu object to render
+  @param {string} context - Position identifier for unique IDs ('start' or 'end')
+  @param {number} [limit] - Maximum menu links to display
+  @param {number} [offset] - Number of links to skip from start
+
+  @example
+  {% render 'header-nav-desktop',
+     section: section,
+     main_menu: linklists.main-menu,
+     context: 'start',
+     limit: 5
+  %}
+{%- enddoc -%}
+
 {%- liquid
   unless limit
     assign limit = main_menu.links.size
@@ -5,6 +25,11 @@
   unless offset
     assign offset = 0
   endunless
+
+  assign section_rendering_api = false
+  if section.index == nil
+    assign section_rendering_api = true
+  endif
 -%}
 
 <ul class="flex flex-wrap{% unless section.settings.hover_menu %} gap-1{% endunless %} list-menu with-{{ section.settings.menu_active }}">
@@ -27,7 +52,10 @@
       <li>
         <details is="details-mega" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top" {{ mega_menu_block.shopify_attributes }}>
           <summary data-link="{{ link.url }}" class="z-2 relative{% if section.settings.menu_active == 'block' %} rounded-full{% endif %}">
-            <button type="button" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% unless section_rendering_api %} is="api-magnet-button" data-id="HeaderNavMega-{{ section.id }}-{{ forloop.index }}-{{ dir }}" data-section-id="{{ section.id }}"{% else %} is="magnet-button"{% endunless %}{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %} tabindex="-1">
+            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
+              {%- unless section_rendering_api -%}
+                <api-button class="api-only" data-id="HeaderNavMega-{{ section.id }}-{{ forloop.index }}-{{ context }}" data-section-id="{{ section.id }}"></api-button>
+              {%- endunless -%}
               <span class="btn-text" data-text {% if link.title == section.settings.highlight_text  %} style="color:{{ section.settings.highlight_nav }}" {% endif %}>
                 {%- liquid
                   echo link.title
@@ -46,10 +74,10 @@
                   -%}
                 </span>
               {%- endif -%}
-            </button>
+            </magnet-element>
           </summary>
           <div class="mega-menu absolute top-0 left-0 w-full max-w-full overflow-hidden pointer-events-none">
-            {%- render 'header-nav-mega', link: link, block: mega_menu_block, full_width: section.settings.full_width, position: forloop.index, dir: dir -%}
+            {%- render 'header-nav-mega', section: section, link: link, block: mega_menu_block, full_width: section.settings.full_width, position: forloop.index, context: context -%}
           </div>
         </details>
       </li>
@@ -57,7 +85,7 @@
       <li>
         <details is="details-dropdown" trigger="{% if section.settings.hover_menu %}hover{% else %}click{% endif %}" level="top">
           <summary data-link="{{ link.url }}" class="z-2 relative{% if section.settings.menu_active == 'block' %} rounded-full{% endif %}">
-            <button type="button" class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer" is="magnet-button"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %} tabindex="-1">
+            <magnet-element class="menu__item text-sm-lg flex items-center font-medium z-2 relative cursor-pointer"{% if section.settings.menu_active == 'block' %} data-magnet="0"{% endif %}>
               <span class="btn-text" data-text {% if link.title == section.settings.highlight_text  %} style="color:{{ section.settings.highlight_nav }}" {% endif %}>
                 {%- liquid
                   echo link.title
@@ -76,9 +104,9 @@
                   -%}
                 </span>
               {%- endif -%}
-            </button>
+            </magnet-element>
           </summary>
-          <div id="DropdownMenu-{{ section.id }}-{{ forloop.index }}-{{ dir }}" class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
+          <div id="DropdownMenu-{{ section.id }}-{{ forloop.index }}-{{ context }}" class="dropdown opacity-0 invisible absolute top-0 max-w-full pointer-events-none">
             <div class="dropdown__container relative">
               {%- render 'corner', dir: 'top', prefix: 'dropdown' -%}
               <ul class="dropdown__nav flex flex-col gap-1d5 xl:gap-2" role="list">

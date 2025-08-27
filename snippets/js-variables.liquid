@@ -29,6 +29,11 @@
     multipleResults: {{ 'general.cart.shipping_calculator.multiple_results' | t | json }}
   };
 
+  theme.discountStrings = {
+    error: {{ 'general.cart.discount.error' | t | json }},
+    shippingError: {{ 'general.cart.discount.shipping_error' | t | json }}
+  };
+
   theme.recipientFormStrings = {
     expanded: {{ 'recipient.form.expanded' | t | json }},
     collapsed: {{ 'recipient.form.collapsed' | t | json }}
@@ -47,8 +52,8 @@
   };
 
   theme.cartStrings = {
-    error: `{{ 'cart.general.cart_error' | t }}`,
-    quantityError: `{{ 'cart.general.cart_quantity_error_html' | t: quantity: '[quantity]' }}`,
+    error: {{ 'cart.general.cart_error' | t | json }},
+    quantityError: {{ 'cart.general.cart_quantity_error_html' | t: quantity: '[quantity]' | json }}
   };
 
   theme.dateStrings = {
@@ -91,7 +96,7 @@
     isCartTemplate: {% if request.page_type == 'cart' %}true{% else %}false{% endif %},
     pswpModule: {{ 'photoswipe.min.js' | asset_url | json }},
     themeName: 'Concept',
-    themeVersion: '4.0.0',
+    themeVersion: '4.3.1',
     agencyId: ''
   };
 

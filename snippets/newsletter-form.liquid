@@ -1,15 +1,27 @@
-{%- comment -%}
-  Renders a newsletter form
+{%- doc -%}
+  Renders newsletter subscription form with floating labels and inline submit button.
 
-  Accepts:
-  - context: {String}
-  - section_id: {String} The ID of section to which this snippet belongs.
-  Usage:
-  {% render 'newsletter-form', section_id: section.id, context: 'section' %}
-{%- endcomment -%}
+  Features email validation, success/error states, and context tracking.
 
-{%- assign form_id = 'newsletter-' | append: section_id -%}
-{%- form 'customer', id: form_id, class: 'newsletter-form grid gap-5' -%}
+  @param {string} section_id - Unique section ID for form identification
+  @param {string} context - Form location identifier for analytics/tracking ('footer', 'section', 'popup', etc.)
+  @param {string} [classes] - Additional CSS classes
+
+  @example
+  {% render 'newsletter-form',
+     section_id: section.id,
+     context: 'footer'
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  assign form_id = 'newsletter-' | append: section_id
+  assign form_class = 'newsletter-form grid gap-5'
+  if classes != blank
+    assign form_class = form_class | append: ' ' | append: classes
+  endif
+-%}
+{%- form 'customer', id: form_id, class: form_class -%}
   <input type="hidden" name="contact[tags]" value="newsletter" />
   <input type="hidden" name="contact[context]" value="{{ context }}" />
   <div class="field relative">

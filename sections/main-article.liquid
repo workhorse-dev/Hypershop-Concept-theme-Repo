@@ -1,12 +1,13 @@
-<style>
-  #shopify-section-{{ section.id }} {
-    --section-padding-top: {{ section.settings.padding_top }}px;
-    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
-  }
-</style>
-
 {%- liquid
-  echo 'article.css' | asset_url | stylesheet_tag
+  if section.index == 1
+    assign loading = 'eager'
+    assign fetchpriority = 'high'
+    assign lazyimage = null
+  else
+    assign loading = 'lazy'
+    assign fetchpriority = 'low'
+    assign lazyimage = 'lazy-image'
+  endif
 
   if section.settings.show_image
     if article.image != blank
@@ -24,6 +25,15 @@
   endif
 -%}
 
+<style>
+  #shopify-section-{{ section.id }} {
+    --section-padding-top: {{ section.settings.padding_top }}px;
+    --section-padding-bottom: {{ section.settings.padding_bottom }}px;
+  }
+</style>
+
+{{ 'article.css' | asset_url | stylesheet_tag }}
+
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
   <article class="article relative grid gap-8" itemscope itemtype="http://schema.org/BlogPosting">
     <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} grid gap-5 text-center">
@@ -32,7 +42,7 @@
           {%- if section.settings.show_tags and article.tags.size > 0 -%}
             {%- if article.metafields.theme.tag_color.value != blank and article.metafields.theme.tag_background.value != blank -%}
               {%- capture badge_style -%}
-              --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }}); --badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
+                --badge-foreground: rgb({{ article.metafields.theme.tag_color.value.rgb }});--badge-background: rgb({{ article.metafields.theme.tag_background.value.rgb }});
               {%- endcapture -%}
             {%- endif -%}
             
@@ -73,7 +83,7 @@
       {%- endif -%}
 
       <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}" itemprop="headline">
-        <split-words class="split-words block" data-animate="fade-up-large">{{ article.title }}</split-words>
+        <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ article.title }}</split-words>
       </{{ section.settings.heading_tag }}>
       
       {%- if article_meta -%}
@@ -88,7 +98,7 @@
         <media-element class="article__image block h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
           <picture class="media media--height block w-full h-full relative overflow-hidden" itemprop="image" is="animate-picture" data-animate="zoom-out">
             {%- capture sizes -%}{% if section.settings.full_width %}100vw{% else %}min({{ settings.page_width }}px, 100vw){% endif %}{%- endcapture -%}
-            {{- article_image | image_url: width: article_image.width | image_tag: loading: 'eager', widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: 'lazy-image', alt: article_alt -}}
+            {{- article_image | image_url: width: article_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', sizes: sizes, is: lazyimage, alt: article_alt -}}
           </picture>
         </media-element>
       </div>
@@ -109,7 +119,7 @@
             {%- render block -%}
 
           {%- when 'spacing' -%}
-            <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px; --spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
+            <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px;--spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
 
           {%- when 'share' -%}
             <div class="flex flex-wrap items-center justify-between" {{ block.shopify_attributes }}>
@@ -321,36 +331,7 @@
 <script type="application/ld+json">
   {{- article | structured_data -}}
 </script>
-<script type="application/ld+json">
-  {
-    "@context": "http://schema.org",
-    "@type": "Article",
-    "articleBody": {{ article.content | strip_html | json }},
-    "mainEntityOfPage": {
-      "@type": "WebPage",
-      "@id": {{ request.origin | append: page.url | json }}
-    },
-    "headline": {{ article.title | json }},
-    {% if article.excerpt != blank %}
-      "description": {{ article.excerpt | strip_html | json }},
-    {% endif %}
-    {% if article.image %}
-      "image": [
-        {{ article | image_url: width: 1920 | prepend: "https:" | json }}
-      ],
-    {% endif %}
-    "datePublished": {{ article.published_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
-    "dateCreated": {{ article.created_at | date: '%Y-%m-%dT%H:%M:%SZ' | json }},
-    "author": {
-      "@type": "Person",
-      "name": {{ article.author | json }}
-    },
-    "publisher": {
-      "@type": "Organization",
-      "name": {{ shop.name | json }}
-    }
-  }
-</script>
+
 {% schema %}
 {
   "name": "t:sections.main-article.name",
@@ -511,14 +492,18 @@
         },
         {
           "label": "t:sections.global.settings.image_height.options__10.label",
-          "value": "850px"
+          "value": "800px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__11.label",
-          "value": "900px"
+          "value": "850px"
         },
         {
           "label": "t:sections.global.settings.image_height.options__12.label",
+          "value": "900px"
+        },
+        {
+          "label": "t:sections.global.settings.image_height.options__13.label",
           "value": "100vh"
         }
       ],
@@ -532,6 +517,7 @@
       "default": true
     },
     {
+      "visible_if": "{{ section.settings.enable_parallax == true }}",
       "type": "select",
       "id": "parallax_direction",
       "label": "t:sections.global.settings.parallax_direction.label",

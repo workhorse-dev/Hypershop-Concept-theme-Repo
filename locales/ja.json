@@ -123,6 +123,7 @@
       "note": {
         "title": "注文書",
         "caption": "特別注文",
+        "placeholder": "注文書",
         "button": "適用する"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "申し訳ございませんが、ご指定の住所への配送は行っておりません。",
         "one_result": "お客様のご住所に対する送料は一律です",
         "multiple_results": "ご住所によって送料が異なります。"
+      },
+      "discount": {
+        "title": "ディスカウント",
+        "caption": "ディスカウント",
+        "placeholder": "クーポンコード",
+        "button": "適用する",
+        "error": "クーポンコードはあなたのカートには適用できません。",
+        "shipping_error": "配送料の割引は、住所を追加した後のチェックアウト時に表示されます",
+        "applied": "適用クーポンコード:{{ code }}",
+        "remove": "クーポン{{ code }}を削除する"
       },
       "recently_viewed": {
         "empty": "最近閲覧したコンテンツはありません。"
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "カルーセル",
+      "announcement": "お知らせ",
+      "announcement_bar": "お知らせバー"
+    },
     "blog_posts": {
       "view_all": "すべて見る"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Google Mapsアカウントの認証に問題が発生しました。<a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a>および<a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a>を作成して有効にしてください。"
     },
     "slideshow": {
+      "carousel": "カルーセル",
       "play_slideshow": "スライドショーを再生",
       "pause_slideshow": "スライドショーを一時停止"
     },
@@ -386,6 +403,7 @@
       "payment_status": "支払状況",
       "shipping_address": "配送先住所",
       "fulfillment_status": "配送状況",
+      "discounts": "割引",
       "discount": "割引",
       "shipping": "送料",
       "tax": "消費税",

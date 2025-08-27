@@ -123,6 +123,7 @@
       "note": {
         "title": "Nota de pedido",
         "caption": "Encomende instruções especiais",
+        "placeholder": "Nota de pedido",
         "button": "Aplicar"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Desculpe, não enviamos para seu endereço.",
         "one_result": "Existe uma taxa de envio para o seu endereço:",
         "multiple_results": "Existem várias taxas de envio para o seu endereço:"
+      },
+      "discount": {
+        "title": "Desconto",
+        "caption": "Desconto",
+        "placeholder": "Código de desconto",
+        "button": "Aplicar",
+        "error": "O código de desconto não pode ser aplicado ao seu carrinho.",
+        "shipping_error": "Os descontos no frete são exibidos no checkout após a adição de um endereço.",
+        "applied": "Código de desconto aplicado: {{ code }}",
+        "remove": "Remover desconto {{ code }}"
       },
       "recently_viewed": {
         "empty": "Seu visualizado recentemente está vazio."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carrossel",
+      "announcement": "Comunicado",
+      "announcement_bar": "Barra de comunicados"
+    },
     "blog_posts": {
       "view_all": "Ver tudo"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Ocorreu um problema ao autenticar sua conta do Google Maps. Crie e ative as permissões <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">da API JavaScript</a> e <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">da API de geocodificação</a> do seu aplicativo."
     },
     "slideshow": {
+      "carousel": "Carrossel",
       "play_slideshow": "Reproduzir apresentação de slides",
       "pause_slideshow": "Pausar apresentação de slides"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Status do pagamento",
       "shipping_address": "Endereço para envio",
       "fulfillment_status": "status de preenchimento",
+      "discounts": "Descontos",
       "discount": "Desconto",
       "shipping": "Envio",
       "tax": "Imposto",

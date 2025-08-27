@@ -123,6 +123,7 @@
       "note": {
         "title": "ملاحظة الطلب",
         "caption": "إطلب تعليمات خاصة",
+        "placeholder": "ملاحظة الطلب",
         "button": "يتقدم"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "نأسف، لا نقوم بالشحن إلى عنوانك.",
         "one_result": "هناك سعر شحن واحد لعنوانك:",
         "multiple_results": "هناك أسعار شحن متعددة لعنوانك:"
+      },
+      "discount": {
+        "title": "خصم",
+        "caption": "خصم",
+        "placeholder": "كود الخصم",
+        "button": "يتقدم",
+        "error": "لا يمكن تطبيق رمز الخصم على سلة التسوق الخاصة بك",
+        "shipping_error": "يتم عرض خصومات الشحن عند الدفع بعد إضافة العنوان",
+        "applied": "تم تطبيق كود الخصم: {{ code }}",
+        "remove": "إزالة الخصم {{ code }}"
       },
       "recently_viewed": {
         "empty": "العناصر التي شاهدتها مؤخرًا فارغة."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "دوار",
+      "announcement": "إعلان", 
+      "announcement_bar": "شريط الإعلانات"
+    },
     "blog_posts": {
       "view_all": "عرض الكل"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "حدثت مشكلة أثناء مصادقة حساب خرائط Google الخاص بك. قم بإنشاء وتمكين أذونات <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">واجهة برمجة تطبيقات JavaScript</a> وواجهة <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">برمجة تطبيقات الترميز الجغرافي</a> لتطبيقك."
     },
     "slideshow": {
+      "carousel": "دوار",
       "play_slideshow": "تشغيل عرض الشرائح",
       "pause_slideshow": "إيقاف عرض الشرائح مؤقتًا"
     },
@@ -386,6 +403,7 @@
       "payment_status": "حالة الدفع",
       "shipping_address": "عنوان الشحن",
       "fulfillment_status": "حالة الإنجاز",
+      "discounts": "خصومات",
       "discount": "تخفيض",
       "shipping": "شحن",
       "tax": "ضريبة",

@@ -43,23 +43,9 @@
             {%- for i in (1..section.settings.product_limit) -%}
               {%- capture placeholder -%}product-{% cycle '1', '2', '3', '4', '5', '6' %}{%- endcapture -%}
               {%- render 'product-card-placeholder',
-                lazy_load: false,
-                image_ratio: settings.product_image_ratio,
-                image_fill: settings.product_image_fill,
-                show_secondary_image: settings.product_secondary_image,
-                show_vendor: settings.product_vendor,
-                show_rating: settings.product_rating,
-                show_color_swatches: settings.product_color_swatches,
-                show_countdown: settings.product_countdown,
-                show_quick_add: settings.product_quick_add,
-                show_quick_view: settings.product_quick_view,
-                show_save_amount: settings.product_save_amount,
-                save_type: settings.product_save_type,
-                picker_type: section.settings.picker_type,
-                enable_color_swatches: section.settings.enable_color_swatches,
-                color_swatch_type: section.settings.color_swatch_type,
-                controls: controls,
                 placeholder: placeholder
+                image_ratio: settings.product_image_ratio,
+                show_vendor: settings.product_vendor
               -%}
             {%- endfor -%}
           {%- endfor -%}
@@ -78,7 +64,7 @@
                 <product-bundle-toggle-button class="product-bundle__toggle flex items-center justify-between gap-3" aria-controls="{{ controls }}">
                   <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }} leading-none tracking-tight">
                     {%- if section.settings.highlighted_text == 'none' -%}
-                      <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+                      <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
                     {%- else -%}
                       {%- liquid
                         assign with_gradient = false
@@ -305,6 +291,7 @@
       "label": "t:sections.main-product.blocks.variant_picker.settings.picker_type.label"
     },
     {
+      "visible_if": "{{ section.settings.picker_type == 'button' }}",
       "type": "checkbox",
       "id": "enable_color_swatches",
       "default": true,
@@ -312,6 +299,7 @@
       "info": "t:sections.main-product.blocks.variant_picker.settings.enable_color_swatches.info"
     },
     {
+      "visible_if": "{{ section.settings.picker_type == 'button' and section.settings.enable_color_swatches == true }}",
       "type": "select",
       "id": "color_swatch_type",
       "options": [
@@ -479,6 +467,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -597,7 +586,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.product-bundle.presets.name"
+      "name": "t:sections.product-bundle.name"
     }
   ],
   "disabled_on": {

@@ -30,7 +30,7 @@
     {%- render 'section-heading', section: section, section_button: indicators -%}
 
     {%- if section.blocks.size > 0 -%}
-      <slider-element id="Slider-{{ section.id }}" class="grid slider slider--desktop slider--tablet" selector=".card-grid>.card">
+      <slider-element id="Slider-{{ section.id }}" class="grid slider slider--desktop slider--tablet" selector=".card-grid>.card" tabindex="0">
         <motion-list class="timeline card-grid grid{% if section.blocks.size == 1 %} with-only1{% endif %}">
           {%- liquid
             assign with_gradient = false
@@ -56,7 +56,7 @@
                     {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
                   {%- else -%}
                     {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
-                    {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+                    {{- placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent' -}}
                   {%- endif -%}
                 </picture>
                 <div class="timeline__item-content flex flex-col gap-4">
@@ -67,7 +67,7 @@
                   {%- if block.settings.heading != blank -%}
                     <{{ block.settings.heading_tag }} class="heading lg:text-3xl text-2xl leading-none tracking-tight">
                       {%- if block.settings.highlighted_text == 'none' -%}
-                        <split-words class="split-words block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
+                        <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ block.settings.heading }}</split-words>
                       {%- else -%}
                         {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                       {%- endif -%}
@@ -332,6 +332,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -538,6 +539,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -558,12 +560,14 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",
@@ -611,6 +615,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -644,7 +649,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.timeline.presets.name",
+      "name": "t:sections.timeline.name",
       "blocks": [
         {
           "type": "content"

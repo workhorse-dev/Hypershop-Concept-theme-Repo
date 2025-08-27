@@ -1,24 +1,39 @@
-{%- comment -%}
-  Renders highlighted text
+{%- doc -%}
+  Transforms emphasis tags into visually enhanced text with decorative highlighting effects.
 
-  Accepts:
-  - content: {HTML} The textual content to use
-  - style: {String} The style you would like for your highlights
-  - scribble: {String} The scribble type
-  - gradient: {Boolean} Will be used for the gradient
+  Replaces standard `<em>` elements with custom highlighted text components.
 
-  Usage:
-  {% render 'highlighted-text', style: 'scribble', scribble: 'circle' %}
-{%- endcomment -%}
+  @param {string} content - Text/HTML containing `<em>` tags to transform
+  @param {string} style - Highlight style type ('scribble', 'none', or other custom styles)
+  @param {string} [scribble] - Scribble icon type when using 'scribble' style
+  @param {boolean} [gradient] - Enable gradient color effects on highlighted text
 
-{%- if style != 'none' -%}
-  {%- capture begin_tag -%}<em class="highlighted-text inline-block not-italic relative{% if gradient %} with-gradient{% endif %}" is="highlighted-text" data-style="{{ style }}">{%- endcapture -%}
-  {%- assign content = content | replace: '<em>', begin_tag -%}
+  @example
+  {% render 'highlighted-text',
+    content: 'This is <em>important text</em> with highlighting.',
+    style: 'scribble',
+    scribble: 'circle'
+  %}
+{%- enddoc -%}
 
-  {%- if style == 'scribble' -%}
-    {%- capture end_tag -%}{% render 'icon-scribble', icon: scribble %}</em>{%- endcapture -%}
-    {%- assign content = content | replace: '</em>', end_tag -%}
-  {%- endif -%}
-{%- endif -%}
+{%- liquid
+  if style != 'none'
+    assign highlighted_class = 'highlighted-text inline-block not-italic relative'
+    if gradient
+      assign highlighted_class = highlighted_class | append: ' with-gradient'
+    endif
 
-{{- content -}}
+    assign begin_tag = '<em is="highlighted-text" class="' | append: highlighted_class | append: '" data-style="' | append: style | append: '">'
+    assign content = content | replace: '<em>', begin_tag
+
+    if style == 'scribble'
+      capture scribble_icon
+        render 'icon-scribble', icon: scribble
+      endcapture
+      assign end_tag = scribble_icon | append: '</em>'
+      assign content = content | replace: '</em>', end_tag
+    endif
+  endif
+
+  echo content
+-%}

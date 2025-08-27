@@ -123,6 +123,7 @@
       "note": {
         "title": "הערת הזמנה",
         "caption": "הערות מיוחדות להזמנה",
+        "placeholder": "הערת הזמנה",
         "button": "החל"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "מצטערים, אנחנו לא מספקים לכתובת זו.",
         "one_result": "קיים תעריף משלוח אחד לכתובת שלכם:",
         "multiple_results": "קיימים מס' תעריפי משלוח לכתובת שלכם:"
+      },
+      "discount": {
+        "title": "הנחה",
+        "caption": "הנחה",
+        "placeholder": "קוד הנחה",
+        "button": "החל",
+        "error": "לא ניתן להחיל את קוד ההנחה על העגלה שלך",
+        "shipping_error": "הנחות משלוח יוצגו בתהליך התשלום לאחר הוספת כתובת",
+        "applied": "הוחל קוד הנחה: {{ code }}",
+        "remove": "הסר הנחה {{ code }}"
       },
       "recently_viewed": {
         "empty": "רשימת המוצרים שנראו לאחרונה ריקה."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "קרוסלה",
+      "announcement": "הודעה", 
+      "announcement_bar": "סרגל הודעות"
+    },
     "blog_posts": {
       "view_all": "צפייה בהכל"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "הייתה בעיה באימות חשבון Google Maps שלך."
     },
     "slideshow": {
+      "carousel": "קרוסלה",
       "play_slideshow": "הפעלת מצגת",
       "pause_slideshow": "עצירת מצגת"
     },
@@ -304,7 +321,7 @@
     "country_label": "מדינה/אזור",
     "language_label": "שפה",
     "update_language": "עדכון שפה",
-    "update_country": "עדכון מדינה/אזור",
+    "update_country": "עדכון מדינה/אזור"
   },
   "contact": {
     "form": {
@@ -365,7 +382,7 @@
       "return": "חזרה לחנות",
       "guest_title": "המשך כאורח",
       "guest_continue": "המשך",
-      "alternate_provider_separator": "או",
+      "alternate_provider_separator": "או"
     },
     "orders": {
       "title": "היסטוריית הזמנות",
@@ -386,6 +403,7 @@
       "payment_status": "מצב תשלום",
       "shipping_address": "כתובת משלוח",
       "fulfillment_status": "מצב הזמנה",
+      "discounts": "הנחות",
       "discount": "הנחה",
       "shipping": "משלוח",
       "tax": "מיסים",

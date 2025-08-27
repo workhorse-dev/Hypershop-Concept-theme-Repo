@@ -1,3 +1,13 @@
+
+{%- doc -%}
+  Generates Open Graph and Twitter Card meta tags for social media sharing.
+
+  Dynamically adjusts content based on page type (product, article, password) with appropriate titles, descriptions, and images.
+
+  @example
+  {% render 'social-meta-tags' %}
+{%- enddoc -%}
+
 {%- liquid
   assign og_title = page_title
   assign og_url = canonical_url
@@ -23,7 +33,7 @@
 <meta property="og:title" content="{{ og_title | escape }}">
 <meta property="og:type" content="{{ og_type }}">
 <meta property="og:description" content="{{ og_description | strip_html }}">
-{%- if template_base == 'product' -%}
+{%- if request.page_type == 'product' -%}
   <meta property="og:price:amount" content="{{ product.price | money_without_currency | strip_html }}">
   <meta property="og:price:currency" content="{{ cart.currency.iso_code }}">
 {%- endif -%}

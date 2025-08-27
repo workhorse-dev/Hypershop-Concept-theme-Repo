@@ -1,3 +1,18 @@
+{%- doc -%}
+  Renders an individual blog comment with author info, timestamp, and optional Gravatar.
+
+  Displays comment in a responsive layout with formatted metadata and content.
+
+  @param {object} comment - Shopify comment object
+  @param {boolean} [show_gravatar] - Display Gravatar avatar image
+
+  @example
+  {% render 'article-comment',
+     comment: comment,
+     show_gravatar: true
+  %}
+{%- enddoc -%}
+
 <article class="grid md:flex items-start gap-4 md:gap-7d5">
   {%- if show_gravatar -%}
     {% # theme-check-disable RemoteAsset %}

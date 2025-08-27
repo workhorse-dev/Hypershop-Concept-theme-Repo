@@ -1,16 +1,17 @@
-{%- comment -%}
-  Renders the cart gift wrapping
+{%- doc -%}
+  Renders gift wrapping option with checkbox toggle and conditional gift note field.
 
-  Accepts:
-  - gift_wrapping: {Object} The product object
-  - gift_wrap_id: {Number} The product variant ID.
-  - gift_wraps_in_cart: {Number} Number of gift wraps in cart.
-  - items_in_cart: {Number} Number of items in cart.
-  - section_id: {String} The ID of section to which this snippet belongs.
+  Manages gift wrap product quantities and stores preferences in cart attributes.
 
-  Usage:
-  {% render 'gift-wrapping' %}
-{%- endcomment -%}
+  @param {object} gift_wrapping - Navigation link object containing gift wrap product details
+  @param {string} gift_wrap_id - Variant ID of the gift wrapping product
+  @param {number} gift_wraps_in_cart - Current quantity of gift wrap items in cart
+  @param {number} items_in_cart - Total quantity of regular items in cart (excluding gift wraps)
+  @param {string} section_id - Section identifier for unique field IDs
+
+  @example
+  {% render 'gift-wrapping', section_id: section.id %}
+{%- enddoc -%}
 
 {%- if gift_wrapping != nil -%}
   <gift-wrapping class="gift-wrapping grid gap-4"

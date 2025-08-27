@@ -1,0 +1,24 @@
+<div {{ block.shopify_attributes }}>
+  {{ block.settings.custom_liquid }}
+</div>
+
+{% schema %}
+{
+  "name": "t:sections.custom-liquid.name",
+  "tag": null,
+  "settings": [
+    {
+      "type": "liquid",
+      "id": "liquid",
+      "label": "t:sections.custom-liquid.settings.liquid.label",
+      "info": "t:sections.custom-liquid.settings.liquid.info"
+    }
+  ],
+  "presets": [
+    {
+      "name": "t:sections.custom-liquid.name",
+      "category": "t:categories.custom"
+    }
+  ]
+}
+{% endschema %}

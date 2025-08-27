@@ -117,23 +117,34 @@
         "other": "{{ count }} artigos"
       },
       "free_shipping": {
-        "remaining_html": "Spend {{ remaining_amount }} more to reach free shipping!",
-        "congratulations_html": "Tens direito a envio gratuito. "
+        "remaining_html": "Só falta {{ remaining_amount }} para teres portes grátis!",
+        "congratulations_html": "Conseguiste portes grátis!"
       },
       "note": {
         "title": "Nota de encomenda",
         "caption": "Encomendar instruções especiais",
+        "placeholder": "Nota de encomenda",
         "button": "Aplicar"
       },
       "shipping_calculator": {
         "title": "Envio",
-        "caption": "Estimativa das taxas de envio",
+        "caption": "Estimativa de custos de envio",
         "tooltip": "Os portes de envio e impostos serão calculados no momento do checkout",
         "button": "Calcular",
-        "error": "Ocorreram um ou mais erros durante a recuperação das taxas de envio:",
+        "error": "Ocorreram um ou mais erros durante a recuperação dos custos de envio:",
         "not_found": "Lamentamos, mas não enviamos para o seu endereço.",
         "one_result": "Existe uma taxa de envio para o seu endereço",
-        "multiple_results": "Existem várias taxas de envio para a sua morada:"
+        "multiple_results": "Existem diferentes opções de envio para a sua morada:"
+      },
+      "discount": {
+        "title": "Desconto",
+        "caption": "Desconto",
+        "placeholder": "Código de desconto",
+        "button": "Aplicar",
+        "error": "O código de desconto não pode ser aplicado ao seu carrinho",
+        "shipping_error": "Os descontos de envio são apresentados na finalização da compra após adicionar um endereço",
+        "applied": "Código de desconto aplicado: {{ code }}",
+        "remove": "Remover desconto {{ code }}"
       },
       "recently_viewed": {
         "empty": "O seu visualizado recentemente está vazio."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carrossel",
+      "announcement": "Comunicado",
+      "announcement_bar": "Barra de comunicado"
+    },
     "blog_posts": {
       "view_all": "Ver tudo"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "There was a problem authenticating your Google Maps account. Create and enable the <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> and  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> permissions of your app."
     },
     "slideshow": {
+      "carousel": "Carrossel",
       "play_slideshow": "Reproduzir slideshow",
       "pause_slideshow": "Pausar slideshow"
     },
@@ -242,12 +259,12 @@
       "subtotal": "Subtotal",
       "cart_error": "Ocorreu um erro ao atualizar o seu carrinho. Tente novamente.",
       "cart_quantity_error_html": "É possível adicionar apenas {{ quantity }} unidade(s) deste item ao carrinho.",
-      "taxes_and_shipping_policy_at_checkout_html": "Taxas e <a href=\"{{ link }}\">transportes</a> calculado no checkout.",
+      "taxes_and_shipping_policy_at_checkout_html": "Taxas e <a href=\"{{ link }}\">custos de envio</a> calculados no checkout.",
       "taxes_included_but_shipping_at_checkout": "Impostos incluídos e portes calculados no momento da finalização da compra.",
-      "taxes_included_and_shipping_policy_html": "Taxa incluída.  <a href=\"{{ link }}\">Transportes</a> calculado no checkout.",
+      "taxes_included_and_shipping_policy_html": "Taxa incluída.  <a href=\"{{ link }}\">Custos de envio</a> calculados no checkout.",
       "taxes_and_shipping_at_checkout": "Impostos incluídos e portes calculados no momento da finalização da compra.",
       "update": "Atualizar Carrinho ",
-      "checkout": "Adicionar ao Carrinho",
+      "checkout": "Finalizar compra",
       "we_accept": "Nós aceitamos",
       "empty": "O teu carrinho está vazio.",
       "continue_shopping": "Continuar a comprar "
@@ -386,6 +403,7 @@
       "payment_status": "Estado de pagamento",
       "shipping_address": "Endereço para envio",
       "fulfillment_status": "Estado de conformidade",
+      "discounts": "Descontos",
       "discount": "Desconto",
       "shipping": "Envio",
       "tax": "Imposto",
@@ -441,7 +459,7 @@
       "color_swatch_trigger": "Cor",
       "size_trigger": "Size",
       "size_chart": "Tabela de tamanhos",
-      "save_html": "Poupar {{ saved_amount }}",
+      "save_html": "- {{ saved_amount }}",
       "sale": "Promoção",
       "show_more": "Mostrar mais"
     },

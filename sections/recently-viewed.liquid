@@ -25,7 +25,7 @@
       <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative overflow-hidden md:overflow-visible">
         {%- capture indicators -%}
           {%- if section.settings.carousel_on_desktop -%}
-            <div class="indicators  lg:flex gap-2d5">
+            <div class="indicators hidden lg:flex gap-2d5">
               <button class="button button--secondary" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
@@ -44,7 +44,7 @@
         {%- render 'section-heading', section: section, section_button: indicators -%}
         
         {%- if recent_results != blank -%}
-          <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+          <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
             <motion-list class="card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
               {{- recent_results -}}
             </motion-list>
@@ -284,6 +284,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -402,7 +403,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.recently-viewed.presets.name"
+      "name": "t:sections.recently-viewed.name"
     }
   ],
   "disabled_on": {

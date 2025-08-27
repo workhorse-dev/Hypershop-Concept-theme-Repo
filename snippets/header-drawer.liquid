@@ -1,12 +1,13 @@
-{%- comment -%}
-  Renders a header menu drawer component
+{%- doc -%}
+  Renders a mobile navigation drawer with menu, localization, and account features.
 
-  Accepts:
-  - section: {Object}
+  Slides from left with nested navigation, language/currency selectors, and footer actions.
 
-  Usage:
+  @param {object} section - Section object with navigation and localization settings
+
+  @example
   {% render 'header-drawer', section: section %}
-{%- endcomment -%}
+{%- enddoc -%}
 
 {%- liquid
 assign section_rendering_api = false
@@ -23,7 +24,7 @@ endif
   <div class="drawer__inner z-10 absolute top-0 flex flex-col w-full h-full overflow-hidden">
     <gesture-element class="drawer__header flex justify-between opacity-0 invisible relative">
       <span class="drawer__title heading lg:text-3xl text-2xl leading-none tracking-tight"></span>
-      <button class="button button--secondary button--close drawer__close  sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
+      <button class="button button--secondary button--close drawer__close hidden sm:flex items-center justify-center" type="button" is="hover-button" aria-controls="MenuDrawer" aria-expanded="false" aria-label="{{ 'general.accessibility.close' | t | escape }}">
         <span class="btn-fill" data-fill></span>
         <span class="btn-text">
           {%- render 'icon', icon: 'close', size: 'sm' -%}
@@ -35,7 +36,7 @@ endif
         <ul class="drawer__scrollable drawer__menu relative w-full h-full" role="list" data-parent>
           {%- assign main_menu = section.settings.menu_mobile | default: section.settings.menu -%}
           {%- for link in main_menu.links -%}
-            <li class="drawer__menu-group  ">
+            <li class="drawer__menu-group">
               {%- liquid
                 assign enable_mega_menu = false
                 assign mega_menu_block = nil
@@ -52,7 +53,7 @@ endif
               -%}
 
               {%- if link.links != blank or enable_mega_menu -%}
-                {%- render 'header-nav-drawer', link: link, enable_mega_menu: enable_mega_menu, block: mega_menu_block, position: forloop.index -%}
+                {%- render 'header-nav-drawer', section: section, link: link, enable_mega_menu: enable_mega_menu, enable_accordion_menu: section.settings.accordion_menu_mobile, block: mega_menu_block, position: forloop.index -%}
               {%- else -%}
                 <a class="drawer__menu-item block heading text-2xl leading-none tracking-tight" href="{{ link.url }}" {% if link.title == section.settings.highlight_text  %} style="color:{{ section.settings.highlight_nav }}" {% endif %} >{{ link.title | escape }}</a>
               {%- endif -%}
@@ -72,7 +73,10 @@ endif
         {%- if enable_language_selector or enable_country_selector -%}
           <div class="drawer__footer-top flex">
             {%- if enable_language_selector -%}
-              <button type="button" class="flex gap-3 grow items-center justify-between"{% unless section_rendering_api %} is="api-button" data-id="header_drawer_localization_language_form" data-section-id="{{ section.id }}"{% endunless %} aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false">
+              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationLanguage-{{ section.id }}" aria-expanded="false">
+                {%- unless section_rendering_api -%}
+                  <api-button class="api-only" data-id="header_drawer_localization_language_form" data-section-id="{{ section.id }}"></api-button>
+                {%- endunless -%}
                 <span class="text-sm leading-none flex items-center gap-2 w-auto">
                   {%- render 'icon', icon: 'language', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
                   {{- localization.language.endonym_name | capitalize -}}
@@ -81,7 +85,10 @@ endif
               </button>
             {%- endif -%}
             {%- if enable_country_selector -%}
-              <button type="button" class="flex gap-3 grow items-center justify-between"{% unless section_rendering_api %} is="api-button" data-id="header_drawer_localization_country_form" data-section-id="{{ section.id }}"{% endunless %} aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"> 
+              <button type="button" class="flex gap-3 grow items-center justify-between" aria-controls="LocalizationCountry-{{ section.id }}" aria-expanded="false"> 
+                {%- unless section_rendering_api -%}
+                  <api-button class="api-only" data-id="header_drawer_localization_country_form" data-section-id="{{ section.id }}"></api-button>
+                {%- endunless -%}
                 <span class="text-sm leading-none flex items-center gap-2 w-auto">
                   {%- render 'icon', icon: 'currency', size: 'xs', class: 'stroke-1 hidden md:block shrink-0' -%}
                   {{- localization.country.name }} ({{ localization.country.currency.iso_code }} {{ localization.country.currency.symbol }})

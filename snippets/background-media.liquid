@@ -1,0 +1,30 @@
+{%- doc -%}
+  Renders background media (video or image) based on media type selection.
+
+  Dispatcher component that routes to appropriate background renderer.
+
+  @param {string} background_media - Media type selector ('video' or 'image')
+  @param {object} [background_video] - Shopify video object (required if media='video')
+  @param {string} [background_video_position] - Video alignment/position value
+  @param {object} [background_image] - Shopify image object (required if media='image')
+  @param {string} [background_image_position] - Image alignment/position CSS value
+  @param {string} [loading] - Loading strategy ('lazy' or 'eager')
+  @param {string} [fetchpriority] - Resource priority ('auto', 'high', or 'low')
+  @param {string} [lazyimage] - Lazy image animation
+  @param {string} [context] - Rendering context ('section' adds banner styling, others use default)
+
+  @example
+  {% render 'background-media',
+     background_media: 'video',
+     background_video: section.settings.video,
+     background_video_position: section.settings.video_position
+  %}
+{%- enddoc -%}
+
+{%- liquid
+  if background_media == 'video'
+    render 'background-video', background_video: background_video, background_video_position: background_video_position, loading: loading, fetchpriority: fetchpriority, lazyimage: lazyimage, context: context
+  elsif background_media == 'image'
+    render 'background-image', background_image: background_image, background_image_position: background_image_position, loading: loading, fetchpriority: fetchpriority, lazyimage: lazyimage, context: context
+  endif
+-%}

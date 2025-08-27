@@ -1,3 +1,20 @@
+{%- doc -%}
+  Renders profile cards with expandable modals for detailed content display.
+
+  Creates a grid of interactive profile cards that open full-screen modals on click.
+
+  @param {object} section - Section object containing profile blocks to display
+  @param {number} [limit] - Maximum profiles to render
+  @param {number} [offset] - Number of blocks to skip from beginning
+
+  @example
+  {% render 'portfolio',
+     section: section,
+     limit: 3,
+     offset: 0
+  %}
+{%- enddoc -%}
+
 {%- liquid
   unless limit
     assign limit = section.blocks.size
@@ -24,10 +41,10 @@
         {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
       {%- else -%}
         {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
-        {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
+        {{- placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent' -}}
       {%- endif -%}
     </picture>
-    <div class="profile__content h-150 absolute left-0 bottom-0 w-full flex items-center justify-between gap-8">
+    <div class="profile__content absolute left-0 bottom-0 w-full flex items-center justify-between gap-8">
       <p id="ProfileHeading-{{ block.id }}" class="heading lg:text-3xl text-2xl leading-none tracking-tight">{{ block.settings.heading | escape }}</p>
       <button type="button" class="profile__button flex items-center justify-center rounded-full shrink-0" aria-labelledby="ProfileHeading-{{ block.id }}" aria-controls="Profile-{{ section.id }}-{{ block.id }}" aria-expanded="false">
         {%- render 'icon', icon: 'plus-2' -%}

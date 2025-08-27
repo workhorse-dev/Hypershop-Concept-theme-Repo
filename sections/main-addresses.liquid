@@ -13,7 +13,7 @@
     <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
       <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none grid gap-4 md:flex {{ section.settings.heading_alignment }} md:justify-between">
         <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
-          <split-words class="split-words block" data-animate="fade-up-large">{{ 'customer.addresses.title' | t }}</split-words>
+          <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ 'customer.addresses.title' | t }}</split-words>
         </{{ section.settings.heading_tag }}>
         <p>
           <a class="button button--secondary icon-with-text" href="{{ routes.account_url }}" is="hover-link">
@@ -100,10 +100,10 @@
                       >
                         {{ all_country_option_tags }}
                       </select>
-                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                       <label class="label is-floating" for="AddressCountryNew">{{ 'customer.addresses.country' | t }}</label>
                     </div>
-                    <div class="field" id="AddressProvinceContainerNew" style="display: none">
+                    <div class="field" id="AddressProvinceContainerNew" style="display: none;">
                       <select
                         class="select is-floating"
                         id="AddressProvinceNew"
@@ -113,7 +113,7 @@
                         is="custom-select"
                       >
                       </select>
-                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                       <label class="label is-floating" for="AddressProvinceNew">{{ 'customer.addresses.province' | t }}</label>
                     </div>
                     <div class="field">
@@ -247,10 +247,10 @@
                             >
                               {{ all_country_option_tags }}
                             </select>
-                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                             <label class="label is-floating" for="AddressCountry_{{ form.id }}">{{ 'customer.addresses.country' | t }}</label>
                           </div>
-                          <div class="field" id="AddressProvinceContainer_{{ form.id }}" style="display:none;">
+                          <div class="field" id="AddressProvinceContainer_{{ form.id }}" style="display: none;">
                             <select
                               class="select is-floating"
                               id="AddressProvince_{{ form.id }}"
@@ -260,7 +260,7 @@
                               is="custom-select"
                             >
                             </select>
-                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                             <label class="label is-floating" for="AddressProvince_{{ form.id }}">{{ 'customer.addresses.province' | t }}</label>
                           </div>
                           <div class="field">

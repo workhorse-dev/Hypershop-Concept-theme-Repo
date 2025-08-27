@@ -123,6 +123,7 @@
       "note": {
         "title": "Notatka do zamówienia",
         "caption": "Specjalne instrukcje do zamówienia",
+        "placeholder": "Notatka do zamówienia",
         "button": "Zastosuj"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Przepraszamy, nie wysyłamy pod Twój adres.",
         "one_result": "Dla Twojego adresu obowiązuje jedna stawka za wysyłkę:",
         "multiple_results": "Istnieje wiele stawek wysyłki dla Twojego adresu:"
+      },
+      "discount": {
+        "title": "Rabat",
+        "caption": "Rabat",
+        "placeholder": "Kod rabatowy",
+        "button": "Zastosuj",
+        "error": "Nie można dodać kodu rabatowego do Twojego koszyka",
+        "shipping_error": "Rabaty na wysyłkę są widoczne przy realizacji zakupu, gdy dodany zostanie adres",
+        "applied": "Zastosowany kod rabatowy: {{ code }}",
+        "remove": "Usuń rabat {{ code }}"
       },
       "recently_viewed": {
         "empty": "Ostatnio oglądane jest puste."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karuzela",
+      "announcement": "Ogłoszenie",
+      "announcement_bar": "Pasek ogłoszeń"
+    },
     "blog_posts": {
       "view_all": "Pokaż wszystkie"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Wystąpił problem z uwierzytelnieniem Twojego konta Map Google. Utwórz i włącz uprawnienia <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> i <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> w swojej aplikacji."
     },
     "slideshow": {
+      "carousel": "Karuzela",
       "play_slideshow": "Odtwarzanie pokazu slajdów",
       "pause_slideshow": "Wstrzymaj pokaz slajdów"
     },
@@ -244,7 +261,7 @@
       "cart_quantity_error_html": "Do koszyka możesz dodać tylko {{ quantity }} tego produktu.",
       "taxes_and_shipping_policy_at_checkout_html": "Podatki i wysyłka obliczane przy kasie",
       "taxes_included_but_shipping_at_checkout": "Podatek jest wliczony w cenę, a wysyłka obliczana przy kasie",
-      "taxes_included_and_shipping_policy_html": "",
+      "taxes_included_and_shipping_policy_html": "<a href=\"{{ link }}\">Koszt wysyłki</a> obliczony przy kasie.",
       "taxes_and_shipping_at_checkout": "Podatki są wliczone, a wysyłka obliczana przy kasie.",
       "update": "Zaktualizuj koszyk",
       "checkout": "Dokończ transakcję ",
@@ -386,6 +403,7 @@
       "payment_status": "Status płatności",
       "shipping_address": "adres wysyłki",
       "fulfillment_status": "Stan realizacji",
+      "discounts": "Rabaty",
       "discount": "Rabat",
       "shipping": "Wysyłka",
       "tax": "Podatek",
@@ -466,7 +484,7 @@
       "xr_button_label": "Zobacz w swojej przestrzeni, ładuje element w oknie rzeczywistości rozszerzonej",
       "read_more": "Zobaczyć szczegołowy opis",
       "quick_add": "Dodaj",
-      "quick_view": "Pogląd",
+      "quick_view": "Pogląd"
     },
     "price": {
       "regular_price": "Normalna cena",
@@ -505,8 +523,8 @@
       "in_stock_with_count": "{{ count }} w magazynie",
       "low_stock": "Niski poziom zapasów",
       "low_stock_with_count": {
-        "one": "Pospiesz się, w magazynie pozostało tylko {{ count }} artykułu!",
-        "other": "Pospiesz się, w magazynie pozostało tylko {{ count }} artykułów!"
+        "one": "Została już tylko {{ count }} sztuka, nie zwlekaj!",
+        "other": "Zostały już tylko {{ count }} sztuki, nie zwlekaj!"
       },
       "out_of_stock": "Obecnie brak na stanie",
       "out_of_stock_continue_selling": "W magazynie",

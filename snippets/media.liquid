@@ -1,43 +1,50 @@
-{%- comment -%}
-  Renders product media
+{%- doc -%}
+  Renders product media with responsive images, deferred videos, and interactive 3D models.
 
-  Accepts:
-  - media: {Object} Product Media object
-  - sizes: {String} Used for the image generation
-  - preload: {Boolean} The image is preloaded and its fetch priority is higher
-  - loop: {Boolean} Enable video looping (optional)
-  - autoplay: {Boolean} Enable video autoplay (optional)
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of section to which this snippet belongs.
+  Handles all Shopify media types with optimized loading and interactive controls.
 
-  Usage:
+  @param {object} media - Shopify media object (image, video, external_video, or model)
+  @param {string} sizes - Responsive sizes attribute for srcset optimization
+  @param {string} product_id - Product ID for unique element targeting
+  @param {string} section_id - Section ID for component identification
+  @param {boolean} [preload] - Eager load with high priority for LCP
+  @param {boolean} [autoplay] - Auto-play videos (muted automatically)
+  @param {boolean} [loop] - Enable continuous video playback
+  @param {string} [video_class] - Additional CSS classes for video elements
+  @param {string} [media_alt] - Override alt text for accessibility
+
+  @example
   {% render 'media',
-    media: media,
-    loop: false,
-    autoplay: false
+     media: product.featured_media,
+     sizes: '(max-width: 740px) 100vw, 50vw',
+     product_id: product.id,
+     section_id: section.id,
+     preload: true
   %}
-{%- endcomment -%}
+{%- enddoc -%}
 
 {%- liquid
   if preload
     assign loading = 'eager'
     assign fetchpriority = 'high'
+    assign lazyimage = null
   else
     assign loading = 'lazy'
     assign fetchpriority = 'auto'
+    assign lazyimage = 'lazy-image'
   endif
 -%}
 
 {%- case media.media_type -%}
   {%- when 'image' -%}
-    {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+    {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: lazyimage -}}
 
   {%- when 'video', 'external_video' -%}
-    <video-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.aspect_ratio }}" data-aspect-ratio="{{ media.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}"
+    <video-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.aspect_ratio }};" data-aspect-ratio="{{ media.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}"
       {%- if media.host %} host="{{ media.host }}"{% endif -%}
       {%- if autoplay %} autoplay{% endif -%}
     >
-      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: lazyimage -}}
 
       <template>
         {%- liquid
@@ -61,8 +68,8 @@
     </video-media>
 
   {%- when 'model' -%}
-    <model-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.preview_image.aspect_ratio }}" data-aspect-ratio="{{ media.preview_image.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
-      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: 'lazy-image' -}}
+    <model-media class="deferred-media block relative w-full" style="--aspect-ratio: {{ media.preview_image.aspect_ratio }};" data-aspect-ratio="{{ media.preview_image.aspect_ratio }}" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}">
+      {{- media | image_url: width: media.preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '200,300,400,500,600,700,800,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', class: 'w-full', alt: media_alt, is: lazyimage -}}
       {{- media | model_viewer_tag: image_size: '2048x', reveal: 'interaction', toggleable: true -}}
 
       <template>

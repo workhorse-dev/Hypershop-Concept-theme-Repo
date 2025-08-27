@@ -1,12 +1,13 @@
-{%- comment -%}
-  Renders free shipping message
+{%- doc -%}
+  Renders a free shipping progress bar showing cart progress toward threshold.
 
-  Accepts:
-  - minimum_amount: {Number} Free shipping minimum amount
+  Displays dynamic messaging and visual progress, excluding gift wrap costs.
 
-  Usage:
-  {% render 'free-shipping-bar', minimum_amount: minimum_amount %}
-{%- endcomment -%}
+  @param {number} minimum_amount - Free shipping threshold in store currency
+
+  @example
+  {% render 'free-shipping-bar', minimum_amount: 50 %}
+{%- enddoc -%}
 
 {%- liquid
   assign minimum_amount_in_cents = minimum_amount | times: 100

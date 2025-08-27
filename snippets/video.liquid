@@ -1,6 +1,37 @@
+{%- doc -%}
+  Renders a deferred-loading video player with poster image and playback controls.
+
+  Supports Shopify native videos and external sources (YouTube/Vimeo) with responsive poster images.
+
+  @param {object} [video] - Shopify video object
+  @param {string} [video_url] - External video URL (YouTube/Vimeo)
+  @param {string} [description] - Video description for accessibility
+  @param {boolean} [muted] - Mute video audio
+  @param {boolean} [autoplay] - Auto-play video
+  @param {boolean} [loop] - Loop video playback
+  @param {boolean} [show_play_button] - Show play/pause button overlay
+  @param {object} [cover_image] - Fallback poster image
+  @param {string} [sizes] - Responsive image sizes
+  @param {string} [loading] - Image loading behavior
+  @param {string} [fetchpriority] - Image fetch priority
+  @param {string} [lazyimage] - Lazy image animation
+  @param {boolean} [is_mobile] - Enable mobile-specific styling
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'video',
+    video: section.settings.video,
+    description: 'Product demo',
+    show_play_button: true,
+    muted: true,
+    autoplay: true
+  %}
+{%- enddoc -%}
+
 {%- liquid
   assign loading = loading | default: 'lazy'
   assign fetchpriority = fetchpriority | default: 'auto'
+  assign lazyimage = lazyimage | default: 'lazy-image'
   assign sizes = sizes | default: 'min(100vw, var(--page-width))'
 
   assign video_id = video.id | default: video_url.id
@@ -10,16 +41,16 @@
 
   capture poster
     if preview_image != blank
-      echo preview_image | image_url: width: preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', alt: alt
+      echo preview_image | image_url: width: preview_image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: lazyimage, alt: alt
     else
-      echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder'
+      echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder placeholder--transparent'
     endif
   endcapture
 -%}
 
 {%- if video != blank or video_url != blank -%}
   <video-media class="media deferred-media{% if is_mobile %} mobile:deferred-media{% endif %} block {{ class }}"
-    style="--aspect-ratio: {{ video.aspect_ratio }}"
+    style="--aspect-ratio: {{ video.aspect_ratio | default: '16 / 9' }};"
     {%- unless video %} host="{{ video_url.type }}"{% endunless -%}
     {%- if autoplay %} autoplay{% endif -%}
   >

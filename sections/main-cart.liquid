@@ -15,7 +15,7 @@
   <div class="page-width{% if section.settings.full_width %} page-width--full{% endif %} relative">
     <div class="title-wrapper{% if section.settings.heading_size == 'title-xl' %} title-wrapper-lg{% endif %} leading-none grid gap-4 md:flex {{ section.settings.heading_alignment }} md:justify-between">
       <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
-        <split-words class="split-words block" data-animate="fade-up-large">{{ 'cart.general.title' | t }}</split-words>
+        <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ 'cart.general.title' | t }}</split-words>
       </{{ section.settings.heading_tag }}>
       <p>
         <a class="button button--secondary icon-with-text" href="{{ routes.all_products_collection_url }}" is="hover-link">
@@ -142,12 +142,13 @@
                                   {%- endif -%}
                                 {%- endif -%}
                               </div>
+                      
                               <div class="grid gap-1">
                                 <div class="price{% if item.original_price != item.final_price %} price--on-sale{% endif %} text-sm flex flex-wrap gap-1d5">
                                   {%- liquid
-                                    assign money_price = item.original_price | money | replace: ' ', '' 
+                                    assign money_price = item.original_price | money
                                     if settings.currency_code_enabled
-                                      assign money_price = item.original_price | money_with_currency | replace: ' ', '' 
+                                      assign money_price = item.original_price | money_with_currency
                                     endif
                                   -%}
                                   {%- if item.original_price != item.final_price -%}
@@ -189,7 +190,7 @@
                                 </div>
                       
                                 {%- if item.line_level_discount_allocations != blank -%}
-                                  <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t | escape }}">
+                                  <ul class="discounts grid gap-2" role="list" aria-label="{{ 'customer.order.discounts' | t | escape }}">
                                     {%- for discount_allocation in item.line_level_discount_allocations -%}
                                       <li class="discounts__discount text-xs flex flex-wrap items-center gap-1">
                                         <span class="badge badge--highlight flex items-center gap-1d5 font-medium leading-none rounded-full">{{ discount_allocation.discount_application.title }}</span>
@@ -431,67 +432,136 @@
             items_in_cart: items_in_cart,
           -%}
 
-          {%- if section.settings.show_shipping_calculator -%}
-            <div class="cart-details">
-              <details class="details" is="accordion-details">
-                <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
-                  <span class="text-sm md:text-2xl font-medium leading-none">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
-                  <svg class="icon icon-chevron-down" viewBox="0 0 18 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
-                    <path stroke-linecap="round" stroke-linejoin="round" d="M1 1L9 9L17 1"></path>
-                  </svg>
-                </summary>
-                <form class="details__content grid gap-4 md:gap-6" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
-                  <div class="grid xl:flex gap-4">
-                    <country-province class="grid xl:flex gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
+          {%- if section.settings.show_shipping_calculator or section.settings.add_discount_code -%}
+            <div class="grid gap-6 items-start{% if section.settings.show_shipping_calculator and section.settings.add_discount_code %} xl:grid-cols-2{% endif %}">
+              {%- if section.settings.show_shipping_calculator -%}
+                <div class="cart-details">
+                  <details class="details" is="accordion-details">
+                    <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                      <span class="text-sm md:text-2xl font-medium leading-none">{{ 'general.cart.shipping_calculator.caption' | t }}</span>
+                      <svg class="icon icon-chevron-down" viewBox="0 0 18 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M1 1L9 9L17 1"></path>
+                      </svg>
+                    </summary>
+                    <form class="details__content grid gap-4 md:gap-6" action="{{ routes.cart_url }}" method="POST" novalidate is="shipping-calculator">
+                      <div class="grid{% unless section.settings.add_discount_code %} xl:flex{% endunless %} gap-4">
+                        <country-province class="grid{% unless section.settings.add_discount_code %} xl:flex{% endunless %} gap-4"{% if shop.customer_accounts_enabled and customer %} data-country="{{ customer.default_address.country }}"{% if customer.default_address.province != '' %} data-province="{{ customer.default_address.province }}"{% endif %}{% endif %}>
+                          <div class="field">
+                            <select
+                              name="address[country]"
+                              class="select is-floating"
+                              autocomplete="country"
+                              is="custom-select"
+                              id="ShippingCalculatorCountry-{{ section.id }}"
+                            >
+                              {{- all_country_option_tags -}}
+                            </select>
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+                            <label class="label is-floating" for="ShippingCalculatorCountry-{{ section.id }}">{{ 'customer.addresses.country' | t }}</label>
+                          </div>
+                          <div class="field" hidden>
+                            <select
+                              name="address[province]"
+                              class="select is-floating"
+                              autocomplete="address-level1"
+                              is="custom-select"
+                              id="ShippingCalculatorProvince-{{ section.id }}"
+                            >
+                            </select>
+                            {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
+                            <label class="label is-floating" for="ShippingCalculatorProvince-{{ section.id }}">{{ 'customer.addresses.province' | t }}</label>
+                          </div>
+                        </country-province>
+                        <div class="field">
+                          <input
+                            name="address[zip]"
+                            class="input is-floating"
+                            type="text"
+                            autocapitalize="characters"
+                            autocomplete="postal-code"
+                            placeholder=" "
+                            id="ShippingCalculatorZip-{{ section.id }}"
+                            {% if shop.customer_accounts_enabled and customer %}value="{{ customer.default_address.zip }}"{% endif %}
+                          />
+                          <label class="label is-floating" for="ShippingCalculatorZip-{{ section.id }}">{{ 'customer.addresses.zip' | t }}</label>
+                        </div>
+                        <div class="justify-self-start{% if section.settings.add_discount_code %} w-full{% endif %}">
+                          <button class="button{% if section.settings.add_discount_code %} button--primary w-full{% else %} button--secondary button--fixed{% endif %}" type="submit" is="hover-button">
+                            <span class="btn-fill" data-fill></span>
+                            <span class="btn-text">{{ 'general.cart.shipping_calculator.button' | t }}</span>
+                          </button>
+                        </div>
+                      </div>
+                      <div class="alert alert--error alert--transparent flex gap-2d5" hidden>
+                        {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'shrink-0' -%}
+                        <div class="grid gap-2 align-self-center text-sm leading-tight"></div>
+                      </div>
+                    </form>
+                  </details>
+                </div>
+              {%- endif -%}
+              
+              {%- if section.settings.add_discount_code -%}
+                {%- liquid
+                  assign discount_codes = cart.cart_level_discount_applications | where: 'type', 'discount_code' | map: 'title'
+                  for item in cart.items
+                    for allocation in item.line_level_discount_allocations
+                      if allocation.discount_application.type == 'discount_code'
+                        assign discount_codes = item.line_level_discount_allocations | slice: forloop.index0 | map: 'discount_application' | map: 'title' | concat: discount_codes
+                      endif
+                    endfor
+                  endfor
+
+                  assign discount_codes = discount_codes | uniq
+                -%}
+                <div class="cart-details">
+                  <details class="details" is="accordion-details" id="CartDiscount-{{ section.id }}">
+                    <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
+                      <p class="flex items-center gap-2d5">
+                        <span class="text-sm md:text-2xl font-medium leading-none">{{ 'general.cart.discount.caption' | t }}</span>
+                        {%- if discount_codes.size > 0 -%}
+                          <span class="cart-discount__count flex items-center justify-center text-xs font-medium rounded-full">{{ discount_codes.size }}</span>
+                        {%- endif -%}
+                      </p>
+                      <svg class="icon icon-chevron-down" viewBox="0 0 18 10" stroke="currentColor" fill="none" xmlns="http://www.w3.org/2000/svg">
+                        <path stroke-linecap="round" stroke-linejoin="round" d="M1 1L9 9L17 1"></path>
+                      </svg>
+                    </summary>
+                    <form class="details__content cart-discount grid gap-4 md:gap-6" action="{{ routes.cart_url }}" method="POST" novalidate is="cart-discount" data-section-id="{{ section.id }}">
+                      <ul class="active-facets flex flex-wrap items-center gap-2" role="list" aria-label="{{ 'customer.order.discounts' | t | escape }}">
+                        {%- for discount_code in discount_codes -%}
+                          <li
+                            class="removable-facet badge badge--highlight flex items-center justify-between gap-2 text-xs lg:text-sm leading-none rounded-full"
+                            aria-label="{{ 'general.cart.discount.applied' | t: code: discount_code | escape }}"
+                          >
+                            <p class="facet-title">{{ discount_code }}</p>
+                            <button type="button" class="block relative" aria-label="{{ 'general.cart.discount.remove' | t: code: discount_code | escape }}" is="discount-remove" data-magnet="3" data-discount="{{ discount_code }}">
+                              <span class="btn-text" data-text>
+                                {%- liquid
+                                  render 'icon', icon: 'remove', size: 'xs'
+                                  render 'icon', icon: 'loader', size: 'sm absolute opacity-0 invisible animate-spin'
+                                -%}
+                              </span>
+                            </button>
+                          </li>
+                        {%- endfor -%}
+                      </ul>
                       <div class="field">
-                        <select
-                          name="address[country]"
-                          class="select is-floating"
-                          autocomplete="country"
-                          is="custom-select"
-                          id="ShippingCalculatorCountry-{{ section.id }}"
-                        >
-                          {{- all_country_option_tags -}}
-                        </select>
-                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
-                        <label class="label is-floating" for="ShippingCalculatorCountry-{{ section.id }}">{{ 'customer.addresses.country' | t }}</label>
+                        <input type="text" name="discount" class="input is-floating" rows="3" placeholder=" " id="CartDiscountForm-{{ section.id }}"/>
+                        <label class="label is-floating" for="CartDiscountForm-{{ section.id }}">{{ 'general.cart.discount.placeholder' | t }}</label>
                       </div>
-                      <div class="field" hidden>
-                        <select
-                          name="address[province]"
-                          class="select is-floating"
-                          autocomplete="address-level1"
-                          is="custom-select"
-                          id="ShippingCalculatorProvince-{{ section.id }}"
-                        >
-                        </select>
-                        {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
-                        <label class="label is-floating" for="ShippingCalculatorProvince-{{ section.id }}">{{ 'customer.addresses.province' | t }}</label>
-                      </div>
-                    </country-province>
-                    <div class="field">
-                      <input
-                        name="address[zip]"
-                        class="input is-floating"
-                        type="text"
-                        autocapitalize="characters"
-                        autocomplete="postal-code"
-                        placeholder=" "
-                        id="ShippingCalculatorZip-{{ section.id }}"
-                        {% if shop.customer_accounts_enabled and customer %}value="{{ customer.default_address.zip }}"{% endif %}
-                      />
-                      <label class="label is-floating" for="ShippingCalculatorZip-{{ section.id }}">{{ 'customer.addresses.zip' | t }}</label>
-                    </div>
-                    <div class="justify-self-start">
-                      <button class="button button--secondary button--fixed" type="submit" is="hover-button">
+                      <button class="button button--primary w-full" type="submit" is="hover-button">
                         <span class="btn-fill" data-fill></span>
-                        <span class="btn-text">{{ 'general.cart.shipping_calculator.button' | t }}</span>
+                        <span class="btn-text">{{ 'general.cart.discount.button' | t }}</span>
                       </button>
-                    </div>
-                  </div>
-                  <div class="grid gap-3 text-sm"></div>
-                </form>
-              </details>
+                      <div class="alert alert--error alert--transparent flex gap-2d5" hidden>
+                        {%- render 'icon', icon: 'alert-circle-filled', size: 'sm', class: 'shrink-0' -%}
+                        <div class="grid gap-2 align-self-center text-sm leading-tight"></div>
+                      </div>
+                    </form>
+                  </details>
+                </div>
+              {%- endif -%}
             </div>
           {%- endif -%}
         </div>
@@ -507,10 +577,15 @@
                   {%- when 'subtotal' -%}
                     <div class="grid gap-3" {{ block.shopify_attributes }}>
                       {%- if cart.cart_level_discount_applications.size > 0 -%}
-                        <ul class="discounts list-unstyled" role="list" aria-label="{{ 'customer.order.discount' | t | escape }}">
+                        <ul class="discounts grid gap-2" role="list" aria-label="{{ 'customer.order.discounts' | t | escape }}">
                           {%- for discount in cart.cart_level_discount_applications -%}
                             <li class="discounts__discount text-sm sm:text-base flex flex-wrap items-center justify-between gap-1d5">
-                              {{- discount.title -}}
+                              <p class="flex items-center gap-1d5">
+                                {%- liquid
+                                  render 'icon', icon: 'discount', size: 'sm'
+                                  echo discount.title
+                                -%}
+                              </p>
                               <span class="badge badge--onsale flex items-center gap-1d5 font-medium leading-none rounded-full">-{{ discount.total_allocated_amount | money }}</span>
                             </li>
                           {%- endfor -%}
@@ -697,7 +772,7 @@
                                   <option value="{{ option_2 }}"{% if option_2 == custom_value %} selected{% endif %}>{{ option_2 }}</option>
                                 {%- endfor -%}
                               </select>
-                              {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                              {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                             {%- endif -%}
                             <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="CartFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
                         {%- endcase -%}
@@ -839,6 +914,12 @@
       "id": "show_shipping_calculator",
       "label": "t:sections.main-cart.settings.show_shipping_calculator.label",
       "info": "t:sections.main-cart.settings.show_shipping_calculator.info",
+      "default": true
+    },
+    {
+      "type": "checkbox",
+      "id": "add_discount_code",
+      "label": "t:sections.main-cart.settings.add_discount_code.label",
       "default": true
     },
     {
@@ -990,39 +1071,46 @@
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "header",
           "content": "t:sections.main-cart.blocks.custom_field.settings.header__checkbox.content",
           "info": "t:sections.main-cart.blocks.custom_field.settings.header__checkbox.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "checked_value",
           "label": "t:sections.main-cart.blocks.custom_field.settings.checked_value.label",
           "default": "Yes"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "unchecked_value",
           "label": "t:sections.main-cart.blocks.custom_field.settings.unchecked_value.label",
           "default": "No"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "header",
           "content": "t:sections.main-cart.blocks.custom_field.settings.header__radio.content",
           "info": "t:sections.main-cart.blocks.custom_field.settings.header__radio.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "text",
           "id": "radio_options",
           "label": "t:sections.main-cart.blocks.custom_field.settings.options.label",
           "info": "t:sections.main-cart.blocks.custom_field.settings.options.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "header",
           "content": "t:sections.main-cart.blocks.custom_field.settings.header__dropdown.content",
           "info": "t:sections.main-cart.blocks.custom_field.settings.header__dropdown.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "text",
           "id": "select_options",
           "label": "t:sections.main-cart.blocks.custom_field.settings.options.label",

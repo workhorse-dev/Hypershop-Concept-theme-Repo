@@ -13,7 +13,7 @@
       },
       "total_reviews": "toplam incelemeler",
       "star_reviews_info": "{{ rating_value }} üzerinden {{ rating_max }} yıldız",
-      "play_video": "Video oynatmak",
+      "play_video": "Videoyu oynat",
       "load_video": "Videoyu yükle: {{ description }}",
       "refresh_page": "Bir seçimin seçilmesi tam sayfanın yenilenmesiyle sonuçlanır.",
       "link_messages": {
@@ -35,7 +35,7 @@
     },
     "pagination": {
       "page": "Sayfa {{ number }}",
-      "previous": "Öncesi",
+      "previous": "Önceki",
       "next": "Sonraki",
       "show_more": "Daha fazla göster"
     },
@@ -84,18 +84,18 @@
     },
     "newsletter": {
       "label": "E-postanızı giriniz",
-      "success": "Abone olduğun için teşekkürler",
-      "submit": "Abone"
+      "success": "Abone olduğunuz için teşekkürler",
+      "submit": "Gönder"
     },
     "search": {
-      "title": "Aramak",
+      "title": "Ara",
       "title_results": "Arama Sonuçları",
-      "placeholder": "Aramak ...",
+      "placeholder": "Ara ...",
       "clear": "Temizlemek",
       "suggestions": "Öneriler",
       "products": "Ürünler",
       "collections": "Koleksiyonlar",
-      "articles": "Nesne",
+      "articles": "Makaleler",
       "pages": "Sayfalar",
       "view_more": "Tüm sonuçları görün",
       "no_results": "“{{ terms }}” için sonuç bulunamadı",
@@ -110,7 +110,7 @@
       }
     },
     "cart": {
-      "title": "Araba",
+      "title": "Sepet",
       "view_cart": "Sepeti görüntüle",
       "cart_count": {
         "one": "{{ count }} öğe",
@@ -123,17 +123,28 @@
       "note": {
         "title": "Sipariş notu",
         "caption": "Özel talimatlar sipariş edin",
+        "placeholder": "Sipariş notu",
         "button": "Uygula"
       },
       "shipping_calculator": {
-        "title": "Nakliye",
+        "title": "Kargo",
         "caption": "Gönderim ücretlerini tahmin edin",
         "tooltip": "Gönderim ve vergiler ödeme sırasında hesaplanacaktır",
         "button": "Hesaplamak",
         "error": "Gönderim ücretleri alınırken bir veya daha fazla hata oluştu:",
         "not_found": "Üzgünüz, adresinize gönderim yapmıyoruz.",
         "one_result": "Adresiniz için tek bir gönderim ücreti vardır:",
-        "multiple_results": "Adresiniz için birden fazla nakliye ücreti var:"
+        "multiple_results": "Adresiniz için birden fazla kargo ücreti var:"
+      },
+      "discount": {
+        "title": "İndirim",
+        "caption": "İndirim",
+        "placeholder": "İndirim kodu",
+        "button": "Uygula",
+        "error": "Sepetinize indirim kodu uygulanamıyor",
+        "shipping_error": "Kargo indirimleri, adres eklendikten sonra ödeme sayfasında gösterilir",
+        "applied": "Uygulanan indirim kodu: {{ code }}",
+        "remove": "{{ code }} indirimini kaldır"
       },
       "recently_viewed": {
         "empty": "Son görüntülenenleriniz boş."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carousel",
+      "announcement": "Duyuru",
+      "announcement_bar": "Duyuru çubuğu"
+    },
     "blog_posts": {
       "view_all": "Hepsini gör"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Google Haritalar hesabınızın kimliği doğrulanırken bir sorun oluştu. Uygulamanızın <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> ve <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> izinlerini oluşturun ve etkinleştirin."
     },
     "slideshow": {
+      "carousel": "Carousel",
       "play_slideshow": "Slayt gösterisini oynat",
       "pause_slideshow": "Slayt gösterisini duraklat"
     },
@@ -216,18 +233,18 @@
     "article": {
       "written_by_html": "ile {{ author }}",
       "filter": "Filtre",
-      "all_tags": "Tüm",
+      "all_tags": "Tüm etiketler",
       "read_more": "Devamını oku"
     },
     "comments": {
-      "title": "yorum Yap",
+      "title": "Yorum Yap",
       "name": "İsim",
       "email": "E-posta",
       "message": "İleti",
       "post": "Yorum Gönder",
       "moderated": "Lütfen yorumların yayınlanmadan önce onaylanması gerektiğini unutmayın.",
       "success_moderated": "Yorumunuz başarıyla gönderildi. Blogumuz moderatörlüğünde olduğundan kısa bir süre sonra yayınlayacağız.",
-      "success": "Yorumunuz başarıyla gönderildi! Teşekkür ederim!",
+      "success": "Yorumunuz başarıyla gönderildi! Teşekkür ederiz!",
       "with_count": {
         "one": "{{ count }} Yorum",
         "other": "{{ count }} yorumlar"
@@ -237,7 +254,7 @@
   "cart": {
     "general": {
       "title": "Sepetiniz",
-      "remove": "Kaldırmak",
+      "remove": "Kaldır",
       "note": "Sipariş notu",
       "subtotal": "ara toplam",
       "cart_error": "Sepetiniz güncellenirken bir hata oluştu. Lütfen tekrar deneyin.",
@@ -247,7 +264,7 @@
       "taxes_included_and_shipping_policy_html": "Vergi dahil. <a href=\"{{ link }}\">Ödeme</a> sırasında kargo bedeli hesaplanır.",
       "taxes_and_shipping_at_checkout": "Vergiler dahildir ve gönderim bedeli ödeme sırasında hesaplanır.",
       "update": "Sepeti Güncelle",
-      "checkout": "Çıkış yapmak",
+      "checkout": "Ödeme ekranı",
       "we_accept": "Kabul ediyoruz",
       "empty": "Sepetiniz şu anda boş.",
       "continue_shopping": "Alışverişe devam"
@@ -311,7 +328,7 @@
       "name": "İsim",
       "email": "E-posta",
       "phone": "Telefon numarası",
-      "message": "İleti",
+      "message": "Mesaj",
       "send": "Mesaj gönder",
       "post_success": "Bizimle iletişime geçtiğiniz için teşekkürler. En kısa sürede size geri döneceğiz."
     }
@@ -386,6 +403,7 @@
       "payment_status": "Ödeme Durumu",
       "shipping_address": "Gönderi Adresi",
       "fulfillment_status": "Tamamlama Durumu",
+      "discounts": "İndirimler",
       "discount": "İndirim",
       "shipping": "Nakliye",
       "tax": "Vergi",
@@ -431,7 +449,7 @@
     }
   },
   "onboarding": {
-    "product_title": "Örnek ürün",
+    "product_title": "Arcana Ürün",
     "product_description": "Bu alan ürününüzün detaylarını tanımlamak için kullanılır. Müşterilerinize ürününüzün görünümü, hissi ve stili hakkında bilgi verin. Renk, kullanılan malzemeler, boyut ve nerede yapıldığına ilişkin ayrıntıları ekleyin.",
     "collection_title": "Örnek koleksiyon",
     "no_content": "Bu bölümde şu anda herhangi bir içerik bulunmamaktadır. Kenar çubuğunu kullanarak bu bölüme içerik ekleyin."
@@ -440,14 +458,14 @@
     "general": {
       "color_swatch_trigger": "Renk",
       "size_trigger": "Boyut",
-      "size_chart": "Beden tablosu",
-      "save_html": "Kaydetmek {{ saved_amount }}",
+      "size_chart": "Beden Tablosu",
+      "save_html": "{{ saved_amount }} indirim!",
       "sale": "Satış",
       "show_more": "Daha fazlasını göster"
     },
     "product": {
-      "product_variants": "Ürün çeşitleri",
-      "sold_out": "Ödeme",
+      "product_variants": "Ürün Çeşitleri",
+      "sold_out": "Ürün Tükendi!",
       "unavailable": "Kullanım dışı",
       "add_to_cart": "Sepete ekle",
       "choose_options": "Seçenekleri seçin",
@@ -456,7 +474,7 @@
       "pre_order": "Ön sipariş",
       "add_to_bundle": "Pakete ekle",
       "shop_the_look": "Görünümü Satın Al",
-      "vendor": "SATICI",
+      "vendor": "Satıcı",
       "include_taxes": "Vergi dahil.",
       "shipping_policy_html": "Ödeme sırasında <a href='{{ link }}'>kargo bedeli</a> hesaplanır.",
       "will_not_ship_until": "Gönderime hazır {{ date }}",
@@ -465,8 +483,8 @@
       "xr_button": "Alanınızda görüntüleyin",
       "xr_button_label": "Alanınızda görüntüleyin, öğeyi artırılmış gerçeklik penceresinde yükler",
       "read_more": "Tüm ayrıntıları görüntüle",
-      "quick_add": "Eklemek",
-      "quick_view": "Görüş"
+      "quick_add": "Hızlı Ekleme",
+      "quick_view": "Hızlı Bakış"
     },
     "price": {
       "regular_price": "Normal fiyat",
@@ -477,7 +495,7 @@
     "media": {
       "open_media": "Medya {{ index }}'yi modaldan aç",
       "play_model": "3D Görüntüleyiciyi Oynat",
-      "play_video": "Video oynatmak",
+      "play_video": "Videoyu Oynat",
       "gallery_viewer": "Galeri Görüntüleyici"
     },
     "quantity": {
@@ -541,8 +559,8 @@
     "issued": {
       "title_html": "İşte {{ value }} hediye kartınız {{ shop }} için!",
       "subtext": "İşte hediye kartınız!",
-      "disabled": "Engelli",
-      "expired": "Günü geçmiş",
+      "disabled": "Devre dışı",
+      "expired": "Sona ermiş.",
       "active": "Tarihinde sona eriyor {{ expiry }}",
       "redeem": "Hediye kartınızı kullanmak için ödeme sırasında bu kodu kullanın.",
       "shop_link": "Çevrimiçi mağazayı ziyaret edin",

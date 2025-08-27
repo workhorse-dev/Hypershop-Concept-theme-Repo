@@ -147,7 +147,7 @@
                           <option value="{{ option_2 }}">{{ option_2 }}</option>
                         {%- endfor -%}
                       </select>
-                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+                      {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
                     {%- endif -%}
                     <label class="label{% if options.size > 0 %} is-floating{% endif %}" for="ContactFormInput-{{ section.id }}-{{ block.id }}">{{ block.settings.title | escape }}</label>
                 {%- endcase -%}
@@ -343,12 +343,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -396,6 +398,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -603,39 +606,46 @@
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__checkbox.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "checked_value",
           "label": "t:sections.contact-form.blocks.custom_field.settings.checked_value.label",
           "default": "Yes"
         },
         {
+          "visible_if": "{{ block.settings.type == 'checkbox' }}",
           "type": "text",
           "id": "unchecked_value",
           "label": "t:sections.contact-form.blocks.custom_field.settings.unchecked_value.label",
           "default": "No"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__radio.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__radio.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'radio' }}",
           "type": "text",
           "id": "radio_options",
           "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
           "info": "t:sections.contact-form.blocks.custom_field.settings.options.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "header",
           "content": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.content",
           "info": "t:sections.contact-form.blocks.custom_field.settings.header__dropdown.info"
         },
         {
+          "visible_if": "{{ block.settings.type == 'select' }}",
           "type": "text",
           "id": "select_options",
           "label": "t:sections.contact-form.blocks.custom_field.settings.options.label",
@@ -646,7 +656,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.contact-form.presets.name"
+      "name": "t:sections.contact-form.name"
     }
   ],
   "disabled_on": {

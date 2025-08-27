@@ -81,11 +81,13 @@
       "label": "t:sections.logo-list.settings.grid_horizontal.label"
     },
     {
+      "visible_if": "{{ section.settings.layout == 'marquee' }}",
       "type": "header",
       "content": "t:sections.logo-list.settings.header.content",
       "info": "t:sections.logo-list.settings.header.info"
     },
     {
+      "visible_if": "{{ section.settings.layout == 'marquee' }}",
       "type": "select",
       "id": "direction",
       "options": [
@@ -102,6 +104,7 @@
       "label": "t:sections.logo-list.settings.direction.label"
     },
     {
+      "visible_if": "{{ section.settings.layout == 'marquee' }}",
       "type": "range",
       "id": "speed",
       "min": 1,
@@ -232,12 +235,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -285,6 +290,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -431,7 +437,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.logo-list.presets.name",
+      "name": "t:sections.logo-list.name",
       "blocks": [
         {
           "type": "logo"

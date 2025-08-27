@@ -1,3 +1,20 @@
+{%- doc -%}
+  Renders a paginated grid collage with image/video blocks and customizable overlay content.
+
+  Supports subset rendering for performance optimization and pagination use cases.
+
+  @param {object} section - Shopify section object with blocks and settings
+  @param {number} [limit] - Maximum blocks to render
+  @param {number} [offset] - Blocks to skip from start
+
+  @example
+  {% render 'collage',
+     section: section,
+     limit: 6,
+     offset: 0
+  %}
+{%- enddoc -%}
+
 {%- liquid
   unless limit
     assign limit = section.blocks.size
@@ -35,7 +52,7 @@
 
             {%- if block.settings.subheading != blank and block.settings.invert_subheading_heading == true -%}
               <span class="block"></span>
-              <p class="text-base leading-none">
+              <p class="text-base leading-tight">
                 {%- render 'highlighted-text', content: block.settings.subheading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
               </p>
             {%- endif -%}
@@ -57,7 +74,7 @@
 
   {%- case block.type -%}
     {%- when 'image' -%}
-      <div class="collage__item with-image banner relative overflow-hidden" style="--collage-column: {{ column_size }}; --collage-row: {{ row_size }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="collage__item with-image banner relative overflow-hidden" style="--collage-column: {{ column_size }};--collage-row: {{ row_size }};" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
         <picture class="media media--{{ image_ratio }} mobile:media--{{ image_ratio_mobile }} block relative overflow-hidden">
           {%- if block.settings.image != blank -%}
             {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
@@ -70,20 +87,17 @@
               >
             {%- endif -%}
 
-            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' ,class: 'w-full' -}}
+            {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
           {%- else -%}
             {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
-            {% if template.name != 'product' %}
-              {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
-            {% endif %}
-            
+            {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
           {%- endif -%}
         </picture>
         {{- block_content -}}
       </div>
 
     {%- when 'video' -%}
-      <div class="collage__item with-image banner relative overflow-hidden" style="--collage-column: {{ block.settings.column_size | default: 10 }}; --collage-row: {{ block.settings.row_size | default: 4 }}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
+      <div class="collage__item with-image banner relative overflow-hidden" style="--collage-column: {{ block.settings.column_size | default: 10 }};--collage-row: {{ block.settings.row_size | default: 4 }};" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}>
         <div class="aspect-{{ image_ratio }} mobile:aspect-{{ image_ratio_mobile }} relative">
           {%- if block.settings.video_mobile or block.settings.video_url_mobile -%}
             {%- render 'video',

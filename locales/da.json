@@ -88,10 +88,10 @@
       "submit": "Abonner"
     },
     "search": {
-      "title": "fejl",
+      "title": "Søg her",
       "title_results": "Søgeresultater",
       "placeholder": "Søg...",
-      "clear": "Klar",
+      "clear": "Ryd",
       "suggestions": "Forslag",
       "products": "Produkter",
       "collections": "Kollektioner",
@@ -123,7 +123,8 @@
       "note": {
         "title": "Besked",
         "caption": "Skriv din besked",
-        "button": "Brugt"
+        "placeholder": "Besked",
+        "button": "Anvend"
       },
       "shipping_calculator": {
         "title": "Fragt",
@@ -134,6 +135,16 @@
         "not_found": "Vi sender ikke til din adresse",
         "one_result": "Der er ét resultat for din adresse",
         "multiple_results": "Der er flere resultater for din adresse"
+      },
+      "discount": {
+        "title": "Rabat",
+        "caption": "Rabat",
+        "placeholder": "Rabatkode",
+        "button": "Anvend",
+        "error": "Rabatkoden kan ikke anvendes i din indkøbskurv",
+        "shipping_error": "Forsendelsesrabatter vises ved betaling efter tilføjelse af en adresse",
+        "applied": "Anvendt rabatkode: {{ code }}",
+        "remove": "Fjern rabatten {{ code }}"
       },
       "recently_viewed": {
         "empty": "Din tidligere viste er tom"
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karrusel",
+      "announcement": "Meddelelse",
+      "announcement_bar": "Meddelelseslinje"
+    },
     "blog_posts": {
       "view_all": "Hvis kl"
     },
@@ -177,12 +193,13 @@
       "auth_error_html": "Fejl, google maps auth"
     },
     "slideshow": {
+      "carousel": "Karrusel",
       "play_slideshow": "Afspil diasshow",
       "pause_slideshow": "Sæt diasshow på pause"
     },
     "product_bundle": {
       "total": "Total",
-      "remove": "Fjerne",
+      "remove": "Fjern",
       "add_to_cart": "Tilføj til kurv",
       "discounts_at_checkout": "Rabatter vil blive anvendt ved kassen."
     },
@@ -237,9 +254,9 @@
   "cart": {
     "general": {
       "title": "Indkøbskurv",
-      "remove": "Fjerne",
+      "remove": "Fjern",
       "note": "Besked",
-      "subtotal": "Subtotal",
+      "subtotal": "I alt",
       "cart_error": "Der opstod en fejl under opdatering af din indkøbskurv. Prøv venligst igen.",
       "cart_quantity_error_html": "Du kan kun tilføje {{ quantity }} af denne vare til din indkøbskurv.",
       "taxes_and_shipping_policy_at_checkout_html": "Skatter og <a href=\"{{ link }}\">forsendelse</a> beregnes ved kassen",
@@ -294,10 +311,10 @@
       "in_stock_only": "På lager",
       "clear": "Fjern \"{{ name }}\"",
       "clear_all": "Slet alt",
-      "apply": "Brugt"
+      "apply": "Anvend"
     },
     "subcollections": {
-      "all_products": "Ved {{ collection }}"
+      "all_products": "Alle {{ collection }}"
     }
   },
   "localization": {
@@ -321,7 +338,7 @@
       "title": "Min konto",
       "log_out": "Log ud",
       "details": "Kontooplysninger",
-      "view_addresses": "Kontakt",
+      "view_addresses": "Se adresser",
       "return": "Tilbage til konto"
     },
     "activate_account": {
@@ -333,14 +350,14 @@
       "cancel": "Afslå invitationen"
     },
     "addresses": {
-      "title": "Adressat",
+      "title": "Adresser",
       "default": "Standard",
       "add_new": "Tilføj ny adresse",
       "edit_address": "skifte adresse",
       "first_name": "Fornavn",
       "last_name": "Efternavn",
       "company": "Forretning",
-      "address1": "adresse 1",
+      "address1": "Adresse 1",
       "address2": "Adresse 2",
       "city": "By",
       "country": "Land/Region",
@@ -352,7 +369,7 @@
       "update": "Opdater adresse",
       "cancel": "Afbestille",
       "edit": "Lave om",
-      "delete": "Fjerne",
+      "delete": "Fjern",
       "delete_confirm": "Er du sikker på, at du vil slette denne adresse?"
     },
     "login": {
@@ -386,6 +403,7 @@
       "payment_status": "Betalingsstatus",
       "shipping_address": "Leveringsadresse",
       "fulfillment_status": "Leveringsstatus",
+      "discounts": "Rabatter",
       "discount": "Rabat",
       "shipping": "Fragt",
       "tax": "Skat",
@@ -425,7 +443,7 @@
       "email": "E-mail",
       "password": "Adgangskode",
       "accepts_marketing": "Tilmeld dig vores nyhedsbrev",
-      "submit": "skab",
+      "submit": "Opret bruger",
       "sign_in": "Log ind",
       "return": "Tilbage til butikken"
     }
@@ -509,7 +527,7 @@
         "other": "Skynd dig, kun {{ count }} varer tilbage på lager!"
       },
       "out_of_stock": "Udsolgt",
-      "out_of_stock_continue_selling": "Ledig",
+      "out_of_stock_continue_selling": "På lager",
       "will_not_ship_until": "Klar til at sende",
       "will_be_in_stock_after": "Tilbage på lager",
       "waiting_for_stock": "Lager på vej"

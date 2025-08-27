@@ -1,0 +1,595 @@
+{
+  "general": {
+    "accessibility": {
+      "skip_to_content": "Пређи на садржај",
+      "close": "Затвори",
+      "unit_price_separator": "пер",
+      "vendor": "Продавац:",
+      "error": "Грешка",
+      "star_reviews_count": {
+        "zero": "Нема рецензија",
+        "one": "{{ count }} рецензија",
+        "other": "{{ count }} рецензија"
+      },
+      "total_reviews": "укупни прегледи",
+      "star_reviews_info": "{{ rating_value }} од {{ rating_max }} звездица",
+      "play_video": "Пусти видео",
+      "load_video": "Учитај видео: {{ description }}",
+      "refresh_page": "Одабир селекције доводи до потпуног освежавања странице.",
+      "link_messages": {
+        "new_window": "Отвара се у новом прозору.",
+        "external": "Отвара спољну веб локацију."
+      },
+      "go_to_item": "Иди на ставку {{ index }}",
+      "drag": "Драг"
+    },
+    "404": {
+      "title": "Страница није пронађена",
+      "subtext_html": "Изгледа да страница коју тражите више не постоји.<br> Покушајте да се вратите на претходну страницу или на странице испод.",
+      "back_to_home": "Идите на почетну страницу",
+      "continue_shopping": "Наставите са куповином"
+    },
+    "meta": {
+      "tags": "Означено са „ {{ tags }} “",
+      "page": "страница {{ page }}"
+    },
+    "pagination": {
+      "page": "Страница {{ number }}",
+      "previous": "Претходни",
+      "next": "Следеће",
+      "show_more": "Покажи више"
+    },
+    "password_page": {
+      "login_form_heading": "Уђите у продавницу користећи лозинку:",
+      "login_password_button": "Унесите користећи лозинку",
+      "login_form_password": "Лозинка",
+      "login_form_error": "Погрешна лозинка!",
+      "login_form_submit": "Ентер",
+      "admin_link_html": "Да ли сте власник продавнице? <a href=\"/admin\" class=\"link\">Пријавите се овде</a>",
+      "powered_by_shopify_html": "Ову продавницу ће покретати {{ shopify }}"
+    },
+    "breadcrumbs": {
+      "home": "Хоме",
+      "home_link_title": "Назад на насловну страну",
+      "collections": "Збирке"
+    },
+    "social": {
+      "share_on_facebook": "Фацебоок",
+      "share_on_twitter": "Твиттер",
+      "share_on_pinterest": "Пинтерест",
+      "share_on_telegram": "Телеграм",
+      "share_on_whatsapp": "ВхатсАпп",
+      "share_by_email": "Е-маил",
+      "alt_text": {
+        "share_on_facebook": "Поделите на Фејсбуку",
+        "share_on_twitter": "Твеет на Твитеру",
+        "share_on_pinterest": "Пин он Пинтерест",
+        "share_on_telegram": "Делите на Телеграму",
+        "share_on_whatsapp": "Делите на ВхатсАпп-у",
+        "share_by_email": "Подели путем е-поште"
+      },
+      "social_platform": "{{ name }} на {{ platform }}",
+      "links": {
+        "twitter": "Твиттер",
+        "facebook": "Фацебоок",
+        "pinterest": "Пинтерест",
+        "instagram": "Инстаграм",
+        "tumblr": "Тумблр",
+        "linkedin": "ЛинкедИн",
+        "snapchat": "Снапцхат",
+        "youtube": "ИоуТубе",
+        "vimeo": "Вимео",
+        "tiktok": "ТикТок"
+      }
+    },
+    "newsletter": {
+      "label": "Унесите своју е-пошту",
+      "success": "Хвала на претплати",
+      "submit": "Претплатите се"
+    },
+    "search": {
+      "title": "Тражи",
+      "title_results": "Резултати претраге",
+      "placeholder": "Тражи...",
+      "clear": "Јасно",
+      "suggestions": "Предлози",
+      "products": "Производи",
+      "collections": "Збирке",
+      "articles": "Чланци",
+      "pages": "Пагес",
+      "view_more": "Погледајте све резултате",
+      "no_results": "Нису пронађени резултати за „ {{ terms }} ”",
+      "user_different_terms": "Проверите правопис или употребите другу реч или фразу.",
+      "results_with_count": {
+        "one": "{{ count }} резултат",
+        "other": "{{ count }} резултата"
+      },
+      "results_with_count_and_term": {
+        "one": "{{ count }} резултат је пронађен за „ {{ terms }} ”",
+        "other": "Пронађено је {{ count }} резултата за „ {{ terms }} ”"
+      }
+    },
+    "cart": {
+      "title": "Царт",
+      "view_cart": "Прикажи корпу",
+      "cart_count": {
+        "one": "{{ count }} ставка",
+        "other": "{{ count }} ставки"
+      },
+      "free_shipping": {
+        "remaining_html": "Потрошите још {{ remaining_amount }} да бисте добили бесплатну испоруку!",
+        "congratulations_html": "Испуњавате услове за бесплатну испоруку."
+      },
+      "note": {
+        "title": "Напомена о наруџбини",
+        "caption": "Наручите посебна упутства",
+        "placeholder": "Напомена о наруџбини",
+        "button": "Примени"
+      },
+      "shipping_calculator": {
+        "multiple_results": "Постоји више цена испоруке за вашу адресу:",
+        "title": "Достава",
+        "caption": "Процените цене испоруке",
+        "tooltip": "Достава и порези ће се обрачунати при одласку",
+        "button": "Израчунај",
+        "error": "Дошло је до једне или више грешака при преузимању цена испоруке:",
+        "not_found": "Жао нам је, не шаљемо на вашу адресу.",
+        "one_result": "Постоји једна цена испоруке за вашу адресу:"
+      },
+      "discount": {
+        "title": "Попуст",
+        "caption": "Попуст", 
+        "placeholder": "Код за попуст",
+        "button": "Примени",
+        "error": "Kod za popust ne može biti primenjen na vašu korpu",
+        "shipping_error": "Popusti za dostavu se prikazuju pri plaćanju nakon dodavanja adrese",
+        "applied": "Primenjen kod za popust: {{ code }}",
+        "remove": "Ukloni popust {{ code }}"
+      },
+      "recently_viewed": {
+        "empty": "Ваш недавно прегледан је празан."
+      }
+    },
+    "drawers": {
+      "navigation": "Навигација по сајту"
+    },
+    "date": {
+      "d": "Д",
+      "day": "Дан",
+      "days": "Дани",
+      "h": "С",
+      "hour": "Сат",
+      "hours": "Сати",
+      "m": "М",
+      "minute": "Мин",
+      "minutes": "Минс",
+      "s": "С",
+      "second": "Сец",
+      "seconds": "Сецс"
+    }
+  },
+  "sections": {
+    "announcements": {
+      "carousel": "Карусел",
+      "announcement": "Најава",
+      "announcement_bar": "Трака за најаве"
+    },
+    "blog_posts": {
+      "view_all": "Погледај све"
+    },
+    "featured_collection": {
+      "view_all": "Погледај све",
+      "view_all_label": "Погледајте све производе у колекцији {{ collection_name }}"
+    },
+    "collection_list": {
+      "view_all": "Погледај све"
+    },
+    "map": {
+      "address_error": "Грешка при тражењу те адресе",
+      "address_no_results": "Нема резултата за ту адресу",
+      "address_query_limit_html": "Прекорачили сте ограничење употребе Гоогле АПИ-ја. Размислите о надоградњи на <a href=\"https://developers.google.com/maps/premium/usage-limits\">Премиум план</a> .",
+      "auth_error_html": "Дошло је до проблема при аутентификацији налога на Гоогле мапама. Направите и омогућите дозволе за <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">ЈаваСцрипт АПИ</a> и <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">АПИ за геокодирање</a> за своју апликацију.",
+      "view_details": "Погледајте детаље",
+      "back": "Назад"
+    },
+    "slideshow": {
+      "carousel": "Карусел",
+      "play_slideshow": "Пусти пројекцију слајдова",
+      "pause_slideshow": "Паузирајте пројекцију слајдова"
+    },
+    "product_bundle": {
+      "total": "Укупно",
+      "remove": "Уклони",
+      "add_to_cart": "Додај у корпу",
+      "discounts_at_checkout": "Попусти ће се примењивати на каси."
+    },
+    "quick_order_list": {
+      "product_total": "Међузбир производа",
+      "view_cart": "Прикажи корпу",
+      "each": "{{ money }} /еа",
+      "product": "Производ",
+      "variant": "Варијанта",
+      "variant_total": "Вариант тотал",
+      "items_added": {
+        "one": "{{ quantity }} ставка је додата",
+        "other": "Додато је {{ quantity }} ставки"
+      },
+      "items_removed": {
+        "one": "{{ quantity }} ставка је уклоњена",
+        "other": "Уклоњених ставки: {{ quantity }}"
+      },
+      "product_variants": "Варијанте производа",
+      "total_items": "Укупно ставки",
+      "remove_all_single_item_confirmation": "Уклонити 1 артикал из корпе?",
+      "remove_all_items_confirmation": "Желите ли да уклоните све ставке {{ quantity }} из корпе?",
+      "remove_all": "Уклоните све",
+      "cancel": "Откажи",
+      "min_error": "Ова ставка има најмање {{ min }}",
+      "max_error": "Ова ставка има највише {{ max }}",
+      "step_error": "Ову ставку можете додати само у корацима од {{ step }}"
+    }
+  },
+  "blogs": {
+    "article": {
+      "written_by_html": "аутор {{ author }}",
+      "all_tags": "Све",
+      "read_more": "Прочитајте више",
+      "filter": "Филтер"
+    },
+    "comments": {
+      "title": "Оставите коментар",
+      "name": "Име",
+      "email": "Емаил",
+      "message": "Порука",
+      "post": "Објавите коментар",
+      "moderated": "Имајте на уму да коментари морају бити одобрени пре него што буду објављени.",
+      "success_moderated": "Ваш коментар је успешно објављен. Ускоро ћемо га објавити пошто наш блог буде модериран.",
+      "success": "Ваш коментар је успешно објављен! Хвала вам!",
+      "with_count": {
+        "one": "{{ count }} коментар",
+        "other": "{{ count }} коментара"
+      }
+    }
+  },
+  "cart": {
+    "general": {
+      "title": "Ваша колица",
+      "remove": "Уклони",
+      "note": "Напомена о наруџбини",
+      "subtotal": "Међузбир",
+      "taxes_and_shipping_policy_at_checkout_html": "Порези и <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">испорука</a> се обрачунавају на каси",
+      "taxes_included_but_shipping_at_checkout": "Порез је укључен и испорука се обрачунава на каси",
+      "taxes_included_and_shipping_policy_html": "Укључен порез. <a href=\"&lt;span%20class='notranslate'&gt;{{%20link%20}}&lt;/span&gt;\">Достава</a> се обрачунава на каси.",
+      "taxes_and_shipping_at_checkout": "Порези су укључени и испорука се обрачунава на каси.",
+      "update": "Ажурирајте корпу",
+      "checkout": "Цхецк оут",
+      "we_accept": "Прихватамо",
+      "empty": "Ваша корпа су тренутно празна.",
+      "continue_shopping": "Наставите са куповином",
+      "cart_error": "Дошло је до грешке при ажурирању ваше корпе. Покушајте поново.",
+      "cart_quantity_error_html": "Можете додати само {{ quantity }} овог артикла у своју корпу."
+    },
+    "headings": {
+      "product": "Производ",
+      "total": "Укупно",
+      "quantity": "Количина",
+      "price": "Цена"
+    },
+    "gift_wrapping": {
+      "message_html": "За {{ price }} , умотајте производе овим редоследом.",
+      "note_placeholder": "Порука о поклону (бесплатно и опционо)"
+    }
+  },
+  "collections": {
+    "general": {
+      "empty": "Жао нам је, нема производа у овој колекцији.",
+      "continue_shopping": "Наставите са куповином",
+      "no_results": "Ниједан производ не одговара тим филтерима.",
+      "use_fewer_filters": "Користите мање филтера или",
+      "product_count": {
+        "one": "{{ product_count }} од {{ count }} производа",
+        "other": "{{ product_count }} од {{ count }} производа"
+      },
+      "product_count_simple": {
+        "one": "{{ count }} производ",
+        "other": "{{ count }} производа"
+      }
+    },
+    "sorting": {
+      "sort_button": "Сортирај по",
+      "sort_by_label": "Сортирај по:"
+    },
+    "filtering": {
+      "filter_and_operator_subtitle": "Ускладите све",
+      "filter_show_button": "Прикажи филтере",
+      "filter_hide_button": "Сакриј филтере",
+      "filter_by_label": "Филтери",
+      "filter_and_sort": "Филтрирајте и сортирајте",
+      "to": "да",
+      "from_price": "Од цене",
+      "to_price": "За цену",
+      "in_stock_only": "Само на лагеру",
+      "clear": "Уклони филтер \" {{ name }} \"",
+      "clear_all": "Обриши све",
+      "apply": "Примени"
+    },
+    "subcollections": {
+      "all_products": "Сва {{ collection }}"
+    }
+  },
+  "localization": {
+    "country_label": "Држава/регија",
+    "language_label": "Језик",
+    "update_language": "Ажурирајте језик",
+    "update_country": "Ажурирајте земљу/регион"
+  },
+  "contact": {
+    "form": {
+      "name": "Име",
+      "email": "Емаил",
+      "phone": "Број телефона",
+      "message": "Порука",
+      "send": "Пошаљи поруку",
+      "post_success": "Хвала што сте нас контактирали. Јавићемо вам се што је пре могуће."
+    }
+  },
+  "customer": {
+    "account": {
+      "title": "Мој налог",
+      "log_out": "Одјавите се",
+      "details": "Детаљи налога",
+      "view_addresses": "Погледајте адресе",
+      "return": "Вратите се на рачун"
+    },
+    "activate_account": {
+      "title": "Активирајте налог",
+      "subtext": "Креирајте своју лозинку да бисте активирали свој налог.",
+      "password": "Лозинка",
+      "password_confirm": "Потврдите лозинку",
+      "submit": "Активирајте налог",
+      "cancel": "Одбијте позивницу"
+    },
+    "addresses": {
+      "set_default": "Постави као подразумевану адресу",
+      "add": "Додајте адресу",
+      "update": "Ажурирајте адресу",
+      "cancel": "Откажи",
+      "edit": "Уреди",
+      "delete": "Избриши",
+      "delete_confirm": "Да ли сте сигурни да желите да избришете ову адресу?",
+      "title": "Аддрессес",
+      "default": "Подразумевано",
+      "add_new": "Додајте нову адресу",
+      "edit_address": "Уреди адресу",
+      "first_name": "Име",
+      "last_name": "Презиме",
+      "company": "Компанија",
+      "address1": "Адреса 1",
+      "address2": "Адреса 2",
+      "city": "Цити",
+      "country": "Држава/регија",
+      "province": "Провинција",
+      "zip": "Поштански број",
+      "phone": "Телефон"
+    },
+    "login": {
+      "title": "Логин",
+      "email": "Емаил",
+      "password": "Лозинка",
+      "forgot_password": "Заборавили сте лозинку?",
+      "submit": "Пријавите се",
+      "create_account": "Креирајте налог",
+      "return": "Вратите се у продавницу",
+      "guest_title": "Наставите као гост",
+      "guest_continue": "Настави",
+      "alternate_provider_separator": "или"
+    },
+    "orders": {
+      "title": "Историја поруџбина",
+      "order_number": "Ред",
+      "order_number_link": "Број поруџбине {{ number }}",
+      "date": "Датум",
+      "payment_status": "Статус плаћања",
+      "fulfillment_status": "Статус испуњености",
+      "total": "Укупно",
+      "none": "Још нисте наручили."
+    },
+    "order": {
+      "title": "Наручите {{ name }}",
+      "date_html": "Постављено {{ date }}",
+      "cancelled_html": "Поруџбина је отказана {{ date }}",
+      "cancelled_reason": "Разлог: {{ reason }}",
+      "billing_address": "Адреса за обрачун",
+      "payment_status": "Статус плаћања",
+      "shipping_address": "Адреса за испоруку",
+      "fulfillment_status": "Статус испуњења",
+      "discounts": "Попусти",
+      "discount": "Попуст",
+      "shipping": "Достава",
+      "tax": "Порез",
+      "product": "Производ",
+      "sku": "СКУ",
+      "price": "Цена",
+      "quantity": "Количина",
+      "total": "Укупно",
+      "total_refunded": "Рефундирано",
+      "fulfilled_at_html": "Испуњено {{ date }} .",
+      "track_shipment": "Пратите пошиљку",
+      "tracking_url": "Линк за праћење",
+      "tracking_company": "Царриер",
+      "tracking_number": "Број за праћење",
+      "subtotal": "Међузбир",
+      "total_duties": "Дужности"
+    },
+    "recover_password": {
+      "title": "Ресетујте лозинку",
+      "email": "Емаил",
+      "submit": "Субмит",
+      "cancel": "Откажи",
+      "subtext": "Послаћемо вам е-пошту да ресетујете лозинку.",
+      "success": "Послали смо вам е-поруку са везом за ажурирање лозинке."
+    },
+    "reset_password": {
+      "title": "Ресетујте лозинку",
+      "subtext": "Унесите нову лозинку",
+      "password": "Лозинка",
+      "password_confirm": "Потврдите лозинку",
+      "submit": "Ресетујте лозинку"
+    },
+    "register": {
+      "title": "Креирајте налог",
+      "first_name": "Име",
+      "last_name": "Презиме",
+      "email": "Емаил",
+      "password": "Лозинка",
+      "accepts_marketing": "Региструјте се на наш билтен",
+      "submit": "Креирај",
+      "sign_in": "Пријавите се",
+      "return": "Вратите се у продавницу"
+    }
+  },
+  "onboarding": {
+    "product_title": "Пример производа",
+    "product_description": "Ова област се користи за описивање детаља о вашем производу. Реците купцима о изгледу, осећају и стилу вашег производа. Додајте детаље о боји, коришћеним материјалима, величини и месту израде.",
+    "collection_title": "Пример колекције",
+    "no_content": "Овај одељак тренутно не садржи никакав садржај. Додајте садржај у овај одељак помоћу бочне траке."
+  },
+  "products": {
+    "general": {
+      "color_swatch_trigger": "Боја",
+      "size_trigger": "Величина",
+      "size_chart": "Табела величина",
+      "save_html": "Уштедите {{ saved_amount }}",
+      "sale": "Сале",
+      "show_more": "Покажи више"
+    },
+    "product": {
+      "product_variants": "Варијанте производа",
+      "sold_out": "Распродано",
+      "unavailable": "Недоступно",
+      "add_to_cart": "Додај у корпу",
+      "choose_options": "Изаберите опције",
+      "choose_product_options": "Одаберите опције за {{ product_name }}",
+      "view_product": "Погледајте производ",
+      "pre_order": "Пре-ордер",
+      "add_to_bundle": "Додај у пакет",
+      "vendor": "Вендор",
+      "include_taxes": "Укључен порез.",
+      "shipping_policy_html": "<a href=\"&lt;span%20class=\" notranslate>{{ линк }} '&gt;Поштарина</a> се обрачунава при плаћању.",
+      "will_not_ship_until": "Спремно за испоруку {{ date }}",
+      "will_be_in_stock_after": "Поново на залихама {{ date }}",
+      "waiting_for_stock": "Инвентар на путу",
+      "xr_button": "Погледајте у свом простору",
+      "xr_button_label": "Прегледајте у свом простору, учитавате ставку у прозору проширене стварности",
+      "read_more": "Погледајте све детаље",
+      "quick_add": "Додај",
+      "quick_view": "Виев",
+      "shop_the_look": "Купујте изглед"
+    },
+    "price": {
+      "regular_price": "Редовна цена",
+      "sale_price": "Продајна цена",
+      "unit_price": "Јединична цена",
+      "from_price_html": "<small>Од</small> {{ price }}"
+    },
+    "media": {
+      "open_media": "Отворите медиј {{ index }} у модалном",
+      "play_model": "Пусти 3Д прегледач",
+      "play_video": "Пусти видео",
+      "gallery_viewer": "Галлери Виевер"
+    },
+    "quantity": {
+      "label": "Количина",
+      "input_label": "Количина за {{ product }}",
+      "increase": "Повећајте количину за {{ product }}",
+      "decrease": "Смањите количину за {{ product }}",
+      "minimum_of": "Минимум од {{ quantity }}",
+      "maximum_of": "Максимум од {{ quantity }}",
+      "multiples_of": "Повећања од {{ quantity }}",
+      "min_of": "Мин {{ quantity }}",
+      "max_of": "Макс. {{ quantity }}",
+      "in_cart_html": "{{ quantity }} у корпи",
+      "note": "Погледајте правила о количини"
+    },
+    "volume_pricing": {
+      "title": "Волуме Прицинг",
+      "note": "Доступне цене за обим",
+      "minimum": "{{ quantity }} +",
+      "price_at_each": "по {{ price }} /еа",
+      "price_range": "{{ minimum }} - {{ maximum }}"
+    },
+    "inventory": {
+      "in_stock": "На залихама, спреман за испоруку",
+      "low_stock": "Лов стоцк",
+      "out_of_stock": "Оут оф стоцк",
+      "out_of_stock_continue_selling": "На залихама",
+      "will_not_ship_until": "Спремно за испоруку {{ date }}",
+      "will_be_in_stock_after": "Поново на залихама {{ date }}",
+      "waiting_for_stock": "Инвентар на путу",
+      "low_stock_with_count": {
+        "one": "Пожурите, још само {{ count }} артикала на лагеру!",
+        "other": "Пожурите, још само {{ count }} артикала на лагеру!"
+      },
+      "in_stock_with_count": "{{ count }} на лагеру"
+    },
+    "pickup_availability": {
+      "title": "Доступност преузимања",
+      "view_store_info": "Погледајте информације о продавници",
+      "check_other_stores": "Проверите доступност у другим продавницама",
+      "pick_up_available": "Доступно за преузимање",
+      "pick_up_available_at_html": "Преузимање је доступно на <span class=\"color-foreground\">{{ location_name }}</span>",
+      "pick_up_unavailable": "Преузимање тренутно није доступно",
+      "pick_up_unavailable_at_html": "Преузимање тренутно није доступно на <span class=\"color-foreground\">{{ location_name }}</span>",
+      "unavailable": "Није могуће учитати доступност преузимања",
+      "refresh": "Освежи"
+    },
+    "back_in_stock": {
+      "label": "Обавести ме када буде доступно",
+      "form": {
+        "message": "Упозорење о повратним залихама",
+        "send": "Обавести ме",
+        "post_success": "Ваш емаил је примљен.",
+        "name": "Име",
+        "email": "Емаил",
+        "phone": "Број телефона"
+      }
+    }
+  },
+  "gift_cards": {
+    "issued": {
+      "title_html": "Ево ваше поклон картице {{ value }} за {{ shop }} !",
+      "subtext": "Ево ваше поклон картице!",
+      "disabled": "Онемогућено",
+      "expired": "Истекао",
+      "active": "Истиче {{ expiry }}",
+      "redeem": "Користите овај код при плаћању да бисте искористили поклон картицу.",
+      "shop_link": "Посетите онлајн продавницу",
+      "copy_code_success": "Код је успешно копиран",
+      "copy": "Копирај",
+      "print": "Принт",
+      "scan": "или скенирајте овај КР код",
+      "add_to_apple_wallet": "Додајте у Аппле новчаник",
+      "qr_image_alt": "КР код — скенирајте да бисте искористили поклон картицу"
+    }
+  },
+  "recipient": {
+    "form": {
+      "checkbox": "Желим да пошаљем ово као поклон",
+      "expanded": "Образац примаоца поклон картице је проширен",
+      "collapsed": "Образац примаоца поклон картице је скупљен",
+      "email_label": "Е-пошта примаоца",
+      "email_label_optional_for_no_js_behavior": "Имејл примаоца (опционо)",
+      "email": "Емаил",
+      "name_label": "Име примаоца (опционо)",
+      "name": "Име",
+      "message_label": "Порука (опционо)",
+      "message": "Порука",
+      "max_characters": "{{ max_chars }} знакова макс",
+      "send_on": "ГГГГ-ММ-ДД",
+      "send_on_label": "Пошаљите (опционо)"
+    }
+  },
+  "date_formats": {
+    "month_day_year": "%б %д, %И"
+  }
+}

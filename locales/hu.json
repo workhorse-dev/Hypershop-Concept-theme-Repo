@@ -123,7 +123,8 @@
       "note": {
         "title": "Rendelési megjegyzés",
         "caption": "Rendeljen speciális utasításokat",
-        "button": "Alkalmazni"
+        "placeholder": "Rendelési megjegyzés",
+        "button": "Alkalmaz"
       },
       "shipping_calculator": {
         "title": "Szállítás",
@@ -134,6 +135,16 @@
         "not_found": "Sajnáljuk, nem szállítunk az Ön címére.",
         "one_result": "Az Ön címére egy szállítási díj vonatkozik:",
         "multiple_results": "Az Ön címére többféle szállítási díj vonatkozik:"
+      },
+      "discount": {
+        "title": "Kedvezmény",
+        "caption": "Kedvezmény",
+        "placeholder": "Kedvezménykód",
+        "button": "Alkalmaz",
+        "error": "A kedvezménykód nem érvényesíthető a kosaradon",
+        "shipping_error": "A szállítási kedvezmények a fizetéskor jelennek meg a cím megadását követően",
+        "applied": "Beváltott kedvezménykód: {{ code }}",
+        "remove": "Kedvezménykód ({{ code }}) eltávolítása"
       },
       "recently_viewed": {
         "empty": "A legutóbb megtekintett üres."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Forgótár",
+      "announcement": "Közlemény",
+      "announcement_bar": "Közleménysáv"
+    },
     "blog_posts": {
       "view_all": "Az összes megtekintése"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Hiba történt a Google Térkép-fiók hitelesítésekor. Hozza létre és engedélyezze az alkalmazás <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> és <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> engedélyeit."
     },
     "slideshow": {
+      "carousel": "Forgótár",
       "play_slideshow": "Diavetítés lejátszása",
       "pause_slideshow": "Diavetítés szüneteltetése"
     },
@@ -294,7 +311,7 @@
       "in_stock_only": "Csak raktáron",
       "clear": "\" {{ name }} \" szűrő eltávolítása",
       "clear_all": "Minden törlése",
-      "apply": "Alkalmazni"
+      "apply": "Alkalmaz"
     },
     "subcollections": {
       "all_products": "Az összes {{ collection }}"
@@ -386,6 +403,7 @@
       "payment_status": "Fizetési állapot",
       "shipping_address": "Szállítási cím",
       "fulfillment_status": "Teljesítés állapota",
+      "discounts": "Kedvezmények",
       "discount": "Kedvezmény",
       "shipping": "Szállítás",
       "tax": "Adó",

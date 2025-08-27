@@ -123,6 +123,7 @@
       "note": {
         "title": "Notiz",
         "caption": "Sonderanweisung bestellen",
+        "placeholder": "Notiz",
         "button": "Anwenden"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Wir liefern leider nicht an Ihre Adresse.",
         "one_result": "Es gibt einen Versandtarif für Ihre Adresse:",
         "multiple_results": "Es gibt mehrere Versandtarife für Ihre Adresse:"
+      },
+      "discount": {
+        "title": "Rabatt",
+        "caption": "Rabatt",
+        "placeholder": "Rabattcode",
+        "button": "Anwenden",
+        "error": "Rabattcode kann nicht auf den Warenkorb angewendet werden",
+        "shipping_error": "Versandrabatte werden beim Checkout angezeigt, nachdem die Adresse hinzugefügt wurde",
+        "applied": "Angewendeter Rabattcode: {{ code }}",
+        "remove": "Rabatt {{ code }} entfernen"
       },
       "recently_viewed": {
         "empty": "Ihre zuletzt angesehenen Produkte sind leer."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karussell",
+      "announcement": "Ankündigung",
+      "announcement_bar": "Ankündigungsleiste"
+    },
     "blog_posts": {
       "view_all": "Alle anzeigen"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Es gab ein Problem bei Google Maps Konto zu authentifizieren. Erstellen und die <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript- API</a> und  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> -Berechtigungen der App aktivieren."
     },
     "slideshow": {
+      "carousel": "Karussell",
       "play_slideshow": "Diashow abspielen",
       "pause_slideshow": "Pause Diashow"
     },
@@ -203,7 +220,7 @@
       },
       "product_variants": "Produktvarianten",
       "total_items": "Artikel gesamt: {{ count }}",
-      "remove_all_items_confirmation": "Alle {{ quantity }} Artikel aus deinem Warenkorb entfernen?",
+      "remove_all_items_confirmation": "Alle {{ quantity }} Artikel aus Ihrem Warenkorb entfernen?",
       "remove_all": "Alle entfernen",
       "cancel": "Abbrechen",
       "remove_all_single_item_confirmation": "1 Artikel aus dem Warenkorb entfernen?",
@@ -236,12 +253,12 @@
   },
   "cart": {
     "general": {
-      "title": "Dein Warenkorb",
+      "title": "Ihr Warenkorb",
       "remove": "Entfernen",
       "note": "Spezielle Bestellanweisungen",
       "subtotal": "Zwischensumme",
-      "cart_error": "Beim Aktualisieren deines Warenkorbs ist ein Fehler aufgetreten. Bitte versuche es erneut.",
-      "cart_quantity_error_html": "Du kannst deinem Warenkorb nur {{ quantity }} Stück dieses Artikels hinzufügen.",
+      "cart_error": "Beim Aktualisieren Ihres Warenkorbs ist ein Fehler aufgetreten. Bitte versuchen Sie es erneut.",
+      "cart_quantity_error_html": "Sie können Ihrem Warenkorb nur {{ quantity }} Stück dieses Artikels hinzufügen.",
       "taxes_and_shipping_policy_at_checkout_html": "Steuern und <a href=\"{{ link }}\">Versand</a> werden beim Checkout berechnet",
       "taxes_included_but_shipping_at_checkout": "Inklusive Steuern, Versand wird beim Checkout berechnet",
       "taxes_included_and_shipping_policy_html": "Inklusive Steuern. <a href=\"{{ link }}\">Versand </a> wird beim Checkout berechnet",
@@ -249,7 +266,7 @@
       "update": "Aktualisieren",
       "checkout": "Auschecken",
       "we_accept": "Wir akzeptieren",
-      "empty": "Dein Warenkorb ist leer.",
+      "empty": "Ihr Warenkorb ist leer.",
       "continue_shopping": "Weiter shoppen"
     },
     "headings": {
@@ -386,6 +403,7 @@
       "payment_status": "Zahlungsstatus",
       "shipping_address": "Lieferadresse",
       "fulfillment_status": "Fulfillmentstatus",
+      "discounts": "Rabatte",
       "discount": "Rabatt",
       "shipping": "Versand",
       "tax": "Steuer",

@@ -19,7 +19,7 @@
         {%- when 'text' -%}
           {%- if block.settings.text != blank -%}
             <div class="{% if section.blocks.size > 1 %}col-span-6{% if forloop.first %} text-left{% else %} text-right{% endif %}{% else %}col-span-full text-center{% endif %} md:text-{{ block.settings.text_alignment }}" {{ block.shopify_attributes }}>
-              <div class="rte leading-tight {{ block.settings.text_font }}">
+              <div class="rte leading-tight {{ block.settings.text_font }}{% if block.settings.text_font == 'subtitle' %} uppercase tracking-widest{% endif %}">
                 {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
               </div>
             </div>
@@ -37,7 +37,7 @@
                 -%}
                 {%- capture expiration_date -%}{{ block.settings.year }}-{{ block.settings.month }}-{{ block.settings.day }} {{ block.settings.hour }}:{{ block.settings.minute }}:00{%- endcapture -%}
                 <countdown-timer
-                  class="countdown__timer leading-tight {{ block.settings.text_font }} inline-flex gap-3 text-center"
+                  class="countdown__timer leading-tight {{ block.settings.text_font }}{% if block.settings.text_font == 'subtitle' %} uppercase tracking-widest{% endif %} inline-flex gap-3 text-center"
                   data-expires="{{ expiration_date | date: '%FT%T%:z' | escape }}"
                   data-compact="{% if block.settings.compact %}true{% else %}mobile{% endif %}"
                 >
@@ -171,6 +171,10 @@
             {
               "value": "heading",
               "label": "t:sections.global.settings.text_font.options__2.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.global.settings.text_font.options__3.label"
             }
           ],
           "default": "body",
@@ -224,6 +228,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -854,6 +859,10 @@
             {
               "value": "heading",
               "label": "t:sections.global.settings.text_font.options__2.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.global.settings.text_font.options__3.label"
             }
           ],
           "default": "heading",
@@ -881,7 +890,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.countdown-timer.presets.name",
+      "name": "t:sections.countdown-timer.name",
       "blocks": [
         {
           "type": "text"

@@ -1,3 +1,20 @@
+{%- doc -%}
+  Renders a complete featured product section with placeholder content for theme onboarding and demos.
+
+  Displays a fully-functional product page layout using placeholder data, allowing merchants to preview theme design and customize settings before adding real products. Includes gallery, product info blocks, and all standard product page elements with sample content.
+
+  @param {object} section - Section object containing settings and blocks
+  @param {string} section_id - Unique section identifier
+  @param {boolean} [mobile_thumbnail] - Show gallery thumbnails on mobile
+
+  @example
+  {% render 'product-placeholder',
+     section: section,
+     section_id: section.id,
+     mobile_thumbnail: true
+  %}
+{%- enddoc -%}
+
 {%- liquid
   assign gallery_layout = section.settings.gallery_layout
   assign thumbnail_position = section.settings.thumbnail_position
@@ -17,7 +34,7 @@
     data-immediate
   >
     {%- if gallery_layout == 'scroll' -%}
-      <sticky-element class="product__preview relative overflow-hidden w-full h-full hidden xl:block sticky top-0">
+      <sticky-element class="product__preview relative overflow-hidden w-full h-full hidden xl:block lg:sticky top-0">
         <div class="product__media media flex w-full relative overflow-hidden" data-media-type="image" data-media-id="1">
           {{- 'product-1' | placeholder_svg_tag: 'placeholder' -}}
   
@@ -31,7 +48,7 @@
     <div class="product__media-container flex flex-col gap-4 
       {%- if gallery_layout == 'thumbnail' %} items-start{% if thumbnail_position == 'beside' %} xl:flex-row{% endif %}{% endif -%}"
     >
-      <slider-element id="SliderGallery-{{ section_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media" tabindex="-1">
+      <slider-element id="SliderGallery-{{ section_id }}" class="slider slider--desktop slider--tablet block w-full h-full" selector=".product__media" tabindex="0">
         <div
           class="product__media-list flex gap-1
           {%- if gallery_layout == 'columns' %} lg:grid lg:gap-4 xl:gap-5 grid-cols-2{% endif -%}
@@ -46,7 +63,7 @@
                 capture placeholder
                   cycle 'product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6'
                 endcapture
-                echo placeholder | placeholder_svg_tag: 'placeholder'
+                echo placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent'
               -%}
             </div>            
           {%- endfor -%}
@@ -54,27 +71,26 @@
       </slider-element>
 
       <scroll-shadow class="product__thumbnails{% unless mobile_thumbnail %} with-dots{% endunless %}{% if gallery_layout == 'scroll' or gallery_layout == 'columns' %} lg:hidden{% endif %} product__thumbnails--{{ thumbnail_position }} grid items-center relative w-full">
-        <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-4 w-full" aria-controls="SliderGallery-{{ section_id }}" tabindex="-1">
+        <media-dots class="product__thumbnails-list scroll-area grid items-end justify-start gap-4 w-full" aria-controls="SliderGallery-{{ section_id }}">
           {%- for i in (1..6) -%}
             <button type="button"
               class="product__thumbnail media media--square relative overflow-hidden"
-              data-media-id="{{ media.id }}"
+              data-media-id="{{ forloop.index }}"
               aria-label="{{ 'general.accessibility.go_to_item' | t: index: forloop.index | escape }}"
               aria-current="{% if forloop.first %}true{% else %}false{% endif %}"
-              tabindex="-1"
             >
               {%- liquid
                 capture placeholder
                   cycle 'product-1', 'product-2', 'product-3', 'product-4', 'product-5', 'product-6'
                 endcapture
-                echo placeholder | placeholder_svg_tag: 'placeholder'
+                echo placeholder | placeholder_svg_tag: 'placeholder placeholder--transparent'
               -%}
             </button>
           {%- endfor -%}
         </media-dots>
         <template>
           <slot></slot>
-          <s dir="{% render 'direction' %}" style="--t: 0; --b: 0; --l: 0; --r: 0;">
+          <s dir="{% render 'direction' %}" style="--t: 0;--b: 0;--l: 0;--r: 0;">
             <span class="t">{%- render 'icon', icon: 'chevron-up' -%}</span>
             <span class="b">{%- render 'icon', icon: 'chevron-down' -%}</span>
             <span class="l">{%- render 'icon', icon: 'chevron-left' -%}</span>
@@ -99,13 +115,13 @@
     </div>
 
     {%- if spinning_block != blank -%}
-      <spinning-text class="product__spinning text-xs md:text-base lg:text-lg uppercase flex items-center justify-center absolute top-0 z-10" data-string="{{ spinning_block.settings.text | escape }}">
+      <spinning-text class="product__spinning text-xs md:text-base lg:text-lg uppercase flex items-center justify-center absolute top-0 z-10 pointer-events-none" data-string="{{ spinning_block.settings.text | escape }}" style="--char-count: {{ spinning_block.settings.text.size | plus: 1 }};">
         {%- render 'icon', icon: 'thumbs-up', class: 'absolute' -%}
       </spinning-text>
     {%- endif -%}
   </media-gallery>
   
-  <animate-element class="product__info block{% if section.settings.enable_sticky_info %} sticky{% endif %} w-full" data-animate="fade-up" data-immediate>
+  <animate-element data-animate="fade-up" data-immediate class="product__info{% if section.settings.enable_sticky_info %} lg:sticky{% endif %} block w-full">
     {%- for block in section.blocks -%}
       {%- case block.type -%}
         {%- when '@app' -%}
@@ -125,16 +141,65 @@
 
         {%- when 'text' -%}
           {%- if block.settings.text != blank -%}
-            <p class="product__text rte {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+            {%- if block.settings.text != product.vendor -%}
               {%- liquid
-                render 'icon-accordion', icon: block.settings.icon
-                echo block.settings.text
+                assign prev_index = forloop.index0 | minus: 1
+                assign prev_block = section.blocks[prev_index]
+                assign next_index = forloop.index0 | plus: 1
+                assign next_block = section.blocks[next_index]
+
+                if prev_block.type == 'sticky_buy_button'
+                  assign prev_index = prev_index | minus: 1
+                  assign prev_block = section.blocks[prev_index]
+                endif
+
+                if next_block.type == 'sticky_buy_button'
+                  assign next_index = next_index | plus: 1
+                  assign next_block = section.blocks[next_index]
+                endif
+
+                if prev_block.type != 'text'
+                  assign block_index = 1
+                else
+                  assign block_index = block_index | plus: 1
+                endif
+
+                assign modulo = block_index | modulo: 2
               -%}
-            </p>
-          {%- else -%}
-            <p class="product__vendor {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
-              {{- 'products.product.vendor' | t -}}
-            </p>
+              <div class="product__text{% if modulo == 0 %} even{% endif %}{% if prev_block.type != 'text' %} first{% endif %}{% if next_block.type != 'text' %} last{% endif %}" {{ block.shopify_attributes }}>
+                <div class="product__text-inner flex items-center gap-2d5">
+                  {%- if block.settings.icon_image != blank -%}
+                    {%- liquid
+                      if block.settings.iwidth == 'fit'
+                        assign icon_width = block.settings.icon_image.width
+                      else
+                        assign icon_width = block.settings.icon_width
+                      endif
+                    -%}
+                    <figure class="media media--transparent relative inline-block">
+                      {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+                      {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                      {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+                      {%- assign image_alt = image_alt | default: block.settings.text | escape -%}
+                      {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
+                    </figure>
+                  {%- elsif block.settings.icon != 'none' -%}
+                    {%- liquid
+                      if block.settings.iwidth == 'fit'
+                        render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block stroke-1'
+                      else
+                        render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block stroke-1', width: block.settings.icon_width
+                      endif
+                    -%}
+                  {%- endif -%}
+                  <p class="rte {{ block.settings.text_size }} leading-tight">{{ block.settings.text }}</p>
+                </div>
+              </div>
+            {%- else -%}
+              <p class="product__vendor {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
+                {{- product.vendor | link_to_vendor : class: 'reversed-link' -}}
+              </p>
+            {%- endif -%}
           {%- endif -%}
 
         {%- when 'description' -%}
@@ -146,7 +211,7 @@
           {%- assign price_block = section.blocks | where: "type", "price" | first -%}
           <div class="product__title grid gap-3{% if price_block == blank and block.settings.show_price %} with-price{% endif %}" {{ block.shopify_attributes }}>
             <h1 class="heading leading-none {{ block.settings.title_size }} mobile:{{ block.settings.title_size_mobile }} col-span-full">
-              <split-words class="split-words block" data-animate="fade-up">{{ 'onboarding.product_title' | t }}</split-words>
+              <split-words class="split-words js-invisible block" data-animate="fade-up">{{ 'onboarding.product_title' | t }}</split-words>
             </h1>
 
             {%- if price_block == blank and block.settings.show_price -%}
@@ -302,12 +367,15 @@
             {%- if block.settings.show_help_desk -%}
               <div class="flex items-center gap-2">
                 {%- render 'icon', icon: 'question' -%}
-                <a class="link text-sm leading-tight cursor-pointer"
-                  {%- if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% else %} role="link" aria-disabled="true"{% endif -%}
-                  {%- if block.settings.help_type == 'drawer' %} aria-controls="HelpDrawer"{% endif -%}
-                >
-                  {{- block.settings.help_label | escape -}}
-                </a>
+                {%- if block.settings.help_type == 'drawer' -%}
+                  <button type="button" class="link text-sm leading-tight cursor-pointer" aria-controls="HelpDrawer">
+                    {{- block.settings.help_label | escape -}}
+                  </button>
+                {%- else -%}
+                  <a class="link text-sm leading-tight cursor-pointer"{% if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% if block.settings.help_page_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
+                    {{- block.settings.help_label | escape -}}
+                  </a>
+                {%- endif -%}
               </div>
             {%- endif -%}
           </div>
@@ -315,12 +383,15 @@
         {%- when 'help_desk' -%}
           <div class="flex items-center gap-2" {{ block.shopify_attributes }}>
             {%- render 'icon', icon: 'question' -%}
-            <a class="link text-sm leading-tight cursor-pointer"
-              {%- if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% else %} role="link" aria-disabled="true"{% endif -%}
-              {%- if block.settings.help_type == 'drawer' %} aria-controls="HelpDrawer"{% endif -%}
-            >
-              {{- block.settings.help_label | escape -}}
-            </a>
+            {%- if block.settings.help_type == 'drawer' -%}
+              <button type="button" class="link text-sm leading-tight cursor-pointer" aria-controls="HelpDrawer">
+                {{- block.settings.help_label | escape -}}
+              </button>
+            {%- else -%}
+              <a class="link text-sm leading-tight cursor-pointer"{% if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% if block.settings.help_page_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %}>
+                {{- block.settings.help_label | escape -}}
+              </a>
+            {%- endif -%}
           </div>
 
         {%- when 'liquid' -%}
@@ -331,7 +402,7 @@
           {%- endif -%}
 
         {%- when 'collapsible_tab' -%}
-          <details class="product__accordion details" is="accordion-details" {{ block.shopify_attributes }}>
+          <details class="product__accordion details {{ block.settings.style }}" is="accordion-details" {{ block.shopify_attributes }}>
             <summary class="details__summary flex items-center justify-between gap-2 cursor-pointer">
               <div class="flex items-center gap-2d5">
                 {%- render 'icon-accordion', icon: block.settings.icon -%}

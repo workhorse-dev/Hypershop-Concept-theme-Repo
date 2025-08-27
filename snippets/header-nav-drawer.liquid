@@ -1,17 +1,55 @@
+{%- doc -%}
+  Renders mobile drawer navigation with multi-level menus, product showcases, and promotions.
+
+  Supports standard navigation, mega menu tabs, product grids, and promotional content.
+
+  @param {object} section - Section object with navigation settings and menu blocks
+  @param {object} link - Navigation link object containing title and child links
+  @param {object} block - Mega menu block configuration for advanced content
+  @param {number} position - Numeric position for unique element IDs
+  @param {boolean} enable_mega_menu - Enable promotional content and mega features
+  @param {boolean} enable_accordion_menu - Enable accordion menu style
+
+  @example
+  {% render 'header-nav-drawer',
+     section: section,
+     link: link,
+     block: block,
+     position: forloop.index,
+     enable_mega_menu: true,
+     enable_accordion_menu: false
+  %}
+{%- enddoc -%}
+
 {%- liquid
   assign section_rendering_api = false
   if section.index == nil
     assign section_rendering_api = true
   endif
 -%}
-<details is="menu-details">
+{%- liquid
+  capture chevron_icon
+    if enable_accordion_menu
+      render 'icon', icon: 'chevron-down', size: 'lg'
+    else
+      render 'icon', icon: 'chevron-right', size: 'lg'
+    endif
+  endcapture
+-%}
+<details is="{% if enable_accordion_menu %}accordion-details{% else %}menu-details{% endif %}">
   <summary class="drawer__menu-item block cursor-pointer relative" aria-expanded="false">
-    <button type="button" class="heading text-2xl leading-none tracking-tight"{% unless section_rendering_api %} is="api-button" data-id="DrawerSubMenu-{{ section.id }}-{{ position }}" data-section-id="{{ section.id }}"{% endunless %}>
+    <span class="heading text-2xl leading-none tracking-tight">
+      {%- unless section_rendering_api -%}
+        <api-button class="api-only" data-id="DrawerSubMenu-{{ section.id }}-{{ position }}" data-section-id="{{ section.id }}"></api-button>
+      {%- endunless -%}
       {{- link.title | escape -}}
-    </button>
+    </span>
+    {{- chevron_icon -}}
   </summary>
-  <div class="drawer__submenu z-1 absolute top-0 left-0 flex flex-col w-full h-full" data-parent>
-    <button type="button" class="tracking-tight heading text-base shrink-0 flex items-center gap-3 w-full" data-close>{{ link.title | escape }}</button>
+  <div class="drawer__submenu{% unless enable_accordion_menu %} z-1 absolute top-0 left-0{% endunless %} flex flex-col w-full h-full" data-parent>
+    {%- unless enable_accordion_menu -%}
+      <button type="button" class="tracking-tight heading text-base shrink-0 flex items-center gap-3 w-full" data-close>{{ link.title | escape }}</button>
+    {%- endunless -%}
     {%- unless section_rendering_api -%}
       <div id="DrawerSubMenu-{{ section.id }}-{{ position }}" class="drawer__scrollable flex flex-col h-full"></div>
     {%- else -%}
@@ -28,12 +66,17 @@
                   assign products = block.settings[tab_products] | default: block.settings[tab_target_link].object.products
                 -%}
                 {%- if block.settings[tab_target_link].type == 'collection_link' and products.count > 0 -%}
-                  <details is="menu-details">
+                  <details is="{% if enable_accordion_menu %}accordion-details{% else %}menu-details{% endif %}">
                     <summary class="drawer__menu-item block heading text-2xl leading-none tracking-tight cursor-pointer relative" aria-expanded="false">
-                      {{- tab_target_heading | escape -}}
+                      {%- liquid
+                        echo tab_target_heading | escape
+                        echo chevron_icon
+                      -%}
                     </summary>
-                    <div class="drawer__submenu z-1 absolute top-0 left-0 flex flex-col w-full h-full">
-                      <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ block.settings[tab_target] | escape }}</button>
+                    <div class="drawer__submenu{% unless enable_accordion_menu %} z-1 absolute top-0 left-0{% endunless %} flex flex-col w-full h-full">
+                      {%- unless enable_accordion_menu -%}
+                        <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ block.settings[tab_target] | escape }}</button>
+                      {%- endunless -%}
                       <div class="drawer__scrollable flex flex-col h-full">
                         <div class="horizontal-products product-grid">
                           {%- for product in products limit: 4 -%}
@@ -47,7 +90,8 @@
                               show_vendor: block.settings.show_vendor,
                               show_price: block.settings.show_price,
                               show_quick_add: settings.product_quick_add,
-                              show_quick_view: settings.product_quick_view
+                              show_quick_view: settings.product_quick_view,
+                              accessibility: true
                             -%}
                           {%- else -%}
                             {%- for i in (1..4) -%}
@@ -61,21 +105,22 @@
                                 show_vendor: block.settings.show_vendor,
                                 show_price: block.settings.show_price,
                                 show_quick_add: settings.product_quick_add,
-                                show_quick_view: settings.product_quick_view
+                                show_quick_view: settings.product_quick_view,
+                                accessibility: true
                               -%}
                             {%- endfor -%}
                           {%- endfor -%}
                         </div>
                       </div>
                       <div class="drawer__sticky w-full">
-                        <button class="button button--primary icon-with-text w-full" type="submit" is="hover-button">
+                        <a class="button button--primary icon-with-text w-full" href="{{ block.settings[tab_target_link].url }}" is="hover-link">
                           <span class="btn-fill" data-fill></span>
                           <span class="btn-text">
                             {{ 'collections.subcollections.all_products' | t: collection: tab_target_heading }}
                             ({{ block.settings[tab_target_link].object.all_products_count }})
                             {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform' -%}
                           </span>
-                        </button>
+                        </a>
                       </div>
                     </div>
                   </details>
@@ -91,12 +136,17 @@
           {%- for childlink in link.links -%}
             <li class="drawer__menu-group">
               {%- if childlink.links != blank -%}
-                <details is="menu-details">
+                <details is="{% if enable_accordion_menu %}accordion-details{% else %}menu-details{% endif %}">
                   <summary class="drawer__menu-item block heading text-2xl leading-none tracking-tight cursor-pointer relative" aria-expanded="false">
-                    {{- childlink.title | escape -}}
+                    {%- liquid
+                      echo childlink.title | escape
+                      echo chevron_icon
+                    -%}
                   </summary>
-                  <div class="drawer__submenu z-1 absolute top-0 left-0 flex flex-col w-full h-full">
-                    <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ childlink.title | escape }}</button>
+                  <div class="drawer__submenu{% unless enable_accordion_menu %} z-1 absolute top-0 left-0{% endunless %} flex flex-col w-full h-full">
+                    {%- unless enable_accordion_menu -%}
+                      <button type="button" class="tracking-tight heading text-base flex items-center gap-3 w-full" data-close>{{ childlink.title | escape }}</button>
+                    {%- endunless -%}
                     <ul class="drawer__scrollable flex flex-col h-full">
                       {%- for grandchildlink in childlink.links -%}
                         <li class="drawer__menu-group">
@@ -163,7 +213,7 @@
                     <div class="media-card media-card--{{ settings.card_style }}{% if block.settings[promo_overlay_content] %} media-card--overlap{% endif %}">
                       <a class="media-card__link flex flex-col w-full h-full relative"{% if block.settings[promo_link] != blank %} href="{{ block.settings[promo_link] }}"{% else %} role="link" aria-disabled="true"{% endif %}
                         aria-label="{{ block.settings[promo_heading] | default: block.settings[promo_subtext] | escape }}"
-                        style="--color-foreground: {{ block.settings[promo_color_text].rgb }}; --color-overlay: {{ block.settings[promo_color_overlay].rgb }}; --overlay-opacity: {{ block.settings[promo_overlay_opacity] | divided_by: 100.0 }};"
+                        style="--color-foreground: {{ block.settings[promo_color_text].rgb }};--color-overlay: {{ block.settings[promo_color_overlay].rgb }};--overlay-opacity: {{ block.settings[promo_overlay_opacity] | divided_by: 100.0 }};"
                       >
                         {%- if block.settings[promo_tag] != blank -%}
                           <div class="badges z-2 absolute grid gap-3 pointer-events-none">
@@ -194,6 +244,14 @@
                 {%- endif -%}
               {%- endfor -%}
             </ul>
+          </li>
+        {%- endif -%}
+        {%- if block.settings.button_label != blank -%}
+          <li class="mega-menu__footer">
+            <a class="button button--primary icon-with-text w-full"{% if block.settings.button_link != blank %} href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link">
+              <span class="btn-fill" data-fill></span>
+              <span class="btn-text">{{ block.settings.button_label | escape }}</span>
+            </a>
           </li>
         {%- endif -%}
       </ul>

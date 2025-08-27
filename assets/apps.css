@@ -1,3 +1,314 @@
+
+/*! Shopify Cookie banner */
+
+#shopify-pc__banner[style*="display: block"] {
+  animation: fade-in .6s cubic-bezier(.7, 0, .2, 1);
+  display: block !important;
+}
+
+#shopify-pc__banner__btn-accept,
+#shopify-pc__banner__btn-decline,
+#shopify-pc__prefs__header-close,
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button {
+  --shadow-horizontal-offset: var(--buttons-shadow-horizontal-offset);
+  --shadow-vertical-offset: var(--buttons-shadow-vertical-offset);
+  --shadow-opacity: var(--buttons-shadow-opacity);
+  --border-opacity: var(--buttons-border-opacity);
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  line-height: 1;
+  font-family: var(--font-button-family);
+  font-size: var(--font-button-size);
+  font-weight: var(--font-button-weight);
+  text-transform: var(--font-button-text-transform);
+  padding: clamp(var(--sp-4d5), 1.2vw, var(--sp-5d5)) clamp(var(--sp-6d5), 1.473vw, var(--sp-7d5));
+  color: rgb(var(--color-button-text));
+  background: var(--color-button-gradient);
+  background-color: rgb(var(--color-button-background));
+  border-radius: var(--buttons-radius);
+  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) rgb(var(--color-shadow)/ var(--shadow-opacity));
+  max-height: 3.75rem;
+  border: none;
+  height: auto;
+}
+
+#shopify-pc__banner__btn-decline,
+#shopify-pc__prefs__header-close,
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button {
+  color: rgb(var(--color-button-background));
+  background: none;
+  backdrop-filter: blur(12px);
+}
+
+#shopify-pc__prefs__header-close {
+  --shadow-opacity: 0;
+  --border-opacity: 0.1;
+  --buttons-border-width: 1px;
+  --buttons-radius: var(--rounded-full);
+  padding: 0;
+}
+
+#shopify-pc__prefs__header-close svg {
+  --tw-rotate: 0deg;
+  transform: rotate(var(--tw-rotate));
+  width: var(--sp-2d5);
+  height: var(--sp-2d5);
+}
+
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button {
+  margin: 0;
+  padding: clamp(var(--sp-3), 1.2vw, var(--sp-4)) clamp(var(--sp-5), 1.473vw, var(--sp-6));
+}
+
+#shopify-pc__banner__btn-accept::after,
+#shopify-pc__banner__btn-decline::after,
+#shopify-pc__prefs__header-close::after,
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button::after {
+  content: '';
+  pointer-events: none;
+  position: absolute;
+  inset: 0;
+  border-radius: var(--buttons-radius);
+  border: var(--buttons-border-width) solid rgb(var(--color-button-border)/ var(--border-opacity));
+}
+
+@media screen and (pointer: fine) {
+  #shopify-pc__banner__btn-accept,
+  #shopify-pc__banner__btn-decline,
+  #shopify-pc__prefs__header-close,
+  #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button {
+    transition: var(--animation-primary);
+    transition-property: box-shadow, color, background-color;
+  }
+
+  #shopify-pc__banner__btn-accept::after,
+  #shopify-pc__banner__btn-decline::after,
+  #shopify-pc__prefs__header-close::after,
+  #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button::after {
+    transition: border var(--animation-primary);
+  }
+
+  [data-button-hover=standard] #shopify-pc__banner__btn-accept:hover,
+  [data-button-hover=standard] #shopify-pc__banner__btn-decline:hover,
+  [data-button-hover=standard] #shopify-pc__prefs__header-close:hover,
+  [data-button-hover=standard] #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button:hover {
+    --shadow-horizontal-offset: 0;
+    --shadow-vertical-offset: 0;
+  }
+
+  [data-button-hover=standard] #shopify-pc__banner__btn-accept:hover {
+    color: rgb(var(--color-button-background));
+    background: none;
+  }
+
+  [data-button-hover=standard] #shopify-pc__banner__btn-decline:hover,
+  [data-button-hover=standard] #shopify-pc__prefs__header-close:hover,
+  [data-button-hover=standard] #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button:hover {
+    color: rgb(var(--color-button-text));
+    background: var(--color-button-gradient);
+    background-color: rgb(var(--color-button-background));
+  }
+
+  #shopify-pc__prefs__header-close svg {
+    transition: transform var(--animation-primary);
+  }
+
+  #shopify-pc__prefs__header-close:hover svg {
+    --tw-rotate: 90deg;
+  }
+}
+
+#shopify-pc__banner__body-policy-link,
+#shopify-pc__banner__btn-manage-prefs span {
+  background: linear-gradient(currentColor, currentColor) 0 min(100%, 1.35em)/100% 1px no-repeat;
+  background-position-x: var(--transform-origin-start);
+  position: relative;
+  text-decoration-line: none;
+  transition: background-size var(--animation-primary), color .3s var(--animation-primary)
+}
+
+@media screen and (pointer: fine) {
+  #shopify-pc__banner__body-policy-link:hover,
+  #shopify-pc__banner__btn-manage-prefs:hover span {
+    background-position-x: var(--transform-origin-end);
+    background-size: 0 1px
+  }
+}
+
+#shopify-pc__banner,
+#shopify-pc__prefs__dialog {
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  border-radius: var(--rounded-block);
+}
+
+#shopify-pc__banner {
+  box-shadow: none;
+  text-align: center;
+  padding: var(--sp-6) var(--sp-5);
+  backdrop-filter: blur(6px);
+  background-color: rgb(var(--color-background) / 0.9);
+  border: 1px solid rgb(var(--color-border));
+}
+
+#shopify-pc__banner__body-title,
+#shopify-pc__prefs__header-title {
+  font-size: var(--fluid-lg-to-2xl);
+  font-family: var(--font-heading-family);
+  font-weight: var(--font-heading-weight);
+  line-height: var(--font-heading-line-height);
+  color: rgb(var(--color-foreground));
+}
+
+#shopify-pc__banner__body-title {
+  margin-block-end: var(--sp-4);
+}
+
+#shopify-pc__banner :is(p, a),
+#shopify-pc__prefs__dialog :is(h3, label, p) {
+  line-height: 1.4;
+  font-size: var(--text-base);
+  color: rgb(var(--color-foreground));
+}
+
+#shopify-pc__banner .shopify-pc__banner__body {
+  margin-block-end: var(--sp-8);
+}
+
+#shopify-pc__banner .shopify-pc__banner__btns {
+  flex-wrap: wrap;
+  justify-content: center;
+  gap: var(--sp-4);
+}
+
+#shopify-pc__banner .shopify-pc__banner__btns button {
+  flex-basis: auto;
+  margin-block-start: 0;
+}
+
+#shopify-pc__banner .shopify-pc__banner__btns .shopify-pc__banner__btn-manage-prefs {
+  margin-block-start: var(--sp-4);
+  text-decoration: none;
+  flex: 0 0 100%;
+  order: 3;
+  line-height: 1;
+  font-size: var(--text-lg);
+  color: rgb(var(--color-foreground));
+}
+
+#shopify-pc__prefs__header-close {
+  height: var(--sp-12);
+  width: var(--sp-12);
+  position: static;
+  flex: 0 0 auto;
+  order: 10;
+}
+
+#shopify-pc__prefs__dialog header {
+  border-bottom-color: rgb(var(--color-border));
+}
+
+#shopify-pc__prefs__dialog .shopify-pc__prefs__option:first-child {
+  border-top-color: rgb(var(--color-border));
+}
+
+#shopify-pc__prefs__dialog svg path {
+  fill: currentColor;
+}
+
+#shopify-pc__prefs__dialog label span,
+#shopify-pc__prefs__dialog svg {
+  background-color: transparent;
+}
+
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions {
+  padding-inline-end: var(--sp-4);
+  gap: var(--sp-4);
+}
+
+#shopify-pc__banner .shopify-pc__banner__body p a:focus,
+#shopify-pc__banner .shopify-pc__banner__btns .shopify-pc__banner__btn-manage-prefs:focus span,
+#shopify-pc__prefs__header-close:focus,
+#shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions button:focus {
+  box-shadow: none;
+  outline: 2px solid rgb(var(--color-keyboard-focus));
+  outline-offset: 3px;
+}
+
+@media screen and (min-width: 640px) {
+  #shopify-pc__banner {
+    max-width: 30rem;
+    margin: var(--sp-8d5);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #shopify-pc__banner {
+    padding: var(--sp-8) var(--sp-12);
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  #shopify-pc__banner {
+    padding-block: var(--sp-11);
+  }
+}
+
+@media only screen and (max-width: 1200px) {
+  #shopify-pc__prefs__dialog header h2 {
+    margin-block-end: var(--sp-6);
+  }
+
+  #shopify-pc__prefs__dialog .shopify-pc__prefs__header-actions {
+    padding: 0;
+  }
+
+  #shopify-pc__prefs__header-close {
+    position: absolute;
+    inset-block-start: var(--sp-7);
+    inset-inline-end: var(--sp-7);
+  }
+}
+
+@media only screen and (max-width: 750px) {
+  #shopify-pc__prefs__header-close {
+    --border-opacity: 0;
+    --buttons-border-width: 0;
+    inset-block-start: var(--sp-3d5);
+    inset-inline-end: var(--sp-3d5);
+    height: var(--sp-8);
+    width: var(--sp-8);
+  }
+}
+
+@media screen and (max-width: 639px) {
+  #shopify-pc__banner,
+  #shopify-pc__prefs__dialog {
+    border-end-end-radius: 0;
+    border-end-start-radius: 0;
+    border-start-end-radius: var(--sp-5);
+    border-start-start-radius: var(--sp-5);
+  }
+
+  #shopify-pc__prefs__dialog {
+    top: auto;
+    bottom: 0;
+    transform: none;
+    left: 0;
+    width: 100%;
+  }
+}
+
+@media only screen and (max-width: 400px) {
+  #shopify-pc__prefs__dialog header {
+    padding: var(--sp-8) var(--sp-5) var(--sp-6);
+  }
+}
+
 /* Air reviews */
 
 :is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRate .AirReviews-StarRate--Positive {
@@ -763,11 +1074,16 @@
 }
 
 @media screen and (max-width: 639px) {
+
   html.js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Container {
     justify-content: flex-end;
   }
+  .js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Container {
+    justify-content: flex-end;
+  }
   
-  html.js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper {
+  .js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper {
+
     margin: 0;
     width: 100%;
     max-height: calc(100% - 60px);
@@ -776,19 +1092,20 @@
     border-start-start-radius: var(--sp-6);
   }
 
-  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails {
+
+  .js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails {
     flex-direction: column;
   }
 
-  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images {
+  .js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images {
     width: 100%;
   }
 
-  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images .AirReviews-Thumbnail img {
+  .js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images .AirReviews-Thumbnail img {
     position: static;
   }
 
-  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
+  .js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
     width: 100%;
     overflow: visible;
     flex: 0 0 auto;
@@ -1743,56 +2060,57 @@ div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__C
 
 /* Air reviews mobile */
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__Content {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__Content {
   font-size: var(--text-sm);
   line-height: 1.6;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product {
   padding: var(--sp-4);
   align-items: center;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text {
   padding-inline: var(--sp-4);
   inset-block-end: var(--sp-18);
   display: flex;
   flex-direction: column;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text>.AirReviews-Stack {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text>.AirReviews-Stack {
   justify-content: space-between;
   flex-direction: row-reverse;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
   width: var(--sp-12);
   height: var(--sp-12);
   margin: 0;
   margin-inline-end: var(--sp-6);
 }
 
-html.js [data-rounded-block=round] #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+.js [data-rounded-block=round] #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
   overflow: hidden;
   border-radius: var(--sp-2);
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail img {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail img {
   aspect-ratio: 1/1;
   object-fit: cover;
   object-position: center center;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Link {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Link {
   font-size: var(--text-base);
   font-weight: var(--font-medium);
   line-height: 1.25;
   text-decoration: none !important;
 }
 
-html.js #AirReviews-Modal__DetailsMobile .AirReviews-StarRate {
+.js #AirReviews-Modal__DetailsMobile .AirReviews-StarRate {
   --air-star-icon-md: var(--sp-5);
 }
+
 
 /* Air reviews RTL */
 

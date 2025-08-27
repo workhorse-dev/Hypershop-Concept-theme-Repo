@@ -7,7 +7,7 @@
 </style>
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded relative{% endif %}">
-  <div class="{% if section.settings.page-width %} page-width {% endif %} {% if section.settings.narrow %} page-width--narrow{% endif %} relative">
+  <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} relative">
     {{ section.settings.liquid }}
   </div>
 </div>
@@ -87,12 +87,6 @@
       "label": "t:sections.global.settings.divider.label",
       "default": false
     },
-     {
-      "type": "checkbox",
-      "id": "page-width",
-      "label": "Apply default Page width",
-      "default": true
-    },
     {
       "type": "checkbox",
       "id": "narrow",
@@ -108,7 +102,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.custom-liquid.presets.name"
+      "name": "t:sections.custom-liquid.name"
     }
   ],
   "disabled_on": {

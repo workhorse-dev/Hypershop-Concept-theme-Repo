@@ -30,11 +30,16 @@
 }
 
 @media screen and (max-width: 639px) {
+
   html.js .age-modal .drawer__inner {
     height: auto;
   }
 
-  html.js .age-modal[active]>.overlay {
+  .js .age-modal .drawer__inner {
+    height: auto;
+  }
+
+  .js .age-modal[active]>.overlay {
     background: rgb(var(--color-overlay));
   }
 }

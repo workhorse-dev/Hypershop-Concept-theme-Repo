@@ -123,6 +123,7 @@
       "note": {
         "title": "Order note",
         "caption": "Order special instructions",
+        "placeholder": "Order note",
         "button": "Apply"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Sorry, we do not ship to your address.",
         "one_result": "There is one shipping rate for your address:",
         "multiple_results": "There are multiple shipping rates for your address:"
+      },
+      "discount": {
+        "title": "Discount",
+        "caption": "Discount",
+        "placeholder": "Discount code",
+        "button": "Apply",
+        "error": "Discount code cannot be applied to your cart",
+        "shipping_error": "Shipping discounts are shown at checkout after adding an address",
+        "applied": "Applied discount code: {{ code }}",
+        "remove": "Remove discount {{ code }}"
       },
       "recently_viewed": {
         "empty": "Your recently viewed is empty."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carousel",
+      "announcement": "Announcement",
+      "announcement_bar": "Announcement bar"
+    },
     "blog_posts": {
       "view_all": "View all"
     },
@@ -177,13 +193,14 @@
       "auth_error_html": "There was a problem authenticating your Google Maps account. Create and enable the <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> and  <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> permissions of your app."
     },
     "slideshow": {
+      "carousel": "Carousel",
       "play_slideshow": "Play slideshow",
       "pause_slideshow": "Pause slideshow"
     },
     "product_bundle": {
       "total": "Total",
       "remove": "Remove",
-      "add_to_cart": "Add to Cart",
+      "add_to_cart": "Add to cart",
       "discounts_at_checkout": "Discounts will be applied at checkout."
     },
     "quick_order_list": {
@@ -386,6 +403,7 @@
       "payment_status": "Payment Status",
       "shipping_address": "Shipping Address",
       "fulfillment_status": "Fulfillment Status",
+      "discounts": "Discounts",
       "discount": "Discount",
       "shipping": "Shipping",
       "tax": "Tax",
@@ -449,7 +467,7 @@
       "product_variants": "Product variants",
       "sold_out": "Sold Out",
       "unavailable": "Unavailable",
-      "add_to_cart": "Add to Cart",
+      "add_to_cart": "Add to cart",
       "choose_options": "Choose options",
       "choose_product_options": "Choose options for {{ product_name }}",
       "view_product": "View product",

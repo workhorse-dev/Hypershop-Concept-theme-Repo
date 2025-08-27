@@ -123,7 +123,8 @@
       "note": {
         "title": "आदेश नोट",
         "caption": "विशेष अनुदेश आदेश दें",
-        "button": "आवेदन करना"
+        "placeholder": "आदेश नोट",
+        "button": "लागू करें"
       },
       "shipping_calculator": {
         "title": "शिपिंग",
@@ -134,6 +135,16 @@
         "not_found": "क्षमा करें, हम आपके पते पर नहीं भेजते।",
         "one_result": "आपके पते के लिए एक शिपिंग दर है:",
         "multiple_results": "आपके पते के लिए कई शिपिंग दरें हैं:"
+      },
+      "discount": {
+        "title": "छूट",
+        "caption": "छूट",
+        "placeholder": "छूट कोड",
+        "button": "लागू करें",
+        "error": "डिस्काउंट कोड आपकी कार्ट पर लागू नहीं किया जा सकता",
+        "shipping_error": "शिपिंग डिस्काउंट पता जोड़ने के बाद चेकआउट पर दिखाए जाते हैं",
+        "applied": "छूट कोड लागू किया गया: {{ code }}",
+        "remove": "छूट हटाएं {{ code }}"
       },
       "recently_viewed": {
         "empty": "आपका हाल ही में देखा गया खाली है."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "कैरोसेल",
+      "announcement": "घोषणा",
+      "announcement_bar": "घोषणा पट्टी"
+    },
     "blog_posts": {
       "view_all": "सभी को देखें"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "आपके Google मानचित्र खाते को प्रमाणित करने में एक समस्या थी। अपने ऐप की <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">जावास्क्रिप्ट एपीआई</a> और <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">जियोकोडिंग एपीआई</a> अनुमतियां बनाएं और सक्षम करें।"
     },
     "slideshow": {
+      "carousel": "कैरोसेल",
       "play_slideshow": "स्लाइड शो चलाएं",
       "pause_slideshow": "स्लाइड शो रोकें"
     },
@@ -294,7 +311,7 @@
       "in_stock_only": "केवल स्टॉक में",
       "clear": "फ़िल्टर हटाएँ \"{{ name }}\"",
       "clear_all": "सभी साफ करें",
-      "apply": "आवेदन करना"
+      "apply": "लागू करें"
     },
     "subcollections": {
       "all_products": "सभी {{ collection }}"
@@ -386,6 +403,7 @@
       "payment_status": "भुगतान की स्थिति",
       "shipping_address": "शिपिंग पता",
       "fulfillment_status": "पूर्ति स्थिति",
+      "discounts": "छूट",
       "discount": "छूट",
       "shipping": "शिपिंग",
       "tax": "कर",

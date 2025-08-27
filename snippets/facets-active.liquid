@@ -1,14 +1,19 @@
-{%- comment -%}
-  Renders active facets
+{%- doc -%}
+  Renders active filter pills with individual and bulk removal capabilities.
 
-  Accepts:
-  - results: {Object} Liquid 'collection' or 'search' object
-  - enable_color_swatches: {Boolean}
-  - filter_count: {Number}
+  Displays currently applied filters as removable badges with visual representations.
 
-  Usage:
-  {% render 'facets-active', results: collection, enable_color_swatches: true, filter_count: count %}
-{%- endcomment -%}
+  @param {object} results - Shopify collection or search results object
+  @param {boolean} enable_color_swatches - Show color filters as swatches
+  @param {number} filter_count - Active filter count for clear-all display
+
+  @example
+  {% render 'facets-active',
+     results: collection,
+     enable_color_swatches: true,
+     filter_count: 3
+  %}
+{%- enddoc -%}
 
 {%- capture active_facets -%}
   {%- for filter in results.filters -%}
@@ -18,7 +23,7 @@
           <div class="facet-title flex items-center gap-2">
             {{- filter.min_value.value | default: 0 | money_without_trailing_zeros }} - {{ filter.max_value.value | default: filter.range_max | money_without_trailing_zeros -}}
           </div>
-          <a class="block relative" href="{{ filter.url_to_remove }}" aria-label="{{ 'collections.filtering.clear' | t: name: active_value.label | escape }}" is="facet-remove" data-magnet="3" data-no-instant>
+          <a class="block relative" href="{{ filter.url_to_remove }}" aria-label="{{ 'collections.filtering.clear' | t: name: filter.label | escape }}" is="facet-remove" data-magnet="3" data-no-instant>
             <span class="btn-text" data-text>
               {%- render 'icon', icon: 'remove', size: 'xs' -%}
             </span>

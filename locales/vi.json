@@ -123,6 +123,7 @@
       "note": {
         "title": "Ghi chú đặt hàng",
         "caption": "Hướng dẫn đặc biệt của đơn hàng",
+        "placeholder": "Ghi chú đặt hàng",
         "button": "Áp dụng"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Xin lỗi, chúng tôi không gửi đến địa chỉ của bạn.",
         "one_result": "Có một mức phí vận chuyển cho địa chỉ của bạn:",
         "multiple_results": "Có nhiều mức phí vận chuyển cho địa chỉ của bạn:"
+      },
+      "discount": {
+        "title": "Giảm giá",
+        "caption": "Giảm giá",
+        "placeholder": "Mã giảm giá",
+        "button": "Áp dụng",
+        "error": "Không thể áp dụng mã giảm giá cho giỏ hàng của bạn",
+        "shipping_error": "Ưu đãi giảm giá vận chuyển được hiển thị tại trang thanh toán sau khi thêm địa chỉ",
+        "applied": "Đã áp dụng mã giảm giá: {{ code }}",
+        "remove": "Xóa mã giảm giá {{ code }}"
       },
       "recently_viewed": {
         "empty": "Mục đã xem gần đây của bạn chưa có."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Quay vòng",
+      "announcement": "Thông báo",
+      "announcement_bar": "Thanh thông báo"
+    },
     "blog_posts": {
       "view_all": "Xem tất cả"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Đã xảy ra sự cố khi xác thực tài khoản Google Maps của bạn. Tạo và kích hoạt <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">API JavaScript</a> và <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">API mã hóa địa lý</a> của ứng dụng của bạn."
     },
     "slideshow": {
+      "carousel": "Quay vòng",
       "play_slideshow": "Chạy trình chiếu",
       "pause_slideshow": "Tạm dừng trình chiếu"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Trạng thái thanh toán",
       "shipping_address": "Địa chỉ giao hàng",
       "fulfillment_status": "Trạng thái thực hiện",
+      "discounts": "Giảm giá",
       "discount": "Giảm giá",
       "shipping": "Đang chuyển hàng",
       "tax": "Thuế",

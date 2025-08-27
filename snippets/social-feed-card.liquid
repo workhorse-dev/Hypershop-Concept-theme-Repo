@@ -1,3 +1,26 @@
+{%- doc -%}
+  Renders a social feed card with clickable product hotspots and quick view modals.
+
+  Supports image/video media, multiple products per card, and navigation between feed items.
+
+  @param {object} block - Block configuration and settings
+  @param {object} section - Parent section object
+  @param {number} position - Card position in feed (for navigation)
+  @param {string} image_ratio - Media aspect ratio
+  @param {boolean} show_vendor - Display product vendor
+  @param {boolean} show_price - Display product prices
+
+  @example
+  {% render 'social-feed-card',
+    section: section,
+    block: block,
+    position: forloop.index,
+    image_ratio: 'square',
+    show_vendor: true,
+    show_price: true
+  %}
+{% enddoc %}
+
 {%- liquid
   assign modulo = position | modulo: 5 | plus: 1
   assign product_1 = block.settings.hotspot_product_1
@@ -8,6 +31,11 @@
   assign section_rendering_api = false
   if section.index == nil
     assign section_rendering_api = true
+  endif
+
+  if block.settings.video != blank
+    assign autoplay = block.settings.enable_video_autoplay
+    assign loop = block.settings.enable_video_looping
   endif
 -%}
 <div class="card media-card media-card--{{ settings.card_style }} media-card--overlap" id="shopify-block-{{ block.id }}">
@@ -22,33 +50,37 @@
             echo placeholder | placeholder_svg_tag: 'placeholder'
           endif
         -%}
-        {%- if block.settings.video != blank -%}
-          <video-media class="absolute top-0 left-0 w-full h-full hidden md:block opacity-0 pointer-events-none">
-            {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: false, loop: true, controls: false, preload: 'none', image_size: '1x' -}}
-          </video-media>
-        {%- endif -%}
-      {%- else -%}
-        {%- liquid
-          assign video_alt = block.settings.video.alt | default: block.settings.image.alt
-          assign alt = 'general.accessibility.load_video' | t: description: video_alt | escape
-          assign preview_image = block.settings.video.preview_image | default: block.settings.image
-
-          capture poster
-            if preview_image != blank
-              echo preview_image | image_url: width: preview_image.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', sizes: sizes, is: 'lazy-image', class: 'inline-block', alt: alt
-            else
-              echo 'lifestyle-1' | placeholder_svg_tag: 'placeholder'
-            endif
-          endcapture
-        -%}
-        <video-media class="block" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }}" autoplay>
-          {{- poster -}}
-          <template>
-            {{- block.settings.video | video_tag: playsinline: true, muted: true, autoplay: true, loop: true, controls: false, preload: 'none', image_size: '1x' -}}
-          </template>
+      {%- endif -%}
+      
+      {%- if block.settings.video != blank -%}
+        <video-media class="block{% if block.settings.video_on_hover %} absolute top-0 left-0 w-full h-full opacity-0 pointer-events-none{% endif %}" style="--aspect-ratio: {{ block.settings.video.aspect_ratio }};"{% if autoplay %} autoplay{% endif %}>
+          {%- if autoplay -%}
+            {{- block.settings.video | video_tag: playsinline: false, muted: autoplay, autoplay: autoplay, loop: loop, controls: false, preload: 'none', image_size: '1x' -}}
+          {%- else -%}
+            {%- capture sizes -%}(max-width: 639px) 100vw, (max-width: 1023px) calc(100vw / 2 - 40px), (max-width: 1535px) calc(min(100vw, {{ settings.page_width }}px) / 3 - 40px), calc(min(100vw, {{ settings.page_width }}px) / 3 - 80px){%- endcapture -%}
+            {%- liquid
+              assign video_alt = block.settings.video.alt | default: block.settings.image.alt
+              assign alt = 'general.accessibility.load_video' | t: description: video_alt | escape
+              assign poster = block.settings.video.preview_image | default: block.settings.image
+            -%}
+            {{- poster | image_url: width: poster.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', sizes: sizes, is: 'lazy-image', class: 'inline-block', alt: alt -}}
+            <template>
+              {{- block.settings.video | video_tag: playsinline: false, muted: autoplay, autoplay: autoplay, loop: loop, controls: false, preload: 'none', image_size: '1x' -}}
+            </template>
+          {%- endif -%}
+          
+          {%- unless autoplay -%}
+            <button type="button" id="DeferredPoster-{{ block.settings.video.id }}" class="deferred-poster absolute top-0 left-0 w-full h-full" aria-label="{{ 'general.accessibility.play_video' | t | escape }}">
+              <span class="play-button absolute flex items-center justify-center rounded-full pointer-events-auto z-10">
+                {%- render 'icon', icon: 'play' -%}
+                {%- render 'icon', icon: 'pause' -%}
+              </span>
+            </button>
+          {%- endunless -%}
         </video-media>
       {%- endif -%}
-      <div class="badges z-2 absolute grid gap-3 pointer-events-none">
+
+      <div class="badges absolute grid gap-3 pointer-events-none">
         {%- render 'icon-brand', icon: 'instagram', size: 'lg' -%}
       </div>
     </div>
@@ -87,12 +119,39 @@
           {%- endfor -%}
         {%- endif -%}
       </div>
-      <button type="button" class="media-card__button"{% unless section_rendering_api %} is="api-button" data-id="SocialFeed-{{ section.id }}-{{ block.id }}" data-section-id="{{ section.id }}"{% endunless %}>
-        <hover-element class="button button--primary button--blur w-full" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}">
-          <span class="btn-fill" data-fill></span>
-          <span class="btn-text">{{ 'products.product.shop_the_look' | t }}</span>
-        </hover-element>
-      </button>
+      {%- capture feed_button_text -%}
+        {%- liquid
+          if block.settings.button_label == blank
+            echo 'products.product.shop_the_look' | t | escape
+          else
+            echo block.settings.button_label | escape
+          endif
+          if block.settings.button_icon
+            render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform'
+          endif
+        -%}
+      {%- endcapture -%}
+      {%- if block.settings.button_link == blank -%}
+        <button class="media-card__button relative" type="button" aria-controls="SocialFeed-{{ section.id }}-{{ block.id }}">
+          {%- unless section_rendering_api -%}
+            <api-button class="api-only" data-id="SocialFeed-{{ section.id }}-{{ block.id }}" data-section-id="{{ section.id }}"></api-button>
+          {%- endunless -%}
+          <hover-element class="button button--primary button--blur icon-with-text w-full">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">{{ feed_button_text }}</span>
+          </hover-element>
+        </button>
+      {%- else -%}
+        <a class="media-card__button relative" href="{{ block.settings.button_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}>
+          <hover-element class="button button--primary button--blur icon-with-text w-full">
+            <span class="btn-fill" data-fill></span>
+            <span class="btn-text">{{ feed_button_text }}</span>
+          </hover-element>
+          {%- unless section_rendering_api -%}
+            <api-button class="api-only" data-id="SocialFeed-{{ section.id }}-{{ block.id }}" data-section-id="{{ section.id }}"></api-button>
+          {%- endunless -%}
+        </a>
+      {%- endif -%}
     </div>
 
     {%- unless section_rendering_api -%}
@@ -145,7 +204,7 @@
                       -%}
                       {%- if settings.product_quick_view -%}
                         {%- capture quick_view_id -%}Quickview-{{ section.id }}-{{ block.id }}-{{ product.id }}-{{ i }}{%- endcapture -%}
-                        <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="{{ quick_view_id }}" aria-expanded="false" style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;">
+                        <hover-element class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-controls="{{ quick_view_id }}" aria-expanded="false" style="--hotspot-color: {{ color_text.rgb }};--hotspot-x: {{ horizontal }}%;--hotspot-y: {{ vertical }}%;">
                           <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if horizontal < 15 %} with-left{% elsif horizontal > 85 %} with-right{% endif %}{% if vertical > 70 %} with-bottom{% endif %}">
                             {%- if product.featured_media -%}
                               <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
@@ -175,7 +234,7 @@
                           </div>
                         </quick-view>
                       {%- else -%}
-                        <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;">
+                        <a class="hotspot flex items-center justify-center absolute z-1 cursor-pointer"{% if product != blank %} href="{{ product.url }}" aria-label="{{ product.title | escape }}"{% else %} role="link" aria-disabled="true"{% endif %} style="--hotspot-color: {{ color_text.rgb }};--hotspot-x: {{ horizontal }}%;--hotspot-y: {{ vertical }}%;">
                           <div class="hotspot__content hidden md:flex gap-2 items-center absolute pointer-events-none{% if horizontal < 15 %} with-left{% elsif horizontal > 85 %} with-right{% endif %}{% if vertical > 70 %} with-bottom{% endif %}">
                             {%- if product.featured_media -%}
                               <div class="hidden lg:block media media--{{ settings.product_image_ratio }}{% unless settings.product_image_fill %} media--contain{% endunless %} relative overflow-hidden shrink-0">
@@ -205,7 +264,7 @@
                       assign vertical_setting_name = 'hotspot_vertical_' | append: i
                       assign vertical = block.settings[vertical_setting_name]
                     -%}
-                    <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" style="--hotspot-color:{{ color_text.rgb }}; --hotspot-x:{{ horizontal }}%; --hotspot-y:{{ vertical }}%;"></button>
+                    <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-label="{{ 'onboarding.product_title' | t | escape }}" aria-disabled="true" style="--hotspot-color: {{ color_text.rgb }};--hotspot-x: {{ horizontal }}%;--hotspot-y: {{ vertical }}%;"></button>
                   {%- endfor -%}
                 {%- endif -%}
               </lookbook-element>
@@ -235,12 +294,12 @@
                             assign product_setting_name = 'hotspot_product_' | append: i
                             assign product = block.settings[product_setting_name]
                             if product != blank
-                              render 'product-card-horizontal', product: product, product_id: product.id, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view
+                              render 'product-card-horizontal', product: product, product_id: product.id, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view, accessibility: true
                             endif
                           endfor
                         else
                           for i in (1..2)
-                            render 'product-card-horizontal', product: null, product_id: i, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view
+                            render 'product-card-horizontal', product: null, product_id: i, section_id: section.id, block_id: block.id, image_ratio: settings.product_image_ratio, image_fill: settings.product_image_fill, show_vendor: show_vendor, show_price: show_price, show_quick_add: settings.product_quick_add, show_quick_view: settings.product_quick_view, accessibility: true
                           endfor
                         endif
                       -%}
@@ -277,7 +336,7 @@
               
                               {%- if block.settings.account_button != blank -%}
                                 <p>
-                                  <a class="button button--secondary button--sm"{% if block.settings.account_link != blank %} href="{{ block.settings.account_link }}"{% if block.settings.button_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link">
+                                  <a class="button button--secondary button--sm"{% if block.settings.account_link != blank %} href="{{ block.settings.account_link }}"{% if block.settings.account_link_external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link">
                                     <span class="btn-fill" data-fill></span>
                                     <span class="btn-text">{{ block.settings.account_button }}</span>
                                   </a>
@@ -300,11 +359,17 @@
                           endif
                         -%}
                         <div class="product__more flex items-center justify-between">
-                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless previous_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.previous' | t | escape }}"{% if previous_block %} aria-controls="SocialFeed-{{ section.id }}-{{ previous_block.id }}"{% if section_rendering_api %} is="social-feed-button" data-id="SocialFeed-{{ section.id }}-{{ previous_block.id }}" data-section-id="{{ section.id }}"{% endif %}{% else %} disabled{% endif %}>
+                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless previous_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.previous' | t | escape }}"{% if previous_block %} aria-controls="SocialFeed-{{ section.id }}-{{ previous_block.id }}" is="social-feed-button"{% else %} disabled{% endif %} data-button="previous">
+                            {%- if previous_block -%}
+                              <api-button class="api-only" data-id="SocialFeed-{{ section.id }}-{{ previous_block.id }}" data-section-id="{{ section.id }}"></api-button>
+                            {%- endif -%}
                             {%- render 'icon', icon: 'arrow-left', size: 'sm', class: 'transform stroke-1 shrink-0' -%}
                             <span class="btn-text" data-text>{{ 'general.pagination.previous' | t }}</span>
                           </button>
-                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless next_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.next' | t | escape }}"{% if next_block %} aria-controls="SocialFeed-{{ section.id }}-{{ next_block.id }}"{% if section_rendering_api %} is="social-feed-button" data-id="SocialFeed-{{ section.id }}-{{ next_block.id }}" data-section-id="{{ section.id }}"{% endif %}{% else %} disabled{% endif %}>
+                          <button type="button" class="flex items-center justify-center gap-2 font-medium{% unless next_block %} text-opacity pointer-events-none{% endunless %}" aria-label="{{ 'general.pagination.next' | t | escape }}"{% if next_block %} aria-controls="SocialFeed-{{ section.id }}-{{ next_block.id }}" is="social-feed-button"{% else %} disabled{% endif %} data-button="next">
+                            {%- if next_block -%}
+                              <api-button class="api-only" data-id="SocialFeed-{{ section.id }}-{{ next_block.id }}" data-section-id="{{ section.id }}"></api-button>
+                            {%- endif -%}
                             <span class="btn-text" data-text>{{ 'general.pagination.next' | t }}</span>
                             {%- render 'icon', icon: 'arrow-right', size: 'sm', class: 'transform stroke-1 shrink-0' -%}
                           </button>

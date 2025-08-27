@@ -1,9 +1,9 @@
-html.touch .has-cookie-banner {
+.touch .has-cookie-banner {
   touch-action: none
 }
 
-html.js .cookie-modal .overlay,
-html.js .cookie-modal[active] .overlay {
+.js .cookie-modal .overlay,
+.js .cookie-modal[active] .overlay {
   background-color: transparent;
   pointer-events: none;
 }
@@ -23,16 +23,16 @@ html.js .cookie-modal[active] .overlay {
   margin-block-start: var(--sp-4);
 }
 
-.cookie-modal .text-center :is(.heading) {
+.cookie-modal .text-center :is(.heading, .cookie__flex) {
   justify-content: center;
 }
 
-.cookie-modal .text-right :is(.heading) {
+.cookie-modal .text-right :is(.heading, .cookie__flex) {
   justify-content: flex-end;
 }
 
 @media screen and (max-width: 639px) {
-  html.js .cookie-modal .drawer__inner {
+  .js .cookie-modal .drawer__inner {
     height: auto;
   }
 }

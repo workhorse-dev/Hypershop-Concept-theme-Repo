@@ -1,14 +1,21 @@
-{%- comment -%}
-  Renders gift card recipient form.
-  Accepts:
-  - product: {Object} product object.
-  - form: {Object} the product form object.
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of section to which this snippet belongs.
+{%- doc -%}
+  Renders a gift card recipient form for direct email delivery with scheduling.
 
-  Usage:
-  {% render 'gift-card-recipient-form', product: product, form: form, section_id: section.id, product_id: product.id %}
-{%- endcomment -%}
+  Enables customers to send gift cards to recipients with personalized messages and delivery dates.
+
+  @param {object} product - Shopify gift card product object
+  @param {object} form - Product form object with validation errors and field values
+  @param {string} product_id - Unique product identifier for field IDs
+  @param {string} section_id - Section identifier for component namespacing
+
+  @example
+  {% render 'gift-card-recipient-form',
+     product: product,
+     form: form,
+     section_id: section.id,
+     product_id: product.id
+  %}
+{%- enddoc -%}
 
 <div class="customer">
   {%- assign gift_card_recipient_control_flag = 'properties[__shopify_send_gift_card_to_recipient]' -%}

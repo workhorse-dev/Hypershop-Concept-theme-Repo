@@ -1,12 +1,13 @@
-{%- comment -%}
-  Renders a contact block on the footer section
+{%- doc -%}
+  Renders a footer contact information block with up to 4 customizable links.
 
-  Accepts:
-  - block: {Object}
+  Displays contact links in a vertical list, optionally within a collapsible section.
 
-  Usage:
+  @param {object} block - Shopify block object with settings and attributes
+
+  @example
   {% render 'footer-contact', block: block %}
-{%- endcomment -%}
+{%- enddoc -%}
 
 {%- if block.settings.button_label_1 != blank or block.settings.button_label_2 != blank or block.settings.button_label_3 != blank or block.settings.button_label_4 != blank -%}
   {%- capture block_content -%}

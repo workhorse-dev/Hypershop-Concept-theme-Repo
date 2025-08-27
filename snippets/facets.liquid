@@ -1,19 +1,27 @@
-{%- comment -%}
-  Renders facets
+{%- doc -%}
+  Renders complete filtering and sorting interface for collections and search results.
 
-  Accepts:
-  - context: {String}
-  - results: {Object} Liquid 'collection' or 'search' object
-  - collapsed: {Boolean}
-  - enable_filtering: {Boolean}
-  - enable_sorting: {Boolean}
-  - enable_color_swatches: {Boolean}
-  - subcollections: {Boolean}
-  - section_id: {String}
+  Supports multiple filter types with various presentations including swatches and ranges.
 
-  Usage:
-  {% render 'facets', results: collection, collapsed: true, enable_color_swatches: true %}
-{%- endcomment -%}
+  @param {string} context - Unique ID prefix for form elements (e.g., 'drawer', 'sticky', 'sidebar')
+  @param {object} results - Shopify collection or search results object
+  @param {boolean} [collapsed] - Start filter groups in collapsed state
+  @param {boolean} [enable_filtering] - Display filter options
+  @param {boolean} [enable_sorting] - Display sort dropdown
+  @param {boolean} [enable_color_swatches] - Auto-detect and render color filters as swatches
+  @param {string} section_id - Parent section ID for form state management
+
+  @example
+  {% render 'facets',
+     context: 'sidebar',
+     results: collection,
+     enable_filtering: true,
+     enable_sorting: true,
+     enable_color_swatches: true,
+     collapsed: false,
+     section_id: section.id
+  %}
+{%- enddoc -%}
 
 {%- if results.filters != empty -%}
   <form class="facet-form" method="GET" action="{{ request.path }}" is="facet-form" data-section-id="{{ section_id }}" data-history update-on-change>
@@ -42,7 +50,7 @@
               <option value="{{ option.value }}" {% if option.value == sort_by %} selected{% endif %}>{{ option.name | escape }}</option>
             {%- endfor -%}
           </select>
-          {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute' -%}
+          {%- render 'icon', icon: 'chevron-up', size: 'sm', class: 'absolute pointer-events-none' -%}
           <label class="label is-floating" for="FacetFormSortBy-{{ context }}">{{ 'collections.sorting.sort_button' | t }}</label>
         </div>
       </div>
@@ -153,7 +161,7 @@
                         <li>
                           <magnet-element class="flex flex-col gap-1 pointer-events-none">
                             <input class="sr-only" name="{{ filter_value.param_name }}" value="{{ filter_value.value | escape }}" class="checkbox" id="{{ filter_value_id }}" type="checkbox"{% if filter_value.active %} checked{% endif %}{% if is_disabled %} disabled{% endif %} />
-                            <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative pointer-events-auto" for="{{ filter_value_id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %} --swatch-background-image: url({{ swatch_image }});{% endif %}">
+                            <label class="color-swatch{% if swatch_image != blank %} with-image{% endif %} block relative pointer-events-auto" for="{{ filter_value_id | escape }}" style="--swatch-background: {{ swatch_fallback }};{% if swatch_image != blank %}--swatch-background-image: url({{ swatch_image }});{% endif %}">
                               {%- if settings.swatch_image_tooltip -%}
                                 <span class="tooltip opacity-0 pointer-events-none text-xs rounded-full z-10">{{ filter_value.label | escape }} ({{ filter_value.count }})</span>
                               {%- else -%}
@@ -208,7 +216,11 @@
                   <price-range class="price-range grid gap-8">
                     <label class="sr-only" for="FacetFormRangeFromPrice-{{ context }}">{{ 'collections.filtering.from_price' | t }}</label>
                     <label class="sr-only" for="FacetFormRangeToPrice-{{ context }}">{{ 'collections.filtering.to_price' | t }}</label>
+<<<<<<< HEAD
                     <div class="range-wrapper relative" style="--range-min: {{ lower_bound_progress }}%; --range-max: {{ higher_bound_progress }}%">
+=======
+                    <div class="range-wrapper relative" style="--range-min: {{ lower_bound_progress }}%;--range-max: {{ higher_bound_progress }}%;">
+>>>>>>> concept-upstream-1/master
                       <input class="range w-full pointer-events-none" type="range"
                         min="0"
                         max="{{ range_max | ceil }}"

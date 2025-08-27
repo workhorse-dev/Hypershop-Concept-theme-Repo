@@ -1,14 +1,25 @@
-{%- comment -%}
-  Renders the store availability for a given variant, along the associated modal.
-  Accepts:
-  - product: {Object} product object.
-  - product_form_id: {String} product form id.
-  - product_id: {String} The ID of the current product.
-  - section_id: {String} The ID of section to which this snippet belongs.
+{%- doc -%}
+  Displays store pickup availability with modal for viewing all pickup locations.
 
-  Usage:
-  {% render 'pickup-availability', product: product, product_form_id: product_form_id %}
-{%- endcomment -%}
+  Shows real-time pickup status and estimated times for the selected product variant.
+
+  @param {object} product - Product object containing variant and availability data
+  @param {object} block - Section block with pickup display settings
+  @param {string} product_form_id - Form ID for variant change integration
+  @param {string} product_id - Product ID for unique element targeting
+  @param {object} section - Section object for conditional asset loading
+  @param {string} section_id - Section ID for component identification
+
+  @example
+  {% render 'pickup-availability',
+     product: product,
+     block: block,
+     product_form_id: product_form_id,
+     product_id: product.id,
+     section: section,
+     section_id: section.id
+  %}
+{%- enddoc -%}
 
 {%- assign pick_up_availabilities = product.selected_or_first_available_variant.store_availabilities | where: 'pick_up_enabled', true -%}
 

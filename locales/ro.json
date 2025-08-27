@@ -123,6 +123,7 @@
       "note": {
         "title": "Notă de comandă",
         "caption": "Comandați instrucțiuni speciale",
+        "placeholder": "Notă de comandă",
         "button": "Aplicați"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Ne pare rău, nu livrăm la adresa dvs.",
         "one_result": "Există o singură rată de livrare pentru adresa dvs.:",
         "multiple_results": "Există mai multe tarife de expediere pentru adresa dvs.:"
+      },
+      "discount": {
+        "title": "Reducere",
+        "caption": "Reducere",
+        "placeholder": "Cod de reducere",
+        "button": "Aplicați",
+        "error": "Codul de reducere nu poate fi aplicat coșului tău de cumpărături",
+        "shipping_error": "Reducerile pentru transport sunt afișate pe pagina de efectuare a plății, după ce ai adăugat adresa",
+        "applied": "Cod de reducere aplicat: {{ code }}",
+        "remove": "Elimină codul de reducere {{ code }}"
       },
       "recently_viewed": {
         "empty": "Ați vizualizat recent este gol."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Carusel",
+      "announcement": "Anunț",
+      "announcement_bar": "Bară cu anunțuri"
+    },
     "blog_posts": {
       "view_all": "Vezi toate"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "A apărut o problemă la autentificarea contului dvs. Google Maps. Creați și activați permisiunile <a href=\"https://developers.google.com/maps/documentation/javascript/get-api-key\">JavaScript API</a> și <a href=\"https://developers.google.com/maps/documentation/geocoding/get-api-key\">Geocoding API</a> ale aplicației dvs."
     },
     "slideshow": {
+      "carousel": "Carusel",
       "play_slideshow": "Redați prezentarea de diapozitive",
       "pause_slideshow": "Întrerupeți prezentarea de diapozitive"
     },
@@ -386,6 +403,7 @@
       "payment_status": "Starea plății",
       "shipping_address": "Adresa de transport",
       "fulfillment_status": "Starea de îndeplinire",
+      "discounts": "Reduceri",
       "discount": "Reducere",
       "shipping": "Transport",
       "tax": "Taxa",

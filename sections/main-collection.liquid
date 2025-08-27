@@ -23,7 +23,6 @@
   assign subcollections = section.blocks | where: "type", "subcollections" | first
 
   assign enable_sorting = section.settings.enable_sorting
-  assign enable_product_icon = section.settings.enable_product_icon_list
   assign enable_filtering = section.settings.enable_filtering
   assign filter_type = section.settings.filter_type
 -%}
@@ -64,7 +63,7 @@
               -%}
             {%- elsif filter_type == 'sidebar' -%}
               <div class="facet-wrapper">
-                <button class="button button--secondary icon-with-text" type="button" is="filters-toogle" aria-controls="FacetFiltersContainer" aria-expanded="true">
+                <button class="button button--secondary icon-with-text" type="button" is="filters-toggle" aria-controls="FacetFiltersContainer" aria-expanded="true">
                   <span class="btn-fill" data-fill></span>
                   <span class="btn-text">
                     {%- liquid
@@ -87,7 +86,6 @@
           {%- if subcollections != blank -%}
             {%- render 'subcollections',
               main_menu: subcollections.settings.menu,
-              per_row: subcollections.settings.per_row,
               show_count: subcollections.settings.show_count
             -%}
           {%- else -%}
@@ -232,8 +230,7 @@
                   show_quick_view: settings.product_quick_view,
                   show_save_amount: settings.product_save_amount,
                   save_type: settings.product_save_type,
-                  show_icon_list: settings.product_icon_list,
-                  show_product_icon_list: enable_product_icon
+                  show_icon_list: settings.product_icon_list
                 -%}
               {%- endfor -%}
             </motion-list>
@@ -339,12 +336,14 @@
       "info": "t:sections.main-collection.settings.enable_filtering.info"
     },
     {
+      "visible_if": "{{ section.settings.enable_filtering == true }}",
       "type": "checkbox",
       "id": "filter_collapsed",
       "label": "t:sections.main-collection.settings.filter_collapsed.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.enable_filtering == true }}",
       "type": "select",
       "id": "filter_type",
       "label": "t:sections.main-collection.settings.filter_type.label",
@@ -361,6 +360,7 @@
       ]
     },
     {
+      "visible_if": "{{ section.settings.enable_filtering == true }}",
       "type": "checkbox",
       "id": "filter_color_swatches",
       "label": "t:sections.main-collection.settings.filter_color_swatches.label",
@@ -518,7 +518,8 @@
           "type": "text",
           "id": "button_label",
           "default": "Button label",
-          "label": "t:sections.global.settings.button_label.label"
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
         },
         {
           "type": "url",
@@ -526,6 +527,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -546,12 +548,14 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",
@@ -752,7 +756,8 @@
           "type": "text",
           "id": "button_label",
           "default": "Button label",
-          "label": "t:sections.global.settings.button_label.label"
+          "label": "t:sections.global.settings.button_label.label",
+          "info": "t:sections.global.settings.button_label.info"
         },
         {
           "type": "url",
@@ -760,6 +765,7 @@
           "label": "t:sections.global.settings.button_link.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "select",
           "id": "button_style",
           "options": [
@@ -780,12 +786,14 @@
           "label": "t:sections.global.settings.button_style.label"
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_external",
           "label": "t:sections.global.settings.button_external.label",
           "default": false
         },
         {
+          "visible_if": "{{ block.settings.button_label != blank }}",
           "type": "checkbox",
           "id": "button_icon",
           "label": "t:sections.global.settings.button_icon.label",

@@ -1,12 +1,13 @@
-{%- comment -%}
-  Renders a text block on the footer section
+{%- doc -%}
+  Renders rich text content block in the footer with optional collapsible wrapper.
 
-  Accepts:
-  - block: {Object}
+  Displays HTML/rich text content either directly or within an expandable section.
 
-  Usage:
+  @param {object} block - Shopify block object with settings and attributes
+
+  @example
   {% render 'footer-text', block: block %}
-{%- endcomment -%}
+{%- enddoc -%}
 
 {%- if block.settings.heading != blank or block.settings.text != blank -%}
   {%- capture block_content -%}

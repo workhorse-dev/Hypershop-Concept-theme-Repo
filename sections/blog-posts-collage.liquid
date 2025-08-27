@@ -312,6 +312,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -430,7 +431,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.blog-posts-collage.presets.name",
+      "name": "t:sections.blog-posts-collage.name",
       "settings": {
         "blog": "",
         "post_limit": 3

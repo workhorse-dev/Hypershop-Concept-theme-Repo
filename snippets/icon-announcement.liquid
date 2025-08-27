@@ -1,3 +1,17 @@
+{%- doc -%}
+  Renders feature icons as inline SVGs for products, services, and UI elements.
+
+  @param {string} icon - Icon name to render (e.g., 'truck', 'shield', 'heart')
+  @param {string} [size] - Icon size: 'sm', 'md', 'lg'
+  @param {string} [class] - Additional CSS classes
+
+  @example
+  {% render 'icon-announcement',
+    icon: 'truck',
+    size: 'lg'
+  %}
+{%- enddoc -%}
+
 {%- capture class -%}icon icon-{{ icon | handle }} icon-{{ size | default: 'md' }}{% if class != blank %} {{ class }}{% endif %}{%- endcapture -%}
 {%- case icon -%}
   {%- when 'alert' -%}

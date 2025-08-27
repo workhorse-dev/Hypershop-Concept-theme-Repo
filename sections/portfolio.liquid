@@ -63,7 +63,7 @@
             {%- if section.settings.heading != blank -%}
               <{{ section.settings.heading_tag }} class="heading {{ section.settings.heading_size }}">
                 {%- if section.settings.highlighted_text == 'none' -%}
-                  <split-words class="split-words block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
+                  <split-words class="split-words js-invisible block" data-animate="fade-up-large">{{ section.settings.heading }}</split-words>
                 {%- else -%}
                   {%- liquid
                     assign with_gradient = false
@@ -103,7 +103,7 @@
     {{- title_wrapper -}}
 
     {%- if section.blocks.size > 0 -%}
-      <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
+      <slider-element id="Slider-{{ section.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card"{% if section.settings.carousel_on_desktop or section.settings.swipe_on_mobile %} tabindex="0"{% endif %}>
         <motion-list class="portfolio card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
           {%- if section.settings.layout == 'grid' and title_wrapper != blank -%}
             <div class="profile card slide hidden xl:grid items-end">
@@ -366,12 +366,14 @@
       "label": "t:sections.global.settings.button_link.label"
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_external",
       "label": "t:sections.global.settings.button_external.label",
       "default": false
     },
     {
+      "visible_if": "{{ section.settings.button_label != blank }}",
       "type": "checkbox",
       "id": "button_icon",
       "label": "t:sections.global.settings.button_icon.label",
@@ -419,6 +421,7 @@
       "label": "t:sections.global.settings.highlighted_text.label"
     },
     {
+      "visible_if": "{{ section.settings.highlighted_text == 'scribble' }}",
       "type": "select",
       "id": "highlighted_scribble",
       "options": [
@@ -584,7 +587,7 @@
   ],
   "presets": [
     {
-      "name": "t:sections.portfolio.presets.name",
+      "name": "t:sections.portfolio.name",
       "blocks": [
         {
           "type": "profile"

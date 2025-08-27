@@ -45,7 +45,7 @@
       "login_form_password": "Heslo",
       "login_form_error": "Nesprávné heslo!",
       "login_form_submit": "Přihlásit se",
-      "admin_link_html": "Jste majitel obchodu? <a href=\"\/admin\" class=\"link\">Přihlásit se zde<\/a> ",
+      "admin_link_html": "Jste majitel obchodu? <a href=\"\/admin\" class=\"link\">Přihlásit se zde<\/a>",
       "powered_by_shopify_html": "Tento obchod bude podporován platformou {{ shopify }}"
     },
     "breadcrumbs": {
@@ -123,6 +123,7 @@
       "note": {
         "title": "Poznámka k objednávce",
         "caption": "Speciální pokyny k objednávce",
+        "placeholder": "Poznámka k objednávce",
         "button": "Použít"
       },
       "shipping_calculator": {
@@ -134,6 +135,16 @@
         "not_found": "Omlouváme se, ale na zadanou adresu nelze zboží doručit.",
         "one_result": "Na vaši adresu je k dispozici jedna sazba za dopravu. ",
         "multiple_results": "Na vaši adresu je k dispozici několik sazeb za dopravu."
+      },
+      "discount": {
+        "title": "Sleva",
+        "caption": "Sleva",
+        "placeholder": "Slevový kód",
+        "button": "Použít",
+        "error": "Slevový kód nelze na váš košík uplatnit",
+        "shipping_error": "Slevy na dopravu se zobrazí při placení po přidání adresy.",
+        "applied": "Uplatněný slevový kód: {{ code }}",
+        "remove": "Odebrat slevu {{ code }}"
       },
       "recently_viewed": {
         "empty": "Vaše nedávno zobrazené položky jsou prázdné."
@@ -158,6 +169,11 @@
     }
   },
   "sections": {
+    "announcements": {
+      "carousel": "Karusel",
+      "announcement": "Oznámení",
+      "announcement_bar": "Panel oznámení"
+    },
     "blog_posts": {
       "view_all": "Zobrazit vše"
     },
@@ -177,6 +193,7 @@
       "auth_error_html": "Došlo k problému s ověřením vašeho účtu Google Maps. Vytvořte a povolte <a href=\"https:\/\/developers.google.com\/maps\/documentation\/javascript\/get-api-key\">JavaScript API<\/a> and <a href=\"https:\/\/developers.google.com\/maps\/documentation\/geocoding\/get-api-key\">a Geocoding API<\/a> oprávnění pro vaši aplikaci."
     },
     "slideshow": {
+      "carousel": "Karusel",
       "play_slideshow": "Spustit prezentaci",
       "pause_slideshow": "Pozastavit prezentaci"
     },
@@ -189,7 +206,7 @@
     "quick_order_list": {
       "product_total": "Mezisoučet produktu",
       "view_cart": "Zobrazit košík",
-      "each": "{{ money }}\/ea",
+      "each": "{{ money }}/ea",
       "product": "Produkt",
       "variant": "Varianta",
       "variant_total": "Celkový počet variant",
@@ -260,7 +277,7 @@
     },
     "gift_wrapping": {
       "message_html": "Za {{ price }}, prosím zabalte produkty v této objednávce.",
-      "note_placeholder": "Dárková zpráva (zdarma a volitelná)"
+      "note_placeholder": "Dárková zpráva (Nepovinné)"
     }
   },
   "collections": {
@@ -386,6 +403,7 @@
       "payment_status": "Stav platby",
       "shipping_address": "Dodací adresa",
       "fulfillment_status": "Stav objednávky",
+      "discounts": "Slevy",
       "discount": "Sleva",
       "shipping": "Doprava",
       "tax": "Daň",
@@ -497,7 +515,7 @@
       "title": "Cenová sleva na základě objemu",
       "note": "Dostupná cenová sleva na základě objemu",
       "minimum": "{{ quantity }}+",
-      "price_at_each": "za {{ price }}\/ea",
+      "price_at_each": "za {{ price }}/ea",
       "price_range": "{{ minimum }} - {{ maximum }}"
     },
     "inventory": {

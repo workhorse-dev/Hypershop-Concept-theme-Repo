@@ -23,8 +23,12 @@
     }
   </style>
 
-  <link rel="stylesheet" href="{{ 'newsletter-popup.css' | asset_url }}" media="print" onload="this.media='all'">
-  <noscript>{{ 'newsletter-popup.css' | asset_url | stylesheet_tag }}</noscript>
+  {%- unless request.design_mode -%}
+    <link rel="stylesheet" href="{{ 'newsletter-popup.css' | asset_url }}" media="print" onload="this.media='all'">
+    <noscript>{{ 'newsletter-popup.css' | asset_url | stylesheet_tag }}</noscript>
+  {%- else -%}
+    {{ 'newsletter-popup.css' | asset_url | stylesheet_tag }}
+  {%- endunless -%}
   <script src="{{ 'newsletter-popup.js' | asset_url }}" defer="defer"></script>
 
   <newsletter-modal id="NewsletterModal" class="x-modal newsletter-modal drawer z-35 fixed bottom-0 left-0 h-full w-full pointer-events-none"
@@ -69,14 +73,14 @@
               {%- for block in section.blocks -%}
                 {%- case block.type -%}
                   {%- when 'spacing' -%}
-                    <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px; --spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
+                    <empty-element class="block spacing-section{% if block.settings.height_mobile == 0 %} hidden lg:block{% endif %}{% if block.settings.height == 0 %} lg:hidden{% endif %}" style="--spacing-height-desktop: {{ block.settings.height }}px;--spacing-height-mobile: {{ block.settings.height_mobile }}px;" {{ block.shopify_attributes }}></empty-element>
                     
                   {%- when 'heading' -%}
                     {%- if block.settings.heading != blank -%}
                       {%- assign delay = delay | plus: 1 -%}
                       <{{ block.settings.heading_tag }} id="Dialog-{{ section.id }}-Heading{{ delay }}" class="heading leading-none {{ block.settings.heading_size }}" {{ block.shopify_attributes }}>
                         {%- if block.settings.highlighted_text == 'none' -%}
-                          <split-words class="split-words block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ block.settings.heading }}</split-words>
+                          <split-words class="split-words js-invisible block" data-animate="fade-up-large" data-animate-delay="{{ delay | times: 250 }}">{{ block.settings.heading }}</split-words>
                         {%- else -%}
                           {%- render 'highlighted-text', content: block.settings.heading, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                         {%- endif -%}
@@ -85,24 +89,48 @@
         
                   {%- when 'text' -%}
                     {%- if block.settings.text != blank -%}
-                      <div class="rte leading-normal {{ block.settings.text_font }} {{ block.settings.text_size }}{% if block.settings.secondary_color %} text-opacity{% endif %}"{% if block.settings.text_size == 'subtext-custom' %} style="--subtext-size:{{ block.settings.text_max_size }}px;"{% endif %} {{ block.shopify_attributes }}>
+                      <div class="rte {{ block.settings.text_font }} {{ block.settings.text_size }}{% if block.settings.text_font == 'subtitle' %} uppercase leading-tight tracking-widest{% else %} leading-normal{% endif %}{% if block.settings.secondary_color %} text-opacity{% endif %}"{% if block.settings.text_size == 'subtext-custom' %} style="--subtext-size: {{ block.settings.text_max_size }}px;--subtext-line-height: {{ block.settings.text_line_height }};--subtext-letter-spacing: {{ block.settings.text_letter_spacing | divided_by: 1000.00 }}em;{% if block.settings.text_capitalize %}--subtext-text-transform: uppercase;{% endif %}"{% endif %} {{ block.shopify_attributes }}>
                         {%- render 'highlighted-text', content: block.settings.text, style: block.settings.highlighted_text, scribble: block.settings.highlighted_scribble, gradient: with_gradient -%}
                       </div>
                     {%- endif -%}
     
                   {%- when 'icon' -%}
-                    {%- if block.settings.icon_image != blank -%}
-                      <div class="leading-none" {{ block.shopify_attributes }}>
-                        <figure class="media media--transparent relative inline-block">
-                          {%- capture sizes -%}{{ block.settings.icon_width }}px{%- endcapture -%}
-                          {%- capture widths -%}{{ block.settings.icon_width }}, {{ block.settings.icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
-                          {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, class: 'image-fit' -}}
-                        </figure>
+                    {%- if block.settings.icon != 'none' or block.settings.icon_image != blank -%}
+                      {%- capture icon_content -%}
+                        {%- if block.settings.icon_image != blank -%}
+                          {%- liquid
+                            if block.settings.iwidth == 'fit'
+                              assign icon_width = block.settings.icon_image.width
+                            else
+                              assign icon_width = block.settings.icon_width
+                            endif
+                          -%}
+                          <figure class="media media--transparent relative inline-block" {{ block.shopify_attributes }}>
+                            {%- capture sizes -%}{{ icon_width }}px{%- endcapture -%}
+                            {%- capture widths -%}{{ icon_width }}, {{ icon_width | times: 2 | at_most: block.settings.icon_image.width }}{%- endcapture -%}
+                            {%- assign image_alt = block.settings.icon_image.alt | default: block.settings.accessibility_info | escape -%}
+                            {{- block.settings.icon_image | image_url: width: block.settings.icon_image.width | image_tag: loading: 'lazy', sizes: sizes, widths: widths, alt: image_alt, class: 'image-fit' -}}
+                          </figure>
+                        {%- elsif block.settings.icon != 'none' -%}
+                          {%- liquid
+                            if block.settings.iwidth == 'fit'
+                              render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block', shopify_attributes: block.shopify_attributes
+                            else
+                              render 'icon-guarantee', icon: block.settings.icon, size: 'custom', class: 'inline-block', width: block.settings.icon_width, shopify_attributes: block.shopify_attributes
+                            endif
+                          -%}
+                        {%- endif -%}
+                      {%- endcapture -%}
+
+                      <div class="leading-none">
+                        {%- if block.settings.link != blank -%}
+                          <a class="inline-block" href="{{ block.settings.link }}"{% if block.settings.external %} target="_blank" rel="noopener"{% endif %} aria-label="{{ block.settings.accessibility_info | escape }}">
+                            {{- icon_content -}}
+                          </a>
+                        {%- else -%}
+                          {{- icon_content -}}
+                        {%- endif -%}
                       </div>
-                    {%- elsif block.settings.icon != 'none' -%}
-                      <p class="leading-none" {{ block.shopify_attributes }}>
-                        {%- render 'icon-guarantee', icon: block.settings.icon, size: 'lg', class: 'inline-block' -%}
-                      </p>
                     {%- endif -%}
 
                   {%- when 'image' -%}
@@ -192,6 +220,7 @@
 {% schema %}
 {
   "name": "t:sections.newsletter-popup.name",
+  "class": "newsletter-section",
   "settings": [
     {
       "type": "paragraph",
@@ -452,6 +481,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -494,6 +524,26 @@
         },
         {
           "type": "select",
+          "id": "text_font",
+          "options": [
+            {
+              "value": "body",
+              "label": "t:sections.global.settings.text_font.options__1.label"
+            },
+            {
+              "value": "heading",
+              "label": "t:sections.global.settings.text_font.options__2.label"
+            },
+            {
+              "value": "subtitle",
+              "label": "t:sections.global.settings.text_font.options__3.label"
+            }
+          ],
+          "default": "body",
+          "label": "t:sections.global.settings.text_font.label"
+        },
+        {
+          "type": "select",
           "id": "text_size",
           "options": [
             {
@@ -521,6 +571,7 @@
           "label": "t:sections.global.settings.text_size.label"
         },
         {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
           "type": "range",
           "id": "text_max_size",
           "default": 32,
@@ -531,20 +582,30 @@
           "label": "t:sections.global.settings.text_max_size.label"
         },
         {
-          "type": "select",
-          "id": "text_font",
-          "options": [
-            {
-              "value": "body",
-              "label": "t:sections.global.settings.text_font.options__1.label"
-            },
-            {
-              "value": "heading",
-              "label": "t:sections.global.settings.text_font.options__2.label"
-            }
-          ],
-          "default": "body",
-          "label": "t:sections.global.settings.text_font.label"
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "range",
+          "id": "text_line_height",
+          "label": "t:sections.global.settings.text_line_height.label",
+          "default": 1.6,
+          "min": 0.8,
+          "max": 2,
+          "step": 0.1
+        },
+        {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "range",
+          "id": "text_letter_spacing",
+          "label": "t:sections.global.settings.text_letter_spacing.label",
+          "default": 0,
+          "min": -75,
+          "max": 250,
+          "step": 5
+        },
+        {
+          "visible_if": "{{ block.settings.text_size == 'subtext-custom' }}",
+          "type": "checkbox",
+          "id": "text_capitalize",
+          "label": "t:sections.global.settings.text_capitalize.label"
         },
         {
           "type": "checkbox",
@@ -594,6 +655,7 @@
           "label": "t:sections.global.settings.highlighted_text.label"
         },
         {
+          "visible_if": "{{ block.settings.highlighted_text == 'scribble' }}",
           "type": "select",
           "id": "highlighted_scribble",
           "options": [
@@ -725,7 +787,7 @@
           "type": "select",
           "id": "icon",
           "label": "t:sections.global.settings.icon.label",
-          "default": "none",
+          "default": "tag",
           "options": [
             {
               "value": "none",
@@ -963,14 +1025,49 @@
           "label": "t:sections.global.settings.icon_image.label"
         },
         {
+          "type": "select",
+          "id": "iwidth",
+          "label": "t:sections.global.settings.icon_width.label",
+          "options": [
+            {
+              "value": "fit",
+              "label": "t:sections.global.settings.icon_width.options__1.label"
+            },
+            {
+              "value": "custom",
+              "label": "t:sections.global.settings.icon_width.options__2.label"
+            }
+          ],
+          "default": "custom"
+        },
+        {
           "type": "range",
           "id": "icon_width",
-          "label": "t:sections.global.settings.icon_width.label",
+          "label": "t:sections.global.settings.custom_width.label",
           "default": 48,
           "min": 10,
-          "max": 120,
+          "max": 200,
           "step": 2,
-          "unit": "px"
+          "unit": "px",
+          "visible_if": "{{ block.settings.iwidth == 'custom' }}"
+        },
+        {
+          "type": "url",
+          "id": "link",
+          "label": "t:sections.global.settings.link.label"
+        },
+        {
+          "type": "text",
+          "id": "accessibility_info",
+          "label": "t:sections.global.settings.accessibility.label",
+          "info": "t:sections.global.settings.accessibility.info",
+          "visible_if": "{{ block.settings.link != blank }}"
+        },
+        {
+          "type": "checkbox",
+          "id": "external",
+          "label": "t:sections.global.settings.button_external.label",
+          "default": false
         }
       ]
     },
@@ -1000,6 +1097,7 @@
           "label": "t:sections.global.settings.image_width.label"
         },
         {
+          "visible_if": "{{ block.settings.image_width == 'custom' }}",
           "type": "range",
           "id": "image_max_width",
           "label": "t:sections.global.settings.image_max_width.label",
@@ -1010,6 +1108,7 @@
           "unit": "px"
         },
         {
+          "visible_if": "{{ block.settings.image_width == 'custom' }}",
           "type": "range",
           "id": "image_max_width_mobile",
           "label": "t:sections.global.settings.image_max_width_mobile.label",
@@ -1114,12 +1213,6 @@
           "info": "t:sections.newsletter-popup.blocks.floating.settings.show_social.info"
         },
         {
-          "type": "text",
-          "id": "social_heading",
-          "default": "Follow us",
-          "label": "t:sections.newsletter-popup.blocks.floating.settings.social_heading.label"
-        },
-        {
           "type": "header",
           "content": "t:sections.global.settings.header__mobile.content"
         },
@@ -1130,6 +1223,7 @@
           "default": true
         },
         {
+          "visible_if": "{{ block.settings.mobile_disabled == false }}",
           "type": "checkbox",
           "id": "mobile_hide_social",
           "label": "t:sections.newsletter-popup.blocks.floating.settings.mobile_hide_social.label",
