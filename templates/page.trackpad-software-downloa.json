@@ -47,6 +47,7 @@
       "block_order": [
         "image_mdG8ch"
       ],
+      "disabled": true,
       "name": "t:sections.slideshow.presets.name",
       "settings": {
         "autoplay": false,
@@ -79,7 +80,7 @@
         "heading_GThXer": {
           "type": "heading",
           "settings": {
-            "heading": "Committed to Net Zero by 2050",
+            "heading": "Hydra Connect",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h1",
             "highlighted_text": "none",
@@ -89,7 +90,7 @@
         "text_eCGxPy": {
           "type": "text",
           "settings": {
-            "text": "<h3><strong>Our Sustainability Goals Through 2030</strong></h3><p>We have mapped out a clear Sustainability Roadmap to 2030, and it’s a team effort. From leadership to product designers to global suppliers, everyone plays a role in hitting these goals. It’s not always easy, and the road ahead comes with tough decisions, but we are ready to make it happen. We are focusing on three core areas:</p>",
+            "text": "<h3><strong>Download The Software For Hydra Connect</strong></h3>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -98,23 +99,22 @@
             "highlighted_scribble": "circle"
           }
         },
-        "text_XqcQcn": {
-          "type": "text",
+        "button_xGrMha": {
+          "type": "button",
           "settings": {
-            "text": "<h3><strong>Design</strong></h3><p>Using more recycled aluminium and plastics, simplifying components and adopting energy-efficient parts. Exploring new thermal tech to boost recycled content in power products.</p><h3><strong>Development</strong></h3><p>Streamlining production with smarter design, fewer steps and less waste. Using shared tooling, modular molds and working only with suppliers who meet high environmental standards.</p><h3><strong>Packaging </strong></h3><p>Reducing packaging size and shipping emissions, cutting paper use with digital guides and improving overall packaging efficiency. </p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
+            "button_label": "Download",
+            "button_link": "https://peratech.egnyte.com/dl/3TtGRyycVtxC",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
           }
         }
       },
       "block_order": [
         "heading_GThXer",
         "text_eCGxPy",
-        "text_XqcQcn"
+        "button_xGrMha"
       ],
       "settings": {
         "text_alignment": "center",
@@ -143,195 +143,6 @@
         "padding_top": 20,
         "padding_bottom": 56,
         "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
-    "rich_text_KGDb9T": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_k9e7Yj": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Accountability Matters</strong>",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text_qydwEa": {
-          "type": "text",
-          "settings": {
-            "text": "<p>Our roadmap isn’t just a plan—it’s a promise. We are setting annual goals, tracking progress, building dedicated sustainability teams, and sharing updates openly. At Hyper, we are committed to do what’s right for our people, our business, and the planet.</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "heading_k9e7Yj",
-        "text_qydwEa"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "rgba(0,0,0,0)",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 20,
-        "padding_bottom": 56,
-        "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
-    "rich_text_VL7nzV": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_aAppeF": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Purpose at the Core</strong>",
-            "heading_size": "title-sm",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text_BMVrrG": {
-          "type": "text",
-          "settings": {
-            "text": "<p>We are transforming into a purpose-driven company, putting sustainability front and center in everything we do worldwide.</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "heading_aAppeF",
-        "text_BMVrrG"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "rgba(0,0,0,0)",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 20,
-        "padding_bottom": 56,
-        "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
-    "rich_text_iwx6tG": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_dHNmkg": {
-          "type": "heading",
-          "settings": {
-            "heading": "<strong>Welcome to our 2025 Hyper Sustainability Report</strong>",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "heading_dHNmkg"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "#fafafa",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 56,
-        "divider": false,
-        "narrow": false,
-        "rounded": false
-      }
-    },
-    "custom_liquid_HWeezd": {
-      "type": "custom-liquid",
-      "name": "t:sections.custom-liquid.presets.name",
-      "settings": {
-        "liquid": "<iframe allowfullscreen=\"allowfullscreen\" allow=\"clipboard-write\" scrolling=\"no\" class=\"fp-iframe\" src=\"https://targus.aflip.in/37a4ee5573.html\" style=\"border: 1px solid lightgray; width: 100%; height: 800px;\"></iframe>",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 0,
-        "padding_bottom": 72,
-        "divider": false,
-        "page-width": false,
         "narrow": false,
         "rounded": false
       }
@@ -340,10 +151,6 @@
   "order": [
     "main-page",
     "slideshow_zE8qhB",
-    "rich_text_Nwm3jV",
-    "rich_text_KGDb9T",
-    "rich_text_VL7nzV",
-    "rich_text_iwx6tG",
-    "custom_liquid_HWeezd"
+    "rich_text_Nwm3jV"
   ]
 }
