@@ -305,17 +305,6 @@
         "type": "shopify://apps/triplewhale/blocks/triple_pixel_snippet/483d496b-3f1a-4609-aea7-8eee3b6b7a2a",
         "disabled": false,
         "settings": {}
-      },
-      "12439146293631897289": {
-        "type": "shopify://apps/blockify-fraud-filter/blocks/app_embed/2e3e0ba5-0e70-447a-9ec5-3bf76b5ef12e",
-        "disabled": true,
-        "settings": {}
-      },
-      "17868308261682785792": {
-        "type": "shopify://apps/armex/blocks/armex-extension/7fd274f7-e6a1-4512-8228-f11c90d2ef69",
-
-        "disabled": false,
-        "settings": {}
       }
     }
   },
@@ -646,5 +635,10 @@
         }
       }
     }
+  },
+  "platform_customizations": {
+    "custom_css": [
+      ".grecaptcha-badge {position: absolute !important; bottom: 0; right: 0; z-index: 1;}"
+    ]
   }
 }
