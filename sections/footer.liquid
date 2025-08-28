@@ -14,7 +14,7 @@
 -%}
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}"{% if section.settings.enable_parallax %} is="footer-parallax"{% endif %}>
-  <footer class="footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid">
+  <footer class="site-footer footer{% if enable_footer_info %}{% if section.settings.invert_newsletter_others %} footer--inverted{% endif %}{% else %} footer--no-info{% endif %} page-width{% if section.settings.full_width %} page-width--full{% endif %} relative grid">
     {%- if section.blocks.size > 0 -%}
       <div class="footer__left flex flex-col md:flex-row gap-10 grid-col-span-5">
         {%- liquid

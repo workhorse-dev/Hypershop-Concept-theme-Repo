@@ -148,5 +148,18 @@
   });
   </script>
   {% render 'trending-section-script' %}
+  <script>
+  window.addEventListener('load', function () {
+    var badge = document.querySelector('.grecaptcha-badge');
+    var footer = document.querySelector('.site-footer'); // Adjust this selector to your actual footer
+    if (badge && footer && !footer.contains(badge)) {
+      // Wrap it in a container to style it easily
+      var wrapper = document.createElement('div');
+      wrapper.className = 'recaptcha-badge-wrapper';
+      wrapper.appendChild(badge);
+      footer.appendChild(wrapper);
+    }
+  });
+</script>
 </body>
 </html>
