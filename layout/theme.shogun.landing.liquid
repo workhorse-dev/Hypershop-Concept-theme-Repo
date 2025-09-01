@@ -123,6 +123,19 @@ This file can be re-written at any time.
     }
   });
   </script>
+<script>
+  window.addEventListener('load', function () {
+    var badge = document.querySelector('.grecaptcha-badge');
+    var footer = document.querySelector('.site-footer'); // Adjust this selector to your actual footer
+    if (badge && footer && !footer.contains(badge)) {
+      // Wrap it in a container to style it easily
+      var wrapper = document.createElement('div');
+      wrapper.className = 'recaptcha-badge-wrapper';
+      wrapper.appendChild(badge);
+      footer.appendChild(wrapper);
+    }
+  });
+</script>
     <style type="text/css">
       body, html {
         width: 100% !important;
