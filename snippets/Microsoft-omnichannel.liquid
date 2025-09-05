@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "10px",
+          bottom: "50%",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -94,39 +94,7 @@
 <script>
   const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
   const width = screen.width;
-  {% comment %} if (chatWidget &&  width > 470) {
+  if (chatWidget &&  width > 470) {
       chatWidget.style.transform = 'translateY(calc(50% + 100px))';
-    } {% endcomment %}
-</script>
-
-<script>
-  document.addEventListener("DOMContentLoaded", function () {
-    const chatObserver = setInterval(() => {
-      const chatBtn = document.querySelector("#oc-lcw-chat-button"); // your chat button
-      const footer = document.querySelector(".footer-group");
-
-      if (chatBtn && footer) {
-        chatBtn.classList.add("custom-chat-button");
-
-        function adjustChatButton() {
-          const footerRect = footer.getBoundingClientRect();
-          const windowHeight = window.innerHeight;
-
-          // If footer is visible in viewport → push chat button up
-          if (footerRect.top < windowHeight) {
-            chatBtn.style.bottom = "120px";
-          } else {
-            chatBtn.style.bottom = "10px";
-          }
-        }
-
-        // Run on scroll + resize
-        window.addEventListener("scroll", adjustChatButton);
-        window.addEventListener("resize", adjustChatButton);
-
-        adjustChatButton(); // Run once at load
-        clearInterval(chatObserver); // stop checking
-      }
-    }, 500);
-  });
+    }
 </script>
