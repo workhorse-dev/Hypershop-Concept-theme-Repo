@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "10px",
+          bottom: "50%",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -88,33 +88,6 @@
       lcwScript.setAttribute("data-customization-callback", "lcw");
 
       document.body.appendChild(lcwScript);
-
-       const adjustChatButton = () => {
-        const chatBtn = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Button');
-        const captcha = document.querySelector('.grecaptcha-badge');
-
-        if (chatBtn) {
-          if (captcha) {
-            const captchaRect = captcha.getBoundingClientRect();
-            console.log("hello",captchaRect);
-            const windowHeight = window.innerHeight;
-            const distanceFromBottom = windowHeight - captchaRect.top;
-
-            // Place button just above captcha with 10px gap
-            chatBtn.style.bottom = (distanceFromBottom + 10) + "px";
-          } else {
-            // Default position
-            chatBtn.style.bottom = "10px";
-          }
-        }
-      };
-
-      // Run after widget loads
-      setTimeout(adjustChatButton, 3000);
-
-      window.addEventListener("resize", adjustChatButton);
-      window.addEventListener("scroll", adjustChatButton);
-      setInterval(adjustChatButton, 2000);
     }, 5000); // Delay 3s after load
   });
 </script>
