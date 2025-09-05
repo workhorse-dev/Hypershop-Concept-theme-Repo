@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "10px",
+          bottom: "50%",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -97,38 +97,4 @@
   if (chatWidget &&  width > 470) {
       chatWidget.style.transform = 'translateY(calc(50% + 100px))';
     }
-</script>
-
-<script>
-  function adjustChatOnScroll() {
-    const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
-    if (!chatWidget) return;
-
-    const scrollY = window.scrollY || window.pageYOffset;
-    const windowHeight = window.innerHeight;
-    const docHeight = document.documentElement.scrollHeight;
-
-    // Distance from bottom
-    const distanceFromBottom = docHeight - (scrollY + windowHeight);
-
-    if (distanceFromBottom <= 160) {
-      // Footer se 40px pehle pohch gaye
-      chatWidget.style.bottom = "180px";
-    } else {
-      // Normal condition
-      chatWidget.style.bottom = "10px";
-    }
-
-    chatWidget.style.right = "20px";
-    chatWidget.style.position = "fixed";
-    chatWidget.style.zIndex = "9999";
-  }
-
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      adjustChatOnScroll();
-      window.addEventListener('scroll', adjustChatOnScroll);
-      window.addEventListener('resize', adjustChatOnScroll);
-    }, 2000); // wait widget to load
-  });
 </script>
