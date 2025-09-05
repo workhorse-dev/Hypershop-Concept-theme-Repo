@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "50%",
+          bottom: "10px",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -97,4 +97,23 @@
   if (chatWidget &&  width > 470) {
       chatWidget.style.transform = 'translateY(calc(50% + 100px))';
     }
+</script>
+
+<script>
+  window.addEventListener("scroll", () => {
+    const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
+    if (!chatWidget) return;
+
+    // Kitna scroll hua aur page height
+    const scrollTop = window.scrollY || document.documentElement.scrollTop;
+    const windowHeight = window.innerHeight;
+    const docHeight = document.documentElement.scrollHeight;
+
+    // Agar user bilkul bottom pe hai
+    if (scrollTop + windowHeight >= docHeight - 5) {
+      chatWidget.style.bottom = "70px"; // bottom change
+    } else {
+      chatWidget.style.bottom = "10px"; // default
+    }
+  });
 </script>
