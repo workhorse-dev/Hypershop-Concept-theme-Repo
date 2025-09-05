@@ -122,6 +122,8 @@
       {{ content_for_layout }}
     </main>
 
+     {% render 'Microsoft-omnichannel' %}
+
     <footer-group class="footer-group block w-full">
       {%- sections 'footer-group' -%}
     </footer-group>
@@ -135,7 +137,7 @@
   {%- if request.design_mode == false and settings.preload_links -%}
     <script src="{{ 'instant-page.js' | asset_url }}" type="module" fetchpriority="low" defer="defer"></script>
   {%- endif -%}
-  {% render 'Microsoft-omnichannel' %}
+  {% comment %} {% render 'Microsoft-omnichannel' %} {% endcomment %}
   {% render 'mouseflow' %}
   <script>
     document.addEventListener("DOMContentLoaded", function () {
