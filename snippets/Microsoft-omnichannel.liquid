@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "50%",
+          bottom: "10px",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -88,6 +88,27 @@
       lcwScript.setAttribute("data-customization-callback", "lcw");
 
       document.body.appendChild(lcwScript);
+
+
+      const adjustPosition = () => {
+        const chatFrame = document.querySelector("#oc-lcw");
+        const footer = document.querySelector(".footer-group");
+
+        if (chatFrame && footer) {
+          const footerRect = footer.getBoundingClientRect();
+          const windowHeight = window.innerHeight;
+
+          if (footerRect.top < windowHeight) {
+            chatFrame.style.bottom = "120px"; // 👈 push up when footer visible
+          } else {
+            chatFrame.style.bottom = "10px"; // 👈 normal case
+          }
+        }
+      };
+       window.addEventListener("scroll", adjustPosition);
+      window.addEventListener("resize", adjustPosition);
+      setInterval(adjustPosition, 1000);
+
     }, 5000); // Delay 3s after load
   });
 </script>
