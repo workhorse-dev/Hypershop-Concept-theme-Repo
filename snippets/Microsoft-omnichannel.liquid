@@ -88,7 +88,8 @@
       lcwScript.setAttribute("data-org-url", "https://m-f2015019-2dea-4f2f-9c31-487a8cc6d38f.us.omnichannelengagementhub.com");
       lcwScript.setAttribute("data-customization-callback", "lcw");
 
-      document.body.appendChild(lcwScript);
+      {% comment %} document.body.appendChild(lcwScript); {% endcomment %}
+       document.getElementById("chat-widget-container").appendChild(lcwScript);
     }, 5000); // Delay 3s after load
   });
 </script>
