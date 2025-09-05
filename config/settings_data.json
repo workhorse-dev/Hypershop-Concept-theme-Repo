@@ -638,8 +638,8 @@
   },
   "platform_customizations": {
     "custom_css": [
-      ".grecaptcha-badge {position: absolute; bottom: 0; right: 0; z-index: 1;}",
-      ".recaptcha-badge-wrapper{position:absolute !important; overflow:hidden !important;}"
+      ".grecaptcha-badge {position: absolute; bottom: 56px !important; right: 0; z-index: 1;}",
+      ".recaptcha-badge-wrapper {position: absolute !important; overflow: hidden !important;}"
     ]
   }
 }
