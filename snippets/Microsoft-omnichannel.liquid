@@ -6,7 +6,7 @@
         generalStyles: {
           width: "360px",
           height: "560px",
-          bottom: "10px",
+          bottom: "50%",
           right: "20px",
           top: "unset",
           left: "unset"
@@ -97,37 +97,4 @@
   if (chatWidget &&  width > 470) {
       chatWidget.style.transform = 'translateY(calc(50% + 100px))';
     }
-</script>
-
-<script>
-  function adjustChatWidget() {
-    const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
-    const recaptcha = document.querySelector('.rc-anchor'); // reCAPTCHA element
-
-    if (chatWidget && recaptcha) {
-      const recaptchaRect = recaptcha.getBoundingClientRect();
-      const widgetHeight = chatWidget.offsetHeight;
-
-      // Distance from bottom jahan se recaptcha start hota hai
-      const recaptchaFromBottom = window.innerHeight - recaptchaRect.top;
-
-      // Default bottom 10px
-      let newBottom = 10;
-
-      // Agar overlap ho raha hai to widget ko recaptcha ke upar set karo
-      if (widgetHeight + 10 > recaptchaFromBottom) {
-        newBottom = recaptchaFromBottom + 10;
-      }
-
-      chatWidget.style.bottom = newBottom + "px";
-    }
-  }
-
-  // Har thodi der me check karte raho (kyunki reCAPTCHA lazy load bhi ho sakta hai)
-  window.addEventListener('load', () => {
-    setInterval(adjustChatWidget, 500); 
-  });
-
-  // Resize hone pe bhi adjust karo
-  window.addEventListener('resize', adjustChatWidget);
 </script>
