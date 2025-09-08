@@ -173,6 +173,8 @@
 
       s.setAttribute("data-widget_layout", "full")
       s.setAttribute("data-account", "2xDigTdBpS");
+       s.removeAttribute("integrity");
+       s.removeAttribute("crossorigin");
       s.setAttribute("src", "https://cdn.userway.org/widget.js");
       (d.body || d.head).appendChild(s);
     })(document)
