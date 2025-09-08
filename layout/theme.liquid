@@ -195,14 +195,11 @@
     <noscript>Please ensure Javascript is enabled for purposes of <a href="https://userway.org">website accessibility</a></noscript>
  <script>
   window.addEventListener("load", function () {
-    // give UserWay time to render
     setTimeout(function () {
       const uw = document.querySelector(".userway_buttons_wrapper");
       if (uw) {
         uw.style.setProperty("left", "50px", "important");
         uw.style.setProperty("bottom", "50px", "important");
-        uw.style.setProperty("right", "auto", "important");
-        uw.style.setProperty("top", "auto", "important");
       }
     }, 2000);
   });
