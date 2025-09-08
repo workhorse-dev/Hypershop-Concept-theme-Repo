@@ -193,6 +193,28 @@
     })(document)
     </script>
     <noscript>Please ensure Javascript is enabled for purposes of <a href="https://userway.org">website accessibility</a></noscript>
+<script>
+  (function() {
+  function fixUserway() {
+    const el = document.querySelector('.userway_buttons_wrapper');
+    if (!el) return;
+    // option A remove all inline styles
+    // el.removeAttribute('style');
 
+    // option B set specific properties with priority important
+    el.style.setProperty('left', '20px', 'important');
+    el.style.setProperty('bottom', '20px', 'important');
+
+    // if you only want to run once
+    mo.disconnect();
+  }
+
+  const mo = new MutationObserver(fixUserway);
+  mo.observe(document.body, { childList: true, subtree: true });
+
+  // also try once on window load
+  window.addEventListener('load', () => setTimeout(fixUserway, 300));
+})();
+</script>
 </body>
 </html>
