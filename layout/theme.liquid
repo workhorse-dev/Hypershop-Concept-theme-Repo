@@ -164,22 +164,42 @@
 
 {% comment %} accessibility widget {% endcomment %}
 
+<!-- Accessibility Widget -->
 <script>
-    (function(d){
-      var s = d.createElement("script");
-       s.setAttribute("data-position", "2");
-       s.setAttribute("data-mobile", "true");
-       s.setAttribute("data-z-index", "10001");
+  (function(d){
+    var s = d.createElement("script");
 
-      s.setAttribute("data-widget_layout", "full")
-      s.setAttribute("data-account", "2xDigTdBpS");
-       s.removeAttribute("integrity");
-       s.removeAttribute("crossorigin");
-      s.setAttribute("src", "https://cdn.userway.org/widget.js");
-      (d.body || d.head).appendChild(s);
-    })(document)
-    </script>
-    <noscript>Please ensure Javascript is enabled for purposes of <a href="https://userway.org">website accessibility</a></noscript>
+    // Widget options
+    s.setAttribute("data-position", "2"); // bottom-left
+    s.setAttribute("data-mobile", "true");
+    s.setAttribute("data-z-index", "10001");
+    s.setAttribute("data-widget_layout", "full");
+    s.setAttribute("data-account", "2xDigTdBpS");
+    s.setAttribute("src", "https://cdn.userway.org/widget.js");
+
+    // ✅ ensure no integrity/crossorigin
+    s.onload = function() {
+      // Just in case: cleanup integrity attributes from any child scripts
+      setTimeout(() => {
+        document.querySelectorAll("script[integrity]").forEach(el => {
+          if (el.src.includes("userway.org")) {
+            el.removeAttribute("integrity");
+            el.removeAttribute("crossorigin");
+          }
+        });
+      }, 1000);
+    };
+
+    (d.body || d.head).appendChild(s);
+  })(document);
+</script>
+
+<noscript>
+  Please ensure Javascript is enabled for purposes of 
+  <a href="https://userway.org">website accessibility</a>
+</noscript>
+<!-- End Accessibility Widget -->
+
 
 </body>
 </html>
