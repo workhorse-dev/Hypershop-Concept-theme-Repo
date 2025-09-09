@@ -643,7 +643,8 @@
       ".uwy.userway_p4 .userway_buttons_wrapper {bottom: 50px !important; left: 50px !important;}",
       ".csm-ccd-category-wrapper {display: none !important;}",
       "#cookieconsent\\:settings .csm-ccd-category-wrapper {display: block !important;}",
-      ".csm-ccd-buttons-wrapper > div:first-child {flex-direction: column !important; }"
+      ".csm-ccd-buttons-wrapper > div:first-child {flex-direction: column !important;}",
+      ".csm-dialog{max-width:450px !important;}"
     ]
   }
 }
