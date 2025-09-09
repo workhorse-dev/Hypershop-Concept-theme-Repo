@@ -642,7 +642,8 @@
       ".recaptcha-badge-wrapper {position: absolute !important; overflow: hidden !important;}",
       ".uwy.userway_p4 .userway_buttons_wrapper {bottom: 50px !important; left: 50px !important;}",
       ".csm-ccd-category-wrapper {display: none !important;}",
-      "#cookieconsent\\:settings .csm-ccd-category-wrapper {display: block !important;}"
+      "#cookieconsent\\:settings .csm-ccd-category-wrapper {display: block !important;}",
+      ".csm-ccd-buttons-wrapper > div:first-child {flex-direction: column !important; }"
     ]
   }
 }
