@@ -640,7 +640,12 @@
     "custom_css": [
       ".grecaptcha-badge {position: absolute; bottom: 62px !important; right: 0; z-index: 1;}",
       ".recaptcha-badge-wrapper {position: absolute !important; overflow: hidden !important;}",
-      ".uwy.userway_p4 .userway_buttons_wrapper {bottom: 50px !important; left: 50px !important;}"
+      ".uwy.userway_p4 .userway_buttons_wrapper {bottom: 50px !important; left: 50px !important;}",
+      ".csm-cookie-consent .csm-ccd-category-wrapper {display: none !important;}",
+      "#cookieconsent\\:settings .csm-ccd-category-wrapper {display: block !important;}",
+      ".csm-cookie-consent .csm-ccd-buttons-wrapper > div:first-child {flex-direction: column !important;}",
+      ".csm-cookie-consent .csm-dialog {max-width: 450px !important;}",
+      "div[title=\"Accessibility Menu\"] {z-index: 8;}"
     ]
   }
 }
