@@ -61,11 +61,9 @@
       <div class="media-card__content flex justify-between items-center gap-4 w-full text-{{ settings.card_text_alignment }}">
         <div class="media-card__text shrink-1 grid gap-0d5">
           <p>
-            {% comment %} <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative"> {% endcomment %}
              <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative" style="display:inline-block;">
               {{- collection_title | escape -}}
               {%- if show_products_count and collection.all_products_count > 0 -%}
-                {% comment %} <small class="count font-medium absolute text-xs tracking-none whitespace-nowrap"> {% endcomment %}
                  <small 
                   class="count font-medium absolute text-xs tracking-none whitespace-nowrap" 
                   style="position:absolute; top:0; right:0; transform:translateY(-40%);"
