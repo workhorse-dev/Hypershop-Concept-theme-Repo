@@ -80,7 +80,7 @@
         "heading_GThXer": {
           "type": "heading",
           "settings": {
-            "heading": "Hydra Connect",
+            "heading": "<strong>Information On How to Report Security Issues</strong> ",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h1",
             "highlighted_text": "none",
@@ -90,7 +90,7 @@
         "text_eCGxPy": {
           "type": "text",
           "settings": {
-            "text": "<h3><strong>Download The Software For Hydra Connect</strong></h3>",
+            "text": "<p>Hyper is committed to the security and privacy of our customers and the ongoing stability of our products and services. We maintain strong processes for managing and responding to reports regarding product security and user privacy. </p><p>We encourage all individuals and organizations to report identified or suspected vulnerabilities in any Hyper product or service. </p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -98,23 +98,288 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
-        },
-        "button_xGrMha": {
-          "type": "button",
-          "settings": {
-            "button_label": "Download",
-            "button_link": "https://peratech.egnyte.com/dl/3TtGRyycVtxC",
-            "button_style": "primary",
-            "button_size": "md",
-            "button_external": false,
-            "button_icon": true
-          }
         }
       },
       "block_order": [
         "heading_GThXer",
-        "text_eCGxPy",
-        "button_xGrMha"
+        "text_eCGxPy"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich_text_VVqaAt": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_dALXL4": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Reporting a Security Vulnerability</strong> ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_UJJf7G": {
+          "type": "text",
+          "settings": {
+            "text": "<p>To report a potential security or privacy issue, contact Hyper at <a href=\"mailto:support@hypershop.com\" target=\"_blank\"><span style=\"text-decoration:underline\">support@hypershop.com</span></a>. Reports must include: </p><ul><li>The product model and software version </li><li>A detailed description of the identified or suspected vulnerability </li></ul><p>Hyper will acknowledge receipt of the report within 15 business days </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_dALXL4",
+        "text_UJJf7G"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich_text_mgKqFH": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_Cn9mEJ": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Responsible Reporting Guidelines</strong> ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_GWK7gK": {
+          "type": "text",
+          "settings": {
+            "text": "<p>All parties submitting vulnerability reports are expected to: </p><ol><li>Comply with all applicable laws and regulations. </li><li>Base all reports on the latest released firmware. </li><li>Use the dedicated channel (<a href=\"mailto:support@hypershop.com\" target=\"_blank\"><span style=\"text-decoration:underline\">support@hypershop.com</span></a>) for submitting reports. </li><li>Adhere to data protection best practices and avoid actions that compromise the privacy or security of Hyper’s users, employees, agents, services, or systems. </li><li>Refrain from disclosing any information about the vulnerability to third parties prior to an agreed-upon disclosure date. </li></ol><p>Please note that Hyper does not operate a vulnerability bounty program at this time. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_Cn9mEJ",
+        "text_GWK7gK"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich_text_QQYEHW": {
+      "type": "rich-text",
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "<strong>How Hyper Deals with Vulnerabilities</strong> ",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich_text_TY9Cir": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_eHPwqk": {
+          "type": "heading",
+          "settings": {
+            "heading": "",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_zqFXTN": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hyper actively encourages customers, vendors, independent researchers, and security organizations to report any potential vulnerabilities to our security team. In addition to reviewing submitted reports, Hyper proactively monitors the broader security community, vulnerability repositories, and industry security websites to identify risks as early as possible. </p><p>When a vulnerability is reported, our process includes: </p><p> </p><ol><li><strong>Awareness and Receipt: </strong>Hyper’s security team reviews all reports as soon as they are received. We aim to acknowledge receipt of your report within 15 business days. </li><li><strong>Verification:</strong> Together with our product team, we carry out a thorough preliminary analysis and validation to determine the validity, severity, and potential impact of the vulnerability. We may reach out to the reporter to request additional details, if needed. </li><li><strong>Remediation</strong>: Once a vulnerability is confirmed, Hyper develops and implements an appropriate remediation plan. Most issues are addressed within 90 days, though particularly complex cases may require extra time. We provide ongoing updates as progress is made. </li><li><strong>Notification:</strong> Hyper will issue a security advisory when one or more of the following conditions are met: </li></ol><ul><li>The vulnerability is rated CRITICAL by the Hyper security team and we have completed our response process, with effective mitigation or solutions available for customers. </li><li>The vulnerability has been actively exploited or is likely to increase security risk or public concern for Hyper customers. In such cases, Hyper will expedite the release of a security bulletin, which may include a full firmware patch or an emergency fix. </li></ul>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": true,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_eHPwqk",
+        "text_zqFXTN"
+      ],
+      "settings": {
+        "text_alignment": "center",
+        "text_alignment_mobile": "center",
+        "heading": "",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_width": "small",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "rgba(0,0,0,0)",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 20,
+        "padding_bottom": 56,
+        "divider": false,
+        "narrow": false,
+        "rounded": false
+      }
+    },
+    "rich_text_b9ricg": {
+      "type": "rich-text",
+      "blocks": {
+        "heading_jCxcCe": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Security Update Support Period</strong> ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h1",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_pjVLxi": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Hyper is committed to supporting security updates for our products as specified below. </p><p>*This list is regularly updated and subject to change without notice. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        }
+      },
+      "block_order": [
+        "heading_jCxcCe",
+        "text_pjVLxi"
       ],
       "settings": {
         "text_alignment": "center",
@@ -151,6 +416,11 @@
   "order": [
     "main-page",
     "slideshow_zE8qhB",
-    "rich_text_Nwm3jV"
+    "rich_text_Nwm3jV",
+    "rich_text_VVqaAt",
+    "rich_text_mgKqFH",
+    "rich_text_QQYEHW",
+    "rich_text_TY9Cir",
+    "rich_text_b9ricg"
   ]
 }
