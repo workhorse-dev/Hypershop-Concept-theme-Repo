@@ -259,6 +259,20 @@
     },
     "rich_text_QQYEHW": {
       "type": "rich-text",
+      "blocks": {
+        "image_fckUp7": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/UK_PSTI_Process.jpg",
+            "image_width": "custom",
+            "image_max_width": 680,
+            "image_max_width_mobile": 340
+          }
+        }
+      },
+      "block_order": [
+        "image_fckUp7"
+      ],
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
@@ -375,11 +389,21 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "image_eC8Jjw": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/UK_PSTI_Total.jpg",
+            "image_width": "custom",
+            "image_max_width": 680,
+            "image_max_width_mobile": 260
+          }
         }
       },
       "block_order": [
         "heading_jCxcCe",
-        "text_pjVLxi"
+        "text_pjVLxi",
+        "image_eC8Jjw"
       ],
       "settings": {
         "text_alignment": "center",
