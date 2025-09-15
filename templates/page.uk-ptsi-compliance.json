@@ -260,10 +260,20 @@
     "rich_text_QQYEHW": {
       "type": "rich-text",
       "blocks": {
+        "heading_QhgxtP": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>How Hyper Deals with Vulnerabilities</strong> ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
         "image_fckUp7": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/UK_PSTI_Process.jpg",
+            "image": "shopify://shop_images/UK_PSTI_Process_708f0742-d2f1-4b53-88a3-4eceef059767.jpg",
             "image_width": "custom",
             "image_max_width": 680,
             "image_max_width_mobile": 340
@@ -271,12 +281,13 @@
         }
       },
       "block_order": [
+        "heading_QhgxtP",
         "image_fckUp7"
       ],
       "settings": {
         "text_alignment": "center",
         "text_alignment_mobile": "center",
-        "heading": "<strong>How Hyper Deals with Vulnerabilities</strong> ",
+        "heading": "",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_width": "small",
@@ -298,7 +309,7 @@
         "color_button_background": "",
         "color_button_gradient": "",
         "padding_top": 20,
-        "padding_bottom": 56,
+        "padding_bottom": 24,
         "divider": false,
         "narrow": false,
         "rounded": false
