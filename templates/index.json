@@ -28,6 +28,22 @@
             "button_icon": false
           }
         },
+        "slide-2": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/trackpad-banner-r01-v01-2000x2000_50c8464b-5feb-4978-b354-200117a189e8.webp",
+            "image_mobile": "shopify://shop_images/trackpad-mobile-banner-v01-r02-500x600.webp",
+            "heading": "The World's Most Advanced Trackpad for Windows",
+            "subheading": "The HyperSpace™ Trackpad Pro is almost here. Reserve now for just $3 to secure first-priority shipping and save $60!",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "https://comingsoon.co/products/hypertrackpad/",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-1": {
           "type": "image",
           "settings": {
@@ -77,30 +93,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "slide-2": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/HS2100-HS2310-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/HS2100-HS2310-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Ergonomic Comfort, Seamless Switching",
-            "subheading": "The HyperSpace Mouse and Keyboard combine ergonomic design with seamless multi-device connectivity for precision and comfort.",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://collections/mouse-and-keyboard",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
         "image_PGrzFE",
+        "slide-2",
         "slide-1",
         "slide-3",
-        "image_eMMdBB",
-        "slide-2"
+        "image_eMMdBB"
       ],
       "settings": {
         "autoplay": true,
