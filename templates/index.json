@@ -46,6 +46,24 @@
             "button_icon": false
           }
         },
+        "video_fTeDTg": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "",
+            "video_url_mobile": "",
+            "heading": "The World's Most Advanced Trackpad for Windows",
+            "subheading": "The HyperSpace™ Trackpad Pro is almost here. Reserve now for just $3 to secure first-priority shipping and save $60!",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Learn More",
+            "button_link": "https://comingsoon.co/products/hypertrackpad/",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-3": {
           "type": "video",
           "settings": {
@@ -79,32 +97,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "video_fTeDTg": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
-            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "description": "",
-            "video_url_mobile": "",
-            "heading": "The World's Most Advanced Trackpad for Windows",
-            "subheading": "The HyperSpace™ Trackpad Pro is almost here. Reserve now for just $3 to secure first-priority shipping and save $60!",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Learn More",
-            "button_link": "https://comingsoon.co/products/hypertrackpad/",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
         "image_PGrzFE",
         "slide-2",
+        "video_fTeDTg",
         "slide-3",
-        "image_eMMdBB",
-        "video_fTeDTg"
+        "image_eMMdBB"
       ],
       "settings": {
         "autoplay": true,
