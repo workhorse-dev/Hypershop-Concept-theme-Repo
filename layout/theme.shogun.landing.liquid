@@ -29,7 +29,7 @@ This file can be re-written at any time.
   {% # theme-check-enable RemoteAsset %}
   <script src="https://www.google.com/recaptcha/api.js?render=6LfIQlorAAAAAEKuHgPFzXQMJvnwPP2_T0V4Kwdz" async></script>
   <script async type="module" fetchpriority="high" src="https://cdn.shopify.com/s/files/1/0872/6416/files/intelligems.js?v=1749207478"></script>
-  <script src="https://cdn.shopify.com/s/files/1/0872/6416/files/widget.js?v=1749207346" data-account="2xDigTdBpS" defer></script>
+  {% comment %} <script src="https://cdn.shopify.com/s/files/1/0872/6416/files/widget.js?v=1749207346" data-account="2xDigTdBpS" defer></script> {% endcomment %}
   
   <script>
       (function() {
@@ -136,6 +136,28 @@ This file can be re-written at any time.
     }
   });
 </script>
+<script>
+    (function(d){
+      var s = d.createElement("script");
+       s.setAttribute("data-position", 4);
+       {% comment %} s.setAttribute("data-z-index", 10001); {% endcomment %}
+      s.setAttribute("data-widget_layout", "full")
+      s.setAttribute("data-account", "2xDigTdBpS");
+      s.setAttribute("src", "https://cdn.userway.org/widget.js");
+      (d.body || d.head).appendChild(s);
+    })(document)
+    </script>
+<script>
+      window.addEventListener("load", function () {
+        setTimeout(function () {
+          const uw = document.querySelector(".userway_buttons_wrapper");
+          if (uw) {
+            uw.style.setProperty("left", "30px", "important");
+            uw.style.setProperty("bottom", "55px", "important");
+          }
+        }, 2000);
+      });
+    </script>
     <style type="text/css">
       body, html {
         width: 100% !important;
