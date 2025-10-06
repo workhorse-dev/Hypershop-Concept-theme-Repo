@@ -13,15 +13,20 @@
       {%- if block.settings.image != blank -%}
         {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
         {%- if block.settings.image_mobile -%}
+          {%- assign Image_alt = block.settings.image_mobile.alt | default: 'banner-image' -%}
+          
+          {%- assign sizes = '(max-width: 767px) 100vw, 50vw' -%}
           <source
             media="(max-width: 767px)"
             srcset="{{ block.settings.image_mobile | image_url: width: '400x' }} 400w, {{ block.settings.image_mobile | image_url: width: '600x' }} 600w, {{ block.settings.image_mobile | image_url: width: '800x' }} 800w, {{ block.settings.image_mobile | image_url: width: '1000x' }} 1000w"
             width="{{ block.settings.image_mobile.width }}"
             height="{{ block.settings.image_mobile.height }}"
+            alt="{{Image_alt }}"
           >
         {%- endif -%}
+        {%- assign Image_alt = block.settings.image.alt | default: 'banner-image' -%}
 
-        {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image' -}}
+        {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: 'lazy', sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600', is: 'lazy-image', alt: Image_alt -}}
       {%- else -%}
         {%- capture placeholder -%}{% cycle 'collection-1', 'collection-2', 'collection-3', 'collection-4', 'collection-5', 'collection-6' %}{%- endcapture -%}
         {{- placeholder | placeholder_svg_tag: 'placeholder' -}}
