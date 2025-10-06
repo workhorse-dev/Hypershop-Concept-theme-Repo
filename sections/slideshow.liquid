@@ -73,18 +73,29 @@
             <div class="banner media--{{ section.settings.image_height }} mobile:media--{{ section.settings.image_height_mobile }} w-full overflow-hidden" data-type="image" {{ block.shopify_attributes }}>
               <media-element class="banner__media block w-full h-full overflow-hidden"{% if section.settings.enable_parallax %} data-parallax="0.3" data-parallax-dir="{{ section.settings.parallax_direction }}"{% endif %}>
                 <animate-element data-animate="zoom-out" class="media media--height block w-full h-full relative overflow-hidden" paused>
+                 
+                  
                   <picture class="media media--height block w-full h-full relative overflow-hidden">
+
                     {%- if block.settings.image != blank -%}
+                       
                       {%- if block.settings.image_mobile -%}
+                        {% assign image_filename = block.settings.image_mobile | split: '/' | last | split: '?' | first %}
+                        {% assign image_name = image_filename | split: '.' | first %}
+                        {% assign Image_alt = block.settings.image_mobile.alt | default: image_name | default: 'Banner image' %}
                         <source
                           media="(max-width: 767px)"
                           srcset="{{ block.settings.image_mobile | image_url: width: '400x' }} 400w, {{ block.settings.image_mobile | image_url: width: '600x' }} 600w, {{ block.settings.image_mobile | image_url: width: '800x' }} 800w, {{ block.settings.image_mobile | image_url: width: '1000x' }} 1000w"
                           width="{{ block.settings.image_mobile.width }}"
                           height="{{ block.settings.image_mobile.height }}"
+                          alt= Image_alt
                         >
                       {%- endif -%}
-    
-                      {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', class: 'banner__image' -}}
+                      {% assign image_filename = block.settings.image | split: '/' | last | split: '?' | first %}
+                      {% assign image_name = image_filename | split: '.' | first %}
+                      {% assign Image_alt = block.settings.image.alt | default: image_name | default: 'Banner image' %}
+                      
+                      {{- block.settings.image | image_url: width: block.settings.image.width | image_tag: loading: loading, fetchpriority: fetchpriority, sizes: sizes, widths: '300,400,500,600,700,800,900,1000,1200,1400,1600,1800,2000,2200,2400,2600,2800,3000,3200', is: 'lazy-image', class: 'banner__image', alt: Image_alt-}}
                     {%- else -%}
                       {%- capture placeholder -%}{% cycle 'lifestyle-1', 'lifestyle-2' %}{%- endcapture -%}
                       {{- placeholder | placeholder_svg_tag: 'banner__image banner__overlay placeholder' -}}
