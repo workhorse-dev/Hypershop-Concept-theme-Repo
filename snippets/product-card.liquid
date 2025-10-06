@@ -106,14 +106,14 @@
               <template>
                 {%- for media in product_media limit: 4 -%}
                   <div class="media media--height{% unless image_fill %} media--contain{% endunless %} w-full h-full overflow-hidden">
-                    {{- media | image_url: width: media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+                    {{- media | image_url: width: media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: media.alt -}}
                   </div>
                 {%- endfor -%}
               </template>
               <secondary-media class="product-card__carousel block absolute top-0 left-0 w-full h-full hidden md:block"></secondary-media>
             {%- endif -%}
 
-            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image' -}}
+            {{- featured_media | image_url: width: featured_media.width | image_tag: loading: 'lazy', widths: '180,360,540,720,900,1080', is: 'lazy-image', alt: featured_media.alt -}}
           {%- else -%}
             {%- render 'product-video',
               video: featured_media,
