@@ -650,7 +650,7 @@
                       {%- if block.settings.help_page != blank %}
                         href="{{ block.settings.help_page.url }}"
                       {% else %}
-                        role="link" aria-disabled="true"
+                        role="link" aria-disabled="true" tabindex="0"
                       {% endif -%}
                       {%- if block.settings.help_type == 'drawer' %}
                         aria-controls="HelpDrawer"
@@ -670,7 +670,7 @@
                   {%- if block.settings.help_page != blank %}
                     href="{{ block.settings.help_page.url }}"
                   {% else %}
-                    role="link" aria-disabled="true"
+                    role="link" aria-disabled="true" tabindex="0"
                   {% endif -%}
                   {%- if block.settings.help_type == 'drawer' %}
                     aria-controls="HelpDrawer"

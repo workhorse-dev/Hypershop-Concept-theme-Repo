@@ -116,6 +116,7 @@
         },
         "share": {
           "type": "share",
+          "disabled": true,
           "settings": {
             "share_label": "Share",
             "show_help_desk": true,
@@ -278,12 +279,7 @@
           }
         }
       },
-      "block_order": [
-        "content-1",
-        "content-2",
-        "content-3",
-        "content-4"
-      ],
+      "block_order": ["content-1", "content-2", "content-3", "content-4"],
       "disabled": true,
       "settings": {
         "heading": "",
@@ -375,11 +371,7 @@
           }
         }
       },
-      "block_order": [
-        "column_LXrR6U",
-        "column_QJ3RgJ",
-        "column_HfeWQm"
-      ],
+      "block_order": ["column_LXrR6U", "column_QJ3RgJ", "column_HfeWQm"],
       "settings": {
         "gap": "large",
         "columns": 3,
@@ -438,10 +430,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+      "block_order": ["heading", "text"],
       "settings": {
         "image": "{{ product.metafields.custom.left_image1_with_right_content.value }}",
         "image_height": "600px",
@@ -496,10 +485,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+      "block_order": ["heading", "text"],
       "settings": {
         "image": "{{ product.metafields.custom.image_with_text_left2_image.value }}",
         "image_height": "600px",
@@ -625,12 +611,7 @@
           }
         }
       },
-      "block_order": [
-        "image-1",
-        "image-3",
-        "image-2",
-        "image-4"
-      ],
+      "block_order": ["image-1", "image-3", "image-2", "image-4"],
       "settings": {
         "heading": "{{ product.metafields.custom.collage_on_scroll_title.value }}",
         "heading_size": "title-md",
@@ -686,10 +667,7 @@
           }
         }
       },
-      "block_order": [
-        "product_bnGjW3",
-        "product_FpGj3T"
-      ],
+      "block_order": ["product_bnGjW3", "product_FpGj3T"],
       "disabled": true,
       "settings": {
         "image": "{{ product.metafields.custom.look_book_image.value }}",
@@ -878,10 +856,7 @@
           }
         }
       },
-      "block_order": [
-        "heading_YnfTgp",
-        "text_LCwLwC"
-      ],
+      "block_order": ["heading_YnfTgp", "text_LCwLwC"],
       "settings": {
         "collection": "",
         "products": "{{ product.metafields.custom.product_bundle.value }}",
@@ -1033,9 +1008,7 @@
           "settings": {}
         }
       },
-      "block_order": [
-        "product_genius_ai_product_genius_liquid_b24b4220"
-      ],
+      "block_order": ["product_genius_ai_product_genius_liquid_b24b4220"],
       "settings": {
         "color_text": "",
         "color_background": "",
