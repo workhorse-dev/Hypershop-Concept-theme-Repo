@@ -39,6 +39,10 @@
             "show_rating": true
           }
         },
+        "bazaarvoice_reviews_photos_rating_summary_block_F3WbTN": {
+          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/rating-summary-block/766ed9d3-b120-48f3-8444-448f45152f47",
+          "settings": {}
+        },
         "price_QJPxND": {
           "type": "price",
           "settings": {
@@ -178,6 +182,7 @@
       "block_order": [
         "vendor",
         "title",
+        "bazaarvoice_reviews_photos_rating_summary_block_F3WbTN",
         "price_QJPxND",
         "description",
         "countdown",
@@ -278,12 +283,7 @@
           }
         }
       },
-      "block_order": [
-        "content-1",
-        "content-2",
-        "content-3",
-        "content-4"
-      ],
+      "block_order": ["content-1", "content-2", "content-3", "content-4"],
       "disabled": true,
       "settings": {
         "heading": "",
@@ -375,11 +375,7 @@
           }
         }
       },
-      "block_order": [
-        "column_LXrR6U",
-        "column_QJ3RgJ",
-        "column_HfeWQm"
-      ],
+      "block_order": ["column_LXrR6U", "column_QJ3RgJ", "column_HfeWQm"],
       "settings": {
         "gap": "large",
         "columns": 3,
@@ -438,10 +434,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+      "block_order": ["heading", "text"],
       "settings": {
         "image": "{{ product.metafields.custom.left_image1_with_right_content.value }}",
         "image_height": "600px",
@@ -496,10 +489,7 @@
           }
         }
       },
-      "block_order": [
-        "heading",
-        "text"
-      ],
+      "block_order": ["heading", "text"],
       "settings": {
         "image": "{{ product.metafields.custom.image_with_text_left2_image.value }}",
         "image_height": "600px",
@@ -625,12 +615,7 @@
           }
         }
       },
-      "block_order": [
-        "image-1",
-        "image-3",
-        "image-2",
-        "image-4"
-      ],
+      "block_order": ["image-1", "image-3", "image-2", "image-4"],
       "settings": {
         "heading": "{{ product.metafields.custom.collage_on_scroll_title.value }}",
         "heading_size": "title-md",
@@ -686,10 +671,7 @@
           }
         }
       },
-      "block_order": [
-        "product_bnGjW3",
-        "product_FpGj3T"
-      ],
+      "block_order": ["product_bnGjW3", "product_FpGj3T"],
       "disabled": true,
       "settings": {
         "image": "{{ product.metafields.custom.look_book_image.value }}",
@@ -878,10 +860,7 @@
           }
         }
       },
-      "block_order": [
-        "heading_YnfTgp",
-        "text_LCwLwC"
-      ],
+      "block_order": ["heading_YnfTgp", "text_LCwLwC"],
       "settings": {
         "collection": "",
         "products": "{{ product.metafields.custom.product_bundle.value }}",
@@ -1031,10 +1010,15 @@
         "product_genius_ai_product_genius_liquid_b24b4220": {
           "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
           "settings": {}
+        },
+        "bazaarvoice_reviews_photos_reviews_block_PfULNA": {
+          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/reviews-block/766ed9d3-b120-48f3-8444-448f45152f47",
+          "settings": {}
         }
       },
       "block_order": [
-        "product_genius_ai_product_genius_liquid_b24b4220"
+        "product_genius_ai_product_genius_liquid_b24b4220",
+        "bazaarvoice_reviews_photos_reviews_block_PfULNA"
       ],
       "settings": {
         "color_text": "",
