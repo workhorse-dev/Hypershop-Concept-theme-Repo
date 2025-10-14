@@ -12,6 +12,24 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "video_fTeDTg": {
+          "type": "video",
+          "settings": {
+            "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
+            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
+            "description": "",
+            "video_url_mobile": "",
+            "heading": "The World's Most Advanced Trackpad for Windows",
+            "subheading": "The HyperSpace™ Trackpad Pro is available NOW.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Back Now",
+            "button_link": "https://www.kickstarter.com/projects/hypershop/hyper-trackpad-pro",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
           "settings": {
@@ -39,24 +57,6 @@
             "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperpack",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "video_fTeDTg": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
-            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "description": "",
-            "video_url_mobile": "",
-            "heading": "The World's Most Advanced Trackpad for Windows",
-            "subheading": "The HyperSpace™ Trackpad Pro is available NOW.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Back Now",
-            "button_link": "https://www.kickstarter.com/projects/hypershop/hyper-trackpad-pro",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -98,9 +98,9 @@
         }
       },
       "block_order": [
+        "video_fTeDTg",
         "slide-2",
         "image_PGrzFE",
-        "video_fTeDTg",
         "slide-3",
         "image_eMMdBB"
       ],
