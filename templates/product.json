@@ -39,6 +39,10 @@
             "show_rating": true
           }
         },
+        "bazaarvoice_reviews_photos_rating_summary_block_F3WbTN": {
+          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/rating-summary-block/766ed9d3-b120-48f3-8444-448f45152f47",
+          "settings": {}
+        },
         "price_QJPxND": {
           "type": "price",
           "settings": {
@@ -179,6 +183,7 @@
       "block_order": [
         "vendor",
         "title",
+        "bazaarvoice_reviews_photos_rating_summary_block_F3WbTN",
         "price_QJPxND",
         "description",
         "countdown",
@@ -1006,9 +1011,16 @@
         "product_genius_ai_product_genius_liquid_b24b4220": {
           "type": "shopify://apps/product-genius-ai/blocks/product-genius-liquid/90d2ddb0-7095-41f9-a623-2079e56d0c9c",
           "settings": {}
+        },
+        "bazaarvoice_reviews_photos_reviews_block_PfULNA": {
+          "type": "shopify://apps/bazaarvoice-reviews-photos/blocks/reviews-block/766ed9d3-b120-48f3-8444-448f45152f47",
+          "settings": {}
         }
       },
-      "block_order": ["product_genius_ai_product_genius_liquid_b24b4220"],
+      "block_order": [
+        "product_genius_ai_product_genius_liquid_b24b4220",
+        "bazaarvoice_reviews_photos_reviews_block_PfULNA"
+      ],
       "settings": {
         "color_text": "",
         "color_background": "",
