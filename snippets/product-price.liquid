@@ -54,14 +54,14 @@
           if settings.currency_code_enabled
             echo price | money_with_currency | replace: ' ', '' 
           else
-            echo price | money | replace: ' ', '' 
+            echo price | money 
           endif
         endif
       else
         if settings.currency_code_enabled
           assign price_min = product.price_min | money_with_currency| replace: ' ', '' 
         else
-          assign price_min = product.price_min | money | replace: ' ', '' 
+          assign price_min = product.price_min | money 
         endif
         echo 'products.price.from_price_html' | t: price: price_min
       endif
@@ -75,7 +75,7 @@
         if settings.currency_code_enabled
           echo compare_at_price | money_with_currency | replace: ' ', '' 
         else
-          echo compare_at_price | money | replace: ' ', '' 
+          echo compare_at_price | money 
         endif
       -%}
     </span>
