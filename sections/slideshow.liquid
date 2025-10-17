@@ -41,10 +41,10 @@
     {%- if section.blocks.size > 1 and section.settings.autoplay -%}
       <button
         type="button"
-        class="slideshow-control flex items-center justify-center rounded-full sr-only"
-        is="control-button"
+        class="slideshow-control flex items-center justify-center rounded-full sr-only control-button"
         aria-controls="Slider-{{ section.id }}"
         aria-live="polite"
+        aria-label="{{ 'general.accessibility.play_video' | t | escape }}"
       >
         <span class="slideshow-control__pause">
           {%- render 'icon', icon: 'pause' -%}
@@ -192,7 +192,7 @@
         </slideshow-words>
         {%- if section.blocks.size > 1 and section.settings.show_navigation -%}
           <div class="slideshow-dots flex items-end justify-between">
-            <button type="button" is="previous-button" class="hidden md:block pointer-events-auto" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}">
+            <button type="button"  class="hidden md:block pointer-events-auto previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}">
               {%- render 'icon', icon: 'arrow-left-long', class: 'transform' -%}
             </button>
             <slider-dots class="flickity-page-dots w-auto pointer-events-auto" aria-controls="Slider-{{ section.id }}">
@@ -202,7 +202,7 @@
                 </button>
               {%- endfor -%}
             </slider-dots>
-            <button type="button" is="next-button" class="hidden md:block pointer-events-auto" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+            <button type="button"  class="hidden md:block pointer-events-auto next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
               {%- render 'icon', icon: 'arrow-right-long', class: 'transform' -%}
             </button>
           </div>

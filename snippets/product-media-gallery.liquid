@@ -194,13 +194,13 @@
       </slider-element>
 
       <div class="indicators hidden items-center justify-between opacity-0 z-1 absolute top-0 left-0 w-full h-full pointer-events-none">
-        <button class="button button--secondary pointer-events-auto" type="button" is="previous-button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
+        <button class="button button--secondary pointer-events-auto previous-button" type="button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
             {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
           </span>
         </button>
-        <button class="button button--secondary pointer-events-auto" type="button" is="next-button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+        <button class="button button--secondary pointer-events-auto next-button" type="button" aria-controls="SliderGallery-{{ section_id }}-{{ product_id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
           <span class="btn-fill" data-fill></span>
           <span class="btn-text">
             {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}

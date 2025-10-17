@@ -37,13 +37,13 @@
 
       {%- if section.settings.carousel_on_desktop -%}
         <div class="indicators hidden lg:flex gap-2d5 items-center absolute top-0 left-0 w-full h-full pointer-events-none opacity-0 page-width">
-          <button class="button button--primary pointer-events-auto" type="button" is="previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled tabindex="-1">
+          <button class="button button--primary pointer-events-auto previous-button" type="button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled tabindex="-1">
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
               {%- render 'icon', icon: 'chevron-left', class: 'stroke-2 transform' -%}
             </span>
           </button>
-          <button class="button button--primary pointer-events-auto" type="button" is="next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}" tabindex="-1">
+          <button class="button button--primary pointer-events-auto next-button" type="button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}" tabindex="-1">
             <span class="btn-fill" data-fill></span>
             <span class="btn-text">
               {%- render 'icon', icon: 'chevron-right', class: 'stroke-2 transform' -%}

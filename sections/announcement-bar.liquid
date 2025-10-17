@@ -87,12 +87,12 @@
           {%- endfor -%}
         </announcement-bar>
         {%- if section.settings.show_navigation and announcement_block_count > 1 -%}
-          <button type="button" is="previous-button" class="fader left relative flex items-center justify-start h-full" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}">
+          <button type="button"  class="fader left relative flex items-center justify-start h-full previous-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}">
             <svg class="icon icon-arrow-left icon-xs transform" viewBox="0 0 15 14" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" d="M6.33333 2.91675L2.25 7.00004M2.25 7.00004L6.33333 11.0834M2.25 7.00004H12.75"></path>
             </svg>
           </button>
-          <button type="button" is="next-button" class="fader right relative flex items-center justify-end h-full" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
+          <button type="button"  class="fader right relative flex items-center justify-end h-full next-button" aria-controls="Slider-{{ section.id }}" aria-label="{{ 'general.pagination.next' | t | escape }}">
             <svg class="icon icon-arrow-right icon-xs transform" viewBox="0 0 15 14" fill="none" stroke="currentColor" xmlns="http://www.w3.org/2000/svg">
               <path stroke-linecap="round" stroke-linejoin="round" d="M2.25 7.00004H12.75M12.75 7.00004L8.66667 2.91675M12.75 7.00004L8.66667 11.0834"></path>
             </svg>
@@ -100,10 +100,10 @@
           {%- if section.settings.autoplay -%}
             <button
               type="button"
-              class="slideshow-control flex items-center justify-center rounded-full sr-only"
-              is="control-button"
+              class="slideshow-control flex items-center justify-center rounded-full sr-only control-button"
               aria-controls="Slider-{{ section.id }}"
               aria-live="polite"
+              aria-label="{{ 'general.accessibility.play_video' | t | escape }}"
             >
               <span class="slideshow-control__pause">
                 {%- render 'icon', icon: 'pause' -%}
