@@ -4803,7 +4803,7 @@ ol {
 
 @media screen and (pointer: fine) {
   .corner {
-    transition: all var(--animation-nav);
+    /* transition: all var(--animation-nav); */
   }
 }
 
