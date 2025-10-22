@@ -142,14 +142,26 @@
           -%}
         </div>
 
-        {% comment %} {%- else -%}
-        <div class="product__gallery-container flex flex-col gap-0 md:gap-8 relative">
+        {%- else -%}
+        <div
+          class="product__gallery-container flex flex-col gap-0 md:gap-8 relative"
+          style="
+            aspect-ratio:
+              {%- if section.settings.image_ratio == 'portrait' -%}4 / 5
+              {%- elsif section.settings.image_ratio == 'square' -%}1 / 1
+              {%- else -%}3 / 2
+              {%- endif -%};
+          "
+        >
           <img
             src="{{ 'no-image.png' | asset_url }}"
             alt="Placeholder image"
+            width="800"
+            height="1000"
+            loading="lazy"
             class="w-full h-auto object-cover rounded-md"
           >
-        </div> {% endcomment %}
+        </div>
       {%- endif -%}
 
       <product-info
