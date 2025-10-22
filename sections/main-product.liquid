@@ -140,6 +140,8 @@
               echo icon_list_render
             endif
           -%}
+          {%- else -%}
+            <img src="{{ 'no-image.png' | asset_url }}" alt="No image available" class="w-full h-auto object-cover">
         </div>
       {%- endif -%}
 
