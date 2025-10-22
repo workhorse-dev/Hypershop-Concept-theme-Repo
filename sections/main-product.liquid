@@ -141,6 +141,45 @@
             endif
           -%}
           
+
+          {%- else -%}
+  <div class="product__gallery-container flex flex-col gap-0 md:gap-8 relative">
+    <div
+      class="product__media-list grid grid-cols-1 gap-4 md:gap-8"
+      id="Slider-Gallery-{{ section.id }}"
+    >
+      <div
+        class="product__media-item"
+        style="max-width: var(--media-width, 600px); margin: 0 auto;"
+      >
+        <div
+          class="media"
+          style="
+            position: relative;
+            overflow: hidden;
+            border-radius: 8px;
+            aspect-ratio:
+              {%- if section.settings.image_ratio == 'portrait' -%}4 / 5
+              {%- elsif section.settings.image_ratio == 'square' -%}1 / 1
+              {%- else -%}3 / 2
+              {%- endif -%};
+          "
+        >
+          <img
+            src="{{ 'no-image.png' | asset_url }}"
+            alt="Placeholder image"
+            class="media__image w-full h-full object-cover"
+            loading="lazy"
+          >
+        </div>
+      </div>
+    </div>
+
+    {%- liquid
+      if icon_list_block and icon_list_block.settings.show_below_media
+        echo icon_list_render
+      endif
+    -%}
         </div>
       {%- endif -%}
 
