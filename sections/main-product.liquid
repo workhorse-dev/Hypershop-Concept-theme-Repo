@@ -140,28 +140,26 @@
               echo icon_list_render
             endif
           -%}
-        </div>
 
-        {% comment %} {%- else -%}
-        <div
-          class="product__gallery-container flex flex-col gap-0 md:gap-8 relative"
-          style="
-            aspect-ratio:
-              {%- if section.settings.image_ratio == 'portrait' -%}4 / 5
-              {%- elsif section.settings.image_ratio == 'square' -%}1 / 1
-              {%- else -%}3 / 2
-              {%- endif -%};
-          "
+          {%- else -%}
+  <div class="product__gallery-container flex flex-col gap-0 md:gap-8 relative">
+    <div class="product__media-wrapper">
+      <div class="media" style="position: relative; overflow: hidden;">
+        <img
+          src="{{ 'placeholder-image.jpg' | asset_url }}"
+          alt="Placeholder image"
+          class="media__image w-full h-full object-cover"
+          loading="lazy"
         >
-          <img
-            src="{{ 'no-image.png' | asset_url }}"
-            alt="Placeholder image"
-            width="800"
-            height="1000"
-            loading="lazy"
-            class="w-full h-auto object-cover rounded-md"
-          >
-        </div> {% endcomment %}
+      </div>
+    </div>
+
+    {%- liquid
+      if icon_list_block and icon_list_block.settings.show_below_media
+        echo icon_list_render
+      endif
+    -%}
+        </div>
       {%- endif -%}
 
       <product-info
