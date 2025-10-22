@@ -15569,3 +15569,11 @@ html.js .product__feed .drawer__header::before {
     display: none;
   }
 }
+
+@media (max-width: 1024px) {
+  .product__gallery-container.no-image {
+    width: 50%;
+    margin-left: auto;
+    margin-right: auto;
+  }
+}
