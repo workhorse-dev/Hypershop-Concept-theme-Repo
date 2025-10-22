@@ -144,11 +144,7 @@
         </div>
 
         {%- else -%}
-        <div class="product__gallery-container 
-            relative 
-            flex flex-col gap-0 md:gap-8 
-            w-1/2 mx-auto 
-            lg:w-full lg:mx-0 lg:justify-self-auto">
+        <div class="product__gallery-container flex flex-col gap-0 md:gap-8 relative no-image">
           <img
             src="{{ 'no-image.png' | asset_url }}"
             alt="No image available"
