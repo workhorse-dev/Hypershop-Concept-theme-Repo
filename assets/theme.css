@@ -7485,6 +7485,11 @@ details.active .drawer__promotions .mega-menu__item,
   background-color: rgb(var(--color-background));
   padding-block-start: calc(var(--header-height) - 1px);
   transition: padding var(--animation-nav);
+  backface-visibility: hidden;
+  transform: translateZ(0);
+  will-change: transform, opacity;
+  position: relative;
+  z-index: 1;
 }
 
 [data-rounded-block=round] .mega-menu__container {
