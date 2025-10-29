@@ -91,21 +91,10 @@
     }, 5000); // Delay 3s after load
   });
 </script>
-{% comment %} <script>
+<script>
   const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
   const width = screen.width;
   if (chatWidget &&  width > 470) {
       chatWidget.style.transform = 'translateY(calc(50% + 100px))';
     }
-</script> {% endcomment %}
-<script defer>
-  window.addEventListener('load', () => {
-    setTimeout(() => {
-      const chatWidget = document.querySelector('#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window');
-      const width = screen.width;
-      if (chatWidget && width > 470) {
-        chatWidget.style.transform = 'translateY(calc(50% + 100px))';
-      }
-    }, 8000); // Wait a few seconds longer than widget load
-  });
 </script>
