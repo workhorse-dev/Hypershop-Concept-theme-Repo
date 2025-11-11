@@ -25,7 +25,7 @@
     -%}
   </a>
 {%- else -%}
-  <a class="button button--{{ style | default: 'primary' }} button--{{ size | default: 'md' }}{% if classes != blank %} {{ classes }}{% endif %}{% if show_icon %} icon-with-text{% endif %}"{% if link != blank %} href="{{ link }}"{% if external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link" {{ shopify_attributes }}>
+  <a class="button button--{{ style | default: 'primary' }} button--{{ size | default: 'md' }}{% if classes != blank %} {{ classes }}{% endif %}{% if show_icon %} icon-with-text{% endif %}"{% if link != blank %} href="{{ link }}"{% if external %} target="_blank" rel="noopener"{% endif %}{% else %} role="link" aria-disabled="true"{% endif %} is="hover-link" {{ shopify_attributes }} tabindex="0">
     <span class="btn-fill" data-fill></span>
     <span class="btn-text">
       {%- liquid
