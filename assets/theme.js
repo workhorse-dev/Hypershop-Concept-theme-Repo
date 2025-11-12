@@ -8141,12 +8141,13 @@ class ControlButtonController {
     this.button.addEventListener("click", () => {
       if (this.paused) {
         this.button.removeAttribute("paused");
+        console.log(this.button.getAttribute("aria-label"));
         (this.controlledElement ?? this.button).dispatchEvent(
           new CustomEvent("slider:play", { bubbles: true })
         );
       } else {
         this.button.setAttribute("paused", "");
-        console.log(this.button);
+        console.log(this.button.getAttribute("aria-label"));
         (this.controlledElement ?? this.button).dispatchEvent(
           new CustomEvent("slider:pause", { bubbles: true })
         );
