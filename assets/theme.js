@@ -8146,6 +8146,7 @@ class ControlButtonController {
         );
       } else {
         this.button.setAttribute("paused", "");
+        console.log(this.button);
         (this.controlledElement ?? this.button).dispatchEvent(
           new CustomEvent("slider:pause", { bubbles: true })
         );
