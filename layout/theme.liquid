@@ -39,12 +39,12 @@ function waitForAttentivePopup() {
 
 // ACCEPT
 window.addEventListener("CookieInformationConsentGiven", function () {
-    loadAttentive();
+    //loadAttentive();
 });
 
 // DECLINE
 window.addEventListener("CookieInformationConsentDeclined", function () {
-    loadAttentive();
+    //loadAttentive();
     waitForAttentivePopup();
 });
 
@@ -54,7 +54,7 @@ window.addEventListener("load", function () {
         window.CookieInformation &&
         CookieInformation.hasGivenConsent()
     ) {
-        loadAttentive();
+        //loadAttentive();
     }
 });
 </script>
