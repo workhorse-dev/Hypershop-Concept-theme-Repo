@@ -4,6 +4,14 @@
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
 <head>
 
+<script>
+window.addEventListener('load', function() {
+    // Hide cookie banner immediately if it exists
+    const banner = document.querySelector('#cookie-consent, .uc-banner, .ci-cookie-banner');
+    if (banner) banner.style.display = 'none';
+});
+</script>
+
 {% comment %} <script>
 (function () {
     let attentiveReady = false;
