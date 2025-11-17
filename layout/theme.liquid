@@ -103,19 +103,19 @@
     endif
   -%}
   {% render 'custom-fonts' %}
-  <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}" media="print" fetchpriority="low" onload="this.media='all'">
+  <link rel="stylesheet" href="{{ 'apps.css' | asset_url }}?v={{ 'now' | date: '%s' }}" media="print" fetchpriority="low" onload="this.media='all'">
 
   {%- if tinyscript -%}{{ content_for_header }}{%- else -%}{% render 'tiny-script-control' %}{%- endif -%}
 
-  <script src="{{ 'vendor.js' | asset_url }}" defer="defer"></script>
-  <script src="{{ 'theme.js' | asset_url }}" defer="defer"></script>
+  <script src="{{ 'vendor.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer="defer"></script>
+  <script src="{{ 'theme.js' | asset_url }}?v={{ 'now' | date: '%s' }}" defer="defer"></script>
 
   {%- if settings.enable_tab_attention -%}
     <script src="{{ 'tab-attention.js' | asset_url }}" defer="defer"></script>
   {%- endif -%}
 
   {%- if request.page_type contains 'customers/' -%}
-    <script src="{{ 'shopify_common.js' | shopify_asset_url }}" defer="defer"></script>
+    <script src="{{ 'shopify_common.js' | shopify_asset_url }}?v={{ 'now' | date: '%s' }}" defer="defer"></script>
   {%- endif -%}
 
   {%- render 'js-variables' -%}
