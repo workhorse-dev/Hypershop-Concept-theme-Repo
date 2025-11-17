@@ -6,22 +6,21 @@
 
 <script>
 (function() {
-    // Function to hide the banner
     function hideBanner(el) {
         el.style.display = 'none';
         console.log("CookieInformation banner hidden");
     }
 
-    // Check immediately in case it already exists
-    const initial = document.querySelector('#cookie-consent, .uc-banner, .ci-cookie-banner');
+    // Immediately hide if already present
+    const initial = document.getElementById('coiOverlay') || document.getElementById('coi-banner-wrapper');
     if (initial) hideBanner(initial);
 
-    // Watch for DOM changes and hide any new banners
+    // Watch for DOM changes in case the banner is added later
     const observer = new MutationObserver((mutations) => {
         for (let mutation of mutations) {
             for (let node of mutation.addedNodes) {
                 if (!(node instanceof HTMLElement)) continue;
-                if (node.matches('#cookie-consent, .uc-banner, .ci-cookie-banner')) {
+                if (node.id === 'coiOverlay' || node.id === 'coi-banner-wrapper' || node.classList.contains('coi-banner__wrapper')) {
                     hideBanner(node);
                 }
             }
@@ -31,6 +30,7 @@
     observer.observe(document.body, { childList: true, subtree: true });
 })();
 </script>
+
 
 
 {% comment %} <script>
