@@ -4,6 +4,50 @@
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
 <head>
 
+  <script>
+(function() {
+    // Key to store in localStorage
+    const reloadKey = 'pageReloadedOnce';
+
+    // Check if the page has already been reloaded
+    if (!localStorage.getItem(reloadKey)) {
+        // Set the flag so it doesn't reload again
+        localStorage.setItem(reloadKey, 'true');
+
+        // Reload the page once
+        location.reload();
+    }
+})();
+</script>
+
+
+<script>
+(function() {
+    function hideBanner(el) {
+        el.style.display = 'none';
+        console.log("CookieInformation banner hidden");
+    }
+
+    // Immediately hide if already present
+    const initial = document.getElementById('coiOverlay') || document.getElementById('coi-banner-wrapper');
+    if (initial) hideBanner(initial);
+
+    // Watch for DOM changes in case the banner is added later
+    const observer = new MutationObserver((mutations) => {
+        for (let mutation of mutations) {
+            for (let node of mutation.addedNodes) {
+                if (!(node instanceof HTMLElement)) continue;
+                if (node.id === 'coiOverlay' || node.id === 'coi-banner-wrapper' || node.classList.contains('coi-banner__wrapper')) {
+                    hideBanner(node);
+                }
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
+</script>
+
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
