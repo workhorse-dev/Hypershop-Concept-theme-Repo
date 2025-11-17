@@ -6,7 +6,7 @@
 <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
 
 <script>
-// load attentive only once
+// Prevent double loading
 function loadAttentive() {
     if (window.__attentiveLoaded) return;
     window.__attentiveLoaded = true;
@@ -17,28 +17,7 @@ function loadAttentive() {
     document.head.appendChild(s);
 }
 
-// If user already consented earlier (page reload)
-window.addEventListener("load", function() {
-    if (window.CookieInformation &&
-        CookieInformation.getConsentGivenForAllCategories()) {
-        loadAttentive();
-    }
-});
-
-// When user ACCEPTS cookies
-window.addEventListener("CookieInformationConsentGiven", function() {
-    loadAttentive();
-});
-
-// When user DECLINES cookies
-// (Attentive should run even without marketing consent)
-window.addEventListener("CookieInformationConsentDeclined", function() {
-    loadAttentive();
-});
-</script>
-
-<script>
-// RUN ONLY after Attentive script has fully loaded
+// Force popup
 function triggerAttentivePopup() {
     if (window.attentive && window.attentive.trigger) {
         window.attentive.trigger();
@@ -46,6 +25,44 @@ function triggerAttentivePopup() {
         window.attentive.show();
     }
 }
+
+// Check whether user has already made any choice
+function anyConsentGiven() {
+    try {
+        return (
+            CookieInformation.getConsentFor("functional") ||
+            CookieInformation.getConsentFor("marketing") ||
+            CookieInformation.getConsentFor("statistical")
+        );
+    } catch(e) {
+        return false;
+    }
+}
+
+// Load on page load if user already accepted/declined earlier
+window.addEventListener("load", function() {
+    if (window.CookieInformation && anyConsentGiven()) {
+        loadAttentive();
+    }
+});
+
+// User clicks ACCEPT
+window.addEventListener("CookieInformationConsentGiven", function() {
+    loadAttentive();
+});
+
+// User clicks DECLINE
+window.addEventListener("CookieInformationConsentDeclined", function() {
+    loadAttentive();
+
+    // Force popup after script finishes initializing
+    var interval = setInterval(function() {
+        if (window.attentive) {
+            triggerAttentivePopup();
+            clearInterval(interval);
+        }
+    }, 200);
+});
 </script>
 
 
