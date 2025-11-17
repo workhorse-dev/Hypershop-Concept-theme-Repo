@@ -7,37 +7,66 @@
 
 <script>
 window.addEventListener("load", function () {
-    console.log("Page loaded, waiting for Attentive iframe…");
+    console.log("Page loaded, searching for Attentive iframe…");
 
-    // Wait for iframe to appear in DOM
-    const checkIframe = setInterval(() => {
+    const findIframe = setInterval(() => {
         const frame = document.getElementById("attentive_creative");
 
-        if (frame) {
-            console.log("Attentive iframe found");
+        if (!frame) return; // not found yet
 
-            frame.addEventListener("load", function () {
-                console.log("Attentive iframe finished loading");
+        console.log("Attentive iframe found");
 
-                try {
-                    const doc = frame.contentWindow.document;
-                    const bubble = doc.getElementById("bubbleWrapper");
+        clearInterval(findIframe);
 
-                    if (bubble) {
-                        console.log("Clicking bubbleWrapper inside iframe");
-                        bubble.click();
-                    } else {
-                        console.log("bubbleWrapper not found inside iframe");
-                    }
-                } catch (e) {
-                    console.log("Cannot access iframe due to cross-origin:", e);
+        // Function to click inside iframe (cross-origin safe check)
+        function tryClickInsideIframe() {
+            try {
+                const doc = frame.contentWindow.document;
+                const bubble = doc.getElementById("bubbleWrapper");
+
+                if (bubble) {
+                    console.log("bubbleWrapper found → clicking...");
+                    bubble.click();
+                    return true;
+                } else {
+                    console.log("bubbleWrapper not found yet");
+                    return false;
                 }
-            });
-
-            clearInterval(checkIframe);
+            } catch (e) {
+                console.log("Cross-origin - cannot access iframe DOM");
+                return false;
+            }
         }
-    }, 200);
 
+        // 1️⃣ If iframe is already loaded, this will be true
+        if (frame.complete) {
+            console.log("Iframe already loaded → trying click");
+            tryClickInsideIframe();
+
+            // and keep retrying in case Attentive loads bubble late
+            let tries = 0;
+            const retry = setInterval(() => {
+                if (tryClickInsideIframe() || tries++ > 40) {
+                    clearInterval(retry);
+                }
+            }, 200);
+
+            return;
+        }
+
+        // 2️⃣ If not loaded yet, listen for load
+        frame.addEventListener("load", function () {
+            console.log("Attentive iframe finished loading");
+
+            let tries = 0;
+            const retry = setInterval(() => {
+                if (tryClickInsideIframe() || tries++ > 40) {
+                    clearInterval(retry);
+                }
+            }, 200);
+        });
+
+    }, 200);
 });
 </script>
 
