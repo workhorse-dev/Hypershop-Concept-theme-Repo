@@ -69,6 +69,11 @@ window.addEventListener("load", function () {
     }, 200);
 });
 </script>
+<script>
+window.addEventListener("message", (e) => {
+    console.log("MESSAGE FROM IFRAME:", e.data);
+});
+</script>
 
 
 
