@@ -5,12 +5,33 @@
 <head>
 
 <script>
-window.addEventListener('load', function() {
-    // Hide cookie banner immediately if it exists
-    const banner = document.querySelector('#cookie-consent, .uc-banner, .ci-cookie-banner');
-    if (banner) banner.style.display = 'none';
-});
+(function() {
+    // Function to hide the banner
+    function hideBanner(el) {
+        el.style.display = 'none';
+        console.log("CookieInformation banner hidden");
+    }
+
+    // Check immediately in case it already exists
+    const initial = document.querySelector('#cookie-consent, .uc-banner, .ci-cookie-banner');
+    if (initial) hideBanner(initial);
+
+    // Watch for DOM changes and hide any new banners
+    const observer = new MutationObserver((mutations) => {
+        for (let mutation of mutations) {
+            for (let node of mutation.addedNodes) {
+                if (!(node instanceof HTMLElement)) continue;
+                if (node.matches('#cookie-consent, .uc-banner, .ci-cookie-banner')) {
+                    hideBanner(node);
+                }
+            }
+        }
+    });
+
+    observer.observe(document.body, { childList: true, subtree: true });
+})();
 </script>
+
 
 {% comment %} <script>
 (function () {
