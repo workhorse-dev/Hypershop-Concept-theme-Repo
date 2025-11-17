@@ -6,40 +6,55 @@
 <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
 
 <script>
-function openAttentivePopup() {
-    const iframe = document.getElementById("attentive_creative");
-    if (!iframe) {
-        console.log("Attentive iframe not found");
-        return false;
+(function () {
+    let attentiveReady = false;
+    let creativeId = "1260965"; // your ID
+
+    // 1️⃣ Detect when Attentive is initialized inside the iframe
+    window.addEventListener("message", function (event) {
+        if (event.data && event.data.__attentive) {
+            console.log("Attentive READY:", event.data);
+            attentiveReady = true;
+        }
+    });
+
+    // 2️⃣ Once ready, send the EXPAND trigger
+    function triggerPopup() {
+        if (!attentiveReady) return false;
+
+        const frame = document.getElementById("attentive_creative");
+        if (!frame) return false;
+
+        console.log("Sending EXPAND message to Attentive…");
+
+        frame.contentWindow.postMessage(
+            {
+                "__attentive": {
+                    "action": "EXPAND",
+                    "creativeId": creativeId
+                }
+            },
+            "*"
+        );
+
+        return true;
     }
 
-    console.log("Sending EXPAND message to Attentive...");
+    // 3️⃣ Keep trying until Attentive becomes ready
+    window.addEventListener("load", function () {
+        console.log("Page loaded. Waiting for Attentive to initialize…");
 
-    iframe.contentWindow.postMessage(
-        {
-            "__attentive": {
-                "action": "EXPAND",
-                "creativeId": "1260965"
+        let attempts = 0;
+
+        const timer = setInterval(() => {
+            if (triggerPopup() || attempts++ > 60) {
+                clearInterval(timer);
             }
-        },
-        "*"
-    );
-
-    return true;
-}
-
-// Wait for iframe to appear, then trigger
-window.addEventListener("load", function () {
-    console.log("Page fully loaded; waiting for Attentive iframe...");
-
-    let tries = 0;
-    const interval = setInterval(() => {
-        if (openAttentivePopup() || tries++ > 40) {
-            clearInterval(interval);
-        }
-    }, 200);
-});
+        }, 300);
+    });
+})();
 </script>
+
 
 {% comment %} <script>
 window.addEventListener("message", (e) => {
