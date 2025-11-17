@@ -6,59 +6,31 @@
 <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
 
 <script>
-function loadAttentive() {
-    if (window.__attentiveLoaded) return;
-    window.__attentiveLoaded = true;
-
-    var s = document.createElement("script");
-    s.src = "https://cdn.attn.tv/hypershop/dtag.js?source=app-embed";
-    s.defer = true;
-    document.head.appendChild(s);
-}
-
-function openAttentivePopup() {
-    const bubble = document.getElementById("bubbleWrapper") ||
-                   document.querySelector('button[id*="bubble"]');
-
-    if (bubble) {
-        console.log("Tried opening signup")
-        bubble.click();
-        return true;
-    }
-    return false;
-}
-
-function waitForAttentivePopup() {
-    let tries = 0;
-    const interval = setInterval(() => {
-        if (openAttentivePopup() || tries > 50) {
-            clearInterval(interval);
-        }
-        tries++;
-    }, 200);
-}
-
-// ACCEPT
-window.addEventListener("CookieInformationConsentGiven", function () {
-    //loadAttentive();
-});
-
-// DECLINE
-window.addEventListener("CookieInformationConsentDeclined", function () {
-    //loadAttentive();
-    waitForAttentivePopup();
-});
-
-// RETURNING USERS (already made a choice)
 window.addEventListener("load", function () {
-    if (
-        window.CookieInformation &&
-        CookieInformation.hasGivenConsent()
-    ) {
-        //loadAttentive();
+
+    function triggerAttentive() {
+        console.log("Triggering Attentive popup (postMessage)");
+
+        window.postMessage(
+            { type: "creative.click", creativeId: "attentive_creative" },
+            "*"
+        );
     }
+
+    // Run once after full page load
+    triggerAttentive();
+
+    // Optional: retry a few times in case Attentive loads late
+    let tries = 0;
+    const retry = setInterval(() => {
+        triggerAttentive();
+        if (tries++ > 20) clearInterval(retry);
+    }, 300);
+
 });
 </script>
+
+
 
 
 
