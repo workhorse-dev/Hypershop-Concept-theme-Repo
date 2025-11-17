@@ -31,69 +31,6 @@
 })();
 </script>
 
-
-
-{% comment %} <script>
-(function () {
-    let attentiveReady = false;
-    let creativeId = "1260965"; // your ID
-
-    // 1️⃣ Detect when Attentive is initialized inside the iframe
-    window.addEventListener("message", function (event) {
-        if (event.data && event.data.__attentive) {
-            console.log("Attentive READY:", event.data);
-            attentiveReady = true;
-        }
-    });
-
-    // 2️⃣ Once ready, send the EXPAND trigger
-    function triggerPopup() {
-        if (!attentiveReady) return false;
-
-        const frame = document.getElementById("attentive_creative");
-        if (!frame) return false;
-
-        console.log("Sending EXPAND message to Attentive…");
-
-        frame.contentWindow.postMessage(
-            {
-                "__attentive": {
-                    "action": "EXPAND",
-                    "creativeId": creativeId
-                }
-            },
-            "*"
-        );
-
-        return true;
-    }
-
-    // 3️⃣ Keep trying until Attentive becomes ready
-    window.addEventListener("load", function () {
-        console.log("Page loaded. Waiting for Attentive to initialize…");
-
-        let attempts = 0;
-
-        const timer = setInterval(() => {
-            if (triggerPopup() || attempts++ > 60) {
-                clearInterval(timer);
-            }
-        }, 300);
-    });
-})();
-</script> {% endcomment %}
-
-
-{% comment %} <script>
-window.addEventListener("message", (e) => {
-    console.log("MESSAGE FROM IFRAME:", e.data);
-});
-</script> {% endcomment %}
- 
-
-
-
-
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
   <meta name="viewport" content="width=device-width,initial-scale=1">
