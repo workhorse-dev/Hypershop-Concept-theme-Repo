@@ -3,9 +3,9 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
 <head>
-<script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
+{% comment %} <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script> {% endcomment %}
 
-<script>
+{% comment %} <script>
 (function () {
     let attentiveReady = false;
     let creativeId = "1260965"; // your ID
@@ -53,14 +53,14 @@
         }, 300);
     });
 })();
-</script>
+</script> {% endcomment %}
 
 
-
+{% comment %} <script>
 window.addEventListener("message", (e) => {
     console.log("MESSAGE FROM IFRAME:", e.data);
 });
-</script>
+</script> {% endcomment %}
  
 
 
