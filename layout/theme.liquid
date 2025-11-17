@@ -7,25 +7,36 @@
 
 <script>
 window.addEventListener("load", function () {
+    console.log("Page loaded, waiting for Attentive iframe…");
 
-    function triggerAttentive() {
-        console.log("Triggering Attentive popup (postMessage)");
+    // Wait for iframe to appear in DOM
+    const checkIframe = setInterval(() => {
+        const frame = document.getElementById("attentive_creative");
 
-        window.postMessage(
-            { type: "creative.click", creativeId: "attentive_creative" },
-            "*"
-        );
-    }
+        if (frame) {
+            console.log("Attentive iframe found");
 
-    // Run once after full page load
-    triggerAttentive();
+            frame.addEventListener("load", function () {
+                console.log("Attentive iframe finished loading");
 
-    // Optional: retry a few times in case Attentive loads late
-    let tries = 0;
-    const retry = setInterval(() => {
-        triggerAttentive();
-        if (tries++ > 20) clearInterval(retry);
-    }, 300);
+                try {
+                    const doc = frame.contentWindow.document;
+                    const bubble = doc.getElementById("bubbleWrapper");
+
+                    if (bubble) {
+                        console.log("Clicking bubbleWrapper inside iframe");
+                        bubble.click();
+                    } else {
+                        console.log("bubbleWrapper not found inside iframe");
+                    }
+                } catch (e) {
+                    console.log("Cannot access iframe due to cross-origin:", e);
+                }
+            });
+
+            clearInterval(checkIframe);
+        }
+    }, 200);
 
 });
 </script>
