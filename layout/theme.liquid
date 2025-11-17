@@ -6,7 +6,6 @@
 <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
 
 <script>
-// Prevent double loading
 function loadAttentive() {
     if (window.__attentiveLoaded) return;
     window.__attentiveLoaded = true;
@@ -17,19 +16,17 @@ function loadAttentive() {
     document.head.appendChild(s);
 }
 
-// Tries to open bubble popup
 function openAttentivePopup() {
     const bubble = document.getElementById("bubbleWrapper") ||
                    document.querySelector('button[id*="bubble"]');
 
     if (bubble) {
-        bubble.click();   // <-- THIS is the real trigger
+        bubble.click();
         return true;
     }
     return false;
 }
 
-// Keep checking until bubble loads
 function waitForAttentivePopup() {
     let tries = 0;
     const interval = setInterval(() => {
@@ -51,13 +48,11 @@ window.addEventListener("CookieInformationConsentDeclined", function () {
     waitForAttentivePopup();
 });
 
-// RETURNING USERS (already accepted/declined previously)
+// RETURNING USERS (already made a choice)
 window.addEventListener("load", function () {
     if (
         window.CookieInformation &&
-        (CookieInformation.getConsentFor("functional") ||
-         CookieInformation.getConsentFor("marketing") ||
-         CookieInformation.getConsentFor("statistical"))
+        CookieInformation.hasGivenConsent()
     ) {
         loadAttentive();
     }
