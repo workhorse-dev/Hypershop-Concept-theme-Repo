@@ -499,6 +499,85 @@
         "rounded": false
       }
     },
+    "image_with_text_overlay_rFKznj": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_dQd6qH": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "LIMTED TIME - 40% Off!",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_NwNgWk": {
+          "type": "heading",
+          "settings": {
+            "heading": "40Gbps USB4 Connection Speed",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_y3aK9W": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Work directly from your SSD with a blazing 40Gbps connection. Tool-free install and IP55 protection for pro-grade portability. </p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_heaLjL": {
+          "type": "button",
+          "settings": {
+            "button_label": "Button label",
+            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "subheading_dQd6qH",
+        "heading_NwNgWk",
+        "text_y3aK9W",
+        "button_heaLjL"
+      ],
+      "name": "t:sections.image-with-text-overlay.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/email-7-black-friday-sale-fullwidth-banner-01-v01-r01-1920x650.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#3c3fbc",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 22,
+        "padding_top": 0,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
     "collage_grid_JPH37M": {
       "type": "collage-grid",
       "blocks": {
@@ -1964,6 +2043,7 @@
     "multicolumn_with_icons_bwTyDq",
     "rich-text-1",
     "collection-list",
+    "image_with_text_overlay_rFKznj",
     "collage_grid_JPH37M",
     "collage_grid_JThW9N",
     "rich_text_mbyy46",
