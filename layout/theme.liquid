@@ -8,7 +8,12 @@
 
   <script>
     window.addEventListener('load', function () {
-      openCcpaBanner();
+      if (!CookieInformation.getConsentGivenFor('cookie_cat_marketing')) {
+        openCcpaBanner();
+      }
+      else{
+        hideCookieBanner();
+      }
     });
   </script>
 
