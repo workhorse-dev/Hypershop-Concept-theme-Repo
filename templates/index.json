@@ -169,6 +169,7 @@
         },
         "video_NyBKW8": {
           "type": "video",
+          "disabled": true,
           "settings": {
             "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
             "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
@@ -180,6 +181,22 @@
             "heading_tag": "h2",
             "button_label": "Order Now",
             "button_link": "https://www.kickstarter.com/projects/hypershop/hyper-trackpad-pro",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
+        "image_YPKFGG": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
+            "heading": "30% Off Qi2 Wireless Chargers!",
+            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -202,30 +219,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "image_YPKFGG": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
-            "heading": "30% Off Qi2 Wireless Chargers!",
-            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
         "image_xPDyNJ",
         "image_Hjyfyw",
         "video_NyBKW8",
-        "video_d3gYfj",
-        "image_YPKFGG"
+        "image_YPKFGG",
+        "video_d3gYfj"
       ],
       "settings": {
         "autoplay": true,
