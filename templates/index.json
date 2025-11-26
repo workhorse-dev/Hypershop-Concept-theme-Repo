@@ -154,14 +154,14 @@
           "type": "image",
           "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/hyper-doorbuster-sale-web-banner-v01-r02-2000x2000_b19f6f65-7cce-4247-83c7-38be470f2e06.jpg",
-            "image_mobile": "shopify://shop_images/hyper-doorbuster-sale-mobile-banner-v01-r02-500x600-1.jpg",
-            "heading": "Early Doorbusters: Save Up to 60% on Power & Connectivity Essentials!",
-            "subheading": "Limited-time savings on chargers, hubs, and accessories to keep you powered through the season.",
+            "image": "shopify://shop_images/email-20-cyber-monday-AM-web-banner-v01-r02-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/email-20-cyber-monday-AM-mobile-banner-v01-r01-500x600.webp",
+            "heading": "",
+            "subheading": "",
             "heading_size": "title-md",
             "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://collections/black-friday-doorbusters-great-deals",
+            "button_label": "",
+            "button_link": "shopify://collections/cyber-monday-starts-now",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -581,6 +581,87 @@
         "parallax_direction": "vertical"
       }
     },
+    "image_with_text_overlay_XLHHd8": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_KTPpBw": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_fNGt9H": {
+          "type": "heading",
+          "settings": {
+            "heading": "<strong>Work & Play directly from your SSD</strong> ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_GjL7cT": {
+          "type": "text",
+          "settings": {
+            "text": "<p>This tool-less enclosure allows you to create a custom, pocket-sized SSD with your choice of NVMe drive. PS5 compatible!</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_8BLwYy": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "subheading_KTPpBw",
+        "heading_fNGt9H",
+        "text_GjL7cT",
+        "button_8BLwYy"
+      ],
+      "disabled": true,
+      "name": "t:sections.image-with-text-overlay.presets.name",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/email-20-cyber-monday-fullwidth-banner-01-v01-r01-2400x650.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/email-20-cyber-monday-fullwidth-banner-01-v01-r01-2400x650_d1aa854c-cec5-40de-b3dd-fe4e2a3a66b1.webp",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#3c3fbc",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 22,
+        "padding_top": 0,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
+      }
+    },
     "collage_grid_JPH37M": {
       "type": "collage-grid",
       "blocks": {
@@ -737,6 +818,247 @@
         "rounded": false,
         "enable_parallax": true,
         "enable_gap": false
+      }
+    },
+    "collage_grid_Qrh6VA": {
+      "type": "collage-grid",
+      "blocks": {
+        "image_aH6Wnt": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "Get blazing 40Gbps speeds, dual 6K displays, and 96W charging—all in one dock.",
+            "heading": "Thunderbolt 4 Pro-Grade Docking",
+            "link": "shopify://products/hyperdrive-thunderbolt-4-docking-station",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/email-20-cyber-monday-bspot-1-v01-r01-660x520.webp",
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "image_mobile": "shopify://shop_images/email-20-cyber-monday-bspot-1-v01-r01-660x520_613593d4-3167-4b18-9880-ec34508b85d7.webp",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        },
+        "image_eTAL3w": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "Get up to 60% off chargers and power accessories. Stay charged at home, work, or on the go. ",
+            "heading": "Fast Charging, Low Prices  ",
+            "link": "shopify://collections/2025-black-friday-power-deals",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/email-20-cyber-monday-bspot-2-v01-r01-660x520.webp",
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "image_mobile": "shopify://shop_images/email-20-cyber-monday-bspot-2-v01-r01-660x520_640fe8b1-0adb-4cd9-83c4-b8ba9fa32e0d.webp",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        },
+        "image_Rg8ckH": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "Stay powered and organized with HyperPack and HyperPack Pro—featuring USB-C charging pass-throughs, and sleek, durable design.",
+            "heading": "Carry Smarter. Travel Better.",
+            "link": "shopify://collections/smart-backpacks",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/email-20-cyber-monday-bspot-4-v01-r01-660x520.webp",
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "image_mobile": "shopify://shop_images/email-20-cyber-monday-bspot-4-v01-r01-660x520_5bc884d8-f4cf-476d-b0f1-39f3dd8be6be.webp",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        },
+        "image_iTfyUy": {
+          "type": "image",
+          "settings": {
+            "column_size": 5,
+            "row_size": 2,
+            "subheading": "From USB-C to Thunderbolt docks, upgrade your setup with pro-grade connectivity at unbeatable prices.",
+            "heading": "Hubs & Docks on Sale",
+            "link": "shopify://collections/2025-black-friday-docks-and-hubs-deals",
+            "invert_subheading_heading": false,
+            "image": "shopify://shop_images/email-20-cyber-monday-bspot-3-v01-r01-660x520.webp",
+            "content_position": "md:items-end md:justify-start",
+            "text_alignment": "left",
+            "image_mobile": "shopify://shop_images/email-20-cyber-monday-bspot-3-v01-r01-660x520_f80bc672-9d8b-4aa6-96e5-c5fee4629e96.webp",
+            "content_position_mobile": "items-end justify-start",
+            "text_alignment_mobile": "left",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle",
+            "color_text": "#ffffff",
+            "color_highlight": "",
+            "gradient_highlight": "",
+            "color_overlay": "#171717",
+            "overlay_opacity": 10,
+            "color_text_hover": "",
+            "color_highlight_hover": "",
+            "gradient_highlight_hover": "",
+            "color_overlay_hover": "",
+            "overlay_opacity_hover": 10
+          }
+        }
+      },
+      "block_order": [
+        "image_aH6Wnt",
+        "image_eTAL3w",
+        "image_Rg8ckH",
+        "image_iTfyUy"
+      ],
+      "disabled": true,
+      "name": "Collage - Cyber Monday",
+      "settings": {
+        "row_height": 300,
+        "row_height_mobile": 150,
+        "heading": "Cyber Monday Are Here!",
+        "heading_size": "title-md",
+        "heading_alignment": "text-left md:items-end md:flex-row",
+        "heading_tag": "h2",
+        "subheading": "",
+        "description": "<p>Save up to 60% on Docks, Hubs, and Power products!</p>",
+        "button_label": "",
+        "button_link": "",
+        "button_external": false,
+        "button_icon": true,
+        "highlighted_text": "none",
+        "highlighted_scribble": "circle",
+        "color_text": "",
+        "color_background": "",
+        "gradient_background": "",
+        "color_highlight": "",
+        "gradient_highlight": "",
+        "color_button_text": "",
+        "color_button_background": "",
+        "color_button_gradient": "",
+        "padding_top": 0,
+        "padding_bottom": 32,
+        "divider": false,
+        "full_width": false,
+        "rounded": false,
+        "enable_parallax": true,
+        "enable_gap": false
+      }
+    },
+    "image_with_text_overlay_dgngmp": {
+      "type": "image-with-text-overlay",
+      "blocks": {
+        "subheading_MktFTh": {
+          "type": "subheading",
+          "settings": {
+            "subheading": "",
+            "subheading_size": "subtitle-md",
+            "secondary_color": true
+          }
+        },
+        "heading_DGqhxj": {
+          "type": "heading",
+          "settings": {
+            "heading": "Charge 4 Devices Fast",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "text_D6kRxV": {
+          "type": "text",
+          "settings": {
+            "text": "<p>Power up to 4 laptops at once with the 245W GaN charger. Compact, powerful, and efficient.</p>",
+            "text_size": "subtext-md",
+            "text_max_size": 32,
+            "text_font": "body",
+            "secondary_color": false,
+            "highlighted_text": "none",
+            "highlighted_scribble": "circle"
+          }
+        },
+        "button_WFChVM": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperjuice-245w-gan-desktop-charger",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
+        }
+      },
+      "block_order": [
+        "subheading_MktFTh",
+        "heading_DGqhxj",
+        "text_D6kRxV",
+        "button_WFChVM"
+      ],
+      "disabled": true,
+      "name": "Image with text overlay - CM",
+      "settings": {
+        "transparent_header": false,
+        "image": "shopify://shop_images/email-20-cyber-monday-fullwidth-banner-03-v01-r01-2400x650.webp",
+        "image_height": "650px",
+        "content_width": "small",
+        "content_position": "md:items-end md:justify-start",
+        "text_alignment": "left",
+        "image_mobile": "shopify://shop_images/email-20-cyber-monday-fullwidth-banner-03-v01-r01-2400x650_d4528fb9-858f-438b-85c8-148c3d015978.webp",
+        "image_height_mobile": "auto",
+        "content_position_mobile": "items-end justify-start",
+        "text_alignment_mobile": "left",
+        "color_text": "#ffffff",
+        "color_highlight": "#e0a580",
+        "gradient_highlight": "",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#3c3fbc",
+        "color_button_gradient": "",
+        "color_overlay": "#171717",
+        "overlay_opacity": 22,
+        "padding_top": 0,
+        "padding_bottom": 28,
+        "divider": false,
+        "full_width": true,
+        "rounded": false,
+        "enable_parallax": true,
+        "parallax_direction": "vertical"
       }
     },
     "collage_grid_JThW9N": {
@@ -1930,7 +2252,6 @@
             "collection": "wireless-chargers",
             "products": [
               "hyperjuice-245w-gan-desktop-charger",
-              "hyperjuice-245w-usb-c-battery-pack",
               "hyperjuice-qi2-4-in-1-magnetic-charging-stand",
               "hyperjuice-next-qi2-3-in-1-magnetic-charging-stand",
               "hyperjuice-next-qi2-2-in-1-magnetic-charging-stand",
@@ -2011,42 +2332,6 @@
         "rounded": true
       }
     },
-    "blog-posts-collage": {
-      "type": "blog-posts-collage",
-      "disabled": true,
-      "settings": {
-        "blog": "news",
-        "post_limit": 3,
-        "show_view_all": true,
-        "image_ratio": "square",
-        "show_tags": true,
-        "show_date": true,
-        "show_comments": false,
-        "show_author": false,
-        "show_excerpt": true,
-        "heading": "Latest Hyper News",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 40,
-        "padding_bottom": 100,
-        "divider": false,
-        "full_width": false,
-        "rounded": false
-      }
-    },
     "blog_posts_q9F3Kf": {
       "type": "blog-posts",
       "name": "t:sections.blog-posts.presets.name",
@@ -2122,7 +2407,10 @@
     "rich-text-1",
     "collection-list",
     "image_with_text_overlay_rFKznj",
+    "image_with_text_overlay_XLHHd8",
     "collage_grid_JPH37M",
+    "collage_grid_Qrh6VA",
+    "image_with_text_overlay_dgngmp",
     "collage_grid_JThW9N",
     "rich_text_DhQFFn",
     "featured-product",
@@ -2136,7 +2424,6 @@
     "scrolling-text-2",
     "logo_list_UxfgMd",
     "featured-collections",
-    "blog-posts-collage",
     "blog_posts_q9F3Kf",
     "1753091884a817fc18"
   ]
