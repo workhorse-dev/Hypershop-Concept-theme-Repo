@@ -136,6 +136,7 @@
       "blocks": {
         "image_xPDyNJ": {
           "type": "image",
+          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/hyper-doorbuster-sale-web-banner-v01-r02-2000x2000_1f3c3fcc-8f10-4904-b8d5-a93625292d0d.webp",
             "image_mobile": "shopify://shop_images/bf-mobile-banner-v01-r01-500x600_1.webp",
@@ -152,7 +153,6 @@
         },
         "image_Hjyfyw": {
           "type": "image",
-          "disabled": true,
           "settings": {
             "image": "shopify://shop_images/email-20-cyber-monday-AM-web-banner-v01-r02-2000x2000.webp",
             "image_mobile": "shopify://shop_images/email-20-cyber-monday-AM-mobile-banner-v01-r01-500x600_7910b4d9-6a6d-4a49-9059-f52ea288aadf.webp",
@@ -552,6 +552,7 @@
         "text_y3aK9W",
         "button_heaLjL"
       ],
+      "disabled": true,
       "name": "t:sections.image-with-text-overlay.presets.name",
       "settings": {
         "transparent_header": false,
@@ -632,7 +633,6 @@
         "text_GjL7cT",
         "button_8BLwYy"
       ],
-      "disabled": true,
       "name": "t:sections.image-with-text-overlay.presets.name",
       "settings": {
         "transparent_header": false,
@@ -788,10 +788,11 @@
         "image_c6kVTY",
         "image_9HtaaX"
       ],
+      "disabled": true,
       "settings": {
         "row_height": 300,
         "row_height_mobile": 150,
-        "heading": "Doorbuster Deals Are Here!",
+        "heading": "Cyber Monday Deals Are Here!",
         "heading_size": "title-md",
         "heading_alignment": "text-left md:items-end md:flex-row",
         "heading_tag": "h2",
@@ -946,7 +947,6 @@
         "image_Rg8ckH",
         "image_iTfyUy"
       ],
-      "disabled": true,
       "name": "Collage - Cyber Monday",
       "settings": {
         "row_height": 300,
@@ -1031,7 +1031,6 @@
         "text_D6kRxV",
         "button_WFChVM"
       ],
-      "disabled": true,
       "name": "Image with text overlay - CM",
       "settings": {
         "transparent_header": false,
@@ -1228,7 +1227,7 @@
         "heading_PKCRGx": {
           "type": "heading",
           "settings": {
-            "heading": "Black Friday Super Deal",
+            "heading": "Cyber Monday Super Deal",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
