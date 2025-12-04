@@ -104,6 +104,10 @@
 
 /*! photoswipe */
 
+.visually-hidden-heading {
+  display: none !important;
+}
+
 .pswp {
   --pswp-bg: rgb(var(--color-background));
   --pswp-placeholder-bg: rgb(var(--color-placeholder));
