@@ -192,21 +192,6 @@
       });
     </script>
 
-    <script>
-document.addEventListener("DOMContentLoaded", function () {
-  const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
-
-  headings.forEach(h => {
-    const content = h.textContent.trim();
-    const hasChildElement = h.children.length > 0;
-
-    // Check: No text + no child elements with content
-    if (!content && !hasChildElement) {
-      h.classList.add("visually-hidden-heading");
-    }
-  });
-});
-</script>
 
 
 </body>
