@@ -47,6 +47,22 @@
     "slideshow_gWP89j": {
       "type": "slideshow",
       "blocks": {
+        "image_AKjaym": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-LP-banner-v01-r01-1824x650.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-LP-mobile-banner-no-text-v01-r01-500x400.webp",
+            "heading": "Hyper's 2025 Holiday Gift Guide",
+            "subheading": "Smart power, seamless connectivity and travel-ready gear, all hand-picked for creators, travelers and Apple power users. Find thoughtful, high-performance gifts that elevate every workflow and lifestyle.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop All the Deals",
+            "button_link": "https://www.hypershop.com/collections/holiday-kick-off-sale",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "image_bWFNGx": {
           "type": "image",
           "settings": {
@@ -63,6 +79,7 @@
         }
       },
       "block_order": [
+        "image_AKjaym",
         "image_bWFNGx"
       ],
       "name": "t:sections.slideshow.presets.name",
@@ -77,8 +94,8 @@
         "color_text": "#ffffff",
         "color_background": "#ffffff",
         "gradient_background": "",
-        "color_button_text": "#171717",
-        "color_button_background": "#ffffff",
+        "color_button_text": "#ffffff",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "color_overlay": "#171717",
         "overlay_opacity": 20,
@@ -91,74 +108,13 @@
         "parallax_direction": "vertical"
       }
     },
-    "rich_text_68zK3i": {
-      "type": "rich-text",
-      "blocks": {
-        "heading_h6bXDD": {
-          "type": "heading",
-          "settings": {
-            "heading": "Go Beyond with HyperDrive Next",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h1",
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        },
-        "text_3nQQ3d": {
-          "type": "text",
-          "settings": {
-            "text": "<p>HyperDrive Next is a game-changing line of connectivity solutions that redefines performance and data transfer speeds, encouraging users to go beyond their devices' boundaries and embrace innovation.</p>",
-            "text_size": "subtext-md",
-            "text_max_size": 32,
-            "text_font": "body",
-            "secondary_color": false,
-            "highlighted_text": "none",
-            "highlighted_scribble": "circle"
-          }
-        }
-      },
-      "block_order": [
-        "heading_h6bXDD",
-        "text_3nQQ3d"
-      ],
-      "settings": {
-        "text_alignment": "center",
-        "text_alignment_mobile": "center",
-        "heading": "",
-        "heading_size": "title-md",
-        "heading_alignment": "text-left md:items-end md:flex-row",
-        "heading_width": "small",
-        "heading_tag": "h2",
-        "subheading": "",
-        "description": "",
-        "button_label": "",
-        "button_link": "",
-        "button_external": false,
-        "button_icon": true,
-        "highlighted_text": "none",
-        "highlighted_scribble": "circle",
-        "color_text": "",
-        "color_background": "",
-        "gradient_background": "",
-        "color_highlight": "",
-        "gradient_highlight": "",
-        "color_button_text": "",
-        "color_button_background": "",
-        "color_button_gradient": "",
-        "padding_top": 72,
-        "padding_bottom": 100,
-        "divider": false,
-        "narrow": true,
-        "rounded": false
-      }
-    },
     "image_with_text_TFajpK": {
       "type": "image-with-text",
       "blocks": {
         "heading_gqyq9H": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "<strong>USB4 SSD Enclosure for Creators on the Go</strong>",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -168,7 +124,7 @@
         "text_GPrMre": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>Work directly from your SSD with blazing 40Gbps USB4 speeds. This eco-friendly, tool-free enclosure is rugged, fast, and perfect for high-performance, portable storage.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -176,19 +132,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_PttyfM": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_gqyq9H",
-        "text_GPrMre"
+        "text_GPrMre",
+        "button_PttyfM"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-03-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "image_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-03-v01-r01-912x432_33bd9247-7059-4c04-b17b-da95f4a28d5d.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -199,7 +168,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -216,7 +185,7 @@
         "heading_z98VXN": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "Smart Backpack + Locator Bundle for Travelers",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -226,7 +195,7 @@
         "text_3APLtb": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>Stay organized and secure on the move with the HyperPack backpack and HyperShield Universal Locator — a durable, travel-ready duo with built-in tracking and tech-focused design.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -234,19 +203,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_JUPcdw": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperpack-and-hypershield-universal-locator-bundle",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_z98VXN",
-        "text_3APLtb"
+        "text_3APLtb",
+        "button_JUPcdw"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-01-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "text_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-01-v01-r01-912x432_96a353b6-c3de-4478-a352-671aafd0f6ab.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -257,7 +239,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -274,7 +256,7 @@
         "heading_P3nzYT": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "GaN Chargers for Travel and Home",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -284,7 +266,7 @@
         "text_ygJ8R3": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>Fast-charge multiple devices from one compact charger. HyperJuice GaN power bricks replace bulky adapters with serious wattage and portability.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -292,19 +274,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_Cwxwkj": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "https://www.hypershop.com/collections/wall-chargers",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_P3nzYT",
-        "text_ygJ8R3"
+        "text_ygJ8R3",
+        "button_Cwxwkj"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-02-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "image_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-02-v01-r01-912x432_e3f143d0-1a0c-4f94-9e45-a368535c6721.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -315,7 +310,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -332,7 +327,7 @@
         "heading_L4rbiN": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "Desktop Charging for Power Users",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -342,7 +337,7 @@
         "text_W3jAUU": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>Charge up to four laptops from a single outlet. This compact 245W GaN station delivers serious power in minimal space — ideal for home offices and multi-device setups.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -350,19 +345,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_tJxweR": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperjuice-245w-gan-desktop-charger",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_L4rbiN",
-        "text_W3jAUU"
+        "text_W3jAUU",
+        "button_tJxweR"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-04-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "text_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-04-v01-r01-912x432_846b5f00-73d2-48ff-afd8-4ee50bd33e4e.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -373,7 +381,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -390,7 +398,7 @@
         "heading_7YaVcY": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "Thunderbolt Docks for Pro Workflows",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -400,7 +408,7 @@
         "text_nNdMHH": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>Expand your creative setup with ultra-fast Thunderbolt docks that support dual 4K displays, high-speed data, and full laptop charging — all through one cable.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -408,19 +416,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_xik6tP": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "https://www.hypershop.com/collections/thunderbolt-docks",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_7YaVcY",
-        "text_nNdMHH"
+        "text_nNdMHH",
+        "button_xik6tP"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-05-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "image_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-05-v01-r01-912x432_9cd24332-80ee-410e-bf4c-6451803edca8.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -431,7 +452,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -448,7 +469,7 @@
         "heading_ttEfk7": {
           "type": "heading",
           "settings": {
-            "heading": "Shape Your Vision with Unmatched Performance",
+            "heading": "USB-C Hubs for Apple Users & Students",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "highlighted_text": "none",
@@ -458,7 +479,7 @@
         "text_cQfWqw": {
           "type": "text",
           "settings": {
-            "text": "<p>Unleash creativity and productivity with unparalleled file transfer speed and seamless compatibility. From USB4 NVMe SSD Enclosure to Dual 4K HDMI 7 Port USB-C Hub, experience faster transfers, 40% more power, and eco-conscious design. Work anywhere, create everywhere with HyperDrive Next.</p>",
+            "text": "<p>HyperDrive USB-C hubs for MacBook deliver extra ports without extra bulk — ideal for expanding creative setups or school productivity.</p>",
             "text_size": "subtext-md",
             "text_max_size": 32,
             "text_font": "body",
@@ -466,19 +487,32 @@
             "highlighted_text": "none",
             "highlighted_scribble": "circle"
           }
+        },
+        "button_9NjHXx": {
+          "type": "button",
+          "settings": {
+            "button_label": "Shop Now",
+            "button_link": "https://www.hypershop.com/collections/2025-holiday-kick-off-deals-on-docks-and-hubs",
+            "button_style": "primary",
+            "button_size": "md",
+            "button_external": false,
+            "button_icon": true
+          }
         }
       },
       "block_order": [
         "heading_ttEfk7",
-        "text_cQfWqw"
+        "text_cQfWqw",
+        "button_9NjHXx"
       ],
       "settings": {
-        "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-bspot-1-v01-r01-660x520_4445526a-9a6a-4071-bab6-1426d898cf3f.webp",
+        "image": "shopify://shop_images/hyper-holiday-gift-guide-module-06-v01-r01-912x432.webp",
         "image_height": "adapt",
         "image_width": "medium",
         "layout": "text_first",
         "text_alignment": "left",
         "content_position": "align-self-center",
+        "image_mobile": "shopify://shop_images/hyper-holiday-gift-guide-module-06-v01-r01-912x432_e8e97dfd-3f8e-446e-a2f9-216dc43ecf98.webp",
         "image_height_mobile": "auto",
         "text_alignment_mobile": "left",
         "color_text": "",
@@ -489,7 +523,7 @@
         "color_highlight": "",
         "gradient_highlight": "",
         "color_button_text": "",
-        "color_button_background": "",
+        "color_button_background": "#3c3fbc",
         "color_button_gradient": "",
         "padding_top": 72,
         "padding_bottom": 72,
@@ -505,7 +539,6 @@
     "main-page",
     "video_cpDYyM",
     "slideshow_gWP89j",
-    "rich_text_68zK3i",
     "image_with_text_TFajpK",
     "image_with_text_UPCy4m",
     "image_with_text_NQHKeG",
