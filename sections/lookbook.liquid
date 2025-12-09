@@ -154,7 +154,7 @@
                   </a>
                 {%- endif -%}
               {%- else -%}
-                 {% if block.shopify_attributes != blank %}
+                 {% if block.shopify_attributes %}
                 <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
               {% endif %}
               {%- endif -%}
