@@ -96,7 +96,15 @@
 
     <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} rte text-base md:text-lg" itemprop="articleBody">
       {% comment %} {{- article.content -}} {% endcomment %}
-       {{ article.content | replace: '<h4></h4>', '' | replace: '<h3></h3>', '' }}
+      {{ article.content
+        | replace: '<h4></h4>', ''
+        | replace: '<h4><b></b></h4>', ''
+        | replace: '<h4><strong></strong></h4>', ''
+        | replace: '<h3></h3>', ''
+        | replace: '<h3><b></b></h3>', ''
+        | replace: '<ul></ul>', '' 
+        | replace: '<p><span></span></p>', ''
+      }}
     </div>
   </article>
 </div>
