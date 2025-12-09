@@ -95,7 +95,8 @@
     {%- endif -%}
 
     <div class="page-width{% if section.settings.narrow %} page-width--narrow{% endif %} rte text-base md:text-lg" itemprop="articleBody">
-      {{- article.content -}}
+      {% comment %} {{- article.content -}} {% endcomment %}
+       {{ article.content | replace: '<h4></h4>', '' | replace: '<h3></h3>', '' }}
     </div>
   </article>
 </div>
