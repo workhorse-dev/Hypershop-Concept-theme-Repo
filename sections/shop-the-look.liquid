@@ -103,7 +103,9 @@
                 </a>
               {%- endif -%}
             {%- else -%}
+               {% if block.shopify_attributes != blank %}
               <button type="button" disabled class="hotspot flex items-center justify-center absolute z-1 cursor-pointer" aria-disabled="true" aria-current="{% if forloop.first %}true{% else %}false{% endif %}" id="shopify-block-{{ block.id }}" {{ block.shopify_attributes }}></button>
+               {% endif %}
             {%- endif -%}
           {%- endfor -%}
         {%- endif -%}
