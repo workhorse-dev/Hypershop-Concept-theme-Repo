@@ -67,7 +67,7 @@
   {%- endif -%}
 
   {%- if settings.predictive_search_enabled %}
-    <div id="PredictiveSearchResults-{{ section_id }}" class="search__box search__results text-left flex flex-col items-start grow gap-10" role="listbox">
+    <div id="PredictiveSearchResults-{{ section_id }}" aria-label="Search suggestions" class="search__box search__results text-left flex flex-col items-start grow gap-10" role="listbox">
       {%- if predictive_search.performed -%}
         {%- if predictive_search.resources.queries.size > 0 -%}
           <div class="grid gap-3 md:gap-4 w-full">
