@@ -116,6 +116,24 @@
     });
   });
   </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const hiddenSections = document.querySelectorAll("[aria-hidden='true']");
+
+  hiddenSections.forEach(section => {
+    const focusable = section.querySelectorAll(
+      "a, button, input, textarea, select, summary, iframe, object, embed, area[href], [contenteditable], [tabindex]:not([tabindex='-1'])"
+    );
+
+    focusable.forEach(el => {
+      el.setAttribute("tabindex", "-1");
+      el.style.pointerEvents = "none";
+    });
+  });
+});
+</script>
+
 </head>
 
 <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}"{% if settings.enable_lazy_image %} data-lazy-image{% endif %} data-title-animation data-page-rendering>
