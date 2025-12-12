@@ -3,8 +3,16 @@
 <!doctype html>
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
 <head>
-
-  <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
+  <script>
+    window.cookieInformationCustomConfig = {
+      GPP: {
+        applicableSections: [
+          { id: 8, name: 'uscav1'},
+        ],
+      },
+    };
+  </script>
+  <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" data-gpp-enabled="true" defer></script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
