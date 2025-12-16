@@ -1,0 +1,1806 @@
+/* Air reviews */
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRate .AirReviews-StarRate--Positive {
+  inset: unset;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRate {
+  margin-inline: calc(var(--sp-0d5) * -1);
+}
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRate .AirReviews-StarRate--Icon {
+  margin: 0;
+  padding-inline: var(--sp-0d5);
+}
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRatingWrapper {
+  gap: var(--sp-1d5);
+}
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRatingWrapper:empty {
+  display: none;
+}
+
+:is(.AirReviews-Widget, #AirReviews-Modal__DetailsMobile) .AirReviews-StarRatingWrapper .AirReviews-StarRate--Count {
+  margin: 0 !important;
+  font-size: var(--text-sm);
+  text-align: start;
+  padding: 0;
+}
+
+.AirReviews-Widget .AirReviews-StarRateProduct {
+  padding: 0;
+  line-height: 1;
+}
+
+.AirReviews-Widget .AirReviews-StarRateProduct .AirReviews-StarRateProduct__Content {
+  gap: var(--sp-1);
+  font-size: var(--text-sm);
+}
+
+.AirReviews-Widget .AirReviews-StarRateProduct .AirReviews-StarRateProduct__Content.right {
+  padding: 0;
+  margin: 0;
+  padding-inline-start: var(--sp-4);
+  margin-inline-start: var(--sp-4);
+}
+
+.AirReviews-Widget .AirReviews-StarRateProduct .AirReviews-StarRateProduct__Content.right::after {
+  border-color: rgb(var(--color-border));
+  inset: unset;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+  height: 100%;
+}
+
+#AirReviews-BlockWrapper {
+  font-family: inherit !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks {
+  display: grid;
+  gap: var(--sp-8);
+  justify-content: unset;
+  align-items: flex-start;
+}
+
+@media screen and (min-width: 1024px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks {
+    gap: var(--grid-gap);
+    grid-template-columns: 250px minmax(0,1fr);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks {
+    grid-template-columns: 320px minmax(0,1fr);
+  }
+}
+
+#AirReviews-BlockWrapper :is(.AirReviews-Blocks__Summary, .AirReviews-Blocks__List) {
+  width: 100%;
+  box-shadow: none;
+  margin: 0 !important;
+}
+
+#AirReviews-BlockWrapper :is(.AirReviews-Blocks__Summary, .AirReviews-Blocks__SummaryLeft, .AirReviews-Blocks--Information, .AirReviews-Blocks--Rate, .AirReviews-Blocks__SummaryRight) {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  text-align: center;
+  gap: var(--sp-6);
+  width: 100%;
+}
+
+@media screen and (min-width: 1024px) {
+  #AirReviews-BlockWrapper :is(.AirReviews-Blocks__Summary, .AirReviews-Blocks__SummaryLeft, .AirReviews-Blocks--Information, .AirReviews-Blocks--Rate, .AirReviews-Blocks__SummaryRight) {
+    align-items: flex-start;
+    text-align: start;
+  }
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__Summary .AirReviews-Blocks--List .AirReviews-Blocks-Star {
+  gap: var(--sp-1d5);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__Summary .AirReviews-Blocks--List .AirReviews-Blocks-Star>div {
+  padding: 0 !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--Information {
+  padding: 0;
+  margin: 0;
+  background: none !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--Rate {
+  margin: 0;
+  padding: 0;
+  gap: var(--sp-2d5);
+  background: none !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--RateCount {
+  align-items: baseline;
+  gap: var(--sp-2d5);
+  letter-spacing: -.04em;
+  font-weight: var(--font-bold);
+  font-size: 3.75rem !important;
+  color: rgb(var(--color-rating)) !important;
+  margin: 0;
+  padding: 0;
+  border: none;
+}
+
+@media screen and (min-width: 768px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks--RateCount {
+    font-size: 5rem !important;
+  }
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--MaximumRate {
+  display: inline;
+  letter-spacing: .05em;
+  font-size: var(--text-base);
+  margin: 0;
+  color: rgb(var(--color-rating)) !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ReviewCount {
+  line-height: 1;
+  font-size: var(--text-sm);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ReviewCount span {
+  color: inherit !important;
+  font-size: inherit;
+  font-weight: 400;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ReviewCount span span {
+  display: unset;
+}
+
+#AirReviews-BlockWrapper :is(.AirReviews-Blocks__SummaryInner, .AirReviews-Blocks__SummaryWrapper) {
+  display: grid;
+  gap: var(--sp-6);
+  width: 100%;
+  box-shadow: none;
+  border-radius: 0;
+  padding: 0;
+  justify-content: unset;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--Title {
+  margin: 0;
+  padding: 0;
+  font-size: var(--title-md);
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: var(--font-heading-letter-spacing);
+  line-height: var(--font-heading-line-height);
+  text-transform: var(--font-heading-text-transform);
+  color: rgb(var(--color-foreground)) !important;
+  word-break: break-word;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--List {
+  margin: 0;
+  padding: 0;
+  border: none;
+  display: grid;
+  gap: var(--sp-1d5);
+  width: 100%;
+  background: none !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__SummaryLeft {
+  padding: 0;
+  border: none !important;
+  width: 100% !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__SummaryRight--Container {
+  width: 100% !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__SummaryRight {
+  margin: 0;
+  padding: var(--sp-5);
+  color: rgb(var(--color-base-text));
+  background-color: rgb(var(--color-base-background)) !important;
+  border-radius: var(--rounded-block);
+  border: 1px solid rgb(var(--color-border-light));
+}
+
+@media screen and (min-width: 1024px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks__SummaryRight {
+    padding: var(--sp-8);
+    padding-block-end: var(--sp-7d5);
+  }
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--Actions {
+  margin: 0;
+  padding: 0;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-2d5);
+  color: inherit;
+  background: none !important;
+  width: 100%;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--Actions div {
+  font-family: var(--font-heading-family);
+  font-style: var(--font-heading-style);
+  font-weight: var(--font-heading-weight);
+  letter-spacing: var(--font-heading-letter-spacing);
+  line-height: var(--font-heading-line-height);
+  text-transform: var(--font-heading-text-transform);
+  line-height: 1;
+  font-size: var(--fluid-base-to-xl);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__ActionRate {
+  margin: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--PoweredBy {
+  color: rgb(var(--color-base-text)/ 0.6);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks-Process {
+  border-radius: var(--rounded-block);
+  background-color: rgb(var(--color-border)) !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks-ProcessBar {
+  border-radius: var(--rounded-block);
+  background-color: rgb(var(--color-foreground)) !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ListItem {
+  color: inherit;
+  display: flex;
+  margin: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ListItem :is(*>span, .AirReviews-Blocks-Star>div) {
+  color: inherit !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ListItem .AirReviews-Blocks-Star>svg path {
+  fill: currentcolor;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__ListReview {
+  margin: 0;
+  display: grid;
+  gap: var(--sp-6);
+}
+
+@media screen and (min-width: 1280px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__ListReview {
+    grid-template-columns: repeat(2,minmax(0,1fr));
+  }
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__List {
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-6);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__ListSort {
+  display: flex;
+  justify-content: space-between;
+  gap: var(--sp-6);
+}
+
+#AirReviews-BlockWrapper .AirReviews-ListSort__Left {
+  gap: var(--sp-3);
+}
+
+#AirReviews-BlockWrapper .AirReviews-ListSort__Left .AirReviews-Select {
+  margin: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__pagination {
+  flex: 1 1 auto;
+  display: flex;
+  justify-content: flex-end;
+  gap: var(--sp-6);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination {
+  display: grid;
+  grid-template: "page previous next" /auto minmax(0, 1fr) minmax(0, 1fr);
+  gap: var(--sp-2);
+  align-items: center;
+  margin: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__label {
+  grid-area: page;
+  line-height: 1;
+  font-size: var(--text-sm);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__button:first-child {
+  grid-area: previous;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__button:last-child {
+  grid-area: next;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__ReviewDetails {
+  margin: 0;
+  border: 1px solid rgb(var(--color-border-light));
+  padding: var(--sp-5) !important;
+  border-radius: var(--rounded-block) !important;
+  color: rgb(var(--color-base-text)) !important;
+  background-color: rgb(var(--color-base-background)) !important;
+  box-shadow: none !important;
+  position: static !important;
+  transform: none !important;
+  width: 100% !important;
+  cursor: unset !important;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__ListReview {
+  height: auto !important;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__ReviewDetails {
+  display: flex;
+  gap: var(--sp-5);
+  flex-direction: column-reverse;
+  justify-content: flex-end;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images {
+  width: var(--sp-20);
+  height: var(--sp-20);
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+  border-radius: 0;
+  margin: 0;
+}
+
+[data-rounded-block=round] :is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images img {
+  border-radius: var(--sp-1d5);
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images svg {
+  width: var(--sp-20) !important;
+  height: auto !important;
+  inset: unset !important;
+  inset-inline-end: -12px !important;
+  inset-block-end: 12px !important;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images--Count {
+  inset: unset !important;
+  inset-inline-end: var(--sp-2d5) !important;
+  inset-block-end: var(--sp-2d5) !important;
+  font-size: var(--text-sm) !important;
+  font-weight: var(--font-medium);
+  line-height: 1.25;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutList .AirReviews-Blocks__Images {
+  display: flex;
+  gap: var(--sp-2d5);
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutList .AirReviews-Blocks__Images:empty {
+  display: none;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal, #AirReviews-PopWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Content .AirReviews-Link {
+  opacity: 0.6;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-decoration: none !important;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__LayoutList .AirReviews-Blocks__Images {
+  order: 10;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__LayoutList .AirReviews-SlideShow__Container {
+  order: 11;
+  margin-block-start: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__LayoutList .AirReviews-Carousel__InnerContainer {
+  margin-block-start: var(--sp-3);
+}
+
+@media screen and (min-width: 768px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks__ReviewDetails {
+    padding: var(--sp-7d5);
+  }
+
+  :is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images {
+    width: var(--sp-24);
+    height: var(--sp-24);
+  }
+
+  :is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__ReviewDetails {
+    gap: var(--sp-7d5);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  #AirReviews-BlockWrapper .AirReviews-Blocks__ReviewDetails {
+    padding: var(--sp-8);
+    padding-block-end: var(--sp-7d5);
+  }
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) :is(.AirReviews-Blocks__Information, .AirReviews-Blocks__Images) {
+  padding: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Information {
+  padding: 0 !important;
+  display: grid !important;
+  grid-template: "author rating" "content content" /minmax(0,1fr) auto;
+  position: relative;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__LayoutList .AirReviews-Blocks__CustomerReview {
+  display: grid;
+  grid-template: "author rating" "content content" "images images" /minmax(0,1fr) auto;
+  position: relative;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__ReviewDetails-Top {
+  grid-area: rating;
+  align-items: flex-end;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-StarRate {
+  margin: 0;
+  margin-inline: -1px;
+  padding-block-end: var(--sp-1d5);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-StarRate :is(.AirReviews-StarRate--Positive, .AirReviews-StarRate--Negative) {
+  inset: unset;
+  inset-block-start: 0;
+  inset-inline-start: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__Author {
+  grid-area: author;
+  margin-block-start: var(--sp-7d5);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__Content {
+  grid-area: content;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__Images {
+  grid-area: images;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__Date {
+  position: absolute;
+  inset-inline-start: 0;
+  inset-block-start: 0;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks .AirReviews-Blocks__ReviewDetails-RatingInfo {
+  justify-content: flex-end;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Carousel__Container {
+  overflow: hidden;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Carousel__InnerContainer {
+  box-shadow: none;
+  border-radius: var(--rounded-block);
+  border: 1px solid rgb(var(--color-border));
+  background-color: rgb(var(--color-placeholder));
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks--ListItem>span {
+  text-align: end;
+}
+
+#AirReviews-BlockWrapper .AirReviews-NoReview__Inner {
+  margin-inline: 0;
+  margin-block: var(--sp-12) var(--sp-5);
+  padding: 0;
+  box-shadow: none;
+}
+
+#AirReviews-BlockWrapper .AirReviews-NoReview__Inner .AirReviews-NoReview__Content {
+  padding: 0;
+  text-align: center;
+}
+
+#AirReviews-BlockWrapper .AirReviews-NoReview__Inner .AirReviews-NoReview__Text {
+  font-size: clamp(var(--sp-5),1.4063rem + .5vw,var(--sp-8));
+}
+
+#AirReviews-BlockWrapper .AirReviews-NoReview__SubmitReview .AirReviews-Blocks__ActionRate {
+  display: flex;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Blocks__Variants {
+  gap: var(--sp-3);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Badge {
+  margin: 0;
+  padding: var(--sp-2d5) var(--sp-4);
+  font-size: var(--text-sm);
+  font-weight: var(--font-medium);
+  border-radius: var(--rounded-full);
+  line-height: 1;
+  color: rgb(var(--color-base-background));
+  background-color: rgb(var(--color-base-text));
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select {
+  width: auto !important;
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Select__Input {
+  display: inline-flex;
+  align-items: center;
+  gap: var(--sp-3d5);
+  appearance: none;
+  text-align: start;
+  width: 100%;
+  height: var(--input-height);
+  font-size: var(--text-sm);
+  line-height: 1.25;
+  padding-inline: var(--input-padding-inline);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-foreground)/ 0.025);
+  border: var(--inputs-border-width) solid rgb(var(--color-foreground)/ var(--border-opacity));
+  border-radius: var(--inputs-radius);
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select :is(.AirReviews-Select__Value, .AirReviews-Blocks--Expand) {
+  margin: 0;
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Blocks--Expand>svg {
+  transform: rotate(90deg);
+  width: var(--sp-3d5);
+  height: auto;
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Select__Input--active .AirReviews-Blocks--Expand>svg {
+  transform: rotate(180deg);
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Blocks--Expand>svg path {
+  fill: currentcolor;
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select ul {
+  padding: 0;
+  box-shadow: none;
+  border: 1px solid rgb(var(--color-border));
+  padding-inline: 0;
+  padding-block-start: var(--sp-4);
+  padding-block-end: var(--sp-6);
+  border-radius: var(--inputs-radius);
+  margin-block-start: var(--sp-1d5);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-background));
+  width: auto;
+  min-width: 100%;
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Select__Option {
+  font-size: var(--text-sm);
+  padding: var(--sp-1d5) var(--sp-7);
+}
+
+.AirReviews-Blocks__ListSort .AirReviews-Select .AirReviews-Select__Option:hover {
+  background-color: rgb(var(--color-foreground)/ 0.025);
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__button {
+  width: var(--sp-12);
+  height: var(--sp-12);
+  border-radius: 50%;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  border: 1px solid rgb(var(--color-foreground));
+  color: rgb(var(--color-foreground));
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__button>svg path {
+  fill: currentColor;
+}
+
+#AirReviews-BlockWrapper .AirReviews-Pagination__button--disabled {
+  opacity: 0.3;
+}
+
+#AirReviews-BlockWrapper .AirReviews-SlideShow__ButtonNav .AirReviews-SlideShow__ButtonNav--prev {
+  inset-inline: unset;
+  inset-inline-start: 1.2rem;
+}
+
+#AirReviews-BlockWrapper .AirReviews-SlideShow__ButtonNav .AirReviews-SlideShow__ButtonNav--next {
+  inset-inline: unset;
+  inset-inline-end: 1.2rem;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-PopWrapper, #AirReviews-Modal__DetailsMobile) {
+  font-family: inherit !important;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Overlay {
+  background-color: rgb(var(--color-drawer-overlay)/ 0.7);
+  border-color: rgb(var(--color-drawer-overlay)/ 0.7);
+  backdrop-filter: blur(12px);
+  opacity: 1;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Wrapper {
+  box-shadow: none;
+  padding: var(--sp-6) var(--sp-5);
+  color: rgb(var(--color-base-text));
+  background-color: rgb(var(--color-base-background));
+  border-radius: var(--rounded-block);
+  display: flex;
+  flex-direction: column;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Product {
+  gap: var(--sp-4);
+  align-items: center;
+  border-color: rgb(var(--color-border)) !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Product .AirReviews-Link__Product {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25;
+  text-decoration: none !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+  margin: 0 !important;
+  border: 1px solid rgb(var(--color-border-light));
+  overflow: hidden;
+  border-radius: 0;
+}
+
+[data-rounded-block=round] #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+  border-radius: var(--sp-2);
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+}
+
+#AirReviews-Modal__Details .AirReviews-Blocks__AuthorInner {
+  gap: var(--sp-2d5);
+}
+
+#AirReviews-Modal__Details .AirReviews-Blocks__AuthorInner>img {
+  margin: 0;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
+  padding: var(--sp-6) var(--sp-5) !important;
+  color: rgb(var(--color-base-text)) !important;
+  background-color: rgb(var(--color-base-background)) !important;
+}
+
+@media screen and (min-width: 1024px) {
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Wrapper {
+    padding: var(--sp-8) var(--sp-12);
+  }
+
+  #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
+    padding: var(--sp-8) var(--sp-12) !important;
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Wrapper {
+    padding-block: var(--sp-11);
+  }
+
+  #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
+    padding:var(--sp-11) !important;
+  }
+}
+
+@keyframes airReviewsShowModal {
+  from {
+    transform: translateY(100%);
+  }
+
+  to {
+    transform: translateY(0);
+  }
+}
+
+@keyframes airReviewsCloseModal {
+  from {
+    transform: translateY(0);
+  }
+
+  to {
+    transform: translateY(100%);
+  }
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper.AirReviews-Modal__Wrapper--Open-Modal {
+  transform: translateY(0);
+  animation: airReviewsShowModal .6s cubic-bezier(.7,0,.2,1) !important;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper.AirReviews-Modal__Wrapper--Close-Modal {
+  transform: translateY(100%);
+  animation: airReviewsCloseModal .6s cubic-bezier(.7,0,.2,1) !important;
+}
+
+@media screen and (max-width: 639px) {
+  html.js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Container {
+    justify-content: flex-end;
+  }
+  
+  html.js :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper {
+    margin: 0;
+    width: 100%;
+    max-height: calc(100% - 60px);
+    border-radius: 0;
+    border-start-end-radius: var(--sp-6);
+    border-start-start-radius: var(--sp-6);
+  }
+
+  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails {
+    flex-direction: column;
+  }
+
+  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images {
+    width: 100%;
+  }
+
+  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images .AirReviews-Thumbnail img {
+    position: static;
+  }
+
+  html.js #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Text {
+    width: 100%;
+    overflow: visible;
+    flex: 0 0 auto;
+  }
+}
+
+@media screen and (min-width: 640px) {
+  @keyframes airReviewsShowModal {
+    from {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+
+    to {
+      opacity: 1;
+      transform: scale(1);
+    }
+  }
+
+  @keyframes airReviewsCloseModal {
+    from {
+      opacity: 1;
+      transform: scale(1);
+    }
+
+    to {
+      opacity: 0;
+      transform: scale(0.8);
+    }
+  }
+  
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper {
+    opacity: 0;
+    transform: scale(0.8);
+    width: 36rem;
+    max-width: 100%;
+  }
+
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper.AirReviews-Modal__Wrapper--Open-Modal {
+    opacity: 1;
+    transform: scale(1);
+  }
+
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__Wrapper.AirReviews-Modal__Wrapper--Close-Modal {
+    opacity: 0;
+    transform: scale(0.8);
+  }
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Title,
+#AirReviews-Modal__Details .AirReviews-Blocks__AuthorName {
+  font-weight: var(--font-bold);
+  font-size: var(--text-2xl);
+  line-height: 1.6;
+  letter-spacing: -.025em;
+  color: inherit !important;
+}
+
+@media screen and (min-width: 768px) {
+  :is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Title,
+  #AirReviews-Modal__Details .AirReviews-Blocks__AuthorName {
+    font-size: var(--text-3xl);
+  }
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal) .AirReviews-Modal__Wrapper>header {
+  position: static;
+  padding: 0;
+  padding-block-end: var(--sp-2d5);
+  display: block;
+  background: none;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-Modal__DetailsMobile) .AirReviews-Modal__Close {
+  height: var(--sp-12);
+  width: var(--sp-12);
+  border: 1px solid rgb(var(--color-border));
+  border-radius: 50% !important;
+  inset: unset !important;
+  inset-block-start: var(--sp-5) !important;
+  inset-inline-end: var(--sp-5) !important;
+  background-color: rgb(var(--color-background)) !important;
+  color: rgb(var(--color-foreground)) !important;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-Modal__DetailsMobile) .AirReviews-Modal__Close>svg {
+  height: var(--sp-8);
+  width: var(--sp-8);
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details, #AirReviews-Modal__DetailsMobile) .AirReviews-Modal__Close>svg path {
+  fill: currentcolor;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__PrevStep {
+  position: absolute;
+  inset-inline-end: unset !important;
+  inset-inline-start: var(--sp-5) !important;
+}
+
+:is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__PrevStep>svg {
+  width: var(--sp-3);
+  height: var(--sp-3);
+}
+
+#AirReviews-Widget__Modal .AirReviews-Modal__Container .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__ListReview .AirReviews-Blocks__ReviewDetails {
+  position: static !important;
+}
+
+#AirReviews-Widget__Modal .AirReviews-Modal__Content-Container {
+  display: grid;
+  gap: var(--sp-4);
+}
+
+#AirReviews-Widget__Modal .AirReviews-Modal__Content {
+  padding: 0;
+}
+
+#AirReviews-Widget__Modal :is(.AirReviews-Blocks__List, .AirReviews-Blocks__ListSort) {
+  margin: 0 !important;
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__ListSort {
+  justify-content: center;
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__ListReview {
+  display: grid;
+  gap: var(--sp-4);
+  margin-block-start: var(--sp-5);
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__Images+.AirReviews-Blocks__Information {
+  border-block-end: 1px solid rgb(var(--color-border-light));
+  padding-block-end: var(--sp-4);
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks--PoweredBy {
+  margin-inline-end: 0 !important;
+  margin-block-start: var(--sp-4);
+  color: rgb(var(--color-foreground)/ 0.6);
+}
+
+@media screen and (min-width: 768px) {
+  #AirReviews-Widget__Modal .AirReviews-Blocks__ListReview {
+    gap: var(--sp-5);
+    margin-block-start: var(--sp-7);
+  }
+
+  #AirReviews-Widget__Modal .AirReviews-Blocks__Images+.AirReviews-Blocks__Information {
+    padding-block-end: var(--sp-6);
+  }
+
+  #AirReviews-Widget__Modal .AirReviews-Blocks--PoweredBy {
+    margin-block-start: var(--sp-5);
+  }
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__LoadMore {
+  text-align: center;
+  margin-block-end: 0;
+  margin-block-start: var(--sp-5d5);
+  position: sticky;
+  inset-block-end: 0;
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__LoadMore .AirReviews-Button {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  line-height: 1;
+  font-family: var(--font-button-family);
+  font-size: var(--font-button-size);
+  font-weight: var(--font-button-weight);
+  text-transform: var(--font-button-text-transform);
+  padding: clamp(var(--sp-4d5),1.2vw,var(--sp-5d5)) clamp(var(--sp-6d5),1.473vw,var(--sp-7d5));
+  color: rgb(var(--color-button-text));
+  background: var(--color-button-gradient);
+  background-color: rgb(var(--color-button-background));
+  border-radius: var(--buttons-radius) !important;
+  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) rgb(var(--color-shadow)/ var(--shadow-opacity));
+  max-height: 3.75rem;
+  min-width: var(--sp-48);
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__ReviewDetails {
+  padding-block: var(--sp-6);
+  padding-inline: var(--sp-7d5);
+  background-color: rgb(var(--color-foreground)/ 0.025);
+  border: 1px solid rgb(var(--color-border-light));
+  border-radius: var(--rounded-block);
+  box-shadow: none;
+  margin-block-start: 0;
+  width: 100% !important;
+  position: static !important;
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__ProductDetails {
+  border-block-start: 1px solid rgb(var(--color-border-light));
+  padding-block-start: var(--sp-4);
+  margin-block-start: var(--sp-7d5);
+  gap: var(--sp-4);
+}
+
+@media screen and (min-width: 768px) {
+  #AirReviews-Widget__Modal .AirReviews-Blocks__ProductDetails {
+    padding-block-start: var(--sp-6);
+  }
+}
+
+#AirReviews-Widget__Modal .AirReviews-Blocks__ProductName {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) :is(.AirReviews-Thumbnail, .AirReviews-Thumbnail--selected) {
+  margin: 0;
+  border: 1px solid rgb(var(--color-border-light));
+  overflow: hidden;
+  border-radius: 0;
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Thumbnail--selected {
+  border-color: rgb(var(--color-foreground));
+  border-width: 2px;
+}
+
+[data-rounded-block=round] :is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) :is(.AirReviews-Thumbnail, .AirReviews-Thumbnail--selected) {
+  border-radius: var(--sp-2);
+}
+
+:is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) :is(.AirReviews-Thumbnail, .AirReviews-Thumbnail--selected) img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__AuthorInner {
+  gap: var(--sp-3);
+  font-weight: 600;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Author {
+  color: inherit;
+  margin-block-start: var(--sp-2);
+  margin-block-end: 0;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__AuthorName {
+  line-height: 1;
+  font-size: var(--fluid-base-to-xl);
+  display: flex;
+  align-items: center;
+  gap: var(--sp-3);
+  color: inherit !important;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__AuthorName img {
+  margin: 0 !important;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper) .AirReviews-Blocks__ReviewDetails-Top {
+  flex-direction: row-reverse;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Date {
+  font-size: var(--text-sm);
+  opacity: 0.6;
+  font-weight: 400;
+  color: inherit !important;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-Modal__DetailsMobile) .AirReviews-Blocks__Author~* {
+  margin-block-start: var(--sp-7d5);
+  font-size: var(--text-base);
+  line-height: 1.6;
+  color: inherit !important;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate {
+  display: flex;
+  margin-inline: -1px;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate .AirReviews-StarRate--Icon {
+  margin: 0;
+  padding-inline: 1px;
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate .Avada_Star-Icon {
+  font-size: var(--sp-5);
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate .Avada_Star-Icon::before {
+  color: rgb(var(--color-rating));
+}
+
+:is(#AirReviews-Widget__Modal, #AirReviews-BlockWrapper, #AirReviews-PopWrapper) .AirReviews-StarRate .AirReviews-StarRate--Icon-negative .Avada_Star-Icon::before {
+  color: rgb(var(--color-foreground)/ 0.15);
+}
+
+.AirReviews-Widget .AirReviews-StarRate .AirReviews-StarRate--Icon.AirReviews-StarRate-single-star .Avada_Star-Icon::before {
+  color: rgb(var(--color-rating));
+}
+
+.AirReviews-Widget .AirReviews-StarRate .AirReviews-StarRate--Icon.AirReviews-StarRate--Icon-negative .Avada_Star-Icon::before {
+  color: rgb(var(--color-foreground)/ 0.15);
+}
+
+#AirReviews-FloatButtonWrapper .AirReviews-Widget__FloatButtonWrapper {
+  inset-block-start: 50%;
+  transform: translateY(-50%);
+}
+
+#AirReviews-FloatButtonWrapper .AirReviews-Widget__FloatButton {
+  transform: none;
+  width: var(--sp-13);
+  margin-inline: var(--page-padding);
+  padding-block: var(--sp-2);
+  backdrop-filter: blur(6px);
+  background-color: rgb(var(--color-background)/ 0.8);
+  box-shadow: 0 0 0 1px rgb(var(--color-border));
+  border-radius: var(--rounded-full);
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: var(--sp-1);
+  filter: none;
+}
+
+@media screen and (min-width: 640px) {
+  #AirReviews-FloatButtonWrapper .AirReviews-Widget__FloatButton {
+    margin-inline: var(--sp-6);
+  }
+}
+
+#AirReviews-FloatButtonWrapper .AirReviews-Widget__FloatButton>span:not(.AirReviews-Widget__Icon) {
+  writing-mode: vertical-rl;
+  font-size: var(--text-3xs);
+  padding-inline: var(--sp-4);
+  padding-block: var(--sp-2);
+  margin-block: var(--sp-2);
+  transform: rotate(0);
+  transform-origin: unset;
+  border-radius: var(--rounded-full);
+  letter-spacing: .05em;
+  text-transform: uppercase;
+  gap: var(--sp-1d5);
+  line-height: 1.6;
+  display: flex;
+  flex: 1 1 auto;
+  align-items: center;
+  cursor: pointer;
+  color: var(--air-float-button-text-color);
+  background-color: var(--air-float-button-background-color);
+  width: 100%;
+}
+
+#AirReviews-FloatButtonWrapper :is(.Desktop-left, .Mobile-left) .AirReviews-Widget__FloatButton>span:not(.AirReviews-Widget__Icon) {
+  transform: rotate(-180deg);
+}
+
+#AirReviews-FloatButtonWrapper .AirReviews-Widget__Icon {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: var(--sp-10);
+  height: var(--sp-10);
+}
+
+#AirReviews-FloatButtonWrapper .AirReviews-Widget__Icon>img {
+  width: var(--sp-4d5);
+  height: var(--sp-4d5);
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__Wrapper {
+  max-height: 90vh;
+  box-shadow: none;
+  color: rgb(var(--color-base-text));
+  background-color: rgb(var(--color-base-background));
+  border-radius: var(--rounded-block) !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-FormLayout {
+  margin: 0;
+}
+
+#AirReviews-Modal__Details .AirReviews-Blocks__Author {
+  margin: 0 !important;
+  color: inherit !important;
+  background-color: transparent !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Content {
+  margin: 0 !important;
+  padding: 0 !important;
+  border: none !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-FormLayout__Item {
+  margin: 0;
+  max-width: 100%;
+}
+
+#AirReviews-Modal__Details .AirReviews-Stack {
+  margin: 0;
+  flex-direction: row-reverse;
+}
+
+#AirReviews-Modal__Details .AirReviews-Stack .AirReviews-Stack__Item {
+  margin: 0;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images .AirReviews-ImageActions.AirReviews-PrevBtn {
+  inset-inline: unset !important;
+  inset-inline-start: var(--sp-5) !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails--Images .AirReviews-ImageActions.AirReviews-NextBtn {
+  inset-inline: unset !important;
+  inset-inline-end: var(--sp-5) !important;
+}
+
+#AirReviews-Modal__Details .AirReviews-Blocks__Date {
+  font-size: var(--text-sm);
+  opacity: .6;
+  font-weight: 400;
+}
+
+#AirReviews-Modal__Details .AirReviews-StarRate .AirReviews-StarRate--Icon {
+  margin-inline-end: 0;
+}
+
+#AirReviews-Modal__Details .AirReviews-StarRate .AirReviews-StarRate--Icon+.AirReviews-StarRate--Icon {
+  margin-inline-start: 2px;
+}
+
+#AirReviews-Modal__Details .AirReviews-Blocks__Content {
+  margin-block-start: var(--sp-7d5);
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+#AirReviews-Modal .AirReviews-Textarea__Title {
+  display: block;
+  margin-block-start: 0;
+  margin-block-end: var(--sp-2d5);
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+#AirReviews-Modal .AirReviews-Select ul {
+  box-shadow: none;
+  border: 1px solid rgb(var(--color-border));
+  padding-inline: 0;
+  padding-block-start: var(--sp-4);
+  padding-block-end: var(--sp-6);
+  border-radius: var(--inputs-radius);
+  margin-block-start: var(--sp-1d5);
+  background-color: rgb(var(--color-background));
+  width: auto;
+  min-width: 100%;
+}
+
+#AirReviews-Modal .AirReviews-Select .AirReviews-Select__Option {
+  font-size: var(--text-sm);
+  padding: var(--sp-1d5) var(--sp-7);
+}
+
+#AirReviews-Modal .AirReviews-Select .AirReviews-Select__Option:hover {
+  background-color: rgb(var(--color-foreground)/ 0.025);
+}
+
+#AirReviews-Modal .AirReviews-TextField,
+#AirReviews-Modal .AirReviews-Textarea {
+  appearance: none;
+  text-align: start;
+  width: 100%;
+  height: var(--input-height);
+  font-size: var(--text-sm);
+  line-height: 1.25;
+  padding-inline: var(--input-padding-inline);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-foreground)/ 0.025);
+  border: var(--inputs-border-width) solid rgb(var(--color-foreground)/ var(--border-opacity));
+  border-radius: var(--inputs-radius);
+  transition: var(--animation-primary);
+  transition-property: border-color, background-color;
+  font-family: inherit !important;
+}
+
+#AirReviews-Modal .AirReviews-TextField::-moz-placeholder,
+#AirReviews-Modal .AirReviews-Textarea::-moz-placeholder {
+  color: inherit;
+  opacity: 0.6;
+  font-size: var(--text-sm);
+}
+
+#AirReviews-Modal .AirReviews-TextField::placeholder,
+#AirReviews-Modal .AirReviews-Textarea::placeholder {
+  color: inherit;
+  opacity: 0.6;
+  font-size: var(--text-sm);
+}
+
+#AirReviews-Modal .AirReviews-Textarea {
+  height: auto;
+  vertical-align: top;
+}
+
+#AirReviews-Modal .AirReviews-TextField:focus,
+#AirReviews-Modal .AirReviews-Textarea:focus {
+  box-shadow: none;
+  border-color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-foreground)/ 0.045);
+  outline: none;
+}
+
+@media screen and (min-width: 768px) {
+  #AirReviews-Modal .AirReviews-Textarea__Title {
+    font-size: var(--text-base);
+  }
+
+  #AirReviews-Modal .AirReviews-TextField,
+  #AirReviews-Modal .AirReviews-Textarea {
+    font-size: var(--text-base);
+    line-height: 1.6;
+  }
+}
+
+#AirReviews-Modal .AirReviews-ModalSubmit__UploadImages .AirReviews-ModalSubmit__ImageList {
+  gap: var(--sp-3);
+  justify-content: flex-start;
+}
+
+#AirReviews-Modal .AirReviews-ModalSubmit__UploadImages .AirReviews-ModalSubmit__ImageList .AirReviews-Thumbnail {
+  margin: 0;
+  border-color: rgb(var(--color-border));
+  border-radius: var(--inputs-radius);
+  overflow: hidden;
+}
+
+#AirReviews-Modal .AirReviews-ModalSubmit__UploadImages .AirReviews-ModalSubmit__ImageList .AirReviews-Thumbnail img:first-child {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+}
+
+#AirReviews-Modal .AirReviews-ModalSubmit__UploadImages .AirReviews-ModalSubmit__ImageList .AirReviews-Thumbnail .AirReviews-Thumbnail__Delete {
+  inset: unset;
+  inset-block-start: var(--sp-1);
+  inset-inline-end: var(--sp-1);
+}
+
+#AirReviews-Modal .AirReviews-Dropzone .AirReviews-Dropzone__Overlay {
+  border-radius: var(--inputs-radius);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-background));
+  border-color: rgb(var(--color-border)) !important;
+}
+
+#AirReviews-Modal .AirReviews-Dropzone .AirReviews-Dropzone__Description {
+  color: inherit;
+  opacity: 0.6;
+}
+
+#AirReviews-Modal .AirReviews-Button {
+  cursor: pointer;
+  position: relative;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  overflow: hidden;
+  line-height: 1;
+  font-family: var(--font-button-family);
+  font-size: var(--font-button-size);
+  font-weight: var(--font-button-weight);
+  text-transform: var(--font-button-text-transform);
+  padding: clamp(var(--sp-4d5),1.2vw,var(--sp-5d5)) clamp(var(--sp-6d5),1.473vw,var(--sp-7d5)) !important;
+  color: rgb(var(--color-button-text));
+  background: var(--color-button-gradient);
+  background-color: rgb(var(--color-button-background));
+  border-radius: var(--buttons-radius);
+  box-shadow: var(--shadow-horizontal-offset) var(--shadow-vertical-offset) rgb(var(--color-shadow)/ var(--shadow-opacity));
+  max-height: 3.75rem;
+  transform: none !important;
+}
+
+#AirReviews-Modal .AirReviews-Button::after {
+  content: "";
+  pointer-events: none;
+  position: absolute;
+  top: 0;
+  right: 0;
+  bottom: 0;
+  left: 0;
+  border-radius: var(--buttons-radius);
+  border: var(--buttons-border-width) solid rgb(var(--color-button-border)/ var(--border-opacity));
+}
+
+@media screen and (min-width: 640px) {
+  #AirReviews-Modal .AirReviews-Button {
+    min-height: 3.75rem;
+  }
+}
+
+#AirReviews-Modal .AirReviews-ModalSubmit__Policy {
+  font-size: var(--text-xs);
+  margin-block: var(--sp-5d5);
+}
+
+#AirReviews-Modal .AirReviews-Modal__Content-Container {
+  margin-block-start: var(--sp-5);
+}
+
+#AirReviews-Modal .AirReviews-Modal__Product {
+  padding: 0;
+  gap: var(--sp-5);
+  align-items: center;
+  color: inherit;
+}
+
+#AirReviews-Modal .AirReviews-Modal__Product img {
+  margin: 0;
+}
+
+#AirReviews-Modal .AirReviews-Modal__ProductTitle {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25;
+}
+
+#AirReviews-Modal header .AirReviews-Modal__Product {
+  flex-direction: column;
+}
+
+#AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Select__Input {
+  border-radius: var(--inputs-radius);
+  padding: var(--sp-1d5) var(--sp-2d5);
+  border-color: rgb(var(--color-border));
+}
+
+#AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Select__Input--active {
+  border-color: rgb(var(--color-foreground));
+}
+
+#AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Select__Value {
+  gap: var(--sp-1d5);
+}
+
+#AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Select__Label {
+  margin: 0;
+  color: inherit;
+  opacity: 0.6;
+}
+
+#AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Blocks--Expand svg path {
+  fill: currentColor;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop>div {
+  box-shadow: none;
+  backdrop-filter: blur(6px);
+  color: rgb(var(--color-foreground));
+  background-color: rgb(var(--color-background)/ 0.9);
+  border: 1px solid rgb(var(--color-border));
+}
+
+[data-rounded-block=round] #AirReviews-PopWrapper .AirReviews-Pop>div {
+  border-radius: var(--sp-3);
+}
+
+[data-rounded-block=round] #AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper, .AirReviews-Pop__Wrapper--style2) .AirReviews-Pop__Image {
+  border-start-start-radius: var(--sp-3);
+  border-start-end-radius: var(--sp-3);
+  overflow: hidden;
+}
+
+#AirReviews-PopWrapper .Avada-ReviewsPop__ContentContainer {
+  display: grid;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+}
+
+#AirReviews-PopWrapper :is(.Avada-ReviewsPop__ContentHeader, .AirReviews-Pop__Content, .Avada-Reviews-Pop__Author-Bottom, .AirReviews-Blocks--PoweredBy, .AirReviews-Pop__Author) {
+  margin: 0;
+  padding: 0;
+  color: inherit !important;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Content {
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Content .AirReviews-Link {
+  opacity: .6;
+  font-size: var(--text-sm);
+  line-height: 1.6;
+  text-decoration: none!important;
+}
+
+#AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper, .AirReviews-Pop__Wrapper--style2) :is(.Avada-ReviewsPop__ContentHeader, .AirReviews-Pop__Content, .Avada-Reviews-Pop__Author-Bottom, .AirReviews-Blocks--PoweredBy, .AirReviews-Pop__Author) {
+  justify-content: center;
+  text-align: center;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__AuthorInner,
+#AirReviews-PopWrapper .Avada-Reviews-Pop__Author-Bottom {
+  gap: var(--sp-2);
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__AuthorInner>div {
+  display: grid;
+  gap: var(--sp-2);
+}
+
+:is(#AirReviews-PopWrapper, #AirReviews-BlockWrapper) .AirReviews-Blocks__Avatar {
+  margin: 0;
+}
+
+:is(#AirReviews-PopWrapper, #AirReviews-BlockWrapper) .AirReviews-Blocks__AuthorRight {
+  margin: 0;
+  display: flex;
+  align-items: center;
+  gap: var(--sp-1);
+}
+
+#AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper, .AirReviews-Pop__Wrapper--horizontal, .AirReviews-Pop__Wrapper--horizontal--style2) .AirReviews-Pop__AuthorName,
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--style2 .Avada-Reviews-Pop__Author-Bottom>span{
+  line-height: 1;
+  font-size: var(--fluid-base-to-xl);
+  color: inherit !important;
+}
+
+#AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper, .AirReviews-Pop__Wrapper--horizontal, .AirReviews-Pop__Wrapper--horizontal--style2) .AirReviews-Blocks__Date,
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--style2 .Avada-Reviews-Pop__Author-Bottom>div{
+  font-size: var(--text-sm);
+  opacity: .6;
+  font-weight: 400;
+}
+
+#AirReviews-PopWrapper .AirReviews-Blocks--PoweredBy {
+  color: rgb(var(--color-base-text)/ 0.6);
+  margin-block-start: var(--sp-3);
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal--style2 .AirReviews-Pop__Image {
+  margin: 0;
+  padding-inline-start: var(--sp-4);
+  padding-block-start: var(--sp-4);
+}
+
+#AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper--horizontal, .AirReviews-Pop__Wrapper--horizontal--style2) .AirReviews-Blocks--PoweredBy {
+  justify-content: flex-start;
+  text-align: start;
+}
+
+@media screen and (min-width: 640px) {
+  #AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper--horizontal, .AirReviews-Pop__Wrapper--horizontal--style2) {
+    width: 30rem;
+  }
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .AirReviews-Pop__Image {
+  float: left;
+  padding: var(--sp-4);
+  padding-block-end: 0;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .AirReviews-Pop__Image>img {
+  margin: 0;
+  position: static;
+}
+
+[data-rounded-block=round] #AirReviews-PopWrapper :is(.AirReviews-Pop__Wrapper--horizontal, .AirReviews-Pop__Wrapper--horizontal--style2) .AirReviews-Pop__Image>img {
+  border-radius: var(--sp-3);
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .Avada-ReviewsPop__ContentContainer {
+  display: block;
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .Avada-ReviewsPop__ContentContainer>*+*{
+  margin-block-start: var(--sp-4);
+}
+
+#AirReviews-PopWrapper .AirReviews-Pop__Wrapper--horizontal .Avada-ReviewsPop__ContentContainer>*:last-child {
+  margin-block-end: var(--sp-4);
+}
+
+div[id*=AirReviews-CarouselWrapper] {
+  font-family: inherit !important;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card {
+  box-shadow: none;
+  border-radius: var(--rounded-block);
+  border: 1px solid rgb(var(--color-border));
+  overflow: hidden;
+  background-color: rgb(var(--color-background));
+  color: rgb(var(--color-foreground));
+  height: 100%;
+  margin-block: 0 !important;
+  display: flex;
+  flex-direction: column;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__CardContent {
+  flex: 1 1 auto;
+  display: flex;
+  flex-direction: column;
+  gap: var(--sp-4);
+  padding: var(--sp-4);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Author {
+  display: flex;
+  gap: var(--sp-1d5);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Author-Right {
+  margin: 0 !important;
+  gap: var(--sp-1d5);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__CardContent .AirReviews-Carousel__Author {
+  color: inherit;
+  padding-block-start: var(--sp-6);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Author__Name {
+  line-height: 1;
+  font-size: var(--text-base);
+  color: inherit !important;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Author__Date {
+  font-size: var(--text-sm) !important;
+  opacity: .6;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__Content {
+  font-size: var(--text-base);
+  line-height: 1.6;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductWrapper {
+  flex: 0 0 auto;
+  padding: var(--sp-4);
+  padding-block-start: var(--sp-2);
+  height: auto;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductWrapper .AirReviews-Pop__ProductName {
+  gap: var(--sp-2d5);
+  padding: var(--sp-2d5);
+  background-color: rgb(var(--color-foreground)/ 0.045);
+  border-radius: 0;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductWrapper .AirReviews-Pop__ProductName .AirReviews-Thumbnail {
+  border-radius: 0;
+}
+
+[data-rounded-block=round] div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductWrapper .AirReviews-Pop__ProductName,
+[data-rounded-block=round] div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductWrapper .AirReviews-Pop__ProductName .AirReviews-Thumbnail {
+  border-radius: var(--sp-2);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Pop__ProductName span {
+  margin: 0 !important;
+  font-size: var(--text-sm);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Media {
+  text-align: center;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Media .AirReviews-Carousel__Image {
+  border-radius: var(--rounded-block) var(--rounded-block) 0 0;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Media .AirReviews-Carousel__RateWrapper {
+  background-color: rgb(var(--color-background));
+  box-shadow: 0 10px 10px -5px rgb(var(--color-foreground)/ 0.04),0 20px 25px -5px rgb(var(--color-foreground)/ 0.1);
+  position: static;
+  transform: none;
+  display: inline-block;
+  margin-block-start: var(--sp-4);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Carousel__Media .AirReviews-Carousel__Image + .AirReviews-Carousel__RateWrapper {
+  position: absolute;
+  transform: translate(-50%, 10px);
+  margin-block-start: 0;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-StarRate .Avada_Star-Icon {
+  color: rgb(var(--color-rating));
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-StarRate .AirReviews-StarRate--Icon .Avada_Star-Icon::before {
+  font-size: var(--sp-5);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Nav .AirReviews-Button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background-color: rgb(var(--color-background));
+  border: 1px solid rgb(var(--color-border));
+  box-shadow: none;
+  width: var(--sp-12);
+  height: var(--sp-12);
+}
+
+@media screen and (min-width: 1280px) {
+  div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Nav .AirReviews-Button {
+    width: var(--sp-14);
+    height: var(--sp-14);
+  }
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Nav .AirReviews-Button img {
+  width: var(--sp-5);
+  height: var(--sp-5);
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Container {
+  margin: 0;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Container h2.AirReviews-Carousel__Header {
+  font-size: var(--title-sm);
+  margin-block-end: var(--sp-8);
+  text-align: center;
+  color: inherit;
+}
+
+div[id*=AirReviews-CarouselWrapper] .AirReviews-Carousel .AirReviews-Carousel__Card .AirReviews-Thumbnail img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+}
+
+/* Air reviews mobile */
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__Content {
+  font-size: var(--text-sm);
+  line-height: 1.6;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product {
+  padding: var(--sp-4);
+  align-items: center;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text {
+  padding-inline: var(--sp-4);
+  inset-block-end: var(--sp-18);
+  display: flex;
+  flex-direction: column;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Text>.AirReviews-Stack {
+  justify-content: space-between;
+  flex-direction: row-reverse;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+  width: var(--sp-12);
+  height: var(--sp-12);
+  margin: 0;
+  margin-inline-end: var(--sp-6);
+}
+
+html.js [data-rounded-block=round] #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail {
+  overflow: hidden;
+  border-radius: var(--sp-2);
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Thumbnail img {
+  aspect-ratio: 1/1;
+  object-fit: cover;
+  object-position: center center;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-Modal__Wrapper .AirReviews-Modal__ReviewDetails--Product .AirReviews-Link {
+  font-size: var(--text-base);
+  font-weight: var(--font-medium);
+  line-height: 1.25;
+  text-decoration: none !important;
+}
+
+html.js #AirReviews-Modal__DetailsMobile .AirReviews-StarRate {
+  --air-star-icon-md: var(--sp-5);
+}
+
+/* Air reviews RTL */
+
+[dir=rtl] #AirReviews-BlockWrapper .AirReviews-Pagination__button>svg,
+[dir=rtl] :is(#AirReviews-Modal, #AirReviews-Widget__Modal, #AirReviews-Modal__Details) .AirReviews-Modal__PrevStep>svg,
+[dir=rtl] #AirReviews-BlockWrapper .AirReviews-SlideShow__ButtonNav button>img,
+[dir=rtl] #AirReviews-Modal__Details .AirReviews-Modal__ReviewDetails .AirReviews-ImageActions>svg,
+[dir=rtl] :is(#AirReviews-BlockWrapper, #AirReviews-Widget__Modal) .AirReviews-Blocks__LayoutGrid .AirReviews-Blocks__Images svg,
+[dir=rtl] #AirReviews-Modal .AirReviews-Modal__Variant .AirReviews-Select__Input .AirReviews-Blocks--Expand>svg {
+  transform: scaleX(-1);
+}

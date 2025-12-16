@@ -1,0 +1,205 @@
+/*! article */
+
+.article__top {
+  row-gap: var(--sp-2);
+}
+
+.article__top li {
+  padding-inline-end: var(--sp-4);
+}
+
+.article__top li::after {
+  content: '';
+  position: absolute;
+  inset-inline-end: 0;
+  width: 1px;
+  height: 16px;
+  background-color: currentColor;
+  opacity: 0.3;
+}
+
+.article__top li:last-child {
+  padding-inline-end: 0;
+}
+
+.article__top li:last-child::after {
+  content: none;
+}
+
+.article__top .icon {
+  width: var(--sp-4);
+  height: var(--sp-4);
+}
+
+.article .page-width--narrow .banner__box {
+  padding-block: 0;
+}
+
+.article .badge {
+  padding: var(--sp-2) var(--sp-4);
+  font-size: var(--text-3xs);
+  color: var(--badge-foreground);
+  background-color: var(--badge-background);
+}
+
+@media screen and (pointer: fine) {
+  .article .badge {
+    --tw-scale-x: 1;
+    --tw-scale-y: 1;
+    transform: scaleX(var(--tw-scale-x)) scaleY(var(--tw-scale-y));
+    transition: transform var(--animation-primary);
+  }
+
+  .article .badge:hover {
+    --tw-scale-x: 1.05;
+    --tw-scale-y: 1.05;
+  }
+
+  .article .banner__media~.banner__content .badge {
+    transition-property: transform;
+  }
+}
+
+@media screen and (min-width: 768px) {
+  .article .badge {
+    padding: var(--sp-2d5) var(--sp-4d5);
+    font-size: var(--text-xs);
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .article.grid {
+    gap: var(--sp-16);
+  }
+
+  .article__media {
+    max-width: var(--page-width);
+    margin: 0 auto;
+    padding-inline: var(--gap-padding);
+  }
+
+  .article__image {
+    border-radius: var(--rounded-block);
+  }
+}
+
+.article .banner__title+* {
+  margin-block-start: 0;
+}
+
+.article .rte>*:first-child {
+  margin-block-start: 0;
+}
+
+.article .rte figure img {
+  border-radius: var(--rounded-block);
+}
+
+.article .rte .image-with-text img {
+  margin: 0;
+}
+
+@media screen and (min-width: 1024px) {
+  .article .rte :is(figure, .image-with-text) {
+    margin-inline-end: calc(var(--sp-10)*-1);
+    margin-inline-start: calc(var(--sp-10)*-1);
+  }
+
+  .article .rte figure figcaption {
+    margin-inline-start: var(--sp-10);
+  }
+
+  .article .rte .grid-cols-2 figure:first-child {
+    margin-inline-end: 0;
+  }
+
+  .article .rte .grid-cols-2 figure:last-child {
+    margin-inline-start: 0;
+  }
+
+  .article .rte .grid-cols-2 figure figcaption {
+    margin-inline-start: var(--rounded-block);
+  }
+}
+
+@media screen and (min-width: 1536px) {
+  .article .rte :is(figure, .image-with-text) {
+    margin-inline-end: calc(var(--sp-20)*-1);
+    margin-inline-start: calc(var(--sp-20)*-1);
+  }
+
+  .article .rte figure figcaption {
+    margin-inline-start: var(--sp-20);
+  }
+}
+
+/*! comments */
+
+.comments-section {
+  padding-block: clamp(40px, 5vw, 80px);
+}
+
+.comments-section::before {
+  background-color: rgb(var(--color-foreground)/ 0.025);
+}
+
+.comments-section :is(.article-card, .new-comment, .comment-card) {
+  background-color: rgb(var(--color-background));
+  padding: var(--sp-5);
+  border-radius: var(--rounded-block);
+}
+
+.comments-wrapper {
+  padding-block-start: var(--sp-5);
+}
+
+.comments-wrapper .pagination {
+  padding-block-end: var(--sp-5);
+}
+
+.comment-card .gravatar {
+  width: var(--sp-15);
+}
+
+@media screen and (max-width: 767px) {
+  .comment-card .article-card__top li {
+    padding-inline-end: 0;
+  }
+
+  .comment-card .article-card__top li::after {
+    content: none;
+  }
+}
+
+@media screen and (min-width: 1024px) {
+  .comments-section>.grid {
+    gap: var(--sp-15);
+  }
+
+  .comments-section .article-card {
+    padding: var(--sp-7d5) var(--sp-10);
+  }
+
+  .comments-section :is(.new-comment, .comment-card) {
+    padding: var(--sp-10);
+  }
+  
+  .comments-wrapper {
+    padding-block-start: var(--sp-7d5);
+  }
+}
+
+@media screen and (min-width: 1280px) {
+  .comments-section .page-width--narrow .article-card:nth-child(1) {
+    margin-inline-start: calc(var(--sp-20) * -1);
+  }
+
+  .comments-section .page-width--narrow .article-card:nth-child(2) {
+    margin-inline-end: calc(var(--sp-20) * -1);
+  }
+}
+
+.comment-count .icon {
+  width: var(--sp-4);
+  height: var(--sp-4);
+}
