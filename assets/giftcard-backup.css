@@ -1,0 +1,51 @@
+@media print {
+  .no-print {
+    display: none;
+  }
+}
+
+.giftcard-header {
+  --header-logo-opacity: 1;
+}
+
+.giftcard__top,
+.giftcard__middle {
+  padding-block-start: clamp(var(--sp-6), 2.105vw, var(--sp-10));
+}
+
+.giftcard__middle {
+  max-width: 36rem;
+  margin-inline: auto;
+}
+
+.giftcard__bottom {
+  max-width: 30rem;
+  margin-inline: auto;
+  padding-block-start: clamp(var(--sp-16), 4.21vw, var(--sp-20));
+  padding-block-end: clamp(var(--sp-6), 2.105vw, var(--sp-10));
+}
+
+.giftcard__code {
+  padding: var(--sp-5d5) var(--sp-6);
+  border: 1px dashed rgb(var(--color-foreground)/ 0.5);
+}
+
+.giftcard__amount {
+  padding: clamp(var(--sp-4d5), 1.2vw, var(--sp-5d5)) clamp(var(--sp-6d5), 1.473vw, var(--sp-7d5));
+  inset-inline-start: 50%;
+  transform: translateX(calc(-50% * var(--transform-logical))) translateY(50%);
+  color: #CD5747;
+  background-color: rgb(var(--color-background));
+  box-shadow: 0px 10px 10px -5px rgb(var(--color-foreground)/ 0.04), 0px 20px 25px -5px rgb(var(--color-foreground)/ 0.1);
+}
+
+[data-rounded-block=round] .giftcard__code,
+[data-rounded-block=round] .giftcard__amount {
+  border-radius: var(--sp-3);
+}
+
+.gift-card__qr-code {
+  border: 1px solid rgb(var(--color-border));
+  border-radius: var(--rounded-block);
+  padding: clamp(var(--sp-7), 1.789vw, var(--sp-8d5));
+}
