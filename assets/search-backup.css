@@ -1,0 +1,96 @@
+@media screen and (min-width: 1024px) {
+  .collection {
+    min-height: 28rem;
+  }
+}
+
+.collection .facet-wrapper {
+  padding-inline-end: var(--sp-3d5);
+}
+
+.collection .collection__topbar {
+  padding-block-start: clamp(var(--sp-8), 2.526vw, var(--sp-12));
+}
+
+.collection .empty-state {
+  margin-block: var(--sp-12) var(--sp-5);
+}
+
+.collection .search__form {
+  width: 100%;
+  max-width: 50rem;
+  margin-inline: auto;
+}
+
+.collection .search__results .drawer__sticky {
+  position: static;
+}
+
+.collection .search__box {
+  position: absolute;
+  inset-block-start: 100%;
+  inset-inline-start: 0;
+  width: 100%;
+  padding: var(--sp-6) var(--sp-5);
+  margin-block-start: var(--sp-2d5);
+  border-radius: var(--inputs-radius);
+  background-color: rgb(var(--color-background));
+  opacity: 0;
+  visibility: hidden;
+  pointer-events: none;
+  max-height: calc(100vh - 100px);
+  overflow-y: auto;
+  overflow-x: hidden;
+  scroll-behavior: smooth;
+  scroll-snap-type: y mandatory;
+  scrollbar-color: auto;
+  scrollbar-width: thin
+}
+
+@media screen and (min-width: 768px) {
+  .collection .search__box {
+    padding: var(--sp-10);
+  }
+}
+
+.collection .search__box::-webkit-scrollbar {
+  -webkit-appearance: none;
+  background-clip: padding-box;
+  background-color: transparent;
+  border-radius: var(--rounded-full);
+  width: var(--sp-1d5)
+}
+
+.collection .search__box::-webkit-scrollbar-thumb {
+  background-clip: padding-box;
+  background-color: rgb(var(--color-foreground)/ 0.2);
+  border-radius: var(--rounded-full)
+}
+
+.collection .search__overlay {
+  background: linear-gradient(to top,rgb(var(--color-drawer-overlay)/ 0.2) 0%, rgb(var(--color-drawer-overlay)/ 0.5) 100%);
+  transition: opacity var(--animation-primary);
+}
+
+.predictive-search-open .collection .search__field {
+  z-index: 35;
+}
+
+.predictive-search-open .collection .search__input {
+  background-color: rgb(var(--color-background));
+}
+
+.predictive-search-open .collection .search__overlay {
+  cursor: none;
+  opacity: 1;
+  pointer-events: auto;
+}
+
+.predictive-search-open .collection .search__box {
+  z-index: 35;
+  opacity: 1;
+  visibility: visible;
+  pointer-events: auto;
+  transition: var(--animation-primary);
+  transition-property: opacity, visibility;
+}

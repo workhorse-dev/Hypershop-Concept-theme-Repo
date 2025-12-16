@@ -1,0 +1,174 @@
+.quick-order-list table {
+  overflow: visible;
+  box-shadow: none;
+}
+
+.quick-order-list table :is(th, td) {
+  font-size: var(--text-base);
+  vertical-align: middle;
+}
+
+.quick-order-list thead th:first-child {
+  border-start-start-radius: var(--rounded-block);
+  border-end-start-radius: var(--rounded-block);
+}
+
+.quick-order-list thead th:last-child {
+  border-start-end-radius: var(--rounded-block);
+  border-end-end-radius: var(--rounded-block);
+}
+
+.quick-order-list tbody tr:first-child {
+  border-block-start: 0;
+}
+
+@media screen and (max-width: 767px) {
+  .quick-order-list table :is(th, td) {
+    vertical-align: top;
+    padding: var(--sp-5);
+  }
+
+  .quick-order-list table :is(th:last-child, td:last-child) {
+    padding-inline-start: 0;
+  }
+}
+
+.quick-order-list .price__regular {
+  --color-price: var(--color-foreground);
+  font-size: var(--text-base);
+}
+
+.quick-order-list :is(.unit-price, .price__sale) {
+  font-size: var(--text-sm);
+}
+
+@media screen and (min-width: 1024px) {
+  .quick-order-list .price__regular {
+    font-size: var(--text-lg);
+  }
+
+  .quick-order-list :is(.unit-price, .price__sale) {
+    font-size: var(--text-base);
+  }
+}
+
+.quick-order-list__total {
+  padding: var(--sp-6) var(--sp-7d5);
+  border-block-start: 2px solid rgb(var(--color-foreground));
+  backdrop-filter: blur(12px);
+  background-color: rgb(var(--color-background)/ 0.7);
+}
+
+.quick-order-list-total__info[hidden] {
+  display: flex;
+  visibility: hidden;
+  pointer-events: none;
+}
+
+.quick-order-list:not(.with-sidebar)>.quick-order-list__container {
+  margin-block-end: -60vh;
+  margin-block-end: -60lvh;
+}
+
+.quick-order-list:not(.with-sidebar)>.sticky {
+  padding-block-start: 60vh;
+  padding-block-start: 60lvh;
+}
+
+.variant-item {
+  --variant-item-media-width: 75px;
+}
+
+.variant-item__media {
+  width: var(--variant-item-media-width);
+}
+
+[data-rounded-block=round] .variant-item__media {
+  border-radius: var(--sp-2);
+}
+
+.variant-item__quantity .loader:not([hidden])~.link {
+  visibility: hidden;
+}
+
+@media screen and (max-width: 767px) {
+  .quick-order-list__total {
+    padding-inline: var(--sp-5);
+  }
+
+  .variant-item {
+    --variant-item-media-width: 65px;
+  }
+
+  .variant-item__quantity {
+    padding-inline-end: 0;
+  }
+}
+
+.variant-remove-total .loader:not([hidden])~* {
+  visibility: hidden;
+}
+
+@media screen and (min-width: 1024px) {
+  .quick-order-list__sidebar {
+    width: clamp(340px, 25vw, 430px);
+    max-height: calc(100vh - var(--sticky-header-height) - 40px);
+    max-height: calc(100svh - var(--sticky-header-height) - 40px);
+  }
+
+  .quick-order-list__sidebar .quick-order-list__total {
+    border: 2px solid rgb(var(--color-foreground));
+    border-radius: var(--rounded-block);
+  }
+
+  .quick-order-list__sidebar :is(.quick-order-list-total__column, .quick-order-list-total__right) {
+    flex-direction: column;
+  }
+
+  .quick-order-list__sidebar .quick-order-list-total__column {
+    gap: var(--sp-7d5);
+  }
+
+  .quick-order-list__sidebar .totals {
+    flex-direction: row;
+    justify-content: space-between;
+    padding-block-start: var(--sp-4);
+    border-block-start: 1px solid rgb(var(--color-border));
+  }
+
+  .quick-order-list__sidebar .quick-order-list-total__confirmation {
+    flex-direction: column;
+  }
+}
+
+@media screen and (min-width: 1024px) and (max-width: 1279px) {
+  .quick-order-list.with-sidebar table :is(th, td) {
+    vertical-align: top;
+  }
+
+  .quick-order-list.with-sidebar table :is(.md\:table-cell, .lg\:table-cell) {
+    display: none;
+  }
+
+  .quick-order-list.with-sidebar .variant-item__details :is(.variant-item__price, .variant-item__quantity) {
+    display: block;
+  }
+
+  .quick-order-list.with-sidebar .variant-item__inner {
+    align-items: flex-start;
+  }
+}
+
+@media screen and (max-width: 1023px) {
+  .quick-order-list.with-sidebar>.lg\:grow {
+    margin-block-end: -60vh;
+    margin-block-end: -60lvh;
+  }
+
+  .quick-order-list.with-sidebar>.lg\:grow-0 {
+    position: sticky;
+    inset-block-end: 0;
+    padding-block-start: 60vh;
+    padding-block-start: 60lvh;
+  }
+}
