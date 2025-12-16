@@ -6,8 +6,16 @@ This file can be re-written at any time.
 {% include 'shogun-content-handler' %}
 <html class="no-js" lang="{{ request.locale.iso_code }}" dir="{{ direction }}">
   <head>
-
-  <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" defer></script>
+  <script>
+    window.cookieInformationCustomConfig = {
+      GPP: {
+        applicableSections: [
+          { id: 8, name: 'uscav1'},
+        ],
+      },
+    };
+  </script>
+  <script id="CookieConsent" src="https://policy.app.cookieinformation.com/uc.js"  data-culture="EN" data-gcm-version="2.0" type="text/javascript" data-gpp-enabled="true" defer></script>
 
   <meta charset="utf-8">
   <meta http-equiv="X-UA-Compatible" content="IE=edge,chrome=1">
@@ -107,6 +115,36 @@ This file can be re-written at any time.
   {% render 'utm-append' %}
 
   {% render 'shogun-head' %}
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+    const headings = document.querySelectorAll("h1, h2, h3, h4, h5, h6");
+
+    headings.forEach(h => {
+      if (!h.textContent.trim()) {
+        h.remove();  
+      }
+    });
+  });
+  </script>
+
+  <script>
+  document.addEventListener("DOMContentLoaded", function () {
+  const hiddenSections = document.querySelectorAll("[aria-hidden='true']");
+
+  hiddenSections.forEach(section => {
+    const focusable = section.querySelectorAll(
+      "a, button, input, textarea, select, summary, iframe, object, embed, area[href], [contenteditable], [tabindex]:not([tabindex='-1'])"
+    );
+
+    focusable.forEach(el => {
+      el.setAttribute("tabindex", "-1");
+      el.style.pointerEvents = "none";
+    });
+  });
+});
+</script>
+
 </head>
   <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}" if settings.enable_lazy_image data-lazy-image endif data-title-animation data-page-rendering>
     {% include 'shogun-content-handler' %}
@@ -163,6 +201,7 @@ This file can be re-written at any time.
         }, 2000);
       });
     </script>
+<script src="{{ 'tiny-img-link-preloader.js' | asset_url }}" defer></script>
     <style type="text/css">
       body, html {
         width: 100% !important;
