@@ -130,6 +130,16 @@
   const hiddenSections = document.querySelectorAll("[aria-hidden='true']");
 
   hiddenSections.forEach(section => {
+
+    if (
+      section.closest('#ccpa-banner') ||
+      section.closest('#CcpaWrapper') ||
+      section.id?.startsWith('coi') ||
+      section.querySelector('[id^="coi-"]')
+    ) {
+      return; 
+    }
+
     const focusable = section.querySelectorAll(
       "a, button, input, textarea, select, summary, iframe, object, embed, area[href], [contenteditable], [tabindex]:not([tabindex='-1'])"
     );
