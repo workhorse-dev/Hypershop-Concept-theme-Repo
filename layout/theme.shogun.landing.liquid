@@ -128,7 +128,7 @@ This file can be re-written at any time.
   });
   </script>
 
-  <script>
+  {% comment %} <script>
   document.addEventListener("DOMContentLoaded", function () {
   const hiddenSections = document.querySelectorAll("[aria-hidden='true']");
 
@@ -143,7 +143,7 @@ This file can be re-written at any time.
     });
   });
 });
-</script>
+</script> {% endcomment %}
 
 </head>
   <body class="template-{{ template | replace: '.', ' ' | truncatewords: 1, '' | handle }}{% if request.path == '/challenge' %} template-challange{% endif %}{% if request.design_mode %} shopify-design-mode{% endif %}" data-rounded-button="{{ settings.rounded_button }}" data-rounded-input="{{ settings.rounded_input }}" data-rounded-block="{{ settings.rounded_block }}" data-rounded-card="{{ settings.rounded_card }}" data-button-hover="{{ settings.buttons_hover }}" if settings.enable_lazy_image data-lazy-image endif data-title-animation data-page-rendering>
