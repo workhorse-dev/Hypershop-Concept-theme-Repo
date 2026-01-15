@@ -135,6 +135,22 @@
     "slideshow_NH7K7p": {
       "type": "slideshow",
       "blocks": {
+        "image_tPbTfQ": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-email-3-winter-sale-web-banner-v01-r01-2000x2000_1_copy.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-3-winter-sale-mobile-banner-v01-r01-500x400_copy.webp",
+            "heading": "Hot Deals for Cold Days",
+            "subheading": "Get 20% off high-performance chargers, hubs, and accessories. Keep your workflow powered and your devices connected this season.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/winter-sale",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "image_YPKFGG": {
           "type": "image",
           "settings": {
@@ -204,6 +220,7 @@
         }
       },
       "block_order": [
+        "image_tPbTfQ",
         "image_YPKFGG",
         "image_Hjyfyw",
         "image_xPDyNJ",
