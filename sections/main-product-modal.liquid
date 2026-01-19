@@ -466,7 +466,7 @@
                   -%}
   
                 {%- when 'share' -%}
-                  <div class="flex justify-between items-center" {{ block.shopify_attributes }}>
+                  {% comment %} <div class="flex justify-between items-center" {{ block.shopify_attributes }}>
                     {%- liquid
                       assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
                       assign share_image = product.selected_variant.featured_image | default: product.featured_image
@@ -497,7 +497,36 @@
 
                       </div>
                     {%- endif -%}
-                  </div>
+                  </div> {% endcomment %}
+                  {%- when 'share' -%}
+  <div class="flex justify-between items-center" {{ block.shopify_attributes }}>
+    {%- liquid
+      assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
+      assign share_image = product.selected_variant.featured_image | default: product.featured_image
+    -%}
+
+    {%- render 'social-sharing',
+      section_id: section.id,
+      share_id: product.id,
+      share_label: block.settings.share_label,
+      share_title: product.title,
+      share_link: share_url,
+      share_image: share_image
+    -%}
+
+    {%- if block.settings.show_help_desk and block.settings.help_page != blank -%}
+      <div class="flex items-center gap-2">
+        {%- render 'icon', icon: 'question' -%}
+        <a
+          href="{{ block.settings.help_page.url }}"
+          class="link text-sm leading-tight"
+        >
+          {{ block.settings.help_label | escape }}
+        </a>
+      </div>
+    {%- endif -%}
+  </div>
+
   
                 {%- when 'help_desk' -%}
                   <div class="flex items-center gap-2" {{ block.shopify_attributes }}>
