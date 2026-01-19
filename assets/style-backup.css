@@ -85,6 +85,10 @@ button.shopify-payment-button__button--unbranded,
 .mega-menu__list--tabs {
   --nav-tabs-width: min(260px, 25vw);
 }
+
+.social-sharing-modal{
+  background:unset
+}
 @media screen and (max-width: 769px) {
   .drawer__inner .drawer__header .button--close {
     right: 0;

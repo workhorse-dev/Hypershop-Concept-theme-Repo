@@ -14,7 +14,7 @@
 {%- if settings.share_facebook or settings.share_twitter or settings.share_pinterest or settings.share_telegram or settings.share_whatsapp or settings.share_email -%}
   <div class="hidden sm:flex items-center gap-3">
     <p class="leading-none">{{ share_label | escape }}:</p>
-    <ul class="social-sharing flex flex-wrap items-center">
+    <ul class="social-sharing flex flex-wrap items-center social-sharing-modal">
       {%- if settings.share_facebook -%}
         <li>
           <a target="_blank" rel="noopener" class="social-sharing__link block" is="magnet-link" href="//www.facebook.com/sharer.php?u={{ share_link }}" title="{{ 'general.social.alt_text.share_on_facebook' | t | escape }}">
