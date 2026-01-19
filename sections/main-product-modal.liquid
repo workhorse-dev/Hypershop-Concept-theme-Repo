@@ -489,7 +489,7 @@
                       {{- block.settings.help_label | escape -}}
                         </a> {% endcomment %}
                         <a
-                        href="{{ block.settings.help_page.url }}"
+                        href="{{ block.settings.help_page.url| default: '/pages/contact-us' }}"
                         class="link text-sm leading-tight cursor-pointer"
                       >
                       {{ block.settings.help_label | escape }}
