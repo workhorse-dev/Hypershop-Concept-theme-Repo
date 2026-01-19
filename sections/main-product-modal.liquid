@@ -466,6 +466,11 @@
                   -%}
   
                 {%- when 'share' -%}
+                  <p style="color:red;font-size:12px">
+  show_help_desk: {{ block.settings.show_help_desk }} <br>
+  help_page: {{ block.settings.help_page | json }}
+</p>
+
                   <div class="flex justify-between items-center" {{ block.shopify_attributes }}>
                     {%- liquid
                       assign share_url = product.selected_variant.url | default: product.url | prepend: request.origin
