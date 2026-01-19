@@ -34,6 +34,10 @@ button.shopify-payment-button__button--unbranded,
   font-family: myFontMedium, sans-serif;
 }
 
+.social-sharing-modal{
+  background:unset !important;
+}
+
 /* Blogpost CSS */
 
 .article img {
@@ -71,10 +75,6 @@ button.shopify-payment-button__button--unbranded,
   .footer__left {
     gap: 2rem !important;
   }
-}
-
-.social-sharing-modal{
-  background:unset !important;
 }
 
 /* Shop the feed */
