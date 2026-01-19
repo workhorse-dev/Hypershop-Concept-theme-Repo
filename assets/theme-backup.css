@@ -79,10 +79,6 @@
   --ratio-percent: 56.25%;
 }
 
-.social-sharing-modal li a{
-  background:unset !important;
-}
-
 @media screen and (min-width: 768px) {
   :root {
     --text-h1: var(--sp-12);
