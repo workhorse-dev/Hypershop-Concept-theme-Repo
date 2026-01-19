@@ -90,6 +90,11 @@
             data-update-url="false"
           >
             {%- for block in section.blocks -%}
+              <p style="font-size:12px;color:red">
+  Block type: {{ block.type }} <br>
+  Help page JSON: {{ block.settings.help_page | json }}
+</p>
+
               {%- case block.type -%}
                 {%- when '@app' -%}
                   {%- render block -%}
