@@ -492,7 +492,7 @@
                         href="{{ block.settings.help_page.url }}"
                         class="link text-sm leading-tight cursor-pointer"
                       >
-                        {{ block.settings.help_label | escape }}
+                        {{block.settings.help_page.url | escape}}{{ block.settings.help_label | escape }}
                       </a>
 
                       </div>
