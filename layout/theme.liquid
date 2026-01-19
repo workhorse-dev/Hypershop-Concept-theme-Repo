@@ -49,6 +49,39 @@
           }
       })();
    </script>
+
+   <script>
+    document.addEventListener("DOMContentLoaded", () => {
+  const section = document.querySelector('.featured-collections');
+  if (!section) return;
+
+  const tabs = section.querySelectorAll('[role="tab"]');
+  const prevBtn = section.querySelector('.featured-tabs-prev');
+  const nextBtn = section.querySelector('.featured-tabs-next');
+
+  if (!tabs.length || !prevBtn || !nextBtn) return;
+
+  function bindArrowsToTab(tab) {
+    const tabId = tab.getAttribute('aria-controls');
+    if (!tabId) return;
+
+    const sliderId = tabId.replace('TabPanel-', 'Slider-');
+
+    prevBtn.setAttribute('aria-controls', sliderId);
+    nextBtn.setAttribute('aria-controls', sliderId);
+  }
+
+  // Initial bind
+  bindArrowsToTab(tabs[0]);
+
+  tabs.forEach(tab => {
+    tab.addEventListener('click', () => {
+      bindArrowsToTab(tab);
+    });
+  });
+});
+
+   </script>
    {% render 'dynamic-redirects' %}
 
   

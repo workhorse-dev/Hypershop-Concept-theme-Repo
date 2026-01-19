@@ -40,7 +40,7 @@
         </div>
         
         {%- if section.settings.carousel_on_desktop -%}
-          {%- for block in section.blocks -%}
+          {% comment %} {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -55,7 +55,33 @@
                 </span>
               </button>
             </div>
-          {%- endfor -%}
+          {%- endfor -%} {% endcomment %}
+           {%- if section.settings.carousel_on_desktop -%}
+  <div class="indicators lg:flex gap-2d5 featured-tabs-arrows">
+  <button
+    class="button button--secondary featured-tabs-prev"
+    type="button"
+    aria-label="Previous"
+  >
+    <span class="btn-fill"></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-left' -%}
+    </span>
+  </button>
+
+  <button
+    class="button button--secondary featured-tabs-next"
+    type="button"
+    aria-label="Next"
+  >
+    <span class="btn-fill"></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-right' -%}
+    </span>
+  </button>
+</div>
+{%- endif -%}
+
         {%- endif -%}
       </tabs-element>
       
