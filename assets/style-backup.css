@@ -73,6 +73,10 @@ button.shopify-payment-button__button--unbranded,
   }
 }
 
+..social-sharing-modal li{
+  background:unset !important;
+}
+
 /* Shop the feed */
 .shop-the-feed .media img.loaded {
   width: 100%;
