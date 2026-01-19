@@ -49,52 +49,7 @@
           }
       })();
    </script>
-   <script>
-    document.addEventListener("DOMContentLoaded", () => {
-  document.querySelectorAll('.featured-collections').forEach(section => {
-    const tabs = section.querySelectorAll('[role="tab"]');
-    const prevBtn = section.querySelector('.featured-tabs-prev');
-    const nextBtn = section.querySelector('.featured-tabs-next');
-
-    if (!tabs.length || !prevBtn || !nextBtn) return;
-
-    let activeSlider = null;
-
-    function getSliderFromTab(tab) {
-      const panelId = tab.getAttribute('aria-controls');
-      if (!panelId) return null;
-      const sliderId = panelId.replace('TabPanel-', 'Slider-');
-      return section.querySelector(`#${sliderId}`);
-    }
-
-    function setActiveSlider(tab) {
-      activeSlider = getSliderFromTab(tab);
-    }
-
-    // initial slider (first tab)
-    setActiveSlider(tabs[0]);
-
-    // tab change
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        setActiveSlider(tab);
-      });
-    });
-
-    // arrows control
-    prevBtn.addEventListener('click', () => {
-      if (!activeSlider) return;
-      activeSlider.dispatchEvent(new CustomEvent('slider:previous'));
-    });
-
-    nextBtn.addEventListener('click', () => {
-      if (!activeSlider) return;
-      activeSlider.dispatchEvent(new CustomEvent('slider:next'));
-    });
-  });
-});
-
-   </script>
+   
    
    {% render 'dynamic-redirects' %}
 
