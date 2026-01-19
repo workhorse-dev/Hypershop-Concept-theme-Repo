@@ -491,6 +491,17 @@
                         <a
                         href="{{ block.settings.help_page.url }}"
                         class="link text-sm leading-tight cursor-pointer"
+                         onclick="
+    event.preventDefault();
+    event.stopPropagation();
+
+    // close quick view modal
+    document.querySelector('.quick-view')?.classList.remove('active');
+    document.body.classList.remove('overflow-hidden');
+
+    // force full page navigation
+    window.location.href = '{{ block.settings.help_page.url }}';
+  "
                       >
                         {{ block.settings.help_label | escape }}
                       </a>
