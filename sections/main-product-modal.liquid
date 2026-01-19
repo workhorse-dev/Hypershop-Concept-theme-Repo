@@ -496,7 +496,7 @@
                   <div class="flex items-center gap-2" {{ block.shopify_attributes }}>
                     {%- render 'icon', icon: 'question' -%}
                     <a class="link text-sm leading-tight cursor-pointer"
-                      {%- if block.settings.help_page != blank %} href="{{ block.settings.help_page.url }}"{% else %} role="link" aria-disabled="true" tabindex="0"{% endif -%}
+                      {%- if block.settings.help_page != blank %} href="/contact"{% else %} role="link" aria-disabled="true" tabindex="0"{% endif -%}
                     >
                       {{- block.settings.help_label | escape -}}
                     </a>
