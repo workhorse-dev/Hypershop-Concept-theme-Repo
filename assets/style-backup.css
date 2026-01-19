@@ -87,7 +87,7 @@ button.shopify-payment-button__button--unbranded,
 }
 
 .social-sharing-modal{
-  background:unset
+  background:unset !important;
 }
 @media screen and (max-width: 769px) {
   .drawer__inner .drawer__header .button--close {
