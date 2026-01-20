@@ -68,7 +68,7 @@
         -%}
         <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}>
           <div id="TabPanelContent-{{ block.id }}">
-            {%- if section_rendering_api or forloop.first -%}
+            {% comment %} {%- if section_rendering_api or forloop.first -%} {% endcomment %}
               <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
                 <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
                   {%- for product in products limit: section.settings.product_limit -%}
@@ -127,7 +127,7 @@
                   </a>
                 </p>
               {%- endif -%}
-            {%- endif -%}
+            {% comment %} {%- endif -%} {% endcomment %}
           </div>
         </div>
       {%- endfor -%}
@@ -509,3 +509,36 @@
   }
 }
 {% endschema %}
+
+<script>
+  document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+
+  tabs.forEach(tab => {
+    tab.addEventListener("click", () => {
+      const targetId = tab.getAttribute("aria-controls");
+
+      // reset tabs
+      tabs.forEach(t => {
+        t.classList.remove("button--primary");
+        t.classList.add("button--secondary");
+        t.disabled = false;
+      });
+
+      // reset panels
+      panels.forEach(panel => panel.hidden = true);
+
+      // activate current tab
+      tab.classList.add("button--primary");
+      tab.classList.remove("button--secondary");
+      tab.disabled = true;
+
+      // show panel
+      const panel = document.getElementById(targetId);
+      if (panel) panel.hidden = false;
+    });
+  });
+});
+
+</script>
