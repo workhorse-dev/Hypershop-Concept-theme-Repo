@@ -39,7 +39,7 @@
           </div>
         </div>
         
-         {%- if section.settings.carousel_on_desktop -%}
+         {% comment %} {%- if section.settings.carousel_on_desktop -%}
             {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
@@ -56,7 +56,40 @@
               </button>
             </div>
           {%- endfor -%}  
-        {%- endif -%} 
+        {%- endif -%}  {% endcomment %}
+         {%- if section.settings.carousel_on_desktop -%}
+  {%- for block in section.blocks -%}
+    <div
+      class="indicators lg:flex gap-2d5"
+      data-arrows-for="TabPanel-{{ block.id }}"
+      {% unless forloop.first %} hidden{% endunless %}
+    >
+      <button
+        class="button button--secondary previous-button"
+        type="button"
+        aria-controls="Slider-{{ block.id }}"
+        disabled
+      >
+        <span class="btn-fill"></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'chevron-left' -%}
+        </span>
+      </button>
+
+      <button
+        class="button button--secondary next-button"
+        type="button"
+        aria-controls="Slider-{{ block.id }}"
+      >
+        <span class="btn-fill"></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'chevron-right' -%}
+        </span>
+      </button>
+    </div>
+  {%- endfor -%}
+{%- endif -%}
+
 
       </tabs-element>
       
@@ -508,5 +541,43 @@
   }
 }
 {% endschema %}
+
+<script>
+(() => {
+  if (window.__shopByCategoryTabsInit) return;
+  window.__shopByCategoryTabsInit = true;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const panels = document.querySelectorAll('[role="tabpanel"]');
+    const arrowGroups = document.querySelectorAll('[data-arrows-for]');
+
+    if (!tabs.length) return;
+
+    function activateTab(tab) {
+      const panelId = tab.getAttribute('aria-controls');
+
+      // panels
+      panels.forEach(panel => {
+        panel.hidden = panel.id !== panelId;
+      });
+
+      // arrows
+      arrowGroups.forEach(group => {
+        group.hidden = group.dataset.arrowsFor !== panelId;
+      });
+    }
+
+    // initial
+    activateTab(tabs[0]);
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        activateTab(tab);
+      });
+    });
+  });
+})();
+</script>
 
 
