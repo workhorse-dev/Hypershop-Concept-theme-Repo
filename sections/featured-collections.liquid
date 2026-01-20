@@ -788,10 +788,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- INITIAL LOAD ---------- */
-  {% comment %} requestAnimationFrame(() => {
+  requestAnimationFrame(() => {
     const firstTab = document.querySelector('[role="tab"]');
     if (firstTab) firstTab.dispatchEvent(new Event("click"));
-  }); {% endcomment %}
+  }); 
   setTimeout(() => {
   const firstTab = document.querySelector('[role="tab"]');
   if (firstTab) firstTab.click();
