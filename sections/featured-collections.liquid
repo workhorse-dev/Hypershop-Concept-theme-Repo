@@ -515,7 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const panels = document.querySelectorAll('[role="tabpanel"]');
   const indicators = document.querySelectorAll('.indicators');
 
-  {% comment %} function updateArrows(sliderId) {
+   function updateArrows(sliderId) {
     const slider = document.getElementById(sliderId);
     if (!slider) return;
 
@@ -533,8 +533,8 @@ document.addEventListener("DOMContentLoaded", () => {
 
     prevBtn.disabled = scrollLeft <= 0;
     nextBtn.disabled = scrollLeft >= maxScroll - 5;
-  } {% endcomment %}
-  function updateArrows(sliderId) {
+  } 
+  {% comment %} function updateArrows(sliderId) {
   const slider = document.getElementById(sliderId);
   if (!slider) return;
 
@@ -557,7 +557,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
   prevBtn.disabled = scrollLeft <= 0;
   nextBtn.disabled = scrollLeft >= maxScroll - 5;
-}
+} {% endcomment %}
 
 
   tabs.forEach((tab, index) => {
@@ -627,21 +627,13 @@ if (indicator) {
 
     const scrollAmount = slider.clientWidth;
 
-    {% comment %} slider.scrollBy({
+    slider.scrollBy({
       left: btn.classList.contains("next-button")
         ? scrollAmount
         : -scrollAmount,
       behavior: "smooth"
-    }); {% endcomment %}
-    const scrollContainer = slider.querySelector('.card-grid');
-if (!scrollContainer) return;
-
-scrollContainer.scrollBy({
-  left: btn.classList.contains("next-button")
-    ? scrollAmount
-    : -scrollAmount,
-  behavior: "smooth"
-});
+    }); 
+ 
 
 
     setTimeout(() => updateArrows(sliderId), 300);
