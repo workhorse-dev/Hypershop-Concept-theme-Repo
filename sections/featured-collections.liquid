@@ -509,7 +509,7 @@
   }
 }
 {% endschema %}
-{% comment %} <script>
+<script>
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll('[role="tab"]');
   const panels = document.querySelectorAll('[role="tabpanel"]');
@@ -624,108 +624,7 @@ requestAnimationFrame(() => {
 
 
 });
-</script> {% endcomment %}
-<script>
-document.addEventListener("DOMContentLoaded", () => {
-  const tabs = document.querySelectorAll('[role="tab"]');
-  const panels = document.querySelectorAll('[role="tabpanel"]');
-  const indicators = document.querySelectorAll('.indicators');
-
-  /* ---------- ARROW STATE ---------- */
-  function updateArrows(sliderId) {
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-
-    const prevBtn = document.querySelector(
-      `.previous-button[aria-controls="${sliderId}"]`
-    );
-    const nextBtn = document.querySelector(
-      `.next-button[aria-controls="${sliderId}"]`
-    );
-    if (!prevBtn || !nextBtn) return;
-
-    const scrollLeft = slider.scrollLeft;
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-
-    prevBtn.disabled = scrollLeft <= 0;
-    nextBtn.disabled = scrollLeft >= maxScroll - 5;
-  }
-
-  /* ---------- TAB CLICK ---------- */
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => {
-      const targetId = tab.getAttribute("aria-controls");
-      const sliderId = targetId.replace("TabPanel-", "Slider-");
-
-      // reset tabs
-      tabs.forEach(t => {
-        t.classList.remove("button--primary");
-        t.classList.add("button--secondary");
-        t.disabled = false;
-      });
-
-      // reset panels
-      panels.forEach(p => (p.hidden = true));
-
-      // activate tab
-      tab.classList.add("button--primary");
-      tab.classList.remove("button--secondary");
-      tab.disabled = true;
-
-      // show panel
-      const panel = document.getElementById(targetId);
-      if (panel) panel.hidden = false;
-
-      // reset arrows
-      indicators.forEach(i => i.classList.remove("is-active"));
-
-      // show active arrows
-      const indicator = document.querySelector(
-        `.indicators[data-index="${index}"]`
-      );
-      if (indicator) indicator.classList.add("is-active");
-
-      requestAnimationFrame(() => updateArrows(sliderId));
-    });
-  });
-
-  /* ---------- ARROW CLICK ---------- */
-  document.addEventListener("click", e => {
-    const btn = e.target.closest(".previous-button, .next-button");
-    if (!btn) return;
-
-    const sliderId = btn.getAttribute("aria-controls");
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-
-    const scrollAmount = slider.clientWidth;
-
-    slider.scrollBy({
-      left: btn.classList.contains("next-button")
-        ? scrollAmount
-        : -scrollAmount,
-      behavior: "smooth"
-    });
-  });
-
-  /* ---------- 🔥 IMPORTANT FIX ---------- */
-  /* Update arrows ONLY when scroll ACTUALLY happens */
-  document.querySelectorAll("slider-element").forEach(slider => {
-    slider.addEventListener("scroll", () => {
-      updateArrows(slider.id);
-    });
-  });
-
-  /* ---------- INITIAL LOAD ---------- */
-  requestAnimationFrame(() => {
-    const firstTab = document.querySelector('[role="tab"]');
-    if (firstTab) {
-      firstTab.dispatchEvent(new Event("click"));
-    }
-  });
-});
 </script>
-
 <style>
 /* Default hide */
 .indicators {
