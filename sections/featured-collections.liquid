@@ -562,100 +562,42 @@
     const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
-    function updateArrowState(slider, arrows) {
-      const prev = arrows.querySelector('.previous-button');
-      const next = arrows.querySelector('.next-button');
+    if (!tabs.length) return;
 
-      const scrollLeft = slider.scrollLeft;
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
+   function activateTab(tab) {
+  const panelId = tab.getAttribute('aria-controls');
 
-      prev.disabled = scrollLeft <= 0;
-      next.disabled = scrollLeft >= maxScroll - 2;
-    }
+  // show correct panel
+  panels.forEach(panel => {
+    panel.classList.toggle('is-hidden', panel.id !== panelId);
+  });
 
-    arrowGroups.forEach(group => {
-      const prev = group.querySelector('.previous-button');
-      const next = group.querySelector('.next-button');
-    const sliderRoot = document.getElementById(
-  prev.getAttribute('aria-controls')
-);
-const slider = sliderRoot?.querySelector('.card-grid');
+  // show correct arrows
+  arrowGroups.forEach(group => {
+    group.classList.toggle(
+      'is-hidden',
+      group.dataset.arrowsFor !== panelId
+    );
+  });
 
-
-      if (!slider) return;
-
-function moveSlider(slider, arrows, direction) {
-  const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
-
-  slider.scrollBy({ left: amount, behavior: 'smooth' });
-
-  setTimeout(() => {
-    updateArrowState(slider, arrows);
-  }, 300);
-}
-
-
-prev.addEventListener('click', () => {
-  moveSlider(slider, group, 'prev');
-});
-
-next.addEventListener('click', () => {
-  moveSlider(slider, group, 'next');
-});
-
-
-      slider.addEventListener('scroll', () => {
-        updateArrowState(slider, group);
-      });
-
-      updateArrowState(slider, group);
-    });
-
-    function activateTab(tab) {
-      const panelId = tab.getAttribute('aria-controls');
-
-      panels.forEach(panel => {
-        panel.classList.toggle('is-hidden', panel.id !== panelId);
-      });
-
-      arrowGroups.forEach(group => {
-        const active = group.dataset.arrowsFor === panelId;
-        group.classList.toggle('is-hidden', !active);
-
-        if (active) {
-          const slider = document.getElementById(
-            group.querySelector('.previous-button').getAttribute('aria-controls')
-          );
-          if (active) {
-  const sliderRoot = document.getElementById(
-    group.querySelector('.previous-button').getAttribute('aria-controls')
-  );
-
-  const slider = sliderRoot?.querySelector('.card-grid');
-  if (!slider) return;
-
-  // 🔥 reset so behavior matches first tab
-  slider.scrollLeft = 0;
-
-  // 🔥 wait till tab becomes visible & layout settles
+  // 🔥 FORCE slider-element recalculation
   requestAnimationFrame(() => {
-    updateArrowState(slider, group);
+    window.dispatchEvent(new Event('resize'));
   });
 }
 
-        }
-      });
-    }
 
+    // initial
     activateTab(tabs[0]);
 
     tabs.forEach(tab => {
-      tab.addEventListener('click', () => activateTab(tab));
+      tab.addEventListener('click', () => {
+        activateTab(tab);
+      });
     });
   });
 })();
 </script>
-
 
 <style>
   .tab-panel.is-hidden {
