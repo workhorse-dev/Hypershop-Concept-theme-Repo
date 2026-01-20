@@ -552,7 +552,7 @@ document.addEventListener("DOMContentLoaded", () => {
       panels.forEach(p => (p.hidden = true));
 
       /* Indicators reset */
-      indicators.forEach(i => i.classList.add("hidden"));
+      {% comment %} indicators.forEach(i => i.classList.add("hidden")); {% endcomment %}
 
       /* Activate tab */
       tab.classList.add("button--primary");
@@ -564,10 +564,24 @@ document.addEventListener("DOMContentLoaded", () => {
       if (panel) panel.hidden = false;
 
       /* Show correct arrows */
-      const indicator = document.querySelector(
+      {% comment %} const indicator = document.querySelector(
         `.indicators[data-index="${index}"]`
       );
-      if (indicator) indicator.classList.remove("hidden");
+      if (indicator) indicator.classList.remove("hidden"); {% endcomment %}
+      /* HARD RESET: hide all arrows */
+indicators.forEach(i => {
+  i.classList.remove("is-active");
+});
+
+/* Show ONLY current tab arrows */
+const indicator = document.querySelector(
+  `.indicators[data-index="${index}"]`
+);
+
+if (indicator) {
+  indicator.classList.add("is-active");
+}
+
 
       /* Update arrows state */
       requestAnimationFrame(() => updateArrows(sliderId));
@@ -596,4 +610,15 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 </script>
+
+<style>
+  .indicators {
+  display: none !important;
+}
+
+.indicators.is-active {
+  display: flex !important;
+}
+
+</style>
 
