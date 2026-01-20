@@ -39,7 +39,7 @@
           </div>
         </div>
         
-         {% comment %} {%- if section.settings.carousel_on_desktop -%}
+         {%- if section.settings.carousel_on_desktop -%}
             {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
@@ -56,34 +56,7 @@
               </button>
             </div>
           {%- endfor -%}  
-        {%- endif -%}  {% endcomment %}
-         {%- if section.settings.carousel_on_desktop -%}
-  <div class="indicators lg:flex gap-2d5" id="category-arrows">
-    <button
-      class="button button--secondary previous-button"
-      type="button"
-      aria-label="{{ 'general.pagination.previous' | t | escape }}"
-      disabled
-    >
-      <span class="btn-fill" data-fill></span>
-      <span class="btn-text">
-        {%- render 'icon', icon: 'chevron-left' -%}
-      </span>
-    </button>
-
-    <button
-      class="button button--secondary next-button"
-      type="button"
-      aria-label="{{ 'general.pagination.next' | t | escape }}"
-    >
-      <span class="btn-fill" data-fill></span>
-      <span class="btn-text">
-        {%- render 'icon', icon: 'chevron-right' -%}
-      </span>
-    </button>
-  </div>
-{%- endif -%}
-
+        {%- endif -%} 
 
       </tabs-element>
       
@@ -94,7 +67,7 @@
         -%}
         <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}>
           <div id="TabPanelContent-{{ block.id }}">
-            {% comment %} {%- if section_rendering_api or forloop.first -%} {% endcomment %}
+            {%- if section_rendering_api or forloop.first -%}
               <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
                 <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
                   {%- for product in products limit: section.settings.product_limit -%}
@@ -153,8 +126,7 @@
                   </a>
                 </p>
               {%- endif -%}
-            {% comment %} {%- endif -%}  {% endcomment %}
-             
+            {%- endif -%}
           </div>
         </div>
       {%- endfor -%}
@@ -538,54 +510,3 @@
 {% endschema %}
 
 
-<script>
-(() => {
-  if (window.__shopByCategoryInit) return;
-  window.__shopByCategoryInit = true;
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll('[role="tab"]');
-    const arrows = document.getElementById('category-arrows');
-    const prevBtn = arrows?.querySelector('.previous-button');
-    const nextBtn = arrows?.querySelector('.next-button');
-
-    if (!tabs.length || !prevBtn || !nextBtn) return;
-
-    function bindArrows(tab) {
-      const panelId = tab.getAttribute('aria-controls');
-      if (!panelId) return;
-
-      const sliderId = panelId.replace('TabPanel-', 'Slider-');
-      const slider = document.getElementById(sliderId);
-      if (!slider) return;
-
-      prevBtn.setAttribute('aria-controls', sliderId);
-      nextBtn.setAttribute('aria-controls', sliderId);
-
-      // reset state on tab change
-      prevBtn.disabled = true;
-      nextBtn.disabled = false;
-
-      // if items fit → disable both
-     const cards = slider.querySelectorAll('.card');
-const slidesPerView = slider.classList.contains('slider--desktop')
-  ? {{ section.settings.columns }}
-  : {{ section.settings.columns_mobile }};
-
-if (cards.length <= slidesPerView) {
-  prevBtn.disabled = true;
-  nextBtn.disabled = true;
-}
-
-
-    // initial (Power tab)
-    bindArrows(tabs[0]);
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        bindArrows(tab);
-      });
-    });
-  });
-})();
-</script>
