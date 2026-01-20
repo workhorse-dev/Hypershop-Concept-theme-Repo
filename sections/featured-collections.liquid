@@ -611,12 +611,14 @@ if (indicator) {
 
     setTimeout(() => updateArrows(sliderId), 300);
   });
+ // ✅ INITIAL LOAD: activate first tab arrows
+requestAnimationFrame(() => {
   const firstTab = document.querySelector('[role="tab"]');
-if (firstTab) {
-  requestAnimationFrame(() => {
-    firstTab.click();
-  });
-}
+  if (firstTab) {
+    firstTab.dispatchEvent(new Event('click'));
+  }
+});
+
 
 });
 </script>
