@@ -610,6 +610,13 @@ if (indicator) {
 
     setTimeout(() => updateArrows(sliderId), 300);
   });
+  const firstTab = document.querySelector('[role="tab"]');
+if (firstTab) {
+  requestAnimationFrame(() => {
+    firstTab.click();
+  });
+}
+
 });
 </script>
 <style>
