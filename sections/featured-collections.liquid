@@ -764,6 +764,14 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 });
 
+// ---------- INITIAL ARROWS FIX ----------
+const firstIndicator = document.querySelector('.indicators[data-index="0"]');
+
+if (firstIndicator) {
+  firstIndicator.classList.add('is-active');
+}
+
+
 
   /* ---------- ARROW CLICK ---------- */
   document.addEventListener("click", e => {
@@ -788,10 +796,10 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- INITIAL LOAD ---------- */
-  requestAnimationFrame(() => {
+  {% comment %} requestAnimationFrame(() => {
     const firstTab = document.querySelector('[role="tab"]');
     if (firstTab) firstTab.dispatchEvent(new Event("click"));
-  }); 
+  });  {% endcomment %}
   setTimeout(() => {
   const firstTab = document.querySelector('[role="tab"]');
   if (firstTab) firstTab.click();
