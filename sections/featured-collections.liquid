@@ -534,30 +534,6 @@ document.addEventListener("DOMContentLoaded", () => {
     prevBtn.disabled = scrollLeft <= 0;
     nextBtn.disabled = scrollLeft >= maxScroll - 5;
   } 
-  {% comment %} function updateArrows(sliderId) {
-  const slider = document.getElementById(sliderId);
-  if (!slider) return;
-
-  // ✅ REAL scroll container
-  const scrollContainer = slider.querySelector('.card-grid');
-  if (!scrollContainer) return;
-
-  const prevBtn = document.querySelector(
-    `.previous-button[aria-controls="${sliderId}"]`
-  );
-  const nextBtn = document.querySelector(
-    `.next-button[aria-controls="${sliderId}"]`
-  );
-
-  if (!prevBtn || !nextBtn) return;
-
-  const scrollLeft = scrollContainer.scrollLeft;
-  const maxScroll =
-    scrollContainer.scrollWidth - scrollContainer.clientWidth;
-
-  prevBtn.disabled = scrollLeft <= 0;
-  nextBtn.disabled = scrollLeft >= maxScroll - 5;
-} {% endcomment %}
 
 
   tabs.forEach((tab, index) => {
