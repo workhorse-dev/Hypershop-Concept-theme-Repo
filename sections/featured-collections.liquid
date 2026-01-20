@@ -742,7 +742,7 @@ document.addEventListener("DOMContentLoaded", () => {
     panels.forEach(p => (p.hidden = true));
 
     tab.classList.add("button--primary");
-    {% comment %} tab.disabled = true; {% endcomment %}
+    tab.disabled = true;
 
     const panel = document.getElementById(targetId);
     if (panel) panel.hidden = false;
@@ -763,8 +763,6 @@ document.addEventListener("DOMContentLoaded", () => {
     requestAnimationFrame(() => updateArrows(sliderId));
   });
 });
-
-
 
 
   /* ---------- ARROW CLICK ---------- */
