@@ -41,7 +41,12 @@
         
          {%- if section.settings.carousel_on_desktop -%}
            {%- for block in section.blocks -%}
-            <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
+            {% comment %} <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}"> {% endcomment %}
+             <div
+  class="indicators lg:flex gap-2d5{% if forloop.first %} is-active{% else %} hidden{% endif %}"
+  data-index="{{ forloop.index0 }}"
+>
+
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
@@ -738,18 +743,28 @@ document.addEventListener("DOMContentLoaded", () => {
   });
 
   /* ---------- INITIAL LOAD ---------- */
-  requestAnimationFrame(() => {
+  {% comment %} requestAnimationFrame(() => {
     const firstTab = document.querySelector('[role="tab"]');
     if (firstTab) firstTab.dispatchEvent(new Event("click"));
-  });
+  }); {% endcomment %}
+  setTimeout(() => {
+  const firstTab = document.querySelector('[role="tab"]');
+  if (firstTab) firstTab.click();
+}, 50);
+
 });
 </script>
 
 <style>
 /* Default hide */
-.indicators {
+{% comment %} .indicators {
   display: none !important;
+} {% endcomment %}
+/* hide ONLY non-active indicators */
+.indicators:not(.is-active) {
+  display: none;
 }
+
 
 /* Only active arrows visible */
 .indicators.is-active {
