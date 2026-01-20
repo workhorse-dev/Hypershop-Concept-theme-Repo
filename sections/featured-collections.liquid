@@ -565,20 +565,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tab.addEventListener("click", () => {
       const targetId = tab.getAttribute("aria-controls");
       const sliderId = targetId.replace("TabPanel-", "Slider-");
-      const prevBtn = document.querySelector(".previous-button");
-const nextBtn = document.querySelector(".next-button");
-
-/* Update arrow target to active slider */
-prevBtn.setAttribute("aria-controls", sliderId);
-nextBtn.setAttribute("aria-controls", sliderId);
-
-/* Reset arrows before recalculation */
-prevBtn.disabled = true;
-nextBtn.disabled = false;
-
-/* Recalculate arrow state */
-requestAnimationFrame(() => updateArrows(sliderId));
-
+      
 
       /* Tabs reset */
       tabs.forEach(t => {
