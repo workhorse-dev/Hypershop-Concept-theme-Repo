@@ -560,22 +560,28 @@
 
     if (!tabs.length) return;
 
-    function activateTab(tab) {
-      const panelId = tab.getAttribute('aria-controls');
+   function activateTab(tab) {
+  const panelId = tab.getAttribute('aria-controls');
 
-      // panels
-      panels.forEach(panel => {
-        panel.classList.toggle('is-hidden', panel.id !== panelId);
-      });
+  // show correct panel
+  panels.forEach(panel => {
+    panel.classList.toggle('is-hidden', panel.id !== panelId);
+  });
 
-      // arrows
-      arrowGroups.forEach(group => {
-        group.classList.toggle(
-          'is-hidden',
-          group.dataset.arrowsFor !== panelId
-        );
-      });
-    }
+  // show correct arrows
+  arrowGroups.forEach(group => {
+    group.classList.toggle(
+      'is-hidden',
+      group.dataset.arrowsFor !== panelId
+    );
+  });
+
+  // 🔥 FORCE slider-element recalculation
+  requestAnimationFrame(() => {
+    window.dispatchEvent(new Event('resize'));
+  });
+}
+
 
     // initial
     activateTab(tabs[0]);
