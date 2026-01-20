@@ -629,7 +629,7 @@ next.addEventListener('click', () => {
         const active = group.dataset.arrowsFor === panelId;
         group.classList.toggle('is-hidden', !active);
 
-      if (active) {
+       if (active) {
   const sliderRoot = document.getElementById(
     group.querySelector('.previous-button').getAttribute('aria-controls')
   );
@@ -646,7 +646,6 @@ next.addEventListener('click', () => {
     });
   });
 }
-
 
       });
     }
