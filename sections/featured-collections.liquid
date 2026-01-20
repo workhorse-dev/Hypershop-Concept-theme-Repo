@@ -509,7 +509,7 @@
   }
 }
 {% endschema %}
-<script>
+{% comment %} <script>
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll('[role="tab"]');
   const panels = document.querySelectorAll('[role="tabpanel"]');
@@ -624,7 +624,127 @@ requestAnimationFrame(() => {
 
 
 });
+</script> {% endcomment %}
+
+
+<script>
+document.addEventListener("DOMContentLoaded", () => {
+  const tabs = document.querySelectorAll('[role="tab"]');
+  const panels = document.querySelectorAll('[role="tabpanel"]');
+  const indicators = document.querySelectorAll('.indicators');
+
+  /* ---------- ARROW STATE ---------- */
+  function updateArrows(sliderId) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+
+    const prevBtn = document.querySelector(
+      `.previous-button[aria-controls="${sliderId}"]`
+    );
+    const nextBtn = document.querySelector(
+      `.next-button[aria-controls="${sliderId}"]`
+    );
+    if (!prevBtn || !nextBtn) return;
+
+    const scrollLeft = Math.round(slider.scrollLeft);
+    const maxScroll = Math.round(slider.scrollWidth - slider.clientWidth);
+
+    prevBtn.disabled = scrollLeft <= 0;
+    nextBtn.disabled = scrollLeft >= maxScroll;
+  }
+
+  /* ---------- SCROLL END DETECTOR (CORE FIX) ---------- */
+  function updateAfterScrollEnd(sliderId) {
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+
+    let last = slider.scrollLeft;
+    let stableFrames = 0;
+
+    function check() {
+      const current = slider.scrollLeft;
+
+      if (Math.abs(current - last) < 0.5) {
+        stableFrames++;
+      } else {
+        stableFrames = 0;
+      }
+
+      last = current;
+
+      // scroll fully stopped
+      if (stableFrames >= 3) {
+        updateArrows(sliderId);
+        return;
+      }
+
+      requestAnimationFrame(check);
+    }
+
+    requestAnimationFrame(check);
+  }
+
+  /* ---------- TAB CLICK ---------- */
+  tabs.forEach((tab, index) => {
+    tab.addEventListener("click", () => {
+      const targetId = tab.getAttribute("aria-controls");
+      const sliderId = targetId.replace("TabPanel-", "Slider-");
+
+      tabs.forEach(t => {
+        t.classList.remove("button--primary");
+        t.classList.add("button--secondary");
+        t.disabled = false;
+      });
+
+      panels.forEach(p => (p.hidden = true));
+
+      tab.classList.add("button--primary");
+      tab.classList.remove("button--secondary");
+      tab.disabled = true;
+
+      const panel = document.getElementById(targetId);
+      if (panel) panel.hidden = false;
+
+      indicators.forEach(i => i.classList.remove("is-active"));
+      const indicator = document.querySelector(
+        `.indicators[data-index="${index}"]`
+      );
+      if (indicator) indicator.classList.add("is-active");
+
+      requestAnimationFrame(() => updateArrows(sliderId));
+    });
+  });
+
+  /* ---------- ARROW CLICK ---------- */
+  document.addEventListener("click", e => {
+    const btn = e.target.closest(".previous-button, .next-button");
+    if (!btn) return;
+
+    const sliderId = btn.getAttribute("aria-controls");
+    const slider = document.getElementById(sliderId);
+    if (!slider) return;
+
+    const scrollAmount = slider.clientWidth;
+
+    slider.scrollBy({
+      left: btn.classList.contains("next-button")
+        ? scrollAmount
+        : -scrollAmount,
+      behavior: "smooth"
+    });
+
+    // 🔥 only update AFTER scroll fully stops
+    updateAfterScrollEnd(sliderId);
+  });
+
+  /* ---------- INITIAL LOAD ---------- */
+  requestAnimationFrame(() => {
+    const firstTab = document.querySelector('[role="tab"]');
+    if (firstTab) firstTab.dispatchEvent(new Event("click"));
+  });
+});
 </script>
+
 <style>
 /* Default hide */
 .indicators {
