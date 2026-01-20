@@ -748,21 +748,17 @@ document.addEventListener("DOMContentLoaded", () => {
     if (panel) panel.hidden = false;
 
     /* 🔥 SCOPED INDICATORS */
-  const scopedIndicators = getScopedIndicators(tab);
+    const scopedIndicators = getScopedIndicators(tab);
 
-scopedIndicators.forEach(i => {
-  i.classList.remove("is-active");
-});
+    scopedIndicators.forEach(i => i.classList.remove("is-active"));
 
-const activeIndicator = [...scopedIndicators].find(
-  i => i.dataset.index === String(index)
-);
+    const activeIndicator = [...scopedIndicators].find(
+      i => i.dataset.index === String(index)
+    );
 
-if (activeIndicator) {
-  activeIndicator.classList.add("is-active");
-}
-
-
+    if (activeIndicator) {
+      activeIndicator.classList.add("is-active");
+    }
 
     requestAnimationFrame(() => updateArrows(sliderId));
   });
@@ -810,7 +806,7 @@ if (activeIndicator) {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-{% comment %} .indicators:not(.is-active) {
+.indicators:not(.is-active) {
   display: none;
 }
 
@@ -818,14 +814,6 @@ if (activeIndicator) {
 /* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
-} {% endcomment %}
-.indicators {
-  display: none;
 }
-
-.indicators.is-active {
-  display: flex;
-}
-
 
 </style>
