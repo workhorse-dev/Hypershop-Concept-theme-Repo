@@ -633,10 +633,15 @@ requestAnimationFrame(() => {
 
 
 <script>
+  function getScopedIndicators(tab) {
+  const wrapper = tab.closest("tabs-element");
+  return wrapper ? wrapper.querySelectorAll(".indicators") : [];
+}
+
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll('[role="tab"]');
   const panels = document.querySelectorAll('[role="tabpanel"]');
-  const indicators = document.querySelectorAll('.indicators');
+  {% comment %} const indicators = document.querySelectorAll('.indicators'); {% endcomment %}
 
   /* ---------- ARROW STATE ---------- */
   function updateArrows(sliderId) {
@@ -690,7 +695,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- TAB CLICK ---------- */
-  tabs.forEach((tab, index) => {
+  {% comment %} tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
       const targetId = tab.getAttribute("aria-controls");
       const sliderId = targetId.replace("TabPanel-", "Slider-");
@@ -718,7 +723,45 @@ document.addEventListener("DOMContentLoaded", () => {
 
       requestAnimationFrame(() => updateArrows(sliderId));
     });
+  }); {% endcomment %}
+  tabs.forEach((tab, index) => {
+  tab.addEventListener("click", () => {
+    const targetId = tab.getAttribute("aria-controls");
+    const sliderId = targetId.replace("TabPanel-", "Slider-");
+
+    /* Tabs reset (global OK) */
+    tabs.forEach(t => {
+      t.classList.remove("button--primary");
+      t.classList.add("button--secondary");
+      t.disabled = false;
+    });
+
+    /* Panels reset */
+    panels.forEach(p => (p.hidden = true));
+
+    tab.classList.add("button--primary");
+    tab.disabled = true;
+
+    const panel = document.getElementById(targetId);
+    if (panel) panel.hidden = false;
+
+    /* 🔥 SCOPED INDICATORS */
+    const scopedIndicators = getScopedIndicators(tab);
+
+    scopedIndicators.forEach(i => i.classList.remove("is-active"));
+
+    const activeIndicator = [...scopedIndicators].find(
+      i => i.dataset.index === String(index)
+    );
+
+    if (activeIndicator) {
+      activeIndicator.classList.add("is-active");
+    }
+
+    requestAnimationFrame(() => updateArrows(sliderId));
   });
+});
+
 
   /* ---------- ARROW CLICK ---------- */
   document.addEventListener("click", e => {
