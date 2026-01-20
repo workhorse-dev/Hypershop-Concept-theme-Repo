@@ -562,49 +562,51 @@
     const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
-    function updateArrowState(slider, arrows) {
+    function updateArrowState(scrollEl, arrows) {
       const prev = arrows.querySelector('.previous-button');
       const next = arrows.querySelector('.next-button');
 
-      const scrollLeft = slider.scrollLeft;
-      const maxScroll = slider.scrollWidth - slider.clientWidth;
+      if (!scrollEl) return;
 
-      prev.disabled = scrollLeft <= 0;
-      next.disabled = scrollLeft >= maxScroll - 2;
+      const scrollLeft = Math.round(scrollEl.scrollLeft);
+      const maxScroll = Math.round(
+        scrollEl.scrollWidth - scrollEl.clientWidth
+      );
+
+      prev.disabled = scrollLeft <= 1;
+      next.disabled = scrollLeft >= maxScroll - 1;
     }
 
     arrowGroups.forEach(group => {
       const prev = group.querySelector('.previous-button');
       const next = group.querySelector('.next-button');
-      const slider = document.getElementById(prev.getAttribute('aria-controls'));
 
-      if (!slider) return;
+      const sliderRoot = document.getElementById(
+        prev.getAttribute('aria-controls')
+      );
+      const scrollEl = sliderRoot?.querySelector('.card-grid');
 
-     function moveSlider(slider, arrows, direction) {
-  const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
+      if (!scrollEl) return;
 
-  slider.scrollBy({ left: amount, behavior: 'smooth' });
+      function move(direction) {
+        const amount =
+          scrollEl.clientWidth * (direction === 'next' ? 1 : -1);
 
-  // 🔥 FORCE arrow state update after scroll
-  setTimeout(() => {
-    updateArrowState(slider, arrows);
-  }, 350);
-}
+        scrollEl.scrollBy({ left: amount, behavior: 'smooth' });
 
-prev.addEventListener('click', () => {
-  moveSlider(slider, group, 'prev');
-});
+        setTimeout(() => {
+          updateArrowState(scrollEl, group);
+        }, 350);
+      }
 
-next.addEventListener('click', () => {
-  moveSlider(slider, group, 'next');
-});
+      prev.addEventListener('click', () => move('prev'));
+      next.addEventListener('click', () => move('next'));
 
-
-      slider.addEventListener('scroll', () => {
-        updateArrowState(slider, group);
+      scrollEl.addEventListener('scroll', () => {
+        updateArrowState(scrollEl, group);
       });
 
-      updateArrowState(slider, group);
+      updateArrowState(scrollEl, group);
     });
 
     function activateTab(tab) {
@@ -619,22 +621,23 @@ next.addEventListener('click', () => {
         group.classList.toggle('is-hidden', !active);
 
         if (active) {
-          const slider = document.getElementById(
+          const sliderRoot = document.getElementById(
             group.querySelector('.previous-button').getAttribute('aria-controls')
           );
-          if (slider) updateArrowState(slider, group);
+          const scrollEl = sliderRoot?.querySelector('.card-grid');
+          if (scrollEl) updateArrowState(scrollEl, group);
         }
       });
     }
 
     activateTab(tabs[0]);
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => activateTab(tab));
-    });
+    tabs.forEach(tab =>
+      tab.addEventListener('click', () => activateTab(tab))
+    );
   });
 })();
 </script>
+
 
 
 <style>
