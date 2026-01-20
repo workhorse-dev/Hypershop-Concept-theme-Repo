@@ -106,7 +106,7 @@
 >
 
           <div id="TabPanelContent-{{ block.id }}">
-            {%- if section_rendering_api or forloop.first -%}
+            {% comment %} {%- if section_rendering_api or forloop.first -%} {% endcomment %}
               <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
                 <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
                   {%- for product in products limit: section.settings.product_limit -%}
@@ -165,7 +165,7 @@
                   </a>
                 </p>
               {%- endif -%}
-            {%- endif -%}
+            {% comment %} {%- endif -%} {% endcomment %}
           </div>
         </div>
       {%- endfor -%}
