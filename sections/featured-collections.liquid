@@ -792,17 +792,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const firstTab = document.querySelector('[role="tab"]');
     if (firstTab) firstTab.dispatchEvent(new Event("click"));
   }); {% endcomment %}
-  {% comment %} setTimeout(() => {
+  setTimeout(() => {
   const firstTab = document.querySelector('[role="tab"]');
   if (firstTab) firstTab.click();
-}, 50); {% endcomment %}
-// ---------- INITIAL STATE FIX ----------
-const firstTab = document.querySelector('[role="tab"]');
-
-if (firstTab) {
-  firstTab.click(); // 🔥 triggers arrow + panel logic
-}
-
+}, 50);
 
 });
 </script>
