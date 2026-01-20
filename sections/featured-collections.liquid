@@ -580,13 +580,25 @@
 
       if (!slider) return;
 
-      prev.addEventListener('click', () => {
-        slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
-      });
+     function moveSlider(slider, arrows, direction) {
+  const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
 
-      next.addEventListener('click', () => {
-        slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
-      });
+  slider.scrollBy({ left: amount, behavior: 'smooth' });
+
+  // 🔥 FORCE arrow state update after scroll
+  setTimeout(() => {
+    updateArrowState(slider, arrows);
+  }, 350);
+}
+
+prev.addEventListener('click', () => {
+  moveSlider(slider, group, 'prev');
+});
+
+next.addEventListener('click', () => {
+  moveSlider(slider, group, 'next');
+});
+
 
       slider.addEventListener('scroll', () => {
         updateArrowState(slider, group);
