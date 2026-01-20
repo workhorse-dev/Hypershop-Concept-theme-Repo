@@ -614,7 +614,7 @@ if (indicator) {
 
     setTimeout(() => updateArrows(sliderId), 300);
   });
- // ✅ INITIAL LOAD: activate first tab arrows
+ //  INITIAL LOAD: activate first tab arrows
 requestAnimationFrame(() => {
   const firstTab = document.querySelector('[role="tab"]');
   if (firstTab) {
@@ -733,7 +733,7 @@ document.addEventListener("DOMContentLoaded", () => {
       behavior: "smooth"
     });
 
-    // 🔥 only update AFTER scroll fully stops
+    //  only update AFTER scroll fully stops
     updateAfterScrollEnd(sliderId);
   });
 
