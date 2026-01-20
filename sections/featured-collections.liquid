@@ -742,7 +742,7 @@ document.addEventListener("DOMContentLoaded", () => {
     panels.forEach(p => (p.hidden = true));
 
     tab.classList.add("button--primary");
-    tab.disabled = true;
+    {% comment %} tab.disabled = true; {% endcomment %}
 
     const panel = document.getElementById(targetId);
     if (panel) panel.hidden = false;
