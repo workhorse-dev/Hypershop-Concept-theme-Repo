@@ -556,11 +556,11 @@ document.addEventListener("DOMContentLoaded", () => {
   nextBtn.disabled = scrollLeft >= maxScroll - 1;
 }
 
-  document.querySelectorAll("slider-element").forEach(slider => {
+  {% comment %} document.querySelectorAll("slider-element").forEach(slider => {
   slider.addEventListener("scroll", () => {
     updateArrows(slider.id);
   });
-});
+}); {% endcomment %}
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
       const targetId = tab.getAttribute("aria-controls");
