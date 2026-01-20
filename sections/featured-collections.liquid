@@ -811,7 +811,7 @@ if (activeIndicator) {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-{% comment %} .indicators:not(.is-active) {
+.indicators:not(.is-active) {
   display: none;
 }
 
@@ -819,13 +819,6 @@ if (activeIndicator) {
 /* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
-} {% endcomment %}
-.indicators {
-  display: none;
-}
-
-.indicators.is-active {
-  display: flex;
 }
 
 
