@@ -576,20 +576,24 @@
     arrowGroups.forEach(group => {
       const prev = group.querySelector('.previous-button');
       const next = group.querySelector('.next-button');
-      const slider = document.getElementById(prev.getAttribute('aria-controls'));
+    const sliderRoot = document.getElementById(
+  prev.getAttribute('aria-controls')
+);
+const slider = sliderRoot?.querySelector('.card-grid');
+
 
       if (!slider) return;
 
-     function moveSlider(slider, arrows, direction) {
+function moveSlider(slider, arrows, direction) {
   const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
 
   slider.scrollBy({ left: amount, behavior: 'smooth' });
 
-  // 🔥 FORCE arrow state update after scroll
   setTimeout(() => {
     updateArrowState(slider, arrows);
-  }, 350);
+  }, 300);
 }
+
 
 prev.addEventListener('click', () => {
   moveSlider(slider, group, 'prev');
@@ -622,7 +626,23 @@ next.addEventListener('click', () => {
           const slider = document.getElementById(
             group.querySelector('.previous-button').getAttribute('aria-controls')
           );
-          if (slider) updateArrowState(slider, group);
+          if (active) {
+  const sliderRoot = document.getElementById(
+    group.querySelector('.previous-button').getAttribute('aria-controls')
+  );
+
+  const slider = sliderRoot?.querySelector('.card-grid');
+  if (!slider) return;
+
+  // 🔥 reset so behavior matches first tab
+  slider.scrollLeft = 0;
+
+  // 🔥 wait till tab becomes visible & layout settles
+  requestAnimationFrame(() => {
+    updateArrowState(slider, group);
+  });
+}
+
         }
       });
     }
