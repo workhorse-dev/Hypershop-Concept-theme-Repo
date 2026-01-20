@@ -799,6 +799,31 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
+<script>
+function initFeaturedCollectionTabs() {
+  const firstTab = document.querySelector('[role="tab"]');
+  if (!firstTab) return;
+
+  firstTab.click(); // this triggers arrows + updateArrows
+}
+
+/* 🔥 Wait until sliders + indicators exist */
+const observer = new MutationObserver(() => {
+  const indicatorsReady = document.querySelector('.indicators');
+  const sliderReady = document.querySelector('slider-element');
+
+  if (indicatorsReady && sliderReady) {
+    observer.disconnect();
+    initFeaturedCollectionTabs();
+  }
+});
+
+observer.observe(document.body, {
+  childList: true,
+  subtree: true
+});
+</script>
+
 
 <style>
 /* Default hide */
