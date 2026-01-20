@@ -40,7 +40,7 @@
         </div>
         
          {%- if section.settings.carousel_on_desktop -%}
-           {%- for block in section.blocks -%}
+           {% comment %} {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -55,7 +55,32 @@
                 </span>
               </button>
             </div>
-          {%- endfor -%} 
+          {%- endfor -%}  {% endcomment %}
+           <div class="indicators lg:flex gap-2d5">
+  <button
+    class="button button--secondary previous-button"
+    type="button"
+    aria-controls=""
+    disabled
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-left' -%}
+    </span>
+  </button>
+
+  <button
+    class="button button--secondary next-button"
+    type="button"
+    aria-controls=""
+  >
+    <span class="btn-fill" data-fill></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-right' -%}
+    </span>
+  </button>
+</div>
+
 
         {%- endif -%} 
 
@@ -514,7 +539,7 @@
 document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll('[role="tab"]');
   const panels = document.querySelectorAll('[role="tabpanel"]');
-  const indicators = document.querySelectorAll('.indicators');
+  {% comment %} const indicators = document.querySelectorAll('.indicators'); {% endcomment %}
 
   function updateArrows(sliderId) {
     const slider = document.getElementById(sliderId);
@@ -540,6 +565,20 @@ document.addEventListener("DOMContentLoaded", () => {
     tab.addEventListener("click", () => {
       const targetId = tab.getAttribute("aria-controls");
       const sliderId = targetId.replace("TabPanel-", "Slider-");
+      const prevBtn = document.querySelector(".previous-button");
+const nextBtn = document.querySelector(".next-button");
+
+/* Update arrow target to active slider */
+prevBtn.setAttribute("aria-controls", sliderId);
+nextBtn.setAttribute("aria-controls", sliderId);
+
+/* Reset arrows before recalculation */
+prevBtn.disabled = true;
+nextBtn.disabled = false;
+
+/* Recalculate arrow state */
+requestAnimationFrame(() => updateArrows(sliderId));
+
 
       /* Tabs reset */
       tabs.forEach(t => {
@@ -552,7 +591,7 @@ document.addEventListener("DOMContentLoaded", () => {
       panels.forEach(p => (p.hidden = true));
 
       /* Indicators reset */
-      indicators.forEach(i => i.classList.add("hidden"));
+      {% comment %} indicators.forEach(i => i.classList.add("hidden")); {% endcomment %}
 
       /* Activate tab */
       tab.classList.add("button--primary");
