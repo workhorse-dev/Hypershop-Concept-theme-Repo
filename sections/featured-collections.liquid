@@ -555,18 +555,39 @@
     if (!tabs.length) return;
 
     function activateTab(tab) {
-      const panelId = tab.getAttribute('aria-controls');
+  const panelId = tab.getAttribute('aria-controls');
 
-      // panels
-      panels.forEach(panel => {
-        panel.hidden = panel.id !== panelId;
-      });
+  // show correct panel
+  panels.forEach(panel => {
+    panel.hidden = panel.id !== panelId;
+  });
 
-      // arrows
-      arrowGroups.forEach(group => {
-        group.hidden = group.dataset.arrowsFor !== panelId;
-      });
-    }
+  // show correct arrows
+  arrowGroups.forEach(group => {
+    group.hidden = group.dataset.arrowsFor !== panelId;
+  });
+
+  // 🔥 IMPORTANT: reset slider state
+  const sliderId = panelId.replace('TabPanel-', 'Slider-');
+  const slider = document.getElementById(sliderId);
+
+  if (slider) {
+    // force slider to think it's freshly loaded
+    slider.scrollLeft = 0;
+
+    // reset arrows
+    const prev = slider.closest('.tabs-element')?.querySelector(
+      `[data-arrows-for="${panelId}"] .previous-button`
+    );
+    const next = slider.closest('.tabs-element')?.querySelector(
+      `[data-arrows-for="${panelId}"] .next-button`
+    );
+
+    if (prev) prev.disabled = true;
+    if (next) next.disabled = false;
+  }
+}
+
 
     // initial
     activateTab(tabs[0]);
