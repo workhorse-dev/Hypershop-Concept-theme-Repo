@@ -569,8 +569,10 @@ document.addEventListener("DOMContentLoaded", () => {
       );
       if (indicator) indicator.classList.remove("hidden"); {% endcomment %}
       /* HARD RESET: hide all arrows */
+/* HARD RESET */
 indicators.forEach(i => {
   i.classList.remove("is-active");
+  i.classList.remove("hidden"); // 👈 IMPORTANT
 });
 
 /* Show ONLY current tab arrows */
@@ -581,6 +583,7 @@ const indicator = document.querySelector(
 if (indicator) {
   indicator.classList.add("is-active");
 }
+
 
 
       /* Update arrows state */
@@ -608,17 +611,31 @@ if (indicator) {
 
     setTimeout(() => updateArrows(sliderId), 300);
   });
+  // ✅ INITIAL LOAD FIX: activate first tab arrows
+const firstTab = document.querySelector('[role="tab"]');
+if (firstTab) {
+  firstTab.click();
+}
+
 });
 </script>
 
 <style>
-  .indicators {
+/* default hide */
+.indicators {
   display: none !important;
 }
 
+/* active arrow */
 .indicators.is-active {
   display: flex !important;
 }
+
+/* OVERRIDE Shopify hidden utility */
+.indicators.hidden {
+  display: none !important;
+}
+
 
 </style>
 
