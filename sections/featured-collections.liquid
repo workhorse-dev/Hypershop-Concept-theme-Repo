@@ -23,16 +23,8 @@
           <div class="flex gap-4" role="tablist">
             {%- for block in section.blocks -%}
               {%- assign collection = block.settings.collection -%}
-              {% comment %} <button class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %} whitespace-nowrap"{% if forloop.first %} disabled{% endif %} type="button"{% if section_rendering_api or forloop.first %} is="hover-button"{% else %} is="api-hover-button" data-id="TabPanelContent-{{ block.id }}" data-section-id="{{ section.id }}"{% endif %} role="tab" aria-controls="TabPanel-{{ block.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}> {% endcomment %}
-               <button
-  class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %}"
-  type="button"
-  role="tab"
-  aria-controls="TabPanel-{{ block.id }}"
-  data-index="{{ forloop.index0 }}"
->
-
-              <span class="btn-fill" data-fill></span>
+              <button class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %} whitespace-nowrap"{% if forloop.first %} disabled{% endif %} type="button"{% if section_rendering_api or forloop.first %} is="hover-button"{% else %} is="api-hover-button" data-id="TabPanelContent-{{ block.id }}" data-section-id="{{ section.id }}"{% endif %} role="tab" aria-controls="TabPanel-{{ block.id }}" data-index="{{ forloop.index0 }}" {{ block.shopify_attributes }}>
+                <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
                   {%- liquid
                     if block.settings.title != blank or collection != blank
@@ -743,7 +735,7 @@ document.addEventListener("DOMContentLoaded", () => {
     tabs.forEach(t => {
       t.classList.remove("button--primary");
       t.classList.add("button--secondary");
-      t.disabled = false;
+      {% comment %} t.disabled = false; {% endcomment %}
     });
 
     /* Panels reset */
@@ -802,25 +794,10 @@ document.addEventListener("DOMContentLoaded", () => {
     const firstTab = document.querySelector('[role="tab"]');
     if (firstTab) firstTab.dispatchEvent(new Event("click"));
   });  {% endcomment %}
-  {% comment %} setTimeout(() => {
+  setTimeout(() => {
   const firstTab = document.querySelector('[role="tab"]');
   if (firstTab) firstTab.click();
-}, 50); {% endcomment %}
-function initFirstTabWhenReady() {
-  const firstTab = document.querySelector('[role="tab"]');
-  const firstSlider = document.querySelector('slider-element');
-
-  if (!firstTab || !firstSlider) {
-    requestAnimationFrame(initFirstTabWhenReady);
-    return;
-  }
-
-  // slider rendered → now safe
-  firstTab.click();
-}
-
-initFirstTabWhenReady();
-
+}, 50);
 
 });
 </script>
