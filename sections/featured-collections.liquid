@@ -42,10 +42,12 @@
          {%- if section.settings.carousel_on_desktop -%}
            {%- for block in section.blocks -%}
             {% comment %} <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}"> {% endcomment %}
-             <div
+             {% comment %} <div
   class="indicators lg:flex gap-2d5{% if forloop.first %} is-active{% else %} hidden{% endif %}"
   data-index="{{ forloop.index0 }}"
->
+> {% endcomment %}
+  <div class="indicators lg:flex gap-2d5" data-index="{{ forloop.index0 }}">
+
 
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -746,17 +748,22 @@ document.addEventListener("DOMContentLoaded", () => {
     if (panel) panel.hidden = false;
 
     /* 🔥 SCOPED INDICATORS */
-    const scopedIndicators = getScopedIndicators(tab);
+  const scopedIndicators = getScopedIndicators(tab);
 
-    scopedIndicators.forEach(i => i.classList.remove("is-active"));
+scopedIndicators.forEach(i => {
+  i.classList.remove("is-active");
+  i.style.display = "none";   // 🔥 hard reset
+});
 
-    const activeIndicator = [...scopedIndicators].find(
-      i => i.dataset.index === String(index)
-    );
+const activeIndicator = [...scopedIndicators].find(
+  i => i.dataset.index === String(index)
+);
 
-    if (activeIndicator) {
-      activeIndicator.classList.add("is-active");
-    }
+if (activeIndicator) {
+  activeIndicator.classList.add("is-active");
+  activeIndicator.style.display = "flex";
+}
+
 
     requestAnimationFrame(() => updateArrows(sliderId));
   });
@@ -804,7 +811,7 @@ document.addEventListener("DOMContentLoaded", () => {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-.indicators:not(.is-active) {
+{% comment %} .indicators:not(.is-active) {
   display: none;
 }
 
@@ -812,6 +819,14 @@ document.addEventListener("DOMContentLoaded", () => {
 /* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
+} {% endcomment %}
+.indicators {
+  display: none;
 }
+
+.indicators.is-active {
+  display: flex;
+}
+
 
 </style>
