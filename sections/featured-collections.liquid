@@ -515,7 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const panels = document.querySelectorAll('[role="tabpanel"]');
   const indicators = document.querySelectorAll('.indicators');
 
-  function updateArrows(sliderId) {
+  {% comment %} function updateArrows(sliderId) {
     const slider = document.getElementById(sliderId);
     if (!slider) return;
 
@@ -533,7 +533,32 @@ document.addEventListener("DOMContentLoaded", () => {
 
     prevBtn.disabled = scrollLeft <= 0;
     nextBtn.disabled = scrollLeft >= maxScroll - 5;
-  }
+  } {% endcomment %}
+  function updateArrows(sliderId) {
+  const slider = document.getElementById(sliderId);
+  if (!slider) return;
+
+  // ✅ REAL scroll container
+  const scrollContainer = slider.querySelector('.card-grid');
+  if (!scrollContainer) return;
+
+  const prevBtn = document.querySelector(
+    `.previous-button[aria-controls="${sliderId}"]`
+  );
+  const nextBtn = document.querySelector(
+    `.next-button[aria-controls="${sliderId}"]`
+  );
+
+  if (!prevBtn || !nextBtn) return;
+
+  const scrollLeft = scrollContainer.scrollLeft;
+  const maxScroll =
+    scrollContainer.scrollWidth - scrollContainer.clientWidth;
+
+  prevBtn.disabled = scrollLeft <= 0;
+  nextBtn.disabled = scrollLeft >= maxScroll - 5;
+}
+
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
@@ -602,12 +627,22 @@ if (indicator) {
 
     const scrollAmount = slider.clientWidth;
 
-    slider.scrollBy({
+    {% comment %} slider.scrollBy({
       left: btn.classList.contains("next-button")
         ? scrollAmount
         : -scrollAmount,
       behavior: "smooth"
-    });
+    }); {% endcomment %}
+    const scrollContainer = slider.querySelector('.card-grid');
+if (!scrollContainer) return;
+
+scrollContainer.scrollBy({
+  left: btn.classList.contains("next-button")
+    ? scrollAmount
+    : -scrollAmount,
+  behavior: "smooth"
+});
+
 
     setTimeout(() => updateArrows(sliderId), 300);
   });
