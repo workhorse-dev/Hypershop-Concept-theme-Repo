@@ -541,6 +541,18 @@
   if (window.__shopByCategoryArrowsInit) return;
   window.__shopByCategoryArrowsInit = true;
 
+  function waitForSlider(sliderId, cb) {
+    let attempts = 0;
+    const interval = setInterval(() => {
+      const slider = document.getElementById(sliderId);
+      if (slider) {
+        clearInterval(interval);
+        cb(slider);
+      }
+      if (++attempts > 20) clearInterval(interval);
+    }, 50);
+  }
+
   document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll('[role="tab"]');
     const arrows = document.getElementById('category-arrows');
@@ -549,30 +561,56 @@
 
     if (!tabs.length || !arrows || !prevBtn || !nextBtn) return;
 
-    function updateArrows(tab) {
-      const panelId = tab.getAttribute('aria-controls');
-      if (!panelId) return;
-
-      const sliderId = panelId.replace('TabPanel-', 'Slider-');
-
-      prevBtn.setAttribute('aria-controls', sliderId);
-      nextBtn.setAttribute('aria-controls', sliderId);
-
-      // 🔑 make sure arrows are visible
-      arrows.style.display = 'flex';
-
+    function resetArrowState() {
       prevBtn.disabled = true;
       nextBtn.disabled = false;
     }
 
+    function updateArrowState(slider) {
+      const items = slider.querySelectorAll('.card');
+      const visible = slider.querySelectorAll('.card:not([hidden])');
+
+      // if everything fits → disable both
+      if (items.length <= visible.length) {
+        prevBtn.disabled = true;
+        nextBtn.disabled = true;
+      }
+    }
+
+    function bindArrows(sliderId) {
+      waitForSlider(sliderId, (slider) => {
+        prevBtn.setAttribute('aria-controls', sliderId);
+        nextBtn.setAttribute('aria-controls', sliderId);
+
+        resetArrowState();
+
+        // force slider recalculation
+        requestAnimationFrame(() => {
+          slider.dispatchEvent(new Event('refresh'));
+          updateArrowState(slider);
+        });
+      });
+    }
+
+    function onTabChange(tab) {
+      const panelId = tab.getAttribute('aria-controls');
+      if (!panelId) return;
+
+      const sliderId = panelId.replace('TabPanel-', 'Slider-');
+      arrows.style.display = 'flex';
+
+      bindArrows(sliderId);
+    }
+
     // initial
-    updateArrows(tabs[0]);
+    onTabChange(tabs[0]);
 
     tabs.forEach(tab => {
       tab.addEventListener('click', () => {
-        updateArrows(tab);
+        onTabChange(tab);
       });
     });
   });
 })();
 </script>
+
