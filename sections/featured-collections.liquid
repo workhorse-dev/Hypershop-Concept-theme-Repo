@@ -690,7 +690,7 @@ document.addEventListener("DOMContentLoaded", () => {
   }
 
   /* ---------- TAB CLICK ---------- */
-  {% comment %} tabs.forEach((tab, index) => {
+  tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
       const targetId = tab.getAttribute("aria-controls");
       const sliderId = targetId.replace("TabPanel-", "Slider-");
@@ -718,47 +718,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
       requestAnimationFrame(() => updateArrows(sliderId));
     });
-  }); {% endcomment %}
-  tabs.forEach((tab, index) => {
-  tab.addEventListener("click", () => {
-    const targetId = tab.getAttribute("aria-controls");
-    const sliderId = targetId.replace("TabPanel-", "Slider-");
-
-    const tabsWrapper = tab.closest("tabs-element");
-
-    /* Tabs reset */
-    tabsWrapper.querySelectorAll('[role="tab"]').forEach(t => {
-      t.classList.remove("button--primary");
-      t.classList.add("button--secondary");
-      t.disabled = false;
-    });
-
-    /* Panels reset */
-    panels.forEach(p => (p.hidden = true));
-
-    /* Activate tab */
-    tab.classList.add("button--primary");
-    tab.classList.remove("button--secondary");
-    tab.disabled = true;
-
-    const panel = document.getElementById(targetId);
-    if (panel) panel.hidden = false;
-
-    /* Arrows reset (SCOPED) */
-    tabsWrapper.querySelectorAll(".indicators").forEach(i => {
-      i.classList.remove("is-active");
-    });
-
-    /* Activate correct arrows */
-    const indicator = tabsWrapper.querySelector(
-      `.indicators[data-index="${index}"]`
-    );
-    if (indicator) indicator.classList.add("is-active");
-
-    requestAnimationFrame(() => updateArrows(sliderId));
   });
-});
-
 
   /* ---------- ARROW CLICK ---------- */
   document.addEventListener("click", e => {
