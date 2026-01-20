@@ -43,7 +43,7 @@
            {%- for block in section.blocks -%}
             {% comment %} <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}"> {% endcomment %}
              <div
-  class="indicators lg:flex gap-2d5{% if forloop.first %} is-active{% else %} hidden{% endif %}"
+  class="indicators lg:flex gap-2d5{% if forloop.first %} is-active{% endif %}"
   data-index="{{ forloop.index0 }}"
 >
 
@@ -710,11 +710,17 @@ document.addEventListener("DOMContentLoaded", () => {
       const panel = document.getElementById(targetId);
       if (panel) panel.hidden = false;
 
-      indicators.forEach(i => i.classList.remove("is-active"));
       const indicator = document.querySelector(
-        `.indicators[data-index="${index}"]`
-      );
-      if (indicator) indicator.classList.add("is-active");
+  `.indicators[data-index="${index}"]`
+);
+
+if (indicator) {
+  indicator.classList.add("is-active");
+
+  // 🔥 force repaint for Shopify sliders
+  indicator.offsetHeight;
+}
+
 
       requestAnimationFrame(() => updateArrows(sliderId));
     });
@@ -761,9 +767,21 @@ document.addEventListener("DOMContentLoaded", () => {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-.indicators:not(.is-active) {
+{% comment %} .indicators:not(.is-active) {
   display: none;
+} {% endcomment %}
+.indicators {
+  visibility: hidden;
+  opacity: 0;
+  pointer-events: none;
 }
+
+.indicators.is-active {
+  visibility: visible;
+  opacity: 1;
+  pointer-events: auto;
+}
+
 
 
 /* Only active arrows visible */
