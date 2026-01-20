@@ -515,7 +515,7 @@ document.addEventListener("DOMContentLoaded", () => {
   const panels = document.querySelectorAll('[role="tabpanel"]');
   const indicators = document.querySelectorAll('.indicators');
 
-  {% comment %} function updateArrows(sliderId) {
+  function updateArrows(sliderId) {
     const slider = document.getElementById(sliderId);
     if (!slider) return;
 
@@ -533,31 +533,7 @@ document.addEventListener("DOMContentLoaded", () => {
 
     prevBtn.disabled = scrollLeft <= 0;
     nextBtn.disabled = scrollLeft >= maxScroll - 5;
-  } {% endcomment %}
-  function updateArrows(sliderId) {
-  const slider = document.getElementById(sliderId);
-  if (!slider) return;
-
-  const prevBtn = document.querySelector(
-    `.previous-button[aria-controls="${sliderId}"]`
-  );
-  const nextBtn = document.querySelector(
-    `.next-button[aria-controls="${sliderId}"]`
-  );
-
-  if (!prevBtn || !nextBtn) return;
-
-  const scrollLeft = slider.scrollLeft;
-  const maxScroll = slider.scrollWidth - slider.clientWidth;
-  const step = slider.clientWidth;
-
-  // ⬅️ Disable prev if we are on first "page"
-  prevBtn.disabled = scrollLeft <= step / 2;
-
-  // ➡️ Disable next if we are on last "page"
-  nextBtn.disabled = scrollLeft >= maxScroll - step / 2;
-}
-
+  }
 
   tabs.forEach((tab, index) => {
     tab.addEventListener("click", () => {
