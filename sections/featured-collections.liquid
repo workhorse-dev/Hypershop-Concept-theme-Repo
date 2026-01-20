@@ -65,22 +65,26 @@
       {% unless forloop.first %} hidden{% endunless %}
     >
       <button
-        class="button button--secondary previous-button"
-        type="button"
-        aria-controls="Slider-{{ block.id }}"
-        disabled
-      >
+  class="button button--secondary previous-button"
+  type="button"
+  aria-controls="Slider-{{ block.id }}"
+  data-direction="prev"
+  disabled
+>
+
         <span class="btn-fill"></span>
         <span class="btn-text">
           {%- render 'icon', icon: 'chevron-left' -%}
         </span>
       </button>
 
-      <button
-        class="button button--secondary next-button"
-        type="button"
-        aria-controls="Slider-{{ block.id }}"
-      >
+     <button
+  class="button button--secondary next-button"
+  type="button"
+  aria-controls="Slider-{{ block.id }}"
+  data-direction="next"
+>
+
         <span class="btn-fill"></span>
         <span class="btn-text">
           {%- render 'icon', icon: 'chevron-right' -%}
@@ -558,42 +562,68 @@
     const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
-    if (!tabs.length) return;
+    function updateArrowState(slider, arrows) {
+      const prev = arrows.querySelector('.previous-button');
+      const next = arrows.querySelector('.next-button');
 
-   function activateTab(tab) {
-  const panelId = tab.getAttribute('aria-controls');
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
 
-  // show correct panel
-  panels.forEach(panel => {
-    panel.classList.toggle('is-hidden', panel.id !== panelId);
-  });
+      prev.disabled = scrollLeft <= 0;
+      next.disabled = scrollLeft >= maxScroll - 2;
+    }
 
-  // show correct arrows
-  arrowGroups.forEach(group => {
-    group.classList.toggle(
-      'is-hidden',
-      group.dataset.arrowsFor !== panelId
-    );
-  });
+    arrowGroups.forEach(group => {
+      const prev = group.querySelector('.previous-button');
+      const next = group.querySelector('.next-button');
+      const slider = document.getElementById(prev.getAttribute('aria-controls'));
 
-  // 🔥 FORCE slider-element recalculation
-  requestAnimationFrame(() => {
-    window.dispatchEvent(new Event('resize'));
-  });
-}
+      if (!slider) return;
 
+      prev.addEventListener('click', () => {
+        slider.scrollBy({ left: -slider.clientWidth, behavior: 'smooth' });
+      });
 
-    // initial
+      next.addEventListener('click', () => {
+        slider.scrollBy({ left: slider.clientWidth, behavior: 'smooth' });
+      });
+
+      slider.addEventListener('scroll', () => {
+        updateArrowState(slider, group);
+      });
+
+      updateArrowState(slider, group);
+    });
+
+    function activateTab(tab) {
+      const panelId = tab.getAttribute('aria-controls');
+
+      panels.forEach(panel => {
+        panel.classList.toggle('is-hidden', panel.id !== panelId);
+      });
+
+      arrowGroups.forEach(group => {
+        const active = group.dataset.arrowsFor === panelId;
+        group.classList.toggle('is-hidden', !active);
+
+        if (active) {
+          const slider = document.getElementById(
+            group.querySelector('.previous-button').getAttribute('aria-controls')
+          );
+          if (slider) updateArrowState(slider, group);
+        }
+      });
+    }
+
     activateTab(tabs[0]);
 
     tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        activateTab(tab);
-      });
+      tab.addEventListener('click', () => activateTab(tab));
     });
   });
 })();
 </script>
+
 
 <style>
   .tab-panel.is-hidden {
