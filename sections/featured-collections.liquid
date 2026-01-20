@@ -629,21 +629,24 @@ next.addEventListener('click', () => {
         const active = group.dataset.arrowsFor === panelId;
         group.classList.toggle('is-hidden', !active);
 
-       if (active) {
+      if (active) {
   const sliderRoot = document.getElementById(
     group.querySelector('.previous-button').getAttribute('aria-controls')
   );
 
   const slider = sliderRoot?.querySelector('.card-grid');
 
-  if (slider) {
-    // 🔥 Reset scroll so arrows behave same as first tab
-    slider.scrollLeft = 0;
+  if (!slider) return;
 
-    // 🔥 Recalculate arrow state correctly
-    updateArrowState(slider, group);
-  }
+  // 🔥 IMPORTANT: wait for layout to settle
+  requestAnimationFrame(() => {
+    requestAnimationFrame(() => {
+      slider.scrollLeft = 0;
+      updateArrowState(slider, group);
+    });
+  });
 }
+
 
       });
     }
