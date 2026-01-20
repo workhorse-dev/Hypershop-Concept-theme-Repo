@@ -752,7 +752,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 scopedIndicators.forEach(i => {
   i.classList.remove("is-active");
-  i.style.display = "none";   // 🔥 hard reset
 });
 
 const activeIndicator = [...scopedIndicators].find(
@@ -761,8 +760,8 @@ const activeIndicator = [...scopedIndicators].find(
 
 if (activeIndicator) {
   activeIndicator.classList.add("is-active");
-  activeIndicator.style.display = "flex";
 }
+
 
 
     requestAnimationFrame(() => updateArrows(sliderId));
@@ -811,7 +810,7 @@ if (activeIndicator) {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-.indicators:not(.is-active) {
+{% comment %} .indicators:not(.is-active) {
   display: none;
 }
 
@@ -819,6 +818,13 @@ if (activeIndicator) {
 /* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
+} {% endcomment %}
+.indicators {
+  display: none;
+}
+
+.indicators.is-active {
+  display: flex;
 }
 
 
