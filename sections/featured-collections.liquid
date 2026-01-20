@@ -39,8 +39,8 @@
           </div>
         </div>
         
-         {%- if section.settings.carousel_on_desktop -%}
-           {%- for block in section.blocks -%}
+         {% comment %} {%- if section.settings.carousel_on_desktop -%}
+            {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -55,9 +55,45 @@
                 </span>
               </button>
             </div>
-          {%- endfor -%} 
+          {%- endfor -%}  
+        {%- endif -%}  {% endcomment %}
+         {%- if section.settings.carousel_on_desktop -%}
+  {%- for block in section.blocks -%}
+    <div
+      class="indicators lg:flex gap-2d5"
+      data-arrows-for="TabPanel-{{ block.id }}"
+      {% unless forloop.first %} hidden{% endunless %}
+    >
+      <button
+  class="button button--secondary previous-button"
+  type="button"
+  aria-controls="Slider-{{ block.id }}"
+  data-direction="prev"
+  disabled
+>
 
-        {%- endif -%} 
+        <span class="btn-fill"></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'chevron-left' -%}
+        </span>
+      </button>
+
+     <button
+  class="button button--secondary next-button"
+  type="button"
+  aria-controls="Slider-{{ block.id }}"
+  data-direction="next"
+>
+
+        <span class="btn-fill"></span>
+        <span class="btn-text">
+          {%- render 'icon', icon: 'chevron-right' -%}
+        </span>
+      </button>
+    </div>
+  {%- endfor -%}
+{%- endif -%}
+
 
       </tabs-element>
       
@@ -66,9 +102,15 @@
           assign collection = block.settings.collection
           assign products = block.settings.products | default: collection.products
         -%}
-        <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}>
+        {% comment %} <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}> {% endcomment %}
+         <div
+  id="TabPanel-{{ block.id }}"
+  role="tabpanel"
+  class="tab-panel{% unless forloop.first %} is-hidden{% endunless %}"
+>
+
           <div id="TabPanelContent-{{ block.id }}">
-            {%- if section_rendering_api or forloop.first -%}
+            {% comment %} {%- if section_rendering_api or forloop.first -%} {% endcomment %}
               <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
                 <motion-list class="product-grid card-grid card-grid--{{ section.settings.columns }} mobile:card-grid--{{ section.settings.columns_mobile }} grid">
                   {%- for product in products limit: section.settings.product_limit -%}
@@ -127,7 +169,7 @@
                   </a>
                 </p>
               {%- endif -%}
-            {%- endif -%}
+            {% comment %} {%- endif -%} {% endcomment %}
           </div>
         </div>
       {%- endfor -%}
@@ -509,3 +551,108 @@
   }
 }
 {% endschema %}
+
+<script>
+(() => {
+  if (window.__shopByCategoryTabsInit) return;
+  window.__shopByCategoryTabsInit = true;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const panels = document.querySelectorAll('.tab-panel');
+    const arrowGroups = document.querySelectorAll('[data-arrows-for]');
+
+    function updateArrowState(scrollEl, arrows) {
+  const prev = arrows.querySelector('.previous-button');
+  const next = arrows.querySelector('.next-button');
+
+  if (!scrollEl) return;
+
+  const scrollLeft = Math.round(scrollEl.scrollLeft);
+  const maxScroll = Math.round(
+    scrollEl.scrollWidth - scrollEl.clientWidth
+  );
+
+  prev.disabled = scrollLeft <= 1;
+  next.disabled = scrollLeft >= maxScroll - 1;
+}
+
+
+    arrowGroups.forEach(group => {
+      const prev = group.querySelector('.previous-button');
+      const next = group.querySelector('.next-button');
+      {% comment %} const slider = document.getElementById(prev.getAttribute('aria-controls')); {% endcomment %}
+       const sliderRoot = document.getElementById(
+  prev.getAttribute('aria-controls')
+);
+const slider = sliderRoot?.querySelector('.card-grid');
+
+
+      if (!slider) return;
+
+     function moveSlider(slider, arrows, direction) {
+  const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
+
+  scrollEl.scrollBy({ left: amount, behavior: 'smooth' });
+
+
+  // 🔥 FORCE arrow state update after scroll
+  setTimeout(() => {
+    updateArrowState(slider, arrows);
+  }, 350);
+}
+
+prev.addEventListener('click', () => {
+  moveSlider(slider, group, 'prev');
+});
+
+next.addEventListener('click', () => {
+  moveSlider(slider, group, 'next');
+});
+
+
+      slider.addEventListener('scroll', () => {
+        updateArrowState(slider, group);
+      });
+
+      updateArrowState(slider, group);
+    });
+
+    function activateTab(tab) {
+      const panelId = tab.getAttribute('aria-controls');
+
+      panels.forEach(panel => {
+        panel.classList.toggle('is-hidden', panel.id !== panelId);
+      });
+
+      arrowGroups.forEach(group => {
+        const active = group.dataset.arrowsFor === panelId;
+        group.classList.toggle('is-hidden', !active);
+
+        if (active) {
+          const slider = document.getElementById(
+            group.querySelector('.previous-button').getAttribute('aria-controls')
+          );
+          if (slider) updateArrowState(slider, group);
+        }
+      });
+    }
+
+    activateTab(tabs[0]);
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => activateTab(tab));
+    });
+  });
+})();
+</script>
+
+
+<style>
+  .tab-panel.is-hidden {
+    display: none;
+  }
+</style>
+
+
+
