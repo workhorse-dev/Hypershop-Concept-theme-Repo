@@ -532,7 +532,7 @@ document.addEventListener("DOMContentLoaded", () => {
     const scrollLeft = slider.scrollLeft;
     const maxScroll = slider.scrollWidth - slider.clientWidth;
 
-    prevBtn.disabled = scrollLeft <= 0;
+    prevBtn.disabled = scrollLeft <= SCROLL_STEP;
     nextBtn.disabled = scrollLeft >= maxScroll - 5;
   }
 
