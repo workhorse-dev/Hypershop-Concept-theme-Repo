@@ -40,7 +40,7 @@
         </div>
         
          {%- if section.settings.carousel_on_desktop -%}
-           {%- for block in section.blocks -%}
+           {% comment %} {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -55,7 +55,33 @@
                 </span>
               </button>
             </div>
-          {%- endfor -%} 
+          {%- endfor -%}  {% endcomment %}
+
+          <div class="indicators hidden lg:flex gap-2d5" id="category-arrows">
+  <button
+    class="button button--secondary previous-button"
+    type="button"
+    aria-label="Previous"
+    disabled
+  >
+    <span class="btn-fill"></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-left' -%}
+    </span>
+  </button>
+
+  <button
+    class="button button--secondary next-button"
+    type="button"
+    aria-label="Next"
+  >
+    <span class="btn-fill"></span>
+    <span class="btn-text">
+      {%- render 'icon', icon: 'chevron-right' -%}
+    </span>
+  </button>
+</div>
+
 
         {%- endif -%} 
 
@@ -509,3 +535,44 @@
   }
 }
 {% endschema %}
+
+<script>
+(() => {
+  if (window.__shopByCategoryArrowsInit) return;
+  window.__shopByCategoryArrowsInit = true;
+
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll('[role="tab"]');
+    const arrows = document.getElementById('category-arrows');
+    const prevBtn = arrows?.querySelector('.previous-button');
+    const nextBtn = arrows?.querySelector('.next-button');
+
+    if (!tabs.length || !arrows || !prevBtn || !nextBtn) return;
+
+    function updateArrows(tab) {
+      const panelId = tab.getAttribute('aria-controls');
+      if (!panelId) return;
+
+      const sliderId = panelId.replace('TabPanel-', 'Slider-');
+
+      prevBtn.setAttribute('aria-controls', sliderId);
+      nextBtn.setAttribute('aria-controls', sliderId);
+
+      // 🔑 make sure arrows are visible
+      arrows.style.display = 'flex';
+
+      prevBtn.disabled = true;
+      nextBtn.disabled = false;
+    }
+
+    // initial
+    updateArrows(tabs[0]);
+
+    tabs.forEach(tab => {
+      tab.addEventListener('click', () => {
+        updateArrows(tab);
+      });
+    });
+  });
+})();
+</script>
