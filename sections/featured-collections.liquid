@@ -570,9 +570,9 @@ document.addEventListener("DOMContentLoaded", () => {
       if (indicator) indicator.classList.remove("hidden"); {% endcomment %}
       /* HARD RESET: hide all arrows */
 /* HARD RESET */
+/* HARD RESET */
 indicators.forEach(i => {
   i.classList.remove("is-active");
-  i.classList.remove("hidden"); // 👈 IMPORTANT
 });
 
 /* Show ONLY current tab arrows */
@@ -583,6 +583,7 @@ const indicator = document.querySelector(
 if (indicator) {
   indicator.classList.add("is-active");
 }
+
 
 
 
@@ -621,19 +622,14 @@ if (firstTab) {
 </script>
 
 <style>
-/* default hide */
+/* Default hide */
 .indicators {
   display: none !important;
 }
 
-/* active arrow */
+/* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
-}
-
-/* OVERRIDE Shopify hidden utility */
-.indicators.hidden {
-  display: none !important;
 }
 
 
