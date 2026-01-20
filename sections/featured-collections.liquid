@@ -562,19 +562,18 @@
     const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
-    function updateArrowState(scrollEl, arrows) {
-      const prev = arrows.querySelector('.previous-button');
-      const next = arrows.querySelector('.next-button');
+    function getState(scrollEl) {
+      const card = scrollEl.querySelector('.card');
+      if (!card) return { index: 0, max: 0 };
 
-      if (!scrollEl) return;
+      const cardWidth = card.getBoundingClientRect().width;
+      const visible = Math.floor(scrollEl.clientWidth / cardWidth);
+      const total = scrollEl.querySelectorAll('.card').length;
 
-      const scrollLeft = Math.round(scrollEl.scrollLeft);
-      const maxScroll = Math.round(
-        scrollEl.scrollWidth - scrollEl.clientWidth
-      );
+      const index = Math.round(scrollEl.scrollLeft / cardWidth);
+      const max = Math.max(0, total - visible);
 
-      prev.disabled = scrollLeft <= 1;
-      next.disabled = scrollLeft >= maxScroll - 1;
+      return { index, max };
     }
 
     arrowGroups.forEach(group => {
@@ -588,25 +587,30 @@
 
       if (!scrollEl) return;
 
-      function move(direction) {
-        const amount =
-          scrollEl.clientWidth * (direction === 'next' ? 1 : -1);
+      function update() {
+        const { index, max } = getState(scrollEl);
+        prev.disabled = index <= 0;
+        next.disabled = index >= max;
+      }
 
-        scrollEl.scrollBy({ left: amount, behavior: 'smooth' });
+      function move(dir) {
+        const card = scrollEl.querySelector('.card');
+        if (!card) return;
 
-        setTimeout(() => {
-          updateArrowState(scrollEl, group);
-        }, 350);
+        const w = card.getBoundingClientRect().width;
+        scrollEl.scrollBy({
+          left: dir === 'next' ? w : -w,
+          behavior: 'smooth'
+        });
+
+        setTimeout(update, 300);
       }
 
       prev.addEventListener('click', () => move('prev'));
       next.addEventListener('click', () => move('next'));
 
-      scrollEl.addEventListener('scroll', () => {
-        updateArrowState(scrollEl, group);
-      });
-
-      updateArrowState(scrollEl, group);
+      scrollEl.addEventListener('scroll', update);
+      update();
     });
 
     function activateTab(tab) {
@@ -625,7 +629,13 @@
             group.querySelector('.previous-button').getAttribute('aria-controls')
           );
           const scrollEl = sliderRoot?.querySelector('.card-grid');
-          if (scrollEl) updateArrowState(scrollEl, group);
+          if (scrollEl) {
+            setTimeout(() => {
+              const { index, max } = getState(scrollEl);
+              group.querySelector('.previous-button').disabled = index <= 0;
+              group.querySelector('.next-button').disabled = index >= max;
+            }, 50);
+          }
         }
       });
     }
@@ -637,6 +647,7 @@
   });
 })();
 </script>
+
 
 
 
