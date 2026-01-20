@@ -98,7 +98,13 @@
           assign collection = block.settings.collection
           assign products = block.settings.products | default: collection.products
         -%}
-        <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}>
+        {% comment %} <div id="TabPanel-{{ block.id }}" role="tabpanel"{% unless forloop.first %} hidden{% endunless %}> {% endcomment %}
+         <div
+  id="TabPanel-{{ block.id }}"
+  role="tabpanel"
+  class="tab-panel{% unless forloop.first %} is-hidden{% endunless %}"
+>
+
           <div id="TabPanelContent-{{ block.id }}">
             {%- if section_rendering_api or forloop.first -%}
               <slider-element id="Slider-{{ block.id }}" class="grid slider{% if section.settings.carousel_on_desktop %} slider--desktop{% endif %}{% if section.settings.swipe_on_mobile %} slider--tablet{% endif %}" selector=".card-grid>.card">
@@ -549,45 +555,27 @@
 
   document.addEventListener("DOMContentLoaded", () => {
     const tabs = document.querySelectorAll('[role="tab"]');
-    const panels = document.querySelectorAll('[role="tabpanel"]');
+    const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
     if (!tabs.length) return;
 
     function activateTab(tab) {
-  const panelId = tab.getAttribute('aria-controls');
+      const panelId = tab.getAttribute('aria-controls');
 
-  // show correct panel
-  panels.forEach(panel => {
-    panel.hidden = panel.id !== panelId;
-  });
+      // panels
+      panels.forEach(panel => {
+        panel.classList.toggle('is-hidden', panel.id !== panelId);
+      });
 
-  // show correct arrows
-  arrowGroups.forEach(group => {
-    group.hidden = group.dataset.arrowsFor !== panelId;
-  });
-
-  // 🔥 IMPORTANT: reset slider state
-  const sliderId = panelId.replace('TabPanel-', 'Slider-');
-  const slider = document.getElementById(sliderId);
-
-  if (slider) {
-    // force slider to think it's freshly loaded
-    slider.scrollLeft = 0;
-
-    // reset arrows
-    const prev = slider.closest('.tabs-element')?.querySelector(
-      `[data-arrows-for="${panelId}"] .previous-button`
-    );
-    const next = slider.closest('.tabs-element')?.querySelector(
-      `[data-arrows-for="${panelId}"] .next-button`
-    );
-
-    if (prev) prev.disabled = true;
-    if (next) next.disabled = false;
-  }
-}
-
+      // arrows
+      arrowGroups.forEach(group => {
+        group.classList.toggle(
+          'is-hidden',
+          group.dataset.arrowsFor !== panelId
+        );
+      });
+    }
 
     // initial
     activateTab(tabs[0]);
@@ -600,5 +588,12 @@
   });
 })();
 </script>
+
+<style>
+  .tab-panel.is-hidden {
+    display: none;
+  }
+</style>
+
 
 
