@@ -562,39 +562,28 @@
     const panels = document.querySelectorAll('.tab-panel');
     const arrowGroups = document.querySelectorAll('[data-arrows-for]');
 
-    function updateArrowState(scrollEl, arrows) {
-  const prev = arrows.querySelector('.previous-button');
-  const next = arrows.querySelector('.next-button');
+    function updateArrowState(slider, arrows) {
+      const prev = arrows.querySelector('.previous-button');
+      const next = arrows.querySelector('.next-button');
 
-  if (!scrollEl) return;
+      const scrollLeft = slider.scrollLeft;
+      const maxScroll = slider.scrollWidth - slider.clientWidth;
 
-  const scrollLeft = Math.round(scrollEl.scrollLeft);
-  const maxScroll = Math.round(
-    scrollEl.scrollWidth - scrollEl.clientWidth
-  );
-
-  prev.disabled = scrollLeft <= 1;
-  next.disabled = scrollLeft >= maxScroll - 1;
-}
-
+      prev.disabled = scrollLeft <= 0;
+      next.disabled = scrollLeft >= maxScroll - 2;
+    }
 
     arrowGroups.forEach(group => {
       const prev = group.querySelector('.previous-button');
       const next = group.querySelector('.next-button');
-      {% comment %} const slider = document.getElementById(prev.getAttribute('aria-controls')); {% endcomment %}
-       const sliderRoot = document.getElementById(
-  prev.getAttribute('aria-controls')
-);
-const slider = sliderRoot?.querySelector('.card-grid');
-
+      const slider = document.getElementById(prev.getAttribute('aria-controls'));
 
       if (!slider) return;
 
      function moveSlider(slider, arrows, direction) {
   const amount = slider.clientWidth * (direction === 'next' ? 1 : -1);
 
-  scrollEl.scrollBy({ left: amount, behavior: 'smooth' });
-
+  slider.scrollBy({ left: amount, behavior: 'smooth' });
 
   // 🔥 FORCE arrow state update after scroll
   setTimeout(() => {
@@ -629,7 +618,12 @@ next.addEventListener('click', () => {
         const active = group.dataset.arrowsFor === panelId;
         group.classList.toggle('is-hidden', !active);
 
-       
+        if (active) {
+          const slider = document.getElementById(
+            group.querySelector('.previous-button').getAttribute('aria-controls')
+          );
+          if (slider) updateArrowState(slider, group);
+        }
       });
     }
 
