@@ -799,30 +799,6 @@ document.addEventListener("DOMContentLoaded", () => {
 
 });
 </script>
-<script>
-function initFeaturedCollectionTabs() {
-  const firstTab = document.querySelector('[role="tab"]');
-  if (!firstTab) return;
-
-  firstTab.click(); // this triggers arrows + updateArrows
-}
-
-/* 🔥 Wait until sliders + indicators exist */
-const observer = new MutationObserver(() => {
-  const indicatorsReady = document.querySelector('.indicators');
-  const sliderReady = document.querySelector('slider-element');
-
-  if (indicatorsReady && sliderReady) {
-    observer.disconnect();
-    initFeaturedCollectionTabs();
-  }
-});
-
-observer.observe(document.body, {
-  childList: true,
-  subtree: true
-});
-</script>
 
 
 <style>
@@ -831,7 +807,7 @@ observer.observe(document.body, {
   display: none !important;
 } {% endcomment %}
 /* hide ONLY non-active indicators */
-.indicators:not(.is-active) {
+{% comment %} .indicators:not(.is-active) {
   display: none;
 }
 
@@ -839,6 +815,15 @@ observer.observe(document.body, {
 /* Only active arrows visible */
 .indicators.is-active {
   display: flex !important;
+} {% endcomment %}
+
+.indicators {
+  display: none;
 }
+
+.indicators.is-active {
+  display: flex;
+}
+
 
 </style>
