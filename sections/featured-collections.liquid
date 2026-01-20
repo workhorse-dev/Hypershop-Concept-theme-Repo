@@ -40,7 +40,7 @@
         </div>
         
          {%- if section.settings.carousel_on_desktop -%}
-           {% comment %} {%- for block in section.blocks -%}
+            {%- for block in section.blocks -%}
             <div class="indicators hidden lg:flex gap-2d5"{% unless forloop.first %} hidden{% endunless %} data-index="{{ forloop.index0 }}">
               <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
@@ -55,34 +55,7 @@
                 </span>
               </button>
             </div>
-          {%- endfor -%}  {% endcomment %}
-
-          <div class="indicators hidden lg:flex gap-2d5" id="category-arrows">
-  <button
-    class="button button--secondary previous-button"
-    type="button"
-    aria-label="Previous"
-    disabled
-  >
-    <span class="btn-fill"></span>
-    <span class="btn-text">
-      {%- render 'icon', icon: 'chevron-left' -%}
-    </span>
-  </button>
-
-  <button
-    class="button button--secondary next-button"
-    type="button"
-    aria-label="Next"
-  >
-    <span class="btn-fill"></span>
-    <span class="btn-text">
-      {%- render 'icon', icon: 'chevron-right' -%}
-    </span>
-  </button>
-</div>
-
-
+          {%- endfor -%}  
         {%- endif -%} 
 
       </tabs-element>
@@ -536,81 +509,4 @@
 }
 {% endschema %}
 
-<script>
-(() => {
-  if (window.__shopByCategoryArrowsInit) return;
-  window.__shopByCategoryArrowsInit = true;
-
-  function waitForSlider(sliderId, cb) {
-    let attempts = 0;
-    const interval = setInterval(() => {
-      const slider = document.getElementById(sliderId);
-      if (slider) {
-        clearInterval(interval);
-        cb(slider);
-      }
-      if (++attempts > 20) clearInterval(interval);
-    }, 50);
-  }
-
-  document.addEventListener("DOMContentLoaded", () => {
-    const tabs = document.querySelectorAll('[role="tab"]');
-    const arrows = document.getElementById('category-arrows');
-    const prevBtn = arrows?.querySelector('.previous-button');
-    const nextBtn = arrows?.querySelector('.next-button');
-
-    if (!tabs.length || !arrows || !prevBtn || !nextBtn) return;
-
-    function resetArrowState() {
-      prevBtn.disabled = true;
-      nextBtn.disabled = false;
-    }
-
-    function updateArrowState(slider) {
-      const items = slider.querySelectorAll('.card');
-      const visible = slider.querySelectorAll('.card:not([hidden])');
-
-      // if everything fits → disable both
-      if (items.length <= visible.length) {
-        prevBtn.disabled = true;
-        nextBtn.disabled = true;
-      }
-    }
-
-    function bindArrows(sliderId) {
-      waitForSlider(sliderId, (slider) => {
-        prevBtn.setAttribute('aria-controls', sliderId);
-        nextBtn.setAttribute('aria-controls', sliderId);
-
-        resetArrowState();
-
-        // force slider recalculation
-        requestAnimationFrame(() => {
-          slider.dispatchEvent(new Event('refresh'));
-          updateArrowState(slider);
-        });
-      });
-    }
-
-    function onTabChange(tab) {
-      const panelId = tab.getAttribute('aria-controls');
-      if (!panelId) return;
-
-      const sliderId = panelId.replace('TabPanel-', 'Slider-');
-      arrows.style.display = 'flex';
-
-      bindArrows(sliderId);
-    }
-
-    // initial
-    onTabChange(tabs[0]);
-
-    tabs.forEach(tab => {
-      tab.addEventListener('click', () => {
-        onTabChange(tab);
-      });
-    });
-  });
-})();
-</script>
 
