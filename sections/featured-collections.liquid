@@ -1,4 +1,4 @@
-{% comment %} <style>
+ <style>
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -846,10 +846,10 @@ window.addEventListener("load", () => {
   opacity: 1;
 }
 
-</style> {% endcomment %}
+</style> 
 
 
-<style>
+{% comment %} <style>
   #shopify-section-{{ section.id }} {
     --section-padding-top: {{ section.settings.padding_top }}px;
     --section-padding-bottom: {{ section.settings.padding_bottom }}px;
@@ -1361,166 +1361,166 @@ window.addEventListener("load", () => {
 }
 {% endschema %}
 <script>
-document.addEventListener("DOMContentLoaded", () => {
-  const tabs = document.querySelectorAll('[role="tab"]');
-  const panels = document.querySelectorAll('[role="tabpanel"]');
-  const indicators = document.querySelectorAll('.indicators');
-  function updateAfterScrollEnd(sliderId) {
-  const slider = document.getElementById(sliderId);
-  if (!slider) return;
-
-  let lastScrollLeft = slider.scrollLeft;
-  let stableFrames = 0;
-
-  function check() {
-    const currentScrollLeft = slider.scrollLeft;
-
-    if (Math.abs(currentScrollLeft - lastScrollLeft) < 1) {
-      stableFrames++;
-    } else {
-      stableFrames = 0;
-    }
-
-    lastScrollLeft = currentScrollLeft;
-
-    if (stableFrames >= 3) {
-      updateArrows(sliderId);
-      return;
-    }
-
-    requestAnimationFrame(check);
-  }
-
-  requestAnimationFrame(check);
-}
-
-
-  function updateArrows(sliderId) {
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-
-    const prevBtn = document.querySelector(
-      `.previous-button[aria-controls="${sliderId}"]`
-    );
-    const nextBtn = document.querySelector(
-      `.next-button[aria-controls="${sliderId}"]`
-    );
-
-    if (!prevBtn || !nextBtn) return;
-
-    const scrollLeft = slider.scrollLeft;
-    const maxScroll = slider.scrollWidth - slider.clientWidth;
-
-    prevBtn.disabled = scrollLeft <= 0;
-    nextBtn.disabled = scrollLeft >= maxScroll - 5;
-  }
-
-  tabs.forEach((tab, index) => {
-    tab.addEventListener("click", () => {
-      const targetId = tab.getAttribute("aria-controls");
-      const sliderId = targetId.replace("TabPanel-", "Slider-");
-
-      /* Tabs reset */
-      tabs.forEach(t => {
-        t.classList.remove("button--primary");
-        t.classList.add("button--secondary");
-        t.disabled = false;
-      });
-
-      /* Panels reset */
-      panels.forEach(p => (p.hidden = true));
-
-      /* Indicators reset */
-      {% comment %} indicators.forEach(i => i.classList.add("hidden")); {% endcomment %}
-
-      /* Activate tab */
-      tab.classList.add("button--primary");
-      tab.classList.remove("button--secondary");
-      tab.disabled = true;
-
-      /* Show panel */
-      const panel = document.getElementById(targetId);
-      if (panel) panel.hidden = false;
-
-      /* Show correct arrows */
-      {% comment %} const indicator = document.querySelector(
-        `.indicators[data-index="${index}"]`
-      );
-      if (indicator) indicator.classList.remove("hidden"); {% endcomment %}
-      /* HARD RESET: hide all arrows */
-/* HARD RESET */
-/* HARD RESET */
-indicators.forEach(i => {
-  i.classList.remove("is-active");
-});
-
-/* Show ONLY current tab arrows */
-const indicator = document.querySelector(
-  `.indicators[data-index="${index}"]`
-);
-
-if (indicator) {
-  indicator.classList.add("is-active");
-}
-
-
-
-
-      /* Update arrows state */
-      requestAnimationFrame(() => updateArrows(sliderId));
-    });
-  });
-
-  /* Bind arrow clicks */
-  document.addEventListener("click", e => {
-    const btn = e.target.closest(".previous-button, .next-button");
-    if (!btn) return;
-
-    const sliderId = btn.getAttribute("aria-controls");
-    const slider = document.getElementById(sliderId);
-    if (!slider) return;
-
-    const scrollAmount = slider.clientWidth;
-
-    slider.scrollBy({
-      left: btn.classList.contains("next-button")
-        ? scrollAmount
-        : -scrollAmount,
-      behavior: "smooth"
-    });
-
-     updateAfterScrollEnd(sliderId);
-  });
- // ✅ INITIAL LOAD: activate first tab arrows
-requestAnimationFrame(() => {
-  const firstTab = document.querySelector('[role="tab"]');
-  if (firstTab) {
-    firstTab.dispatchEvent(new Event('click'));
-  }
-});
-
-
-});
-</script>
-<style>
-/* Default hide */
-.indicators {
-  display: none !important;
-}
-
-/* Only active arrows visible */
-.indicators.is-active {
-  display: flex !important;
-}
-
-.tab__item.button--primary {
-  pointer-events: none;
-  cursor: default;
-  opacity: 1;
-}
-
-.tab__item.button--primary:hover {
-  opacity: 1;
-}
-
-</style>
+  document.addEventListener("DOMContentLoaded", () => {
+    const tabs = document.querySelectorAll('[role="tab"]');
+      const panels = document.querySelectorAll('[role="tabpanel"]');
+        const indicators = document.querySelectorAll('.indicators');
+          function updateAfterScrollEnd(sliderId) {
+            const slider = document.getElementById(sliderId);
+              if (!slider) return;
+              
+                let lastScrollLeft = slider.scrollLeft;
+                  let stableFrames = 0;
+                  
+                    function check() {
+                        const currentScrollLeft = slider.scrollLeft;
+                        
+                            if (Math.abs(currentScrollLeft - lastScrollLeft) < 1) {
+                                  stableFrames++;
+                                      } else {
+                                            stableFrames = 0;
+                                                }
+                                                
+                                                    lastScrollLeft = currentScrollLeft;
+                                                    
+                                                        if (stableFrames >= 3) {
+                                                              updateArrows(sliderId);
+                                                                    return;
+                                                                        }
+                                                                        
+                                                                            requestAnimationFrame(check);
+                                                                              }
+                                                                              
+                                                                                requestAnimationFrame(check);
+                                                                                }
+                                                                                
+                                                                                
+                                                                                  function updateArrows(sliderId) {
+                                                                                      const slider = document.getElementById(sliderId);
+                                                                                          if (!slider) return;
+                                                                                          
+                                                                                              const prevBtn = document.querySelector(
+                                                                                                    `.previous-button[aria-controls="${sliderId}"]`
+                                                                                                        );
+                                                                                                            const nextBtn = document.querySelector(
+                                                                                                                  `.next-button[aria-controls="${sliderId}"]`
+                                                                                                                      );
+                                                                                                                      
+                                                                                                                          if (!prevBtn || !nextBtn) return;
+                                                                                                                          
+                                                                                                                              const scrollLeft = slider.scrollLeft;
+                                                                                                                                  const maxScroll = slider.scrollWidth - slider.clientWidth;
+                                                                                                                                  
+                                                                                                                                      prevBtn.disabled = scrollLeft <= 0;
+                                                                                                                                          nextBtn.disabled = scrollLeft >= maxScroll - 5;
+                                                                                                                                            }
+                                                                                                                                            
+                                                                                                                                              tabs.forEach((tab, index) => {
+                                                                                                                                                  tab.addEventListener("click", () => {
+                                                                                                                                                        const targetId = tab.getAttribute("aria-controls");
+                                                                                                                                                              const sliderId = targetId.replace("TabPanel-", "Slider-");
+                                                                                                                                                              
+                                                                                                                                                                    /* Tabs reset */
+                                                                                                                                                                          tabs.forEach(t => {
+                                                                                                                                                                                  t.classList.remove("button--primary");
+                                                                                                                                                                                          t.classList.add("button--secondary");
+                                                                                                                                                                                                  t.disabled = false;
+                                                                                                                                                                                                        });
+                                                                                                                                                                                                        
+                                                                                                                                                                                                              /* Panels reset */
+                                                                                                                                                                                                                    panels.forEach(p => (p.hidden = true));
+                                                                                                                                                                                                                    
+                                                                                                                                                                                                                          /* Indicators reset */
+                                                                                                                                                                                                                                {% comment %} indicators.forEach(i => i.classList.add("hidden")); {% endcomment %}
+                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                      /* Activate tab */
+                                                                                                                                                                                                                                            tab.classList.add("button--primary");
+                                                                                                                                                                                                                                                  tab.classList.remove("button--secondary");
+                                                                                                                                                                                                                                                        tab.disabled = true;
+                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                              /* Show panel */
+                                                                                                                                                                                                                                                                    const panel = document.getElementById(targetId);
+                                                                                                                                                                                                                                                                          if (panel) panel.hidden = false;
+                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                /* Show correct arrows */
+                                                                                                                                                                                                                                                                                      {% comment %} const indicator = document.querySelector(
+                                                                                                                                                                                                                                                                                              `.indicators[data-index="${index}"]`
+                                                                                                                                                                                                                                                                                                    );
+                                                                                                                                                                                                                                                                                                          if (indicator) indicator.classList.remove("hidden"); {% endcomment %}
+                                                                                                                                                                                                                                                                                                                /* HARD RESET: hide all arrows */
+                                                                                                                                                                                                                                                                                                                /* HARD RESET */
+                                                                                                                                                                                                                                                                                                                /* HARD RESET */
+                                                                                                                                                                                                                                                                                                                indicators.forEach(i => {
+                                                                                                                                                                                                                                                                                                                  i.classList.remove("is-active");
+                                                                                                                                                                                                                                                                                                                  });
+                                                                                                                                                                                                                                                                                                                  
+                                                                                                                                                                                                                                                                                                                  /* Show ONLY current tab arrows */
+                                                                                                                                                                                                                                                                                                                  const indicator = document.querySelector(
+                                                                                                                                                                                                                                                                                                                    `.indicators[data-index="${index}"]`
+                                                                                                                                                                                                                                                                                                                    );
+                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                    if (indicator) {
+                                                                                                                                                                                                                                                                                                                      indicator.classList.add("is-active");
+                                                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                            /* Update arrows state */
+                                                                                                                                                                                                                                                                                                                                  requestAnimationFrame(() => updateArrows(sliderId));
+                                                                                                                                                                                                                                                                                                                                      });
+                                                                                                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                          /* Bind arrow clicks */
+                                                                                                                                                                                                                                                                                                                                            document.addEventListener("click", e => {
+                                                                                                                                                                                                                                                                                                                                                const btn = e.target.closest(".previous-button, .next-button");
+                                                                                                                                                                                                                                                                                                                                                    if (!btn) return;
+                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                        const sliderId = btn.getAttribute("aria-controls");
+                                                                                                                                                                                                                                                                                                                                                            const slider = document.getElementById(sliderId);
+                                                                                                                                                                                                                                                                                                                                                                if (!slider) return;
+                                                                                                                                                                                                                                                                                                                                                                
+                                                                                                                                                                                                                                                                                                                                                                    const scrollAmount = slider.clientWidth;
+                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                        slider.scrollBy({
+                                                                                                                                                                                                                                                                                                                                                                              left: btn.classList.contains("next-button")
+                                                                                                                                                                                                                                                                                                                                                                                      ? scrollAmount
+                                                                                                                                                                                                                                                                                                                                                                                              : -scrollAmount,
+                                                                                                                                                                                                                                                                                                                                                                                                    behavior: "smooth"
+                                                                                                                                                                                                                                                                                                                                                                                                        });
+                                                                                                                                                                                                                                                                                                                                                                                                        
+                                                                                                                                                                                                                                                                                                                                                                                                             updateAfterScrollEnd(sliderId);
+                                                                                                                                                                                                                                                                                                                                                                                                               });
+                                                                                                                                                                                                                                                                                                                                                                                                                // ✅ INITIAL LOAD: activate first tab arrows
+                                                                                                                                                                                                                                                                                                                                                                                                                requestAnimationFrame(() => {
+                                                                                                                                                                                                                                                                                                                                                                                                                  const firstTab = document.querySelector('[role="tab"]');
+                                                                                                                                                                                                                                                                                                                                                                                                                    if (firstTab) {
+                                                                                                                                                                                                                                                                                                                                                                                                                        firstTab.dispatchEvent(new Event('click'));
+                                                                                                                                                                                                                                                                                                                                                                                                                          }
+                                                                                                                                                                                                                                                                                                                                                                                                                          });
+                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                          
+                                                                                                                                                                                                                                                                                                                                                                                                                          });
+                                                                                                                                                                                                                                                                                                                                                                                                                          </script>
+                                                                                                                                                                                                                                                                                                                                                                                                                          <style>
+                                                                                                                                                                                                                                                                                                                                                                                                                          /* Default hide */
+                                                                                                                                                                                                                                                                                                                                                                                                                          .indicators {
+                                                                                                                                                                                                                                                                                                                                                                                                                            display: none !important;
+                                                                                                                                                                                                                                                                                                                                                                                                                            }
+                                                                                                                                                                                                                                                                                                                                                                                                                            
+                                                                                                                                                                                                                                                                                                                                                                                                                            /* Only active arrows visible */
+                                                                                                                                                                                                                                                                                                                                                                                                                            .indicators.is-active {
+                                                                                                                                                                                                                                                                                                                                                                                                                              display: flex !important;
+                                                                                                                                                                                                                                                                                                                                                                                                                              }
+                                                                                                                                                                                                                                                                                                                                                                                                                              
+                                                                                                                                                                                                                                                                                                                                                                                                                              .tab__item.button--primary {
+                                                                                                                                                                                                                                                                                                                                                                                                                                pointer-events: none;
+                                                                                                                                                                                                                                                                                                                                                                                                                                  cursor: default;
+                                                                                                                                                                                                                                                                                                                                                                                                                                    opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                    }
+                                                                                                                                                                                                                                                                                                                                                                                                                                    
+                                                                                                                                                                                                                                                                                                                                                                                                                                    .tab__item.button--primary:hover {
+                                                                                                                                                                                                                                                                                                                                                                                                                                      opacity: 1;
+                                                                                                                                                                                                                                                                                                                                                                                                                                      }
+                                                                                                                                                                                                                                                                                                                                                                                                                                      
+                                                                                                                                                                                                                                                                                                                                                                                                                                      </style>> {% endcomment %}
