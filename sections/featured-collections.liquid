@@ -1365,6 +1365,35 @@ document.addEventListener("DOMContentLoaded", () => {
   const tabs = document.querySelectorAll('[role="tab"]');
   const panels = document.querySelectorAll('[role="tabpanel"]');
   const indicators = document.querySelectorAll('.indicators');
+  function updateAfterScrollEnd(sliderId) {
+  const slider = document.getElementById(sliderId);
+  if (!slider) return;
+
+  let lastScrollLeft = slider.scrollLeft;
+  let stableFrames = 0;
+
+  function check() {
+    const currentScrollLeft = slider.scrollLeft;
+
+    if (Math.abs(currentScrollLeft - lastScrollLeft) < 1) {
+      stableFrames++;
+    } else {
+      stableFrames = 0;
+    }
+
+    lastScrollLeft = currentScrollLeft;
+
+    if (stableFrames >= 3) {
+      updateArrows(sliderId);
+      return;
+    }
+
+    requestAnimationFrame(check);
+  }
+
+  requestAnimationFrame(check);
+}
+
 
   function updateArrows(sliderId) {
     const slider = document.getElementById(sliderId);
@@ -1460,7 +1489,7 @@ if (indicator) {
       behavior: "smooth"
     });
 
-    setTimeout(() => updateArrows(sliderId), 300);
+     updateAfterScrollEnd(sliderId);
   });
  // ✅ INITIAL LOAD: activate first tab arrows
 requestAnimationFrame(() => {
