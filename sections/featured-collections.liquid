@@ -25,6 +25,22 @@
   .indicators.is-active {
     display: flex;
   }
+  /* Hover should look like active tab */
+#shopify-section-{{ section.id }} .tab__item.button--secondary:hover {
+  background: var(--color-button-background, currentColor);
+  color: var(--color-button-text, #fff);
+}
+
+/* Keep hover consistent (no animation jump) */
+#shopify-section-{{ section.id }} .tab__item.button--secondary:hover .btn-fill {
+  opacity: 1;
+}
+
+/* Active tab stays the same */
+#shopify-section-{{ section.id }} .tab__item.button--primary {
+  pointer-events: none;
+}
+
 </style>
 
 <div class="section section--padding{% if section.settings.divider %} section--divider{% endif %}{% if section.settings.rounded %} section--rounded{% endif %}">
