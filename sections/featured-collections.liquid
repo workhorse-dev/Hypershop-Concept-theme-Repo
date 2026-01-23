@@ -43,13 +43,19 @@
                   -%}
                 </span>
               </button> {% endcomment %}
-              <button
-  is="hover-button"
+            <button
   class="tab__item button{% if forloop.first %} button--primary{% else %} button--secondary{% endif %}"
   type="button"
   role="tab"
   aria-controls="TabPanel-{{ block.id }}"
   data-index="{{ forloop.index0 }}"
+  {% if section_rendering_api or forloop.first %}
+    is="hover-button"
+  {% else %}
+    is="api-hover-button"
+    data-id="TabPanelContent-{{ block.id }}"
+    data-section-id="{{ section.id }}"
+  {% endif %}
 >
   <span class="btn-fill" data-fill></span>
   <span class="btn-text">
@@ -71,7 +77,7 @@
   <div class="indicators lg:flex gap-2d5" data-index="{{ forloop.index0 }}">
 
 
-              {% comment %} <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
+              <button class="button button--secondary previous-button" type="button" aria-controls="Slider-{{ block.id }}" aria-label="{{ 'general.pagination.previous' | t | escape }}" disabled>
                 <span class="btn-fill" data-fill></span>
                 <span class="btn-text">
                   {%- render 'icon', icon: 'chevron-left', class: 'transform' -%}
@@ -82,34 +88,7 @@
                 <span class="btn-text">
                   {%- render 'icon', icon: 'chevron-right', class: 'transform' -%}
                 </span>
-              </button> {% endcomment %}
-              <button
-  is="hover-button"
-  class="button button--secondary previous-button"
-  type="button"
-  aria-controls="Slider-{{ block.id }}"
-  aria-label="{{ 'general.pagination.previous' | t | escape }}"
-  disabled
->
-  <span class="btn-fill" data-fill></span>
-  <span class="btn-text">
-    {%- render 'icon', icon: 'chevron-left' -%}
-  </span>
-</button>
-
-<button
-  is="hover-button"
-  class="button button--secondary next-button"
-  type="button"
-  aria-controls="Slider-{{ block.id }}"
-  aria-label="{{ 'general.pagination.next' | t | escape }}"
->
-  <span class="btn-fill" data-fill></span>
-  <span class="btn-text">
-    {%- render 'icon', icon: 'chevron-right' -%}
-  </span>
-</button>
-
+              </button>
             </div>
           {%- endfor -%} 
 
