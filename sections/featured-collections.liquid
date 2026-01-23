@@ -25,21 +25,29 @@
   .indicators.is-active {
     display: flex;
   }
-  /* Hover should look like active tab */
-#shopify-section-{{ section.id }} .tab__item.button--secondary:hover {
-  background: var(--color-button-background, currentColor);
-  color: var(--color-button-text, #fff);
+ /* Force hover tab to look like active tab */
+#shopify-section-{{ section.id }} .tab__item.button--secondary:hover .btn-fill {
+  transform: translateY(0) !important;
+  opacity: 1 !important;
 }
 
-/* Keep hover consistent (no animation jump) */
-#shopify-section-{{ section.id }} .tab__item.button--secondary:hover .btn-fill {
+/* Ensure fill is hidden when NOT hovered */
+#shopify-section-{{ section.id }} .tab__item.button--secondary .btn-fill {
+  transform: translateY(100%);
+}
+
+/* Active tab stays filled */
+#shopify-section-{{ section.id }} .tab__item.button--primary .btn-fill {
+  transform: translateY(0);
   opacity: 1;
 }
 
-/* Active tab stays the same */
-#shopify-section-{{ section.id }} .tab__item.button--primary {
-  pointer-events: none;
+/* Keep text color readable */
+#shopify-section-{{ section.id }} .tab__item.button--secondary:hover .btn-text {
+  color: var(--color-button-text, #fff);
 }
+
+
 
 </style>
 
