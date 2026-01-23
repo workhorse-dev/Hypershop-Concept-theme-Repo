@@ -46,6 +46,17 @@
 #shopify-section-{{ section.id }} .tab__item.button--secondary:hover .btn-text {
   color: var(--color-button-text, #fff);
 }
+/* Force tab text color on hover */
+#shopify-section-{{ section.id }} 
+.tab__item.button--secondary:hover .btn-text {
+  color: #171717 !important;
+}
+
+/* Keep active tab text also consistent (optional but recommended) */
+#shopify-section-{{ section.id }} 
+.tab__item.button--primary .btn-text {
+  color: #171717;
+}
 
 
 
