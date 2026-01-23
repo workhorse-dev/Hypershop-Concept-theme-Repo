@@ -35,6 +35,7 @@
 
       <!-- ✅ TAB BUTTONS -->
       <div class="custom-tabs" data-tabs role="tablist">
+        <div>
         {% for block in section.blocks %}
           {% assign collection = block.settings.collection %}
           <button
@@ -47,6 +48,7 @@
             {{ block.settings.title | default: collection.title | escape }}
           </button>
         {% endfor %}
+      </div>
          <!-- ✅ ARROWS -->
       {% if section.settings.carousel_on_desktop %}
         {% for block in section.blocks %}
