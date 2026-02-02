@@ -228,9 +228,7 @@
               {%- endif -%}
 
             {%- when 'sku' -%}
-              {% comment %} <p class="product__sku" id="Sku-{{ section.id }}-{{ product.id }}" {{ block.shopify_attributes }}>
-                {{- product.selected_or_first_available_variant.sku -}}
-              </p> {% endcomment %}
+             
 
                 {% assign sku = product.selected_or_first_available_variant.sku %}
 
