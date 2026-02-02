@@ -232,6 +232,12 @@
                 {{- product.selected_or_first_available_variant.sku -}}
               </p>
 
+                {% assign sku = product.selected_or_first_available_variant.sku %}
+
+          {% if sku != blank %}
+            {% comment %} SKU: {{ sku }} {% endcomment %}
+          {% endif %}
+
             {%- when 'description' -%}
               <div class="product__text rte {{ block.settings.text_size }}" {{ block.shopify_attributes }}>
                 {{- product.description -}}
