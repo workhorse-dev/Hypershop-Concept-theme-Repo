@@ -12,6 +12,22 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "image_wFPPzm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-feb-2026-email-2-valentines-sale-web-banner-v02-r01-2000x2000_974b0d76-95a5-423c-a527-6a83dce58420.webp",
+            "image_mobile": "shopify://shop_images/hyper-feb-2026-email-2-valentines-sale-mobile-banner-v02-r01-500x400.webp",
+            "heading": "Love Your Workspace",
+            "subheading": "Celebrate Valentine's Day with desktop accessories, chargers, hubs, and more. Find the perfect match and upgrade your workspace.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/love-your-workspace",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
           "settings": {
@@ -60,25 +76,6 @@
             "button_icon": false
           }
         },
-        "video_fTeDTg": {
-          "type": "video",
-          "disabled": true,
-          "settings": {
-            "video": "shopify://files/videos/Hyper-HS2510-Trackpad-Pro-Website-Banner-Video.mp4",
-            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "description": "",
-            "video_url_mobile": "",
-            "heading": "The World's Most Advanced Trackpad for Windows",
-            "subheading": "The HyperSpace™ Trackpad Pro is available NOW.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Order Now",
-            "button_link": "https://www.kickstarter.com/projects/hypershop/hyper-trackpad-pro",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
         "slide-3": {
           "type": "video",
           "settings": {
@@ -99,10 +96,10 @@
         }
       },
       "block_order": [
+        "image_wFPPzm",
         "slide-2",
         "image_eMMdBB",
         "image_PGrzFE",
-        "video_fTeDTg",
         "slide-3"
       ],
       "settings": {
