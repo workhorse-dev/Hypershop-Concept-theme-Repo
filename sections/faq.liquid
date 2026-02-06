@@ -258,7 +258,7 @@
                     </label>
                   </div>
                   <div class="field">
-                    <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label>
+                    {% comment %} <label for="ContactSubmit-{{ section.id }}" class="sr-only">{{ 'contact.form.send' | t }}</label> {% endcomment %}
                     <button
                       type="submit"
                       id="ContactSubmit-{{ section.id }}"
