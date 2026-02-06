@@ -63,13 +63,7 @@
           <p>
              <span class="heading reversed-link text-xl-3xl tracking-tighter leading-tight relative inline-block">
               {{- collection_title | escape -}}
-              {%- if show_products_count and collection.all_products_count > 0 -%}
-                 <small 
-                  class="count font-medium absolute text-xs tracking-none whitespace-nowrap" 
-                  style="position:absolute; top:0; right:0; transform:translateY(-40%);"
-      >
-                  {{ collection.all_products_count }}</small>
-              {%- endif -%}
+              
             </span>
           </p>
           {%- if collection_description != blank -%}
