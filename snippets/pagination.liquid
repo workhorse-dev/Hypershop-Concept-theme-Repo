@@ -34,11 +34,11 @@
         </a>
       {%- else -%}
         {%- if part.title == paginate.current_page -%}
-          <span class="page current flex items-center justify-center rounded-full pointer-events-none" aria-current="page" aria-label="{{ part.title | escape }}">
+          <span class="page current flex items-center justify-center rounded-full pointer-events-none" aria-current="page" >
             {{- part.title -}}
           </span>
         {%- else -%}
-          <span class="page flex items-center justify-center rounded-full" aria-current="page" aria-label="{{ part.title | escape }}">
+          <span class="page flex items-center justify-center rounded-full" aria-current="page" >
             {{- part.title -}}
           </span>
         {%- endif -%}
