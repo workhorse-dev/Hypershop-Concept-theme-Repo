@@ -230,6 +230,10 @@ iframe#Microsoft_Omnichannel_LCWidget_Chat_Iframe_Window {
     max-width: 80rem;
   }
 }
+/* Mega Menu CSS */
+.mega-menu__item--tabs .mega-menu__footer {
+    margin-block-start: 0;
+}
 /* BazaarVoice CSS */
 [data-bv-show="inpage_submission"] {
   display: block !important;
