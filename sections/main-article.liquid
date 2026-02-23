@@ -44,7 +44,7 @@
           {%- if section.settings.show_date or section.settings.show_comments or section.settings.show_author -%}
             {%- capture article_meta -%}
               {%- if section.settings.show_date -%}
-                <li class="inline-flex items-center gap-2 text-sm relative" itemprop="dateCreated pubdate datePublished">
+                <li class="inline-flex items-center gap-2 text-sm relative" itemprop="dateCreated datePublished">
                   {%- render 'icon', icon: 'calendar', size: 'xs', class: 'stroke-1' -%}
                   {{- article.published_at | time_tag: format: 'month_day_year' -}}
                 </li>
