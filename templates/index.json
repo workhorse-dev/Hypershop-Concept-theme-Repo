@@ -28,6 +28,22 @@
             "button_icon": false
           }
         },
+        "image_PGrzFE": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-mar-2026-email-1-apple-announcement-web-banner-v02-r01-2000x2000_d053f944-1d0c-48ec-8057-991e5f5b8e13.webp",
+            "image_mobile": "shopify://shop_images/hyper-mar-2026-email-1-apple-announcement-mobile-banner-v02-r01-500x400_105b44ae-8766-41d1-80ef-c43638562388.webp",
+            "heading": "Power Your New Apple Gear",
+            "subheading": "We have everything you need to connect     and power your new MacBook Pro MacBook Air, iPhone 17e, and iPad Air.",
+            "heading_size": "title-md",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/power-your-new-apple-gear",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
           "settings": {
@@ -60,22 +76,6 @@
             "button_icon": false
           }
         },
-        "image_PGrzFE": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/email-4-hp21p2bkgl-early-bird-web-banner-v01-r01-2000x2000.jpg",
-            "image_mobile": "shopify://shop_images/email-4-hp21p2bkgl-early-bird-mobile-banner-v01-r01-500x600.webp",
-            "heading": "Organize. Protect. Simplify.",
-            "subheading": "Now Available! The HyperPack keeps your tech secure and essentials organized with recycled materials and smart design to support your daily workflow.",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://products/hyperpack",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
         "slide-3": {
           "type": "video",
           "settings": {
@@ -97,9 +97,9 @@
       },
       "block_order": [
         "image_wFPPzm",
+        "image_PGrzFE",
         "slide-2",
         "image_eMMdBB",
-        "image_PGrzFE",
         "slide-3"
       ],
       "settings": {
