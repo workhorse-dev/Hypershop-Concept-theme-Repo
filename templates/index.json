@@ -12,6 +12,22 @@
     "slideshow": {
       "type": "slideshow",
       "blocks": {
+        "image_wFPPzm": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper_email_4_hd2801gl_launch_web_banner_v01_r01_2000x2000_1x_77ae1c93-ed20-4fab-a7f2-0aa6dff24783.webp",
+            "image_mobile": "shopify://shop_images/hyper_email_4_hd2801gl_launch_web_banner_v01_r01_500x400_3362c7a2-0283-469e-911c-df0a05c7a6e6.webp",
+            "heading": "Thunderbolt 5 Is Here!",
+            "subheading": "120Gbps video Thunderbolt 5 performance with triple 4K displays, built-in M.2 PCIe slot for storage or AI modules, Thunderbolt Share, and 140W charging. All from one cable. Available now.",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://products/hyperdrive-next-thunderbolt-5-dock",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "image_LVeLVB": {
           "type": "image",
           "settings": {
@@ -23,23 +39,6 @@
             "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://collections/spring-sale",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "image_wFPPzm": {
-          "type": "image",
-          "disabled": true,
-          "settings": {
-            "image": "shopify://shop_images/hyper-TB5-pre-launch-emails-1-teaser-plant-the-flag-web-banner-v02-r01-2000x2000_1.webp",
-            "image_mobile": "shopify://shop_images/hyper-TB5-pre-launch-emails-1-teaser-plant-the-flag-mobile-banner-v02-r01-500x400.png",
-            "heading": "Sign Up to Lock In 15% Off",
-            "subheading": "Sign up to get 15% Off and be the first to experience the new HyperDrive Thunderbolt 5 Dock, arriving this April.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Sign up",
-            "button_link": "https://hypershop.attn.tv/p/E5L/landing-page",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -95,8 +94,8 @@
         }
       },
       "block_order": [
-        "image_LVeLVB",
         "image_wFPPzm",
+        "image_LVeLVB",
         "slide-2",
         "image_PGrzFE",
         "image_eMMdBB"
