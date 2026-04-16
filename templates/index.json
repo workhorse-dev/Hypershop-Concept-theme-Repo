@@ -44,6 +44,22 @@
             "button_icon": false
           }
         },
+        "image_eMMdBB": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-april-2026-email-6-earth-week-web-banner-v01-r01-2000x2000_7651a5e7-c11c-480f-b6ab-15291bcfb708.webp",
+            "image_mobile": "shopify://shop_images/hyper-april-2026-email-6-earth-week-web-banner-v01-r01-500x400.webp",
+            "heading": "Less Waste. More Performance.",
+            "subheading": "Explore our 2026 sustainability updates. We build high-performance connectivity and power tools using recycled materials to reduce global waste. ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://pages/sustainability-roadmap",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
         "slide-2": {
           "type": "image",
           "settings": {
@@ -75,30 +91,14 @@
             "button_external": false,
             "button_icon": false
           }
-        },
-        "image_eMMdBB": {
-          "type": "image",
-          "settings": {
-            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
-            "heading": "Charge 2X Faster with Qi2",
-            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
-            "heading_size": "title-lg tracking-heading",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
         }
       },
       "block_order": [
         "image_wFPPzm",
         "image_LVeLVB",
+        "image_eMMdBB",
         "slide-2",
-        "image_PGrzFE",
-        "image_eMMdBB"
+        "image_PGrzFE"
       ],
       "settings": {
         "autoplay": true,
@@ -125,34 +125,49 @@
         "parallax_direction": "vertical"
       }
     },
-    "slideshow_NH7K7p": {
+    "slideshow_wKYeFr": {
       "type": "slideshow",
       "blocks": {
-        "image_tPbTfQ": {
+        "image_3RBm4z": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/hyper-email-3-winter-sale-web-banner-v01-r01-2000x2000_1_copy.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-3-winter-sale-mobile-banner-v01-r01-500x400_copy.webp",
-            "heading": "Hot Deals for Cold Days",
-            "subheading": "Get 20% off high-performance chargers, hubs, and accessories. Keep your workflow powered and your devices connected this season.",
+            "image": "shopify://shop_images/hyper_email_4_hd2801gl_launch_web_banner_v01_r01_2000x2000_1x_77ae1c93-ed20-4fab-a7f2-0aa6dff24783.webp",
+            "image_mobile": "shopify://shop_images/hyper_email_4_hd2801gl_launch_web_banner_v01_r01_500x400_3362c7a2-0283-469e-911c-df0a05c7a6e6.webp",
+            "heading": "Thunderbolt 5 Is Here!",
+            "subheading": "120Gbps video Thunderbolt 5 performance with triple 4K displays, built-in M.2 PCIe slot for storage or AI modules, Thunderbolt Share, and 140W charging. All from one cable. Available now.",
             "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/winter-sale",
+            "button_link": "shopify://products/hyperdrive-next-thunderbolt-5-dock",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
           }
         },
-        "image_YPKFGG": {
+        "image_jzBgL6": {
+          "type": "image",
+          "settings": {
+            "image": "shopify://shop_images/hyper-april-2026-email-5-spring-sale-web-banner-v02-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/hyper-april-2026-email-5-spring-sale-mobile-banner-v02-r01-500x400.webp",
+            "heading": "Work Smarter This Spring  - Save 25%",
+            "subheading": "Create a clean, organized workspace to improve your daily focus. Shop our Spring Sale to save 25% on essential tech. ",
+            "heading_size": "title-lg tracking-heading",
+            "heading_tag": "h2",
+            "button_label": "Shop Now",
+            "button_link": "shopify://collections/spring-sale",
+            "button_style": "primary",
+            "button_external": false,
+            "button_icon": false
+          }
+        },
+        "image_acjRNU": {
           "type": "image",
           "settings": {
             "image": "shopify://shop_images/hyper-email-22-HD2500-launch-web-banner-v01-r01-2000x2000.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-22-HD2500-launch-mobile-banner-v02-r01-500x400_d436f282-d52e-44f1-8dd0-6c79d92b73a7.webp",
+            "image_mobile": "shopify://shop_images/hyper-email-22-HD2500-launch-web-banner-blank-v01-r01-2000x2000.webp",
             "heading": "Get Ready for USB4 V2 Speed",
             "subheading": "80Gbps USB4 V2 performance with PCIe Gen4 NVMe speed and an extra M.2 PCIe expansion slot for AI, or other cards.",
-            "heading_size": "title-lg tracking-heading",
+            "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
             "button_link": "shopify://products/hyperdrive-next-usb4-m-2-pcie-enclosure",
@@ -161,52 +176,33 @@
             "button_icon": false
           }
         },
-        "image_Hjyfyw": {
+        "image_QinriD": {
           "type": "image",
           "settings": {
-            "image": "shopify://shop_images/hyper-award-winning-innovations-CES-press-homepage-banner-v01-r01-2000x2000_copy.webp",
-            "image_mobile": "shopify://shop_images/hyper-award-winning-innovations-CES-press-mobile-banner-v02-r01-500x600_copy.webp",
-            "heading": "New from CES 2026",
-            "subheading": "Our new 2026 product lineup debuted at CES. Discover award-winning power and connectivity solutions built for creators and professionals.",
+            "image": "shopify://shop_images/hyper-mar-2026-email-1-apple-announcement-web-banner-v02-r01-2000x2000_d053f944-1d0c-48ec-8057-991e5f5b8e13.webp",
+            "image_mobile": "shopify://shop_images/hyper-mar-2026-email-1-apple-announcement-mobile-banner-v02-r01-500x400_105b44ae-8766-41d1-80ef-c43638562388.webp",
+            "heading": "Power Your New Apple Gear",
+            "subheading": "We have everything you need to connect     and power your new MacBook Pro, MacBook Neo, MacBook Air, iPhone 17e, and iPad Air.",
             "heading_size": "title-md",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/2026-ces-power-and-connectivity",
+            "button_link": "shopify://collections/power-your-new-apple-gear",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
           }
         },
-        "image_xPDyNJ": {
+        "image_iznEjg": {
           "type": "image",
-          "disabled": true,
           "settings": {
-            "image": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-web-banner-v01-r01-2000x2000_copy.webp",
-            "image_mobile": "shopify://shop_images/hyper-email-1-holiday-kick-off-sale-mobile-banner-v01-r01-500x400.webp",
-            "heading": "Holiday Sale!",
-            "subheading": "Shop our top-rated chargers, hubs, and     accessories now up to 60% off.",
-            "heading_size": "title-md",
+            "image": "shopify://shop_images/Qi2-hp-web-v01-r01-2000x2000.webp",
+            "image_mobile": "shopify://shop_images/Qi2-hp-mobile-v01-r01-500x600.webp",
+            "heading": "Charge 2X Faster with Qi2",
+            "subheading": "Charge 2X faster with 15W Qi2 power with the new lineup of HyperJuice Charging Stands with compact and travel-friendly designs.",
+            "heading_size": "title-lg tracking-heading",
             "heading_tag": "h2",
             "button_label": "Shop Now",
-            "button_link": "shopify://collections/holiday-kick-off-sale",
-            "button_style": "primary",
-            "button_external": false,
-            "button_icon": false
-          }
-        },
-        "video_d3gYfj": {
-          "type": "video",
-          "settings": {
-            "video": "shopify://files/videos/Hyper HD5001GL lifestyle video - No Text.mp4",
-            "video_url": "https://www.youtube.com/watch?v=_9VUPq3SxOc",
-            "description": "",
-            "video_url_mobile": "",
-            "heading": "Lightning Fast USB4 Speeds",
-            "subheading": "The world's fastest 40Gbps  USB4 SSD Enclosure is back. Be productive and creative anywhere you work, with ultra-fast USB4 speeds.",
-            "heading_size": "title-md",
-            "heading_tag": "h2",
-            "button_label": "Shop Now",
-            "button_link": "shopify://products/hyperdrive-next-usb4-nvme-ssd-enclosure",
+            "button_link": "shopify://pages/hyperjuice-qi2-wireless-chargers",
             "button_style": "primary",
             "button_external": false,
             "button_icon": false
@@ -214,11 +210,11 @@
         }
       },
       "block_order": [
-        "image_tPbTfQ",
-        "image_YPKFGG",
-        "image_Hjyfyw",
-        "image_xPDyNJ",
-        "video_d3gYfj"
+        "image_3RBm4z",
+        "image_jzBgL6",
+        "image_acjRNU",
+        "image_QinriD",
+        "image_iznEjg"
       ],
       "disabled": true,
       "settings": {
@@ -2241,7 +2237,7 @@
   },
   "order": [
     "slideshow",
-    "slideshow_NH7K7p",
+    "slideshow_wKYeFr",
     "multicolumn_with_icons_bwTyDq",
     "rich-text-1",
     "collection-list",
